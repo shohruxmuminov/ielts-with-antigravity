@@ -4,7 +4,7 @@ import { collection, query, where, orderBy, onSnapshot } from 'firebase/firestor
 import { db } from '../firebase';
 import IELTSReadingLayout from '../components/IELTSReadingLayout';
 
-import { FULL_TEST_29 } from '../data/fullTest29';
+
 interface ReadingTest {
   id: string;
   title: string;
@@ -37,12 +37,12 @@ export default function ReadingPractice() {
         };
       }) as ReadingTest[];
       
-      // Combine Firestore tests with the new local test
-      setTests([FULL_TEST_29 as ReadingTest, ...dbTests]);
+      // Only use Firebase tests
+      setTests(dbTests);
       setLoading(false);
     }, (error) => {
-      // If Firestore fails, at least show the local test
-      setTests([FULL_TEST_29 as ReadingTest]);
+      // If Firestore fails, show empty
+      setTests([]);
       setLoading(false);
     });
 
