@@ -1,0 +1,57 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /metadata/{docId} {
+      allow read: if true;
+      allow write: if request.auth != null && 
+        (get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin' ||
+         request.auth.token.email == "shohruxmuminov201@gmail.com");
+    }
+
+    function isAuthenticated() { return request.auth != null; }
+    
+    function isAdmin() {
+      return isAuthenticated() &&
+        (exists(/databases/$(database)/documents/users/$(request.auth.uid)) && 
+         get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin' ||
+         request.auth.token.email == "shohruxmuminov201@gmail.com");
+    }
+
+    match /users {
+      allow list: if isAdmin();
+      match /{userId} {
+        allow read, write: if isAuthenticated() && request.auth.uid == userId;
+      }
+    }
+
+    match /materials {
+      allow list: if isAuthenticated();
+      match /{materialId} {
+        allow read: if isAuthenticated();
+        allow create, update, delete: if isAdmin();
+      }
+    }
+    
+    match /vocabulary {
+      allow list: if true;
+      match /{wordId} {
+        allow read: if true;
+        allow write: if isAdmin();
+      }
+    }
+    
+    match /results/{resultId} {
+      allow read: if isAuthenticated() && resource.data.userId == request.auth.uid;
+      allow create: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
+      allow update, delete: if isAdmin();
+    }
+    
+    match /vocabBooks {
+      allow list: if isAuthenticated();
+      match /{bookId} {
+        allow read: if isAuthenticated();
+        allow write: if isAdmin();
+      }
+    }
+  }
+}

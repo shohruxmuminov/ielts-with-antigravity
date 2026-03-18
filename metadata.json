@@ -1,0 +1,5 @@
+{
+  "name": "IELTS AI Prep Platform",
+  "description": "A full-stack AI-powered IELTS preparation platform with practice tests, AI feedback, and analytics.",
+  "requestFramePermissions": ["microphone"]
+}

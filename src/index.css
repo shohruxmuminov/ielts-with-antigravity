@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  background-color: #020617; /* slate-950 */
+  color: #f8fafc; /* slate-50 */
+}
+
+@utility glass-hover {
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    box-shadow: 0 0 25px 5px rgba(99, 102, 241, 0.15);
+    z-index: -1;
+  }
+
+  &:hover {
+    transform: translateY(-6px) scale(1.02);
+    border-color: rgba(99, 102, 241, 0.4);
+    background: rgba(15, 23, 42, 0.95); /* slate-900 */
+  }
+
+  &:hover::after {
+    opacity: 1;
+  }
+}
+
+@utility premium-gradient {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+}
+
+@utility glass-card {
+  background: rgba(15, 23, 42, 0.8); /* slate-900 */
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@utility fire-blur-hover {
+  position: relative;
+  transition: all 0.5s ease;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -5px;
+    background: linear-gradient(0deg, #ff4d00, #ff9500, #ff4d00);
+    background-size: 200% 200%;
+    filter: blur(20px);
+    opacity: 0;
+    z-index: -1;
+    border-radius: inherit;
+    transition: opacity 0.5s ease;
+    animation: fire-move 3s linear infinite;
+  }
+
+  &:hover::before {
+    opacity: 0.6;
+  }
+}
+
+@layer components {
+  .reading-questions .question-group {
+    @apply mb-10 p-6 bg-slate-900 rounded-2xl border border-slate-800;
+  }
+  .reading-questions .instructions {
+    @apply mb-6 p-4 bg-indigo-900/30 text-indigo-100 rounded-xl border-l-4 border-indigo-500 text-sm italic;
+  }
+  .reading-questions .question {
+    @apply mb-6 last:mb-0;
+  }
+  .reading-questions .options {
+    @apply mt-3 grid grid-cols-1 sm:grid-cols-3 gap-3;
+  }
+  .reading-questions label {
+    @apply flex items-center gap-2 p-3 bg-slate-800 rounded-xl border border-slate-700 cursor-pointer hover:bg-slate-700 transition-colors;
+  }
+  .reading-questions input[type="radio"], .reading-questions input[type="checkbox"] {
+    @apply w-4 h-4 text-indigo-600 border-slate-600 focus:ring-indigo-500 bg-slate-700;
+  }
+  .reading-questions input[type="text"] {
+    @apply mx-2 px-3 py-1 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all text-white;
+  }
+  .reading-questions select {
+    @apply mx-2 px-3 py-1 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all text-white;
+  }
+  .reading-questions .matching-headings-container {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-8;
+  }
+  .reading-questions .heading-option {
+    @apply mb-2 text-sm text-slate-300;
+  }
+  .reading-questions .matching-heading-question {
+    @apply flex items-center justify-between mb-4 p-3 bg-slate-800 rounded-xl border border-slate-700;
+  }
+}

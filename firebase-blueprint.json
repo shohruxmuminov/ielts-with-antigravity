@@ -1,0 +1,64 @@
+{
+  "entities": {
+    "Material": {
+      "title": "Material",
+      "description": "IELTS practice material",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "type": { "type": "string", "enum": ["listening", "reading", "writing_task1", "writing_task2", "writing_full"] },
+        "htmlContent": { "type": "string" },
+        "correctAnswers": { "type": "string" },
+        "isPremium": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "type", "htmlContent"]
+    },
+    "Result": {
+      "title": "Result",
+      "description": "Student test result",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "materialId": { "type": "string" },
+        "studentAnswers": { "type": "string" },
+        "feedback": { "type": "string" },
+        "score": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "materialId", "studentAnswers"]
+    },
+    "User": {
+      "title": "User",
+      "description": "Student profile",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "displayName": { "type": "string" },
+        "email": { "type": "string" },
+        "role": { "type": "string", "enum": ["user", "admin"] },
+        "isPremium": { "type": "boolean" },
+        "targetBand": { "type": "number" },
+        "currentBand": { "type": "number" },
+        "studyStreak": { "type": "number" },
+        "practiceTime": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "role"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "User" },
+      "description": "Collection of student profiles"
+    },
+    "/materials/{materialId}": {
+      "schema": { "$ref": "Material" },
+      "description": "Collection of IELTS practice materials"
+    },
+    "/results/{resultId}": {
+      "schema": { "$ref": "Result" },
+      "description": "Collection of student test results"
+    }
+  }
+}
