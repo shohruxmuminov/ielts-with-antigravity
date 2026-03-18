@@ -46,7 +46,7 @@ export default function IELTSReadingLayout({ test, onBack }: IELTSReadingLayoutP
         if (i + 1 === currentPart) {
           p.classList.remove('ielts-hidden', 'hidden');
         } else {
-          p.classList.add('ielts-hidden');
+          p.classList.add('ielts-hidden', 'hidden');
         }
       });
     }
@@ -56,7 +56,7 @@ export default function IELTSReadingLayout({ test, onBack }: IELTSReadingLayoutP
         if (i + 1 === currentPart) {
           qs.classList.remove('ielts-hidden', 'hidden');
         } else {
-          qs.classList.add('ielts-hidden');
+          qs.classList.add('ielts-hidden', 'hidden');
         }
       });
       // Scroll to top when part changes
