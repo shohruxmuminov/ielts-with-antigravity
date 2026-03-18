@@ -1,8 +1,61 @@
-﻿export const FULL_TEST_29 = {
-  id: "full-test-29",
-  title: "Full Free Test 29 - IELTS Full Reading Test",
-  type: "reading",
-  htmlContent: `                <div class="passage-content-wrapper" id="passage1"
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full Free Test 4 - IELTS Full Reading Test</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/full-reading-test.css?v=8">
+
+    <!-- Google Analytics (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EBY3TYEJF4"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-EBY3TYEJF4');
+    </script>
+</head>
+<body data-test-id="29">
+    <header>
+        <div class="header-left">
+            <a href="https://t.me/ieltswithsanokulov" target="_blank" class="telegram-link">
+                <i class="fab fa-telegram"></i>
+                <span>Join My Channel</span>
+            </a>
+            <div class="timer-container">
+                <span class="timer-display" id="timer">60:00</span>
+                <button class="timer-button" id="startPauseBtn" onclick="toggleTimer()">
+                    <i class="fas fa-play"></i>
+                </button>
+                <button class="timer-button" onclick="resetTimer()">
+                    <i class="fas fa-redo"></i>
+                </button>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="font-size-control">
+                <button class="font-size-button" onclick="changeFontSize(-1)">A-</button>
+                <button class="font-size-button" onclick="changeFontSize(1)">A+</button>
+            </div>
+            <button class="night-mode-toggle" onclick="toggleNightMode()">
+                <i class="fas fa-moon"></i>
+                <span id="modeText">Night Mode</span>
+            </button>
+        </div>
+    </header>
+
+    <form method="post" id="testForm" autocomplete="off">
+        <input type="hidden" name="csrfmiddlewaretoken" value="yGsaStinZSKWkp3VkLc6BDusYBz1bGXCKTJM9LNjA7BFXv8uCrVX7pnSy68ArSM9">
+        
+
+        <div class="container">
+            <!-- LEFT: PASSAGE SECTION -->
+            <div class="passage-section" id="passageSection">
+                
+                <div class="passage-content-wrapper" id="passage1"
                      >
 
                     <div class="passage-instructions">
@@ -75,8 +128,13 @@
                         <p>The starkly modern Beinecke Library at Yale University is home to some of the most valuable books in the world: first folios of Shakespeare, Gutenberg Bibles and manuscripts from the early Middle Ages. Yet the library's most controversial possession is an unprepossessing vellum manuscript about the size of a hardback book, containing 240-odd pages of drawings and text of unknown age and authorship. Catalogued as MS408, the manuscript would attract little attention were it not for the fact that the drawings hint at esoteric knowledge, while the text seems to be some sort of code – one that no-one has been able to break. It’s known to scholars as the Voynich manuscript, after the American book dealer Wilfrid Voynich, who bought the manuscript from a Jesuit college in Italy in 1912.</p><p>Over the years, the manuscript has attracted the attention of everyone from amateur dabblers to top codebreakers, all determined to succeed where countless others have failed. Academic research papers, books and websites are devoted to making sense of the contents of the manuscript, which are freely available to all. ‘Most other mysteries involve second-hand reports,’ says Dr Gordon Rugg of Keele University, a leading Voynich expert. ‘But this is one that you can see for yourself.’</p><p>It is certainly strange: page after page of drawings of weird plants, astrological symbolism and human figures, accompanied by a script that looks like some form of shorthand. What does it say – and what are the drawings about? Voynich himself believed that the manuscript was the work of the 13th-century English monk Roger Bacon, famed for his knowledge of alchemy, philosophy and science. In 1921 Voynich’s view that Bacon was the writer appeared to win support from the work of William Newbold, Professor of Philosophy at the University of Pennsylvania, who claimed to have found the key to the cipher system used by Bacon. According to Newbold, the manuscript proved that Bacon had access to a microscope centuries before they were supposedly first invented. The claim that this medieval monk had observed living cells created a sensation. It soon became clear, however, that Newbold had fallen victim to wishful thinking. Other scholars showed that his ‘decoding’ methods produced a host of possible interpretations.</p><p>The Voynich manuscript has continued to defy the efforts of world-class experts. In 1944, a team was assembled to tackle the mystery, led by William Friedman, the renowned American codebreaker. They began with the most basic codebreaking task: analysing the relative frequencies of the characters making up the text, looking for signs of an underlying structure. Yet Friedman’s team soon found themselves in deep water. The precise size of the ‘alphabet’ of the Voynich manuscript was unclear: it’s possible to make out more than 70 distinct symbols among the 170,000-character text. Furthermore, Friedman discovered that some words and phrases appeared more often than expected in a standard language, casting doubt on claims that the manuscript concealed a real language, as encryption typically reduces word frequencies.</p><p>Friedman concluded that the most plausible resolution of this paradox was hat ‘Voynichese’ is some sort of specially created artificial language, whose words are devised from concepts, rather than linguistics. So could the Voynich manuscript be the earliest-known example of artificial language? ‘Friedman’s hypothesis commands respect because of the lifetime of cryptanalytical expertise he brought to bear,’ says Rob Churchill, co-author of The Voynich Manuscript. That still leaves a host of questions unanswered, however, such as the identity of the author and the meaning of the bizarre drawings. ‘It does little to advance our understanding of the manuscript as a whole,’ says Churchill.</p><p>Even though Friedman was working more than 60 years ago, he suspected that major insights would come from using the device that had already transformed codebreaking: the computer. In this he was right – it is now the key tool for uncovering clues about the manuscript’s language.</p><p>The insights so far have been perplexing. For example, in 2001 another leading Voynich scholar, Dr Gabriel Landini of Birmingham University in the UK, published the results of his study of the manuscript using a pattern-detecting method called spectral analysis. This revealed evidence that the manuscript contains genuine words, rather than random nonsense, consistent with the existence of some underlying natural language. Yet the following year, Voynich expert René Zandbergen of the European Space Agency in Darmstadt, Germany showed that the entropy of the text (a measure of the rate of transfer of information) was consistent with Friedman’s suspicions that an artificial language had been used.</p><p>Many are convinced that the Voynich manuscript isn’t a hoax. For how could a medieval hoaxer create so many telltale signs of a message from random nonsense? Yet even this has been challenged in new research by Rugg. Using a system, first published by the Italian mathematician Girolamo Cardano in 1150, in which a specially constructed grille is used to pick out symbols from a table, Rugg found he could rapidly generate text with many of the basic traits of the Voynich manuscript. Publishing his results in 2004, Rugg stresses that he hadn’t set out to prove the manuscript a hoax. ‘I simply demonstrated that it’s feasible to hoax something this complex in a few months,’ he says.</p><p>Inevitably, others beg to differ. Some scholars, such as Zandbergen, still suspect the text has genuine meaning, though believe it may never be decipherable. Others, such as Churchill, have suggested that the sheer weirdness of the illustrations and text hint at an author who had lost touch with reality.</p><p>What is clear is that the book-sized manuscript kept under lock and key at Yale University has lost none of its fascination. ‘Many derive great intellectual pleasure from solving puzzles,’ says Rugg. ‘The Voynich manuscript is as challenging a puzzle as anyone could ask for.’</p>
                     </div>
                 </div>
-                `,
-  questionsHtml: `                <div class="questions-content-wrapper" id="questions1"
+                
+            </div>
+
+            <!-- RIGHT: QUESTIONS SECTION -->
+            <div class="questions-section" id="questionsSection">
+                
+                <div class="questions-content-wrapper" id="questions1"
                      >
 
                     <h2>Questions</h2>
@@ -545,29 +603,21 @@
                                             <select name="q31" onchange="updateProgress()">
                                                 <option value="">Choose</option>
                                                 
-                                                <option value="A">A - Gordon Rugg
-</option>
+                                                <option value="A">A - Gordon Rugg</option>
                                                 
-                                                <option value="B">B - Roger Bacon
-</option>
+                                                <option value="B">B - Roger Bacon</option>
                                                 
-                                                <option value="C">C - William Newbold
-</option>
+                                                <option value="C">C - William Newbold</option>
                                                 
-                                                <option value="D">D - William Friedman
-</option>
+                                                <option value="D">D - William Friedman</option>
                                                 
-                                                <option value="E">E - Rob Churchill
-</option>
+                                                <option value="E">E - Rob Churchill</option>
                                                 
-                                                <option value="F">F - Gabriel Landini
-</option>
+                                                <option value="F">F - Gabriel Landini</option>
                                                 
-                                                <option value="G">G - Rene Zandbergen
-</option>
+                                                <option value="G">G - Rene Zandbergen</option>
                                                 
-                                                <option value="H">H - Girolamo Cardano
-</option>
+                                                <option value="H">H - Girolamo Cardano</option>
                                                 
                                             </select>
                                         </div>
@@ -579,29 +629,21 @@
                                             <select name="q32" onchange="updateProgress()">
                                                 <option value="">Choose</option>
                                                 
-                                                <option value="A">A - Gordon Rugg
-</option>
+                                                <option value="A">A - Gordon Rugg</option>
                                                 
-                                                <option value="B">B - Roger Bacon
-</option>
+                                                <option value="B">B - Roger Bacon</option>
                                                 
-                                                <option value="C">C - William Newbold
-</option>
+                                                <option value="C">C - William Newbold</option>
                                                 
-                                                <option value="D">D - William Friedman
-</option>
+                                                <option value="D">D - William Friedman</option>
                                                 
-                                                <option value="E">E - Rob Churchill
-</option>
+                                                <option value="E">E - Rob Churchill</option>
                                                 
-                                                <option value="F">F - Gabriel Landini
-</option>
+                                                <option value="F">F - Gabriel Landini</option>
                                                 
-                                                <option value="G">G - Rene Zandbergen
-</option>
+                                                <option value="G">G - Rene Zandbergen</option>
                                                 
-                                                <option value="H">H - Girolamo Cardano
-</option>
+                                                <option value="H">H - Girolamo Cardano</option>
                                                 
                                             </select>
                                         </div>
@@ -613,29 +655,21 @@
                                             <select name="q33" onchange="updateProgress()">
                                                 <option value="">Choose</option>
                                                 
-                                                <option value="A">A - Gordon Rugg
-</option>
+                                                <option value="A">A - Gordon Rugg</option>
                                                 
-                                                <option value="B">B - Roger Bacon
-</option>
+                                                <option value="B">B - Roger Bacon</option>
                                                 
-                                                <option value="C">C - William Newbold
-</option>
+                                                <option value="C">C - William Newbold</option>
                                                 
-                                                <option value="D">D - William Friedman
-</option>
+                                                <option value="D">D - William Friedman</option>
                                                 
-                                                <option value="E">E - Rob Churchill
-</option>
+                                                <option value="E">E - Rob Churchill</option>
                                                 
-                                                <option value="F">F - Gabriel Landini
-</option>
+                                                <option value="F">F - Gabriel Landini</option>
                                                 
-                                                <option value="G">G - Rene Zandbergen
-</option>
+                                                <option value="G">G - Rene Zandbergen</option>
                                                 
-                                                <option value="H">H - Girolamo Cardano
-</option>
+                                                <option value="H">H - Girolamo Cardano</option>
                                                 
                                             </select>
                                         </div>
@@ -647,29 +681,21 @@
                                             <select name="q34" onchange="updateProgress()">
                                                 <option value="">Choose</option>
                                                 
-                                                <option value="A">A - Gordon Rugg
-</option>
+                                                <option value="A">A - Gordon Rugg</option>
                                                 
-                                                <option value="B">B - Roger Bacon
-</option>
+                                                <option value="B">B - Roger Bacon</option>
                                                 
-                                                <option value="C">C - William Newbold
-</option>
+                                                <option value="C">C - William Newbold</option>
                                                 
-                                                <option value="D">D - William Friedman
-</option>
+                                                <option value="D">D - William Friedman</option>
                                                 
-                                                <option value="E">E - Rob Churchill
-</option>
+                                                <option value="E">E - Rob Churchill</option>
                                                 
-                                                <option value="F">F - Gabriel Landini
-</option>
+                                                <option value="F">F - Gabriel Landini</option>
                                                 
-                                                <option value="G">G - Rene Zandbergen
-</option>
+                                                <option value="G">G - Rene Zandbergen</option>
                                                 
-                                                <option value="H">H - Girolamo Cardano
-</option>
+                                                <option value="H">H - Girolamo Cardano</option>
                                                 
                                             </select>
                                         </div>
@@ -694,7 +720,744 @@
                                     <p>Voynich Researchers</p><p>William Newbold believed that the author of the Voynich manuscript had been able to look at cells through a 35 <input type="text" class="fill-in-the-blank" name="q35" placeholder="..." style="width: 280px;" oninput="updateProgress()" data-question="35" autocomplete="one-time-code">. Other researchers later demonstrated that there were flaws in his argument.</p><p>William Friedman concluded that the manuscript was written in an artificial language that was based on 36 <input type="text" class="fill-in-the-blank" name="q36" placeholder="..." style="width: 260px;" oninput="updateProgress()" data-question="36" autocomplete="one-time-code">. He couldn’t find out the meaning of this language but he believed that the 37 <input type="text" class="fill-in-the-blank" name="q37" placeholder="..." style="width: 260px;" oninput="updateProgress()" data-question="37" autocomplete="one-time-code"> would continue to bring advances in codebreaking.</p><p>Dr Gabriel Landini used a system known as 38 <input type="text" class="fill-in-the-blank" name="q38" placeholder="..." style="width: 260px;" oninput="updateProgress()" data-question="38" autocomplete="one-time-code"> in his research, and claims to have demonstrated the presence of genuine words.</p><p>Dr Gordon Rugg’s system involved a grille, that made it possible to quickly select symbols that appeared in a 39 <input type="text" class="fill-in-the-blank" name="q39" placeholder="..." style="width: 300px;" oninput="updateProgress()" data-question="39" autocomplete="one-time-code">. Rugg’s conclusion was that the manuscript lacked genuine meaning.</p>
                                 </div>
                             
-`,
-  correctAnswers: "1:TRUE,2:FALSE,3:TRUE,4:NOT GIVEN,5:TRUE,6:trust,7:computers,8:language,9:international travel|travel,10:memory,11:status,12:conversation,13:tradition,14:iv,15:vii,16:i,17:viii,18:vi,19:ii,20:A|C,21:A|C,22:justice,23:Journalists,24:nurses,25:dedication,26:rules|documents,27:FALSE,28:FALSE,29:FALSE,30:NOT GIVEN,31:D,32:A|G,33:E,34:B,35:microscope,36:logic,37:computer,38:spectral analysis,39:table|grille,40:C"
-};
 
+                        
+                    </div>
+                    
+                    <div class="question-group">
+                        <div class="instructions">
+                            <strong>Questions 40-40</strong><br>
+                            Choose the correct letter, A, B, C or D. Write the correct letter in box 40 on your answer sheet.
+                            
+                        </div>
+
+                        
+                            
+                                
+                                    
+                                    <div class="question" data-question="40">
+                                        <div><strong>40.</strong> The writer’s main aim in this passage is to</div>
+                                        <div class="options">
+                                            <label><input type="radio" name="q40" value="A" onchange="updateProgress()"> <span class="option-text">A. explain the meaning of the manuscript.</span></label>
+                                            <label><input type="radio" name="q40" value="B" onchange="updateProgress()"> <span class="option-text">B. determine the true identity of the manuscript’s author.</span></label>
+                                            <label><input type="radio" name="q40" value="C" onchange="updateProgress()"> <span class="option-text">C. describe the numerous attempts to decode the manuscript.</span></label>
+                                            <label><input type="radio" name="q40" value="D" onchange="updateProgress()"> <span class="option-text">D. identify which research into the manuscript has had the most media coverage.</span></label>
+                                        </div>
+                                    </div>
+                                    
+                                
+                            
+
+                        
+                    </div>
+                    
+                </div>
+                
+            </div>
+        </div>
+
+        <!-- Passage Navigation - Bottom Right -->
+        <div class="passage-navigation">
+            <button type="button" class="nav-button" id="prevPassageBtn" onclick="navigatePassage(-1)">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <span class="passage-indicator">
+                <span id="currentPassageNum">1</span> / 3
+            </span>
+            <button type="button" class="nav-button" id="nextPassageBtn" onclick="navigatePassage(1)">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+
+        <footer>
+            <div class="progress-container" id="progressContainer"></div>
+            
+            <button type="submit" class="submit-button">Submit Test</button>
+            
+        </footer>
+    </form>
+
+<script>
+    // Current passage being displayed
+    let currentPassage = 1;
+    const totalPassages = 3;
+
+    // Navigate between passages
+    function navigatePassage(direction) {
+        const newPassage = currentPassage + direction;
+
+        if (newPassage < 1 || newPassage > totalPassages) {
+            return;
+        }
+
+        // Hide current passage and questions
+        document.getElementById(`passage${currentPassage}`).style.display = 'none';
+        document.getElementById(`questions${currentPassage}`).style.display = 'none';
+
+        // Show new passage and questions
+        document.getElementById(`passage${newPassage}`).style.display = 'block';
+        document.getElementById(`questions${newPassage}`).style.display = 'block';
+
+        // Update current passage
+        currentPassage = newPassage;
+        document.getElementById('currentPassageNum').textContent = currentPassage;
+
+        // Update button states
+        document.getElementById('prevPassageBtn').disabled = (currentPassage === 1);
+        document.getElementById('nextPassageBtn').disabled = (currentPassage === totalPassages);
+
+        // Scroll both sections to top
+        document.getElementById('passageSection').scrollTop = 0;
+        document.getElementById('questionsSection').scrollTop = 0;
+    }
+
+    // Initialize navigation buttons
+    document.getElementById('prevPassageBtn').disabled = true;
+
+    // Highlight text selection in passage
+    let currentHighlightColor = 'orange';
+    const highlightColors = {
+        'orange': '#FFA500',
+        'blue': '#4A90E2',
+        'green': '#7ED321'
+    };
+
+    // Add highlight menu
+    const highlightMenu = document.createElement('div');
+    highlightMenu.id = 'highlightMenu';
+    highlightMenu.style.cssText = 'position: absolute; display: none; background: white; border: 1px solid #ccc; border-radius: 4px; padding: 5px; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1);';
+    highlightMenu.innerHTML = `
+        <button onclick="highlightText('orange')" style="background: #FFA500; width: 30px; height: 30px; border: none; border-radius: 3px; margin: 2px; cursor: pointer;"></button>
+        <button onclick="highlightText('blue')" style="background: #4A90E2; width: 30px; height: 30px; border: none; border-radius: 3px; margin: 2px; cursor: pointer;"></button>
+        <button onclick="highlightText('green')" style="background: #7ED321; width: 30px; height: 30px; border: none; border-radius: 3px; margin: 2px; cursor: pointer;"></button>
+        <button onclick="removeHighlight()" style="background: white; width: 30px; height: 30px; border: 1px solid #ccc; border-radius: 3px; margin: 2px; cursor: pointer;">×</button>
+    `;
+    document.body.appendChild(highlightMenu);
+
+    // Listen for text selection in passage and questions sections
+    document.addEventListener('mouseup', function(e) {
+        const selection = window.getSelection();
+        const selectedText = selection.toString().trim();
+
+        if (selectedText.length > 0) {
+            const range = selection.getRangeAt(0);
+            const commonAncestor = range.commonAncestorContainer;
+
+            // Check if selection spans multiple paragraphs
+            const startContainer = range.startContainer;
+            const endContainer = range.endContainer;
+
+            // Find parent <p> tags
+            let startParagraph = startContainer.nodeType === 3 ? startContainer.parentElement : startContainer;
+            let endParagraph = endContainer.nodeType === 3 ? endContainer.parentElement : endContainer;
+
+            while (startParagraph && startParagraph.tagName !== 'P' && startParagraph !== document.body) {
+                startParagraph = startParagraph.parentElement;
+            }
+            while (endParagraph && endParagraph.tagName !== 'P' && endParagraph !== document.body) {
+                endParagraph = endParagraph.parentElement;
+            }
+
+            // Don't allow highlighting across different paragraphs
+            if (startParagraph !== endParagraph && startParagraph && endParagraph &&
+                startParagraph.tagName === 'P' && endParagraph.tagName === 'P') {
+                highlightMenu.style.display = 'none';
+                return;
+            }
+
+            // Check if selection is within passage-text or questions-section
+            let isInHighlightableArea = false;
+            let element = commonAncestor;
+            while (element && element !== document) {
+                if (element.classList && (element.classList.contains('passage-text') ||
+                    element.classList.contains('questions-section'))) {
+                    isInHighlightableArea = true;
+                    break;
+                }
+                element = element.parentElement;
+            }
+
+            if (isInHighlightableArea) {
+                const rect = range.getBoundingClientRect();
+                highlightMenu.style.display = 'block';
+                highlightMenu.style.left = (rect.left + window.scrollX) + 'px';
+                highlightMenu.style.top = (rect.bottom + window.scrollY + 5) + 'px';
+            } else {
+                highlightMenu.style.display = 'none';
+            }
+        } else {
+            highlightMenu.style.display = 'none';
+        }
+    });
+
+    function highlightText(color) {
+        const selection = window.getSelection();
+        if (selection.rangeCount > 0) {
+            const range = selection.getRangeAt(0);
+            const span = document.createElement('span');
+            span.style.backgroundColor = highlightColors[color];
+            span.style.padding = '2px 0';
+            span.className = 'highlighted-text';
+            span.setAttribute('data-color', color);
+
+            try {
+                range.surroundContents(span);
+            } catch (e) {
+                // If surroundContents fails (e.g., selection crosses element boundaries), use alternative method
+                const fragment = range.extractContents();
+                span.appendChild(fragment);
+                range.insertNode(span);
+            }
+        }
+        highlightMenu.style.display = 'none';
+        window.getSelection().removeAllRanges();
+    }
+
+    function removeHighlight() {
+        const selection = window.getSelection();
+        if (selection.rangeCount > 0) {
+            const range = selection.getRangeAt(0);
+            let element = range.commonAncestorContainer;
+
+            // Find the highlighted span
+            while (element && element !== document) {
+                if (element.classList && element.classList.contains('highlighted-text')) {
+                    const parent = element.parentNode;
+                    while (element.firstChild) {
+                        parent.insertBefore(element.firstChild, element);
+                    }
+                    parent.removeChild(element);
+                    parent.normalize();
+                    break;
+                }
+                element = element.parentElement;
+            }
+        }
+        highlightMenu.style.display = 'none';
+        window.getSelection().removeAllRanges();
+    }
+
+    // Hide highlight menu when clicking elsewhere
+    document.addEventListener('click', function(e) {
+        if (!highlightMenu.contains(e.target) && window.getSelection().toString().trim() === '') {
+            highlightMenu.style.display = 'none';
+        }
+    });
+
+    // Get all question numbers from the test
+    const questionNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40];
+    let totalQuestions = 40;
+
+    // Initialize progress indicators
+    function initializeProgress() {
+        const container = document.getElementById('progressContainer');
+        container.innerHTML = '';
+        questionNumbers.forEach(function(questionNum) {
+            const indicator = document.createElement('div');
+            indicator.className = 'progress-indicator';
+            indicator.id = `progress-${questionNum}`;
+            indicator.textContent = questionNum;
+            indicator.dataset.questionNumber = questionNum;
+
+            // Add click handler to scroll to question
+            indicator.addEventListener('click', function() {
+                const questionNum = this.dataset.questionNumber;
+
+                // Find which passage this question belongs to
+                
+                
+                
+                if (questionNum >= 1 && questionNum <= 13) {
+                    // Navigate to correct passage
+                    if (currentPassage !== 1) {
+                        navigatePassage(1 - currentPassage);
+                    }
+
+                    // Scroll to question after a short delay
+                    setTimeout(() => {
+                        // First try exact match for data-question
+                        let questionElement = document.querySelector(`[data-question="${questionNum}"]`);
+
+                        // If not found, check data-question-2 (for dual questions)
+                        if (!questionElement) {
+                            questionElement = document.querySelector(`[data-question-2="${questionNum}"]`);
+                        }
+
+                        // If still not found, check if questionNum is in a comma-separated list (for multi questions)
+                        if (!questionElement) {
+                            const allQuestions = document.querySelectorAll('[data-question]');
+                            for (const elem of allQuestions) {
+                                const dataQuestion = elem.getAttribute('data-question');
+                                if (dataQuestion && dataQuestion.includes(',')) {
+                                    const questionNums = dataQuestion.split(',').map(n => parseInt(n.trim()));
+                                    if (questionNums.includes(questionNum)) {
+                                        questionElement = elem;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+
+                        if (questionElement) {
+                            questionElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                    }, 100);
+                }
+                
+                
+                
+                
+                
+                if (questionNum >= 14 && questionNum <= 26) {
+                    // Navigate to correct passage
+                    if (currentPassage !== 2) {
+                        navigatePassage(2 - currentPassage);
+                    }
+
+                    // Scroll to question after a short delay
+                    setTimeout(() => {
+                        // First try exact match for data-question
+                        let questionElement = document.querySelector(`[data-question="${questionNum}"]`);
+
+                        // If not found, check data-question-2 (for dual questions)
+                        if (!questionElement) {
+                            questionElement = document.querySelector(`[data-question-2="${questionNum}"]`);
+                        }
+
+                        // If still not found, check if questionNum is in a comma-separated list (for multi questions)
+                        if (!questionElement) {
+                            const allQuestions = document.querySelectorAll('[data-question]');
+                            for (const elem of allQuestions) {
+                                const dataQuestion = elem.getAttribute('data-question');
+                                if (dataQuestion && dataQuestion.includes(',')) {
+                                    const questionNums = dataQuestion.split(',').map(n => parseInt(n.trim()));
+                                    if (questionNums.includes(questionNum)) {
+                                        questionElement = elem;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+
+                        if (questionElement) {
+                            questionElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                    }, 100);
+                }
+                
+                
+                
+                
+                
+                if (questionNum >= 27 && questionNum <= 40) {
+                    // Navigate to correct passage
+                    if (currentPassage !== 3) {
+                        navigatePassage(3 - currentPassage);
+                    }
+
+                    // Scroll to question after a short delay
+                    setTimeout(() => {
+                        // First try exact match for data-question
+                        let questionElement = document.querySelector(`[data-question="${questionNum}"]`);
+
+                        // If not found, check data-question-2 (for dual questions)
+                        if (!questionElement) {
+                            questionElement = document.querySelector(`[data-question-2="${questionNum}"]`);
+                        }
+
+                        // If still not found, check if questionNum is in a comma-separated list (for multi questions)
+                        if (!questionElement) {
+                            const allQuestions = document.querySelectorAll('[data-question]');
+                            for (const elem of allQuestions) {
+                                const dataQuestion = elem.getAttribute('data-question');
+                                if (dataQuestion && dataQuestion.includes(',')) {
+                                    const questionNums = dataQuestion.split(',').map(n => parseInt(n.trim()));
+                                    if (questionNums.includes(questionNum)) {
+                                        questionElement = elem;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+
+                        if (questionElement) {
+                            questionElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                    }, 100);
+                }
+                
+                
+                
+            });
+
+            container.appendChild(indicator);
+        });
+    }
+
+    // Update progress
+    function updateProgress() {
+        questionNumbers.forEach(function(questionNum) {
+            const indicator = document.getElementById(`progress-${questionNum}`);
+            if (!indicator) return;
+
+            let isAnswered = false;
+
+            // Check if this question is part of a dual or multi-choice group
+            // Look for question containers that include this question number
+            const allQuestionDivs = document.querySelectorAll('[data-question]');
+            let isDualOrMulti = false;
+            let baseQuestionNum = questionNum;
+            let questionPosition = 0;
+
+            for (const div of allQuestionDivs) {
+                const dataQuestion = div.getAttribute('data-question');
+
+                // Check if this is a multi question (comma-separated question numbers)
+                if (dataQuestion && dataQuestion.includes(',')) {
+                    const questionNums = dataQuestion.split(',').map(n => parseInt(n.trim()));
+                    const index = questionNums.indexOf(questionNum);
+                    if (index !== -1) {
+                        isDualOrMulti = true;
+                        baseQuestionNum = questionNums[0];
+                        questionPosition = index;
+                        break;
+                    }
+                }
+
+                // Check if this is a dual question (has data-question-2)
+                const dataQuestion2 = div.getAttribute('data-question-2');
+                if (dataQuestion2 && (dataQuestion == questionNum || dataQuestion2 == questionNum)) {
+                    isDualOrMulti = true;
+                    baseQuestionNum = parseInt(dataQuestion);
+                    questionPosition = (questionNum == dataQuestion) ? 0 : 1;
+                    break;
+                }
+            }
+
+            if (isDualOrMulti) {
+                // For dual/multi questions, check checkboxes with the base question name
+                const checkboxes = document.querySelectorAll(`input[type="checkbox"][name="q${baseQuestionNum}"]:checked`);
+                const checkedCount = checkboxes.length;
+
+                // Mark as answered if we have enough selections for this position
+                // e.g., question 27 needs 1+ selections, question 28 needs 2+, question 29 needs 3+
+                if (checkedCount > questionPosition) {
+                    isAnswered = true;
+                }
+            } else {
+                // Regular question - use normal detection
+                const radio = document.querySelector(`input[type="radio"][name="q${questionNum}"]:checked`);
+                if (radio) isAnswered = true;
+
+                const checkboxes = document.querySelectorAll(`input[type="checkbox"][name="q${questionNum}"]:checked`);
+                if (checkboxes.length > 0) isAnswered = true;
+
+                const textInput = document.querySelector(`input[type="text"][name="q${questionNum}"]`);
+                if (textInput && textInput.value.trim() !== '') isAnswered = true;
+
+                const select = document.querySelector(`select[name="q${questionNum}"]`);
+                if (select && select.value !== '') isAnswered = true;
+
+                const hiddenInput = document.querySelector(`input[type="hidden"][name="q${questionNum}"]`);
+                if (hiddenInput && hiddenInput.value !== '') isAnswered = true;
+            }
+
+            if (isAnswered) {
+                indicator.classList.add('completed');
+            } else {
+                indicator.classList.remove('completed');
+            }
+        });
+    }
+
+    function checkDualSelection(checkbox) {
+        const questionNum = parseInt(checkbox.name.substring(1)); // Extract number from "q27"
+        const checkboxes = document.querySelectorAll(`input[type="checkbox"][name="${checkbox.name}"]`);
+        const checked = Array.from(checkboxes).filter(cb => cb.checked);
+        if (checked.length > 2) {
+            // Uncheck the checkbox that was just clicked
+            checkbox.checked = false;
+            // Update progress after unchecking
+            updateDualProgress(questionNum, questionNum + 1);
+        }
+    }
+
+    function updateDualProgress(questionNum1, questionNum2) {
+        const checkboxes = document.querySelectorAll(`input[type="checkbox"][name="q${questionNum1}"]`);
+        const checked = Array.from(checkboxes).filter(cb => cb.checked);
+
+        const indicator1 = document.getElementById(`progress-${questionNum1}`);
+        const indicator2 = document.getElementById(`progress-${questionNum2}`);
+
+        // Light up indicators progressively based on number of selections
+        if (checked.length >= 1) {
+            if (indicator1) indicator1.classList.add('completed');
+        } else {
+            if (indicator1) indicator1.classList.remove('completed');
+        }
+
+        if (checked.length >= 2) {
+            if (indicator2) indicator2.classList.add('completed');
+        } else {
+            if (indicator2) indicator2.classList.remove('completed');
+        }
+    }
+
+    function checkMultiSelection(checkbox, maxCount) {
+        const questionNum = parseInt(checkbox.name.substring(1)); // Extract number from "q27"
+        const checkboxes = document.querySelectorAll(`input[type="checkbox"][name="${checkbox.name}"]`);
+        const checked = Array.from(checkboxes).filter(cb => cb.checked);
+        if (checked.length > maxCount) {
+            // Uncheck the checkbox that was just clicked
+            checkbox.checked = false;
+            // Update progress after unchecking
+            updateProgress();
+        }
+    }
+
+    function updateMultiProgress(questionNumbers, answerCount) {
+        const questionNums = questionNumbers.split(',').map(n => parseInt(n));
+        const checkboxes = document.querySelectorAll(`input[type="checkbox"][name="q${questionNums[0]}"]`);
+        const checked = Array.from(checkboxes).filter(cb => cb.checked);
+
+        // Light up indicators progressively based on number of selections
+        questionNums.forEach((qNum, index) => {
+            const indicator = document.getElementById(`progress-${qNum}`);
+            if (indicator) {
+                if (checked.length > index) {
+                    indicator.classList.add('completed');
+                } else {
+                    indicator.classList.remove('completed');
+                }
+            }
+        });
+    }
+
+    // Timer functionality
+    let timeRemaining = 60 * 60;
+    let timerInterval = null;
+    let isTimerRunning = false;
+
+    function toggleTimer() {
+        const btn = document.getElementById('startPauseBtn');
+        if (isTimerRunning) {
+            clearInterval(timerInterval);
+            btn.innerHTML = '<i class="fas fa-play"></i>';
+            isTimerRunning = false;
+        } else {
+            timerInterval = setInterval(updateTimer, 1000);
+            btn.innerHTML = '<i class="fas fa-pause"></i>';
+            isTimerRunning = true;
+        }
+    }
+
+    function updateTimer() {
+        if (timeRemaining <= 0) {
+            clearInterval(timerInterval);
+            alert('Time is up! Please submit your test.');
+            return;
+        }
+        timeRemaining--;
+        const minutes = Math.floor(timeRemaining / 60);
+        const seconds = timeRemaining % 60;
+        document.getElementById('timer').textContent =
+            `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
+
+    function resetTimer() {
+        clearInterval(timerInterval);
+        timeRemaining = 60 * 60;
+        document.getElementById('timer').textContent = '60:00';
+        document.getElementById('startPauseBtn').innerHTML = '<i class="fas fa-play"></i>';
+        isTimerRunning = false;
+    }
+
+    // Night mode toggle
+    function toggleNightMode() {
+        document.body.classList.toggle('night-mode');
+        const modeText = document.getElementById('modeText');
+        if (document.body.classList.contains('night-mode')) {
+            modeText.textContent = 'Day Mode';
+            localStorage.setItem('nightMode', 'enabled');
+        } else {
+            modeText.textContent = 'Night Mode';
+            localStorage.setItem('nightMode', 'disabled');
+        }
+    }
+
+    if (localStorage.getItem('nightMode') === 'enabled') {
+        document.body.classList.add('night-mode');
+        document.getElementById('modeText').textContent = 'Day Mode';
+    }
+
+    // Font size control
+    let currentFontSize = 15;
+    function changeFontSize(delta) {
+        currentFontSize += delta;
+        if (currentFontSize < 12) currentFontSize = 12;
+        if (currentFontSize > 20) currentFontSize = 20;
+        document.body.style.fontSize = currentFontSize + 'px';
+        localStorage.setItem('fontSize', currentFontSize);
+    }
+
+    const savedFontSize = localStorage.getItem('fontSize');
+    if (savedFontSize) {
+        currentFontSize = parseInt(savedFontSize);
+        document.body.style.fontSize = currentFontSize + 'px';
+    }
+
+    // Matching table functionality
+    document.querySelectorAll('.matching-table tbody tr').forEach(row => {
+        row.querySelectorAll('td[data-answer]').forEach(cell => {
+            cell.addEventListener('click', function() {
+                const questionId = row.dataset.questionId;
+                const answer = this.dataset.answer;
+
+                row.querySelectorAll('td[data-answer]').forEach(td => {
+                    td.classList.remove('selected');
+                });
+
+                this.classList.add('selected');
+
+                let hiddenInput = document.querySelector(`input[name="q${questionId}"]`);
+                if (!hiddenInput) {
+                    hiddenInput = document.createElement('input');
+                    hiddenInput.type = 'hidden';
+                    hiddenInput.name = `q${questionId}`;
+                    document.getElementById('testForm').appendChild(hiddenInput);
+                }
+                hiddenInput.value = answer;
+
+                updateProgress();
+            });
+        });
+    });
+
+    // Initialize on page load
+    window.addEventListener('load', function() {
+        initializeProgress();
+        updateProgress();
+        // Auto-start timer when test loads
+        toggleTimer();
+    });
+
+    // Loading animation for CDI tests
+    function showCDILoadingAnimation() {
+        // Remove any existing loading overlay
+        const existingOverlay = document.getElementById('cdi-loading-overlay');
+        if (existingOverlay) {
+            existingOverlay.remove();
+        }
+
+        // Create loading overlay
+        const loadingOverlay = document.createElement('div');
+        loadingOverlay.id = 'cdi-loading-overlay';
+        loadingOverlay.innerHTML = `
+            <div class="cdi-loading-container">
+                <div class="cdi-dot"></div>
+                <div class="cdi-dot"></div>
+                <div class="cdi-dot"></div>
+                <div class="cdi-dot"></div>
+            </div>
+        `;
+
+        // Add styles
+        const style = document.createElement('style');
+        style.textContent = `
+            #cdi-loading-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: #000000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 9999;
+            }
+
+            .cdi-loading-container {
+                --uib-size: 40px;
+                --uib-color: white;
+                --uib-speed: 1.6s;
+                position: relative;
+                top: 8%;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                height: var(--uib-size);
+                width: var(--uib-size);
+            }
+
+            .cdi-dot {
+                position: absolute;
+                top: 13.5%;
+                left: 0;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                height: 100%;
+                width: 100%;
+                animation: cdi-swing var(--uib-speed) linear infinite;
+            }
+
+            .cdi-dot::before {
+                content: '';
+                height: 25%;
+                width: 25%;
+                border-radius: 50%;
+                background-color: var(--uib-color);
+                transition: background-color 0.3s ease;
+            }
+
+            .cdi-dot:nth-child(1) {
+                animation-delay: calc(var(--uib-speed) * -0.36);
+            }
+
+            .cdi-dot:nth-child(2) {
+                animation-delay: calc(var(--uib-speed) * -0.27);
+                opacity: 0.8;
+            }
+
+            .cdi-dot:nth-child(2)::before {
+                transform: scale(0.9);
+            }
+
+            .cdi-dot:nth-child(3) {
+                animation-delay: calc(var(--uib-speed) * -0.18);
+                opacity: 0.6;
+            }
+
+            .cdi-dot:nth-child(3)::before {
+                transform: scale(0.8);
+            }
+
+            .cdi-dot:nth-child(4) {
+                animation-delay: calc(var(--uib-speed) * -0.09);
+                opacity: 0.4;
+            }
+
+            .cdi-dot:nth-child(4)::before {
+                transform: scale(0.7);
+            }
+
+            @keyframes cdi-swing {
+                0% { transform: rotate(0deg); }
+                15% { transform: rotate(0deg); }
+                50% { transform: rotate(180deg); }
+                65% { transform: rotate(180deg); }
+                100% { transform: rotate(0deg); }
+            }
+        `;
+
+        document.head.appendChild(style);
+        document.body.appendChild(loadingOverlay);
+    }
+
+    // Handle form submission with loading animation for CDI tests
+    
+</script>
+
+</body>
+</html>
