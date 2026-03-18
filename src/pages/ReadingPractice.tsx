@@ -3,6 +3,7 @@ import { ArrowLeft, BookOpen, ArrowRight } from 'lucide-react';
 import { collection, query, where, orderBy, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebase';
 import IELTSReadingLayout from '../components/IELTSReadingLayout';
+import { DYNAMIC_TEST_21 } from '../data/dynamic21';
 
 
 interface ReadingTest {
@@ -37,12 +38,12 @@ export default function ReadingPractice() {
         };
       }) as ReadingTest[];
       
-      // Only use Firebase tests
-      setTests(dbTests);
+      // Add strict raw HTML test with Firebase tests
+      setTests([DYNAMIC_TEST_21 as ReadingTest, ...dbTests]);
       setLoading(false);
     }, (error) => {
-      // If Firestore fails, show empty
-      setTests([]);
+      // If Firestore fails, show local raw test
+      setTests([DYNAMIC_TEST_21 as ReadingTest]);
       setLoading(false);
     });
 
