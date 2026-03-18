@@ -1,0 +1,812 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evolution of the Calculator - IELTS Reading Test</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/dynamic-reading-test.css?v=2">
+
+    <!-- Google Analytics (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EBY3TYEJF4"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-EBY3TYEJF4');
+    </script>
+</head>
+<body data-test-id="21" data-test-type="dynamic">
+    <header>
+        <div class="header-left">
+            <a href="https://t.me/ieltswithsanokulov" target="_blank" class="telegram-link">
+                <i class="fab fa-telegram"></i>
+                <span>Join My Channel</span>
+            </a>
+            <div class="timer-container">
+                <span class="timer-display" id="timer">20:00</span>
+                <button class="timer-button" id="startPauseBtn" onclick="toggleTimer()">
+                    <i class="fas fa-play"></i>
+                </button>
+                <button class="timer-button" onclick="resetTimer()">
+                    <i class="fas fa-redo"></i>
+                </button>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="font-size-control">
+                <button class="font-size-button" onclick="changeFontSize(-1)">A-</button>
+                <button class="font-size-button" onclick="changeFontSize(1)">A+</button>
+            </div>
+            <button class="night-mode-toggle" onclick="toggleNightMode()">
+                <i class="fas fa-moon"></i>
+                <span id="modeText">Night Mode</span>
+            </button>
+        </div>
+    </header>
+
+    <form method="post" id="testForm" autocomplete="off">
+        <input type="hidden" name="csrfmiddlewaretoken" value="54vTtQinlcxGNVnFrjHIxFExU6CbYS3rgjdTjYurJnFGOtIGi7UcVCqxO6SB9IsI">
+        <div class="container">
+            <!-- PASSAGE SECTION -->
+            <div class="passage-section" id="passageSection">
+                
+                <div class="passage-instructions">
+                    <div class="passage-number">READING PASSAGE 1</div>
+                    <div class="passage-time-info">
+                        You should spend about 20 minutes on Questions 1–16, which are based on Reading Passage 1 below.
+                    </div>
+                </div>
+                
+                
+                <h1>Evolution of the Calculator</h1>
+                
+                
+                <h2 class="passage-subheading">Before the invention of the electronic calculator, people used a number of devices to help them with mathematical calculations.</h2>
+                
+                <div id="passageContent">
+                    <p style="text-align: center; color: #29b6f6; padding: 40px;">
+                        <i class="fas fa-spinner fa-spin" style="font-size: 24px;"></i><br>
+                        Loading passage...
+                    </p>
+                </div>
+            </div>
+
+            <!-- QUESTIONS SECTION -->
+            <div class="questions-section" id="questionsSection">
+                <h2>Questions</h2>
+
+                
+                <div class="question-group">
+                    <div class="instructions">
+                        <strong>Questions 1-6</strong><br>
+                        <p>Do the following statements agree with the information given in Reading Passage 1?</p><p>TRUE   if the statement agrees with the information<br>FALSE  if the statement contradicts the information<br>NOT GIVEN if there is no information on this</p>
+                        
+                    </div>
+
+                    
+                        <!-- TRUE/FALSE/NOT GIVEN or YES/NO/NOT GIVEN Questions -->
+
+                        
+                            <!-- Use combined true/false/not given mode -->
+                            
+                                
+                                <div class="question" data-question="1">
+                                    <div><strong>1.</strong> Counting methods before the abacus were limited to small quantities.</div>
+                                    <div class="options">
+                                        <label>
+                                            <input type="radio" name="q1" value="TRUE" onchange="updateProgress()"> TRUE
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="q1" value="FALSE" onchange="updateProgress()"> FALSE
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="q1" value="NOT GIVEN" onchange="updateProgress()"> NOT GIVEN
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                            
+                                
+                                <div class="question" data-question="2">
+                                    <div><strong>2.</strong> Development of trade helped spread the use of the abacus to Europe.</div>
+                                    <div class="options">
+                                        <label>
+                                            <input type="radio" name="q2" value="TRUE" onchange="updateProgress()"> TRUE
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="q2" value="FALSE" onchange="updateProgress()"> FALSE
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="q2" value="NOT GIVEN" onchange="updateProgress()"> NOT GIVEN
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                            
+                                
+                                <div class="question" data-question="3">
+                                    <div><strong>3.</strong> For 4,500 years, the abacus was constantly being improved.</div>
+                                    <div class="options">
+                                        <label>
+                                            <input type="radio" name="q3" value="TRUE" onchange="updateProgress()"> TRUE
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="q3" value="FALSE" onchange="updateProgress()"> FALSE
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="q3" value="NOT GIVEN" onchange="updateProgress()"> NOT GIVEN
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                            
+                                
+                                <div class="question" data-question="4">
+                                    <div><strong>4.</strong> The abacus can carry out some calculation tasks better than other tasks.</div>
+                                    <div class="options">
+                                        <label>
+                                            <input type="radio" name="q4" value="TRUE" onchange="updateProgress()"> TRUE
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="q4" value="FALSE" onchange="updateProgress()"> FALSE
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="q4" value="NOT GIVEN" onchange="updateProgress()"> NOT GIVEN
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                            
+                                
+                                <div class="question" data-question="5">
+                                    <div><strong>5.</strong> A complex knowledge of arithmetic was essential when using Napier’s bones.</div>
+                                    <div class="options">
+                                        <label>
+                                            <input type="radio" name="q5" value="TRUE" onchange="updateProgress()"> TRUE
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="q5" value="FALSE" onchange="updateProgress()"> FALSE
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="q5" value="NOT GIVEN" onchange="updateProgress()"> NOT GIVEN
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                            
+                                
+                                <div class="question" data-question="6">
+                                    <div><strong>6.</strong> Napier’s bones were automated counting devices.</div>
+                                    <div class="options">
+                                        <label>
+                                            <input type="radio" name="q6" value="TRUE" onchange="updateProgress()"> TRUE
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="q6" value="FALSE" onchange="updateProgress()"> FALSE
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="q6" value="NOT GIVEN" onchange="updateProgress()"> NOT GIVEN
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                            
+
+                        
+
+                    
+
+                </div>
+                
+                <div class="question-group">
+                    <div class="instructions">
+                        <strong>Questions 7-16</strong><br>
+                        <p>Complete the table below.</p><p>Choose ONE WORD ONLY from the passage for each answer.</p>
+                        
+                    </div>
+
+                    
+                        <!-- Table Completion -->
+                        
+                            <!-- Use combined text mode -->
+                            <div class="question-group-combined" data-question-range="7-16">
+                                <p><strong>Invention:</strong> Pascal Calculator<br><strong>Inventor:</strong> Blaise Pascal</p><p>• 7 <input type="text" class="fill-in-the-blank" name="q7" placeholder="..." style="width: 140px;" oninput="updateProgress()" data-question="7" autocomplete="one-time-code"> was not needed to carry out calculations<br>• high price was due to manufacturing 8 <input type="text" class="fill-in-the-blank" name="q8" placeholder="..." style="width: 140px;" oninput="updateProgress()" data-question="8" autocomplete="one-time-code"></p><p><strong>Invention:</strong> Arithmometer<br><strong>Inventor:</strong> Thomas de Colmar</p><p>• the first of several devices with improved 9 <input type="text" class="fill-in-the-blank" name="q9" placeholder="..." style="width: 140px;" oninput="updateProgress()" data-question="9" autocomplete="one-time-code"><br>• its 10 <input type="text" class="fill-in-the-blank" name="q10" placeholder="..." style="width: 140px;" oninput="updateProgress()" data-question="10" autocomplete="one-time-code"> was impractical</p><p><strong>Invention:</strong> Curta<br><strong>Inventor:</strong> Curt Herzstark</p><p>• people’s 11 <input type="text" class="fill-in-the-blank" name="q11" placeholder="..." style="width: 140px;" oninput="updateProgress()" data-question="11" autocomplete="one-time-code"> about previous devices led to its invention<br>• his design initially focused on the 12 <input type="text" class="fill-in-the-blank" name="q12" placeholder="..." style="width: 140px;" oninput="updateProgress()" data-question="12" autocomplete="one-time-code"> of the device<br>• because it was so small, it was 13 <input type="text" class="fill-in-the-blank" name="q13" placeholder="..." style="width: 140px;" oninput="updateProgress()" data-question="13" autocomplete="one-time-code"><br>• the device received 14 <input type="text" class="fill-in-the-blank" name="q14" placeholder="..." style="width: 140px;" oninput="updateProgress()" data-question="14" autocomplete="one-time-code"> from a royal<br>• it was operated by moving a 15 <input type="text" class="fill-in-the-blank" name="q15" placeholder="..." style="width: 140px;" oninput="updateProgress()" data-question="15" autocomplete="one-time-code"><br>• Curta calculators can be found today in 16 <input type="text" class="fill-in-the-blank" name="q16" placeholder="..." style="width: 140px;" oninput="updateProgress()" data-question="16" autocomplete="one-time-code"></p>
+                            </div>
+                        
+
+                    
+
+                </div>
+                
+            </div>
+        </div>
+
+        <footer>
+            <div class="progress-container" id="progressContainer"></div>
+            <button type="submit" class="submit-button">Submit Test</button>
+        </footer>
+    </form>
+
+<script>
+        // Load passage content via AJAX
+        function loadPassageContent() {
+            const testId = document.body.dataset.testId;
+            const testType = document.body.dataset.testType;
+
+            if (testType === 'dynamic' && testId) {
+                fetch(`/api/get-passage-data/${testId}/`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Failed to load passage');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (data.success) {
+                            // Convert passage text to HTML with paragraphs
+                            // Match the Django linebreaks_to_paragraphs filter logic
+                            let passageHTML = data.passage_text;
+
+                            // If text already has HTML tags, use it as-is
+                            if (passageHTML.includes('<p>') || passageHTML.includes('<h1>') ||
+                                passageHTML.includes('<h2>') || passageHTML.includes('<div>')) {
+                                document.getElementById('passageContent').innerHTML = passageHTML;
+                            } else {
+                                // Split on double newlines (with optional whitespace)
+                                const paragraphs = passageHTML.trim().split(/\n\s*\n/);
+
+                                if (paragraphs.length === 1) {
+                                    // Single paragraph - replace newlines with spaces
+                                    passageHTML = paragraphs[0].trim().replace(/\n/g, ' ');
+                                } else {
+                                    // Multiple paragraphs - wrap each in <p> tags
+                                    passageHTML = paragraphs
+                                        .map(p => p.trim())
+                                        .filter(p => p)
+                                        .map(p => `<p>${p.replace(/\n/g, ' ')}</p>`)
+                                        .join('\n\n');
+                                }
+
+                                document.getElementById('passageContent').innerHTML = passageHTML;
+                            }
+                        } else {
+                            document.getElementById('passageContent').innerHTML =
+                                '<p style="text-align: center; color: #dc3545;">Error loading passage. Please refresh the page.</p>';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error loading passage:', error);
+                        document.getElementById('passageContent').innerHTML =
+                            '<p style="text-align: center; color: #dc3545;">Error loading passage. Please refresh the page.</p>';
+                    });
+            }
+        }
+
+        // Call loadPassageContent when page loads
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadPassageContent);
+        } else {
+            loadPassageContent();
+        }
+
+        
+        // Get all question numbers from the test
+        const questionNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+        let totalQuestions = 16;
+        const userAnswers = {};
+
+        // Initialize progress indicators
+        function initializeProgress() {
+            const container = document.getElementById('progressContainer');
+            container.innerHTML = '';
+            questionNumbers.forEach(function(questionNum) {
+                const indicator = document.createElement('div');
+                indicator.className = 'progress-indicator';
+                indicator.id = `progress-${questionNum}`;
+                indicator.textContent = questionNum;
+                indicator.dataset.questionNumber = questionNum;
+
+                // Add click handler to scroll to question
+                indicator.addEventListener('click', function() {
+                    const questionNum = parseInt(this.dataset.questionNumber);
+
+                    // First try exact match for data-question
+                    let questionElement = document.querySelector(`[data-question="${questionNum}"]`);
+
+                    // If not found, check data-question-2 (for dual questions)
+                    if (!questionElement) {
+                        questionElement = document.querySelector(`[data-question-2="${questionNum}"]`);
+                    }
+
+                    // If still not found, check if questionNum is in a comma-separated list (for multi questions)
+                    if (!questionElement) {
+                        const allQuestions = document.querySelectorAll('[data-question]');
+                        for (const elem of allQuestions) {
+                            const dataQuestion = elem.getAttribute('data-question');
+                            if (dataQuestion && dataQuestion.includes(',')) {
+                                const questionNums = dataQuestion.split(',').map(n => parseInt(n.trim()));
+                                if (questionNums.includes(questionNum)) {
+                                    questionElement = elem;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    if (questionElement) {
+                        questionElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                });
+
+                container.appendChild(indicator);
+            });
+        }
+
+        // Update progress - check which specific questions are answered
+        function updateProgress() {
+            // Check each question individually
+            questionNumbers.forEach(function(questionNum) {
+                const indicator = document.getElementById(`progress-${questionNum}`);
+                if (!indicator) return;
+
+                let isAnswered = false;
+
+                // Check for radio buttons for this question
+                const radio = document.querySelector(`input[type="radio"][name="q${questionNum}"]:checked`);
+                if (radio) {
+                    isAnswered = true;
+                }
+
+                // Check for checkboxes for this question (dual choice)
+                const checkboxes = document.querySelectorAll(`input[type="checkbox"][name="q${questionNum}"]:checked`);
+                if (checkboxes.length > 0) {
+                    isAnswered = true;
+                }
+
+                // Check for text inputs for this question
+                const textInput = document.querySelector(`input[type="text"][name="q${questionNum}"]`);
+                if (textInput && textInput.value.trim() !== '') {
+                    isAnswered = true;
+                }
+
+                // Check for select/dropdown for this question
+                const select = document.querySelector(`select[name="q${questionNum}"]`);
+                if (select && select.value !== '') {
+                    isAnswered = true;
+                }
+
+                // Check for matching table answers (hidden inputs created by table clicks)
+                const hiddenInput = document.querySelector(`input[type="hidden"][name="q${questionNum}"]`);
+                if (hiddenInput && hiddenInput.value !== '') {
+                    isAnswered = true;
+                }
+
+                // Update indicator
+                if (isAnswered) {
+                    indicator.classList.add('completed');
+                } else {
+                    indicator.classList.remove('completed');
+                }
+            });
+        }
+
+        // Check dual selection limit (max 2 checkboxes per question)
+        function checkDualSelection(questionNum) {
+            const checkboxes = document.querySelectorAll(`input[type="checkbox"][name="q${questionNum}"]`);
+            const checked = Array.from(checkboxes).filter(cb => cb.checked);
+
+            if (checked.length > 2) {
+                // Uncheck the first checked box to maintain only 2 selections
+                checked[0].checked = false;
+            }
+        }
+
+        // Update progress for dual choice questions (occupies 2 question slots)
+        function updateDualProgress(questionNum1, questionNum2) {
+            const checkboxes = document.querySelectorAll(`input[type="checkbox"][name="q${questionNum1}"]`);
+            const checked = Array.from(checkboxes).filter(cb => cb.checked);
+
+            // Mark question slots progressively based on number of selections
+            const indicator1 = document.getElementById(`progress-${questionNum1}`);
+            const indicator2 = document.getElementById(`progress-${questionNum2}`);
+
+            // Light up indicators progressively based on number of selections
+            if (checked.length >= 1) {
+                if (indicator1) indicator1.classList.add('completed');
+            } else {
+                if (indicator1) indicator1.classList.remove('completed');
+            }
+
+            if (checked.length >= 2) {
+                if (indicator2) indicator2.classList.add('completed');
+            } else {
+                if (indicator2) indicator2.classList.remove('completed');
+            }
+        }
+
+        // Check multi-choice selection limit
+        function checkMultiSelection(questionNum, maxCount) {
+            const checkboxes = document.querySelectorAll(`input[type="checkbox"][name="q${questionNum}"]`);
+            const checked = Array.from(checkboxes).filter(cb => cb.checked);
+            if (checked.length > maxCount) {
+                checked[0].checked = false;
+            }
+        }
+
+        // Update progress for multi-choice questions (occupies 3 or 4 question slots)
+        function updateMultiProgress(questionNumbers, answerCount) {
+            const questionNums = questionNumbers.split(',').map(n => parseInt(n));
+            const checkboxes = document.querySelectorAll(`input[type="checkbox"][name="q${questionNums[0]}"]`);
+            const checked = Array.from(checkboxes).filter(cb => cb.checked);
+
+            // Light up indicators progressively based on number of selections
+            questionNums.forEach((qNum, index) => {
+                const indicator = document.getElementById(`progress-${qNum}`);
+                if (indicator) {
+                    if (checked.length > index) {
+                        indicator.classList.add('completed');
+                    } else {
+                        indicator.classList.remove('completed');
+                    }
+                }
+            });
+        }
+
+        // Timer functionality
+        let timeRemaining = 20 * 60; // Convert minutes to seconds
+        let timerInterval = null;
+        let isTimerRunning = false;
+
+        function toggleTimer() {
+            const btn = document.getElementById('startPauseBtn');
+            if (isTimerRunning) {
+                clearInterval(timerInterval);
+                btn.innerHTML = '<i class="fas fa-play"></i>';
+                isTimerRunning = false;
+            } else {
+                timerInterval = setInterval(updateTimer, 1000);
+                btn.innerHTML = '<i class="fas fa-pause"></i>';
+                isTimerRunning = true;
+            }
+        }
+
+        function updateTimer() {
+            if (timeRemaining <= 0) {
+                clearInterval(timerInterval);
+                alert('Time is up! Please submit your test.');
+                return;
+            }
+
+            timeRemaining--;
+            const minutes = Math.floor(timeRemaining / 60);
+            const seconds = timeRemaining % 60;
+            document.getElementById('timer').textContent =
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            timeRemaining = 20 * 60;
+            document.getElementById('timer').textContent = '20:00';
+            document.getElementById('startPauseBtn').innerHTML = '<i class="fas fa-play"></i>';
+            isTimerRunning = false;
+        }
+
+        // Night mode toggle
+        function toggleNightMode() {
+            document.body.classList.toggle('night-mode');
+            const modeText = document.getElementById('modeText');
+            if (document.body.classList.contains('night-mode')) {
+                modeText.textContent = 'Day Mode';
+                localStorage.setItem('nightMode', 'enabled');
+            } else {
+                modeText.textContent = 'Night Mode';
+                localStorage.setItem('nightMode', 'disabled');
+            }
+        }
+
+        // Load night mode preference
+        if (localStorage.getItem('nightMode') === 'enabled') {
+            document.body.classList.add('night-mode');
+            document.getElementById('modeText').textContent = 'Day Mode';
+        }
+
+        // Font size control
+        let currentFontSize = 15;
+        function changeFontSize(delta) {
+            currentFontSize += delta;
+            if (currentFontSize < 12) currentFontSize = 12;
+            if (currentFontSize > 20) currentFontSize = 20;
+            document.body.style.fontSize = currentFontSize + 'px';
+            localStorage.setItem('fontSize', currentFontSize);
+        }
+
+        // Load font size preference
+        const savedFontSize = localStorage.getItem('fontSize');
+        if (savedFontSize) {
+            currentFontSize = parseInt(savedFontSize);
+            document.body.style.fontSize = currentFontSize + 'px';
+        }
+
+        // ===== ROBUST HIGHLIGHT SYSTEM =====
+        // Using CSS Custom Highlight API fallback approach with mark elements
+
+        let highlightToolbar = null;
+        let currentHighlightColor = 'orange';
+
+        function makeSelectable() {
+            // Create toolbar if it doesn't exist
+            if (!document.getElementById('highlightToolbar')) {
+                createHighlightToolbar();
+            }
+
+            // Listen for text selection on both passage and questions
+            document.addEventListener('mouseup', handleSelection);
+
+            // Click on existing highlights to change color or remove
+            document.addEventListener('click', handleHighlightClick);
+
+            // Hide toolbar when clicking elsewhere
+            document.addEventListener('mousedown', function(e) {
+                const toolbar = document.getElementById('highlightToolbar');
+                if (toolbar && !toolbar.contains(e.target)) {
+                    hideToolbar();
+                }
+            });
+        }
+
+        function createHighlightToolbar() {
+            const toolbar = document.createElement('div');
+            toolbar.id = 'highlightToolbar';
+            toolbar.className = 'highlight-toolbar';
+            toolbar.innerHTML = `
+                <button class="highlight-orange-btn" onclick="applyHighlight('orange')" title="Orange">🟠</button>
+                <button class="highlight-blue-btn" onclick="applyHighlight('blue')" title="Blue">🔵</button>
+                <button class="highlight-green-btn" onclick="applyHighlight('green')" title="Green">🟢</button>
+                <button class="highlight-remove-btn" onclick="removeHighlight()" title="Remove">✕</button>
+            `;
+            document.body.appendChild(toolbar);
+            highlightToolbar = toolbar;
+        }
+
+        function handleSelection(e) {
+            const selection = window.getSelection();
+            const selectedText = selection.toString().trim();
+
+            if (selectedText.length === 0) {
+                hideToolbar();
+                return;
+            }
+
+            // Check if selection is within passage or questions
+            const range = selection.getRangeAt(0);
+            const container = range.commonAncestorContainer;
+            const parentElement = container.nodeType === Node.TEXT_NODE ? container.parentNode : container;
+
+            const passageSection = document.getElementById('passageContent');
+            const questionsSection = document.getElementById('questionsSection');
+
+            const isInPassage = passageSection && passageSection.contains(parentElement);
+            const isInQuestions = questionsSection && questionsSection.contains(parentElement);
+
+            if (!isInPassage && !isInQuestions) {
+                hideToolbar();
+                return;
+            }
+
+            // Show toolbar near selection
+            showToolbar(e.pageX, e.pageY);
+        }
+
+        function showToolbar(x, y) {
+            const toolbar = document.getElementById('highlightToolbar');
+            if (!toolbar) return;
+
+            // Position toolbar near cursor
+            toolbar.style.left = (x - 100) + 'px';
+            toolbar.style.top = (y - 70) + 'px';
+            toolbar.style.display = 'flex';
+        }
+
+        function hideToolbar() {
+            const toolbar = document.getElementById('highlightToolbar');
+            if (toolbar) {
+                toolbar.style.display = 'none';
+            }
+        }
+
+        function applyHighlight(color) {
+            const selection = window.getSelection();
+            if (!selection.rangeCount) return;
+
+            const range = selection.getRangeAt(0);
+            const selectedText = selection.toString().trim();
+
+            if (selectedText.length === 0) return;
+
+            // Check if selection crosses paragraph boundaries
+            const startContainer = range.startContainer;
+            const endContainer = range.endContainer;
+
+            // Find the containing paragraph elements
+            function findParagraphParent(node) {
+                let current = node.nodeType === Node.TEXT_NODE ? node.parentNode : node;
+                while (current && current !== document.body) {
+                    const tagName = current.tagName ? current.tagName.toLowerCase() : '';
+                    // Check for paragraph-like elements
+                    if (tagName === 'p' || tagName === 'div' || tagName === 'li' ||
+                        current.classList && (current.classList.contains('question') ||
+                                             current.classList.contains('question-group'))) {
+                        return current;
+                    }
+                    current = current.parentNode;
+                }
+                return null;
+            }
+
+            const startParagraph = findParagraphParent(startContainer);
+            const endParagraph = findParagraphParent(endContainer);
+
+            // Check if selection spans across different paragraphs
+            if (startParagraph !== endParagraph) {
+                selection.removeAllRanges();
+                hideToolbar();
+                return;
+            }
+
+            try {
+                // Simple approach: try surroundContents first (works for simple selections)
+                const mark = document.createElement('mark');
+                mark.className = 'highlight-' + color;
+                mark.setAttribute('data-highlight-color', color);
+
+                try {
+                    range.surroundContents(mark);
+                    selection.removeAllRanges();
+                    hideToolbar();
+                    return;
+                } catch (e) {
+                    // surroundContents failed, try manual approach for complex selections
+                }
+
+                // Manual approach for selections within same paragraph
+                const startOffset = range.startOffset;
+                const endOffset = range.endOffset;
+
+                // Same container - simple text node split
+                if (startContainer === endContainer && startContainer.nodeType === Node.TEXT_NODE) {
+                    const textNode = startContainer;
+                    const highlightedText = textNode.textContent.substring(startOffset, endOffset);
+
+                    const mark = document.createElement('mark');
+                    mark.className = 'highlight-' + color;
+                    mark.setAttribute('data-highlight-color', color);
+                    mark.textContent = highlightedText;
+
+                    const afterText = textNode.textContent.substring(endOffset);
+                    const beforeText = textNode.textContent.substring(0, startOffset);
+
+                    const parent = textNode.parentNode;
+                    const afterNode = afterText ? document.createTextNode(afterText) : null;
+                    const beforeNode = document.createTextNode(beforeText);
+
+                    parent.insertBefore(beforeNode, textNode);
+                    parent.insertBefore(mark, textNode);
+                    if (afterNode) parent.insertBefore(afterNode, textNode);
+                    parent.removeChild(textNode);
+                } else {
+                    // Complex selection within same paragraph - use document fragment
+                    const fragment = range.cloneContents();
+                    const mark = document.createElement('mark');
+                    mark.className = 'highlight-' + color;
+                    mark.setAttribute('data-highlight-color', color);
+
+                    // Move all fragment contents into mark
+                    while (fragment.firstChild) {
+                        mark.appendChild(fragment.firstChild);
+                    }
+
+                    range.deleteContents();
+                    range.insertNode(mark);
+                }
+
+                selection.removeAllRanges();
+                hideToolbar();
+
+            } catch (error) {
+                console.error('Highlight error:', error);
+                alert('Could not highlight this selection. Please try selecting a smaller portion of text.');
+                hideToolbar();
+            }
+        }
+
+        function handleHighlightClick(e) {
+            // Check if clicked on a highlight
+            if (e.target.tagName === 'MARK' && e.target.hasAttribute('data-highlight-color')) {
+                e.stopPropagation();
+
+                // Select the highlighted text
+                const range = document.createRange();
+                range.selectNodeContents(e.target);
+                const selection = window.getSelection();
+                selection.removeAllRanges();
+                selection.addRange(range);
+
+                // Show toolbar
+                showToolbar(e.pageX, e.pageY);
+            }
+        }
+
+        function removeHighlight() {
+            const selection = window.getSelection();
+            if (!selection.rangeCount) return;
+
+            const range = selection.getRangeAt(0);
+            const container = range.commonAncestorContainer;
+
+            // Find the mark element
+            let markElement = container.nodeType === Node.TEXT_NODE ? container.parentNode : container;
+
+            if (markElement.tagName === 'MARK') {
+                // Unwrap the mark element
+                const parent = markElement.parentNode;
+                while (markElement.firstChild) {
+                    parent.insertBefore(markElement.firstChild, markElement);
+                }
+                parent.removeChild(markElement);
+                parent.normalize(); // Merge adjacent text nodes
+            }
+
+            selection.removeAllRanges();
+            hideToolbar();
+        }
+
+        // Matching table functionality
+        document.querySelectorAll('.matching-table tbody tr').forEach(row => {
+            row.querySelectorAll('td[data-answer]').forEach(cell => {
+                cell.addEventListener('click', function() {
+                    const questionId = row.dataset.questionId;
+                    const answer = this.dataset.answer;
+
+                    // Remove previous selection in this row
+                    row.querySelectorAll('td[data-answer]').forEach(td => {
+                        td.classList.remove('selected');
+                    });
+
+                    // Mark this cell as selected
+                    this.classList.add('selected');
+
+                    // Store the answer
+                    userAnswers[questionId] = answer;
+
+                    // Create/update hidden input for this answer
+                    let hiddenInput = document.querySelector(`input[name="q${questionId}"]`);
+                    if (!hiddenInput) {
+                        hiddenInput = document.createElement('input');
+                        hiddenInput.type = 'hidden';
+                        hiddenInput.name = `q${questionId}`;
+                        document.getElementById('testForm').appendChild(hiddenInput);
+                    }
+                    hiddenInput.value = answer;
+
+                    updateProgress();
+                });
+            });
+        });
+
+        // Form submission - no validation needed, just submit
+        // User can submit with any number of answers
+
+        // Initialize on page load
+        window.addEventListener('load', function() {
+            initializeProgress();
+            makeSelectable();
+            updateProgress();
+        });
+    </script>
+
+</body>
+</html>
