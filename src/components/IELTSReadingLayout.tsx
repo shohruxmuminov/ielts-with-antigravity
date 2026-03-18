@@ -41,26 +41,22 @@ export default function IELTSReadingLayout({ test, onBack }: IELTSReadingLayoutP
   // Effect to handle visibility of parts in the injected HTML
   useEffect(() => {
     if (passageRef.current) {
-      const passages = passageRef.current.querySelectorAll('.passage-content-wrapper');
+      const passages = passageRef.current.querySelectorAll('.reading-passage');
       passages.forEach((p: any, i) => {
         if (i + 1 === currentPart) {
           p.classList.remove('ielts-hidden', 'hidden');
-          p.style.display = 'block';
         } else {
           p.classList.add('ielts-hidden', 'hidden');
-          p.style.display = 'none';
         }
       });
     }
     if (questionsRef.current) {
-      const questionSets = questionsRef.current.querySelectorAll('.questions-content-wrapper');
+      const questionSets = questionsRef.current.querySelectorAll('.question-set');
       questionSets.forEach((qs: any, i) => {
         if (i + 1 === currentPart) {
           qs.classList.remove('ielts-hidden', 'hidden');
-          qs.style.display = 'block';
         } else {
           qs.classList.add('ielts-hidden', 'hidden');
-          qs.style.display = 'none';
         }
       });
       // Scroll to top when part changes
@@ -71,7 +67,7 @@ export default function IELTSReadingLayout({ test, onBack }: IELTSReadingLayoutP
   // Scroll to question when currentQuestion changes
   useEffect(() => {
     if (questionsRef.current) {
-      const questionElement = questionsRef.current.querySelector(`[data-question="${currentQuestion}"]`);
+      const questionElement = questionsRef.current.querySelector(`[data-q-start="${currentQuestion}"]`);
       if (questionElement) {
         questionElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
@@ -81,10 +77,10 @@ export default function IELTSReadingLayout({ test, onBack }: IELTSReadingLayoutP
   // Accessibility: Add ARIA labels to injected inputs
   useEffect(() => {
     if (questionsRef.current) {
-      const inputs = questionsRef.current.querySelectorAll('input[type="text"], select');
+      const inputs = questionsRef.current.querySelectorAll('.answer-input');
       inputs.forEach((input: any) => {
         if (!input.getAttribute('aria-label')) {
-          const qId = input.getAttribute('name');
+          const qId = input.getAttribute('id');
           input.setAttribute('aria-label', `Answer for question ${qId?.replace('q', '')}`);
         }
       });
