@@ -95,15 +95,6 @@ export default function Dashboard() {
   return (
     <div className="w-full min-h-full bg-[#05050f] text-slate-100 font-sans p-8 lg:p-12 relative overflow-hidden flex flex-col justify-center">
       
-      {/* SVG Filter for Realistic Fire Turbulence */}
-      <svg style={{ position: 'absolute', width: 0, height: 0 }}>
-        <filter id="fire-turbulence" x="-20%" y="-20%" width="140%" height="140%">
-          <feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="3" result="noise">
-            <animate attributeName="baseFrequency" values="0.012;0.015;0.012" dur="5s" repeatCount="indefinity" />
-          </feTurbulence>
-          <feDisplacementMap in="SourceGraphic" in2="noise" scale="15" />
-        </filter>
-      </svg>
       {/* Cosmic Background Nebulas */}
       <div className="absolute top-[-20%] left-[-10%] w-[70%] h-[70%] bg-indigo-600/10 rounded-full blur-[150px] pointer-events-none" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] bg-purple-600/10 rounded-full blur-[140px] pointer-events-none" />
