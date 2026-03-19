@@ -49,47 +49,52 @@ body {
   position: relative;
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 
-  &::before {
+  &::before, &::after {
     content: '';
     position: absolute;
-    inset: -2px;
-    background: linear-gradient(
-      45deg,
-      #ff4d00,
-      #ff9500,
-      #ff4d00,
-      #ff2d00,
-      #ff9500
-    );
-    background-size: 400% 400%;
-    filter: blur(25px);
+    inset: -15px;
+    background-image: url('/realistic_flame_texture.png');
+    background-size: 200% 200%;
+    filter: blur(20px) brightness(1.3) contrast(1.5) url('#fire-turbulence');
     opacity: 0;
     z-index: -1;
-    border-radius: inherit;
-    transition: opacity 0.5s ease;
-    animation: fire-move 8s ease infinite;
+    border-radius: 2.5rem;
+    transition: opacity 0.6s ease-in-out;
+    pointer-events: none;
   }
 
-  &:hover::before {
-    opacity: 0.7;
+  &::before {
+    background-position: top center;
+    animation: fire-move-up 4s ease-in-out infinite;
+  }
+
+  &::after {
+    background-position: bottom right;
+    animation: fire-move-up 6s ease-in-out infinite reverse, flicker 0.1s infinite alternate;
+    mix-blend-mode: color-dodge;
+  }
+
+  &:hover::before, &:hover::after {
+    opacity: 0.8;
   }
 
   &:hover {
-    transform: translateY(-5px);
-    border-color: rgba(255, 77, 0, 0.4);
+    transform: translateY(-8px) scale(1.01);
+    border-color: rgba(255, 120, 0, 0.5);
+    box-shadow: 0 0 40px rgba(255, 80, 0, 0.2);
   }
 }
 
-@keyframes fire-move {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+@keyframes fire-move-up {
+  0% { transform: translateY(0) scale(1); background-position: 0% 0%; }
+  50% { transform: translateY(-10px) scale(1.05); background-position: 50% 100%; }
+  100% { transform: translateY(0) scale(1); background-position: 100% 0%; }
+}
+
+@keyframes flicker {
+  0% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.02); }
+  100% { opacity: 0.8; transform: scale(0.98); }
 }
 
 @layer components {
