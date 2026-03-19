@@ -86,25 +86,11 @@ export default function Dashboard() {
       colors: { start: '#ff9966', mid: '#ff5e62', glow: '#ff9966', shadow: 'rgba(255, 153, 102, 0.3)' }
     },
     { 
-      id: 'samples', 
-      name: 'Band 9.0 Samples', 
-      path: '/samples', 
-      icon: Trophy,
-      colors: { start: '#f7971e', mid: '#ffd200', glow: '#f7971e', shadow: 'rgba(247, 151, 30, 0.3)' }
-    },
-    { 
       id: 'mock', 
       name: 'Take a Full Mock', 
       path: '/mock-exam', 
       icon: ClipboardList,
       colors: { start: '#ee0979', mid: '#ff6a00', glow: '#ee0979', shadow: 'rgba(238, 9, 121, 0.3)' }
-    },
-    { 
-      id: 'materials', 
-      name: 'Special Materials', 
-      path: '/special-materials', 
-      icon: Star,
-      colors: { start: '#2193b0', mid: '#6dd5ed', glow: '#2193b0', shadow: 'rgba(33, 147, 176, 0.3)' }
     },
     { 
       id: 'speaking', 
