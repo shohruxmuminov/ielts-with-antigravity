@@ -3,8 +3,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Trophy, 
   ChevronRight,
-  Clock,
-  Calendar,
+  Headphones,
+  Mic2,
+  BookOpen,
+  PenTool,
+  ClipboardList,
+  Star,
+  Smartphone,
   Sparkles
 } from 'lucide-react';
 import { useAuth } from '../FirebaseProvider';
@@ -15,8 +20,6 @@ import { db } from '../firebase';
 export default function Dashboard() {
   const { profile, loading, user } = useAuth();
   const [totalUsers, setTotalUsers] = useState(0);
-  const [recentScores, setRecentScores] = useState<number[]>([]);
-  const [averageScore, setAverageScore] = useState(0);
   const [greeting, setGreeting] = useState('');
 
   useEffect(() => {
@@ -34,205 +37,150 @@ export default function Dashboard() {
         if (statsSnap.exists()) {
           setTotalUsers(statsSnap.data().userCount || 0);
         }
-
-        if (user) {
-          const resultsRef = collection(db, 'results');
-          const q = query(
-            resultsRef, 
-            where('userId', '==', user.uid),
-            orderBy('createdAt', 'desc'),
-            limit(5)
-          );
-          const resultsSnap = await getDocs(q);
-          const docs = resultsSnap.docs;
-          const scores = docs.map(doc => doc.data().overallBand || 0);
-          setRecentScores(scores);
-          
-          if (scores.length > 0) {
-            const avg = scores.reduce((a, b) => a + b, 0) / scores.length;
-            setAverageScore(Number(avg.toFixed(1)));
-          }
-        }
       } catch (error) {
         console.error(error);
       }
     };
-
     fetchStats();
   }, [user]);
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-full bg-[#080710]">
+      <div className="flex items-center justify-center h-screen bg-slate-50">
         <motion.div 
           animate={{ rotate: 360 }}
           transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-          className="rounded-full h-12 w-12 border-b-2 border-indigo-500"
+          className="rounded-full h-12 w-12 border-b-2 border-blue-500"
         />
       </div>
     );
   }
 
-  const formatTime = (minutes: number) => {
-    const h = Math.floor(minutes / 60);
-    const m = minutes % 60;
-    return `${h}h ${m}m`;
-  };
-
   const features = [
     { 
       id: 'vocabulary', 
-      name: 'Vocabulary', 
+      name: 'Learn Vocabulary', 
       path: '/vocabulary', 
-      desc: 'Expand your lexicon',
-      colors: { start: '#8b5cf6', mid: '#a78bfa', end: '#c4b5fd', glow: '#8b5cf6', shadow: 'rgba(139, 92, 246, 0.4)' }
+      icon: Headphones,
+      colors: { start: '#00d2ff', mid: '#3a7bd5', glow: '#00d2ff', shadow: 'rgba(0, 210, 255, 0.3)' }
     },
     { 
       id: 'listening', 
-      name: 'Listening', 
+      name: 'Listening Practice', 
       path: '/listening', 
-      desc: 'Sharpen your ears',
-      colors: { start: '#0ea5e9', mid: '#00d2ff', end: '#00fff2', glow: '#0ea5e9', shadow: 'rgba(14, 165, 233, 0.4)' }
+      icon: Mic2,
+      colors: { start: '#9d50bb', mid: '#6e48aa', glow: '#9d50bb', shadow: 'rgba(157, 80, 187, 0.3)' }
     },
     { 
       id: 'reading', 
-      name: 'Reading', 
+      name: 'Reading Practice', 
       path: '/reading', 
-      desc: 'Analyze complex texts',
-      colors: { start: '#10b981', mid: '#34d399', end: '#6ee7b7', glow: '#10b981', shadow: 'rgba(16, 185, 129, 0.4)' }
+      icon: BookOpen,
+      colors: { start: '#00b09b', mid: '#96c93d', glow: '#00b09b', shadow: 'rgba(0, 176, 155, 0.3)' }
     },
     { 
       id: 'writing', 
-      name: 'Writing', 
+      name: 'Writing Practice', 
       path: '/writing', 
-      desc: 'Master essay structure',
-      colors: { start: '#6366f1', mid: '#818cf8', end: '#a5b4fc', glow: '#6366f1', shadow: 'rgba(99, 102, 241, 0.4)' }
+      icon: PenTool,
+      colors: { start: '#ff9966', mid: '#ff5e62', glow: '#ff9966', shadow: 'rgba(255, 153, 102, 0.3)' }
     },
     { 
-      id: 'speaking', 
-      name: 'Speaking', 
-      path: '/speaking', 
-      desc: 'Speak with confidence',
-      colors: { start: '#3b82f6', mid: '#60a5fa', end: '#93c5fd', glow: '#3b82f6', shadow: 'rgba(59, 130, 246, 0.4)' }
+      id: 'samples', 
+      name: 'Band 9.0 Samples', 
+      path: '/samples', 
+      icon: Trophy,
+      colors: { start: '#f7971e', mid: '#ffd200', glow: '#f7971e', shadow: 'rgba(247, 151, 30, 0.3)' }
     },
     { 
       id: 'mock', 
-      name: 'Mock Exam', 
+      name: 'Take a Full Mock', 
       path: '/mock-exam', 
-      desc: 'Test your limits',
-      colors: { start: '#f43f5e', mid: '#fb7185', end: '#fda4af', glow: '#f43f5e', shadow: 'rgba(244, 63, 94, 0.4)' }
+      icon: ClipboardList,
+      colors: { start: '#ee0979', mid: '#ff6a00', glow: '#ee0979', shadow: 'rgba(238, 9, 121, 0.3)' }
+    },
+    { 
+      id: 'materials', 
+      name: 'Special Materials', 
+      path: '/special-materials', 
+      icon: Star,
+      colors: { start: '#2193b0', mid: '#6dd5ed', glow: '#2193b0', shadow: 'rgba(33, 147, 176, 0.3)' }
+    },
+    { 
+      id: 'speaking', 
+      name: 'Speaking Practice', 
+      path: '/speaking', 
+      icon: Smartphone,
+      colors: { start: '#ff0084', mid: '#33001b', glow: '#ff0084', shadow: 'rgba(255, 0, 132, 0.2)' }
     },
   ];
 
   const displayName = profile?.displayName?.split(' ')[0] || 'Student';
   const targetBand = profile?.targetBand || '7.0';
-  const displayBand = averageScore > 0 ? averageScore.toFixed(1) : '0.0';
 
   return (
-    <div className="w-full min-h-full bg-[#05050f] text-slate-100 font-sans p-8 lg:p-12 relative overflow-hidden flex flex-col justify-center">
+    <div className="w-full min-h-screen bg-slate-50 text-slate-900 font-sans p-8 lg:p-12 relative overflow-hidden">
       
-      {/* Cosmic Background Nebulas */}
-      <div className="absolute top-[-20%] left-[-10%] w-[70%] h-[70%] bg-indigo-600/10 rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] bg-purple-600/10 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute top-[30%] right-[10%] w-[40%] h-[30%] bg-fuchsia-600/10 rounded-full blur-[120px] transform -rotate-45 pointer-events-none" />
-      
-      {/* Light Streak Overlays */}
-      <div className="absolute top-[10%] right-[20%] w-[60%] h-[1px] bg-gradient-to-r from-transparent via-purple-400/40 to-transparent transform rotate-12 blur-[2px] pointer-events-none" />
-      <div className="absolute top-[15%] right-[15%] w-[80%] h-[2px] bg-gradient-to-r from-transparent via-indigo-400/20 to-transparent transform rotate-[15deg] blur-[4px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-full h-[40px] bg-gradient-to-t from-indigo-900/30 to-transparent blur-xl pointer-events-none" />
+      {/* Decorative Overlays */}
+      <div className="absolute top-[-10%] left-[-5%] w-[40%] h-[40%] bg-blue-100/30 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-[-5%] right-[-5%] w-[30%] h-[30%] bg-purple-100/30 rounded-full blur-[100px] pointer-events-none" />
 
-      <div className="max-w-6xl mx-auto w-full relative z-10 space-y-10">
+      <div className="max-w-6xl mx-auto w-full relative z-10 space-y-16">
         
-        {/* TOP HEADER */}
+        {/* HEADER SECTION */}
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="flex flex-col md:flex-row md:items-start justify-between gap-6"
+          className="flex flex-col md:flex-row md:items-end justify-between gap-6"
         >
-          <div className="space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#11112b]/80 border border-indigo-500/30 text-indigo-300/80 font-bold text-[10px] tracking-[0.2em] uppercase backdrop-blur-md shadow-[0_0_15px_rgba(99,102,241,0.15)]">
-              <Sparkles className="w-3 h-3 text-indigo-400" />
-              {greeting}
+          <div className="space-y-4 text-left">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 text-blue-600 font-bold text-xs border border-blue-100 uppercase tracking-widest">
+              <Sparkles className="w-3.5 h-3.5" />
+              {greeting}, IELTS Achiever
             </div>
-            
-            <div className="space-y-1">
-              <h1 className="text-5xl lg:text-6xl font-black text-white tracking-tight">
-                Ready to learn, <span className="text-[#a48afd] drop-shadow-[0_0_15px_rgba(168,85,247,0.4)]">{displayName}?</span>
-              </h1>
-              <p className="text-slate-400/90 text-lg font-medium tracking-wide">
-                Start your next mock exam to see your progress!
-              </p>
-            </div>
+            <h1 className="text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-tight">
+              Ready to learn,<br />
+              <span className="text-blue-600 underline decoration-blue-200 underline-offset-8">{displayName}!</span>
+            </h1>
           </div>
-          
-          <div className="flex items-center gap-5 bg-[#121124]/90 backdrop-blur-xl px-5 py-3 rounded-full border border-slate-700/50 shadow-2xl">
-            <div className="flex -space-x-4">
-              {[1,2,3].map(i => (
-                <div key={i} className="w-11 h-11 rounded-full border-2 border-[#121124] bg-slate-800 overflow-hidden shadow-md">
-                  <img src={`https://i.pravatar.cc/150?u=${i + 20}`} alt="user" referrerPolicy="no-referrer" className="w-full h-full object-cover" />
-                </div>
-              ))}
-            </div>
-            <div className="flex flex-col">
-              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Community</span>
-              <span className="text-sm font-black text-white">{totalUsers + 824}+ Students</span>
-            </div>
+
+          <div className="flex items-center gap-4 bg-white px-6 py-4 rounded-3xl border border-slate-100 shadow-sm">
+             <div className="w-12 h-12 rounded-2xl bg-blue-600 flex items-center justify-center text-white shadow-[0_10px_20px_-5px_rgba(37,99,235,0.4)]">
+                <Trophy className="w-6 h-6" />
+             </div>
+             <div>
+                <p className="text-slate-400 text-[10px] font-bold uppercase tracking-widest">Target Band</p>
+                <p className="text-2xl font-black text-slate-800 tracking-tighter">{targetBand}</p>
+             </div>
           </div>
         </motion.div>
 
-        {/* ADVERTISEMENT WIDGET */}
-        <div className="w-full flex justify-center py-2">
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2 }}
-            className="w-full max-w-4xl relative rounded-[2rem] overflow-hidden border border-indigo-500/20 shadow-[0_0_40px_rgba(99,102,241,0.1)] group bg-[#050510]"
-          >
-            {/* Main Advertisement Image - Using h-auto and object-contain for full visibility */}
-            <div className="w-full flex justify-center bg-black/20">
-              <img 
-                src="/ad-banner.jpg" 
-                alt="Ace Your IELTS Exam - Start Practicing with Us Today!" 
-                className="w-full h-auto max-h-[450px] object-contain block transform group-hover:scale-[1.01] transition-transform duration-700"
-              />
-            </div>
-
-            {/* Slight gradient overlay for better blending with dark mode */}
-            <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-[#05050f] via-transparent to-transparent pointer-events-none" />
-          </motion.div>
-        </div>
-
-        {/* PRACTICE MODULES GRID */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pt-10">
-          {features.map((feature, index) => (
+        {/* FEATURE GRID */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {features.map((feature, idx) => (
             <motion.div
               key={feature.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 + (index * 0.05) }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: idx * 0.05, type: 'spring', stiffness: 260, damping: 20 }}
             >
               <Link 
                 to={feature.path}
-                className="group block bg-[#12112e]/90 backdrop-blur-xl rounded-[2rem] p-8 border border-slate-700/40 shadow-[0_0_20px_rgba(0,0,0,0.5)] transition-all duration-300 relative overflow-hidden water-blur-hover"
+                className="clean-card group"
                 style={{
-                  '--water-gradient-start': feature.colors.start,
-                  '--water-gradient-mid': feature.colors.mid,
-                  '--water-gradient-end': feature.colors.end,
-                  '--water-glow-color': feature.colors.glow,
-                  '--water-shadow-color': feature.colors.shadow,
+                  '--section-color': feature.colors.glow,
+                  '--gradient-start': feature.colors.start,
+                  '--gradient-end': feature.colors.mid,
+                  '--shadow-color': feature.colors.shadow,
                 } as React.CSSProperties}
               >
-                <div className="relative z-10">
-                  <div className="flex items-start justify-between mb-8">
-                    <div className="w-12 h-12 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300 shadow-inner">
-                      <ChevronRight className="w-5 h-5 text-white/50 group-hover:text-white transition-colors" />
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <h3 className="text-xl font-black text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-[var(--water-gradient-mid)] transition-all">{feature.name}</h3>
-                    <p className="text-slate-400 font-medium text-sm group-hover:text-slate-200 transition-colors">{feature.desc}</p>
-                  </div>
+                <div className="icon-squircle group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
+                  <feature.icon />
                 </div>
+                
+                <h3 className="text-lg font-extrabold text-slate-800 leading-tight mb-2 group-hover:text-blue-600 transition-colors">
+                  {feature.name}
+                </h3>
               </Link>
             </motion.div>
           ))}
