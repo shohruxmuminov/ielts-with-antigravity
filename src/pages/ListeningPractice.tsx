@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Play, Pause, Clock, CheckCircle, Volume2, ChevronLeft, ChevronRight, Info, BookOpen, Headphones, ArrowRight, Trophy, Layout, Box, Crown } from 'lucide-react';
+import { Play, Pause, Clock, CheckCircle, Volume2, ChevronLeft, ChevronRight, Info, BookOpen, Headphones, ArrowRight, Trophy } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { db } from '../firebase';
 import { collection, query, where, getDocs, orderBy } from 'firebase/firestore';
@@ -70,110 +70,106 @@ export default function ListeningPractice() {
     );
   }
 
-  const [activeFilter, setActiveFilter] = useState('all');
-
-  const filteredMaterials = materials.filter(m => {
-    if (activeFilter === 'all') return true;
-    if (activeFilter === 'trainer1') return m.title?.includes('Trainer 1');
-    if (activeFilter === 'trainer2') return m.title?.includes('Trainer 2');
-    return true;
-  });
-
   if (!selectedMaterial) {
     return (
-      <div className="bg-slate-950 min-h-screen text-slate-100 flex flex-col">
-        {/* Redesigned Header */}
-        <header className="bg-blue-600 py-12 px-6 text-center shadow-2xl relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-700 to-indigo-800 opacity-90"></div>
-          <div className="relative z-10 max-w-4xl mx-auto space-y-4">
-            <div className="flex justify-center items-center gap-3">
-              <Headphones className="w-10 h-10 text-white" />
-              <h1 className="text-4xl font-extrabold text-white tracking-tight uppercase">IELTS Listening Tests</h1>
+      <div className="min-h-screen bg-slate-950 text-slate-100">
+        {/* Header */}
+        <div className="bg-emerald-600 text-white py-16 px-4 text-center">
+          <div className="max-w-5xl mx-auto">
+            <div className="flex items-center justify-center gap-4 mb-6">
+              <div className="p-4 bg-white/10 rounded-3xl backdrop-blur-md">
+                <Headphones className="w-12 h-12" />
+              </div>
+              <h1 className="text-5xl font-black tracking-tight">IELTS Listening Tests</h1>
             </div>
-            <p className="text-blue-100 text-lg font-medium max-w-2xl mx-auto">
+            <p className="text-emerald-50 text-xl font-medium opacity-90 max-w-2xl mx-auto">
               Authentic audio materials with native speakers to improve your listening comprehension
             </p>
           </div>
-        </header>
+        </div>
 
-        <div className="flex-1 flex max-w-[1400px] mx-auto w-full p-6 lg:p-10 gap-8">
+        <div className="max-w-7xl mx-auto px-6 py-12 flex flex-col lg:flex-row gap-10">
           {/* Sidebar */}
-          <aside className="w-72 hidden md:block">
-            <div className="bg-slate-900 rounded-3xl border border-slate-800 p-6 sticky top-10 shadow-xl">
-              <h2 className="text-xs font-black text-slate-500 uppercase tracking-[0.2em] mb-6 px-2">Filter Tests</h2>
-              
-              <nav className="space-y-1">
+          <div className="w-full lg:w-72 flex-shrink-0">
+            <div className="bg-slate-900 rounded-[2.5rem] shadow-xl border border-slate-800 p-8 sticky top-8">
+              <h2 className="text-xs font-black text-slate-500 uppercase tracking-[0.2em] mb-8">Filter Tests</h2>
+              <div className="space-y-3">
                 {[
-                  { id: 'all', label: 'All Tests', icon: Layout, count: materials.length },
-                  { id: 'trainer1', label: 'IELTS Trainer 1', icon: Box, count: materials.filter(m => m.title?.includes('Trainer 1')).length },
-                  { id: 'trainer2', label: 'IELTS Trainer 2', icon: Crown, count: materials.filter(m => m.title?.includes('Trainer 2')).length },
-                ].map((item) => (
+                  { id: 'all', label: 'All Tests', count: materials.length, active: true },
+                  { id: 'trainer1', label: 'IELTS Trainer 1', count: materials.filter(m => m.title.includes('Trainer 1')).length },
+                  { id: 'trainer2', label: 'IELTS Trainer 2', count: materials.filter(m => m.title.includes('Trainer 2')).length },
+                  { id: 'plus3', label: 'Test Plus 3', count: 0 },
+                  { id: 'authentic', label: 'Free Authentic', count: 0 },
+                ].map((filter) => (
                   <button
-                    key={item.id}
-                    onClick={() => setActiveFilter(item.id)}
-                    className={`w-full flex items-center justify-between px-4 py-4 rounded-2xl transition-all font-bold group ${
-                      activeFilter === item.id 
-                      ? 'bg-blue-600 text-white shadow-lg shadow-blue-900/40' 
-                      : 'text-slate-400 hover:bg-slate-800 hover:text-white'
+                    key={filter.id}
+                    className={`w-full flex items-center justify-between px-5 py-4 rounded-2xl text-sm font-bold transition-all ${
+                      filter.active 
+                        ? "bg-emerald-600 text-white shadow-lg shadow-emerald-900/40" 
+                        : "text-slate-400 hover:bg-slate-800 hover:text-slate-200"
                     }`}
                   >
                     <div className="flex items-center gap-3">
-                      <item.icon className="w-5 h-5" />
-                      <span className="text-sm">{item.label}</span>
+                      {filter.label}
                     </div>
-                    <span className={`text-[10px] px-2 py-0.5 rounded-full ${
-                      activeFilter === item.id ? 'bg-blue-500' : 'bg-slate-800 text-slate-500'
-                    }`}>
-                      {item.count}
+                    <span className={`px-2.5 py-1 rounded-lg text-[10px] font-black ${filter.active ? 'bg-white/20' : 'bg-slate-800 text-slate-500'}`}>
+                      {filter.count}
                     </span>
                   </button>
                 ))}
-              </nav>
+              </div>
             </div>
-          </aside>
+          </div>
 
           {/* Main Content */}
-          <main className="flex-1">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredMaterials.map((m) => (
-                <div key={m.id} className="bg-slate-900 rounded-[2rem] border border-slate-800 overflow-hidden shadow-xl hover:border-slate-700 transition-all group flex flex-col h-full">
-                  <div className="p-6 flex-1 flex flex-col">
-                    <div className="flex justify-between items-start mb-4">
-                      <span className="bg-emerald-500/10 text-emerald-400 text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full border border-emerald-500/20">
-                        ✓ Free
+          <div className="flex-1">
+            <div className="mb-10 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="w-2 h-8 bg-emerald-500 rounded-full"></div>
+                <h2 className="text-2xl font-black text-white">Available Tests ({materials.length})</h2>
+              </div>
+            </div>
+
+            {materials.length === 0 ? (
+              <div className="bg-slate-900 rounded-[3rem] border-2 border-dashed border-slate-800 p-24 text-center">
+                <Headphones className="w-20 h-20 text-slate-800 mx-auto mb-8" />
+                <h3 className="text-3xl font-black text-white mb-3">No tests available yet</h3>
+                <p className="text-slate-500 text-lg font-medium">The admin hasn't uploaded any listening tests yet.</p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+                {materials.map((m) => (
+                  <motion.div
+                    key={m.id}
+                    whileHover={{ y: -8 }}
+                    className="bg-slate-900 rounded-[2.5rem] border border-slate-800 p-8 shadow-lg hover:shadow-2xl hover:border-emerald-500/30 transition-all group"
+                  >
+                    <div className="flex items-center gap-2 mb-6">
+                      <span className="bg-emerald-900/40 text-emerald-400 text-[10px] font-black px-3 py-1.5 rounded-xl border border-emerald-900/50 flex items-center gap-1.5 uppercase tracking-widest">
+                        <CheckCircle className="w-3.5 h-3.5" />
+                        FREE
                       </span>
                     </div>
-                    
-                    <h3 className="text-lg font-black text-white leading-snug mb-6 flex-1">
-                      {m.title}
-                    </h3>
-                    
-                    <button 
+                    <h3 className="text-xl font-black text-white mb-8 line-clamp-2 min-h-[4rem] leading-tight">{m.title}</h3>
+                    <button
                       onClick={() => handleStartTest(m)}
-                      className="w-full bg-blue-600 text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-blue-500 transition-all shadow-lg shadow-blue-900/20 active:scale-95"
+                      className="w-full bg-emerald-600 text-white py-4 rounded-2xl font-black flex items-center justify-center gap-2 hover:bg-emerald-500 transition-all shadow-lg shadow-emerald-900/40"
                     >
                       <Play className="w-4 h-4 fill-current" />
-                      Start
+                      Start Test
                     </button>
-                  </div>
-                </div>
-              ))}
-
-              {filteredMaterials.length === 0 && (
-                <div className="col-span-full text-center py-20 bg-slate-900/50 rounded-[3rem] border border-dashed border-slate-800">
-                  <Headphones className="w-12 h-12 text-slate-700 mx-auto mb-4" />
-                  <p className="text-slate-500 font-bold">No tests found in this category.</p>
-                </div>
-              )}
-            </div>
-          </main>
+                  </motion.div>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     );
   }
 
-  const testData = selectedMaterial?.parsedData;
-  const currentPart = testData?.parts?.[currentPartIndex];
+  const testData = selectedMaterial.parsedData;
+  const currentPart = testData.parts[currentPartIndex];
 
   const togglePlay = () => {
     if (audioRef.current) {
@@ -305,7 +301,7 @@ export default function ListeningPractice() {
 
               <audio 
                 ref={audioRef} 
-                src={testData?.audioSrc} 
+                src={testData.audioSrc} 
                 onTimeUpdate={handleTimeUpdate}
                 onLoadedMetadata={handleLoadedMetadata}
                 onEnded={() => setIsPlaying(false)}
@@ -367,7 +363,7 @@ export default function ListeningPractice() {
                 <h4 className="font-black text-lg">Instructions</h4>
               </div>
               <p className="text-sm text-emerald-100 font-medium leading-relaxed">
-                {currentPart?.instruction}
+                {currentPart.instruction}
               </p>
             </div>
           </div>
@@ -395,19 +391,19 @@ export default function ListeningPractice() {
 
             <AnimatePresence mode="wait">
               <motion.div
-                key={currentPart?.id || 'part'}
+                key={currentPart.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 className="space-y-12"
               >
                 <div className="space-y-4">
-                  <h2 className="text-4xl font-black text-white tracking-tight leading-tight">{currentPart?.title}</h2>
+                  <h2 className="text-4xl font-black text-white tracking-tight leading-tight">{currentPart.title}</h2>
                   <div className="h-2 w-24 bg-emerald-500 rounded-full"></div>
                 </div>
 
                 <div className="space-y-10">
-                  {currentPart?.questions?.map((q: any) => (
+                  {currentPart.questions.map((q: any) => (
                     <div key={q.id} className="bg-slate-900 rounded-[2.5rem] p-10 border border-slate-800 shadow-lg hover:border-slate-700 transition-all">
                       <div className="flex items-start gap-6 mb-8">
                         <span className="flex-shrink-0 w-12 h-12 rounded-2xl bg-slate-800 text-slate-400 flex items-center justify-center font-black text-lg border border-slate-700 shadow-inner">
