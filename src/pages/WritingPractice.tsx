@@ -4,6 +4,7 @@ import { PenTool, CheckCircle, AlertCircle, BookOpen, Clock, ChevronRight, Arrow
 import { collection, query, where, orderBy, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebase';
 import { GoogleGenAI, Type } from "@google/genai";
+import FullWritingTestLayout from '../components/FullWritingTestLayout';
 
 interface WritingTask {
   id: string;
@@ -54,7 +55,18 @@ export default function WritingPractice() {
         id: doc.id,
         ...doc.data()
       })) as WritingTask[];
-      setTasks(tasksData);
+      
+      const staticTasks: WritingTask[] = [
+        {
+          id: 'full-writing-test',
+          title: 'Full Writing Practice Test',
+          type: 'full',
+          data: 'Complete both Task 1 and Task 2 in 60 minutes.',
+          createdAt: { seconds: Date.now() / 1000 }
+        }
+      ];
+
+      setTasks([...staticTasks, ...tasksData]);
       setLoading(false);
     }, (error) => {
       // Error fetching writing tasks
@@ -128,6 +140,9 @@ export default function WritingPractice() {
   };
 
   if (selectedTask) {
+    if (selectedTask.id === 'full-writing-test') {
+      return <FullWritingTestLayout onBack={handleBack} />;
+    }
     return (
       <div className="min-h-screen bg-slate-950 text-slate-100">
         {/* Header */}
@@ -381,6 +396,7 @@ export default function WritingPractice() {
     if (activeFilter === 'all') return true;
     if (activeFilter === 'task1') return task.type === 'task1';
     if (activeFilter === 'task2') return task.type === 'task2';
+    if (activeFilter === 'full') return task.type === 'full';
     return true;
   });
 
@@ -412,6 +428,7 @@ export default function WritingPractice() {
                   { id: 'all', label: 'All Tasks', icon: Layout, count: tasks.length },
                   { id: 'task1', label: 'Writing Task 1', icon: FileText, count: tasks.filter(t => t.type === 'task1').length },
                   { id: 'task2', label: 'Writing Task 2', icon: PenTool, count: tasks.filter(t => t.type === 'task2').length },
+                  { id: 'full', label: 'Full Tests', icon: PenTool, count: tasks.filter(t => t.type === 'full').length },
                 ].map((item) => (
                   <button
                     key={item.id}
@@ -445,7 +462,7 @@ export default function WritingPractice() {
                   <div className="p-6 flex-1 flex flex-col">
                     <div className="flex justify-between items-start mb-4">
                       <span className="bg-emerald-500/10 text-emerald-400 text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full border border-emerald-500/20">
-                        {task.type === 'task1' ? 'Task 1' : 'Task 2'}
+                        {task.type === 'task1' ? 'Task 1' : task.type === 'task2' ? 'Task 2' : 'Full Test'}
                       </span>
                     </div>
                     
