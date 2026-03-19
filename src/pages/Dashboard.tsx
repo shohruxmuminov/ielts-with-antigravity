@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Trophy, 
@@ -8,7 +9,6 @@ import {
 } from 'lucide-react';
 import { useAuth } from '../FirebaseProvider';
 import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
 import { collection, getDocs, query, where, limit, orderBy, doc, getDoc } from 'firebase/firestore';
 import { db } from '../firebase';
 
@@ -80,12 +80,48 @@ export default function Dashboard() {
   };
 
   const features = [
-    { id: 'vocabulary', name: 'Vocabulary', path: '/vocabulary', desc: 'Expand your lexicon' },
-    { id: 'listening', name: 'Listening', path: '/listening', desc: 'Sharpen your ears' },
-    { id: 'reading', name: 'Reading', path: '/reading', desc: 'Analyze complex texts' },
-    { id: 'writing', name: 'Writing', path: '/writing', desc: 'Master essay structure' },
-    { id: 'speaking', name: 'Speaking', path: '/speaking', desc: 'Speak with confidence' },
-    { id: 'mock', name: 'Mock Exam', path: '/mock-exam', desc: 'Test your limits' },
+    { 
+      id: 'vocabulary', 
+      name: 'Vocabulary', 
+      path: '/vocabulary', 
+      desc: 'Expand your lexicon',
+      colors: { start: '#8b5cf6', mid: '#a78bfa', end: '#c4b5fd', glow: '#8b5cf6', shadow: 'rgba(139, 92, 246, 0.4)' }
+    },
+    { 
+      id: 'listening', 
+      name: 'Listening', 
+      path: '/listening', 
+      desc: 'Sharpen your ears',
+      colors: { start: '#0ea5e9', mid: '#00d2ff', end: '#00fff2', glow: '#0ea5e9', shadow: 'rgba(14, 165, 233, 0.4)' }
+    },
+    { 
+      id: 'reading', 
+      name: 'Reading', 
+      path: '/reading', 
+      desc: 'Analyze complex texts',
+      colors: { start: '#10b981', mid: '#34d399', end: '#6ee7b7', glow: '#10b981', shadow: 'rgba(16, 185, 129, 0.4)' }
+    },
+    { 
+      id: 'writing', 
+      name: 'Writing', 
+      path: '/writing', 
+      desc: 'Master essay structure',
+      colors: { start: '#6366f1', mid: '#818cf8', end: '#a5b4fc', glow: '#6366f1', shadow: 'rgba(99, 102, 241, 0.4)' }
+    },
+    { 
+      id: 'speaking', 
+      name: 'Speaking', 
+      path: '/speaking', 
+      desc: 'Speak with confidence',
+      colors: { start: '#3b82f6', mid: '#60a5fa', end: '#93c5fd', glow: '#3b82f6', shadow: 'rgba(59, 130, 246, 0.4)' }
+    },
+    { 
+      id: 'mock', 
+      name: 'Mock Exam', 
+      path: '/mock-exam', 
+      desc: 'Test your limits',
+      colors: { start: '#f43f5e', mid: '#fb7185', end: '#fda4af', glow: '#f43f5e', shadow: 'rgba(244, 63, 94, 0.4)' }
+    },
   ];
 
   const displayName = profile?.displayName?.split(' ')[0] || 'Student';
@@ -178,6 +214,13 @@ export default function Dashboard() {
               <Link 
                 to={feature.path}
                 className="group block bg-[#12112e]/90 backdrop-blur-xl rounded-[2rem] p-8 border border-slate-700/40 shadow-[0_0_20px_rgba(0,0,0,0.5)] transition-all duration-300 relative overflow-hidden water-blur-hover"
+                style={{
+                  '--water-gradient-start': feature.colors.start,
+                  '--water-gradient-mid': feature.colors.mid,
+                  '--water-gradient-end': feature.colors.end,
+                  '--water-glow-color': feature.colors.glow,
+                  '--water-shadow-color': feature.colors.shadow,
+                } as React.CSSProperties}
               >
                 <div className="relative z-10">
                   <div className="flex items-start justify-between mb-8">
@@ -186,7 +229,7 @@ export default function Dashboard() {
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <h3 className="text-xl font-black text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-cyan-400 transition-all">{feature.name}</h3>
+                    <h3 className="text-xl font-black text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-[var(--water-gradient-mid)] transition-all">{feature.name}</h3>
                     <p className="text-slate-400 font-medium text-sm group-hover:text-slate-200 transition-colors">{feature.desc}</p>
                   </div>
                 </div>
