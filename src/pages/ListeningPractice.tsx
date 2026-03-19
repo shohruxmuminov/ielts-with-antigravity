@@ -96,10 +96,6 @@ export default function ListeningPractice() {
               <div className="space-y-3">
                 {[
                   { id: 'all', label: 'All Tests', count: materials.length, active: true },
-                  { id: 'trainer1', label: 'IELTS Trainer 1', count: materials.filter(m => m.title.includes('Trainer 1')).length },
-                  { id: 'trainer2', label: 'IELTS Trainer 2', count: materials.filter(m => m.title.includes('Trainer 2')).length },
-                  { id: 'plus3', label: 'Test Plus 3', count: 0 },
-                  { id: 'authentic', label: 'Free Authentic', count: 0 },
                 ].map((filter) => (
                   <button
                     key={filter.id}

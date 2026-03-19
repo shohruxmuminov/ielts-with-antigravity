@@ -139,9 +139,6 @@ export default function ReadingPractice() {
             <nav className="space-y-1">
               {[
                 { id: 'all', label: 'All Tests', icon: Layout },
-                { id: 'free', label: 'Free Passages', icon: Box },
-                { id: 'premium', label: 'Premium Passages', icon: Crown },
-                { id: 'full', label: 'Full Tests', icon: FileText },
               ].map((item) => (
                 <button
                   key={item.id}
