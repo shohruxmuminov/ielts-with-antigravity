@@ -90,13 +90,6 @@ export default function Dashboard() {
       colors: { start: '#00b09b', mid: '#96c93d', glow: '#00b09b', shadow: 'rgba(0, 176, 155, 0.3)' }
     },
     { 
-      id: 'writing', 
-      name: 'Writing Practice', 
-      path: '/writing', 
-      icon: PenTool,
-      colors: { start: '#ff9966', mid: '#ff5e62', glow: '#ff9966', shadow: 'rgba(255, 153, 102, 0.3)' }
-    },
-    { 
       id: 'mock', 
       name: 'Take a Full Mock', 
       path: '/mock-exam', 
@@ -109,6 +102,13 @@ export default function Dashboard() {
       path: '/speaking', 
       icon: Smartphone,
       colors: { start: '#ff0084', mid: '#33001b', glow: '#ff0084', shadow: 'rgba(255, 0, 132, 0.2)' }
+    },
+    { 
+      id: 'writing', 
+      name: 'Writing Practice', 
+      path: '/writing', 
+      icon: PenTool,
+      colors: { start: '#ff9966', mid: '#ff5e62', glow: '#ff9966', shadow: 'rgba(255, 153, 102, 0.3)' }
     },
   ];
 
