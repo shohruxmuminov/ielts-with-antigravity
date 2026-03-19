@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mic, Square, Play, CheckCircle, AlertCircle, Volume2, Clock, ChevronRight, ArrowLeft, Trophy } from 'lucide-react';
+import { Mic, Square, Play, CheckCircle, AlertCircle, Volume2, Clock, ChevronRight, ArrowLeft, Trophy, Layout, FileText } from 'lucide-react';
 import { collection, query, where, orderBy, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebase';
 import { GoogleGenAI, Type } from "@google/genai";
@@ -408,69 +408,109 @@ export default function SpeakingPractice() {
     );
   }
 
-  return (
-    <div className="max-w-7xl mx-auto space-y-12 bg-slate-950 min-h-screen p-10 text-slate-100">
-      <div className="space-y-4">
-        <div className="flex items-center gap-2 text-purple-400 font-bold text-sm tracking-widest uppercase">
-          <Mic className="w-4 h-4" />
-          Speaking Module
-        </div>
-        <h1 className="text-5xl font-black text-white tracking-tight leading-none">Speaking <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">Practice</span></h1>
-        <p className="text-slate-400 text-lg font-medium max-w-2xl">Practice IELTS Speaking Part 1, 2, and 3 with real-time AI feedback on your pronunciation, fluency, and vocabulary.</p>
-      </div>
+  const [activeFilter, setActiveFilter] = useState('all');
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {loading ? (
-          <div className="col-span-full py-20 text-center">
-            <div className="animate-spin w-12 h-12 border-4 border-purple-600 border-t-transparent rounded-full mx-auto mb-6"></div>
-            <p className="text-slate-500 font-black uppercase tracking-widest text-xs">Loading tasks...</p>
+  const filteredTasks = tasks.filter(task => {
+    if (activeFilter === 'all') return true;
+    if (activeFilter === 'part1') return task.title.toLowerCase().includes('part 1');
+    if (activeFilter === 'part2') return task.title.toLowerCase().includes('part 2');
+    if (activeFilter === 'part3') return task.title.toLowerCase().includes('part 3');
+    return true;
+  });
+
+  if (!selectedTask) {
+    return (
+      <div className="bg-slate-950 min-h-screen text-slate-100 flex flex-col">
+        {/* Redesigned Header */}
+        <header className="bg-blue-600 py-12 px-6 text-center shadow-2xl relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-700 to-indigo-800 opacity-90"></div>
+          <div className="relative z-10 max-w-4xl mx-auto space-y-4">
+            <div className="flex justify-center items-center gap-3">
+              <Mic className="w-10 h-10 text-white" />
+              <h1 className="text-4xl font-extrabold text-white tracking-tight uppercase">IELTS Speaking Tests</h1>
+            </div>
+            <p className="text-blue-100 text-lg font-medium max-w-2xl mx-auto">
+              Practice IELTS Speaking Part 1, 2, and 3 with real-time AI feedback
+            </p>
           </div>
-        ) : tasks.length > 0 ? (
-          tasks.map((task, index) => (
-            <motion.div
-              key={task.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              className="group bg-slate-900 p-8 rounded-[2.5rem] border border-slate-800 shadow-sm hover:border-slate-700 hover:shadow-2xl transition-all duration-500 flex flex-col justify-between"
-            >
-              <div className="space-y-6">
-                <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-black px-3 py-1 rounded-lg uppercase tracking-widest bg-purple-900/30 text-purple-400 border border-purple-900/50">
-                    Speaking
-                  </span>
-                  <div className="flex items-center gap-2 text-slate-500 text-xs font-black uppercase tracking-widest">
-                    <Clock className="w-4 h-4" />
-                    11-14 min
+        </header>
+
+        <div className="flex-1 flex max-w-[1400px] mx-auto w-full p-6 lg:p-10 gap-8">
+          {/* Sidebar */}
+          <aside className="w-72 hidden md:block">
+            <div className="bg-slate-900 rounded-3xl border border-slate-800 p-6 sticky top-10 shadow-xl">
+              <h2 className="text-xs font-black text-slate-500 uppercase tracking-[0.2em] mb-6 px-2">Filter Tasks</h2>
+              
+              <nav className="space-y-1">
+                {[
+                  { id: 'all', label: 'All Tasks', icon: Layout, count: tasks.length },
+                  { id: 'part1', label: 'Speaking Part 1', icon: FileText, count: tasks.filter(t => t.title.toLowerCase().includes('part 1')).length },
+                  { id: 'part2', label: 'Speaking Part 2', icon: Mic, count: tasks.filter(t => t.title.toLowerCase().includes('part 2')).length },
+                  { id: 'part3', label: 'Speaking Part 3', icon: Volume2, count: tasks.filter(t => t.title.toLowerCase().includes('part 3')).length },
+                ].map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => setActiveFilter(item.id)}
+                    className={`w-full flex items-center justify-between px-4 py-4 rounded-2xl transition-all font-bold group ${
+                      activeFilter === item.id 
+                      ? 'bg-blue-600 text-white shadow-lg shadow-blue-900/40' 
+                      : 'text-slate-400 hover:bg-slate-800 hover:text-white'
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <item.icon className="w-5 h-5" />
+                      <span className="text-sm">{item.label}</span>
+                    </div>
+                    <span className={`text-[10px] px-2 py-0.5 rounded-full ${
+                      activeFilter === item.id ? 'bg-blue-500' : 'bg-slate-800 text-slate-500'
+                    }`}>
+                      {item.count}
+                    </span>
+                  </button>
+                ))}
+              </nav>
+            </div>
+          </aside>
+
+          {/* Main Content */}
+          <main className="flex-1">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredTasks.map((task) => (
+                <div key={task.id} className="bg-slate-900 rounded-[2rem] border border-slate-800 overflow-hidden shadow-xl hover:border-slate-700 transition-all group flex flex-col h-full">
+                  <div className="p-6 flex-1 flex flex-col">
+                    <div className="flex justify-between items-start mb-4">
+                      <span className="bg-emerald-500/10 text-emerald-400 text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full border border-emerald-500/20">
+                        ✓ Free
+                      </span>
+                    </div>
+                    
+                    <h3 className="text-lg font-black text-white leading-snug mb-6 flex-1">
+                      {task.title}
+                    </h3>
+                    
+                    <button 
+                      onClick={() => handleStartTest(task)}
+                      className="w-full bg-blue-600 text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-blue-500 transition-all shadow-lg shadow-blue-900/20 active:scale-95"
+                    >
+                      <Play className="w-4 h-4 fill-current" />
+                      Start
+                    </button>
                   </div>
                 </div>
-                <h3 className="text-2xl font-black text-white group-hover:text-purple-400 transition-colors leading-tight">
-                  {task.title}
-                </h3>
-              </div>
-              
-              <button 
-                onClick={() => handleStartTest(task)}
-                className="mt-10 w-full flex items-center justify-center gap-2 py-5 bg-slate-800 group-hover:bg-purple-600 group-hover:text-white rounded-2xl font-black transition-all shadow-lg text-slate-300"
-              >
-                Start Practice
-                <ChevronRight className="w-5 h-5" />
-              </button>
-            </motion.div>
-          ))
-        ) : (
-          <div className="col-span-full py-24 text-center bg-slate-900 rounded-[3rem] border border-dashed border-slate-800">
-            <div className="w-20 h-20 bg-slate-800 rounded-3xl flex items-center justify-center mx-auto mb-6 border border-slate-700">
-              <Mic className="w-10 h-10 text-slate-600" />
+              ))}
+
+              {filteredTasks.length === 0 && (
+                <div className="col-span-full text-center py-20 bg-slate-900/50 rounded-[3rem] border border-dashed border-slate-800">
+                  <Mic className="w-12 h-12 text-slate-700 mx-auto mb-4" />
+                  <p className="text-slate-500 font-bold">No tasks found in this category.</p>
+                </div>
+              )}
             </div>
-            <h3 className="text-2xl font-black text-white mb-2">No speaking tasks available yet</h3>
-            <p className="text-slate-500 font-medium">Tasks will be uploaded soon. Please check back later.</p>
-          </div>
-        )}
+          </main>
+        </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
 
 function FeedbackSection({ title, items, icon }: any) {
   return (

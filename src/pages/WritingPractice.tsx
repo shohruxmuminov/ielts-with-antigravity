@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { PenTool, CheckCircle, AlertCircle, BookOpen, Clock, ChevronRight, ArrowLeft, Play, Trophy, Send, Sparkles, Wand2, BookA } from 'lucide-react';
+import { PenTool, CheckCircle, AlertCircle, BookOpen, Clock, ChevronRight, ArrowLeft, Play, Trophy, Send, Sparkles, Wand2, BookA, Layout, Box, FileText } from 'lucide-react';
 import { collection, query, where, orderBy, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebase';
 import { GoogleGenAI, Type } from "@google/genai";
@@ -375,63 +375,107 @@ export default function WritingPractice() {
     );
   }
 
-  return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 py-12 px-6">
-      <div className="max-w-7xl mx-auto space-y-12">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-          <div className="space-y-4">
-            <div className="flex items-center gap-2 text-rose-400 font-bold text-sm tracking-widest uppercase">
-              <PenTool className="w-4 h-4" />
-              Writing Module
+  const [activeFilter, setActiveFilter] = useState('all');
+
+  const filteredTasks = tasks.filter(task => {
+    if (activeFilter === 'all') return true;
+    if (activeFilter === 'task1') return task.type === 'task1';
+    if (activeFilter === 'task2') return task.type === 'task2';
+    return true;
+  });
+
+  if (!selectedTask) {
+    return (
+      <div className="bg-slate-950 min-h-screen text-slate-100 flex flex-col">
+        {/* Redesigned Header */}
+        <header className="bg-blue-600 py-12 px-6 text-center shadow-2xl relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-700 to-indigo-800 opacity-90"></div>
+          <div className="relative z-10 max-w-4xl mx-auto space-y-4">
+            <div className="flex justify-center items-center gap-3">
+              <PenTool className="w-10 h-10 text-white" />
+              <h1 className="text-4xl font-extrabold text-white tracking-tight uppercase">IELTS Writing Tests</h1>
             </div>
-            <h1 className="text-5xl font-black text-white tracking-tight leading-none">
-              Writing <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-orange-400">Practice</span>
-            </h1>
-            <p className="text-slate-400 text-lg font-medium max-w-2xl">
-              Improve your writing with AI-powered feedback on Task 1 and Task 2 essays.
+            <p className="text-blue-100 text-lg font-medium max-w-2xl mx-auto">
+              Improve your writing with AI-powered feedback on Task 1 and Task 2 essays
             </p>
           </div>
-        </div>
+        </header>
 
-        {loading ? (
-          <div className="flex justify-center py-20">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-rose-600"></div>
-          </div>
-        ) : tasks.length === 0 ? (
-          <div className="bg-slate-900 rounded-[3rem] border-2 border-dashed border-slate-800 p-24 text-center">
-            <PenTool className="w-20 h-20 text-slate-800 mx-auto mb-8" />
-            <h3 className="text-3xl font-black text-white mb-3">No tasks available yet</h3>
-            <p className="text-slate-500 text-lg font-medium">The admin hasn't uploaded any writing tasks yet.</p>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {tasks.map((task) => (
-              <motion.div
-                key={task.id}
-                whileHover={{ y: -8 }}
-                className="bg-slate-900 rounded-[2.5rem] border border-slate-800 p-8 shadow-lg hover:shadow-2xl hover:border-rose-500/30 transition-all group"
-              >
-                <div className="flex items-center gap-2 mb-6">
-                  <span className="bg-rose-900/40 text-rose-400 text-[10px] font-black px-3 py-1.5 rounded-xl border border-rose-900/50 flex items-center gap-1.5 uppercase tracking-widest">
-                    {task.type === 'task1' ? 'Task 1' : 'Task 2'}
-                  </span>
+        <div className="flex-1 flex max-w-[1400px] mx-auto w-full p-6 lg:p-10 gap-8">
+          {/* Sidebar */}
+          <aside className="w-72 hidden md:block">
+            <div className="bg-slate-900 rounded-3xl border border-slate-800 p-6 sticky top-10 shadow-xl">
+              <h2 className="text-xs font-black text-slate-500 uppercase tracking-[0.2em] mb-6 px-2">Filter Tasks</h2>
+              
+              <nav className="space-y-1">
+                {[
+                  { id: 'all', label: 'All Tasks', icon: Layout, count: tasks.length },
+                  { id: 'task1', label: 'Writing Task 1', icon: FileText, count: tasks.filter(t => t.type === 'task1').length },
+                  { id: 'task2', label: 'Writing Task 2', icon: PenTool, count: tasks.filter(t => t.type === 'task2').length },
+                ].map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => setActiveFilter(item.id)}
+                    className={`w-full flex items-center justify-between px-4 py-4 rounded-2xl transition-all font-bold group ${
+                      activeFilter === item.id 
+                      ? 'bg-blue-600 text-white shadow-lg shadow-blue-900/40' 
+                      : 'text-slate-400 hover:bg-slate-800 hover:text-white'
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <item.icon className="w-5 h-5" />
+                      <span className="text-sm">{item.label}</span>
+                    </div>
+                    <span className={`text-[10px] px-2 py-0.5 rounded-full ${
+                      activeFilter === item.id ? 'bg-blue-500' : 'bg-slate-800 text-slate-500'
+                    }`}>
+                      {item.count}
+                    </span>
+                  </button>
+                ))}
+              </nav>
+            </div>
+          </aside>
+
+          {/* Main Content */}
+          <main className="flex-1">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredTasks.map((task) => (
+                <div key={task.id} className="bg-slate-900 rounded-[2rem] border border-slate-800 overflow-hidden shadow-xl hover:border-slate-700 transition-all group flex flex-col h-full">
+                  <div className="p-6 flex-1 flex flex-col">
+                    <div className="flex justify-between items-start mb-4">
+                      <span className="bg-emerald-500/10 text-emerald-400 text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full border border-emerald-500/20">
+                        {task.type === 'task1' ? 'Task 1' : 'Task 2'}
+                      </span>
+                    </div>
+                    
+                    <h3 className="text-lg font-black text-white leading-snug mb-6 flex-1">
+                      {task.title}
+                    </h3>
+                    
+                    <button 
+                      onClick={() => handleStartTest(task)}
+                      className="w-full bg-blue-600 text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-blue-500 transition-all shadow-lg shadow-blue-900/20 active:scale-95"
+                    >
+                      <Play className="w-4 h-4 fill-current" />
+                      Start
+                    </button>
+                  </div>
                 </div>
-                <h3 className="text-xl font-black text-white mb-8 line-clamp-2 min-h-[4rem] leading-tight">{task.title}</h3>
-                <button
-                  onClick={() => handleStartTest(task)}
-                  className="w-full bg-rose-600 text-white py-4 rounded-2xl font-black flex items-center justify-center gap-2 hover:bg-rose-500 transition-all shadow-lg shadow-rose-900/40"
-                >
-                  <Play className="w-4 h-4 fill-current" />
-                  Start Practice
-                </button>
-              </motion.div>
-            ))}
-          </div>
-        )}
+              ))}
+
+              {filteredTasks.length === 0 && (
+                <div className="col-span-full text-center py-20 bg-slate-900/50 rounded-[3rem] border border-dashed border-slate-800">
+                  <PenTool className="w-12 h-12 text-slate-700 mx-auto mb-4" />
+                  <p className="text-slate-500 font-bold">No tasks found in this category.</p>
+                </div>
+              )}
+            </div>
+          </main>
+        </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
 
 function FeedbackSection({ title, items, icon }: any) {
   return (
