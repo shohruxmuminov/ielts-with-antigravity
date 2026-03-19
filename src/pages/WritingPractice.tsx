@@ -476,6 +476,7 @@ export default function WritingPractice() {
       </div>
     );
   }
+}
 
 function FeedbackSection({ title, items, icon }: any) {
   return (

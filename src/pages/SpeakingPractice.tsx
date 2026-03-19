@@ -511,6 +511,7 @@ export default function SpeakingPractice() {
       </div>
     );
   }
+}
 
 function FeedbackSection({ title, items, icon }: any) {
   return (
