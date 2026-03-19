@@ -4,6 +4,8 @@ import { collection, query, where, orderBy, onSnapshot } from 'firebase/firestor
 import { db } from '../firebase';
 import IELTSReadingLayout from '../components/IELTSReadingLayout';
 import { DYNAMIC_TEST_21 } from '../data/dynamic21';
+import { DYNAMIC_TEST_20 } from '../data/dynamic20';
+import { DYNAMIC_TEST_19 } from '../data/dynamic19';
 
 
 interface ReadingTest {
@@ -38,12 +40,21 @@ export default function ReadingPractice() {
         };
       }) as ReadingTest[];
       
-      // Add strict raw HTML test with Firebase tests
-      setTests([DYNAMIC_TEST_21 as ReadingTest, ...dbTests]);
+      // Add strict raw HTML tests with Firebase tests
+      setTests([
+        DYNAMIC_TEST_21 as ReadingTest, 
+        DYNAMIC_TEST_20 as ReadingTest, 
+        DYNAMIC_TEST_19 as ReadingTest, 
+        ...dbTests
+      ]);
       setLoading(false);
     }, (error) => {
-      // If Firestore fails, show local raw test
-      setTests([DYNAMIC_TEST_21 as ReadingTest]);
+      // If Firestore fails, show local raw tests
+      setTests([
+        DYNAMIC_TEST_21 as ReadingTest,
+        DYNAMIC_TEST_20 as ReadingTest,
+        DYNAMIC_TEST_19 as ReadingTest
+      ]);
       setLoading(false);
     });
 
