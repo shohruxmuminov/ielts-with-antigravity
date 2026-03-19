@@ -305,7 +305,7 @@ export default function ListeningPractice() {
 
               <audio 
                 ref={audioRef} 
-                src={testData.audioSrc} 
+                src={testData?.audioSrc} 
                 onTimeUpdate={handleTimeUpdate}
                 onLoadedMetadata={handleLoadedMetadata}
                 onEnded={() => setIsPlaying(false)}
@@ -367,7 +367,7 @@ export default function ListeningPractice() {
                 <h4 className="font-black text-lg">Instructions</h4>
               </div>
               <p className="text-sm text-emerald-100 font-medium leading-relaxed">
-                {currentPart.instruction}
+                {currentPart?.instruction}
               </p>
             </div>
           </div>
@@ -395,19 +395,19 @@ export default function ListeningPractice() {
 
             <AnimatePresence mode="wait">
               <motion.div
-                key={currentPart.id}
+                key={currentPart?.id || 'part'}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 className="space-y-12"
               >
                 <div className="space-y-4">
-                  <h2 className="text-4xl font-black text-white tracking-tight leading-tight">{currentPart.title}</h2>
+                  <h2 className="text-4xl font-black text-white tracking-tight leading-tight">{currentPart?.title}</h2>
                   <div className="h-2 w-24 bg-emerald-500 rounded-full"></div>
                 </div>
 
                 <div className="space-y-10">
-                  {currentPart.questions.map((q: any) => (
+                  {currentPart?.questions?.map((q: any) => (
                     <div key={q.id} className="bg-slate-900 rounded-[2.5rem] p-10 border border-slate-800 shadow-lg hover:border-slate-700 transition-all">
                       <div className="flex items-start gap-6 mb-8">
                         <span className="flex-shrink-0 w-12 h-12 rounded-2xl bg-slate-800 text-slate-400 flex items-center justify-center font-black text-lg border border-slate-700 shadow-inner">
