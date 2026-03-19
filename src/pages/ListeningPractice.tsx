@@ -70,14 +70,14 @@ export default function ListeningPractice() {
     );
   }
 
+  const [activeFilter, setActiveFilter] = useState('all');
+
   const filteredMaterials = materials.filter(m => {
     if (activeFilter === 'all') return true;
     if (activeFilter === 'trainer1') return m.title.includes('Trainer 1');
     if (activeFilter === 'trainer2') return m.title.includes('Trainer 2');
     return true;
   });
-
-  const [activeFilter, setActiveFilter] = useState('all');
 
   if (!selectedMaterial) {
     return (
