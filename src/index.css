@@ -46,7 +46,8 @@ body {
 }
 
 @utility clean-card {
-  background: white;
+  background: rgba(18, 17, 46, 0.85);
+  backdrop-filter: blur(20px);
   border-radius: 2.5rem;
   padding: 2.5rem 2rem;
   display: flex;
@@ -57,12 +58,15 @@ body {
   position: relative;
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(0, 0, 0, 0.03);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  color: white;
 
   &:hover {
     transform: translateY(-8px);
-    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.7);
+    background: rgba(18, 17, 46, 0.95);
+    border-color: rgba(255, 255, 255, 0.1);
   }
 
   &::after {

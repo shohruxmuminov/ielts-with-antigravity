@@ -119,11 +119,12 @@ export default function Dashboard() {
   const targetBand = profile?.targetBand || '7.0';
 
   return (
-    <div className="w-full min-h-screen bg-slate-50 text-slate-900 font-sans p-8 lg:p-12 relative overflow-hidden">
+    <div className="w-full min-h-screen bg-[#05050f] text-white font-sans p-8 lg:p-12 relative overflow-hidden">
       
-      {/* Decorative Overlays */}
-      <div className="absolute top-[-10%] left-[-5%] w-[40%] h-[40%] bg-blue-100/30 rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-[-5%] right-[-5%] w-[30%] h-[30%] bg-purple-100/30 rounded-full blur-[100px] pointer-events-none" />
+      {/* Cosmic Background Elements */}
+      <div className="absolute top-[-20%] left-[-10%] w-[70%] h-[70%] bg-indigo-600/10 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] bg-purple-600/10 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-[30%] right-[10%] w-[40%] h-[30%] bg-fuchsia-600/10 rounded-full blur-[120px] transform -rotate-45 pointer-events-none" />
 
       <div className="max-w-6xl mx-auto w-full relative z-10 space-y-16">
         
@@ -134,35 +135,70 @@ export default function Dashboard() {
           className="flex flex-col md:flex-row md:items-end justify-between gap-6"
         >
           <div className="space-y-4 text-left">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 text-blue-600 font-bold text-xs border border-blue-100 uppercase tracking-widest">
-              <Sparkles className="w-3.5 h-3.5" />
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 text-indigo-300 font-bold text-xs border border-indigo-500/20 uppercase tracking-widest backdrop-blur-md">
+              <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
               {greeting}, IELTS Achiever
             </div>
-            <h1 className="text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-tight">
+            <h1 className="text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight">
               Ready to learn,<br />
-              <span className="text-blue-600 underline decoration-blue-200 underline-offset-8">{displayName}!</span>
+              <span className="text-[#a48afd] drop-shadow-[0_0_15px_rgba(168,85,247,0.4)]">{displayName}!</span>
             </h1>
           </div>
 
-          <div className="flex items-center gap-4 bg-white px-6 py-4 rounded-3xl border border-slate-100 shadow-sm">
-             <div className="w-12 h-12 rounded-2xl bg-blue-600 flex items-center justify-center text-white shadow-[0_10px_20px_-5px_rgba(37,99,235,0.4)]">
-                <Trophy className="w-6 h-6" />
-             </div>
-             <div>
-                <p className="text-slate-400 text-[10px] font-bold uppercase tracking-widest">Target Band</p>
-                <p className="text-2xl font-black text-slate-800 tracking-tighter">{targetBand}</p>
-             </div>
+          <div className="flex items-center gap-8">
+            <div className="flex items-center gap-4 bg-[#121124]/90 backdrop-blur-xl px-6 py-3 rounded-3xl border border-slate-700/50 shadow-2xl">
+              <div className="flex -space-x-4">
+                {[1,2,3].map(i => (
+                  <div key={i} className="w-10 h-10 rounded-full border-2 border-[#121124] bg-slate-800 overflow-hidden shadow-md">
+                    <img src={`https://i.pravatar.cc/150?u=${i + 20}`} alt="user" referrerPolicy="no-referrer" className="w-full h-full object-cover" />
+                  </div>
+                ))}
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Community</span>
+                <span className="text-sm font-black text-white">{totalUsers + 824}+ Students</span>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-4 bg-[#121124]/90 backdrop-blur-xl px-6 py-4 rounded-3xl border border-slate-700/50 shadow-2xl">
+               <div className="w-11 h-11 rounded-2xl bg-indigo-600 flex items-center justify-center text-white shadow-[0_10px_20px_-5px_rgba(79,70,229,0.4)]">
+                  <Trophy className="w-6 h-6" />
+               </div>
+               <div>
+                  <p className="text-slate-400 text-[10px] font-bold uppercase tracking-widest">Target Band</p>
+                  <p className="text-2xl font-black text-white tracking-tighter">{targetBand}</p>
+               </div>
+            </div>
           </div>
         </motion.div>
 
+        {/* ADVERTISEMENT WIDGET */}
+        <div className="w-full flex justify-center py-2">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.2 }}
+            className="w-full max-w-4xl relative rounded-[2.5rem] overflow-hidden border border-indigo-500/20 shadow-[0_0_50px_rgba(0,0,0,1)] group bg-black"
+          >
+            <div className="w-full flex justify-center">
+              <img 
+                src="/ad-banner.jpg" 
+                alt="Ace Your IELTS Exam" 
+                className="w-full h-auto max-h-[450px] object-contain block transform group-hover:scale-[1.01] transition-transform duration-700 opacity-90 group-hover:opacity-100"
+              />
+            </div>
+            <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-black via-transparent to-transparent pointer-events-none" />
+          </motion.div>
+        </div>
+
         {/* FEATURE GRID */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 pb-12">
           {features.map((feature, idx) => (
             <motion.div
               key={feature.id}
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: idx * 0.05, type: 'spring', stiffness: 260, damping: 20 }}
+              transition={{ delay: 0.4 + (idx * 0.05), type: 'spring', stiffness: 260, damping: 20 }}
             >
               <Link 
                 to={feature.path}
@@ -175,10 +211,10 @@ export default function Dashboard() {
                 } as React.CSSProperties}
               >
                 <div className="icon-squircle group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
-                  <feature.icon />
+                  {React.createElement(feature.icon)}
                 </div>
                 
-                <h3 className="text-lg font-extrabold text-slate-800 leading-tight mb-2 group-hover:text-blue-600 transition-colors">
+                <h3 className="text-lg font-extrabold text-white leading-tight mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-[var(--section-color)] transition-all">
                   {feature.name}
                 </h3>
               </Link>
