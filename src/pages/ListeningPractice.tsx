@@ -74,8 +74,8 @@ export default function ListeningPractice() {
 
   const filteredMaterials = materials.filter(m => {
     if (activeFilter === 'all') return true;
-    if (activeFilter === 'trainer1') return m.title.includes('Trainer 1');
-    if (activeFilter === 'trainer2') return m.title.includes('Trainer 2');
+    if (activeFilter === 'trainer1') return m.title?.includes('Trainer 1');
+    if (activeFilter === 'trainer2') return m.title?.includes('Trainer 2');
     return true;
   });
 
@@ -105,8 +105,8 @@ export default function ListeningPractice() {
               <nav className="space-y-1">
                 {[
                   { id: 'all', label: 'All Tests', icon: Layout, count: materials.length },
-                  { id: 'trainer1', label: 'IELTS Trainer 1', icon: Box, count: materials.filter(m => m.title.includes('Trainer 1')).length },
-                  { id: 'trainer2', label: 'IELTS Trainer 2', icon: Crown, count: materials.filter(m => m.title.includes('Trainer 2')).length },
+                  { id: 'trainer1', label: 'IELTS Trainer 1', icon: Box, count: materials.filter(m => m.title?.includes('Trainer 1')).length },
+                  { id: 'trainer2', label: 'IELTS Trainer 2', icon: Crown, count: materials.filter(m => m.title?.includes('Trainer 2')).length },
                 ].map((item) => (
                   <button
                     key={item.id}
@@ -172,8 +172,8 @@ export default function ListeningPractice() {
     );
   }
 
-  const testData = selectedMaterial.parsedData;
-  const currentPart = testData.parts[currentPartIndex];
+  const testData = selectedMaterial?.parsedData;
+  const currentPart = testData?.parts?.[currentPartIndex];
 
   const togglePlay = () => {
     if (audioRef.current) {
