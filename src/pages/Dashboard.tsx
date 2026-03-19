@@ -144,10 +144,24 @@ export default function Dashboard() {
           </div>
         </motion.div>
 
-        {/* Placeholder for the upcoming image */}
-        <div id="image-placeholder" className="w-full flex justify-center py-8">
-          {/* Rasm bu yerda bo'ladi */}
-        </div>
+        {/* ADVERTISEMENT WIDGET */}
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.2 }}
+          className="w-full relative rounded-[2.5rem] overflow-hidden border border-indigo-500/20 shadow-[0_0_40px_rgba(99,102,241,0.15)] group"
+        >
+          {/* Main Advertisement Image */}
+          <img 
+            src="/ad-banner.jpg" 
+            alt="Ace Your IELTS Exam - Start Practicing with Us Today!" 
+            className="w-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+            style={{ maxHeight: '500px' }}
+          />
+
+          {/* Slight gradient overlay for better blending with dark mode */}
+          <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#05050f] via-transparent to-transparent pointer-events-none" />
+        </motion.div>
 
         {/* PRACTICE MODULES GRID */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pt-10">
