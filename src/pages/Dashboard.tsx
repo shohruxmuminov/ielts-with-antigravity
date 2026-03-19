@@ -164,7 +164,11 @@ export default function Dashboard() {
                 transition={{ duration: 0.5 }}
                 src={adImages[currentAdIndex]} 
                 alt={`Advertisement ${currentAdIndex + 1}`} 
-                className="w-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                className={`w-full object-cover transform transition-all duration-700 ${
+                  currentAdIndex === 0 
+                  ? 'scale-[0.85] rounded-3xl shadow-2xl mt-4 mb-4 object-contain group-hover:scale-[0.88]' 
+                  : 'group-hover:scale-105'
+                }`}
                 style={{ maxHeight: '500px' }}
               />
             </AnimatePresence>
