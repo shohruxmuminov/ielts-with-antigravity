@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Trophy, 
@@ -10,7 +10,9 @@ import {
   ClipboardList,
   Star,
   Smartphone,
-  Sparkles
+  Sparkles,
+  Volume2,
+  VolumeX
 } from 'lucide-react';
 import { useAuth } from '../FirebaseProvider';
 import { Link } from 'react-router-dom';
@@ -21,6 +23,8 @@ export default function Dashboard() {
   const { profile, loading, user } = useAuth();
   const [totalUsers, setTotalUsers] = useState(0);
   const [greeting, setGreeting] = useState('');
+  const [isMuted, setIsMuted] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const hour = new Date().getHours();
@@ -44,13 +48,20 @@ export default function Dashboard() {
     fetchStats();
   }, [user]);
 
+  const toggleMute = () => {
+    if (videoRef.current) {
+      videoRef.current.muted = !videoRef.current.muted;
+      setIsMuted(videoRef.current.muted);
+    }
+  };
+
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-screen bg-slate-50">
+      <div className="flex items-center justify-center h-screen bg-[#05050f]">
         <motion.div 
           animate={{ rotate: 360 }}
           transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-          className="rounded-full h-12 w-12 border-b-2 border-blue-500"
+          className="rounded-full h-12 w-12 border-b-2 border-indigo-500"
         />
       </div>
     );
@@ -166,12 +177,31 @@ export default function Dashboard() {
             transition={{ delay: 0.2 }}
             className="w-full max-w-4xl relative rounded-[2.5rem] overflow-hidden border border-indigo-500/20 shadow-[0_0_50px_rgba(0,0,0,1)] group bg-black"
           >
-            <div className="w-full flex justify-center">
-              <img 
-                src="/ad-banner.jpg" 
-                alt="Ace Your IELTS Exam" 
+            <div className="w-full flex justify-center relative">
+              <video 
+                ref={videoRef}
+                autoPlay 
+                loop 
+                muted 
+                playsInline
+                poster="/ad-banner.jpg"
                 className="w-full h-auto max-h-[450px] object-contain block transform group-hover:scale-[1.01] transition-transform duration-700 opacity-90 group-hover:opacity-100"
-              />
+              >
+                <source src="/ad-video.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+
+              {/* Mute/Unmute Overlay */}
+              <button 
+                onClick={toggleMute}
+                className="absolute bottom-6 right-6 p-3 rounded-full bg-black/40 backdrop-blur-md border border-white/10 text-white hover:bg-black/60 transition-all z-20 group/mute"
+              >
+                {isMuted ? (
+                  <VolumeX className="w-5 h-5 text-indigo-300" />
+                ) : (
+                  <Volume2 className="w-5 h-5 text-green-400" />
+                )}
+              </button>
             </div>
             <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-black via-transparent to-transparent pointer-events-none" />
           </motion.div>
