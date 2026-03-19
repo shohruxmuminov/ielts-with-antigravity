@@ -25,50 +25,57 @@ export default function ListeningPractice() {
   }, []);
 
   const fetchMaterials = async () => {
+    const staticTests = [
+      { 
+        id: 'jurabek-listening-1', 
+        title: 'IELTS with Jurabek - Listening Test 1', 
+        isStatic: true, 
+        url: '/tests/IELTSwithJurabek Listening.html',
+        createdAt: { seconds: 1710900000 } 
+      },
+      { 
+        id: 'jurabek-listening-2', 
+        title: 'IELTS with Jurabek - Listening Test 2', 
+        isStatic: true, 
+        url: '/tests/IELTSwithJurabek Listening2.html',
+        createdAt: { seconds: 1710900001 } 
+      },
+      { 
+        id: 'jurabek-listening-3', 
+        title: 'IELTS with Jurabek - Listening Test 3', 
+        isStatic: true, 
+        url: '/tests/IELTSwithJurabek Listening3.html',
+        createdAt: { seconds: 1710900002 } 
+      },
+      { 
+        id: 'jurabek-listening-4', 
+        title: 'IELTS with Jurabek - Final Test', 
+        isStatic: true, 
+        url: '/tests/IELTSwithJurabek Lis.html',
+        createdAt: { seconds: 1710900003 } 
+      },
+    ];
+
     setLoading(true);
     try {
+      // Simplified query without orderBy to avoid index requirement issues
       const q = query(
         collection(db, 'materials'),
-        where('type', '==', 'listening'),
-        orderBy('createdAt', 'desc')
+        where('type', '==', 'listening')
       );
       const querySnapshot = await getDocs(q);
       const dbDocs = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       
-      const staticTests = [
-        { 
-          id: 'jurabek-listening-1', 
-          title: 'IELTS with Jurabek - Listening Test 1', 
-          isStatic: true, 
-          url: '/tests/IELTSwithJurabek Listening.html',
-          createdAt: { seconds: 1710900000 } 
-        },
-        { 
-          id: 'jurabek-listening-2', 
-          title: 'IELTS with Jurabek - Listening Test 2', 
-          isStatic: true, 
-          url: '/tests/IELTSwithJurabek Listening2.html',
-          createdAt: { seconds: 1710900001 } 
-        },
-        { 
-          id: 'jurabek-listening-3', 
-          title: 'IELTS with Jurabek - Listening Test 3', 
-          isStatic: true, 
-          url: '/tests/IELTSwithJurabek Listening3.html',
-          createdAt: { seconds: 1710900002 } 
-        },
-        { 
-          id: 'jurabek-listening-4', 
-          title: 'IELTS with Jurabek - Final Test', 
-          isStatic: true, 
-          url: '/tests/IELTSwithJurabek Lis.html',
-          createdAt: { seconds: 1710900003 } 
-        },
-      ];
+      // Sort manually to avoid Firestore Index issues
+      const sortedDbDocs = dbDocs.sort((a: any, b: any) => 
+        (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0)
+      );
 
-      setMaterials([...staticTests, ...dbDocs]);
+      setMaterials([...staticTests, ...sortedDbDocs]);
     } catch (error) {
-      // Error fetching materials
+      console.error("Error fetching listening materials:", error);
+      // Fallback to just static tests if DB fails
+      setMaterials(staticTests);
     } finally {
       setLoading(false);
     }
