@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Trophy, 
   ChevronRight,
@@ -18,6 +18,8 @@ export default function Dashboard() {
   const [recentScores, setRecentScores] = useState<number[]>([]);
   const [averageScore, setAverageScore] = useState(0);
   const [greeting, setGreeting] = useState('');
+  const [currentAdIndex, setCurrentAdIndex] = useState(0);
+  const adImages = ['/ad-banner.jpg', '/ad-banner2.jpg', '/ad-banner3.jpg'];
 
   useEffect(() => {
     const hour = new Date().getHours();
@@ -144,23 +146,59 @@ export default function Dashboard() {
           </div>
         </motion.div>
 
-        {/* ADVERTISEMENT WIDGET */}
+        {/* ADVERTISEMENT CAROUSEL */}
         <motion.div 
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.2 }}
-          className="w-full relative rounded-[2.5rem] overflow-hidden border border-indigo-500/20 shadow-[0_0_40px_rgba(99,102,241,0.15)] group"
+          className="w-full relative rounded-[2.5rem] overflow-hidden border border-indigo-500/20 shadow-[0_0_40px_rgba(99,102,241,0.15)] group bg-[#0e0c1f]"
         >
           {/* Main Advertisement Image */}
-          <img 
-            src="/ad-banner.jpg" 
-            alt="Ace Your IELTS Exam - Start Practicing with Us Today!" 
-            className="w-full object-cover transform group-hover:scale-105 transition-transform duration-700"
-            style={{ maxHeight: '500px' }}
-          />
+          <div className="relative w-full overflow-hidden" style={{ maxHeight: '500px' }}>
+            <AnimatePresence mode="wait">
+              <motion.img 
+                key={currentAdIndex}
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -50 }}
+                transition={{ duration: 0.5 }}
+                src={adImages[currentAdIndex]} 
+                alt={`Advertisement ${currentAdIndex + 1}`} 
+                className="w-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                style={{ maxHeight: '500px' }}
+              />
+            </AnimatePresence>
+          </div>
+
+          {/* Navigation Arrows */}
+          <div className="absolute inset-0 flex items-center justify-between px-4 z-20 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
+            <button 
+              onClick={() => setCurrentAdIndex(prev => prev === 0 ? adImages.length - 1 : prev - 1)}
+              className="p-3 rounded-full bg-black/40 backdrop-blur-md text-white hover:bg-indigo-600 border border-white/10 transition-colors pointer-events-auto"
+            >
+              <ChevronRight className="w-6 h-6 rotate-180" />
+            </button>
+            <button 
+              onClick={() => setCurrentAdIndex(prev => (prev + 1) % adImages.length)}
+              className="p-3 rounded-full bg-black/40 backdrop-blur-md text-white hover:bg-indigo-600 border border-white/10 transition-colors pointer-events-auto"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
+          </div>
+
+          {/* Indicator Dots */}
+          <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2 z-20">
+             {adImages.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setCurrentAdIndex(idx)}
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${currentAdIndex === idx ? 'bg-indigo-500 w-6' : 'bg-white/40 hover:bg-white/80'}`}
+                />
+             ))}
+          </div>
 
           {/* Slight gradient overlay for better blending with dark mode */}
-          <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#05050f] via-transparent to-transparent pointer-events-none" />
+          <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#05050f] via-transparent to-transparent pointer-events-none z-10" />
         </motion.div>
 
         {/* PRACTICE MODULES GRID */}
