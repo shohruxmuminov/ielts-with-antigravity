@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { db } from '../firebase';
 import { collection, query, where, getDocs, orderBy } from 'firebase/firestore';
 import { calculateBandScore } from '../utils/scoring';
+import StaticListeningLayout from '../components/StaticListeningLayout';
 
 export default function ListeningPractice() {
   const [materials, setMaterials] = useState<any[]>([]);
@@ -17,7 +18,7 @@ export default function ListeningPractice() {
   const [duration, setDuration] = useState(0);
   const [score, setScore] = useState(0);
   const [bandScore, setBandScore] = useState("0.0");
-  const audioRef = useRef<HTMLAudioElement>(null);
+  const audioRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     fetchMaterials();
@@ -32,8 +33,40 @@ export default function ListeningPractice() {
         orderBy('createdAt', 'desc')
       );
       const querySnapshot = await getDocs(q);
-      const docs = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      setMaterials(docs);
+      const dbDocs = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      
+      const staticTests = [
+        { 
+          id: 'jurabek-listening-1', 
+          title: 'IELTS with Jurabek - Listening Test 1', 
+          isStatic: true, 
+          url: '/tests/IELTSwithJurabek Listening.html',
+          createdAt: { seconds: 1710900000 } 
+        },
+        { 
+          id: 'jurabek-listening-2', 
+          title: 'IELTS with Jurabek - Listening Test 2', 
+          isStatic: true, 
+          url: '/tests/IELTSwithJurabek Listening2.html',
+          createdAt: { seconds: 1710900001 } 
+        },
+        { 
+          id: 'jurabek-listening-3', 
+          title: 'IELTS with Jurabek - Listening Test 3', 
+          isStatic: true, 
+          url: '/tests/IELTSwithJurabek Listening3.html',
+          createdAt: { seconds: 1710900002 } 
+        },
+        { 
+          id: 'jurabek-listening-4', 
+          title: 'IELTS with Jurabek - Final Test', 
+          isStatic: true, 
+          url: '/tests/IELTSwithJurabek Lis.html',
+          createdAt: { seconds: 1710900003 } 
+        },
+      ];
+
+      setMaterials([...staticTests, ...dbDocs]);
     } catch (error) {
       // Error fetching materials
     } finally {
@@ -42,6 +75,11 @@ export default function ListeningPractice() {
   };
 
   const handleStartTest = (m: any) => {
+    if (m.isStatic) {
+      setSelectedMaterial(m);
+      return;
+    }
+    
     try {
       const data = JSON.parse(m.data);
       if (document.documentElement.requestFullscreen) {
@@ -65,8 +103,17 @@ export default function ListeningPractice() {
   if (loading) {
     return (
       <div className="min-h-[60vh] flex items-center justify-center bg-slate-950">
-        <div className="w-12 h-12 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin"></div>
+        <div className="w-12 h-12 border-4 border-emerald-600 border-t-transparent rounded-full animate-spin"></div>
       </div>
+    );
+  }
+
+  if (selectedMaterial?.isStatic) {
+    return (
+      <StaticListeningLayout 
+        testUrl={selectedMaterial.url} 
+        onBack={handleBack} 
+      />
     );
   }
 
