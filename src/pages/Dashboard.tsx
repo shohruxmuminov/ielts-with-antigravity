@@ -18,8 +18,6 @@ export default function Dashboard() {
   const [recentScores, setRecentScores] = useState<number[]>([]);
   const [averageScore, setAverageScore] = useState(0);
   const [greeting, setGreeting] = useState('');
-  const [currentAdIndex, setCurrentAdIndex] = useState(0);
-  const adImages = ['/ad-banner.jpg', '/ad-banner2.jpg', '/ad-banner3.jpg'];
 
   useEffect(() => {
     const hour = new Date().getHours();
@@ -153,12 +151,12 @@ export default function Dashboard() {
           transition={{ delay: 0.2 }}
           className="w-full relative rounded-[2.5rem] overflow-hidden border border-indigo-500/20 shadow-[0_0_40px_rgba(99,102,241,0.15)] group bg-[#050510]"
         >
-          {/* Main Advertisement Image - Object Contain prevents cropping */}
-          <div className="w-full flex justify-center py-4 px-2" style={{ maxHeight: '600px' }}>
+          {/* Main Advertisement Image - Using h-auto to ensure full visibility without cropping */}
+          <div className="w-full overflow-hidden">
             <img 
               src="/ad-banner.jpg" 
               alt="Ace Your IELTS Exam - Start Practicing with Us Today!" 
-              className="w-full max-h-[550px] object-contain transform group-hover:scale-[1.02] transition-transform duration-700 rounded-2xl"
+              className="w-full h-auto block transform group-hover:scale-[1.01] transition-transform duration-700"
             />
           </div>
 
