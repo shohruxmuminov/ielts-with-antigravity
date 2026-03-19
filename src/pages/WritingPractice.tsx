@@ -69,7 +69,17 @@ export default function WritingPractice() {
       setTasks([...staticTasks, ...tasksData]);
       setLoading(false);
     }, (error) => {
-      // Error fetching writing tasks
+      console.error("Firestore error in WritingPractice:", error);
+      const staticTasks: WritingTask[] = [
+        {
+          id: 'full-writing-test',
+          title: 'Full Writing Practice Test',
+          type: 'full',
+          data: 'Complete both Task 1 and Task 2 in 60 minutes.',
+          createdAt: { seconds: Date.now() / 1000 }
+        }
+      ];
+      setTasks(staticTasks);
       setLoading(false);
     });
 
