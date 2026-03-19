@@ -36,11 +36,25 @@ export default function Register() {
     setLoading(true);
     try {
       const provider = new GoogleAuthProvider();
+      // Ensure specific prompt for account selection
+      provider.setCustomParameters({ prompt: 'select_account' });
+      
       const result = await signInWithPopup(auth, provider);
       await createProfile(result.user, '');
       navigate('/dashboard');
     } catch (err: any) {
-      setError('Failed to sign up with Google. Please try again.');
+      console.error('Google Sign Up Error:', err);
+      if (err.code === 'auth/popup-blocked') {
+        setError('Brauzer oyna ochilishini blokladi (Popup blocked). Iltimos, brauzer sozlamalaridan ruxsat bering.');
+      } else if (err.code === 'auth/cancelled-popup-request') {
+        setError('Login oynasi yopildi. Iltimos, qayta urinib ko\'ring.');
+      } else if (err.code === 'auth/popup-closed-by-user') {
+        setError('Oyna foydalanuvchi tomonidan yopildi.');
+      } else if (err.code === 'auth/unauthorized-domain') {
+        setError('Xatolik: Ushbu domen Firebase Console\'da ruxsat berilganlar ro\'yxatiga kiritilmagan.');
+      } else {
+        setError('Google orqali ro\'yxatdan o\'tishda xatolik yuz berdi: ' + (err.message || 'Noma\'lum xato'));
+      }
     } finally {
       setLoading(false);
     }

@@ -35,10 +35,14 @@ export const FirebaseProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       const unsubscribeProfile = onSnapshot(doc(db, 'users', user.uid), (docSnap) => {
         if (docSnap.exists()) {
           setProfile({ ...docSnap.data(), isPremium: true });
+        } else {
+          console.warn('User document does not exist in Firestore for UID:', user.uid);
+          setProfile(null);
         }
         setLoading(false);
       }, (error) => {
-        // Profile snapshot error
+        console.error('Error fetching user profile:', error);
+        setProfile(null);
         setLoading(false);
       });
       return () => unsubscribeProfile();
