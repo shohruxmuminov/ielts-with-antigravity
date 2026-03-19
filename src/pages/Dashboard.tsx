@@ -177,7 +177,7 @@ export default function Dashboard() {
             >
               <Link 
                 to={feature.path}
-                className="group block bg-[#12112e]/90 backdrop-blur-xl rounded-[2rem] p-8 border border-slate-700/40 shadow-[0_0_20px_rgba(0,0,0,0.5)] transition-all duration-300 relative overflow-hidden fire-blur-hover"
+                className="group block bg-[#12112e]/90 backdrop-blur-xl rounded-[2rem] p-8 border border-slate-700/40 shadow-[0_0_20px_rgba(0,0,0,0.5)] transition-all duration-300 relative overflow-hidden water-blur-hover"
               >
                 <div className="relative z-10">
                   <div className="flex items-start justify-between mb-8">
@@ -186,7 +186,7 @@ export default function Dashboard() {
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <h3 className="text-xl font-black text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-orange-400 transition-all">{feature.name}</h3>
+                    <h3 className="text-xl font-black text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-cyan-400 transition-all">{feature.name}</h3>
                     <p className="text-slate-400 font-medium text-sm group-hover:text-slate-200 transition-colors">{feature.desc}</p>
                   </div>
                 </div>
