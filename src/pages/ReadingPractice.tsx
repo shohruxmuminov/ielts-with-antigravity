@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
-import { ArrowLeft, BookOpen, ArrowRight } from 'lucide-react';
+import { BookOpen, ArrowRight } from 'lucide-react';
 import { collection, query, where, orderBy, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebase';
 import IELTSReadingLayout from '../components/IELTSReadingLayout';
+import FullTest29Layout from '../components/FullTest29Layout';
+import { FULL_TEST_29 } from '../data/fullTest29';
+import '../styles/fullTest29.css';
 
 
 interface ReadingTest {
@@ -37,12 +40,12 @@ export default function ReadingPractice() {
         };
       }) as ReadingTest[];
       
-      // Remove all static tests, use only Firebase tests
-      setTests([...dbTests]);
+      // Merge with static tests
+      setTests([{ ...FULL_TEST_29, type: 'Academic' } as ReadingTest, ...dbTests]);
       setLoading(false);
     }, (error) => {
-      // If Firestore fails, show empty
-      setTests([]);
+      // If Firestore fails, show at least static tests
+      setTests([{ ...FULL_TEST_29, type: 'Academic' } as ReadingTest]);
       setLoading(false);
     });
 
@@ -67,6 +70,13 @@ export default function ReadingPractice() {
   };
 
   if (selectedTest) {
+    if (selectedTest.id === 'full-test-29') {
+      return (
+        <div className="fixed inset-0 z-50 bg-white overflow-hidden">
+          <FullTest29Layout onBack={handleBack} />
+        </div>
+      );
+    }
     return (
       <div className="fixed inset-0 z-50 bg-slate-950 overflow-hidden">
         <IELTSReadingLayout 

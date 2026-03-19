@@ -1,0 +1,270 @@
+/* Scoped Styles for Full Test 29 */
+
+.full-test-29-container {
+    background-color: #ffffff;
+    color: #000;
+    font-family: Arial, sans-serif;
+    line-height: 1.4;
+    font-size: 16px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.full-test-29-container * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.full-test-29-container .header {
+    background-color: #ffffff;
+    padding: 12px 20px;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    height: 60px;
+}
+
+.full-test-29-container .ielts-logo {
+    display: none;
+}
+
+.full-test-29-container .test-info {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    font-size: 14px;
+    color: #333;
+}
+
+.full-test-29-container .audio-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+}
+
+.full-test-29-container .telegram-link {
+    color: #0088cc;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.full-test-29-container .main-container {
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    height: calc(100vh - 60px);
+}
+
+.full-test-29-container .panels-container {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+.full-test-29-container .passage-panel {
+    flex: 1;
+    padding: 20px 20px 100px;
+    overflow-y: auto;
+    min-width: 200px;
+}
+
+.full-test-29-container .reading-passage h4 {
+    font-family: 'Merriweather', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: #2c3e50;
+    line-height: 1.4;
+    margin-bottom: 20px;
+    text-align: center;
+    border-bottom: 2px solid #4a90e2;
+    padding-bottom: 5px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.full-test-29-container .reading-passage p {
+    margin-bottom: 1.2em;
+}
+
+.full-test-29-container .questions-panel {
+    flex: 1;
+    padding: 20px 20px 100px;
+    overflow-y: auto;
+    min-width: 200px;
+    border-left: 1px solid #e0e0e0;
+}
+
+.full-test-29-container .resizer {
+    width: 10px;
+    cursor: col-resize;
+    background-color: #f0f0f0;
+    background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="30" viewBox="0 0 10 30"><path d="M4 11h2v2H4zM4 15h2v2H4zM4 19h2v2H4z" fill="%23888"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
+    flex-shrink: 0;
+    flex-grow: 0;
+}
+
+.full-test-29-container .nav-arrows {
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+    display: flex;
+    gap: 5px;
+    z-index: 101;
+}
+
+.full-test-29-container .nav-arrow {
+    width: 50px;
+    height: 50px;
+    background: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.full-test-29-container .nav-row {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    height: 80px;
+    z-index: 100;
+    border-top: 1px solid #e0e0e0;
+}
+
+.full-test-29-container .footer__questionWrapper___1tZ46 {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.full-test-29-container .footer__questionNo___3WNct {
+    background: none;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.full-test-29-container .footer__subquestionWrapper___9GgoP {
+    display: none;
+    gap: 2px;
+    margin-left: 10px;
+}
+
+.full-test-29-container .footer__questionWrapper___1tZ46.selected .footer__subquestionWrapper___9GgoP {
+    display: flex;
+}
+
+.full-test-29-container .subQuestion {
+    width: 32px;
+    height: 32px;
+    border: 1px solid #ccc;
+    background: white;
+    color: #333;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px;
+}
+
+.full-test-29-container .subQuestion.active {
+    background-color: #4a90e2;
+    color: white;
+    border-color: #4a90e2;
+}
+
+.full-test-29-container .footer__deliverButton___3FM07 {
+    margin-left: auto;
+    margin-right: 20px;
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #ccc;
+    padding: 12px 20px;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 170px;
+    justify-content: center;
+}
+
+/* Question Content Styles */
+.full-test-29-container .question { margin-bottom: 40px; }
+.full-test-29-container .answer-input {
+    border: 1px solid #888;
+    border-radius: 4px;
+    padding: 2px 5px;
+    font-size: 16px;
+    text-align: center;
+    height: 28px;
+    width: 150px;
+}
+.full-test-29-container .tf-question-number {
+    border: 2px solid #ccc;
+    padding: 2px 8px;
+    margin-right: 10px;
+    border-radius: 3px;
+    font-weight: bold;
+}
+.full-test-29-container .tf-option {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+.full-test-29-container .people-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+}
+.full-test-29-container .people-table th, .full-test-29-container .people-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+/* Modal and hidden helpers */
+.full-test-29-container .hidden { display: none !important; }
+.full-test-29-container .part-header {
+    background-color: #f1f2ec;
+    padding: 15px 20px;
+    border: 1px solid #e0e0e0;
+    text-align: left;
+    margin: 10px 20px;
+    border-radius: 5px;
+}
+.full-test-29-container .timer-display { font-size: 24px; font-weight: bold; }
