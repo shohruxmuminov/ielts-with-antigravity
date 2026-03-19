@@ -24,7 +24,10 @@ export default function Dashboard() {
   const [totalUsers, setTotalUsers] = useState(0);
   const [greeting, setGreeting] = useState('');
   const [isMuted, setIsMuted] = useState(true);
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const videoRef = useRef<HTMLVideoElement>(null);
+  
+  const adVideos = ['/ad-video-1.mp4', '/ad-video-2.mp4'];
 
   useEffect(() => {
     const hour = new Date().getHours();
@@ -47,6 +50,18 @@ export default function Dashboard() {
     };
     fetchStats();
   }, [user]);
+
+  // Handle video transition
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.load();
+      videoRef.current.play().catch(e => console.log("Autoplay blocked or load error:", e));
+    }
+  }, [currentVideoIndex]);
+
+  const handleVideoEnd = () => {
+    setCurrentVideoIndex((prev) => (prev + 1) % adVideos.length);
+  };
 
   const toggleMute = () => {
     if (videoRef.current) {
@@ -181,13 +196,13 @@ export default function Dashboard() {
               <video 
                 ref={videoRef}
                 autoPlay 
-                loop 
                 muted 
                 playsInline
+                onEnded={handleVideoEnd}
                 poster="/ad-banner.jpg"
                 className="w-full h-auto max-h-[450px] object-contain block transform group-hover:scale-[1.01] transition-transform duration-700 opacity-90 group-hover:opacity-100"
               >
-                <source src="/ad-video.mp4" type="video/mp4" />
+                <source src={adVideos[currentVideoIndex]} type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
 
