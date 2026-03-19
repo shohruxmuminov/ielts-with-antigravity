@@ -177,11 +177,8 @@ export default function Dashboard() {
             >
               <Link 
                 to={feature.path}
-                className="group block bg-[#12112e]/80 backdrop-blur-md rounded-[2rem] p-8 border border-slate-700/40 shadow-[0_0_20px_rgba(0,0,0,0.5)] hover:border-slate-500/50 transition-all duration-300 relative overflow-hidden"
+                className="group block bg-[#12112e]/90 backdrop-blur-xl rounded-[2rem] p-8 border border-slate-700/40 shadow-[0_0_20px_rgba(0,0,0,0.5)] transition-all duration-300 relative overflow-hidden fire-blur-hover"
               >
-                <div className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
-                <div className={`absolute -inset-4 ${feature.blurColor} blur-2xl opacity-0 group-hover:opacity-30 transition-opacity duration-500`} />
-                
                 <div className="relative z-10">
                   <div className="flex items-start justify-between mb-8">
                     <div className="w-12 h-12 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300 shadow-inner">
@@ -189,8 +186,8 @@ export default function Dashboard() {
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <h3 className="text-xl font-black text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-slate-300 transition-all">{feature.name}</h3>
-                    <p className="text-slate-400 font-medium text-sm group-hover:text-slate-300 transition-colors">{feature.desc}</p>
+                    <h3 className="text-xl font-black text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-orange-400 transition-all">{feature.name}</h3>
+                    <p className="text-slate-400 font-medium text-sm group-hover:text-slate-200 transition-colors">{feature.desc}</p>
                   </div>
                 </div>
               </Link>
