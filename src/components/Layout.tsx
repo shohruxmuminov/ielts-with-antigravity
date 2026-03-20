@@ -72,8 +72,8 @@ export default function Layout() {
     <div className="flex h-screen bg-slate-950 text-slate-100 font-sans">
       {/* Slim Sidebar */}
       <aside className="w-20 bg-slate-900 border-r border-slate-800 flex flex-col items-center py-8 gap-8 z-50">
-        <Link to="/dashboard" className="w-12 h-12 bg-indigo-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-indigo-900/50 hover:scale-110 transition-transform">
-          <Trophy className="w-6 h-6" />
+        <Link to="/dashboard" className="w-12 h-12 bg-slate-800 rounded-2xl flex items-center justify-center overflow-hidden shadow-lg shadow-indigo-900/30 hover:scale-110 transition-all border border-slate-700">
+          <img src="/logo.png" alt="Antigravity Logo" className="w-full h-full object-cover" />
         </Link>
         
         <div className="w-10 h-px bg-slate-800"></div>
