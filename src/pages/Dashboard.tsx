@@ -131,54 +131,54 @@ export default function Dashboard() {
   const targetBand = profile?.targetBand || '7.0';
 
   return (
-    <div className="w-full min-h-screen bg-[#05050f] text-white font-sans p-8 lg:p-12 relative overflow-hidden">
+    <div className="w-full min-h-screen bg-[#05050f] text-white font-sans p-5 lg:p-8 relative overflow-hidden">
       
       {/* Cosmic Background Elements */}
       <div className="absolute top-[-20%] left-[-10%] w-[70%] h-[70%] bg-indigo-600/10 rounded-full blur-[150px] pointer-events-none" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] bg-purple-600/10 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute top-[30%] right-[10%] w-[40%] h-[30%] bg-fuchsia-600/10 rounded-full blur-[120px] transform -rotate-45 pointer-events-none" />
 
-      <div className="max-w-6xl mx-auto w-full relative z-10 space-y-16">
+      <div className="max-w-6xl mx-auto w-full relative z-10 space-y-8">
         
         {/* HEADER SECTION */}
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="flex flex-col md:flex-row md:items-end justify-between gap-6"
+          className="flex flex-col md:flex-row md:items-end justify-between gap-4"
         >
-          <div className="space-y-4 text-left">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 text-indigo-300 font-bold text-xs border border-indigo-500/20 uppercase tracking-widest backdrop-blur-md">
-              <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
+          <div className="space-y-2 text-left">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 text-indigo-300 font-bold text-[10px] border border-indigo-500/20 uppercase tracking-widest backdrop-blur-md">
+              <Sparkles className="w-3 h-3 text-indigo-400" />
               {greeting}, IELTS Achiever
             </div>
-            <h1 className="text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight">
+            <h1 className="text-3xl lg:text-4xl font-black text-white tracking-tight leading-tight">
               Ready to learn,<br />
               <span className="text-[#a48afd] drop-shadow-[0_0_15px_rgba(168,85,247,0.4)]">{displayName}!</span>
             </h1>
           </div>
 
-          <div className="flex items-center gap-8">
-            <div className="flex items-center gap-4 bg-[#121124]/90 backdrop-blur-xl px-6 py-3 rounded-3xl border border-slate-700/50 shadow-2xl">
-              <div className="flex -space-x-4">
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3 bg-[#121124]/90 backdrop-blur-xl px-4 py-2 rounded-2xl border border-slate-700/50 shadow-2xl">
+              <div className="flex -space-x-3">
                 {[1,2,3].map(i => (
-                  <div key={i} className="w-10 h-10 rounded-full border-2 border-[#121124] bg-slate-800 overflow-hidden shadow-md">
+                  <div key={i} className="w-7 h-7 rounded-full border-2 border-[#121124] bg-slate-800 overflow-hidden shadow-md">
                     <img src={`https://i.pravatar.cc/150?u=${i + 20}`} alt="user" referrerPolicy="no-referrer" className="w-full h-full object-cover" />
                   </div>
                 ))}
               </div>
               <div className="flex flex-col">
-                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Community</span>
-                <span className="text-sm font-black text-white">{totalUsers + 824}+ Students</span>
+                <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Community</span>
+                <span className="text-xs font-black text-white">{totalUsers + 824}+ Students</span>
               </div>
             </div>
 
-            <div className="flex items-center gap-4 bg-[#121124]/90 backdrop-blur-xl px-6 py-4 rounded-3xl border border-slate-700/50 shadow-2xl">
-               <div className="w-11 h-11 rounded-2xl bg-indigo-600 flex items-center justify-center text-white shadow-[0_10px_20px_-5px_rgba(79,70,229,0.4)]">
-                  <Trophy className="w-6 h-6" />
+            <div className="flex items-center gap-3 bg-[#121124]/90 backdrop-blur-xl px-4 py-2 rounded-2xl border border-slate-700/50 shadow-2xl">
+               <div className="w-9 h-9 rounded-xl bg-indigo-600 flex items-center justify-center text-white shadow-[0_10px_20px_-5px_rgba(79,70,229,0.4)]">
+                  <Trophy className="w-4 h-4" />
                </div>
                <div>
-                  <p className="text-slate-400 text-[10px] font-bold uppercase tracking-widest">Target Band</p>
-                  <p className="text-2xl font-black text-white tracking-tighter">{targetBand}</p>
+                  <p className="text-slate-400 text-[9px] font-bold uppercase tracking-widest">Target Band</p>
+                  <p className="text-lg font-black text-white tracking-tighter">{targetBand}</p>
                </div>
             </div>
           </div>
@@ -223,7 +223,7 @@ export default function Dashboard() {
         </div>
 
         {/* FEATURE GRID */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 pb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 pb-8">
           {features.map((feature, idx) => (
             <motion.div
               key={feature.id}
@@ -245,7 +245,7 @@ export default function Dashboard() {
                   {React.createElement(feature.icon)}
                 </div>
                 
-                <h3 className="text-lg font-extrabold text-white leading-tight mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-[var(--section-color)] transition-all">
+                <h3 className="text-sm font-extrabold text-white leading-tight mb-1 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-[var(--section-color)] transition-all">
                   {feature.name}
                 </h3>
               </Link>
