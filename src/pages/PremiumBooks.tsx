@@ -105,10 +105,7 @@ export default function PremiumBooks() {
 
   if (loading) return null;
 
-  // Protect the page
-  if (!profile?.isPremium) {
-    return <Navigate to="/premium" />;
-  }
+  const isPremium = profile?.isPremium;
 
   const currentBooks = booksData[activeCategory as keyof typeof booksData].filter(book => 
     book.toLowerCase().includes(searchTerm.toLowerCase())
@@ -197,23 +194,33 @@ export default function PremiumBooks() {
                       )}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="text-sm font-extrabold text-slate-100 leading-tight line-clamp-2 group-hover:text-white transition-colors">
-                        {book}
+                      <h3 className={`text-sm font-extrabold text-slate-100 leading-tight line-clamp-2 group-hover:text-white transition-all ${!isPremium ? 'blur-sm select-none' : ''}`}>
+                        {isPremium ? book : 'Premium Resource Title'}
                       </h3>
                       <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider mt-1">
-                        {book.toLowerCase().split('.').pop()} Resource
+                        {isPremium ? book.toLowerCase().split('.').pop() : 'FILE'} Resource
                       </p>
                     </div>
                   </div>
 
-                  <a
-                    href={`/My premium books/${activeCategory.charAt(0).toUpperCase() + activeCategory.slice(1)}/${book}`}
-                    download={book}
-                    className="w-full flex items-center justify-center gap-2 bg-[#1a1932] hover:bg-indigo-600 border border-slate-800 hover:border-indigo-500 text-slate-400 hover:text-white rounded-xl py-3 text-xs font-black transition-all group/btn"
-                  >
-                    <Download className="w-4 h-4 group-hover/btn:scale-125 transition-transform" />
-                    Download Kitob
-                  </a>
+                  {isPremium ? (
+                    <a
+                      href={`/My premium books/${activeCategory.charAt(0).toUpperCase() + activeCategory.slice(1)}/${book}`}
+                      download={book}
+                      className="w-full flex items-center justify-center gap-2 bg-[#1a1932] hover:bg-indigo-600 border border-slate-800 hover:border-indigo-500 text-slate-400 hover:text-white rounded-xl py-3 text-xs font-black transition-all group/btn"
+                    >
+                      <Download className="w-4 h-4 group-hover/btn:scale-125 transition-transform" />
+                      Download Kitob
+                    </a>
+                  ) : (
+                    <Link
+                      to="/premium"
+                      className="w-full flex items-center justify-center gap-2 bg-indigo-600/10 border border-indigo-500/20 text-indigo-400 rounded-xl py-3 text-xs font-black transition-all hover:bg-indigo-600/20"
+                    >
+                      <Lock className="w-4 h-4" />
+                      Unlock Premium
+                    </Link>
+                  )}
                 </motion.div>
               ))
             ) : (
@@ -231,27 +238,41 @@ export default function PremiumBooks() {
           </motion.div>
         </AnimatePresence>
 
-        {/* Premium Badge */}
-        <div className="mt-12 bg-gradient-to-r from-indigo-600/20 to-purple-600/20 border border-indigo-500/20 rounded-[2.5rem] p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+        {/* Premium Badge / CTA */}
+        <div className={`mt-12 bg-gradient-to-r ${isPremium ? 'from-indigo-600/20 to-purple-600/20' : 'from-amber-600/20 to-orange-600/20'} border border-indigo-500/20 rounded-[2.5rem] p-8 flex flex-col md:flex-row items-center justify-between gap-6`}>
           <div className="flex items-center gap-5">
-            <div className="w-16 h-16 rounded-3xl bg-indigo-600 flex items-center justify-center shadow-lg shadow-indigo-600/20">
-              <CheckCircle className="w-8 h-8 text-white" />
+            <div className={`w-16 h-16 rounded-3xl ${isPremium ? 'bg-indigo-600' : 'bg-amber-600'} flex items-center justify-center shadow-lg shadow-indigo-600/20`}>
+              {isPremium ? <CheckCircle className="w-8 h-8 text-white" /> : <Lock className="w-8 h-8 text-white" />}
             </div>
             <div>
-              <h4 className="text-xl font-black text-white">Full Premium Access Active</h4>
-              <p className="text-slate-400 text-sm font-medium">You have unlimited access to all preparation materials.</p>
+              <h4 className="text-xl font-black text-white">{isPremium ? 'Full Premium Access Active' : 'Premium Membership Required'}</h4>
+              <p className="text-slate-400 text-sm font-medium">
+                {isPremium 
+                  ? 'You have unlimited access to all preparation materials.' 
+                  : 'Upgrade to premium to unlock over 60 exclusive IELTS books and guides.'}
+              </p>
             </div>
           </div>
-          <div className="flex -space-x-3">
-            {[1, 2, 3, 4, 5].map((i) => (
-              <div key={i} className="w-10 h-10 rounded-full border-4 border-[#0a0a1a] bg-slate-800 overflow-hidden">
-                <img src={`https://i.pravatar.cc/100?u=${i + 50}`} alt="user" className="w-full h-full object-cover" />
+          {!isPremium && (
+            <Link 
+              to="/premium"
+              className="px-8 py-4 bg-indigo-600 hover:bg-indigo-500 text-white rounded-2xl font-black text-sm transition-all shadow-xl shadow-indigo-600/30 text-center"
+            >
+              Get Premium Now
+            </Link>
+          )}
+          {isPremium && (
+            <div className="flex -space-x-3">
+              {[1, 2, 3, 4, 5].map((i) => (
+                <div key={i} className="w-10 h-10 rounded-full border-4 border-[#0a0a1a] bg-slate-800 overflow-hidden">
+                  <img src={`https://i.pravatar.cc/100?u=${i + 50}`} alt="user" className="w-full h-full object-cover" />
+                </div>
+              ))}
+              <div className="h-10 px-4 rounded-full border-4 border-[#0a0a1a] bg-indigo-600 flex items-center justify-center text-[10px] font-black">
+                +2k users
               </div>
-            ))}
-            <div className="h-10 px-4 rounded-full border-4 border-[#0a0a1a] bg-indigo-600 flex items-center justify-center text-[10px] font-black">
-              +2k users
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>
