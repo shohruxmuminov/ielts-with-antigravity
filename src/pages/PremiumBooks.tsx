@@ -101,12 +101,13 @@ const booksData = {
 
 export default function PremiumBooks() {
   const { profile, loading } = useAuth();
+  const { isPremium: isLocalPremium } = usePremium();
   const [activeCategory, setActiveCategory] = useState('listening');
   const [searchTerm, setSearchTerm] = useState('');
 
   if (loading) return null;
 
-  const isPremium = !!profile?.isPremium;
+  const isPremium = !!profile?.isPremium || isLocalPremium;
 
   const currentBooks = booksData[activeCategory as keyof typeof booksData].filter(book => 
     book.toLowerCase().includes(searchTerm.toLowerCase())
@@ -195,11 +196,11 @@ export default function PremiumBooks() {
                       )}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className={`text-sm font-extrabold text-slate-100 leading-tight line-clamp-2 group-hover:text-white transition-all ${!isPremium ? 'blur-sm select-none' : ''}`}>
-                        {isPremium ? book : 'Premium Resource Title'}
+                      <h3 className={`text-sm font-extrabold text-slate-100 leading-tight line-clamp-2 transition-all ${!isPremium ? 'blur-md select-none opacity-40' : 'group-hover:text-white'}`}>
+                        {isPremium ? book : '•••••••• •••••••• ••••••••'}
                       </h3>
                       <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider mt-1">
-                        {isPremium ? book.toLowerCase().split('.').pop() : 'FILE'} Resource
+                        {isPremium ? book.toLowerCase().split('.').pop() : 'PREMIUM'} Resource
                       </p>
                     </div>
                   </div>
