@@ -30,6 +30,8 @@ export default function SpeakingPractice() {
   const audioChunksRef = useRef<Blob[]>([]);
   const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
   const [recordingTime, setRecordingTime] = useState(0);
+  const [activeTab, setActiveTab] = useState<'task' | 'sample' | 'vocab'>('task');
+  const [activeFilter, setActiveFilter] = useState('all');
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -223,7 +225,6 @@ export default function SpeakingPractice() {
     setFeedback(null);
   };
   
-  const [activeTab, setActiveTab] = useState<'task' | 'sample' | 'vocab'>('task');
 
   if (selectedTask) {
     return (
@@ -498,7 +499,6 @@ export default function SpeakingPractice() {
     );
   }
 
-  const [activeFilter, setActiveFilter] = useState('all');
 
   const filteredTasks = tasks.filter(task => {
     if (activeFilter === 'all') return true;
