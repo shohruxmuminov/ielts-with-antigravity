@@ -165,12 +165,9 @@ export default function SpeakingPractice() {
           responseSchema: {
             type: Type.OBJECT,
             properties: {
-              band: { type: Type.STRING },
-              pronunciation: { type: Type.ARRAY, items: { type: Type.STRING } },
-              fluency: { type: Type.ARRAY, items: { type: Type.STRING } },
-              vocabulary: { type: Type.ARRAY, items: { type: Type.STRING } }
+              transcript: { type: Type.STRING }
             },
-            required: ["band", "pronunciation", "fluency", "vocabulary"]
+            required: ["transcript"]
           }
         }
       });
@@ -179,14 +176,7 @@ export default function SpeakingPractice() {
         contents: [
           {
             parts: [
-              { text: `Evaluate the following IELTS Speaking response for the task: "${selectedTask.title}".
-              Task description: ${selectedTask.data}
-              
-              Provide feedback in JSON format with:
-              - band: string (estimated overall band score)
-              - pronunciation: string[] (list of points about pronunciation)
-              - fluency: string[] (list of points about fluency and coherence)
-              - vocabulary: string[] (list of points about lexical resource)` },
+              { text: `Transcribe the following IELTS Speaking response clearly and accurately. Provide only the transcript text in JSON format with a single field "transcript".` },
               {
                 inlineData: {
                   mimeType: "audio/webm",
@@ -257,17 +247,17 @@ export default function SpeakingPractice() {
               <button 
                 onClick={handleEvaluate}
                 disabled={isEvaluating || !audioBlob}
-                className="bg-purple-600 text-white px-8 py-3 rounded-2xl font-black hover:bg-purple-500 transition-all shadow-lg shadow-purple-900/40 disabled:opacity-50 disabled:shadow-none flex items-center gap-2"
+                className="bg-blue-600 text-white px-8 py-3 rounded-2xl font-black hover:bg-blue-500 transition-all shadow-lg shadow-blue-900/40 disabled:opacity-50 disabled:shadow-none flex items-center gap-2"
               >
                 {isEvaluating ? (
                   <>
                     <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                    Analyzing...
+                    Transcribing...
                   </>
                 ) : (
                   <>
-                    <CheckCircle className="w-4 h-4" />
-                    Get AI Feedback
+                    <FileText className="w-4 h-4" />
+                    Transcribe My Speech
                   </>
                 )}
               </button>
@@ -382,35 +372,27 @@ export default function SpeakingPractice() {
                     <div className="bg-slate-900 rounded-[3rem] p-12 border border-slate-800 shadow-2xl">
                       <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 mb-12">
                         <div className="flex items-center gap-6">
-                          <div className="w-16 h-16 bg-emerald-600 rounded-2xl flex items-center justify-center shadow-lg shadow-emerald-900/40">
-                            <Trophy className="w-9 h-9 text-white" />
+                          <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-900/40">
+                            <FileText className="w-9 h-9 text-white" />
                           </div>
                           <div>
-                            <h2 className="text-3xl font-black text-white">Evaluation Result</h2>
-                            <p className="text-sm text-slate-500 font-medium mt-1">Based on IELTS assessment criteria</p>
+                            <h2 className="text-3xl font-black text-white">Speech Transcript</h2>
+                            <p className="text-sm text-slate-500 font-medium mt-1">AI-generated transcription from your recording</p>
                           </div>
-                        </div>
-                        <div className="text-center bg-emerald-900/20 px-10 py-5 rounded-3xl border border-emerald-900/30">
-                          <p className="text-[10px] font-black text-emerald-400 uppercase tracking-widest mb-2">Band Score</p>
-                          <p className="text-5xl font-black text-emerald-100 leading-none">{feedback.band}</p>
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div className="space-y-8">
-                          <FeedbackSection title="Pronunciation" items={feedback.pronunciation} icon={<Volume2 className="w-6 h-6 text-blue-400" />} />
-                          <FeedbackSection title="Fluency & Coherence" items={feedback.fluency} icon={<CheckCircle className="w-6 h-6 text-emerald-400" />} />
-                        </div>
-                        <div className="space-y-8">
-                          <FeedbackSection title="Lexical Resource" items={feedback.vocabulary} icon={<AlertCircle className="w-6 h-6 text-amber-400" />} />
-                        </div>
+                      <div className="bg-slate-800 rounded-3xl p-10 border border-slate-700 shadow-inner">
+                        <p className="text-slate-200 text-lg leading-relaxed whitespace-pre-wrap font-medium font-sans">
+                          {feedback.transcript || "No transcript available."}
+                        </p>
                       </div>
 
                       <button 
                         onClick={() => { setFeedback(null); setAudioUrl(null); setAudioBlob(null); }}
                         className="mt-12 w-full py-5 bg-slate-800 text-white rounded-2xl font-black hover:bg-slate-700 transition-all border border-slate-700 shadow-lg"
                       >
-                        Try Another Task
+                        Try Another Recording
                       </button>
                     </div>
                   </motion.div>
@@ -607,23 +589,3 @@ export default function SpeakingPractice() {
   }
 }
 
-function FeedbackSection({ title, items, icon }: any) {
-  return (
-    <div className="bg-slate-800 p-8 rounded-3xl border border-slate-700 shadow-inner">
-      <h3 className="font-black text-white text-lg mb-6 flex items-center gap-3">
-        <div className="w-10 h-10 bg-slate-900 rounded-xl flex items-center justify-center border border-slate-700">
-          {icon}
-        </div>
-        {title}
-      </h3>
-      <ul className="space-y-4">
-        {(items || []).map((item: string, i: number) => (
-          <li key={i} className="text-sm text-slate-300 flex items-start gap-4 leading-relaxed">
-            <span className="w-2 h-2 rounded-full bg-indigo-500 mt-2 shrink-0 shadow-lg shadow-indigo-900/50" />
-            {item}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
