@@ -11,10 +11,7 @@ import {
 import { collection, query, where, orderBy, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebase';
 import IELTSReadingLayout from '../components/IELTSReadingLayout';
-import FullTest29Layout from '../components/FullTest29Layout';
 import StaticReadingLayout from '../components/StaticReadingLayout';
-import { FULL_TEST_29 } from '../data/fullTest29';
-import '../styles/fullTest29.css';
 
 interface ReadingTest {
   id: string;
@@ -58,7 +55,6 @@ export default function ReadingPractice() {
       }) as ReadingTest[];
       
       const staticTests: ReadingTest[] = [
-        { ...FULL_TEST_29, type: 'Academic', category: 'full', isNew: true } as ReadingTest,
         {
           id: 'jurabek-reading-1',
           title: 'IELTS with Jurabek - Reading Test 1',
@@ -85,7 +81,6 @@ export default function ReadingPractice() {
       setLoading(false);
     }, (error) => {
       const staticTests: ReadingTest[] = [
-        { ...FULL_TEST_29, type: 'Academic', category: 'full', isNew: true } as ReadingTest,
         {
           id: 'jurabek-reading-1',
           title: 'IELTS with Jurabek - Reading Test 1',
@@ -155,13 +150,7 @@ export default function ReadingPractice() {
         />
       );
     }
-    if (selectedTest.id === 'full-test-29') {
-      return (
-        <div className="fixed inset-0 z-50 bg-white overflow-hidden">
-          <FullTest29Layout onBack={handleBack} />
-        </div>
-      );
-    }
+
     return (
       <div className="fixed inset-0 z-50 bg-slate-950 overflow-hidden">
         <IELTSReadingLayout 
