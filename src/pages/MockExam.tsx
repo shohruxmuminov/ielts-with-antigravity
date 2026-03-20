@@ -126,7 +126,8 @@ export default function MockExam() {
 
         {/* Free tests */}
         {activeTab === 'free' && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {MOCK_TESTS.map((test, idx) => (
             <div
               key={test.id}
@@ -173,13 +174,13 @@ export default function MockExam() {
           ))}
         </div>
 
-        {MOCK_TESTS.length === 0 && activeTab === 'free' && (
+        {MOCK_TESTS.length === 0 && (
           <div className="text-center py-20 bg-slate-900/50 rounded-[3rem] border border-dashed border-slate-800">
             <AlertCircle className="w-12 h-12 text-slate-700 mx-auto mb-4" />
             <p className="text-slate-500 font-bold">Hozircha mock testlar mavjud emas.</p>
           </div>
         )}
-        </div>
+          </>
         )}
       </div>
     );

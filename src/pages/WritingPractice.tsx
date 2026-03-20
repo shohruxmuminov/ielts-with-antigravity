@@ -468,10 +468,8 @@ export default function WritingPractice() {
             <h3 className="text-2xl font-bold text-slate-800 dark:text-slate-200 mb-2">No question sets available</h3>
             <p className="text-slate-500 dark:text-slate-400">Please check back later or add new tests to the database.</p>
           </div>
-        )}
-        </div>
+        ))}
       </div>
     </div>
-    );
   );
 }
