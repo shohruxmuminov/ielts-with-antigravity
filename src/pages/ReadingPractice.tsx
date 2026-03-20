@@ -12,6 +12,7 @@ import { collection, query, where, orderBy, onSnapshot } from 'firebase/firestor
 import { db } from '../firebase';
 import IELTSReadingLayout from '../components/IELTSReadingLayout';
 import FullTest29Layout from '../components/FullTest29Layout';
+import StaticReadingLayout from '../components/StaticReadingLayout';
 import { FULL_TEST_29 } from '../data/fullTest29';
 import '../styles/fullTest29.css';
 
@@ -24,6 +25,8 @@ interface ReadingTest {
   htmlContent: string;
   questionsHtml?: string;
   correctAnswers: string;
+  isStatic?: boolean;
+  url?: string;
   createdAt?: any;
 }
 
@@ -54,14 +57,61 @@ export default function ReadingPractice() {
         };
       }) as ReadingTest[];
       
-      const staticTests = [
-        { ...FULL_TEST_29, type: 'Academic', category: 'full', isNew: true } as ReadingTest
+      const staticTests: ReadingTest[] = [
+        { ...FULL_TEST_29, type: 'Academic', category: 'full', isNew: true } as ReadingTest,
+        {
+          id: 'jurabek-reading-1',
+          title: 'IELTS with Jurabek - Reading Test 1',
+          type: 'Academic',
+          category: 'free',
+          isNew: true,
+          htmlContent: '/reading/IELTSwithJurabek Reading.html',
+          correctAnswers: '',
+          createdAt: { seconds: Date.now() / 1000 }
+        } as ReadingTest,
+        {
+          id: 'jurabek-reading-2',
+          title: 'IELTS with Jurabek - Reading Test 2',
+          type: 'Academic',
+          category: 'free',
+          isNew: true,
+          htmlContent: '/reading/IELTSwithJurabek.html',
+          correctAnswers: '',
+          createdAt: { seconds: Date.now() / 1000 }
+        } as ReadingTest
       ];
 
       setTests([...staticTests, ...dbTests]);
       setLoading(false);
     }, (error) => {
-      setTests([{ ...FULL_TEST_29, type: 'Academic', category: 'full', isNew: true } as ReadingTest]);
+      const staticTests: ReadingTest[] = [
+        { ...FULL_TEST_29, type: 'Academic', category: 'full', isNew: true } as ReadingTest,
+        {
+          id: 'jurabek-reading-1',
+          title: 'IELTS with Jurabek - Reading Test 1',
+          type: 'Academic',
+          category: 'free',
+          isNew: true,
+          isStatic: true,
+          url: '/reading/IELTSwithJurabek Reading.html',
+          htmlContent: '',
+          correctAnswers: '',
+          createdAt: { seconds: Date.now() / 1000 }
+        } as ReadingTest,
+        {
+          id: 'jurabek-reading-2',
+          title: 'IELTS with Jurabek - Reading Test 2',
+          type: 'Academic',
+          category: 'free',
+          isNew: true,
+          isStatic: true,
+          url: '/reading/IELTSwithJurabek.html',
+          htmlContent: '',
+          correctAnswers: '',
+          createdAt: { seconds: Date.now() / 1000 }
+        } as ReadingTest
+      ];
+      setTests(staticTests);
       setLoading(false);
     });
 
@@ -97,6 +147,14 @@ export default function ReadingPractice() {
   };
 
   if (selectedTest) {
+    if (selectedTest.isStatic && selectedTest.url) {
+      return (
+        <StaticReadingLayout 
+          testUrl={selectedTest.url} 
+          onBack={handleBack} 
+        />
+      );
+    }
     if (selectedTest.id === 'full-test-29') {
       return (
         <div className="fixed inset-0 z-50 bg-white overflow-hidden">

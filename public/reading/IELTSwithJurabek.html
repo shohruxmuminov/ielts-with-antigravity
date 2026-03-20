@@ -1,0 +1,2495 @@
+
+
+
+<!--made by IELTSwithShohrux-->
+
+<!DOCTYPE html>
+<html lang="en">
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+
+<!--made by IELTSwithShohrux-->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .watermark-layer {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-20deg);
+            font-size: 160px;
+            font-weight: 800;
+            color: rgba(0, 0, 0, 0.14);
+            letter-spacing: 4px;
+            pointer-events: none;
+            z-index: 0;
+            text-transform: uppercase;
+            user-select: none;
+            white-space: nowrap;
+        }
+
+        body.contrast-white-black .watermark-layer {
+            color: rgba(255, 255, 255, 0.22);
+        }
+
+        body.contrast-yellow-black .watermark-layer {
+            color: rgba(246, 224, 94, 0.24);
+        }
+
+        .loading-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f9fafb;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 9999;
+        }
+
+        .loading-content {
+            text-align: center;
+        }
+
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #2563eb;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-title {
+            font-size: 1.2rem;
+            color: #6b7280;
+            margin-bottom: 20px;
+        }
+
+        .loading-subtitle {
+            font-size: 1rem;
+            color: #9ca3af;
+        }
+
+        .start-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f9fafb;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 9998;
+        }
+
+        .start-content {
+            text-align: center;
+        }
+
+        .start-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 24px;
+        }
+
+        .start-subtitle {
+            color: #6b7280;
+            margin-bottom: 24px;
+        }
+
+        .start-button {
+            padding: 12px 32px;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .start-button:hover {
+            background-color: #1d4ed8;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            width: 100vw;
+            background: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Make content panels opaque for stability while watermark stays behind */
+        .passage-container,
+        .questions-container {
+            background: #ffffff;
+        }
+        .contrast-white-black .passage-container,
+        .contrast-white-black .questions-container {
+            background: #0f1012 !important;
+        }
+        .contrast-yellow-black .passage-container,
+        .contrast-yellow-black .questions-container {
+            background: #0a0a0a !important;
+        }
+
+        header {
+            background-color: #ffffff;
+            color: #333;
+            padding: 8px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            flex-shrink: 0;
+            border-bottom: 1px solid #e2e8f0;
+            gap: 10px;
+        }
+
+        .passage-info {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #2d3748;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            color: #2d3748;
+        }
+
+        .brand img {
+            width: 28px;
+            height: 28px;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+
+        .timer {
+            background-color: rgba(255, 193, 193, 0.5);
+            padding: 6px 12px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s;
+            min-width: 80px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #c53030;
+            border: 1px solid rgba(255, 120, 120, 0.3);
+        }
+
+        .timer.warning {
+            color: #9b2c2c;
+            background-color: rgba(254, 178, 178, 0.7);
+            border-color: rgba(245, 101, 101, 0.5);
+        }
+
+        .logo-area {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+            cursor: pointer;
+        }
+
+        .logo-area:hover {
+            background-color: #0056b3;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.4);
+        }
+
+        .logo-area i {
+            font-size: 1.1rem;
+        }
+
+        .progress-container {
+            background-color: #f8f9fa;
+            padding: 4px 20px;
+            z-index: 100;
+            flex-shrink: 0;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .progress-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .progress-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 6px;
+        }
+
+        .progress-item {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4a5568;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            border: 1px solid #cbd5e0;
+        }
+
+        .progress-item.current {
+            background-color: #4299e1;
+            color: white;
+            transform: scale(1.1);
+            border-color: #2b6cb0;
+        }
+
+        .progress-item.answered {
+            background-color: #9ae6b4;
+            color: #22543d;
+            border-color: #68d391;
+        }
+
+        .progress-item.correct {
+            background-color: #48bb78;
+            color: white;
+            border-color: #38a169;
+        }
+
+        .progress-item.incorrect {
+            background-color: #fed7d7;
+            color: #c53030;
+            border-color: #feb2b2;
+        }
+
+        .progress-item:hover {
+            background-color: #cbd5e0;
+            transform: scale(1.05);
+        }
+
+        .btn {
+            padding: 6px 14px;
+            border: 1px solid #cbd5e0;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.95rem;
+            background-color: #f7fafc;
+            color: #4a5568;
+        }
+
+        .btn i {
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background-color: #edf2f7;
+            border-color: #a0aec0;
+        }
+
+        .btn-primary {
+            background-color: #f7fafc;
+            color: #4a5568;
+            border: 1px solid #cbd5e0;
+        }
+
+        .btn-primary:hover {
+            background-color: #edf2f7;
+            border-color: #a0aec0;
+        }
+
+        .btn-secondary {
+            background-color: #f7fafc;
+            color: #4a5568;
+            border: 1px solid #cbd5e0;
+        }
+
+        .btn-secondary:hover {
+            background-color: #edf2f7;
+            border-color: #a0aec0;
+        }
+
+        .btn-submit {
+            background-color: #48bb78;
+            color: white;
+            font-weight: 900;
+            border: 1px solid #38a169;
+        }
+
+        .btn-submit:hover {
+            background-color: #38a169;
+            border-color: #2f855a;
+        }
+
+        .btn-submit:disabled {
+            background-color: #9ae6b4;
+            color: #718096;
+            cursor: not-allowed;
+            border: 1px solid #68d391;
+        }
+
+        .main-content {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .passage-container {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: #fafafa;
+            position: relative;
+        }
+
+        .resizer {
+            width: 4px;
+            background-color: #cbd5e0;
+            cursor: col-resize;
+            position: relative;
+            transition: background-color 0.2s;
+        }
+
+        .resizer:hover {
+            background-color: #a0aec0;
+        }
+
+        .resizer::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 30px;
+            height: 60px;
+            background-color: rgba(203, 213, 224, 0.5);
+            border-radius: 4px;
+            pointer-events: none;
+        }
+
+        .questions-container {
+            width: 40%;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: white;
+            border-left: 1px solid #e2e8f0;
+        }
+
+        .passage {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .passage h2 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .passage-content p {
+            margin-top: 15px;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .passage h2 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .passage p {
+            margin-top: 20px;
+            margin-bottom: 25px;
+            text-align: justify;
+        }
+
+        .question-section {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .question {
+            margin-bottom: 25px;
+            padding: 6px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            background-color: #ffffff;
+            transition: box-shadow 0.2s;
+        }
+
+        .question:hover {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .question-text {
+            font-weight: 500;
+            margin-bottom: 12px;
+            color: #2d3748;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .option:hover {
+            background-color: #f7fafc;
+            border-color: #cbd5e0;
+        }
+
+        .option input {
+            margin-right: 8px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: #2563eb;
+        }
+
+        .input-field {
+            padding: 8px 10px;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            width: 20%;
+            margin-top: 5px;
+            font-size: 0.9rem;
+        }
+
+        .input-field.inline-input {
+            display: inline-block;
+            width: auto;
+            min-width: 110px;
+            margin: 0 6px;
+            vertical-align: baseline;
+        }
+
+        .input-field:focus {
+            border-color: #4299e1;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(66, 153, 225, 0.2);
+        }
+
+        select.input-field {
+            padding: 8px 10px;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            width: 20%;
+            margin-top: 5px;
+            font-size: 0.9rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.9rem;
+        }
+
+        th,
+        td {
+            border: 1px solid #e2e8f0;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f1f5f9;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .answer-indicator {
+            background-color: #e6fffa;
+            border: 1px solid #38b2ac;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        .answer-indicator.correct {
+            background-color: #e6fffa;
+            border-color: #38b2ac;
+            color: #234e52;
+        }
+
+        .answer-indicator.incorrect {
+            background-color: #fed7d7;
+            border-color: #fc8181;
+            color: #742a2a;
+        }
+
+        .question-group {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .question-group-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #2d3748;
+            font-size: 1rem;
+        }
+
+        /* Highlight styles */
+        .highlight {
+            background-color: #ffff00;
+            cursor: pointer;
+        }
+
+        #highlight-btn,
+        #remove-highlight-btn {
+            position: absolute;
+            z-index: 9999;
+            display: none;
+            padding: 6px 12px;
+            font-size: 14px;
+            border: 1px solid #888;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .selection-menu {
+            position: absolute;
+            z-index: 100000;
+            display: none;
+            background: #fff;
+            border: 1px solid #cbd5e0;
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            padding: 6px 0;
+            min-width: 160px;
+        }
+
+        .selection-menu button {
+            width: 100%;
+            background: transparent;
+            border: none;
+            padding: 10px 14px;
+            text-align: left;
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a202c;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .selection-menu button:hover {
+            background: #f7fafc;
+        }
+
+        .selection-menu i {
+            width: 16px;
+            text-align: center;
+            color: #4a5568;
+        }
+
+        .contrast-white-black .selection-menu {
+            background: #0f1012;
+            border-color: #2d3748;
+            color: #f7fafc;
+        }
+
+        .contrast-white-black .selection-menu button {
+            color: #f7fafc;
+        }
+
+        .contrast-white-black .selection-menu button:hover {
+            background: #1a202c;
+        }
+
+        .contrast-white-black .selection-menu i {
+            color: #f7fafc;
+        }
+
+        .contrast-yellow-black .selection-menu {
+            background: #0a0a0a;
+            border-color: #4a5568;
+            color: #f6e05e;
+        }
+
+        .contrast-yellow-black .selection-menu button {
+            color: #f6e05e;
+        }
+
+        .contrast-yellow-black .selection-menu button:hover {
+            background: #1a202c;
+        }
+
+        .contrast-yellow-black .selection-menu i {
+            color: #f6e05e;
+        }
+
+
+        .note-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .note-card textarea {
+            width: 100%;
+            min-height: 70px;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            padding: 8px;
+            font-size: 14px;
+            resize: vertical;
+            color: #2d3748;
+        }
+
+        .note-card button {
+            margin-top: 8px;
+        }
+
+        .contrast-white-black .note-card {
+            background: #111;
+            border-color: #2d3748;
+            color: #f7fafc;
+        }
+        .contrast-white-black .note-card textarea {
+            background: #0f1012;
+            color: #f7fafc;
+            border-color: #2d3748;
+        }
+        .contrast-yellow-black .note-card {
+            background: #0c0c0c;
+            border-color: #4a5568;
+            color: #f6e05e;
+        }
+        .contrast-yellow-black .note-card textarea {
+            background: #0a0a0a;
+            color: #f6e05e;
+            border-color: #4a5568;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Drag & Drop styles */
+        .drag-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 10px 0 14px;
+        }
+
+        .drag-item {
+            padding: 6px 10px;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            background: #f7fafc;
+            cursor: grab;
+            font-weight: 600;
+            min-width: 32px;
+            text-align: center;
+            user-select: none;
+            transition: background 0.2s, transform 0.1s;
+        }
+
+        .drag-item:active {
+            cursor: grabbing;
+            transform: scale(0.97);
+        }
+
+        .drag-item.used {
+            opacity: 0.45;
+            cursor: not-allowed;
+            background: #e2e8f0;
+        }
+
+        .contrast-white-black .drag-item { background: #1a202c; color: #f7fafc; border-color: #4a5568; }
+        .contrast-yellow-black .drag-item { background: #1a202c; color: #f6e05e; border-color: #718096; }
+        .contrast-white-black .drag-item.used,
+        .contrast-yellow-black .drag-item.used {
+            opacity: 0.65;
+            background: #2d3748;
+        }
+
+        .drop-zone {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 120px;
+            min-height: 34px;
+            padding: 6px 10px;
+            border: 2px dashed #cbd5e0;
+            border-radius: 6px;
+            background: #f8fafc;
+            margin: 0 4px;
+            font-weight: 700;
+            color: #4a5568;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .drop-zone.over {
+            border-color: #4299e1;
+            background: #ebf8ff;
+        }
+
+        .drop-zone.filled {
+            border-style: solid;
+            border-color: #9ae6b4;
+            background: #f0fff4;
+            color: #22543d;
+        }
+
+        .contrast-white-black .drop-zone {
+            border-color: #4a5568;
+            background: #1a202c;
+            color: #f7fafc;
+        }
+        .contrast-white-black .drop-zone.filled {
+            border-color: #63b3ed;
+            background: #2d3748;
+            color: #f7fafc;
+        }
+        .contrast-yellow-black .drop-zone {
+            border-color: #718096;
+            background: #111;
+            color: #f6e05e;
+        }
+        .contrast-yellow-black .drop-zone.filled {
+            border-color: #f6e05e;
+            background: #1a202c;
+            color: #f6e05e;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .contrast-white-black .modal {
+            background-color: rgba(0, 0, 0, 0.75);
+        }
+        .contrast-white-black .modal-content {
+            background-color: #0f1012;
+            color: #f7fafc;
+            border: 1px solid #2d3748;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+        }
+        .contrast-yellow-black .modal {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        .contrast-yellow-black .modal-content {
+            background-color: #0a0a0a;
+            color: #f6e05e;
+            border: 1px solid #4a5568;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+        }
+
+        .contrast-white-black .score-display,
+        .contrast-white-black .options-title {
+            color: #f7fafc !important;
+        }
+        .contrast-yellow-black .score-display,
+        .contrast-yellow-black .options-title {
+            color: #f6e05e !important;
+        }
+
+        /* Options menu */
+        .menu-button {
+            width: 36px;
+            height: 32px;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            background: #f7fafc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+        }
+
+        .menu-button:hover { background: #edf2f7; }
+        .menu-button:active { transform: scale(0.97); }
+
+        .menu-icon {
+            width: 16px;
+            height: 12px;
+            display: grid;
+            row-gap: 3px;
+        }
+
+        .menu-icon span {
+            display: block;
+            height: 2px;
+            background: #2d3748;
+            border-radius: 2px;
+        }
+
+        .icon-button {
+            width: 38px;
+            height: 32px;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            background: #f7fafc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            color: #2d3748;
+            font-size: 16px;
+        }
+        .icon-button:hover { background: #edf2f7; }
+        .icon-button:active { transform: scale(0.97); }
+
+        .options-modal {
+            background: rgba(0, 0, 0, 0.35);
+        }
+        .options-modal .modal-content {
+            max-width: 640px;
+            width: 92%;
+            text-align: left;
+            padding: 26px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            background: #ffffff;
+            color: #1a202c;
+        }
+        .contrast-white-black .options-modal { background: rgba(0, 0, 0, 0.75); }
+        .contrast-yellow-black .options-modal { background: rgba(0, 0, 0, 0.85); }
+        .contrast-white-black .options-modal .modal-content {
+            background: #111 !important;
+            color: #f7fafc !important;
+        }
+        .contrast-yellow-black .options-modal .modal-content {
+            background: #000 !important;
+            color: #f6e05e !important;
+        }
+
+        .options-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .options-title { font-size: 1.2rem; font-weight: 700; color: #1a202c; flex: 1; text-align: center; }
+
+        .close-btn {
+            border: none;
+            background: transparent;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: #2d3748;
+        }
+        .contrast-white-black .close-btn { color: #f7fafc !important; }
+        .contrast-yellow-black .close-btn { color: #f6e05e !important; }
+
+        .options-list {
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .option-row {
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e2e8f0;
+            cursor: pointer;
+            background: #fff;
+        }
+
+        .option-row:last-child { border-bottom: none; }
+
+        .option-label { font-weight: 800; color: #2d3748; font-size: 1.08rem; }
+        .option-sub { font-weight: 700; color: #4a5568; margin-left: 10px; font-size: 1.02rem; }
+
+        .submenu button {
+            width: 100%;
+            text-align: left;
+            padding: 16px 18px;
+            border: none;
+            background: #fff;
+            border-bottom: 1px solid #e2e8f0;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.05rem;
+            font-weight: 700;
+        }
+
+        .submenu button:last-child { border-bottom: none; }
+
+        .submenu button:hover { background: #f7fafc; }
+
+        .submenu .selected > .checkmark::before {
+            content: "✓";
+            font-weight: 800;
+        }
+
+        .question-anchor {
+            height: 0;
+            width: 0;
+            display: inline-block;
+            position: relative;
+            top: -8px;
+        }
+
+        .active-contrast { background: #000 !important; color: #fff !important; }
+        .contrast-white-black { background: #111 !important; color: #fff !important; }
+        .contrast-yellow-black { background: #000 !important; color: #f6e05e !important; }
+
+        .contrast-white-black,
+        .contrast-white-black p,
+        .contrast-white-black h1,
+        .contrast-white-black h2,
+        .contrast-white-black h3,
+        .contrast-white-black h4,
+        .contrast-white-black h5,
+        .contrast-white-black h6,
+        .contrast-white-black label,
+        .contrast-white-black .question-text,
+        .contrast-white-black .option-label,
+        .contrast-white-black .option-sub,
+        .contrast-white-black .question-group-title,
+        .contrast-white-black .timer,
+        .contrast-white-black .progress-item,
+        .contrast-white-black .options-title {
+            color: #f7fafc !important;
+        }
+
+        .contrast-yellow-black,
+        .contrast-yellow-black p,
+        .contrast-yellow-black h1,
+        .contrast-yellow-black h2,
+        .contrast-yellow-black h3,
+        .contrast-yellow-black h4,
+        .contrast-yellow-black h5,
+        .contrast-yellow-black h6,
+        .contrast-yellow-black label,
+        .contrast-yellow-black .question-text,
+        .contrast-yellow-black .option-label,
+        .contrast-yellow-black .option-sub,
+        .contrast-yellow-black .question-group-title,
+        .contrast-yellow-black .timer,
+        .contrast-yellow-black .progress-item,
+        .contrast-yellow-black .options-title {
+            color: #f6e05e !important;
+        }
+
+        .contrast-white-black a { color: #90cdf4 !important; }
+        .contrast-yellow-black a { color: #f6e05e !important; text-decoration: underline; }
+
+        .contrast-white-black .container,
+        .contrast-white-black .passage-container,
+        .contrast-white-black .questions-container,
+        .contrast-white-black header,
+        .contrast-white-black .progress-container,
+        .contrast-white-black .question,
+        .contrast-white-black .question-group,
+        .contrast-white-black .question-group-title,
+        .contrast-white-black .options-modal .modal-content,
+        .contrast-white-black .options-list,
+        .contrast-white-black .submenu button,
+        .contrast-white-black input,
+        .contrast-white-black select {
+            background: rgba(17, 17, 17, 0.94) !important;
+            color: #fff !important;
+            border-color: #2d3748 !important;
+        }
+
+        .contrast-yellow-black .container,
+        .contrast-yellow-black .passage-container,
+        .contrast-yellow-black .questions-container,
+        .contrast-yellow-black header,
+        .contrast-yellow-black .progress-container,
+        .contrast-yellow-black .question,
+        .contrast-yellow-black .question-group,
+        .contrast-yellow-black .question-group-title,
+        .contrast-yellow-black .options-modal .modal-content,
+        .contrast-yellow-black .options-list,
+        .contrast-yellow-black .submenu button,
+        .contrast-yellow-black input,
+        .contrast-yellow-black select {
+            background: rgba(0, 0, 0, 0.94) !important;
+            color: #f6e05e !important;
+            border-color: #4a5568 !important;
+        }
+
+        .contrast-white-black .option-row,
+        .contrast-white-black .submenu button,
+        .contrast-white-black .options-list {
+            border-color: #2d3748 !important;
+        }
+        .contrast-white-black .options-list,
+        .contrast-white-black .option-row,
+        .contrast-white-black .submenu button {
+            background: #1a202c !important;
+            color: #f7fafc !important;
+        }
+        .contrast-white-black .option-row i,
+        .contrast-white-black .submenu button i {
+            color: #f7fafc !important;
+        }
+
+        .contrast-yellow-black .option-row,
+        .contrast-yellow-black .submenu button,
+        .contrast-yellow-black .options-list {
+            border-color: #4a5568 !important;
+        }
+        .contrast-yellow-black .options-list,
+        .contrast-yellow-black .option-row,
+        .contrast-yellow-black .submenu button {
+            background: #1a202c !important;
+            color: #f6e05e !important;
+        }
+        .contrast-yellow-black .option-row i,
+        .contrast-yellow-black .submenu button i {
+            color: #f6e05e !important;
+        }
+
+        .contrast-white-black input::placeholder,
+        .contrast-white-black textarea::placeholder {
+            color: #e2e8f0 !important;
+        }
+        .contrast-yellow-black input::placeholder,
+        .contrast-yellow-black textarea::placeholder {
+            color: #f6e05e !important;
+        }
+
+        .contrast-white-black .option-label,
+        .contrast-white-black .option-sub,
+        .contrast-white-black .option-row i,
+        .contrast-white-black .submenu button {
+            color: #f7fafc !important;
+        }
+        .contrast-yellow-black .option-label,
+        .contrast-yellow-black .option-sub,
+        .contrast-yellow-black .option-row i,
+        .contrast-yellow-black .submenu button {
+            color: #f6e05e !important;
+        }
+
+        .contrast-white-black #options-content {
+            background: #111 !important;
+            color: #f7fafc !important;
+            border: 1px solid #2d3748 !important;
+        }
+        .contrast-yellow-black #options-content {
+            background: #000 !important;
+            color: #f6e05e !important;
+            border: 1px solid #4a5568 !important;
+        }
+
+        .contrast-white-black .progress-item {
+            background: #2d3748 !important;
+            color: #f7fafc !important;
+            border-color: #4a5568 !important;
+        }
+        .contrast-white-black .progress-item.current { background: #63b3ed !important; color: #0b1723 !important; border-color: #3182ce !important; }
+        .contrast-white-black .progress-item.answered { background: #68d391 !important; color: #0f2c1a !important; border-color: #38a169 !important; }
+        .contrast-white-black .progress-item.correct { background: #48bb78 !important; color: #0b1723 !important; border-color: #38a169 !important; }
+        .contrast-white-black .progress-item.incorrect { background: #feb2b2 !important; color: #742a2a !important; border-color: #fc8181 !important; }
+
+        .contrast-yellow-black .progress-item {
+            background: #1a202c !important;
+            color: #f6e05e !important;
+            border-color: #718096 !important;
+        }
+        .contrast-yellow-black .progress-item.current { background: #d69e2e !important; color: #0b1723 !important; border-color: #b7791f !important; }
+        .contrast-yellow-black .progress-item.answered { background: #ecc94b !important; color: #0b1723 !important; border-color: #d69e2e !important; }
+        .contrast-yellow-black .progress-item.correct { background: #f6e05e !important; color: #0b1723 !important; border-color: #d69e2e !important; }
+        .contrast-yellow-black .progress-item.incorrect { background: #feb2b2 !important; color: #742a2a !important; border-color: #fc8181 !important; }
+
+        .contrast-white-black .btn,
+        .contrast-white-black .logo-area {
+            background: #2d3748 !important;
+            color: #f7fafc !important;
+            border-color: #4a5568 !important;
+        }
+        .contrast-yellow-black .btn,
+        .contrast-yellow-black .logo-area {
+            background: #1a202c !important;
+            color: #f6e05e !important;
+            border-color: #718096 !important;
+        }
+
+        .contrast-white-black .passage-info { color: #f7fafc !important; }
+        .contrast-yellow-black .passage-info { color: #f6e05e !important; }
+
+        .score-display {
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #2d3748;
+        }
+
+        .score-breakdown {
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .score-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 0.95rem;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+
+            .questions-container {
+                width: 100%;
+                border-left: none;
+                border-top: 1px solid #e2e8f0;
+            }
+
+            .resizer {
+                width: 100%;
+                height: 4px;
+                cursor: row-resize;
+            }
+
+            .resizer::before {
+                width: 60px;
+                height: 30px;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            .progress-item {
+                width: 32px;
+                height: 32px;
+                font-size: 0.85rem;
+            }
+
+            .passage-info {
+                font-size: 0.9rem;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px;
+            }
+
+            .logo-area {
+                order: 1;
+            }
+
+            .passage-info {
+                order: 2;
+            }
+
+            .timer {
+                order: 3;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .progress-item {
+                width: 32px;
+                height: 32px;
+                font-size: 0.85rem;
+            }
+
+            .passage-info {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+
+<!--made by IELTSwithShohrux-->
+
+
+<body>
+    <div class="watermark-layer" aria-hidden="true">IELTSwithShohrux</div>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <h2 class="loading-title">Your test will begin shortly</h2>
+            <p class="loading-subtitle">Please wait</p>
+        </div>
+    </div>
+
+    <!-- Start Screen -->
+    <div id="startScreen" class="start-screen hidden">
+        <div class="start-content">
+            <h1 class="start-title" style="display:flex; align-items:center; gap:10px; justify-content:center;">
+                <img src="https://static.vecteezy.com/system/resources/previews/054/058/468/non_2x/iconic-barcelona-logo-free-png.png" alt="Logo" style="width:100px; height:100px; object-fit:contain; border-radius:4px;">
+                IELTSwithShohrux
+            </h1>
+            <p class="start-subtitle">Are you ready to begin your reading test?</p>
+            <button class="start-button" onclick="startTest()">Start Test</button>
+        </div>
+    </div>
+
+    <!-- Test Container -->
+    <div class="container hidden" id="testContainer">
+        <!-- Header -->
+        <header>
+            <div class="brand" onclick="window.open('https://t.me/spcgroupinternational','_blank')" style="cursor:pointer;">
+                <img src="https://static.vecteezy.com/system/resources/previews/054/058/468/non_2x/iconic-barcelona-logo-free-png.png" alt="Logo">
+                <span class="passage-info">IELTSwithShohrux</span>
+            </div>
+            <span id="headerPassageTitle" style="display:none;"></span>
+
+            <!-- Timer centered -->
+            <div class="timer" id="globalTimer" style="margin-left:auto; margin-right:auto;">
+                <i class="fas fa-clock"></i>
+                <span>60:00</span>
+            </div>
+
+            <!-- Promo + controls -->
+            <div style="display:flex; align-items:center; gap:8px;">
+                <img src="https://static.vecteezy.com/system/resources/previews/054/058/468/non_2x/iconic-barcelona-logo-free-png.png" alt="Logo" style="width:24px; height:24px; object-fit:contain; margin-right:6px;">
+                <div class="logo-area" onclick="window.open('https://t.me/spcgroupinternational', '_blank')">
+                    <i class="fas fa-paper-plane"></i>
+                    <span>Click for More Materials</span>
+                </div>
+                <button class="icon-button" id="fullscreenBtn" aria-label="Toggle fullscreen">
+                    <i class="fas fa-expand"></i>
+                </button>
+                <button class="menu-button" id="optionsMenuBtn" aria-label="Options menu">
+                    <div class="menu-icon">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </button>
+            </div>
+        </header>
+
+        <!-- Floating Highlight Buttons -->
+        <button id="highlight-btn" type="button">Highlight</button>
+        <button id="remove-highlight-btn" type="button">Remove Highlight</button>
+        <div id="selection-menu" class="selection-menu" style="display:none;"></div>
+
+        <div class="main-content">
+            <!-- ===== PASSAGE 1 ===== -->
+            <div class="passage-container" id="p1_passagePanel" role="region" aria-label="Reading Passage">
+                <h2 class="section-title">READING PASSAGE 1</h2>
+                <div class="passage-content" id="passage1">
+                    <p><strong>You should spend about 20 minutes on Questions 1-13, which are based on Reading Passage 1 below.</strong></p>
+                    <h3>How the first trans-Atlantic telegraph cable was laid</h3>
+                    <p>On August 16, 1858, the first telegraphic message crossed the Atlantic Ocean. Travelling along a recently laid cable, the message from Britain's Queen Victoria to US President James Buchanan took just 16 hours. Prior to this, communication across the Atlantic would have been by ship - and taken around 10 days.</p>
+                    <p>People had been communicating via overland telegraph since 1844 and messages had been passing between Britain and France since 1850 when the first submarine cable was laid in the English Channel. But the attempt to span the Atlantic Ocean was the most daring attempt yet - and was the talk of the age, the 19th-century equivalent of the Apollo space mission. The idea that one could seemingly cheat time and space was inspiring and it changed the way people thought about the world and their place in it.</p>
+                    <p>The driving force behind the trans-Atlantic telegraph cable was an American businessman called Cyrus Field. In 1856, he and Englishmen John Watkins Brett and Charles Tilson Bright formed the Atlantic Telegraph company. They raised 350,000 pounds mostly from businessmen in London, Liverpool, Manchester and Glasgow. They also secured 14,000 pounds annually from the British government plus the loan of ships and a similar amount from the US government.</p>
+                    <p>Getting the cable made proved to be difficult. The distance between the west coast of Ireland and Newfoundland is over 3,700km, and Field was unable to find a company that was capable of supplying the required cable in the desired time frame. As a result, two companies were engaged to fulfil the order. The cable had a core of seven copper wires down which the signal would pass. These were insulated with several layers of gutta-percha (a natural plastic made from tree sap) and then armoured with iron wire. When it was complete, the weight of the cable proved too great for any single ship. It was therefore loaded onto two: the British ship, HMS Agamemnon and the American ship, USS Niagara.</p>
+                    <p>The first attempt to lay the cable began on August 5 1857 with both ships departing from the west coast of Ireland, near Ballycarbery Castle. The venture did not go according to plan. The cable snapped on the first day, but was recovered from the bottom and repaired. A few days later, mid-Atlantic, the cable snapped again, this time in water 3km deep. It was lost and the expedition abandoned.</p>
+                    <p>The next summer in 1858 they tried again. On this expedition, the two great ships met mid-Atlantic, each carrying half the cable. The two ends were joined together and the ships sailed away from each other. The cable broke three times and each time they were forced to start again. On July 29, with little hope of success, the cable was joined for the fourth time and the ships sailed for home. This time they succeeded. The cable was landed in Newfoundland on August 4 and in Ireland the following day. And a week or so later Queen Victoria sent that first trans-Atlantic message to President Buchanan.</p>
+                    <p>The celebrations were tremendous. One US newspaper proclaimed:</p>
+                    <p>New York has seldom seen a more complete holiday than that on September 1 1858, in celebration of the successful laying of the Atlantic cable. The enthusiasm of an entire nation was expressed in this jubilee of its metropolis, and the era of a closer connection with Europe was well ushered in by a day of genuine rejoicing and gaiety.</p>
+                    <p>Celebrations were, however, short-lived: the cable performed badly and failed after just three weeks. The project was put on hold, but the concept had been proved possible. By 1865, further research had been carried out into the problems which had plagued the earlier cables. In addition, cables had been successfully laid in the Mediterranean and in the Persian Gulf. The cables that were used were better engineered, with thicker cores and better insulation allowing faster transmission speeds.</p>
+                    <p>In 1865, Field incorporated a second company to raise enough funds to try again. He chartered the largest ship in the world at the time, the SS Great Eastern, which could carry the entire Atlantic cable. Huge salt-water tanks and other state-of-the-art machinery were fitted to ensure it remained in mint condition during its journey. All went well until, in heavy winds 1000km off the coast of Newfoundland, the cable rubbed on the side of the ship, snapped and plunged to the deep ocean floor.</p>
+                    <p>Not one to quit, Field vowed to return the following year. This final 1866 expedition proved to be successful and the cable was put into commercial service on July 28. One month later, the 1865 cable was brought to the surface and repaired, providing a second Atlantic telegraph link. The service had obvious and immediate impact. People in government were able to respond more swiftly to evolving situations. News travelled more quickly, which boosted trade on both sides of the Atlantic. It also had a profound effect on things such as family life and cultural ties. For example, it was no longer so difficult for immigrants in America to keep in touch with their families back home.</p>
+                    <p>The roller-coaster of cable-laying highs and lows between 1857 and 1866 caught the imaginations of a generation the way the space race did in the 20th century. There was immense public interest in the endeavour and in telegraphy more generally. At the time, telegraphic science was reported widely in the newspapers and the fortunes of the telegraph companies were followed closely. Discussions of the pitfalls and solutions to spanning the Atlantic with cable became everyday topics of conversation, and endless articles in the newspapers ensured that the project stayed in people's thoughts.</p>
+                </div>
+            </div>
+            <div class="resizer"></div>
+
+            <!-- Questions for Passage 1 -->
+            <div class="questions-container" id="p1_questionsPanel" role="region" aria-label="Questions">
+                <h2 class="section-title">Questions 1–13</h2>
+
+                <div class="question-group">
+                    <div class="question-group-title">Questions 1–6</div>
+                    <p>Do the following statements agree with the information given in the text?</p>
+                    <p>In boxes 1–6, write <strong>TRUE</strong> if the statement agrees with the information, <strong>FALSE</strong> if the statement contradicts the information, or <strong>NOT GIVEN</strong> if there is no information on this.</p>
+
+                    <div class="question" data-question="1">
+                        <div class="question-text">1 Field failed to find a company that could produce all of the cable needed by the specified date.</div>
+                        <div class="options">
+                            <label><input type="radio" name="q1" value="TRUE"> TRUE</label>
+                            <label><input type="radio" name="q1" value="FALSE"> FALSE</label>
+                            <label><input type="radio" name="q1" value="NOT GIVEN"> NOT GIVEN</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="2">
+                        <div class="question-text">2 HMS Agamemnon and USS Niagara set sail from different locations on August 5, 1857.</div>
+                        <div class="options">
+                            <label><input type="radio" name="q2" value="TRUE"> TRUE</label>
+                            <label><input type="radio" name="q2" value="FALSE"> FALSE</label>
+                            <label><input type="radio" name="q2" value="NOT GIVEN"> NOT GIVEN</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="3">
+                        <div class="question-text">3 On the 1858 expedition, the cable broke three times because of a manufacturing fault.</div>
+                        <div class="options">
+                            <label><input type="radio" name="q3" value="TRUE"> TRUE</label>
+                            <label><input type="radio" name="q3" value="FALSE"> FALSE</label>
+                            <label><input type="radio" name="q3" value="NOT GIVEN"> NOT GIVEN</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="4">
+                        <div class="question-text">4 The newspaper quoted in the passage disapproved of the enthusiasm that met the 1858 expedition.</div>
+                        <div class="options">
+                            <label><input type="radio" name="q4" value="TRUE"> TRUE</label>
+                            <label><input type="radio" name="q4" value="FALSE"> FALSE</label>
+                            <label><input type="radio" name="q4" value="NOT GIVEN"> NOT GIVEN</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="5">
+                        <div class="question-text">5 Many articles appeared in the press between 1857 and 1866 about the science behind the telegraph.</div>
+                        <div class="options">
+                            <label><input type="radio" name="q5" value="TRUE"> TRUE</label>
+                            <label><input type="radio" name="q5" value="FALSE"> FALSE</label>
+                            <label><input type="radio" name="q5" value="NOT GIVEN"> NOT GIVEN</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="6">
+                        <div class="question-text">6 Between 1857 and 1866, people talked about the problems related to the telegraph project on a regular basis.</div>
+                        <div class="options">
+                            <label><input type="radio" name="q6" value="TRUE"> TRUE</label>
+                            <label><input type="radio" name="q6" value="FALSE"> FALSE</label>
+                            <label><input type="radio" name="q6" value="NOT GIVEN"> NOT GIVEN</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-group-title">Questions 7–13</div>
+                    <p>Complete the notes below.</p>
+                    <p>Choose <strong>ONE WORD ONLY</strong> from the text for each answer.</p>
+                    <p><strong>The history of the trans-Atlantic telegraph</strong></p>
+                    <p><strong>The first attempts to lay cable:</strong></p>
+                    <ul>
+                        <li>the Atlantic Telegraph company was set up by Field, Brett and Bright in 1856</li>
+                        <li>the central wires of the cable were made of <span class="question-anchor" data-question-anchor="7"></span><input type="text" name="q7" placeholder="7" class="input-field inline-input"></li>
+                        <li>the cable was put onto two ships due to its <span class="question-anchor" data-question-anchor="8"></span><input type="text" name="q8" placeholder="8" class="input-field inline-input"></li>
+                        <li>the 1857 attempt failed</li>
+                        <li>the cable was successfully laid in 1858</li>
+                    </ul>
+                    <p><strong>Events between 1858 and 1866:</strong></p>
+                    <ul>
+                        <li>celebrations were brief since problems emerged</li>
+                        <li>further research led to the cable's thickness and <span class="question-anchor" data-question-anchor="9"></span><input type="text" name="q9" placeholder="9" class="input-field inline-input"> being improved</li>
+                        <li>Field set up another company to get the <span class="question-anchor" data-question-anchor="10"></span><input type="text" name="q10" placeholder="10" class="input-field inline-input"> for another attempt</li>
+                        <li>the strong winds experienced by the SS Great Eastern led to the cable being lost</li>
+                        <li>the 1866 expedition was successful</li>
+                    </ul>
+                    <p><strong>The changes the trans-Atlantic telegraph brought about:</strong></p>
+                    <ul>
+                        <li>members of the <span class="question-anchor" data-question-anchor="11"></span><input type="text" name="q11" placeholder="11" class="input-field inline-input"> could react more quickly to events</li>
+                        <li>news could be relayed faster, thus improving <span class="question-anchor" data-question-anchor="12"></span><input type="text" name="q12" placeholder="12" class="input-field inline-input"></li>
+                        <li>it became easier for US <span class="question-anchor" data-question-anchor="13"></span><input type="text" name="q13" placeholder="13" class="input-field inline-input"> to maintain contact with their families</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ===== PASSAGE 2 ===== -->
+            <div class="passage-container hidden" id="p2_passagePanel" role="region" aria-label="Reading Passage">
+                <h2 class="section-title">READING PASSAGE 2</h2>
+                <div class="passage-content" id="passage2">
+                    <p><strong>You should spend about 20 minutes on Questions 14-26, which are based on Reading Passage 2.</strong></p>
+                    <h3>REMOVING UNWANTED NOISE</h3>
+
+                    <p><strong><span class="question-anchor" data-question-anchor="14"></span><span class="drop-zone" data-target="q14" data-placeholder="14">14</span></strong> A noisy restaurant, a busy road, or a windy day are all situations that can be intensely frustrating for the hearing impaired when trying to understand what other people are saying. Some 10 million people in the UK suffer from hearing difficulties and, helpful as hearing aids are, those who wear them often complain that background noise continues to interfere with their understanding. But what if hearing aid wearers could choose to filter out all the troublesome sounds and focus just on the voices they want to hear?
+                        <input type="text" name="q14" class="input-field" style="display:none;" aria-hidden="true"></p>
+                    <p>Engineer Dr Richard Turner believes that this is fast becoming a possibility. He is developing a system that identifies the distracting noise and 'rubs it out'. 'The poor performance in noise of current hearing devices is a major reason why six million people in the UK who would benefit from hearing aids do not use them,' he said. Moreover, as the population ages, a greater number of people will be hindered by the inability to hear clearly. In addition, hearing-impaired patients who have been fitted with cochlear implants - devices implanted to help those whose auditory hair cells have died - suffer from similar limitations.</p>
+
+                    <p><strong><span class="question-anchor" data-question-anchor="15"></span><span class="drop-zone" data-target="q15" data-placeholder="15">15</span></strong> The solution lies in the statistics of sound, as Turner explained: 'Many interfering noises are immediately recognisable. Raindrops patter on a surface, a fire crackles, talkers babble at a party and the wind howls. But what makes these different noises sound the way they do? No two rain sounds are identical because the precise arrangement of falling water droplets is never repeated. Nonetheless, there must be statistical similarities in the sounds of these raindrops compared with, say, the crackle of a fire.' He believes that for this reason, the brain may be able to group similar types of sounds together based on their specific characteristics.
+                        <input type="text" name="q15" class="input-field" style="display:none;" aria-hidden="true"></p>
+                    <p>Turner and his colleagues have analysed this process mathematically and then developed algorithms that mimic what the brain is doing. The mathematical system that they have developed is capable of being 'trained' - a process that uses new methods from the field of machine learning - so that it can recognise new sounds. 'Rather surprisingly, it seems that a relatively small set of statistics is sufficient to describe a large number of sounds' he says. Crucially, the system that Turner and his team have come up with is capable of telling the difference between speech and other types of sound.</p>
+
+                    <p><strong><span class="question-anchor" data-question-anchor="16"></span><span class="drop-zone" data-target="q16" data-placeholder="16">16</span></strong> 'What we can now do is to erase background noise and pass these cleaned-up sounds to a listener to improve their perception in difficult surroundings,' said Turner. The idea is that future devices will have several different modes in which they can operate. These might include a mode for travelling in a car or on a train, a mode for places like a noisy party or a busy restaurant, a mode that can be used outdoors in windy weather, and so on. The device might intelligently select an appropriate mode based on the characteristics of the incoming sound.
+                        <input type="text" name="q16" class="input-field" style="display:none;" aria-hidden="true"></p>
+
+                    <p><strong><span class="question-anchor" data-question-anchor="17"></span><span class="drop-zone" data-target="q17" data-placeholder="17">17</span></strong> 'In a sense we are developing the technology to underpin intelligent hearing devices,' said Turner. An additional possibility would be for users to override the selection made by the device and select a processing mode based upon what sorts of noise they wish to erase. They could even guide the processing on their device using an interface on a mobile phone through wireless communication. Turner anticipates that his team will need two more years of simulating the effect of modifications that clean up sound before they start to work with device specialists. 'If these preliminary tests go well, then we'll be looking to work with hearing device companies to try to adapt their processing in order to incorporate these machine learning techniques.'
+                        <input type="text" name="q17" class="input-field" style="display:none;" aria-hidden="true"></p>
+
+                    <p><strong><span class="question-anchor" data-question-anchor="18"></span><span class="drop-zone" data-target="q18" data-placeholder="18">18</span></strong> Tinnitus sufferers, who are plagued by a constant ringing in their ears, could also benefit from the technology. At present, people with tinnitus sometimes use environmental sound generators as a distraction from the ringing in their ears. But such generators offer only a limited selection of sounds - a gently flowing stream, waves lapping on the seashore, or leaves rustling. With the new technology, individual patients could select the best sound to distract them from their tinnitus.
+                        <input type="text" name="q18" class="input-field" style="display:none;" aria-hidden="true"></p>
+
+                    <p><strong><span class="question-anchor" data-question-anchor="19"></span><span class="drop-zone" data-target="q19" data-placeholder="19">19</span></strong> The technology not only holds promise for helping the hearing impaired, but it also has the potential to improve phone calls - anyone who has ever tried to hold a conversation with someone phoning from a crowded room will recognise the possible benefits of such a facility. Systems that can deal with unwanted audio content would also be welcomed by the increasing numbers of people using video-sharing websites. For example, a video containing a conversation that takes place by a busy roadside on a windy day could be made more intelligible by isolating the speech from the noises - users could even be offered the chance to de-noise their video during the upload process.
+                        <input type="text" name="q19" class="input-field" style="display:none;" aria-hidden="true"></p>
+                </div>
+            </div>
+            <div class="resizer"></div>
+
+            <!-- Questions for Passage 2 -->
+            <div class="questions-container hidden" id="p2_questionsPanel" role="region" aria-label="Questions">
+                <h2 class="section-title">Questions 14–26</h2>
+
+                <div class="question-group">
+                    <div class="question-group-title">Questions 14–19</div>
+                    <p>The text has six sections, <strong>A–F</strong>.</p>
+                    <p>Choose the correct heading for each section from the list of headings below.</p>
+                    <p>Drag the correct heading into the paragraph labels in Reading Passage 2 (14–19).</p>
+
+                    <p><strong>List of Headings</strong></p>
+                    <div class="drag-options">
+                        <div class="drag-item" draggable="true" data-option="I" data-label="How hearing loss may be caused by certain types of sounds">I How hearing loss may be caused by certain types of sounds</div>
+                        <div class="drag-item" draggable="true" data-option="II" data-label="Uses for Turner's research in media and communications">II Uses for Turner's research in media and communications</div>
+                        <div class="drag-item" draggable="true" data-option="III" data-label="Creating a model for the classification of sounds">III Creating a model for the classification of sounds</div>
+                        <div class="drag-item" draggable="true" data-option="IV" data-label="Potential developments that still require further research">IV Potential developments that still require further research</div>
+                        <div class="drag-item" draggable="true" data-option="V" data-label="A drawback in the help currently available to those with hearing problems">V A drawback in the help currently available to those with hearing problems</div>
+                        <div class="drag-item" draggable="true" data-option="VI" data-label="Providing the hearing-impaired with training in new technology">VI Providing the hearing-impaired with training in new technology</div>
+                        <div class="drag-item" draggable="true" data-option="VII" data-label="A more effective way to take attention away from a hearing problem">VII A more effective way to take attention away from a hearing problem</div>
+                        <div class="drag-item" draggable="true" data-option="VIII" data-label="Analysing the sounds produced in the process of speaking">VIII Analysing the sounds produced in the process of speaking</div>
+                        <div class="drag-item" draggable="true" data-option="IX" data-label="The possibility of a hearing aid that can adjust itself to different environments">IX The possibility of a hearing aid that can adjust itself to different environments</div>
+                    </div>
+
+                    
+                </div>
+
+                <div class="question-group">
+                    <div class="question-group-title">Questions 20–23</div>
+                    <p>Complete the summary below.</p>
+                    <p>Choose <strong>NO MORE THAN TWO WORDS</strong> from the passage for each answer.</p>
+                    <p><strong>Improving the performance of hearing aids</strong></p>
+                    <p>At present, many people find their hearing aids do not work well when there is background noise. This also applies to people without hearing aids who have had implants fitted to help with hearing loss. Dr Richard Turner is looking for a solution to this problem. Although sounds are never <span class="question-anchor" data-question-anchor="20"></span><input type="text" name="q20" placeholder="20" class="input-field inline-input">, he believes they do share some similarities. He and his colleagues have worked on a mathematical system using <span class="question-anchor" data-question-anchor="21"></span><input type="text" name="q21" placeholder="21" class="input-field inline-input"> which replicate how we hear sounds. To allow this system to be 'trained', they have applied procedures used in machine learning and found that many different sounds can be described using a limited number of <span class="question-anchor" data-question-anchor="22"></span><input type="text" name="q22" placeholder="22" class="input-field inline-input">. They have now developed a system that can distinguish <span class="question-anchor" data-question-anchor="23"></span><input type="text" name="q23" placeholder="23" class="input-field inline-input"> from other sounds.</p>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-group-title">Questions 24–26</div>
+                    <p>Choose the correct letter, <strong>A</strong>, <strong>B</strong>, <strong>C</strong> or <strong>D</strong>.</p>
+                    <div class="question" data-question="24">
+                        <div class="question-text">24 Turner's team are now planning a new development involving a device which could</div>
+                        <div class="options">
+                            <label><input type="radio" name="q24" value="A"> A allow sound to be heard at a greater distance.</label>
+                            <label><input type="radio" name="q24" value="B"> B adapt itself to different kinds of background noise.</label>
+                            <label><input type="radio" name="q24" value="C"> C allow a user to remove all types of sound completely.</label>
+                            <label><input type="radio" name="q24" value="D"> D adapt itself to disorders involving other senses.</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="25">
+                        <div class="question-text">25 In section E, a stream, waves and leaves are examples of the sounds that tinnitus sufferers</div>
+                        <div class="options">
+                            <label><input type="radio" name="q25" value="A"> A can currently use to help their condition.</label>
+                            <label><input type="radio" name="q25" value="B"> B might choose to use if they were available.</label>
+                            <label><input type="radio" name="q25" value="C"> C hear in their ears as a result of their condition.</label>
+                            <label><input type="radio" name="q25" value="D"> D find to be the most natural solutions to their problem.</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="26">
+                        <div class="question-text">26 The writer refers to 'a busy roadside on a windy day' in section F to illustrate that</div>
+                        <div class="options">
+                            <label><input type="radio" name="q26" value="A"> A unwanted noise could be erased from video recordings.</label>
+                            <label><input type="radio" name="q26" value="B"> B some environments are difficult for the hearing-impaired.</label>
+                            <label><input type="radio" name="q26" value="C"> C when noises are combined in a video they are difficult to erase.</label>
+                            <label><input type="radio" name="q26" value="D"> D people must cooperate in order to learn how to apply the technology.</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== PASSAGE 3 ===== -->
+                <div class="passage-container hidden" id="p3_passagePanel" role="region" aria-label="Reading Passage">
+                <h2 class="section-title">READING PASSAGE 3</h2>
+                <div class="passage-content" id="passage3">
+                    <p><strong>You should spend about 20 minutes on Questions 27-40, which are based on Reading Passage 3 below.</strong></p>
+                    <h3>The Bug Picture</h3>
+                    <p><em>Lara Zanarini gives her view on insects</em></p>
+
+                    <p>How many other species do we share our planet with? The truth is that scientists don't have the slightest idea. Some early guesses of 30 million or even 100 million have been replaced in the last few years with more reliable ones of somewhere between five to ten million species. But despite this massive uncertainty there is one thing which is indisputable: the vast majority of Earth's inhabitants are invertebrate - without a backbone - and most of those are insects.</p>
+
+                    <p>It is therefore not very surprising that these creatures have a pre-eminent impact on the functioning of global ecosystems. Creatures like us - and I don't just mean primates (such as apes and monkeys), but all vertebrates (back-boned animals) - make up less than three percent of all species.</p>
+
+                    <p>Yet it is these very animals that most people hold dear, especially those with a passing resemblance to ourselves. I use a slide in my lectures which has images of all sorts of insects along with one face-on image of a female slender loris, a wide-eyed furry primate, with a baby on its back. No prizes for guessing the first, and probably the only, thing audiences look at. It seems we can't help ourselves. Appealing they may be, but in the great ecological scheme of things, they are fairly useless. If you really want to understand the world around you - you need to take a serious look at insects.</p>
+
+                    <p>Pollination, the process by which flying insects transfer grains of pollen from one plant to another and so aid their reproduction, is perhaps one of the most essential partnerships ever to have evolved. This plant-insect version of 'I'll scratch your back if you scratch mine', has been around for 100 million years and it has given the world a rich diversity, and not just of flowering plants. Twenty thousand species of bee are responsible for the continued survival of the angiosperms, which includes a very long list of fruit and vegetables from pumpkins, plums and peas to cherries, cucumbers and cocoa.</p>
+
+                    <p>What about herbivory and carnivory - plant- and meat-eating? Ecology really doesn't get much more basic than this. The light energy from the sun is converted to chemical energy and the plants - the producers - that carry out this astonishing transformation are fed on by primary consumers - the herbivores. They in turn are eaten by secondary consumers - the carnivores. But it may come as a surprise to many that all the herds of grazing ungulates - cows, goats and sheep - are entirely 'out-munched', perhaps by a factor of ten to one, by myriads of tiny insects. What about the meat-eaters? Again, insects consume many times more animal flesh than all vertebrate carnivores put together, and ants alone are the major carnivorous species in any habitat you could mention.</p>
+
+                    <p>If this sounds implausible, consider that although insects are individually small, there are an awful lot of them - an estimated ten million, million, million (10^19) with an impressively large biomass. Insects are also the major food source for countless species. Many trillions of creatures a year are eaten by insect-eating species of birds, bats and a multitude of other furry and feathery animals. Space prevents me from extolling the role of insects in global decomposition and nutrient recycling.</p>
+
+                    <p>But there is a problem looming - the first effects of which we are already feeling. Almost every study that has been done to date points to a steady decline in insect species' richness and abundance. The loss of natural habitat and the prodigious amounts of pesticides used in agriculture are taking their toll. The decreases seen in well-studied insect groups such as bees and butterflies are surely taking place in many other groups as well. At what point does the web of life become so frayed that it starts to disintegrate? We may find out sooner rather than later.</p>
+
+                    <p>It is thought that the world's tropical forests hold more than half of all extant species. If these complex habitats are being felled and degraded at even the slowest rate that has been suggested, it will still only be a matter of a few hundred years before they are lost. It is therefore an inescapable conclusion that our planet could lose more than half of all its living species in the time it takes for a tiny acorn to become a veteran oak tree.</p>
+
+                    <p>There's no doubt about it - we are the most intelligent and capable species yet to evolve on Earth. In a very short time after our appearance we covered the entire globe, establishing colonies wherever it was possible to survive. A few of us have walked on the surface of the Moon and visited the deepest abysses of the oceans. We spend vast sums of money to probe the very make-up of matter and remotely examine other parts of our solar system. We want to understand the science of everything from the infinitesimally small to the astronomically large. This truly is 'big' science and of course it's expensive. But do we have to do it right now? What about understanding the environment a bit better? Perhaps what we actually need is a bit more 'bug' science.</p>
+
+                    <p><small>* biomass: the total quantity or weight of organisms in a certain area</small></p>
+                </div>
+            </div>
+            <div class="resizer"></div>
+
+            <!-- Questions for Passage 3 -->
+            <div class="questions-container hidden" id="p3_questionsPanel" role="region" aria-label="Questions">
+                <h2 class="section-title">Questions 27–40</h2>
+
+                <div class="question-group">
+                    <div class="question-group-title">Questions 27–31</div>
+                    <p>Do the following statements agree with the views of the writer in the text?</p>
+                    <p>In boxes 27–31, write <strong>YES</strong> if the statement agrees with the views of the writer, <strong>NO</strong> if the statement contradicts the views of the writer, or <strong>NOT GIVEN</strong> if it is impossible to say what the writer thinks about this.</p>
+
+                    <div class="question" data-question="27">
+                        <div class="question-text">27 Early guesses probably greatly over-estimated the total number of species on Earth.</div>
+                        <div class="options">
+                            <label><input type="radio" name="q27" value="YES"> YES</label>
+                            <label><input type="radio" name="q27" value="NO"> NO</label>
+                            <label><input type="radio" name="q27" value="NOT GIVEN"> NOT GIVEN</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="28">
+                        <div class="question-text">28 Primates play a significant role in the ecology of our planet.</div>
+                        <div class="options">
+                            <label><input type="radio" name="q28" value="YES"> YES</label>
+                            <label><input type="radio" name="q28" value="NO"> NO</label>
+                            <label><input type="radio" name="q28" value="NOT GIVEN"> NOT GIVEN</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="29">
+                        <div class="question-text">29 We still have a great deal to learn about the importance of pollination.</div>
+                        <div class="options">
+                            <label><input type="radio" name="q29" value="YES"> YES</label>
+                            <label><input type="radio" name="q29" value="NO"> NO</label>
+                            <label><input type="radio" name="q29" value="NOT GIVEN"> NOT GIVEN</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="30">
+                        <div class="question-text">30 Some people may be unaware that the world's insects consume more food overall than mammals.</div>
+                        <div class="options">
+                            <label><input type="radio" name="q30" value="YES"> YES</label>
+                            <label><input type="radio" name="q30" value="NO"> NO</label>
+                            <label><input type="radio" name="q30" value="NOT GIVEN"> NOT GIVEN</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="31">
+                        <div class="question-text">31 It will take a long time for us to learn the effects of habitat loss and extensive pesticide use.</div>
+                        <div class="options">
+                            <label><input type="radio" name="q31" value="YES"> YES</label>
+                            <label><input type="radio" name="q31" value="NO"> NO</label>
+                            <label><input type="radio" name="q31" value="NOT GIVEN"> NOT GIVEN</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-group-title">Questions 32–36</div>
+                    <p>Complete each sentence with the correct ending, <strong>A–F</strong>, below.</p>
+                    <p>Drag the correct letter into each box 32–36.</p>
+                    <div class="drag-options">
+                        <div class="drag-item" draggable="true" data-option="A" data-label="a fall in the total number and variety of insects in the world">A a fall in the total number and variety of insects in the world.</div>
+                        <div class="drag-item" draggable="true" data-option="B" data-label="the number of plants that are pollinated by insects">B the number of plants that are pollinated by insects.</div>
+                        <div class="drag-item" draggable="true" data-option="C" data-label="how many different animal species are currently in existence">C how many different animal species are currently in existence.</div>
+                        <div class="drag-item" draggable="true" data-option="D" data-label="how long it will be before the Earth's biodiversity is drastically reduced">D how long it will be before the Earth's biodiversity is drastically reduced.</div>
+                        <div class="drag-item" draggable="true" data-option="E" data-label="the predominance of invertebrates among the Earth's species">E the predominance of invertebrates among the Earth's species.</div>
+                        <div class="drag-item" draggable="true" data-option="F" data-label="the declining numbers of bees and butterflies">F the declining numbers of bees and butterflies.</div>
+                    </div>
+                    <p><span class="question-anchor" data-question-anchor="32"></span>32 Scientists have recently revised their views regarding
+                        <span class="drop-zone" data-target="q32" data-placeholder="32">32</span>
+                        <input type="text" name="q32" class="input-field" style="display:none;" aria-hidden="true">
+                    </p>
+                    <p><span class="question-anchor" data-question-anchor="33"></span>33 There is absolutely no doubt about
+                        <span class="drop-zone" data-target="q33" data-placeholder="33">33</span>
+                        <input type="text" name="q33" class="input-field" style="display:none;" aria-hidden="true">
+                    </p>
+                    <p><span class="question-anchor" data-question-anchor="34"></span>34 Almost every study done so far has indicated
+                        <span class="drop-zone" data-target="q34" data-placeholder="34">34</span>
+                        <input type="text" name="q34" class="input-field" style="display:none;" aria-hidden="true">
+                    </p>
+                    <p><span class="question-anchor" data-question-anchor="35"></span>35 A lot of research on insect groups has focused on
+                        <span class="drop-zone" data-target="q35" data-placeholder="35">35</span>
+                        <input type="text" name="q35" class="input-field" style="display:none;" aria-hidden="true">
+                    </p>
+                    <p><span class="question-anchor" data-question-anchor="36"></span>36 The rate at which tropical forests are being lost can help us calculate
+                        <span class="drop-zone" data-target="q36" data-placeholder="36">36</span>
+                        <input type="text" name="q36" class="input-field" style="display:none;" aria-hidden="true">
+                    </p>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-group-title">Questions 37–40</div>
+                    <p>Choose the correct letter, <strong>A</strong>, <strong>B</strong>, <strong>C</strong> or <strong>D</strong>.</p>
+
+                    <div class="question" data-question="37">
+                        <div class="question-text">37 In the third paragraph, the writer refers to a particular slide to emphasise</div>
+                        <div class="options">
+                            <label><input type="radio" name="q37" value="A"> A the predominance of insects in the world.</label>
+                            <label><input type="radio" name="q37" value="B"> B a common misunderstanding about global biodiversity.</label>
+                            <label><input type="radio" name="q37" value="C"> C our instinctive reaction towards certain types of animals.</label>
+                            <label><input type="radio" name="q37" value="D"> D the main distinction between vertebrates and invertebrates.</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="38">
+                        <div class="question-text">38 What does "they" in the third paragraph refer to?</div>
+                        <div class="options">
+                            <label><input type="radio" name="q38" value="A"> A lectures about animals given by the writer</label>
+                            <label><input type="radio" name="q38" value="B"> B audiences who attend events focused on insect life</label>
+                            <label><input type="radio" name="q38" value="C"> C images which depict various different types of species</label>
+                            <label><input type="radio" name="q38" value="D"> D creatures which appear comparatively similar to humans</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="39">
+                        <div class="question-text">39 What does the writer imply about "big" science in the final paragraph?</div>
+                        <div class="options">
+                            <label><input type="radio" name="q39" value="A"> A It should not be our priority at the moment.</label>
+                            <label><input type="radio" name="q39" value="B"> B It serves no useful purpose in the long term.</label>
+                            <label><input type="radio" name="q39" value="C"> C It will cost an unreasonable amount in the future.</label>
+                            <label><input type="radio" name="q39" value="D"> D It results from our natural curiosity about the world.</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="40">
+                        <div class="question-text">40 What point does the writer make overall about insects?</div>
+                        <div class="options">
+                            <label><input type="radio" name="q40" value="A"> A Certain insect species are more at risk than others.</label>
+                            <label><input type="radio" name="q40" value="B"> B Insects are more important than many people realise.</label>
+                            <label><input type="radio" name="q40" value="C"> C There is an interdependence between different insect species.</label>
+                            <label><input type="radio" name="q40" value="D"> D The ecological role of insects is likely to change in the near future.</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Progress/Navigation -->
+        <div class="progress-container">
+            <div class="progress-nav">
+                <div class="progress-items" style="gap:10px; flex-wrap:wrap;">
+                    <div id="bottomPartTabs" style="display:flex; gap:14px; justify-content:center; width:100%; align-items:center; flex-wrap:wrap;"></div>
+                </div>
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary" id="prev-btn" disabled>Previous</button>
+                    <button class="btn btn-secondary" id="next-btn">Next</button>
+                    
+                    <button class="btn btn-submit" id="submit-all-btn">Submit All</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Modal -->
+    <div class="modal" id="results-modal">
+        <div class="modal-content">
+            <h2>Test Results</h2>
+            <div class="score-display" id="score-display">0/0</div>
+            <div class="score-breakdown" id="score-breakdown"> </div>
+            <div class="modal-buttons">
+                <button  class="btn btn-secondary" id="close-modal">Close</button>
+                <button class="btn btn-primary" id="review-answers">Review Answers</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Options Modal -->
+    <div class="modal options-modal" id="options-modal">
+        <div class="modal-content" id="options-content">
+            <div class="options-header">
+                <button class="close-btn" id="options-back" aria-label="Back" style="visibility:hidden; margin-right:8px;">&#8249;</button>
+                <div class="options-title" id="options-title">Options</div>
+                <button class="close-btn" id="close-options" aria-label="Close options">&times;</button>
+            </div>
+
+            <div id="options-home">
+                <div class="options-list">
+                    <div class="option-row" data-target="contrast">
+                        <span class="option-label">Contrast <span class="option-sub" id="contrast-current">Black on white</span></span>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    <div class="option-row" data-target="textsize">
+                        <span class="option-label">Text size <span class="option-sub" id="textsize-current">Medium</span></span>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div id="contrast-menu" style="display:none;">
+                <div class="options-list submenu">
+                    <button data-contrast="normal"><span>Black on white</span><span class="checkmark"></span></button>
+                    <button data-contrast="whiteblack"><span>White on black</span><span class="checkmark"></span></button>
+                    <button data-contrast="yellowblack"><span>Yellow on black</span><span class="checkmark"></span></button>
+                </div>
+            </div>
+
+            <div id="textsize-menu" style="display:none;">
+                <div class="options-list submenu">
+                    <button data-textsize="small"><span>Small</span><span class="checkmark"></span></button>
+                    <button data-textsize="medium"><span>Medium</span><span class="checkmark"></span></button>
+                    <button data-textsize="large"><span>Large</span><span class="checkmark"></span></button>
+                    <button data-textsize="xlarge"><span>Extra large</span><span class="checkmark"></span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notes Panel -->
+    <!-- Notes removed -->
+
+    <script>
+        /* ========= CONFIG ========= */
+        const PARTS = [
+            { id: 1, title: 'Passage 1', qStart: 1, qEnd: 13, passagePanel: 'p1_passagePanel', questionsPanel: 'p1_questionsPanel' },
+            { id: 2, title: 'Passage 2', qStart: 14, qEnd: 26, passagePanel: 'p2_passagePanel', questionsPanel: 'p2_questionsPanel' },
+            { id: 3, title: 'Passage 3', qStart: 27, qEnd: 40, passagePanel: 'p3_passagePanel', questionsPanel: 'p3_questionsPanel' },
+        ];
+
+        /* ======= ANSWER KEY ======= */
+        const correctAnswers = {
+            q1: "TRUE",
+            q2: "FALSE",
+            q3: "NOT GIVEN",
+            q4: "FALSE",
+            q5: "TRUE",
+            q6: "TRUE",
+            q7: "COPPER",
+            q8: "WEIGHT",
+            q9: "INSULATION",
+            q10: "FUNDS",
+            q11: "GOVERNMENT",
+            q12: "TRADE",
+            q13: "IMMIGRANTS",
+            q14: "V",
+            q15: "III",
+            q16: "IX",
+            q17: "IV",
+            q18: "VII",
+            q19: "II",
+            q20: "IDENTICAL",
+            q21: "ALGORITHMS",
+            q22: "STATISTICS",
+            q23: "SPEECH",
+            q24: "B",
+            q25: "A",
+            q26: "A",
+            q27: "YES",
+            q28: "NO",
+            q29: "NOT GIVEN",
+            q30: "YES",
+            q31: "NO",
+            q32: "C",
+            q33: "E",
+            q34: "A",
+            q35: "F",
+            q36: "D",
+            q37: "C",
+            q38: "D",
+            q39: "A",
+            q40: "B"
+        };
+
+        /* ========= STATE ========= */
+        let currentPart = 1;
+        let currentQuestion = 1;
+        let seconds = 60 * 60;
+        let timerInterval;
+        let selectedContrast = 'normal';
+        let selectedTextSize = 'medium';
+
+        /* ========= HELPERS ========= */
+        function el(id) { return document.getElementById(id); }
+        function inRange(q, pId) { const p = PARTS[pId - 1]; return q >= p.qStart && q <= p.qEnd; }
+
+        /* ======= BOTTOM TABS + PER-PART NUMBER RAILS ======= */
+        function renderBottomTabs() {
+            const tabs = el('bottomPartTabs');
+            tabs.innerHTML = '';
+            PARTS.forEach(p => {
+                const btn = document.createElement('button');
+                btn.className = 'btn btn-secondary';
+                btn.style.fontWeight = (p.id === currentPart) ? '900' : '600';
+                btn.innerHTML = (p.id === currentPart) ? `<strong>${p.title}</strong>` : `${p.title}`;
+                btn.onclick = () => switchPart(p.id);
+                tabs.appendChild(btn);
+
+                const rail = document.createElement('div');
+                rail.id = `rail-part-${p.id}`;
+                rail.style.display = (p.id === currentPart) ? 'flex' : 'none';
+                rail.style.gap = '6px';
+                rail.style.flexWrap = 'wrap';
+                rail.style.alignItems = 'center';
+                const total = p.qEnd - p.qStart + 1;
+                for (let q = p.qStart; q <= p.qEnd; q++) {
+                    const chip = document.createElement('div');
+                    chip.textContent = q;
+                    chip.className = 'progress-item' + (q === currentQuestion && p.id === currentPart ? ' current' : '');
+                    chip.dataset.question = q;
+                    chip.style.width = '30px'; chip.style.height = '20px'; chip.style.borderRadius = '6px';
+                    chip.style.fontSize = '14px'; chip.style.padding = '0'; chip.style.lineHeight = '20px';
+                    chip.onclick = () => scrollToQuestion(q);
+                    rail.appendChild(chip);
+                }
+                tabs.appendChild(rail);
+            });
+        }
+
+        function refreshBottomBar() { renderBottomTabs(); }
+
+        function switchPart(partId) {
+            if (currentPart === partId) return;
+            PARTS.forEach(p => {
+                el(p.passagePanel).classList.add('hidden');
+                el(p.questionsPanel).classList.add('hidden');
+                const r = el(`rail-part-${p.id}`); if (r) r.style.display = 'none';
+            });
+            currentPart = partId;
+            const p = PARTS[currentPart - 1];
+            currentQuestion = p.qStart;
+            el(p.passagePanel).classList.remove('hidden');
+            el(p.questionsPanel).classList.remove('hidden');
+            const r = el(`rail-part-${p.id}`); if (r) r.style.display = 'flex';
+            el('headerPassageTitle').textContent = `Passage ${currentPart} of 3`;
+            scrollToQuestion(currentQuestion, false);
+            refreshBottomBar();
+        }
+
+        function scrollToQuestion(num, smooth = true) {
+            const anchor = document.querySelector(`[data-question-anchor="${num}"]`);
+            const elQ = anchor || document.querySelector(`[data-question="${num}"]`) ||
+                document.querySelector(`input[name="q${num}"]`) ||
+                document.querySelector(`select[name="q${num}"]`);
+            if (elQ) elQ.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'center' });
+            updateCurrentQuestion(num);
+        }
+
+        function updateCurrentQuestion(num) {
+            currentQuestion = num;
+            document.querySelectorAll(`#rail-part-${currentPart} .progress-item`).forEach(it => {
+                it.classList.toggle('current', parseInt(it.dataset.question, 10) === num);
+            });
+        }
+
+        function attachAnsweredListeners() {
+            document.querySelectorAll('input[type="radio"], input[type="text"], select, input[type="checkbox"]').forEach(input => {
+                input.addEventListener('change', () => {
+                    const m = input.name && input.name.match(/^q(\d+)$/);
+                    if (!m) return;
+                    const q = parseInt(m[1], 10);
+                    const chip = document.querySelector(`.progress-item[data-question="${q}"]`);
+                    if (chip) {
+                        let val = '';
+                        if (input.type === 'text') val = input.value.trim();
+                        else if (input.type === 'checkbox') {
+                            const checked = Array.from(document.querySelectorAll(`input[name="${input.name}"]:checked`)).map(cb => cb.value);
+                            val = checked.length > 0 ? checked.join(',') : '';
+                        } else val = input.value;
+                        if (val) chip.classList.add('answered');
+                    }
+                });
+            });
+        }
+
+        function createAnchors() {
+            for (let q = 1; q <= PARTS[PARTS.length - 1].qEnd; q++) {
+                if (document.querySelector(`[data-question-anchor="${q}"]`)) continue;
+                const target = document.querySelector(`[data-question="${q}"]`) ||
+                    document.querySelector(`input[name="q${q}"]`) ||
+                    document.querySelector(`select[name="q${q}"]`);
+                if (target && target.parentNode) {
+                    const anchor = document.createElement('span');
+                    anchor.className = 'question-anchor';
+                    anchor.dataset.questionAnchor = q;
+                    target.parentNode.insertBefore(anchor, target);
+                }
+            }
+        }
+
+        /* Drag & Drop for Q32-36 */
+        function setupDragDrop() {
+            const zones = document.querySelectorAll('.drop-zone');
+            const items = document.querySelectorAll('.drag-item');
+            const optionBins = document.querySelectorAll('.drag-options');
+
+            const releaseOption = (option) => {
+                const item = document.querySelector(`.drag-item[data-option="${option}"]`);
+                if (item) {
+                    item.dataset.used = "false";
+                    item.classList.remove('used');
+                    item.draggable = true;
+                }
+            };
+
+            items.forEach(item => {
+                item.dataset.used = "false";
+                item.addEventListener('dragstart', (e) => {
+                    if (item.dataset.used === "true") {
+                        e.preventDefault();
+                        return;
+                    }
+                    e.dataTransfer.setData('text/plain', item.dataset.option);
+                    e.dataTransfer.setData('text/label', item.dataset.label || '');
+                    e.dataTransfer.effectAllowed = 'move';
+                });
+            });
+
+            zones.forEach(zone => {
+                const placeholder = zone.dataset.placeholder || '';
+                zone.dataset.value = '';
+                zone.draggable = false;
+
+                zone.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    zone.classList.add('over');
+                });
+                zone.addEventListener('dragleave', () => zone.classList.remove('over'));
+                zone.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    zone.classList.remove('over');
+                    const option = e.dataTransfer.getData('text/plain');
+                    const label = e.dataTransfer.getData('text/label');
+                    if (!option) return;
+
+                    const item = document.querySelector(`.drag-item[data-option="${option}"]`);
+                    if (!item || item.dataset.used === "true") return;
+
+                    if (zone.dataset.value && zone.dataset.value !== option) {
+                        releaseOption(zone.dataset.value);
+                    }
+
+                    zone.dataset.value = option;
+                    zone.textContent = label ? `${option} ${label}` : option;
+                    zone.classList.add('filled');
+                    zone.draggable = true;
+                    item.dataset.used = "true";
+                    item.classList.add('used');
+                    item.draggable = false;
+
+                    const targetName = zone.dataset.target;
+                    const input = document.querySelector(`input[name="${targetName}"]`);
+                    if (input) {
+                        input.value = option;
+                        const evt = new Event('change', { bubbles: true });
+                        input.dispatchEvent(evt);
+                    }
+                });
+
+                zone.addEventListener('dragstart', (e) => {
+                    if (!zone.dataset.value) {
+                        e.preventDefault();
+                        return;
+                    }
+                    e.dataTransfer.setData('text/plain', zone.dataset.value);
+                    const item = document.querySelector(`.drag-item[data-option="${zone.dataset.value}"]`);
+                    e.dataTransfer.setData('text/label', item ? item.dataset.label : '');
+                    e.dataTransfer.setData('text/source-zone', zone.dataset.target);
+                    e.dataTransfer.effectAllowed = 'move';
+                });
+
+                zone.addEventListener('dblclick', () => {
+                    if (zone.dataset.value) releaseOption(zone.dataset.value);
+                    zone.dataset.value = '';
+                    zone.textContent = placeholder;
+                    zone.classList.remove('filled');
+                    zone.draggable = false;
+                    const targetName = zone.dataset.target;
+                    const input = document.querySelector(`input[name="${targetName}"]`);
+                    if (input) {
+                        input.value = '';
+                        const evt = new Event('change', { bubbles: true });
+                        input.dispatchEvent(evt);
+                    }
+                });
+            });
+
+            optionBins.forEach(bin => {
+                bin.addEventListener('dragover', (e) => e.preventDefault());
+                bin.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    const option = e.dataTransfer.getData('text/plain');
+                    const source = e.dataTransfer.getData('text/source-zone');
+                    if (!option || !source) return;
+                    const zone = document.querySelector(`.drop-zone[data-target="${source}"]`);
+                    if (zone && zone.dataset.value === option) {
+                        zone.dataset.value = '';
+                        zone.textContent = zone.dataset.placeholder || '';
+                        zone.classList.remove('filled');
+                        zone.draggable = false;
+                        const input = document.querySelector(`input[name="${source}"]`);
+                        if (input) {
+                            input.value = '';
+                            const evt = new Event('change', { bubbles: true });
+                            input.dispatchEvent(evt);
+                        }
+                        releaseOption(option);
+                    }
+                });
+            });
+        }
+
+        /* ===== SUBMIT ALL ===== */
+        el('submit-all-btn').addEventListener('click', () => {
+            if (!confirm('Submit the entire test?')) return;
+
+            let score = 0, total = PARTS[PARTS.length - 1].qEnd;
+            const results = {};
+
+            for (let q = 1; q <= total; q++) {
+                const key = `q${q}`;
+                const corr = correctAnswers[key];
+                let user = null, isCorrect = false;
+
+                const radios = document.querySelectorAll(`input[name="${key}"][type="radio"]`);
+                const text = document.querySelector(`input[name="${key}"][type="text"]`);
+                const sel = document.querySelector(`select[name="${key}"]`);
+                const cbs = document.querySelectorAll(`input[name="${key}"][type="checkbox"]`);
+
+                if (radios.length > 0) {
+                    const c = Array.from(radios).find(r => r.checked);
+                    if (c) { user = c.value; isCorrect = (user.toUpperCase() === corr.toUpperCase()); radios.forEach(r => r.disabled = true); }
+                } else if (cbs.length > 0) {
+                    user = Array.from(cbs).filter(cb => cb.checked).map(cb => cb.value).sort().join(',');
+                    if (user) {
+                        const corrArr = Array.isArray(corr) ? corr.sort().join(',') : '';
+                        isCorrect = user === corrArr;
+                        cbs.forEach(cb => cb.disabled = true);
+                    }
+                } else if (text) {
+                    user = (text.value || '').trim();
+                    if (user) {
+                        const norm = (s) => String(s).trim().toUpperCase().replace(/[^A-Z0-9]/g, '');
+                        isCorrect = norm(user) === norm(corr);
+                        text.disabled = true;
+                    }
+                } else if (sel) {
+                    user = sel.value;
+                    if (user) { isCorrect = user === corr; sel.disabled = true; }
+                }
+
+                if (isCorrect) score++;
+                results[key] = { userAnswer: user || 'No answer', correct: corr, isCorrect };
+            }
+
+            for (let q = 1; q <= total; q++) {
+                const res = results[`q${q}`];
+                const ch = document.querySelector(`.progress-item[data-question="${q}"]`);
+                if (ch) {
+                    ch.classList.remove('current', 'answered');
+                    if (res) ch.classList.add(res.isCorrect ? 'correct' : 'incorrect');
+                }
+            }
+
+            el('score-display').textContent = `${score}/${total}`;
+            const breakdown = el('score-breakdown');
+            breakdown.innerHTML = PARTS.map(p => {
+                const partScore = Array.from({ length: p.qEnd - p.qStart + 1 }, (_, i) => results[`q${p.qStart + i}`])
+                    .filter(r => r && r.isCorrect).length;
+                return `<div class="score-item"><span>Passage ${p.id}:</span><span>${partScore}/${p.qEnd - p.qStart + 1}</span></div>`;
+            }).join('');
+            el('results-modal').style.display = 'flex';
+
+            el('review-answers').onclick = () => {
+                el('results-modal').style.display = 'none';
+                showCorrectIndicators(results);
+            };
+        });
+
+        function showCorrectIndicators(results) {
+            document.querySelectorAll('.answer-indicator').forEach(e => e.remove());
+            const total = PARTS[PARTS.length - 1].qEnd;
+
+            for (let q = 1; q <= total; q++) {
+                const key = `q${q}`;
+                const res = results[key];
+                if (!res) continue;
+
+                let target = null;
+                const qEl = document.querySelector(`[data-question="${q}"] .options`);
+                if (qEl) target = qEl;
+                if (!target) {
+                    const input = document.querySelector(`input[name="${key}"]`);
+                    if (input) target = input.parentNode;
+                }
+                if (!target) {
+                    const dz = document.querySelector(`.drop-zone[data-target="${key}"]`);
+                    if (dz) target = dz;
+                }
+                if (!target) {
+                    const sel = document.querySelector(`select[name="${key}"]`);
+                    if (sel) target = sel.parentNode;
+                }
+                if (!target) continue;
+
+                const box = document.createElement('div');
+                box.className = 'answer-indicator ' + (res.isCorrect ? 'correct' : 'incorrect');
+                box.style.display = 'block';
+                box.style.marginTop = '6px';
+                box.innerHTML = res.isCorrect
+                    ? `<i class="fas fa-check"></i> Correct!`
+                    : `<i class="fas fa-times"></i> Incorrect. Your answer: <strong>${res.userAnswer}</strong> <strong>Correct:</strong> ${Array.isArray(res.correct) ? res.correct.join(', ') : res.correct}`;
+                target.appendChild(box);
+            }
+        }
+
+        const timerSpan = document.querySelector('#globalTimer span');
+        const timerContainer = document.querySelector('#globalTimer');
+        function updateTimer() {
+            seconds--;
+            const m = Math.floor(seconds / 60), s = seconds % 60;
+            timerSpan.textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+            if (seconds <= 2 * 60) timerContainer.classList.add('warning');
+            if (seconds <= 0) { clearInterval(timerInterval); alert('Time is up! Submitting all passages.'); el('submit-all-btn').click(); }
+        }
+
+        function startTest() {
+            el('startScreen').classList.add('hidden');
+            el('testContainer').classList.remove('hidden');
+            timerInterval = setInterval(updateTimer, 1000);
+        }
+        window.startTest = startTest;
+
+        setTimeout(() => { el('loadingScreen').classList.add('hidden'); el('startScreen').classList.remove('hidden'); }, 900);
+
+        PARTS.forEach(p => {
+            if (p.id === 1) { el(p.passagePanel).classList.remove('hidden'); el(p.questionsPanel).classList.remove('hidden'); }
+            else { el(p.passagePanel).classList.add('hidden'); el(p.questionsPanel).classList.add('hidden'); }
+        });
+        renderBottomTabs();
+        attachAnsweredListeners();
+        setupDragDrop();
+        createAnchors();
+
+        /* Options modal logic */
+        const optionsModal = el('options-modal');
+        const optionsTitle = el('options-title');
+        const optionsBack = el('options-back');
+        const optionsHome = el('options-home');
+        const contrastMenu = el('contrast-menu');
+        const textSizeMenu = el('textsize-menu');
+
+        const openOptions = () => {
+            optionsModal.style.display = 'flex';
+            switchView('home');
+        };
+        const closeOptions = () => optionsModal.style.display = 'none';
+        el('optionsMenuBtn').addEventListener('click', openOptions);
+        el('close-options').addEventListener('click', closeOptions);
+        window.addEventListener('click', (e) => { if (e.target === optionsModal) closeOptions(); });
+        optionsBack.addEventListener('click', () => switchView('home'));
+
+        function switchView(view) {
+            currentView = view;
+            optionsHome.style.display = view === 'home' ? 'block' : 'none';
+            contrastMenu.style.display = view === 'contrast' ? 'block' : 'none';
+            textSizeMenu.style.display = view === 'textsize' ? 'block' : 'none';
+            optionsBack.style.visibility = view === 'home' ? 'hidden' : 'visible';
+            optionsTitle.textContent = view === 'home' ? 'Options' : (view === 'contrast' ? 'Contrast' : 'Text size');
+        }
+
+        optionsHome.querySelectorAll('.option-row').forEach(row => {
+            row.addEventListener('click', () => {
+                const target = row.dataset.target;
+                switchView(target);
+            });
+        });
+
+        function applyContrast(mode) {
+            document.body.classList.remove('contrast-white-black', 'contrast-yellow-black');
+            if (mode === 'whiteblack') document.body.classList.add('contrast-white-black');
+            if (mode === 'yellowblack') document.body.classList.add('contrast-yellow-black');
+            selectedContrast = mode;
+            contrastMenu.querySelectorAll('button').forEach(btn => {
+                btn.classList.toggle('selected', btn.dataset.contrast === selectedContrast);
+            });
+            el('contrast-current').textContent =
+                mode === 'whiteblack' ? 'White on black' :
+                mode === 'yellowblack' ? 'Yellow on black' : 'Black on white';
+        }
+
+        contrastMenu.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                applyContrast(btn.dataset.contrast);
+                switchView('home');
+            });
+        });
+
+        function applyTextSize(size) {
+            const base = { small: '14px', medium: '16px', large: '19px', xlarge: '24px' }[size] || '16px';
+            document.documentElement.style.fontSize = base;
+            selectedTextSize = size;
+            textSizeMenu.querySelectorAll('button').forEach(btn => {
+                btn.classList.toggle('selected', btn.dataset.textsize === selectedTextSize);
+            });
+            el('textsize-current').textContent =
+                size === 'small' ? 'Small' :
+                size === 'large' ? 'Large' :
+                size === 'xlarge' ? 'Extra large' : 'Medium';
+        }
+
+        textSizeMenu.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                applyTextSize(btn.dataset.textsize);
+                switchView('home');
+            });
+        });
+
+        applyContrast(selectedContrast);
+        applyTextSize(selectedTextSize);
+
+        /* Fullscreen toggle */
+        const fsBtn = el('fullscreenBtn');
+        fsBtn.addEventListener('click', async () => {
+            if (!document.fullscreenElement) {
+                try { await document.documentElement.requestFullscreen(); }
+                catch (e) { console.warn('Fullscreen failed', e); }
+            } else {
+                document.exitFullscreen();
+            }
+        });
+
+        /* Notes removed */
+
+        let isResizing = false;
+        document.querySelectorAll('.resizer').forEach(resizer => {
+            resizer.addEventListener('mousedown', () => { isResizing = true; document.body.style.cursor = 'col-resize'; document.body.style.userSelect = 'none'; });
+        });
+        document.addEventListener('mousemove', (e) => {
+            if (!isResizing) return;
+            const container = document.querySelector('.main-content');
+            const rect = container.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const leftPct = (mouseX / rect.width) * 100;
+            const rightPct = 100 - leftPct;
+            if (leftPct >= 30 && leftPct <= 70) {
+                const passage = document.querySelector('.passage-container:not(.hidden)');
+                const questions = document.querySelector('.questions-container:not(.hidden)');
+                if (passage) passage.style.flex = leftPct + '%';
+                if (questions) questions.style.flex = rightPct + '%';
+            }
+        });
+        document.addEventListener('mouseup', () => { if (isResizing) { isResizing = false; document.body.style.cursor = ''; document.body.style.userSelect = ''; } });
+
+        /* ========= HIGHLIGHT (selectionchange-based) ========= */
+        const highlightBtn = el('highlight-btn');
+        const removeHighlightBtn = el('remove-highlight-btn');
+        const passagePanels = PARTS.map(p => el(p.passagePanel));
+        const questionsPanels = PARTS.map(p => el(p.questionsPanel));
+        let lastSelection = null, highlightTarget = null, currentPanel = null;
+
+        function getValidSelection() {
+            const sel = window.getSelection();
+            if (!sel.rangeCount || sel.isCollapsed) return null;
+            const range = sel.getRangeAt(0);
+            if (passagePanels.some(pp => pp && pp.contains(range.commonAncestorContainer))) {
+                currentPanel = passagePanels.find(pp => pp.contains(range.commonAncestorContainer));
+            } else if (questionsPanels.some(qp => qp && qp.contains(range.commonAncestorContainer))) {
+                currentPanel = questionsPanels.find(qp => qp.contains(range.commonAncestorContainer));
+            } else return null;
+            return range;
+        }
+
+        function showHighlightBtn(range) {
+            const rect = range.getBoundingClientRect();
+            highlightBtn.style.top = (window.scrollY + rect.top - 35) + 'px';
+            highlightBtn.style.left = (window.scrollX + rect.left) + 'px';
+            highlightBtn.style.display = 'block';
+        }
+
+        function hideHighlightBtn() { highlightBtn.style.display = 'none'; }
+
+        function showRemoveBtn(span) {
+            const rect = span.getBoundingClientRect();
+            removeHighlightBtn.style.top = (window.scrollY + rect.top - 35) + 'px';
+            removeHighlightBtn.style.left = (window.scrollX + rect.left) + 'px';
+            removeHighlightBtn.style.display = 'block';
+            highlightTarget = span;
+        }
+
+        function hideRemoveBtn() { removeHighlightBtn.style.display = 'none'; highlightTarget = null; }
+
+        highlightBtn.addEventListener('click', () => {
+            if (lastSelection) {
+                const span = document.createElement('span');
+                span.className = 'highlight';
+                span.appendChild(lastSelection.extractContents());
+                lastSelection.insertNode(span);
+                window.getSelection().removeAllRanges();
+                hideHighlightBtn();
+            }
+        });
+
+        removeHighlightBtn.addEventListener('click', () => {
+            if (highlightTarget) {
+                const parent = highlightTarget.parentNode;
+                while (highlightTarget.firstChild) parent.insertBefore(highlightTarget.firstChild, highlightTarget);
+                parent.removeChild(highlightTarget);
+                hideRemoveBtn();
+            }
+        });
+
+        let selectionFrame = null;
+        document.addEventListener('selectionchange', () => {
+            if (selectionFrame) cancelAnimationFrame(selectionFrame);
+            selectionFrame = requestAnimationFrame(() => {
+                hideHighlightBtn(); hideRemoveBtn();
+                const range = getValidSelection();
+                if (range) { lastSelection = range; showHighlightBtn(range); } else { lastSelection = null; }
+                selectionFrame = null;
+            });
+        });
+
+        document.addEventListener('mousedown', (e) => {
+            if (e.target !== highlightBtn && e.target !== removeHighlightBtn) { hideHighlightBtn(); hideRemoveBtn(); }
+        });
+
+        document.addEventListener('click', (e) => {
+            if (e.target.classList && e.target.classList.contains('highlight')) { e.preventDefault(); showRemoveBtn(e.target); }
+        });
+
+        // Disable right-click context menu while keeping text selection active
+        document.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+        });
+
+        // Block copy/paste/cut via keyboard or menu
+        document.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && ['c', 'v', 'x', 'C', 'V', 'X'].includes(e.key)) {
+                e.preventDefault();
+            }
+        });
+        ['copy', 'cut', 'paste'].forEach(evt => {
+            document.addEventListener(evt, (e) => {
+                e.preventDefault();
+            });
+        });
+
+        el('close-modal').addEventListener('click', () => { el('results-modal').style.display = 'none'; });
+    </script>
+</body>
+
+
+
+</html>

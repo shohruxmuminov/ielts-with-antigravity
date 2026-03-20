@@ -4,6 +4,7 @@ import { collection, query, where, orderBy, onSnapshot } from 'firebase/firestor
 import { db } from '../firebase';
 import { GoogleGenAI, Type } from "@google/genai";
 import FullWritingTestLayout from '../components/FullWritingTestLayout';
+import StaticWritingLayout from '../components/StaticWritingLayout';
 import { PenTool, CheckCircle, AlertCircle, BookOpen, Clock, ArrowLeft, Sparkles, Wand2, BookA, Layout, Play, Bot, Home, FileText } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
@@ -16,6 +17,7 @@ interface WritingTask {
   imageUrl?: string;
   task1Type?: string;
   task2Type?: string;
+  isStatic?: boolean;
 }
 
 export default function WritingPractice() {
@@ -72,6 +74,14 @@ export default function WritingPractice() {
           task2Type: 'Opinion Essay',
           imageUrl: 'https://engnovatewebsitestorage.blob.core.windows.net/ielts-writing-task-1-images/a6aad123f8d98350',
           createdAt: { seconds: Date.now() / 1000 }
+        },
+        {
+          id: 'jurabek-writing-1',
+          title: 'IELTS with Jurabek - Writing Test',
+          type: 'full',
+          data: '/writing/IELTSwithJurabek.html',
+          isStatic: true,
+          createdAt: { seconds: Date.now() / 1000 }
         }
       ];
 
@@ -88,6 +98,14 @@ export default function WritingPractice() {
           task1Type: 'Line Graph',
           task2Type: 'Opinion Essay',
           imageUrl: 'https://engnovatewebsitestorage.blob.core.windows.net/ielts-writing-task-1-images/a6aad123f8d98350',
+          createdAt: { seconds: Date.now() / 1000 }
+        },
+        {
+          id: 'jurabek-writing-1',
+          title: 'IELTS with Jurabek - Writing Test',
+          type: 'full',
+          data: '/writing/IELTSwithJurabek.html',
+          isStatic: true,
           createdAt: { seconds: Date.now() / 1000 }
         }
       ];
@@ -168,6 +186,14 @@ export default function WritingPractice() {
   };
 
   if (selectedTask) {
+    if (selectedTask.isStatic && selectedTask.data) {
+      return (
+        <StaticWritingLayout 
+          testUrl={selectedTask.data} 
+          onBack={handleBack} 
+        />
+      );
+    }
     if (selectedTask.id === 'full-writing-test' || selectedTask.type === 'full') {
       return <FullWritingTestLayout onBack={handleBack} />;
     }

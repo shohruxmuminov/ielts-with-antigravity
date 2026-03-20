@@ -30,34 +30,34 @@ export default function ListeningPractice() {
         id: 'jurabek-listening-1', 
         title: 'IELTS with Jurabek - Listening Test 1', 
         isStatic: true, 
-        url: '/tests/IELTSwithJurabek Listening.html',
-          receivedFrom: 'IELTSwithJurabek',
-          createdAt: { seconds: 1710900000 } 
-        },
-        { 
-          id: 'jurabek-listening-2', 
-          title: 'IELTS with Jurabek - Listening Test 2', 
-          isStatic: true, 
-          url: '/tests/IELTSwithJurabek Listening2.html',
-          receivedFrom: 'IELTSwithJurabek',
-          createdAt: { seconds: 1710900001 } 
-        },
-        { 
-          id: 'jurabek-listening-3', 
-          title: 'IELTS with Jurabek - Listening Test 3', 
-          isStatic: true, 
-          url: '/tests/IELTSwithJurabek Listening3.html',
-          receivedFrom: 'IELTSwithJurabek',
-          createdAt: { seconds: 1710900002 } 
-        },
-        { 
-          id: 'jurabek-listening-4', 
-          title: 'IELTS with Jurabek - Final Test', 
-          isStatic: true, 
-          url: '/tests/IELTSwithJurabek Lis.html',
-          receivedFrom: 'IELTSwithJurabek',
-          createdAt: { seconds: 1710900003 } 
-        },
+        url: '/listening/IELTSwithJurabek Listening.html',
+        receivedFrom: 'IELTSwithJurabek',
+        createdAt: { seconds: 1710900000 } 
+      },
+      { 
+        id: 'jurabek-listening-2', 
+        title: 'IELTS with Jurabek - Listening Test 2', 
+        isStatic: true, 
+        url: '/listening/IELTSwithJurabek Listening2.html',
+        receivedFrom: 'IELTSwithJurabek',
+        createdAt: { seconds: 1710900001 } 
+      },
+      { 
+        id: 'jurabek-listening-3', 
+        title: 'IELTS with Jurabek - Listening Test 3', 
+        isStatic: true, 
+        url: '/listening/IELTSwithJurabek Listening3.html',
+        receivedFrom: 'IELTSwithJurabek',
+        createdAt: { seconds: 1710900002 } 
+      },
+      { 
+        id: 'jurabek-listening-4', 
+        title: 'IELTS with Jurabek - Final Test', 
+        isStatic: true, 
+        url: '/listening/IELTSwithJurabek Lis.html',
+        receivedFrom: 'IELTSwithJurabek',
+        createdAt: { seconds: 1710900003 } 
+      },
     ];
 
     setLoading(true);
