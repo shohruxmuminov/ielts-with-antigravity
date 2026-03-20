@@ -4,6 +4,7 @@ import { Mic, Square, Play, CheckCircle, AlertCircle, Volume2, Clock, ChevronRig
 import { collection, query, where, orderBy, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebase';
 import { GoogleGenAI, Type } from "@google/genai";
+import { ieltsSpeakingMaterials, SpeakingMaterial } from '../data/ieltsSpeakingMaterial';
 
 interface SpeakingTask {
   id: string;
@@ -11,6 +12,10 @@ interface SpeakingTask {
   type: string;
   data: string;
   createdAt: any;
+  part?: number;
+  sampleAnswer?: string;
+  vocabulary?: any[];
+  isStatic?: boolean;
 }
 
 export default function SpeakingPractice() {
@@ -52,14 +57,44 @@ export default function SpeakingPractice() {
     );
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      const tasksData = snapshot.docs.map(doc => ({
+      const firebaseTasks = snapshot.docs.map(doc => ({
         id: doc.id,
-        ...doc.data()
+        ...doc.data(),
+        isStatic: false
       })) as SpeakingTask[];
-      setTasks(tasksData);
+
+      const staticTasks: SpeakingTask[] = ieltsSpeakingMaterials.map(m => ({
+        id: m.id,
+        title: m.title,
+        type: 'speaking',
+        data: `<ul class="list-disc pl-5 space-y-2 text-slate-300">
+          ${m.questions.map(q => `<li>${q}</li>`).join('')}
+        </ul>`,
+        createdAt: new Date(),
+        part: m.part,
+        sampleAnswer: m.sampleAnswer,
+        vocabulary: m.vocabulary,
+        isStatic: true
+      }));
+
+      setTasks([...staticTasks, ...firebaseTasks]);
       setLoading(false);
     }, (error) => {
-      // Error fetching speaking tasks
+      // Mock with static data if firebase fails or is empty
+      const staticTasks: SpeakingTask[] = ieltsSpeakingMaterials.map(m => ({
+        id: m.id,
+        title: m.title,
+        type: 'speaking',
+        data: `<ul class="list-disc pl-5 space-y-2 text-slate-300">
+          ${m.questions.map(q => `<li>${q}</li>`).join('')}
+        </ul>`,
+        createdAt: new Date(),
+        part: m.part,
+        sampleAnswer: m.sampleAnswer,
+        vocabulary: m.vocabulary,
+        isStatic: true
+      }));
+      setTasks(staticTasks);
       setLoading(false);
     });
 
@@ -187,6 +222,8 @@ export default function SpeakingPractice() {
     setAudioUrl(null);
     setFeedback(null);
   };
+  
+  const [activeTab, setActiveTab] = useState<'task' | 'sample' | 'vocab'>('task');
 
   if (selectedTask) {
     return (
@@ -249,8 +286,61 @@ export default function SpeakingPractice() {
                 <div className="h-2 w-24 bg-purple-600 rounded-full"></div>
               </div>
 
-              <div className="p-10 bg-slate-800 rounded-[2.5rem] border border-slate-700 shadow-inner">
-                <div className="prose prose-invert prose-sm max-w-none font-medium text-slate-300 leading-relaxed" dangerouslySetInnerHTML={{ __html: selectedTask.data }} />
+              <div className="flex gap-2 p-1 bg-slate-800 rounded-2xl border border-slate-700">
+                <button 
+                  onClick={() => setActiveTab('task')}
+                  className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl font-bold text-xs transition-all ${activeTab === 'task' ? 'bg-purple-600 text-white shadow-lg' : 'text-slate-400 hover:text-white'}`}
+                >
+                  <FileText className="w-4 h-4" />
+                  Task
+                </button>
+                <button 
+                  onClick={() => setActiveTab('sample')}
+                  className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl font-bold text-xs transition-all ${activeTab === 'sample' ? 'bg-purple-600 text-white shadow-lg' : 'text-slate-400 hover:text-white'}`}
+                >
+                  <Layout className="w-4 h-4" />
+                  Model Answer
+                </button>
+                <button 
+                  onClick={() => setActiveTab('vocab')}
+                  className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl font-bold text-xs transition-all ${activeTab === 'vocab' ? 'bg-purple-600 text-white shadow-lg' : 'text-slate-400 hover:text-white'}`}
+                >
+                  <Volume2 className="w-4 h-4" />
+                  Vocab
+                </button>
+              </div>
+
+              <div className="p-8 bg-slate-800 rounded-[2.5rem] border border-slate-700 shadow-inner min-h-[300px]">
+                {activeTab === 'task' && (
+                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                    <div className="prose prose-invert prose-sm max-w-none font-medium text-slate-300 leading-relaxed" dangerouslySetInnerHTML={{ __html: selectedTask.data }} />
+                  </motion.div>
+                )}
+                {activeTab === 'sample' && (
+                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4">
+                    <h4 className="text-emerald-400 font-black text-sm uppercase tracking-widest">Band 9.0 Sample Answer</h4>
+                    <p className="text-slate-300 leading-relaxed text-sm italic">
+                      {selectedTask.sampleAnswer || "Sample answer is being updated for this task. Use the AI feedback to get personalized improvements."}
+                    </p>
+                  </motion.div>
+                )}
+                {activeTab === 'vocab' && (
+                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4">
+                    <h4 className="text-blue-400 font-black text-sm uppercase tracking-widest">Useful Vocabulary</h4>
+                    {selectedTask.vocabulary ? (
+                      <div className="grid grid-cols-1 gap-3">
+                        {selectedTask.vocabulary.map((v, i) => (
+                          <div key={i} className="bg-slate-900/50 p-4 rounded-xl border border-slate-700/50 flex flex-col">
+                            <span className="text-white font-bold text-sm">{v.phrase}</span>
+                            <span className="text-slate-500 text-xs mt-1">{v.meaning}</span>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <p className="text-slate-500 text-sm">Vocabulary list is being generated...</p>
+                    )}
+                  </motion.div>
+                )}
               </div>
 
               <div className="space-y-6">
@@ -412,9 +502,9 @@ export default function SpeakingPractice() {
 
   const filteredTasks = tasks.filter(task => {
     if (activeFilter === 'all') return true;
-    if (activeFilter === 'part1') return task.title.toLowerCase().includes('part 1');
-    if (activeFilter === 'part2') return task.title.toLowerCase().includes('part 2');
-    if (activeFilter === 'part3') return task.title.toLowerCase().includes('part 3');
+    if (activeFilter === 'part1') return task.part === 1 || task.title.toLowerCase().includes('part 1');
+    if (activeFilter === 'part2') return task.part === 2 || task.title.toLowerCase().includes('part 2');
+    if (activeFilter === 'part3') return task.part === 3 || task.title.toLowerCase().includes('part 3');
     return true;
   });
 
@@ -444,9 +534,9 @@ export default function SpeakingPractice() {
               <nav className="space-y-1">
                 {[
                   { id: 'all', label: 'All Tasks', icon: Layout, count: tasks.length },
-                  { id: 'part1', label: 'Speaking Part 1', icon: FileText, count: tasks.filter(t => t.title.toLowerCase().includes('part 1')).length },
-                  { id: 'part2', label: 'Speaking Part 2', icon: Mic, count: tasks.filter(t => t.title.toLowerCase().includes('part 2')).length },
-                  { id: 'part3', label: 'Speaking Part 3', icon: Volume2, count: tasks.filter(t => t.title.toLowerCase().includes('part 3')).length },
+                  { id: 'part1', label: 'Speaking Part 1', icon: FileText, count: tasks.filter(t => t.part === 1 || t.title.toLowerCase().includes('part 1')).length },
+                  { id: 'part2', label: 'Speaking Part 2', icon: Mic, count: tasks.filter(t => t.part === 2 || t.title.toLowerCase().includes('part 2')).length },
+                  { id: 'part3', label: 'Speaking Part 3', icon: Volume2, count: tasks.filter(t => t.part === 3 || t.title.toLowerCase().includes('part 3')).length },
                 ].map((item) => (
                   <button
                     key={item.id}
