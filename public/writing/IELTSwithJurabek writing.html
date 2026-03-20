@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real exam IELTS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #333333;
+            --passage-bg: #f8f9fa;
+            --questions-bg: #ffffff;
+            --border-color: #5770ff;
+            --highlight-color: springgreen; /* Changed highlight color */
+            
+            /* New Header & Social Colors */
+            --header-bg: #F8F8F8; /* Very light gray for header background */
+            --header-text: #333333; /* Dark text for light header */
+            --telegram-blue: #0088CC;
+            --instagram-pink: #E4405F;
+            --youtube-red: #FF0000;
+
+            /* Button Colors (Red themed) */
+            --button-bg: #28a745; /* Primary button red */
+            --button-hover: #218838; /* Darker red on hover */
+            
+            --correct-color: #28a745; /* Standard green */
+            --incorrect-color: #dc3545; /* Standard red */
+            --progress-complete: #28a745;
+            --progress-incomplete: #bdbdbd;
+
+            /* Timer Colors (Red themed) */
+            --timer-bg: #0088CC; /* Very light red/pink */
+            --timer-text: #ffffff; /* Darker red */
+
+            --footer-bg: #f5f5f5;
+        }
+
+        .night-mode {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --passage-bg: #1e1e1e;
+            --questions-bg: #1e1e1e;
+            --border-color: #424242;
+            --highlight-color: #0084ff; /* Darker springgreen for night mode */
+            
+            /* Night Mode Header & Social Colors */
+            --header-bg: #1a1a1a; /* Dark gray for header background */
+            --header-text: #ffffff; /* White text for dark header */
+            --telegram-blue: #005f99; /* Darker telegram blue */
+            --instagram-pink: #b2334b; /* Darker instagram pink */
+            --youtube-red: #b20000; /* Darker YouTube red */
+
+            /* Night Mode Button Colors */
+            --button-bg: #990000; /* Darker primary button red */
+            --button-hover: #7a0000; /* Even darker red on hover */
+            
+            --correct-color: #218838; /* Darker green */
+            --incorrect-color: #c82333; /* Darker red */
+            --progress-complete: #218838;
+            --progress-incomplete: #616161;
+
+            /* Night Mode Timer Colors */
+            --timer-bg: #0088CC; /* Dark red */
+            --timer-text: #ffcdd2; /* Lighter red */
+
+            --footer-bg: #121212;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        header {
+            background-color: var(--header-bg);
+            color: var(--header-text);
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+        
+        .logo-area {
+            display: flex; justify-content: center;
+            align-items: center;
+            gap: 15px; /* Space between social links */
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 8px; /* Space between icon and text */
+            color: white; /* Text color is always white for social links */
+            padding: 8px 15px;
+            border-radius: 50px; /* Pill shape */
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .social-link:hover {
+            transform: translateY(-1px);
+        }
+
+        .social-link i {
+            font-size: 1.2em; /* Makes icon slightly larger than text */
+        }
+
+        /* Specific styling for social links */
+        .social-link.telegram {
+            background-color: var(--telegram-blue);
+        }
+        .social-link.telegram:hover {
+            background-color: #007bb5; /* Slightly darker */
+        }
+
+        .social-link.instagram {
+            background-color: var(--instagram-pink);
+        }
+        .social-link.instagram:hover {
+            background-color: #d62976; /* Slightly darker */
+        }
+
+        .social-link.youtube {
+            background-color: var(--youtube-red);
+        }
+        .social-link.youtube:hover {
+            background-color: #CC0000; /* Slightly darker */
+        }
+
+
+        .header-controls {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .timer-container {
+            background-color: var(--timer-bg);
+            color: var(--timer-text);
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .timer-controls {
+            display: flex;
+            gap: 8px;
+        }
+
+        .timer-controls button {
+            background: none;
+            border: none;
+            color: var(--timer-text);
+            cursor: pointer;
+            font-size: 16px;
+            padding: 4px;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .timer-controls button:hover {
+            background-color: rgba(0,0,0,0.1); /* Darker hover for light timer */
+        }
+        .night-mode .timer-controls button:hover {
+            background-color: rgba(255,255,255,0.2); /* Lighter hover for dark timer */
+        }
+
+        .mode-toggle {
+            background: none;
+            border: none;
+            color: var(--header-text);
+            cursor: pointer;
+            font-size: 20px;
+            padding: 6px;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mode-toggle:hover {
+            background-color: rgba(0,0,0,0.1); /* Darker hover for light header */
+        }
+        .night-mode .mode-toggle:hover {
+            background-color: rgba(255,255,255,0.2); /* Lighter hover for dark header */
+        }
+
+        main {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .passage-container, .questions-container {
+            height: 100%;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .passage-container {
+            width: 50%;
+            background-color: var(--passage-bg);
+            border-right: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .questions-container {
+            width: 50%;
+            background-color: var(--questions-bg);
+        }
+
+        .passage-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .passage-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-color);
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .passage-text {
+            font-size: 17px;
+        }
+        
+        .question-text {
+             font-size: 17px;
+             line-height: 1.8; /* Increased line-height for fill-in-the-blank */
+        }
+
+        .passage-text p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .highlight {
+            background-color: var(--highlight-color);
+            cursor: pointer;
+        }
+
+        .highlight-tooltip {
+            position: absolute;
+            background-color: #333;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 14px;
+            z-index: 1000;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 25px 0 15px;
+            color: var(--text-color);
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .question-group {
+            margin-bottom: 30px;
+        }
+
+        .question {
+            margin-bottom: 25px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: var(--passage-bg);
+            border-left: 4px solid var(--border-color);
+        }
+
+        .question-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: baseline; /* Align baselines of number and text */
+        }
+
+        .question-number {
+            display: inline-block;
+            width: 28px;
+            height: 28px;
+            background-color: var(--progress-incomplete);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            margin-right: 10px;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .question.answered .question-number {
+            background-color: var(--progress-complete);
+        }
+
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .option input {
+            margin-right: 8px;
+        }
+
+        /* Styling for the new inline input fields */
+        .fill-in-the-blank {
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid var(--text-color);
+            width: 150px;
+            font-family: inherit;
+            font-size: 1em; /* Inherit font size from parent */
+            color: inherit;
+            padding: 0 4px 2px 4px; /* Add some padding */
+            margin: 0 3px; /* Add some margin */
+            vertical-align: baseline; /* Align with the text */
+            text-align: center;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .fill-in-the-blank:focus {
+            border-bottom-color: var(--button-bg);
+        }
+
+
+        .instructions {
+            font-size: 14px;
+            color: #757575;
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        footer {
+            background-color: var(--footer-bg);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border-color);
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.05);
+        }
+
+        .progress-container {
+            display: flex;
+            gap: 8px;
+        }
+
+        .progress-item {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: var(--progress-incomplete);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .progress-item:hover {
+            transform: scale(1.1);
+        }
+
+        .progress-item.completed {
+            background-color: var(--progress-complete);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+        }
+
+        .btn-primary {
+            background-color: var(--button-bg);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--button-hover);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 1px solid var(--button-bg); /* Use primary button color for border */
+            color: var(--button-bg); /* Use primary button color for text */
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(204, 0, 0, 0.1); /* Light red tint on hover */
+        }
+        .night-mode .btn-secondary:hover {
+            background-color: rgba(153, 0, 0, 0.2); /* Darker red tint on hover for night mode */
+        }
+
+
+        .feedback-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            display: none; /* Hidden by default */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .feedback-container {
+            background-color: var(--passage-bg);
+            width: 90%;
+            max-width: 900px;
+            height: 90%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .feedback-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .feedback-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        #close-feedback {
+            font-size: 24px;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+        }
+
+        .score-display {
+            font-size: 24px;
+            font-weight: 700;
+            margin-left: 10px;
+        }
+        
+        .feedback-body {
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .feedback-item {
+            margin-bottom: 25px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: var(--questions-bg);
+        }
+
+        .feedback-question {
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .feedback-answer {
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            border-radius: 4px;
+            background-color: rgba(0,0,0,0.05);
+        }
+
+        .correct {
+            color: var(--correct-color);
+        }
+
+        .incorrect {
+            color: var(--incorrect-color);
+        }
+
+        .feedback-explanation {
+            margin-top: 10px;
+            padding: 10px;
+            border-left: 3px solid var(--button-bg); /* Use primary button color for explanation border */
+            background-color: rgba(0,0,0,0.03);
+        }
+
+        .feedback-passage {
+            margin-top: 8px;
+            font-style: italic;
+            color: #757575;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            main {
+                flex-direction: column;
+            }
+            
+            .passage-container, .questions-container {
+                width: 100%;
+                height: 50%;
+            }
+            
+            .passage-container {
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+            }
+            
+            .progress-container {
+                flex-wrap: wrap;
+                max-width: 60%;
+            }
+        }
+
+        @media (max-width: 768px) {
+             .logo-area {
+                flex-wrap: wrap; /* Allow items to wrap to the next line */
+                justify-content: center; /* Center items when wrapped */
+                gap: 8px; /* Adjusted gap for smaller screens */
+             }
+             .social-link {
+                padding: 6px 10px; /* Reduced padding for smaller screens */
+                font-size: 13px; /* Reduced font size for smaller screens */
+             }
+             .social-link i {
+                font-size: 1.1em; /* Slightly smaller icon */
+             }
+             .social-link span {
+                display: inline; /* Ensure text is visible */
+             }
+        }
+
+
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px;
+            }
+            .header-controls {
+                width: 100%;
+                justify-content: space-around;
+            }
+            .progress-container {
+                max-width: 50%;
+            }
+            .progress-item {
+                width: 26px;
+                height: 26px;
+                font-size: 12px;
+            }
+            footer {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .action-buttons {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-area">
+            <!-- Removed the logo image tag as it was not opening -->
+            <a href="https://t.me/muminov_bar" class="social-link telegram" target="_blank" title="Join on Telegram">
+                <i class="fab fa-telegram-plane"></i>
+                <span>More CDI materials</span>
+            </a>
+           
+            </a>
+        </div>
+        <div class="header-controls">
+            <div class="timer-container">
+                <i class="fas fa-clock"></i>
+                <span id="timer">20:00</span>
+                <div class="timer-controls">
+                    <button id="start-timer" title="Start"><i class="fas fa-play"></i></button>
+                    <button id="pause-timer" title="Pause"><i class="fas fa-pause"></i></button>
+                    <button id="reset-timer" title="Reset"><i class="fas fa-redo"></i></button>
+                </div>
+            </div>
+            <button class="mode-toggle" id="night-mode-toggle" title="Toggle Night Mode">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </header>
+<main>
+    <div class="passage-container" id="passage-container">
+        <div class="passage-content">
+            <div class="passage-title">Understanding and Protecting Elephants</div>
+            <div class="passage-text" id="passage-text">
+                <p><b>A</b><br>
+                The future of the African elephant is at risk. They are often shot by poachers for their ivory and this is responsible for most of the decline in elephant numbers. But habitat loss is important too, and not just the changing of bush into farmland. Roads, railways and fences stop elephants moving around, and an elephant needs a lot of room. According to George Wittemyer of Save the Elephants, an average elephant ranges over 1,500 square kilometres over a year and may travel as much as 60 kilometres a day.</p>
+                
+                <p><b>B</b><br>
+                The question is whether elephants and people can ever coexist peacefully. People who worry that the answer may be 'no' fear the loss of more than just another species of animal. Elephants seem to have evolved intelligence, and possibly even consciousness. Though they may not be alone in this (similar claims are made for certain whales, some carnivores like lions and hyenas, and some birds), they are certainly part of a small group. Self-awareness is one indication of the vast capacity for thinking and intellect that exists in the elephant. They can, in fact, identify themselves in a mirror, something that is extremely rare in the animal kingdom. Another example of superior intellect is the elephant's ability to have fun and display a sense of humour. Elephants in zoos have even been seen stealing onlookers' caps and hiding them in playful teasing. Losing even one example of how intelligence develops would reduce the ability of biologists to understand the process of how intelligence has evolved in animals.</p>
+                
+                <p><b>C</b><br>
+                Apart from people, no species on Earth has a more complex society than elephants. Their social arrangements centre around groups of four or five females and their young that are led by a matriarch who is mother, grandmother, great-grandmother, sister or aunt to most of them. Though males are forced to depart their birth group when they mature, females usually remain in it their entire lives. Elephant families are part of bigger 'kinship' groups that come together and separate at will. Moreover, each kinship group is part of what is called a clan. Clans gather in the dry season, when the resources capable of supporting elephants are limited. All clan members know each other and, since a clan will usually have 100 to 200 adult members, this means an adult female can recognise and have meaningful social relations with that many other individuals. A figure of between 100 and 200 acquaintances is similar to the number of people a human being can maintain meaningful social relationships with a value known as Dunbar's number. Dunbar's number for people is about 150.</p>
+                
+                <p><b>D</b><br>
+                Being able to recall details of such large numbers of individuals means elephants require enormous mental powers. Details of how their brains work are not known, but one thing which is known is that they have big hippocampuses. These structures, one in each hemisphere of the brain, are involved in the formation of long-term recall. Compared with the size of its brain, an elephant's hippocampuses are about 40 per cent larger than those of a human being.</p>
+                
+                <p><b>E</b><br>
+                Elephants can seemingly solve problems by thinking about them in abstract terms. Experiments conducted on domesticated Asian elephants show that they are able to manipulate nearby objects, such as branches, as tools to get food which is out of reach. This is something some other species, such as great apes, can do, but which most animals find impossible. For all of these reasons then, elephants are of great scientific interest. But the focus of almost all elephant researchers has shifted from understanding the animals to trying to preserve them.</p>
+                
+                <p><b>F</b><br>
+                Another, though secondary, cause of elephant decline, is changes in land use in Africa. The human inhabitants of areas around African elephant reserves have traditionally survived by moving herds of cattle from one grazing place to another. One source of conflict with elephants has been competition for pasture, as the herders' populations have grown. But, additionally, some herders have begun to settle down. Buildings and fences are appearing on land which elephants have traditionally crossed as they travel from one place to another. Elephants have places where they prefer to live and, when travelling between these, which they often do at night, they tend to follow narrow corridors. Keeping these corridors clear of development is essential to the well-being of elephants.</p>
+                
+                <p><b>G</b><br>
+                Understanding elephants' behavior also permits it to be changed in ways that help reduce direct conflict between elephants and people. One such project uses elephants' fear of bees. Bees are the only animals, apart from humans, that elephants seem truly afraid of. This is because, although a bee's sting cannot penetrate most parts of an elephant's hide, groups of bees tend to attack the eyes and the tips of the trunks, an elephant's most sensitive parts. Elephants can't protect themselves from the bees—not even by swinging their tails and flapping their ears.</p>
+                
+                <p><b>H</b><br>
+                Knowing this, scientists developed the idea of protecting farms with bee fences. The sort of fence most African farmers can afford is too weak to keep an elephant away from their crops, but a bee fence, though even weaker, will achieve this. The fence consists of pairs of poles placed at three-metre intervals, between which beehives are hung. This fence is enough to stop elephants immediately. They are so scared that half the hives can be fake, and the fence still keeps the elephants out. Bee-fences farms suffer far fewer elephant attacks than those with conventional protection. As a bonus, the farmers earn extra income from the honey the bees produce.</p>
+            </div>
+        </div>
+    </div>
+       <div class="questions-container" id="questions-container">
+    <div class="section-title">Questions 14–20</div>
+    <div class="instructions">
+        Reading Passage 2 has eight paragraphs, A–H. <br>
+        Which paragraph contains the following information?<br>
+        Write the correct letter, A–H, in boxes 14–20 on your answer sheet.<br>
+        You may use any letter more than once.
+    </div>
+    <div class="question-group">
+        <div class="question" id="q14"><strong>14.</strong> an explanation of why elephants have such good memories<br><input type="text" name="q14"></div>
+        <div class="question" id="q15"><strong>15.</strong> a mention of the possible consequence of elephant extinction on scientific knowledge<br><input type="text" name="q15"></div>
+        <div class="question" id="q16"><strong>16.</strong> a comparison of human and elephant abilities to interact with others<br><input type="text" name="q16"></div>
+        <div class="question" id="q17"><strong>17.</strong> a detail about when elephants most frequently move between different areas<br><input type="text" name="q17"></div>
+        <div class="question" id="q18"><strong>18.</strong> reference to the biggest cause of the decrease in the world’s elephant population<br><input type="text" name="q18"></div>
+        <div class="question" id="q19"><strong>19.</strong> a mention of the fact that climate affects the time when elephants group together<br><input type="text" name="q19"></div>
+        <div class="question" id="q20"><strong>20.</strong> reference to how some elephants can use items in their environment to feed themselves<br><input type="text" name="q20"></div>
+    </div>
+
+    <div class="section-title">Questions 21–22</div>
+    <div class="instructions">Choose TWO letters, A–E.</div>
+    <p>The list below gives some examples of elephant intelligence.<br>Which TWO of these examples are mentioned by the writer of the text?</p>
+    <div class="question-group">
+        <div class="question"><label><input type="checkbox" name="q21" value="A"> A. Elephants can identify potentially dangerous foods.</label></div>
+        <div class="question"><label><input type="checkbox" name="q21" value="B"> B. Elephants are capable of learning new skills throughout their lives.</label></div>
+        <div class="question"><label><input type="checkbox" name="q21" value="C"> C. Elephants are able to share a habitat with other animal species.</label></div>
+        <div class="question"><label><input type="checkbox" name="q21" value="D"> D. Elephants have the ability to recognise their own reflection.</label></div>
+        <div class="question"><label><input type="checkbox" name="q21" value="E"> E. Elephants demonstrate a capacity for playful behaviour.</label></div>
+    </div>
+
+    <div class="section-title">Questions 23–24</div>
+    <div class="instructions">Choose TWO letters, A–E.</div>
+    <p>Which TWO of the following statements are true of land use in Africa according to the writer of the text?</p>
+    <div class="question-group">
+        <div class="question"><label><input type="checkbox" name="q23" value="A"> A. Rising global temperatures are affecting animals more than humans.</label></div>
+        <div class="question"><label><input type="checkbox" name="q23" value="B"> B. Herders have begun to change the way they graze their cattle.</label></div>
+        <div class="question"><label><input type="checkbox" name="q23" value="C"> C. Elephants are easily capable of adapting to new grazing areas.</label></div>
+        <div class="question"><label><input type="checkbox" name="q23" value="D"> D. Man-made structures are preventing the free movement of elephants.</label></div>
+        <div class="question"><label><input type="checkbox" name="q23" value="E"> E. Elephants consume considerably more grass than cattle do.</label></div>
+    </div>
+
+    <div class="section-title">Questions 25–29</div>
+    <div class="instructions">Complete the summary below. Choose ONE WORD ONLY from the passage for each answer.</div>
+    <p><strong>Elephants and Bees</strong></p>
+    <p>Even though most of an elephant's skin is too thick for a bee to sting through, elephants fear bees greatly. This is because the insects sting elephants in their eyes or on their <input type="text" name="q25">, which are easily hurt.</p>
+    <p>Farmers in Africa use bee fences to stop elephants from coming on to their property and damaging <input type="text" name="q26">. These bee fences are simple constructions of regularly spaced <input type="text" name="q27"> from which hives are hung. The elephants are so scared of bees that even using some beehives which are <input type="text" name="q28"> will frighten elephants away.</p>
+    <p>The honey collected from these beehives can also provide additional <input type="text" name="q29"> for farmers.</p>
+</div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="progress-container" id="progress-container">
+            </div>
+        <div class="action-buttons">
+            <button class="btn-secondary" id="reset-btn">Reset Answers</button>
+            <button class="btn-primary" id="submit-btn">Submit Answers</button>
+        </div>
+    </footer>
+
+    <div class="feedback-overlay" id="feedback-overlay">
+        <div class="feedback-container" id="feedback-container">
+            <div class="feedback-header">
+                <div class="feedback-title">
+                    <i class="fas fa-chart-bar"></i> Your Results
+                    <span class="score-display" id="score-display">0/13</span>
+                </div>
+                <button id="close-feedback" title="Close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="feedback-body" id="feedback-body">
+                </div>
+        </div>
+    </div>
+
+
+    <script>
+        // Timer functionality
+        let timerInterval;
+        let seconds = 1200; // 20 minutes
+        let timerRunning = false;
+        
+        const timerDisplay = document.getElementById('timer');
+        const startTimer = document.getElementById('start-timer');
+        const pauseTimer = document.getElementById('pause-timer');
+        const resetTimer = document.getElementById('reset-timer');
+        
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60).toString().padStart(2, '0');
+            const secs = (seconds % 60).toString().padStart(2, '0');
+            return `${mins}:${secs}`;
+        }
+        
+        function updateTimer() {
+            timerDisplay.textContent = formatTime(seconds);
+            if (seconds <= 0) {
+                clearInterval(timerInterval);
+                timerRunning = false;
+                document.getElementById('submit-btn').click();
+            }
+        }
+        
+        startTimer.addEventListener('click', () => {
+            if (!timerRunning) {
+                timerRunning = true;
+                timerInterval = setInterval(() => {
+                    seconds--;
+                    updateTimer();
+                }, 1000);
+            }
+        });
+        
+        pauseTimer.addEventListener('click', () => {
+            if (timerRunning) {
+                clearInterval(timerInterval);
+                timerRunning = false;
+            }
+        });
+        
+        resetTimer.addEventListener('click', () => {
+            clearInterval(timerInterval);
+            timerRunning = false;
+            seconds = 1200;
+            updateTimer();
+        });
+        
+        // Night mode toggle
+        const nightModeToggle = document.getElementById('night-mode-toggle');
+        nightModeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('night-mode');
+            const icon = nightModeToggle.querySelector('i');
+            if (document.body.classList.contains('night-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        });
+        
+        // Create progress indicators
+        const progressContainer = document.getElementById('progress-container');
+        for (let i = 14; i <= 29; i++) {
+            const progressItem = document.createElement('div');
+            progressItem.className = 'progress-item';
+            progressItem.textContent = i;
+            progressItem.dataset.question = i;
+            progressContainer.appendChild(progressItem);
+            
+            progressItem.addEventListener('click', () => {
+                const questionElement = document.getElementById(`q${i}`);
+                if (questionElement) {
+                    questionElement.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        }
+        
+        // Text highlighting functionality
+        let highlightTooltip = null;
+
+        function handleMouseUp(e) {
+            const container = e.currentTarget;
+            const selection = window.getSelection();
+            if (selection.toString().trim() !== '' && container.contains(selection.anchorNode)) {
+                const range = selection.getRangeAt(0);
+                const rect = range.getBoundingClientRect();
+
+                if (highlightTooltip) {
+                    highlightTooltip.remove();
+                    highlightTooltip = null;
+                }
+
+                highlightTooltip = document.createElement('div');
+                highlightTooltip.className = 'highlight-tooltip';
+                highlightTooltip.innerHTML = '<i class="fas fa-highlighter"></i> Highlight';
+                highlightTooltip.style.position = 'fixed';
+                highlightTooltip.style.top = `${rect.top - 40}px`;
+                highlightTooltip.style.left = `${rect.left}px`;
+                document.body.appendChild(highlightTooltip);
+
+                highlightTooltip.addEventListener('click', () => {
+                    const span = document.createElement('span');
+                    span.className = 'highlight';
+                    span.appendChild(range.extractContents());
+                    range.insertNode(span);
+                    selection.removeAllRanges();
+                    highlightTooltip.remove();
+                    highlightTooltip = null;
+                });
+            }
+        }
+
+        document.getElementById('passage-text').addEventListener('mouseup', handleMouseUp);
+        document.getElementById('questions-container').addEventListener('mouseup', handleMouseUp);
+        
+        document.addEventListener('mousedown', (e) => {
+            if (highlightTooltip && !highlightTooltip.contains(e.target)) {
+                highlightTooltip.remove();
+                highlightTooltip = null;
+                window.getSelection().removeAllRanges();
+            }
+        });
+        
+        // Track answered questions
+        const questions = document.querySelectorAll('.question');
+        const progressItems = document.querySelectorAll('.progress-item');
+        
+        function updateProgress() {
+            let answeredCount = 0;
+            
+            questions.forEach((question, index) => {
+                const questionNumber = index + 1;
+                let answered = false;
+                
+                if (questionNumber <= 6) {
+                    const selectedOption = question.querySelector('input:checked');
+                    answered = selectedOption !== null;
+                } else {
+                    const input = question.querySelector('input[type="text"]');
+                    answered = input.value.trim() !== '';
+                }
+                
+                if (answered) {
+                    question.classList.add('answered');
+                    progressItems[index].classList.add('completed');
+                    answeredCount++;
+                } else {
+                    question.classList.remove('answered');
+                    progressItems[index].classList.remove('completed');
+                }
+            });
+            
+            return answeredCount;
+        }
+        
+        document.querySelectorAll('input[type="radio"], input[type="text"]').forEach(input => {
+            input.addEventListener('change', updateProgress);
+            input.addEventListener('input', updateProgress);
+        });
+        
+        // Reset button
+        document.getElementById('reset-btn').addEventListener('click', () => {
+            document.querySelectorAll('input[type="radio"]').forEach(radio => {
+                radio.checked = false;
+            });
+            
+            document.querySelectorAll('input[type="text"]').forEach(input => {
+                input.value = '';
+            });
+            
+            document.querySelectorAll('.highlight').forEach(highlight => {
+                const parent = highlight.parentNode;
+                while (highlight.firstChild) {
+                    parent.insertBefore(highlight.firstChild, highlight);
+                }
+                parent.removeChild(highlight);
+                parent.normalize();
+            });
+            
+            updateProgress();
+            document.getElementById('feedback-overlay').style.display = 'none';
+        });
+        
+        // Submit and Feedback functionality
+        const feedbackOverlay = document.getElementById('feedback-overlay');
+        const closeFeedbackBtn = document.getElementById('close-feedback');
+
+        document.getElementById('submit-btn').addEventListener('click', () => {
+            console.log("Submit button clicked!"); // Debugging log
+            pauseTimer.click();
+            
+            const answers = {
+                1: 'FALSE', 2: 'FALSE', 3: 'NOT GIVEN', 4: 'TRUE', 5: 'FALSE', 6: 'TRUE', 7: 'fraudulent',
+                8: 'museums', 9: 'Cubism', 10: 'cinema', 11: 'workshop', 12: 'vases', 13: 'travelers'
+            };
+            
+            
+            
+            let correctCount = 0;
+            const feedbackBody = document.getElementById('feedback-body');
+            feedbackBody.innerHTML = ''; 
+            
+            for (let i = 14; i <= 29; i++) {
+                let userAnswer, isCorrect, questionHTML;
+                const feedbackItem = document.createElement('div');
+                feedbackItem.className = 'feedback-item';
+                
+                const questionDiv = document.querySelector(`#q${i} .question-text`);
+
+                if (i <= 6) {
+                    const selectedOption = document.querySelector(`input[name="q${i}"]:checked`);
+                    userAnswer = selectedOption ? selectedOption.value : 'Not answered';
+                    isCorrect = userAnswer === answers[i];
+                    questionHTML = questionDiv.textContent;
+                } else {
+                    const input = document.querySelector(`input[name="q${i}"]`);
+                    userAnswer = input.value.trim();
+                    isCorrect = userAnswer.toLowerCase() === answers[i].toLowerCase();
+                    // Recreate the question with the correct answer filled in
+                    questionHTML = questionDiv.innerHTML.replace(/<input.*?>/, `<strong><em>${answers[i]}</em></strong>`);
+                }
+                
+                if (isCorrect) correctCount++;
+                
+                feedbackItem.innerHTML = `
+                    <div class="feedback-question">
+                        <span class="${isCorrect ? 'correct' : 'incorrect'}">Question ${i}:</span>
+                        ${isCorrect ? `<i class="fas fa-check correct" style="margin-left: 5px;"></i>` : `<i class="fas fa-times incorrect" style="margin-left: 5px;"></i>`}
+                    </div>
+                    <p><em>${questionHTML}</em></p>
+                    <div class="feedback-answer">
+                        <strong>Your answer:</strong> ${userAnswer || 'Not answered'}<br>
+                        ${!isCorrect ? `<strong>Correct answer:</strong> ${answers[i]}` : ''}
+                    </div>
+                    
+                    
+                `;
+                
+                feedbackBody.appendChild(feedbackItem);
+            }
+            
+            document.getElementById('score-display').textContent = `${correctCount}/13`;
+            feedbackOverlay.style.display = 'flex'; // This line makes the overlay visible
+            console.log("Feedback overlay display set to flex."); // Debugging log
+        });
+
+        closeFeedbackBtn.addEventListener('click', () => {
+            feedbackOverlay.style.display = 'none';
+        });
+
+        feedbackOverlay.addEventListener('click', (e) => {
+            if (e.target === feedbackOverlay) {
+                feedbackOverlay.style.display = 'none';
+            }
+        });
+
+        // Initialize timer display and progress
+        updateTimer();
+        updateProgress();
+    </script>
+</body>
+</html>

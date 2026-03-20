@@ -85,6 +85,70 @@ export default function WritingPractice() {
           data: '/writing/IELTSwithJurabek.html',
           isStatic: true,
           createdAt: { seconds: Date.now() / 1000 }
+        },
+        {
+          id: 'jurabek-writing-2',
+          title: 'IELTS with Jurabek - Writing 2',
+          type: 'full',
+          data: '/writing/@IELTSwithJurabekwriting 2.html',
+          isStatic: true,
+          createdAt: { seconds: Date.now() / 1000 }
+        },
+        {
+          id: 'appeared-full-writing-2',
+          title: 'APPEARED Full Writing 2',
+          type: 'full',
+          data: '/writing/APPEARED full writing 2.html',
+          isStatic: true,
+          createdAt: { seconds: Date.now() / 1000 }
+        },
+        {
+          id: 'appeared-writing-1',
+          title: 'APPEARED Writing 1',
+          type: 'full',
+          data: '/writing/APPEARED writing 1.html',
+          isStatic: true,
+          createdAt: { seconds: Date.now() / 1000 }
+        },
+        {
+          id: 'jurabek-writing-3',
+          title: 'IELTS with Jurabek 3',
+          type: 'full',
+          data: '/writing/IELTSwithJurabek 3.html',
+          isStatic: true,
+          createdAt: { seconds: Date.now() / 1000 }
+        },
+        {
+          id: 'jurabek-writing-main',
+          title: 'IELTS with Jurabek Writing',
+          type: 'full',
+          data: '/writing/IELTSwithJurabek writing.html',
+          isStatic: true,
+          createdAt: { seconds: Date.now() / 1000 }
+        },
+        {
+          id: 'jurabek-writing-2nd',
+          title: 'IELTS with Jurabek 2',
+          type: 'full',
+          data: '/writing/IELTSwithJurabek2.html',
+          isStatic: true,
+          createdAt: { seconds: Date.now() / 1000 }
+        },
+        {
+          id: 'writing-day-1',
+          title: 'Writing Day 1',
+          type: 'full',
+          data: '/writing/writing day 1.html',
+          isStatic: true,
+          createdAt: { seconds: Date.now() / 1000 }
+        },
+        {
+          id: 'writing-day-2',
+          title: 'Writing Day 2',
+          type: 'full',
+          data: '/writing/writing day 2.html',
+          isStatic: true,
+          createdAt: { seconds: Date.now() / 1000 }
         }
       ];
 
@@ -108,6 +172,70 @@ export default function WritingPractice() {
           title: 'IELTS with Jurabek - Writing Test',
           type: 'full',
           data: '/writing/IELTSwithJurabek.html',
+          isStatic: true,
+          createdAt: { seconds: Date.now() / 1000 }
+        },
+        {
+          id: 'jurabek-writing-2',
+          title: 'IELTS with Jurabek - Writing 2',
+          type: 'full',
+          data: '/writing/@IELTSwithJurabekwriting 2.html',
+          isStatic: true,
+          createdAt: { seconds: Date.now() / 1000 }
+        },
+        {
+          id: 'appeared-full-writing-2',
+          title: 'APPEARED Full Writing 2',
+          type: 'full',
+          data: '/writing/APPEARED full writing 2.html',
+          isStatic: true,
+          createdAt: { seconds: Date.now() / 1000 }
+        },
+        {
+          id: 'appeared-writing-1',
+          title: 'APPEARED Writing 1',
+          type: 'full',
+          data: '/writing/APPEARED writing 1.html',
+          isStatic: true,
+          createdAt: { seconds: Date.now() / 1000 }
+        },
+        {
+          id: 'jurabek-writing-3',
+          title: 'IELTS with Jurabek 3',
+          type: 'full',
+          data: '/writing/IELTSwithJurabek 3.html',
+          isStatic: true,
+          createdAt: { seconds: Date.now() / 1000 }
+        },
+        {
+          id: 'jurabek-writing-main',
+          title: 'IELTS with Jurabek Writing',
+          type: 'full',
+          data: '/writing/IELTSwithJurabek writing.html',
+          isStatic: true,
+          createdAt: { seconds: Date.now() / 1000 }
+        },
+        {
+          id: 'jurabek-writing-2nd',
+          title: 'IELTS with Jurabek 2',
+          type: 'full',
+          data: '/writing/IELTSwithJurabek2.html',
+          isStatic: true,
+          createdAt: { seconds: Date.now() / 1000 }
+        },
+        {
+          id: 'writing-day-1',
+          title: 'Writing Day 1',
+          type: 'full',
+          data: '/writing/writing day 1.html',
+          isStatic: true,
+          createdAt: { seconds: Date.now() / 1000 }
+        },
+        {
+          id: 'writing-day-2',
+          title: 'Writing Day 2',
+          type: 'full',
+          data: '/writing/writing day 2.html',
           isStatic: true,
           createdAt: { seconds: Date.now() / 1000 }
         }

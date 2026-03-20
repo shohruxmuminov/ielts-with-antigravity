@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IELTS Task Manager</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      background: #f5f5f5;
+    }
+    .header {
+      background: linear-gradient(to right, #4a90e2, #63b8ff);
+      padding: 15px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: 700;
+      color: white;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .telegram-recommendation {
+      display: flex;
+      justify-content: flex-end;
+      padding: 10px 20px;
+      background: #f5f5f5;
+    }
+    .telegram-recommendation a {
+      padding: 15px 30px;
+      font-size: 20px;
+      font-weight: 700;
+      color: white;
+      background: linear-gradient(to right, #0088cc, #00aaff);
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 6px 12px rgba(0, 136, 204, 0.3);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .telegram-recommendation a:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 136, 204, 0.4);
+    }
+    .telegram-recommendation img {
+      width: 32px;
+      height: 32px;
+    }
+    .container {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+    .left-panel {
+      width: 50%;
+      background: #f0f0f0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-y: auto;
+    }
+    .task-options {
+      margin-bottom: 20px;
+    }
+    .task-options button {
+      margin: 0 10px;
+      padding: 12px 25px;
+      font-size: 16px;
+      cursor: pointer;
+      background: linear-gradient(to right, #4a90e2, #63b8ff);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .task-options button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(74, 144, 226, 0.3);
+    }
+    .task-instructions {
+      margin: 10px 0;
+      font-size: 16px;
+      font-weight: bold;
+      text-align: center;
+      background: #ffffff;
+      padding: 15px;
+      border-radius: 6px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      width: 85%;
+      line-height: 1.5;
+      color: #333;
+    }
+    .image-preview {
+      max-width: 100%;
+      max-height: 70%;
+      object-fit: contain;
+      display: none;
+      border: 2px solid #e0e0e0;
+      border-radius: 6px;
+      margin: 10px 0;
+    }
+    .image-controls {
+      display: block;
+      margin-top: 10px;
+    }
+    .topic-input, .candidate-input {
+      width: 85%;
+      margin: 10px 0;
+      padding: 12px;
+      font-size: 16px;
+      border: 2px solid #ccc;
+      border-radius: 6px;
+      transition: border-color 0.2s;
+    }
+    .topic-input:focus, .candidate-input:focus {
+      border-color: #4a90e2;
+      outline: none;
+    }
+    .topic-input {
+      height: 100px;
+      resize: vertical;
+    }
+    .right-panel {
+      width: 50%;
+      padding: 20px;
+      background: #e0e0e0;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+    .timer {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 15px;
+      color: #333;
+    }
+    .timer-controls {
+      margin-bottom: 15px;
+    }
+    .timer-controls button {
+      margin: 0 10px;
+      padding: 12px 25px;
+      font-size: 16px;
+      cursor: pointer;
+      background: linear-gradient(to right, #4a90e2, #63b8ff);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .timer-controls button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(74, 144, 226, 0.3);
+    }
+    .word-count {
+      font-size: 18px;
+      color: #555;
+      margin-bottom: 15px;
+    }
+    .typing-area {
+      width: 100%;
+      height: 60%;
+      margin-top: 10px;
+      padding: 12px;
+      font-size: 16px;
+      border: 2px solid #ccc;
+      border-radius: 6px;
+      resize: none;
+    }
+    .typing-area:focus {
+      border-color: #4a90e2;
+      outline: none;
+    }
+    .download-btn, .delete-image-btn {
+      margin-top: 15px;
+      padding: 12px 25px;
+      font-size: 16px;
+      cursor: pointer;
+      background: linear-gradient(to right, #4a90e2, #63b8ff);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .delete-image-btn {
+      background: linear-gradient(to right, #e94e77, #d43a5f);
+      display: none;
+    }
+    .download-btn:hover, .delete-image-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(74, 144, 226, 0.3);
+    }
+    .upload-btn {
+      margin-top: 10px;
+    }
+    .footer {
+      text-align: center;
+      font-size: 14px;
+      font-style: italic;
+      color: #555;
+      padding: 10px;
+      background: #f0f0f0;
+    }
+    .telegram-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 15px 30px;
+      font-size: 18px;
+      font-weight: 700;
+      color: white;
+      background: linear-gradient(to right, #0088cc, #00aaff);
+      border: none;
+      border-radius: 10px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 6px 12px rgba(0, 136, 204, 0.3);
+      transition: transform 0.2s, box-shadow 0.2s;
+      z-index: 1000;
+    }
+    .telegram-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 136, 204, 0.4);
+    }
+    .telegram-btn img {
+      width: 30px;
+      height: 30px;
+    }
+    @media screen and (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+      .left-panel, .right-panel {
+        width: 100%;
+        height: 50%;
+      }
+      .image-preview {
+        max-height: 60%;
+      }
+      .typing-area {
+        height: 40%;
+      }
+      .telegram-btn {
+        padding: 10px 20px;
+        font-size: 16px;
+        top: 10px;
+        right: 10px;
+      }
+      .telegram-btn img {
+        width: 24px;
+        height: 24px;
+      }
+      .telegram-recommendation {
+        padding: 8px 10px;
+      }
+      .telegram-recommendation a {
+        padding: 10px 20px;
+        font-size: 16px;
+      }
+      .telegram-recommendation img {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="https://t.me/muminov_bar" target="_blank" class="telegram-btn">
+    <img src="https://telegram.org/img/t_logo.png" alt="Telegram Icon">
+    Join @IELTSwithShohrux
+  </a>
+  <div class="header">IELTS Task Manager</div>
+  <div class="telegram-recommendation">
+    <a href="https://t.me/muminov_bar" target="_blank">
+      <img src="https://telegram.org/img/t_logo.png" alt="Telegram Icon">
+      Join Our Telegram Channel
+    </a>
+  </div>
+  <div class="container">
+    <div class="left-panel">
+      <div class="task-options">
+        <button onclick="showTask(1)">Task 1</button>
+        <button onclick="showTask(2)">Task 2</button>
+      </div>
+      <div id="taskInstructions" class="task-instructions"></div>
+      <p>Upload an image for Task 1 (Ctrl+V or select a file).</p>
+      <img id="preview" class="image-preview" src="">
+      <input type="file" id="imageUpload" accept="image/*" class="upload-btn">
+      <div class="image-controls">
+        <button id="deleteImageBtn" class="delete-image-btn" onclick="deleteImage()">Delete Image</button>
+      </div>
+      <textarea id="topicInput" class="topic-input" placeholder="Enter topic..."></textarea>
+      <input type="text" id="candidateInput" class="candidate-input" placeholder="Enter candidate name..." required>
+    </div>
+    <div class="right-panel">
+      <div class="timer">Time: <span id="time">60:00</span></div>
+      <div class="timer-controls">
+        <button onclick="startTimer()">Start</button>
+        <button onclick="pauseTimer()">Pause</button>
+        <button onclick="restartTimer()">Restart</button>
+      </div>
+      <div class="word-count">Words: <span id="wordCount">0</span></div>
+      <textarea id="task1TypingArea" class="typing-area" placeholder="Start typing here for Task 1..." style="display:none;" oninput="updateWordCount(1)"></textarea>
+      <textarea id="task2TypingArea" class="typing-area" placeholder="Start typing here for Task 2..." style="display:none;" oninput="updateWordCount(2)"></textarea>
+      <button id="downloadBtn" class="download-btn" onclick="downloadPDF()">Download PDF</button>
+    </div>
+  </div>
+  <div class="footer">by @IELTSwithShohrux</div>
+
+  <script>
+    const { jsPDF } = window.jspdf;
+    const preview = document.getElementById('preview');
+    const imageUpload = document.getElementById('imageUpload');
+    const deleteImageBtn = document.getElementById('deleteImageBtn');
+    const imageControls = document.querySelector('.image-controls');
+    const topicInput = document.getElementById('topicInput');
+    const candidateInput = document.getElementById('candidateInput');
+    const task1TypingArea = document.getElementById('task1TypingArea');
+    const task2TypingArea = document.getElementById('task2TypingArea');
+    const wordCount = document.getElementById('wordCount');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const taskInstructions = document.getElementById('taskInstructions');
+    let timeLeft = 60 * 60;
+    let initialTime = 60 * 60;
+    let timerId;
+    let isRunning = false;
+    let currentTask = 1;
+
+    function showTask(task) {
+      currentTask = task;
+      preview.style.display = task === 1 && preview.src ? 'block' : 'none';
+      imageUpload.style.display = task === 1 ? 'block' : 'none';
+      imageControls.style.display = task === 1 ? 'block' : 'none';
+      deleteImageBtn.style.display = preview.src ? 'inline-block' : 'none';
+      topicInput.style.display = task === 2 ? 'block' : 'none';
+      taskInstructions.style.display = 'block';
+      task1TypingArea.style.display = task === 1 ? 'block' : 'none';
+      task2TypingArea.style.display = task === 2 ? 'block' : 'none';
+      if (task === 1) {
+        taskInstructions.textContent = 'Academic Writing Task 1.\nYou should spend about 20 minutes on this task. Write at least 150 words.';
+        downloadBtn.style.display = 'none';
+      } else if (task === 2) {
+        taskInstructions.textContent = 'Academic Writing Task 2.\nYou should spend about 40 minutes on this task. Write at least 250 words.';
+        downloadBtn.style.display = 'block';
+      }
+      updateWordCount(task);
+      updateTimer();
+    }
+
+    imageUpload.addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        deleteImage();
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          preview.src = event.target.result;
+          preview.style.display = 'block';
+          deleteImageBtn.style.display = 'inline-block';
+        };
+        reader.onerror = function() {
+          alert('Error reading the uploaded image.');
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    document.addEventListener('paste', function(e) {
+      if (currentTask !== 1) {
+        return;
+      }
+      e.preventDefault();
+      const items = (e.clipboardData || window.clipboardData).items;
+      let imageFound = false;
+
+      for (let item of items) {
+        if (item.type.indexOf('image') === 0) {
+          imageFound = true;
+          const file = item.getAsFile();
+          if (file) {
+            deleteImage();
+            const reader = new FileReader();
+            reader.onload = function(event) {
+              preview.src = event.target.result;
+              preview.style.display = 'block';
+              deleteImageBtn.style.display = 'inline-block';
+              imageControls.style.display = 'block';
+            };
+            reader.onerror = function() {
+              alert('Error reading the pasted image.');
+            };
+            reader.readAsDataURL(file);
+          }
+          break;
+        }
+      }
+
+      if (!imageFound) {
+        alert('No image found in the clipboard. Please copy an image and try again.');
+      }
+    });
+
+    function deleteImage() {
+      preview.src = '';
+      preview.style.display = 'none';
+      deleteImageBtn.style.display = 'none';
+      imageUpload.value = '';
+    }
+
+    function updateWordCount(task) {
+      const text = task === 1 ? task1TypingArea.value : task2TypingArea.value;
+      const words = text.trim().split(/\s+/).filter(word => word.length > 0).length;
+      wordCount.textContent = words;
+    }
+
+    function startTimer() {
+      if (!isRunning && timeLeft > 0) {
+        isRunning = true;
+        timerId = setInterval(() => {
+          timeLeft--;
+          updateTimer();
+          if (timeLeft <= 0) {
+            clearInterval(timerId);
+            isRunning = false;
+            alert('Time is up!');
+          }
+        }, 1000);
+      }
+    }
+
+    function pauseTimer() {
+      if (isRunning) {
+        clearInterval(timerId);
+        isRunning = false;
+      }
+    }
+
+    function restartTimer() {
+      pauseTimer();
+      timeLeft = 60 * 60;
+      initialTime = 60 * 60;
+      updateTimer();
+    }
+
+    function updateTimer() {
+      const minutes = Math.floor(timeLeft / 60);
+      const seconds = timeLeft % 60;
+      document.getElementById('time').textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    }
+
+    function downloadPDF() {
+      if (!candidateInput.value.trim()) {
+        alert('Please enter your name.');
+        return;
+      }
+      const candidateName = candidateInput.value.trim();
+      const time = new Date().toLocaleString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true, timeZone: 'Asia/Tashkent' });
+      const totalTimeSpent = initialTime - timeLeft;
+      const hours = Math.floor(totalTimeSpent / 3600);
+      const minutes = Math.floor((totalTimeSpent % 3600) / 60);
+      const seconds = totalTimeSpent % 60;
+      const timeSpentStr = `${hours > 0 ? hours + 'h ' : ''}${minutes > 0 ? minutes + 'm ' : ''}${seconds}s`;
+      const doc = new jsPDF();
+
+      const adText = 'JOIN OUR TELEGRAM CHANNEL FOR IELTS TIPS AND RESOURCES: @IELTSWITHShohrux (https://t.me/muminov_bar)';
+
+      doc.setFontSize(16);
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(0, 136, 204);
+      const adSplit1 = doc.splitTextToSize(adText, 170);
+      let yPos = 20;
+      doc.text(adSplit1, 105, yPos, { align: 'center' });
+      yPos += adSplit1.length * 10 + 10;
+      doc.setLineWidth(0.5);
+      doc.setDrawColor(0, 136, 204);
+      doc.line(20, yPos, 190, yPos);
+      yPos += 10;
+
+      doc.setFontSize(18);
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(0, 0, 0);
+      doc.text(`Essay by ${candidateName}`, 20, yPos);
+      yPos += 10;
+      doc.setFontSize(12);
+      doc.setFont('helvetica', 'normal');
+      doc.text('Task: Academic Writing Task 1', 20, yPos);
+      yPos += 10;
+      doc.text(`Time: ${time} (Tashkent Time)`, 20, yPos);
+      yPos += 10;
+      doc.text(`Total Time Spent: ${timeSpentStr}`, 20, yPos);
+      yPos += 10;
+      doc.text('Topic: [Image-based summary]', 20, yPos);
+      yPos += 10;
+      doc.text(`Word Count: ${task1TypingArea.value.trim().split(/\s+/).filter(word => word.length > 0).length}`, 20, yPos);
+      yPos += 10;
+      doc.line(20, yPos, 190, yPos);
+      yPos += 10;
+      const splitText1 = doc.splitTextToSize(task1TypingArea.value.trim() || 'No content provided', 170);
+      for (let line of splitText1) {
+        if (yPos > 280) {
+          doc.addPage();
+          yPos = 20;
+        }
+        doc.text(line, 20, yPos);
+        yPos += 10;
+      }
+
+      doc.addPage();
+      doc.setFontSize(16);
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(0, 136, 204);
+      const adSplit2 = doc.splitTextToSize(adText, 170);
+      yPos = 20;
+      doc.text(adSplit2, 105, yPos, { align: 'center' });
+      yPos += adSplit2.length * 10 + 10;
+      doc.setLineWidth(0.5);
+      doc.setDrawColor(0, 136, 204);
+      doc.line(20, yPos, 190, yPos);
+      yPos += 10;
+
+      doc.setFontSize(18);
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(0, 0, 0);
+      doc.text(`Essay by ${candidateName}`, 20, yPos);
+      yPos += 10;
+      doc.setFontSize(12);
+      doc.setFont('helvetica', 'normal');
+      doc.text('Task: Academic Writing Task 2', 20, yPos);
+      yPos += 10;
+      doc.text(`Time: ${time} (Tashkent Time)`, 20, yPos);
+      yPos += 10;
+      doc.text(`Total Time Spent: ${timeSpentStr}`, 20, yPos);
+      yPos += 10;
+      const splitTopic = doc.splitTextToSize(`Topic: ${topicInput.value.trim() || 'No Topic Provided'}`, 170);
+      for (let line of splitTopic) {
+        if (yPos > 280) {
+          doc.addPage();
+          yPos = 20;
+        }
+        doc.text(line, 20, yPos);
+        yPos += 10;
+      }
+      doc.text(`Word Count: ${task2TypingArea.value.trim().split(/\s+/).filter(word => word.length > 0).length}`, 20, yPos);
+      yPos += 10;
+      doc.line(20, yPos, 190, yPos);
+      yPos += 10;
+      const splitText2 = doc.splitTextToSize(task2TypingArea.value.trim() || 'No content provided', 170);
+      for (let line of splitText2) {
+        if (yPos > 280) {
+          doc.addPage();
+          yPos = 20;
+        }
+        doc.text(line, 20, yPos);
+        yPos += 10;
+      }
+
+      doc.save(`${candidateName}_Essay_Both_Tasks.pdf`);
+    }
+
+    showTask(1);
+  </script>
+</body>
+</html>

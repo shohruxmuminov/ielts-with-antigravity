@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS Writing Test</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            line-height: 1.4;
+            font-size: 16px;
+            padding-bottom: 90px;
+        }
+
+        /* Loading Screen Styles */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #007bff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-text {
+            font-size: 18px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        /* Start Screen Styles */
+        .start-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9998;
+            padding: 40px;
+        }
+
+        .start-content {
+            text-align: center;
+            max-width: 600px;
+        }
+
+        .start-title {
+            font-size: 32px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .start-description {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .test-info {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 40px;
+            border-left: 5px solid #007bff;
+        }
+
+        .test-info h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .test-info ul {
+            list-style: none;
+            text-align: left;
+        }
+
+        .test-info li {
+            padding: 8px 0;
+            color: #555;
+            font-size: 16px;
+        }
+
+        .test-info li:before {
+            content: "✓ ";
+            color: #28a745;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .start-button {
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+        }
+
+        .start-button:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+        }
+
+        /* Header Styles */
+        .header {
+            background-color: #ffffff;
+            padding: 8px 20px;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            height: 50px;
+            font-family: Arial, sans-serif;
+        }
+
+        .header-left {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            flex-shrink: 0;
+        }
+
+        .timer-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #ffebee;
+            border: 1px solid #f44336;
+            border-radius: 15px;
+            padding: 6px 12px;
+            color: #d32f2f;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .timer-icon {
+            width: 16px;
+            height: 16px;
+            fill: #d32f2f;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .more-tests-button {
+            background-color: #2196f3;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .more-tests-button:hover {
+            background-color: #1976d2;
+        }
+
+        /* Main Container with Resizable Panels */
+        .main-container {
+            margin-top: 50px;
+            display: none;
+            background: #ffffff;
+            height: calc(100vh - 110px);
+            flex-direction: column;
+        }
+
+        .panels-container {
+            display: flex;
+            flex-grow: 1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .left-panel {
+            width: 50%;
+            padding: 20px;
+            border-right: 1px solid #e0e0e0;
+            overflow-y: auto;
+            min-width: 300px;
+            max-width: 70%;
+        }
+
+        .right-panel {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            min-width: 300px;
+        }
+
+        /* Resizer Handle */
+        .resizer {
+            width: 8px;
+            background: #f0f0f0;
+            cursor: col-resize;
+            position: relative;
+            border-left: 1px solid #e0e0e0;
+            border-right: 1px solid #e0e0e0;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .resizer:hover {
+            background: #e0e0e0;
+        }
+
+        .resizer::before {
+            content: '';
+            width: 2px;
+            height: 30px;
+            background: #ccc;
+            border-radius: 1px;
+            box-shadow: 2px 0 0 #ccc, -2px 0 0 #ccc;
+        }
+
+        .resizer.resizing {
+            background: #007bff;
+        }
+
+        .resizer.resizing::before {
+            background: white;
+            box-shadow: 2px 0 0 white, -2px 0 0 white;
+        }
+
+        .part-header {
+            background-color: #f1f2ec;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            margin-top: 20px;
+            border: 1px solid #e0e0e0;
+            width: auto;
+            text-align: left;
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+
+        .part-header p {
+            margin: 0;
+        }
+
+        .chart-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .writing-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .writing-textarea {
+            border: 1px solid #ccc;
+            padding: 15px;
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+            line-height: 1.5;
+            resize: none;
+            outline: none;
+            min-height: 300px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .writing-textarea:focus {
+            border-color: #4a90e2;
+        }
+
+        .word-count {
+            text-align: right;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .instructions {
+            margin-bottom: 20px;
+        }
+
+        .instructions p {
+            margin-bottom: 10px;
+        }
+
+        .instructions strong {
+            font-weight: bold;
+        }
+
+        .task-prompt {
+            padding: 15px;
+            margin: 20px 0;
+            border: 1px solid #000;
+            font-style: italic;
+        }
+
+        .task-prompt p {
+            margin-bottom: 10px;
+        }
+
+        .task-prompt p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Bottom Navigation */
+        .nav-row {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #ffffff;
+            border-top: 1px solid #e0e0e0;
+            padding: 0;
+            display: none;
+            align-items: stretch;
+            height: 60px;
+            z-index: 100;
+        }
+
+        .footer__questionWrapper___1tZ46 {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            position: relative;
+        }
+
+        .footer__questionWrapper___1tZ46.completed::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background-color: #28a745;
+            z-index: 1;
+        }
+
+        .footer__questionNo___3WNct {
+            background: none;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            cursor: pointer;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.2s;
+            width: 100%;
+            height: 100%;
+            position: relative;
+            text-align: left;
+            padding-left: 20px;
+        }
+
+        .footer__questionWrapper___1tZ46 .footer__questionNo___3WNct:hover {
+            background-color: #f8f9fa;
+        }
+
+        .footer__questionWrapper___1tZ46.selected .footer__questionNo___3WNct {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .part-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            line-height: 1.2;
+        }
+
+        .footer__questionWrapper___1tZ46.selected .attemptedCount {
+            display: none;
+        }
+
+        .attemptedCount {
+            font-size: 14px;
+            color: #666;
+            font-weight: 400;
+            line-height: 1.2;
+        }
+
+        .footer__deliverButton___3FM07 {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #f0f0f0;
+            color: #333;
+            border: 1px solid #ccc;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s, border-color 0.2s;
+            width: 40px;
+            height: 40px;
+        }
+
+        .footer__deliverButton___3FM07:hover {
+            background-color: #e0e0e0;
+            border-color: #bbb;
+        }
+
+        .fa-check::before {
+            content: "✓";
+            font-size: 18px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* PDF Generation Loading */
+        .pdf-loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            color: white;
+        }
+
+        .pdf-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        .pdf-text {
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        /* Prevent text selection during resize */
+        .no-select {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+
+            .panels-container {
+                flex-direction: column;
+            }
+
+            .left-panel,
+            .right-panel {
+                width: 100% !important;
+                border-right: none;
+                min-width: unset;
+                max-width: unset;
+            }
+
+            .left-panel {
+                border-bottom: 1px solid #e0e0e0;
+                height: 50%;
+            }
+
+            .right-panel {
+                height: 50%;
+            }
+
+            .resizer {
+                display: none;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- jsPDF Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+
+<body>
+    <!-- PDF Generation Loading -->
+    <div class="pdf-loading" id="pdfLoading">
+        <div class="pdf-spinner"></div>
+        <div class="pdf-text">Generating PDF Report...</div>
+    </div>
+
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Loading IELTS Writing Test...</div>
+    </div>
+
+    <!-- Start Screen -->
+    <div class="start-screen" id="startScreen">
+        <div class="start-content">
+            <h1 class="start-title">IELTS Writing Test</h1>
+            <p class="start-description">
+                Welcome to the IELTS Academic Writing Test. This test consists of two tasks and should be completed in
+                60 minutes.
+            </p>
+
+            <div class="test-info">
+                <h3>Test Information</h3>
+                <ul>
+                    <li>Task 1: Describe visual information (20 minutes, 150+ words)</li>
+                    <li>Task 2: Write an essay (40 minutes, 250+ words)</li>
+                    <li>Total time: 60 minutes</li>
+                    <li>Automatic PDF report generation</li>
+                    <li>Your progress is automatically saved</li>
+                </ul>
+            </div>
+
+            <button class="start-button" onclick="startTest()">
+                <i class="fas fa-play"></i> Start Test
+            </button>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <div class="header" id="header" style="display: none;">
+        <div class="header-left">IELTSwithShohrux</div>
+
+        <div class="timer-container">
+            <svg class="timer-icon" viewBox="0 0 24 24">
+                <path
+                    d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M16.2,16.2L11,13V7H12.5V12.2L17,14.9L16.2,16.2Z" />
+            </svg>
+            <span class="timer-display">60:00</span>
+        </div>
+
+        <div class="header-right">
+            <button class="more-tests-button" onclick="window.open('https://t.me/IELTSwithShohrux', '_blank')">
+                <i class="fas fa-paper-plane"></i>
+                Click for more TESTS
+            </button>
+        </div>
+    </div>
+
+    <!-- Test Interface -->
+    <div class="main-container" id="mainContainer">
+        <div id="part-header-1" class="part-header">
+            <p><strong>Task 1</strong></p>
+            <p>You should spend about 20 minutes on this task. Write at least 150 words.</p>
+        </div>
+
+        <div id="part-header-2" class="part-header hidden">
+            <p><strong>Task 2</strong></p>
+            <p>You should spend about 40 minutes on this task. Write at least 250 words.</p>
+        </div>
+
+        <div class="panels-container">
+            <div class="left-panel" id="leftPanel">
+                <div id="part-1" class="writing-part" style="width: 800px; margin: 20px auto;">
+                    <div class="task-prompt">
+                        <p><strong>The tables give information on the temperatures and the hours of daylight in two
+                                particular cities in the same week in May 2007.</strong></p>
+                        <p><strong>Summarise the information by selecting and reporting the main features, and make
+                                comparisons where relevant.</strong></p>
+                    </div>
+
+                    <div class="chart-container">
+                        <div class="image-container" style="text-align: center;">
+                            <img src="https://i0.wp.com/ieltspracticeonline.com/wp-content/uploads/2019/03/ielts-writing-recent-actual-test-27-10-2018-min.png"
+                                alt="Pie charts showing time distribution of working adults in 1958 and 2008 from the IELTS Writing actual test."
+                                style="width: 800px; height: auto; border: 1px solid #ccc;" />
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <div id="part-2" class="writing-part hidden">
+                    <div class="instructions">
+                        <p><strong>Write about the following topic:</strong></p>
+                        <div class="task-prompt">
+                            <p><em><strong>Some people believe that it is more important to teach children the
+                                        literature of their own country than other countries.<br><br>Do you agree or
+                                        disagree ?</strong></em>
+                            </p>
+                        </div>
+                        <p>Give reasons for your answer and include any relevant examples from your own knowledge or
+                            experience.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resizable Handle -->
+            <div class="resizer" id="resizer"></div>
+
+            <div class="right-panel" id="rightPanel">
+                <div class="writing-area">
+                    <textarea class="writing-textarea" id="writingTextarea"
+                        placeholder="Start writing your response here..." oninput="updateWordCount()"></textarea>
+                    <div class="word-count">
+                        Words: <span id="wordCount">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="nav-row perScorableItem" aria-label="Questions" id="navigation">
+        <div class="footer__questionWrapper___1tZ46 selected single" role="tablist">
+            <button role="tab" class="footer__questionNo___3WNct writing" data-sectionid="part1" tabindex="-1"
+                onclick="switchPart(1)">
+                <div class="part-title">Part 1</div>
+                <div class="attemptedCount">0 of 1</div>
+            </button>
+        </div>
+        <div class="footer__questionWrapper___1tZ46 single" role="tablist">
+            <button role="tab" class="footer__questionNo___3WNct writing" data-sectionid="part2" tabindex="0"
+                onclick="switchPart(2)">
+                <div class="part-title">Part 2</div>
+                <div class="attemptedCount">0 of 1</div>
+            </button>
+        </div>
+        <button id="deliver-button" aria-label="Submit Test" class="footer__deliverButton___3FM07"
+            onclick="submitTest()">
+            <i class="fa fa-check" aria-hidden="true"></i>
+        </button>
+    </nav>
+
+    <script>
+        let currentPart = 1;
+        let timeInSeconds = 3600;
+        let timerInterval;
+        let partCompletionStatus = { 1: false, 2: false };
+        let isResizing = false;
+
+        // Resizer functionality
+        function initializeResizer() {
+            const resizer = document.getElementById('resizer');
+            const leftPanel = document.getElementById('leftPanel');
+            const rightPanel = document.getElementById('rightPanel');
+            const container = document.querySelector('.panels-container');
+
+            let startX, startLeftWidth;
+
+            resizer.addEventListener('mousedown', initResize);
+
+            function initResize(e) {
+                isResizing = true;
+                startX = e.clientX;
+                startLeftWidth = parseInt(document.defaultView.getComputedStyle(leftPanel).width, 10);
+
+                document.addEventListener('mousemove', doResize);
+                document.addEventListener('mouseup', stopResize);
+
+                resizer.classList.add('resizing');
+                document.body.classList.add('no-select');
+
+                e.preventDefault();
+            }
+
+            function doResize(e) {
+                if (!isResizing) return;
+
+                const containerWidth = container.offsetWidth - 8;
+                const currentX = e.clientX;
+                const diffX = currentX - startX;
+                const newLeftWidth = startLeftWidth + diffX;
+
+                const leftPercent = (newLeftWidth / containerWidth) * 100;
+                const rightPercent = 100 - leftPercent;
+
+                if (leftPercent >= 30 && leftPercent <= 70) {
+                    leftPanel.style.width = leftPercent + '%';
+                    rightPanel.style.width = rightPercent + '%';
+                }
+            }
+
+            function stopResize() {
+                isResizing = false;
+                document.removeEventListener('mousemove', doResize);
+                document.removeEventListener('mouseup', stopResize);
+
+                resizer.classList.remove('resizing');
+                document.body.classList.remove('no-select');
+
+                const leftWidth = leftPanel.style.width;
+                localStorage.setItem('ielts-panel-width', leftWidth);
+            }
+        }
+
+        function loadPanelWidth() {
+            const savedWidth = localStorage.getItem('ielts-panel-width');
+            if (savedWidth) {
+                const leftPanel = document.getElementById('leftPanel');
+                const rightPanel = document.getElementById('rightPanel');
+                const leftPercent = parseFloat(savedWidth);
+                const rightPercent = 100 - leftPercent;
+
+                leftPanel.style.width = leftPercent + '%';
+                rightPanel.style.width = rightPercent + '%';
+            }
+        }
+
+        // Loading and Start Screen Functions
+        function showLoadingScreen() {
+            document.getElementById('loadingScreen').style.display = 'flex';
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('header').style.display = 'none';
+            document.getElementById('mainContainer').style.display = 'none';
+            document.getElementById('navigation').style.display = 'none';
+        }
+
+        function showStartScreen() {
+            document.getElementById('loadingScreen').style.display = 'none';
+            document.getElementById('startScreen').style.display = 'flex';
+            document.getElementById('header').style.display = 'none';
+            document.getElementById('mainContainer').style.display = 'none';
+            document.getElementById('navigation').style.display = 'none';
+        }
+
+        function startTest() {
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('header').style.display = 'flex';
+            document.getElementById('mainContainer').style.display = 'flex';
+            document.getElementById('navigation').style.display = 'flex';
+
+            initializeResizer();
+            loadPanelWidth();
+            startTimer();
+        }
+
+        // Timer functionality
+        function startTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                timeInSeconds--;
+                updateTimerDisplay();
+                if (timeInSeconds <= 0) {
+                    clearInterval(timerInterval);
+                    alert("Time's up! Your test will be submitted automatically.");
+                    submitTest();
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeInSeconds / 60);
+            const seconds = timeInSeconds % 60;
+            document.querySelector('.timer-display').textContent =
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        // PDF Generation Function
+        async function generatePDFReport() {
+            const part1Content = localStorage.getItem('ielts-writing-part-1') || '';
+            const part2Content = localStorage.getItem('ielts-writing-part-2') || '';
+
+            // Show loading screen
+            document.getElementById('pdfLoading').style.display = 'flex';
+
+            try {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+
+                // Calculate word counts
+                const part1WordCount = part1Content.trim() === '' ? 0 : part1Content.trim().split(/\s+/).length;
+                const part2WordCount = part2Content.trim() === '' ? 0 : part2Content.trim().split(/\s+/).length;
+                const totalWords = part1WordCount + part2WordCount;
+
+                // Set up fonts and colors
+                doc.setFont('helvetica');
+
+                // Header
+                doc.setFillColor(102, 126, 234);
+                doc.rect(0, 0, 210, 40, 'F');
+                doc.setTextColor(255, 255, 255);
+                doc.setFontSize(24);
+                doc.text('IELTS Writing Test Submission', 105, 20, { align: 'center' });
+                doc.setFontSize(16);
+                doc.text('IELTSwithShohrux', 105, 30, { align: 'center' });
+
+                // Reset text color
+                doc.setTextColor(0, 0, 0);
+                let yPos = 55;
+
+                // Test Information
+                doc.setFontSize(14);
+                doc.setFont('helvetica', 'bold');
+                doc.text('Test Information', 20, yPos);
+                yPos += 10;
+
+                doc.setFont('helvetica', 'normal');
+                doc.setFontSize(10);
+                doc.text(`Test Date: ${new Date().toLocaleDateString()}`, 20, yPos);
+                doc.text(`Test Time: ${new Date().toLocaleTimeString()}`, 120, yPos);
+                yPos += 8;
+                doc.text(`Total Words: ${totalWords}`, 20, yPos);
+                doc.text(`Time Spent: ${Math.floor((3600 - timeInSeconds) / 60)} minutes`, 120, yPos);
+                yPos += 15;
+
+                // Part 1 Section
+                doc.setFontSize(14);
+                doc.setFont('helvetica', 'bold');
+                doc.text('Part 1 - Task Achievement', 20, yPos);
+                yPos += 8;
+                doc.setFontSize(10);
+                doc.setFont('helvetica', 'normal');
+                doc.text(`Word Count: ${part1WordCount} words`, 20, yPos);
+                yPos += 8;
+                doc.text('Task: Summarise the information by selecting and reporting the main features,', 20, yPos);
+                yPos += 5;
+                doc.text('and make comparisons where relevant.', 20, yPos);
+                yPos += 15;
+
+                // Part 1 Response
+                doc.setFontSize(12);
+                doc.setFont('helvetica', 'bold');
+                doc.text('Your Part 1 Response:', 20, yPos);
+                yPos += 8;
+
+                doc.setFontSize(9);
+                doc.setFont('helvetica', 'normal');
+                const part1Lines = doc.splitTextToSize(part1Content || 'No response provided', 170);
+                const maxLinesPerPage = Math.floor((280 - yPos) / 4);
+
+                if (part1Lines.length > maxLinesPerPage) {
+                    doc.text(part1Lines.slice(0, maxLinesPerPage), 20, yPos);
+                    doc.addPage();
+                    yPos = 20;
+                    doc.text(part1Lines.slice(maxLinesPerPage), 20, yPos);
+                    yPos += (part1Lines.length - maxLinesPerPage) * 4 + 15;
+                } else {
+                    doc.text(part1Lines, 20, yPos);
+                    yPos += part1Lines.length * 4 + 15;
+                }
+
+                // Part 2 Section
+                if (yPos > 200) {
+                    doc.addPage();
+                    yPos = 20;
+                }
+
+                doc.setFontSize(14);
+                doc.setFont('helvetica', 'bold');
+                doc.text('Part 2 - Essay Writing', 20, yPos);
+                yPos += 8;
+                doc.setFontSize(10);
+                doc.setFont('helvetica', 'normal');
+                doc.text(`Word Count: ${part2WordCount} words`, 20, yPos);
+                yPos += 8;
+                doc.text('Topic: The animal species are becoming extinct due to human activities', 20, yPos);
+                yPos += 5;
+                doc.text('on land and in sea. What are the reasons and solutions?', 20, yPos);
+                yPos += 15;
+
+                // Part 2 Response
+                doc.setFontSize(12);
+                doc.setFont('helvetica', 'bold');
+                doc.text('Your Part 2 Response:', 20, yPos);
+                yPos += 8;
+
+                doc.setFontSize(9);
+                doc.setFont('helvetica', 'normal');
+                const part2Lines = doc.splitTextToSize(part2Content || 'No response provided', 170);
+
+                if (yPos + (part2Lines.length * 4) > 280) {
+                    doc.addPage();
+                    yPos = 20;
+                }
+
+                doc.text(part2Lines, 20, yPos);
+
+                // Footer
+                const pageCount = doc.internal.getNumberOfPages();
+                for (let i = 1; i <= pageCount; i++) {
+                    doc.setPage(i);
+                    doc.setFontSize(8);
+                    doc.setTextColor(128, 128, 128);
+                    doc.text(`Generated by IELTSwithShohrux - Page ${i} of ${pageCount}`, 105, 290, { align: 'center' });
+                }
+
+                // Save the PDF
+                doc.save(`IELTS_Writing_Test_${new Date().toISOString().split('T')[0]}.pdf`);
+
+                // Show success message
+                alert('Your test has been submitted successfully! PDF report has been downloaded.');
+
+            } catch (error) {
+                console.error('Error generating PDF:', error);
+                alert('Error generating PDF report. Please try again.');
+            } finally {
+                // Hide loading screen
+                document.getElementById('pdfLoading').style.display = 'none';
+
+                // Reset the test
+                setTimeout(() => {
+                    if (confirm('Would you like to take another test?')) {
+                        localStorage.clear();
+                        location.reload();
+                    }
+                }, 1000);
+            }
+        }
+
+        // Test submission
+        function submitTest() {
+            const part1Content = localStorage.getItem('ielts-writing-part-1') || '';
+            const part2Content = localStorage.getItem('ielts-writing-part-2') || '';
+
+            if (!part1Content.trim() && !part2Content.trim()) {
+                alert('Please write your responses before submitting the test.');
+                return;
+            }
+
+            const part1WordCount = part1Content.trim() === '' ? 0 : part1Content.trim().split(/\s+/).length;
+            const part2WordCount = part2Content.trim() === '' ? 0 : part2Content.trim().split(/\s+/).length;
+
+            if (confirm(`Are you sure you want to submit your test?\n\nPart 1: ${part1WordCount} words\nPart 2: ${part2WordCount} words\n\nA PDF report will be generated automatically.`)) {
+                clearInterval(timerInterval);
+                generatePDFReport();
+            }
+        }
+
+        // Test interface functions
+        function checkPartCompletion(partNumber) {
+            const savedContent = localStorage.getItem(`ielts-writing-part-${partNumber}`);
+            if (!savedContent) return false;
+            const wordCount = savedContent.trim() === '' ? 0 : savedContent.trim().split(/\s+/).length;
+            const minWords = partNumber === 1 ? 150 : 250;
+            return wordCount >= minWords;
+        }
+
+        function updateCompletionIndicators() {
+            for (let i = 1; i <= 2; i++) {
+                const isCompleted = checkPartCompletion(i);
+                partCompletionStatus[i] = isCompleted;
+                const wrapper = document.querySelectorAll('.footer__questionWrapper___1tZ46')[i - 1];
+                if (wrapper) {
+                    if (isCompleted) {
+                        wrapper.classList.add('completed');
+                    } else {
+                        wrapper.classList.remove('completed');
+                    }
+                }
+            }
+        }
+
+        function switchPart(partNumber) {
+            const currentContent = document.getElementById('writingTextarea').value;
+            localStorage.setItem(`ielts-writing-part-${currentPart}`, currentContent);
+
+            currentPart = partNumber;
+
+            document.querySelectorAll('.writing-part').forEach(part => {
+                part.classList.add('hidden');
+            });
+            document.querySelectorAll('.part-header').forEach(header => {
+                header.classList.add('hidden');
+            });
+
+            document.getElementById(`part-${partNumber}`).classList.remove('hidden');
+            document.getElementById(`part-header-${partNumber}`).classList.remove('hidden');
+
+            document.querySelectorAll('.footer__questionWrapper___1tZ46').forEach(wrapper => {
+                wrapper.classList.remove('selected');
+            });
+
+            const wrappers = document.querySelectorAll('.footer__questionWrapper___1tZ46');
+            if (wrappers[partNumber - 1]) {
+                wrappers[partNumber - 1].classList.add('selected');
+            }
+
+            document.querySelectorAll('.footer__questionNo___3WNct').forEach((btn, index) => {
+                btn.tabIndex = index === (partNumber - 1) ? -1 : 0;
+            });
+
+            const savedContent = localStorage.getItem(`ielts-writing-part-${partNumber}`);
+            document.getElementById('writingTextarea').value = savedContent || '';
+            updateWordCount();
+            updateCompletionIndicators();
+        }
+
+        function updateWordCount() {
+            const textarea = document.getElementById('writingTextarea');
+            textarea.style.overflowY = 'hidden';
+            textarea.style.height = 'auto';
+            textarea.style.height = (textarea.scrollHeight) + 'px';
+
+            const text = textarea.value.trim();
+            const wordCount = text === '' ? 0 : text.split(/\s+/).length;
+            document.getElementById('wordCount').textContent = wordCount;
+
+            localStorage.setItem(`ielts-writing-part-${currentPart}`, textarea.value);
+            updateCompletionIndicators();
+
+            const minWords = currentPart === 1 ? 150 : 250;
+            const isCompleted = wordCount >= minWords;
+            const attemptedCount = document.querySelector(`.footer__questionWrapper___1tZ46:nth-child(${currentPart}) .attemptedCount`);
+            if (attemptedCount) {
+                attemptedCount.textContent = isCompleted ? '1 of 1' : '0 of 1';
+            }
+        }
+
+        // Auto-save functionality
+        setInterval(() => {
+            const content = document.getElementById('writingTextarea').value;
+            localStorage.setItem(`ielts-writing-part-${currentPart}`, content);
+            updateCompletionIndicators();
+        }, 5000);
+
+        // Load saved content on page load
+        window.addEventListener('load', () => {
+            showLoadingScreen();
+
+            setTimeout(() => {
+                showStartScreen();
+            }, 2000);
+
+            const savedContent = localStorage.getItem(`ielts-writing-part-${currentPart}`);
+            if (savedContent) {
+                document.getElementById('writingTextarea').value = savedContent;
+                updateWordCount();
+            }
+            updateCompletionIndicators();
+
+            const textarea = document.getElementById('writingTextarea');
+            textarea.style.overflowY = 'hidden';
+            textarea.style.height = 'auto';
+            textarea.style.height = (textarea.scrollHeight) + 'px';
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function (e) {
+            if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+                e.preventDefault();
+                const content = document.getElementById('writingTextarea').value;
+                localStorage.setItem(`ielts-writing-part-${currentPart}`, content);
+                alert('Content saved!');
+            }
+            if ((e.ctrlKey || e.metaKey) && (e.key === '1' || e.key === '2')) {
+                e.preventDefault();
+                switchPart(parseInt(e.key));
+            }
+        });
+    </script>
+</body>
+
+</html>
