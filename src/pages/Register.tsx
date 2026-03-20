@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { doc, getDoc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { auth, db } from '../firebase';
 
@@ -31,34 +31,7 @@ export default function Register() {
     }
   };
 
-  const handleGoogleSignUp = async () => {
-    setError('');
-    setLoading(true);
-    try {
-      const provider = new GoogleAuthProvider();
-      // Ensure specific prompt for account selection
-      provider.setCustomParameters({ prompt: 'select_account' });
-      
-      const result = await signInWithPopup(auth, provider);
-      await createProfile(result.user, '');
-      navigate('/dashboard');
-    } catch (err: any) {
-      console.error('Google Sign Up Error:', err);
-      if (err.code === 'auth/popup-blocked') {
-        setError('Brauzer oyna ochilishini blokladi (Popup blocked). Iltimos, brauzer sozlamalaridan ruxsat bering.');
-      } else if (err.code === 'auth/cancelled-popup-request') {
-        setError('Login oynasi yopildi. Iltimos, qayta urinib ko\'ring.');
-      } else if (err.code === 'auth/popup-closed-by-user') {
-        setError('Oyna foydalanuvchi tomonidan yopildi.');
-      } else if (err.code === 'auth/unauthorized-domain') {
-        setError('Xatolik: Ushbu domen Firebase Console\'da ruxsat berilganlar ro\'yxatiga kiritilmagan.');
-      } else {
-        setError('Google orqali ro\'yxatdan o\'tishda xatolik yuz berdi: ' + (err.message || 'Noma\'lum xato'));
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
+
 
   const handleEmailSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -141,23 +114,7 @@ export default function Register() {
           </button>
         </form>
 
-        <div className="relative mb-6">
-          <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-slate-800"></div>
-          </div>
-          <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-slate-900 px-2 text-slate-500 font-bold">Yoki</span>
-          </div>
-        </div>
 
-        <button
-          onClick={handleGoogleSignUp}
-          disabled={loading}
-          className="w-full flex items-center justify-center gap-4 px-6 py-4 bg-slate-800 border-2 border-slate-700 rounded-[1.5rem] font-bold text-slate-300 hover:border-indigo-600 hover:bg-slate-700 transition-all duration-300 disabled:opacity-50 group"
-        >
-          <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" className="w-6 h-6 group-hover:scale-110 transition-transform" />
-          {loading ? 'Ulanmoqda...' : 'Google orqali ro\'yxatdan o\'tish'}
-        </button>
 
         <p className="mt-8 text-sm text-slate-400 font-medium">
           Akkauntingiz bormi? <Link to="/login" className="text-indigo-400 font-bold hover:underline">Kirish</Link>
