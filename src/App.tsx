@@ -16,6 +16,9 @@ import Register from './pages/Register';
 import PremiumPanel from './pages/PremiumPanel';
 import PremiumBooks from './pages/PremiumBooks';
 import VocabularyBank from './pages/VocabularyBank';
+import MatchingGame from './pages/MatchingGame';
+import VocabularyQuiz from './pages/VocabularyQuiz';
+import TypingPractice from './pages/TypingPractice';
 
 export default function App() {
   return (
@@ -34,6 +37,9 @@ export default function App() {
           <Route path="/vocabulary" element={<Vocabulary />} />
           <Route path="/vocabulary/trainer" element={<VocabularyTrainer />} />
           <Route path="/vocabulary/bank" element={<VocabularyBank />} />
+          <Route path="/vocabulary/matching" element={<MatchingGame />} />
+          <Route path="/vocabulary/quiz" element={<VocabularyQuiz />} />
+          <Route path="/vocabulary/typing" element={<TypingPractice />} />
           <Route path="/mock-exam" element={<MockExam />} />
           <Route path="/analytics" element={<Analytics />} />
           <Route path="/profile" element={<Profile />} />

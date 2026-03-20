@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Volume2, ChevronRight, Check, X, RotateCcw } from 'lucide-react';
 import { collection, getDocs, query, orderBy } from 'firebase/firestore';
 import { db } from '../firebase';
+import { vocabularyData } from '../data/vocabulary';
 
 export default function VocabularyTrainer() {
   const [words, setWords] = useState<any[]>([]);
@@ -12,19 +13,9 @@ export default function VocabularyTrainer() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchWords = async () => {
-      try {
-        const q = query(collection(db, 'vocabulary'), orderBy('word', 'asc'));
-        const snap = await getDocs(q);
-        const wordsData = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        setWords(wordsData);
-      } catch (error) {
-        // Error fetching vocabulary
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchWords();
+    // We now use the premium local data store
+    setWords(vocabularyData);
+    setLoading(false);
   }, []);
 
   const currentWord = words[currentIndex];
@@ -114,20 +105,22 @@ export default function VocabularyTrainer() {
                     <Volume2 className="w-6 h-6 text-indigo-400" />
                   </button>
                 </div>
-                <span className="inline-block px-4 py-1 bg-indigo-900/40 text-indigo-300 rounded-full text-xs font-black uppercase tracking-widest w-fit mb-6 border border-indigo-900/50">
-                  {currentWord.type}
+                <span className={`inline-block px-4 py-1 rounded-full text-xs font-black uppercase tracking-widest w-fit mb-6 border ${
+                  currentWord.level === 'B2' ? 'bg-blue-900/30 text-blue-400 border-blue-900/50' :
+                  currentWord.level === 'C1' ? 'bg-purple-900/30 text-purple-400 border-purple-900/50' :
+                  'bg-rose-900/30 text-rose-400 border-rose-900/50'
+                }`}>
+                  {currentWord.level} Level
                 </span>
                 <p className="text-2xl text-slate-200 mb-8 leading-relaxed font-medium">{currentWord.meaning}</p>
+                <div className="mb-6 p-4 bg-indigo-900/10 border border-indigo-900/20 rounded-xl">
+                  <p className="text-[10px] font-black text-indigo-400 uppercase tracking-widest mb-1">Translation</p>
+                  <p className="text-xl font-bold text-white">{currentWord.uzbek}</p>
+                </div>
                 {currentWord.example && (
                   <div className="mt-auto bg-slate-800/50 p-6 rounded-2xl text-left border border-slate-800">
                     <p className="text-xs text-slate-500 font-bold uppercase tracking-widest mb-2">Example</p>
-                    <p className="text-slate-300 italic mb-4 text-lg leading-relaxed">"{currentWord.example}"</p>
-                    {currentWord.ieltsExample && (
-                      <>
-                        <p className="text-xs text-indigo-400 font-bold uppercase tracking-widest mb-1">IELTS Context</p>
-                        <p className="text-slate-200 font-bold leading-relaxed">"{currentWord.ieltsExample}"</p>
-                      </>
-                    )}
+                    <p className="text-slate-300 italic text-lg leading-relaxed">"{currentWord.example}"</p>
                   </div>
                 )}
               </div>
