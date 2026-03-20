@@ -5,8 +5,9 @@ import { db } from '../firebase';
 import { GoogleGenAI, Type } from "@google/genai";
 import FullWritingTestLayout from '../components/FullWritingTestLayout';
 import StaticWritingLayout from '../components/StaticWritingLayout';
-import { PenTool, CheckCircle, AlertCircle, BookOpen, Clock, ArrowLeft, Sparkles, Wand2, BookA, Layout, Play, Bot, Home, FileText } from 'lucide-react';
+import { PenTool, CheckCircle, AlertCircle, BookOpen, Clock, ArrowLeft, Sparkles, Wand2, BookA, Layout, Play, Bot, Home, FileText, Crown, Lock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { usePremium } from '../context/PremiumContext';
 
 interface WritingTask {
   id: string;
@@ -32,6 +33,8 @@ export default function WritingPractice() {
   const [copilotLoading, setCopilotLoading] = useState(false);
   const [copilotResult, setCopilotResult] = useState<string | null>(null);
   const [activeFilter, setActiveFilter] = useState('all');
+  const [activeTab, setActiveTab] = useState<'free' | 'premium'>('free');
+  const { isPremium } = usePremium();
 
   const runCopilot = async (action: string) => {
     if (!text.trim()) return;
@@ -349,7 +352,55 @@ export default function WritingPractice() {
 
       {/* Grid Content */}
       <div className="max-w-[1400px] mx-auto px-4 md:px-8 py-10">
-        {loading ? (
+
+        {/* Tabs */}
+        <div className="flex gap-3 mb-8">
+          <button
+            onClick={() => setActiveTab('free')}
+            className={`flex items-center gap-2 px-6 py-3 rounded-2xl font-bold text-sm transition-all ${
+              activeTab === 'free' ? 'bg-rose-600 text-white shadow-lg' : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700 hover:text-slate-900 dark:hover:text-white'
+            }`}
+          >
+            Free Testlar
+          </button>
+          <button
+            onClick={() => setActiveTab('premium')}
+            className={`flex items-center gap-2 px-6 py-3 rounded-2xl font-bold text-sm transition-all ${
+              activeTab === 'premium' ? 'bg-amber-500 text-white shadow-lg' : 'bg-white dark:bg-slate-800 text-amber-600 border border-amber-300 dark:border-amber-500/30 hover:bg-amber-50 dark:hover:bg-amber-500/10'
+            }`}
+          >
+            <Crown className="w-4 h-4" /> ⭐ Premium Testlar
+          </button>
+        </div>
+
+        {/* Premium locked */}
+        {activeTab === 'premium' && !isPremium && (
+          <div className="flex flex-col items-center justify-center min-h-[350px] bg-slate-900 rounded-[2rem] border-2 border-dashed border-amber-500/30 p-12 text-center">
+            <div className="w-20 h-20 bg-amber-500/10 rounded-3xl flex items-center justify-center mb-6 border border-amber-500/20">
+              <Lock className="w-10 h-10 text-amber-400" />
+            </div>
+            <h3 className="text-3xl font-black text-white mb-3">Premium bo'lim</h3>
+            <p className="text-slate-500 text-lg font-medium mb-8 max-w-sm">
+              Bu bo'limdagi testlarga kirish uchun premium obuna kerak
+            </p>
+            <button
+              onClick={() => navigate('/premium')}
+              className="bg-gradient-to-r from-amber-500 to-orange-500 text-white px-8 py-4 rounded-2xl font-black text-lg hover:from-amber-400 hover:to-orange-400 transition-all shadow-xl shadow-amber-900/30 flex items-center gap-3"
+            >
+              <Crown className="w-5 h-5" />
+              Premium olish
+            </button>
+          </div>
+        )}
+
+        {activeTab === 'premium' && isPremium && (
+          <div className="text-center py-20 bg-slate-900/50 rounded-[3rem] border border-dashed border-amber-500/30">
+            <Crown className="w-12 h-12 text-amber-500/50 mx-auto mb-4" />
+            <p className="text-slate-500 font-bold">Premium writing testlar tez orada qo'shiladi.</p>
+          </div>
+        )}
+
+        {activeTab === 'free' && (loading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[1,2,3,4].map(i => (
               <div key={i} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl h-[450px] animate-pulse shadow-sm"></div>
@@ -418,7 +469,9 @@ export default function WritingPractice() {
             <p className="text-slate-500 dark:text-slate-400">Please check back later or add new tests to the database.</p>
           </div>
         )}
+        </div>
       </div>
     </div>
+    );
   );
 }

@@ -12,6 +12,7 @@ import Analytics from './pages/Analytics';
 import Profile from './pages/Profile';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import PremiumPanel from './pages/PremiumPanel';
 
 export default function App() {
   return (
@@ -31,6 +32,7 @@ export default function App() {
           <Route path="/mock-exam" element={<MockExam />} />
           <Route path="/analytics" element={<Analytics />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/premium" element={<PremiumPanel />} />
         </Route>
       </Routes>
     </Router>

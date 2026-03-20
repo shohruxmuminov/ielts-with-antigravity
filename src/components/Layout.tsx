@@ -106,6 +106,22 @@ export default function Layout() {
         </nav>
 
         <div className="flex flex-col gap-4 mt-auto">
+          {/* Premium Button */}
+          <Link
+            to="/premium"
+            title="Premium"
+            className={cn(
+              "w-12 h-12 rounded-2xl flex items-center justify-center transition-all group relative",
+              location.pathname === '/premium'
+                ? "bg-amber-500 text-white shadow-lg shadow-amber-900/50"
+                : "text-amber-500 hover:bg-amber-500/10 hover:text-amber-400 border border-amber-500/30"
+            )}
+          >
+            <Crown className="w-6 h-6" />
+            <span className="absolute left-16 bg-amber-900 text-amber-200 text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50">
+              Premium
+            </span>
+          </Link>
           <Link
             to="/profile"
             className={cn(

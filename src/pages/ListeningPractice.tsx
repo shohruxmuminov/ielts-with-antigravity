@@ -1,10 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Play, Pause, Clock, CheckCircle, Volume2, ChevronLeft, ChevronRight, Info, BookOpen, Headphones, ArrowRight, Trophy } from 'lucide-react';
+import { Play, Pause, Clock, CheckCircle, Volume2, ChevronLeft, ChevronRight, Info, BookOpen, Headphones, ArrowRight, Trophy, Crown, Lock } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { db } from '../firebase';
 import { collection, query, where, getDocs, orderBy } from 'firebase/firestore';
 import { calculateBandScore } from '../utils/scoring';
 import StaticListeningLayout from '../components/StaticListeningLayout';
+import { usePremium } from '../context/PremiumContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function ListeningPractice() {
   const [materials, setMaterials] = useState<any[]>([]);
@@ -18,7 +20,10 @@ export default function ListeningPractice() {
   const [duration, setDuration] = useState(0);
   const [score, setScore] = useState(0);
   const [bandScore, setBandScore] = useState("0.0");
+  const [activeTab, setActiveTab] = useState<'free' | 'premium'>('free');
   const audioRef = useRef<HTMLVideoElement>(null);
+  const { isPremium } = usePremium();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchMaterials();
@@ -153,12 +158,13 @@ export default function ListeningPractice() {
               <h2 className="text-xs font-black text-slate-500 uppercase tracking-[0.2em] mb-8">Filter Tests</h2>
               <div className="space-y-3">
                 {[
-                  { id: 'all', label: 'All Tests', count: materials.length, active: true },
+                  { id: 'free', label: 'Free Tests', count: materials.length, color: 'emerald' },
                 ].map((filter) => (
                   <button
                     key={filter.id}
+                    onClick={() => setActiveTab('free')}
                     className={`w-full flex items-center justify-between px-5 py-4 rounded-2xl text-sm font-bold transition-all ${
-                      filter.active 
+                      activeTab === 'free'
                         ? "bg-emerald-600 text-white shadow-lg shadow-emerald-900/40" 
                         : "text-slate-400 hover:bg-slate-800 hover:text-slate-200"
                     }`}
@@ -166,11 +172,27 @@ export default function ListeningPractice() {
                     <div className="flex items-center gap-3">
                       {filter.label}
                     </div>
-                    <span className={`px-2.5 py-1 rounded-lg text-[10px] font-black ${filter.active ? 'bg-white/20' : 'bg-slate-800 text-slate-500'}`}>
+                    <span className={`px-2.5 py-1 rounded-lg text-[10px] font-black ${activeTab === 'free' ? 'bg-white/20' : 'bg-slate-800 text-slate-500'}`}>
                       {filter.count}
                     </span>
                   </button>
                 ))}
+                <button
+                  onClick={() => setActiveTab('premium')}
+                  className={`w-full flex items-center justify-between px-5 py-4 rounded-2xl text-sm font-bold transition-all ${
+                    activeTab === 'premium'
+                      ? "bg-amber-500 text-white shadow-lg shadow-amber-900/40" 
+                      : "text-amber-500 hover:bg-amber-500/10 border border-amber-500/20"
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <Crown className="w-4 h-4" />
+                    ⭐ Premium
+                  </div>
+                  <span className={`px-2.5 py-1 rounded-lg text-[10px] font-black ${activeTab === 'premium' ? 'bg-white/20' : 'bg-amber-900/40 text-amber-500'}`}>
+                    {isPremium ? '0' : '🔒'}
+                  </span>
+                </button>
               </div>
             </div>
           </div>
@@ -180,11 +202,40 @@ export default function ListeningPractice() {
             <div className="mb-10 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-2 h-8 bg-emerald-500 rounded-full"></div>
-                <h2 className="text-2xl font-black text-white">Available Tests ({materials.length})</h2>
+                <h2 className="text-2xl font-black text-white">
+                  {activeTab === 'free' ? `Available Tests (${materials.length})` : '⭐ Premium Tests'}
+                </h2>
               </div>
             </div>
 
-            {materials.length === 0 ? (
+            {/* Premium locked */}
+            {activeTab === 'premium' && !isPremium && (
+              <div className="flex flex-col items-center justify-center min-h-[350px] bg-slate-900 rounded-[2rem] border-2 border-dashed border-amber-500/30 p-12 text-center">
+                <div className="w-20 h-20 bg-amber-500/10 rounded-3xl flex items-center justify-center mb-6 border border-amber-500/20">
+                  <Lock className="w-10 h-10 text-amber-400" />
+                </div>
+                <h3 className="text-3xl font-black text-white mb-3">Premium bo'lim</h3>
+                <p className="text-slate-500 text-lg font-medium mb-8 max-w-sm">
+                  Bu bo'limdagi testlarga kirish uchun premium obuna kerak
+                </p>
+                <button
+                  onClick={() => navigate('/premium')}
+                  className="bg-gradient-to-r from-amber-500 to-orange-500 text-white px-8 py-4 rounded-2xl font-black text-lg hover:from-amber-400 hover:to-orange-400 transition-all shadow-xl shadow-amber-900/30 flex items-center gap-3"
+                >
+                  <Crown className="w-5 h-5" />
+                  Premium olish
+                </button>
+              </div>
+            )}
+
+            {activeTab === 'premium' && isPremium && (
+              <div className="text-center py-20 bg-slate-900/50 rounded-[3rem] border border-dashed border-amber-500/30">
+                <Crown className="w-12 h-12 text-amber-500/50 mx-auto mb-4" />
+                <p className="text-slate-500 font-bold">Premium listening testlar tez orada qo'shiladi.</p>
+              </div>
+            )}
+
+            {activeTab === 'free' && materials.length === 0 ? (
               <div className="bg-slate-900 rounded-[3rem] border-2 border-dashed border-slate-800 p-24 text-center">
                 <Headphones className="w-20 h-20 text-slate-800 mx-auto mb-8" />
                 <h3 className="text-3xl font-black text-white mb-3">No tests available yet</h3>

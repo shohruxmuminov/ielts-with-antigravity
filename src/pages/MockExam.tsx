@@ -1,5 +1,7 @@
 import { useState } from 'react';
-import { Play, Clock, BookOpen, Headphones, PenTool, AlertCircle, CheckCircle2, X, ChevronRight, ArrowLeft } from 'lucide-react';
+import { Play, Clock, BookOpen, Headphones, PenTool, AlertCircle, CheckCircle2, X, ChevronRight, ArrowLeft, Crown, Lock } from 'lucide-react';
+import { usePremium } from '../context/PremiumContext';
+import { useNavigate } from 'react-router-dom';
 
 // ─── MOCK TEST DEFINITIONS ───
 // Har safar yangi mock test qo'shganda, shu arrayga bitta yangi object qo'shing
@@ -35,8 +37,10 @@ const ICON_MAP: Record<string, any> = {
 
 export default function MockExam() {
   const [selectedTest, setSelectedTest] = useState<typeof MOCK_TESTS[0] | null>(null);
-  // -1 = test info/confirm, 0..n = active section, sections.length = completed
   const [currentStep, setCurrentStep] = useState(-1);
+  const [activeTab, setActiveTab] = useState<'free' | 'premium'>('free');
+  const { isPremium } = usePremium();
+  const navigate = useNavigate();
 
   const handleSelectTest = (test: typeof MOCK_TESTS[0]) => {
     setSelectedTest(test);
@@ -72,6 +76,56 @@ export default function MockExam() {
           <span className="text-slate-500 text-sm font-bold">{MOCK_TESTS.length} ta test mavjud</span>
         </div>
 
+        {/* Tabs */}
+        <div className="flex gap-3">
+          <button
+            onClick={() => setActiveTab('free')}
+            className={`flex items-center gap-2 px-6 py-3 rounded-2xl font-bold text-sm transition-all ${
+              activeTab === 'free' ? 'bg-indigo-600 text-white shadow-lg' : 'bg-slate-800 text-slate-400 hover:text-white'
+            }`}
+          >
+            Free Testlar
+          </button>
+          <button
+            onClick={() => setActiveTab('premium')}
+            className={`flex items-center gap-2 px-6 py-3 rounded-2xl font-bold text-sm transition-all ${
+              activeTab === 'premium' ? 'bg-amber-500 text-white shadow-lg' : 'bg-slate-800 text-amber-400 border border-amber-500/30 hover:bg-amber-500/10'
+            }`}
+          >
+            <Crown className="w-4 h-4" /> ⭐ Premium Testlar
+          </button>
+        </div>
+
+        {/* Premium locked */}
+        {activeTab === 'premium' && !isPremium && (
+          <div className="flex flex-col items-center justify-center min-h-[350px] bg-slate-900 rounded-[2rem] border-2 border-dashed border-amber-500/30 p-12 text-center">
+            <div className="w-20 h-20 bg-amber-500/10 rounded-3xl flex items-center justify-center mb-6 border border-amber-500/20">
+              <Lock className="w-10 h-10 text-amber-400" />
+            </div>
+            <h3 className="text-3xl font-black text-white mb-3">Premium bo'lim</h3>
+            <p className="text-slate-500 text-lg font-medium mb-8 max-w-sm">
+              Bu bo'limdagi testlarga kirish uchun premium obuna kerak
+            </p>
+            <button
+              onClick={() => navigate('/premium')}
+              className="bg-gradient-to-r from-amber-500 to-orange-500 text-white px-8 py-4 rounded-2xl font-black text-lg hover:from-amber-400 hover:to-orange-400 transition-all shadow-xl shadow-amber-900/30 flex items-center gap-3"
+            >
+              <Crown className="w-5 h-5" />
+              Premium olish
+            </button>
+          </div>
+        )}
+
+        {/* Premium unlocked - empty for now */}
+        {activeTab === 'premium' && isPremium && (
+          <div className="text-center py-20 bg-slate-900/50 rounded-[3rem] border border-dashed border-amber-500/30">
+            <Crown className="w-12 h-12 text-amber-500/50 mx-auto mb-4" />
+            <p className="text-slate-500 font-bold">Premium mock testlar tez orada qo'shiladi.</p>
+          </div>
+        )}
+
+        {/* Free tests */}
+        {activeTab === 'free' && (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {MOCK_TESTS.map((test, idx) => (
             <div
@@ -119,11 +173,13 @@ export default function MockExam() {
           ))}
         </div>
 
-        {MOCK_TESTS.length === 0 && (
+        {MOCK_TESTS.length === 0 && activeTab === 'free' && (
           <div className="text-center py-20 bg-slate-900/50 rounded-[3rem] border border-dashed border-slate-800">
             <AlertCircle className="w-12 h-12 text-slate-700 mx-auto mb-4" />
             <p className="text-slate-500 font-bold">Hozircha mock testlar mavjud emas.</p>
           </div>
+        )}
+        </div>
         )}
       </div>
     );
