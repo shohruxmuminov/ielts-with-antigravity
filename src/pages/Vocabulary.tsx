@@ -154,9 +154,12 @@ export default function Vocabulary() {
                   </div>
                 ))}
               </div>
-              <button className="w-full py-4 bg-slate-800 hover:bg-slate-700 rounded-2xl font-bold text-sm transition-all border border-slate-700 text-slate-300">
+              <Link 
+                to="/vocabulary/bank"
+                className="w-full py-4 bg-slate-800 hover:bg-slate-700 rounded-2xl font-bold text-sm transition-all border border-slate-700 text-slate-300 flex items-center justify-center gap-2"
+              >
                 View Word List
-              </button>
+              </Link>
             </div>
           </div>
 

@@ -7,6 +7,7 @@ import ListeningPractice from './pages/ListeningPractice';
 import WritingPractice from './pages/WritingPractice';
 import SpeakingPractice from './pages/SpeakingPractice';
 import VocabularyTrainer from './pages/VocabularyTrainer';
+import Vocabulary from './pages/Vocabulary';
 import MockExam from './pages/MockExam';
 import Analytics from './pages/Analytics';
 import Profile from './pages/Profile';
@@ -14,6 +15,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import PremiumPanel from './pages/PremiumPanel';
 import PremiumBooks from './pages/PremiumBooks';
+import VocabularyBank from './pages/VocabularyBank';
 
 export default function App() {
   return (
@@ -29,7 +31,9 @@ export default function App() {
           <Route path="/listening" element={<ListeningPractice />} />
           <Route path="/writing" element={<WritingPractice />} />
           <Route path="/speaking" element={<SpeakingPractice />} />
-          <Route path="/vocabulary" element={<VocabularyTrainer />} />
+          <Route path="/vocabulary" element={<Vocabulary />} />
+          <Route path="/vocabulary/trainer" element={<VocabularyTrainer />} />
+          <Route path="/vocabulary/bank" element={<VocabularyBank />} />
           <Route path="/mock-exam" element={<MockExam />} />
           <Route path="/analytics" element={<Analytics />} />
           <Route path="/profile" element={<Profile />} />
