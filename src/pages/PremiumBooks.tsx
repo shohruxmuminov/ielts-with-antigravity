@@ -105,7 +105,7 @@ export default function PremiumBooks() {
 
   if (loading) return null;
 
-  const isPremium = profile?.isPremium;
+  const isPremium = !!profile?.isPremium;
 
   const currentBooks = booksData[activeCategory as keyof typeof booksData].filter(book => 
     book.toLowerCase().includes(searchTerm.toLowerCase())
