@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IELTS Speaking Pro Practice | Prep Oasis</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #0f172a;
+      --panel: #1e293b;
+      --panel-2: #334155;
+      --card: #1e293b;
+      --soft: #94a3b8;
+      --text: #f8fafc;
+      --accent: #6366f1;
+      --accent-2: #10b981;
+      --border: rgba(255,255,255,0.06);
+      --shadow: 0 20px 50px rgba(0,0,0,0.3);
+      --radius: 24px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: 'Outfit', sans-serif;
+      background: #0f172a;
+      color:var(--text);
+      line-height: 1.6;
+    }
+
+    .container{
+      width:min(1220px,92%);
+      margin:0 auto;
+    }
+
+    .hero{
+      padding:40px 0 24px;
+    }
+
+    .hero-card{
+      background:linear-gradient(135deg, rgba(96,165,250,0.18), rgba(34,197,94,0.12));
+      border:1px solid var(--border);
+      border-radius:28px;
+      padding:32px;
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .hero-card::before{
+      content:"";
+      position:absolute;
+      inset:auto -80px -80px auto;
+      width:220px;
+      height:220px;
+      background:radial-gradient(circle, rgba(96,165,250,0.35), transparent 70%);
+      border-radius:50%;
+    }
+
+    h1{
+      margin:0 0 12px;
+      font-size:clamp(28px,5vw,48px);
+      line-height:1.08;
+      letter-spacing:-0.02em;
+    }
+
+    .subtitle{
+      margin:0;
+      max-width:850px;
+      color:#dbeafe;
+      font-size:16px;
+      line-height:1.7;
+    }
+
+    .top-stats{
+      margin-top:22px;
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+      gap:14px;
+    }
+
+    .stat{
+      background:rgba(255,255,255,0.06);
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:16px;
+      backdrop-filter:blur(6px);
+    }
+
+    .stat strong{
+      display:block;
+      font-size:24px;
+      margin-bottom:6px;
+    }
+
+    .stat span{
+      color:var(--soft);
+      font-size:14px;
+    }
+
+    .toolbar{
+      margin:26px 0 10px;
+      display:grid;
+      grid-template-columns: 1fr auto auto;
+      gap:14px;
+    }
+
+    .btn-secondary{
+      background: var(--panel);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 14px 24px;
+      border-radius: 18px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-secondary:hover{
+      background: var(--panel-2);
+      transform: translateY(-2px);
+    }
+
+    .nav-top{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 0;
+    }
+
+    .back-btn{
+        color: var(--soft);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 600;
+        transition: color 0.2s;
+    }
+
+    .back-btn:hover{
+        color: var(--text);
+    }
+
+    .search-box, .select-box{
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:14px 16px;
+      box-shadow:var(--shadow);
+    }
+
+    .search-box input, .select-box select{
+      width:100%;
+      border:none;
+      outline:none;
+      background:transparent;
+      color:var(--text);
+      font-size:15px;
+    }
+
+    .select-box select option{
+      color:#000;
+    }
+
+    .tabs{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin:18px 0 22px;
+    }
+
+    .tab-btn{
+      border:none;
+      cursor:pointer;
+      padding:12px 18px;
+      border-radius:999px;
+      background:var(--panel);
+      color:var(--text);
+      border:1px solid var(--border);
+      font-weight:700;
+      transition:0.25s ease;
+    }
+
+    .tab-btn:hover{
+      transform:translateY(-2px);
+      background:var(--panel-2);
+    }
+
+    .tab-btn.active{
+      background:linear-gradient(135deg,var(--accent),#3b82f6);
+      color:#07111f;
+      border-color:transparent;
+    }
+
+    .part-section{
+      display:none;
+      animation:fade 0.35s ease;
+      margin-bottom:30px;
+    }
+
+    .part-section.active{
+      display:block;
+    }
+
+    @keyframes fade{
+      from{opacity:0; transform:translateY(8px)}
+      to{opacity:1; transform:translateY(0)}
+    }
+
+    .section-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:end;
+      gap:20px;
+      margin-bottom:16px;
+      flex-wrap:wrap;
+    }
+
+    .section-header h2{
+      margin:0;
+      font-size:28px;
+    }
+
+    .section-header p{
+      margin:8px 0 0;
+      color:var(--soft);
+      max-width:800px;
+      line-height:1.7;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+      gap:18px;
+    }
+
+    .card{
+      background:linear-gradient(180deg,var(--panel) 0%, var(--panel-2) 100%);
+      border:1px solid var(--border);
+      border-radius:24px;
+      padding:20px;
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .card::after{
+      content:"";
+      position:absolute;
+      right:-35px;
+      top:-35px;
+      width:100px;
+      height:100px;
+      background:radial-gradient(circle, rgba(96,165,250,0.15), transparent 70%);
+      border-radius:50%;
+    }
+
+    .badge{
+      display:inline-block;
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:0.04em;
+      text-transform:uppercase;
+      padding:7px 10px;
+      border-radius:999px;
+      background:rgba(96,165,250,0.14);
+      color:#bfdbfe;
+      border:1px solid rgba(96,165,250,0.2);
+      margin-bottom:12px;
+    }
+
+    .card h3{
+      margin:0 0 10px;
+      font-size:22px;
+    }
+
+    .question-list{
+      margin:0 0 16px;
+      padding-left:18px;
+      color:#dbeafe;
+      line-height:1.7;
+    }
+
+    .answer-box{
+      background:rgba(255,255,255,0.04);
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:16px;
+      margin-bottom:14px;
+    }
+
+    .answer-box h4,
+    .vocab-box h4{
+      margin:0 0 10px;
+      font-size:14px;
+      color:#93c5fd;
+      text-transform:uppercase;
+      letter-spacing:0.05em;
+    }
+
+    .answer-box p{
+      margin:0;
+      color:#f8fafc;
+      line-height:1.9;
+      font-size:15px;
+    }
+
+    .highlight{
+      color:#86efac;
+      font-weight:700;
+    }
+
+    .accordion{
+      border-radius:18px;
+      overflow:hidden;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,0.03);
+    }
+
+    .accordion button{
+      width:100%;
+      border:none;
+      cursor:pointer;
+      text-align:left;
+      background:transparent;
+      color:var(--text);
+      padding:15px 16px;
+      font-weight:700;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      font-size:15px;
+    }
+
+    .accordion-content{
+      display:none;
+      padding:0 16px 16px;
+    }
+
+    .accordion.active .accordion-content{
+      display:block;
+    }
+
+    .vocab-table{
+      width:100%;
+      border-collapse:collapse;
+      overflow:hidden;
+      border-radius:14px;
+    }
+
+    .vocab-table th,
+    .vocab-table td{
+      text-align:left;
+      padding:10px 10px;
+      border-bottom:1px solid rgba(255,255,255,0.06);
+      vertical-align:top;
+      font-size:14px;
+      line-height:1.6;
+    }
+
+    .vocab-table th{
+      color:#93c5fd;
+      background:rgba(255,255,255,0.03);
+    }
+
+    .copy-btn{
+      margin-top:14px;
+      border:none;
+      cursor:pointer;
+      padding:11px 14px;
+      border-radius:14px;
+      font-weight:700;
+      background:linear-gradient(135deg,var(--accent-2),#16a34a);
+      color:#04130a;
+      transition:0.2s ease;
+    }
+
+    .copy-btn:hover{
+      transform:translateY(-1px);
+      filter:brightness(1.05);
+    }
+
+    .footer-note{
+      margin:24px 0 40px;
+      color:var(--soft);
+      text-align:center;
+      line-height:1.8;
+      font-size:14px;
+    }
+
+    .empty-state{
+      display:none;
+      margin-top:18px;
+      text-align:center;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:20px;
+      padding:28px;
+      color:var(--soft);
+    }
+
+    @media print {
+      .nav-top, .toolbar, .tabs, .copy-btn, .footer-note { display: none !important; }
+      .container { width: 100% !important; margin: 0 !important; }
+      .card { break-inside: avoid; border: 1px solid #ddd !important; background: #fff !important; color: #000 !important; box-shadow: none !important; margin-bottom: 20px !important; }
+      .answer-box { background: #f9f9f9 !important; border: 1px solid #eee !important; color: #000 !important; }
+      .highlight { color: #059669 !important; }
+      .accordion-content { display: block !important; }
+      .accordion button span { display: none; }
+      h1, h2, h3 { color: #000 !important; }
+      .badge { border: 1px solid #ccc !important; color: #333 !important; }
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--accent-2);
+      color: #04130a;
+      padding: 12px 24px;
+      border-radius: 99px;
+      font-weight: 700;
+      box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
+      z-index: 1000;
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+        <a href="/dashboard" class="back-btn">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            Back to Dashboard
+        </a>
+        <div class="brand" style="font-weight: 800; font-size: 20px; color: var(--accent);">Prep Oasis</div>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-card">
+        <h1>IELTS Speaking Pro Practice Hub</h1>
+        <p class="subtitle">
+          Practice the most common IELTS Speaking topics with Band 9.0 sample answers, advanced phrases,
+          high-level vocabulary, and Uzbek translations. The content is organized clearly into Part 1,
+          Part 2, and Part 3 so students can prepare in a structured and confident way.
+        </p>
+
+        <div class="top-stats">
+          <div class="stat">
+            <strong>3 Parts</strong>
+            <span>Part 1, Part 2, Part 3 fully separated</span>
+          </div>
+          <div class="stat">
+            <strong>Band 9.0</strong>
+            <span>Natural, fluent, and high-level sample answers</span>
+          </div>
+          <div class="stat">
+            <strong>Vocab + Phrases</strong>
+            <span>Difficult expressions with Uzbek meaning</span>
+          </div>
+          <div class="stat">
+            <strong>Clear UI</strong>
+            <span>Modern design with search and filtering</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="toolbar">
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search topic, question, phrase, or vocabulary..." />
+      </div>
+      <div class="select-box">
+        <select id="levelFilter">
+          <option value="all">All Sections</option>
+          <option value="part1">Part 1</option>
+          <option value="part2">Part 2</option>
+          <option value="part3">Part 3</option>
+        </select>
+      </div>
+      <button class="btn-secondary" onclick="window.print()">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 14h12v8H6v-8z"/></svg>
+        Print
+      </button>
+    </div>
+
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="part1">Part 1</button>
+      <button class="tab-btn" data-tab="part2">Part 2</button>
+      <button class="tab-btn" data-tab="part3">Part 3</button>
+    </div>
+
+    <div id="part1" class="part-section active">
+      <div class="section-header">
+        <div>
+          <h2>Part 1 — Personal & Familiar Topics</h2>
+          <p>
+            Short questions about your life, daily routine, preferences, hometown, study, hobbies, and habits.
+            Answers should be natural, direct, and slightly developed.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid" id="part1Grid">
+
+        <div class="card searchable">
+          <span class="badge">Part 1 • Hometown</span>
+          <h3>Hometown</h3>
+          <ul class="question-list">
+            <li>Can you describe your hometown?</li>
+            <li>What do you like most about it?</li>
+            <li>Has your hometown changed much over the years?</li>
+          </ul>
+
+          <div class="answer-box">
+            <h4>Band 9.0 Sample Answer</h4>
+            <p>
+              I come from a fairly lively city, and what I appreciate most about it is the fact that it
+              <span class="highlight">strikes a balance between modern development and traditional charm</span>.
+              On the one hand, there are new buildings, shopping centres, and better roads; on the other hand,
+              people still maintain a strong sense of community. What really sets it apart is the atmosphere.
+              It is not the kind of place where life feels overwhelmingly hectic, so I find it both practical
+              and emotionally comforting. Over the years, it has definitely
+              <span class="highlight">undergone a noticeable transformation</span>, particularly in terms of infrastructure,
+              but fortunately it has not entirely lost its identity.
+            </p>
+          </div>
+
+          <div class="accordion">
+            <button type="button">
+              Difficult Phrases & Vocabulary
+              <span>+</span>
+            </button>
+            <div class="accordion-content">
+              <table class="vocab-table">
+                <tr><th>Phrase / Word</th><th>Meaning in Uzbek</th></tr>
+                <tr><td>strikes a balance between</td><td>o‘rtasida muvozanat saqlaydi</td></tr>
+                <tr><td>traditional charm</td><td>an’anaviy joziba</td></tr>
+                <tr><td>sets it apart</td><td>uni boshqalardan ajratib turadi</td></tr>
+                <tr><td>overwhelmingly hectic</td><td>haddan tashqari shoshqin / juda gavjum</td></tr>
+                <tr><td>emotionally comforting</td><td>ruhiy jihatdan taskin beruvchi</td></tr>
+                <tr><td>undergone a noticeable transformation</td><td>sezilarli o‘zgarishni boshdan kechirdi</td></tr>
+                <tr><td>infrastructure</td><td>infratuzilma</td></tr>
+                <tr><td>lost its identity</td><td>o‘ziga xosligini yo‘qotgan</td></tr>
+              </table>
+            </div>
+          </div>
+
+          <button class="copy-btn" onclick="copyCard(this)">Copy Sample Answer</button>
+        </div>
+
+        <div class="card searchable">
+          <span class="badge">Part 1 • Work / Study</span>
+          <h3>Work or Study</h3>
+          <ul class="question-list">
+            <li>Do you work or are you a student?</li>
+            <li>Why did you choose this field?</li>
+            <li>What do you find most challenging about it?</li>
+          </ul>
+
+          <div class="answer-box">
+            <h4>Band 9.0 Sample Answer</h4>
+            <p>
+              At the moment, I am a student, and I chose my field mainly because it
+              <span class="highlight">aligns closely with my long-term aspirations</span>.
+              I have always been drawn to subjects that require both analytical thinking and persistence,
+              so it felt like a natural fit. What I find most rewarding is that the learning process constantly
+              <span class="highlight">pushes me out of my comfort zone</span>. That said, it is not without difficulties.
+              The workload can be quite demanding, especially when several deadlines
+              <span class="highlight">pile up at once</span>, but I believe that kind of pressure helps me develop discipline
+              and resilience in the long run.
+            </p>
+          </div>
+
+          <div class="accordion">
+            <button type="button">
+              Difficult Phrases & Vocabulary
+              <span>+</span>
+            </button>
+            <div class="accordion-content">
+              <table class="vocab-table">
+                <tr><th>Phrase / Word</th><th>Meaning in Uzbek</th></tr>
+                <tr><td>aligns closely with my long-term aspirations</td><td>uzoq muddatli maqsadlarimga juda mos keladi</td></tr>
+                <tr><td>drawn to</td><td>qiziqib qolgan / moyil bo‘lgan</td></tr>
+                <tr><td>analytical thinking</td><td>tahliliy fikrlash</td></tr>
+                <tr><td>natural fit</td><td>juda mos keladigan tanlov</td></tr>
+                <tr><td>pushes me out of my comfort zone</td><td>meni qulay hududimdan chiqaradi</td></tr>
+                <tr><td>pile up at once</td><td>birdaniga yig‘ilib qolmoq</td></tr>
+                <tr><td>discipline and resilience</td><td>intizom va bardoshlilik</td></tr>
+              </table>
+            </div>
+          </div>
+
+          <button class="copy-btn" onclick="copyCard(this)">Copy Sample Answer</button>
+        </div>
+
+        <div class="card searchable">
+          <span class="badge">Part 1 • Daily Routine</span>
+          <h3>Daily Routine</h3>
+          <ul class="question-list">
+            <li>Do you usually follow the same routine every day?</li>
+            <li>What part of your day do you enjoy the most?</li>
+            <li>Would you like to change your routine in the future?</li>
+          </ul>
+
+          <div class="answer-box">
+            <h4>Band 9.0 Sample Answer</h4>
+            <p>
+              To a large extent, yes, I do follow a fairly consistent routine because it helps me
+              <span class="highlight">stay on top of my responsibilities</span>.
+              I usually begin the day by planning what needs to be done, which prevents me from feeling scattered.
+              The part I enjoy most is probably the evening because it gives me a chance to
+              <span class="highlight">wind down</span> and reflect on the day. However, I would not say my routine is rigid.
+              I try to leave a bit of room for spontaneity, since an overly repetitive lifestyle can become
+              <span class="highlight">mentally draining</span> after a while.
+            </p>
+          </div>
+
+          <div class="accordion">
+            <button type="button">
+              Difficult Phrases & Vocabulary
+              <span>+</span>
+            </button>
+            <div class="accordion-content">
+              <table class="vocab-table">
+                <tr><th>Phrase / Word</th><th>Meaning in Uzbek</th></tr>
+                <tr><td>stay on top of my responsibilities</td><td>majburiyatlarimni nazoratda ushlab turmoq</td></tr>
+                <tr><td>feeling scattered</td><td>chalg‘igan / tartibsiz holatda his qilish</td></tr>
+                <tr><td>wind down</td><td>bo‘shashmoq, dam olmoq</td></tr>
+                <tr><td>reflect on the day</td><td>kun haqida o‘ylab chiqmoq</td></tr>
+                <tr><td>rigid</td><td>qattiq, o‘zgarmas</td></tr>
+                <tr><td>leave room for spontaneity</td><td>spontanlik uchun joy qoldirmoq</td></tr>
+                <tr><td>mentally draining</td><td>aqliy jihatdan charchatadigan</td></tr>
+              </table>
+            </div>
+          </div>
+
+          <button class="copy-btn" onclick="copyCard(this)">Copy Sample Answer</button>
+        </div>
+
+        <div class="card searchable">
+          <span class="badge">Part 1 • Books</span>
+          <h3>Reading Books</h3>
+          <ul class="question-list">
+            <li>Do you enjoy reading books?</li>
+            <li>What kind of books do you usually read?</li>
+            <li>Do you think reading is important for young people?</li>
+          </ul>
+
+          <div class="answer-box">
+            <h4>Band 9.0 Sample Answer</h4>
+            <p>
+              Yes, absolutely. I think reading is one of the most effective ways to
+              <span class="highlight">broaden one’s horizons</span>.
+              I tend to read books that are either educational or thought-provoking because I like material that
+              <span class="highlight">adds depth to my understanding</span> of the world. What I value most about reading is that
+              it sharpens both language skills and concentration. For young people in particular, it can be
+              <span class="highlight">immensely beneficial</span> because it exposes them to new ideas and encourages them to think
+              beyond their immediate surroundings.
+            </p>
+          </div>
+
+          <div class="accordion">
+            <button type="button">
+              Difficult Phrases & Vocabulary
+              <span>+</span>
+            </button>
+            <div class="accordion-content">
+              <table class="vocab-table">
+                <tr><th>Phrase / Word</th><th>Meaning in Uzbek</th></tr>
+                <tr><td>broaden one’s horizons</td><td>dunyoqarashni kengaytirmoq</td></tr>
+                <tr><td>thought-provoking</td><td>chuqur o‘ylashga undovchi</td></tr>
+                <tr><td>adds depth to my understanding</td><td>tushunchamni chuqurlashtiradi</td></tr>
+                <tr><td>sharpens language skills</td><td>til ko‘nikmalarini charxlaydi</td></tr>
+                <tr><td>immensely beneficial</td><td>nihoyatda foydali</td></tr>
+                <tr><td>immediate surroundings</td><td>yaqin atrof / bevosita muhit</td></tr>
+              </table>
+            </div>
+          </div>
+
+          <button class="copy-btn" onclick="copyCard(this)">Copy Sample Answer</button>
+        </div>
+
+        <div class="card searchable">
+          <span class="badge">Part 1 • Technology</span>
+          <h3>Technology</h3>
+          <ul class="question-list">
+            <li>Do you use technology a lot in your daily life?</li>
+            <li>What device do you use most often?</li>
+            <li>Has technology improved your life?</li>
+          </ul>
+
+          <div class="answer-box">
+            <h4>Band 9.0 Sample Answer</h4>
+            <p>
+              Yes, without a doubt, technology plays a central role in my daily life.
+              The device I rely on most is probably my phone because it allows me to stay informed,
+              manage tasks, and communicate efficiently. I would say technology has improved my life significantly,
+              mainly because it has made information far more
+              <span class="highlight">readily accessible</span>.
+              At the same time, I try to use it in a balanced way because excessive screen time can be
+              <span class="highlight">counterproductive</span> and distract me from more meaningful activities.
+            </p>
+          </div>
+
+          <div class="accordion">
+            <button type="button">
+              Difficult Phrases & Vocabulary
+              <span>+</span>
+            </button>
+            <div class="accordion-content">
+              <table class="vocab-table">
+                <tr><th>Phrase / Word</th><th>Meaning in Uzbek</th></tr>
+                <tr><td>plays a central role</td><td>asosiy rol o‘ynaydi</td></tr>
+                <tr><td>rely on</td><td>tayanmoq</td></tr>
+                <tr><td>readily accessible</td><td>oson kirish mumkin bo‘lgan</td></tr>
+                <tr><td>significantly</td><td>sezilarli darajada</td></tr>
+                <tr><td>counterproductive</td><td>teskari natija beruvchi / samarasiz</td></tr>
+                <tr><td>meaningful activities</td><td>mazmunli faoliyatlar</td></tr>
+              </table>
+            </div>
+          </div>
+
+          <button class="copy-btn" onclick="copyCard(this)">Copy Sample Answer</button>
+        </div>
+
+        <div class="card searchable">
+          <span class="badge">Part 1 • Friends</span>
+          <h3>Friends</h3>
+          <ul class="question-list">
+            <li>Do you spend a lot of time with friends?</li>
+            <li>What qualities do you value in a good friend?</li>
+            <li>Is it easy for you to make friends?</li>
+          </ul>
+
+          <div class="answer-box">
+            <h4>Band 9.0 Sample Answer</h4>
+            <p>
+              I would say I value quality over quantity when it comes to friendships.
+              I may not have a huge social circle, but the friends I do have are people I can genuinely
+              <span class="highlight">count on</span>.
+              The qualities I admire most are honesty, emotional maturity, and the ability to be supportive
+              without being judgmental. As for making friends, I can do it when necessary, but I do not
+              <span class="highlight">open up</span> to people straight away. I usually prefer to get to know someone gradually
+              before I place real trust in them.
+            </p>
+          </div>
+
+          <div class="accordion">
+            <button type="button">
+              Difficult Phrases & Vocabulary
+              <span>+</span>
+            </button>
+            <div class="accordion-content">
+              <table class="vocab-table">
+                <tr><th>Phrase / Word</th><th>Meaning in Uzbek</th></tr>
+                <tr><td>quality over quantity</td><td>sifat sonidan ustun</td></tr>
+                <tr><td>social circle</td><td>ijtimoiy doira</td></tr>
+                <tr><td>count on</td><td>ishonmoq, suyanmoq</td></tr>
+                <tr><td>emotional maturity</td><td>hissiy yetuklik</td></tr>
+                <tr><td>judgmental</td><td>tez hukm qiladigan</td></tr>
+                <tr><td>open up</td><td>ichini ochmoq, samimiylashmoq</td></tr>
+                <tr><td>gradually</td><td>asta-sekin</td></tr>
+              </table>
+            </div>
+          </div>
+
+          <button class="copy-btn" onclick="copyCard(this)">Copy Sample Answer</button>
+        </div>
+
+      </div>
+    </div>
+
+    <div id="part2" class="part-section">
+      <div class="section-header">
+        <div>
+          <h2>Part 2 — Cue Card / Long Turn</h2>
+          <p>
+            You speak for 1–2 minutes on one topic. Strong answers need structure, vivid detail,
+            natural coherence, and high-level language.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid" id="part2Grid">
+
+        <div class="card searchable">
+          <span class="badge">Part 2 • Person</span>
+          <h3>Describe a Person Who Inspired You</h3>
+          <ul class="question-list">
+            <li>Who this person is</li>
+            <li>How you know this person</li>
+            <li>What qualities this person has</li>
+            <li>Explain why this person inspired you</li>
+          </ul>
+
+          <div class="answer-box">
+            <h4>Band 9.0 Sample Answer</h4>
+            <p>
+              I would like to talk about a teacher of mine who had a profound impact on the way I see education
+              and personal growth. I first met him a few years ago when he taught me an important subject at school.
+              What made him stand out was not merely his knowledge, but the way he
+              <span class="highlight">brought out the best in his students</span>.
+              He was exceptionally patient, highly articulate, and genuinely invested in our progress.
+              Whenever we struggled, he never made us feel inadequate; instead, he encouraged us to view mistakes
+              as part of the learning curve. I found that attitude incredibly inspiring because it shifted my mindset
+              from fear of failure to a more constructive way of thinking.
+              To this day, I still remember him as someone who did not simply teach lessons,
+              but also <span class="highlight">left a lasting impression</span> on my character.
+            </p>
+          </div>
+
+          <div class="accordion">
+            <button type="button">
+              Difficult Phrases & Vocabulary
+              <span>+</span>
+            </button>
+            <div class="accordion-content">
+              <table class="vocab-table">
+                <tr><th>Phrase / Word</th><th>Meaning in Uzbek</th></tr>
+                <tr><td>had a profound impact on</td><td>juda chuqur ta’sir ko‘rsatdi</td></tr>
+                <tr><td>stand out</td><td>ajralib turmoq</td></tr>
+                <tr><td>brought out the best in</td><td>eng yaxshi jihatlarini yuzaga chiqardi</td></tr>
+                <tr><td>highly articulate</td><td>fikrini juda ravon ifodalay oladigan</td></tr>
+                <tr><td>genuinely invested in our progress</td><td>bizning rivojimizga chin dildan qiziqqan</td></tr>
+                <tr><td>learning curve</td><td>o‘rganish jarayonidagi bosqichlar</td></tr>
+                <tr><td>left a lasting impression</td><td>uzoq saqlanadigan taassurot qoldirdi</td></tr>
+              </table>
+            </div>
+          </div>
+
+          <button class="copy-btn" onclick="copyCard(this)">Copy Sample Answer</button>
+        </div>
+
+        <div class="card searchable">
+          <span class="badge">Part 2 • Place</span>
+          <h3>Describe a Place You Enjoy Visiting</h3>
+          <ul class="question-list">
+            <li>Where it is</li>
+            <li>How often you go there</li>
+            <li>What you do there</li>
+            <li>Explain why you enjoy going there</li>
+          </ul>
+
+          <div class="answer-box">
+            <h4>Band 9.0 Sample Answer</h4>
+            <p>
+              A place I genuinely enjoy visiting is a quiet park not too far from where I live.
+              I do not go there every single day, but I try to visit it whenever I need a break from a busy routine.
+              What appeals to me most is the peaceful atmosphere. It is one of those places where you can
+              <span class="highlight">clear your head</span> and regain a sense of balance.
+              I usually walk around, listen to music, or simply sit on a bench and observe what is happening around me.
+              In a world where people are constantly in a rush, having access to a calm environment like that feels
+              <span class="highlight">nothing short of refreshing</span>.
+              I enjoy it not because it is spectacular in any dramatic sense, but because it gives me mental space,
+              which I think is increasingly rare nowadays.
+            </p>
+          </div>
+
+          <div class="accordion">
+            <button type="button">
+              Difficult Phrases & Vocabulary
+              <span>+</span>
+            </button>
+            <div class="accordion-content">
+              <table class="vocab-table">
+                <tr><th>Phrase / Word</th><th>Meaning in Uzbek</th></tr>
+                <tr><td>appeals to me most</td><td>menga eng ko‘p yoqadigan jihati</td></tr>
+                <tr><td>clear your head</td><td>xayolni tozalamoq, tinchlanmoq</td></tr>
+                <tr><td>regain a sense of balance</td><td>muvozanat hissini qayta tiklamoq</td></tr>
+                <tr><td>in a rush</td><td>shoshqaloqlikda</td></tr>
+                <tr><td>nothing short of refreshing</td><td>nihoyatda tetiklashtiruvchi</td></tr>
+                <tr><td>mental space</td><td>ruhiy/aqliy bo‘shliq, xotirjam fikrlash imkoniyati</td></tr>
+              </table>
+            </div>
+          </div>
+
+          <button class="copy-btn" onclick="copyCard(this)">Copy Sample Answer</button>
+        </div>
+
+        <div class="card searchable">
+          <span class="badge">Part 2 • Experience</span>
+          <h3>Describe a Time You Helped Someone</h3>
+          <ul class="question-list">
+            <li>Who the person was</li>
+            <li>What problem they had</li>
+            <li>How you helped them</li>
+            <li>Explain how you felt about it</li>
+          </ul>
+
+          <div class="answer-box">
+            <h4>Band 9.0 Sample Answer</h4>
+            <p>
+              I remember helping one of my friends when he was going through a particularly stressful academic period.
+              He had several assignments due at the same time and was clearly
+              <span class="highlight">under a great deal of pressure</span>.
+              Since I had already dealt with a similar situation before, I tried to help him organise his work into
+              manageable steps rather than seeing it as one overwhelming burden.
+              I assisted him with planning, prioritising tasks, and reviewing some of his written work.
+              What I found most meaningful about that experience was the fact that a relatively small effort on my part
+              made a noticeable difference to someone else’s wellbeing. It reminded me that practical support,
+              when offered at the right moment, can <span class="highlight">go a long way</span>.
+            </p>
+          </div>
+
+          <div class="accordion">
+            <button type="button">
+              Difficult Phrases & Vocabulary
+              <span>+</span>
+            </button>
+            <div class="accordion-content">
+              <table class="vocab-table">
+                <tr><th>Phrase / Word</th><th>Meaning in Uzbek</th></tr>
+                <tr><td>going through</td><td>boshdan kechirayotgan</td></tr>
+                <tr><td>under a great deal of pressure</td><td>katta bosim ostida</td></tr>
+                <tr><td>manageable steps</td><td>boshqariladigan kichik bosqichlar</td></tr>
+                <tr><td>overwhelming burden</td><td>juda og‘ir yuk</td></tr>
+                <tr><td>wellbeing</td><td>ruhiy va jismoniy holatning yaxshiligi</td></tr>
+                <tr><td>go a long way</td><td>katta foyda bermoq / juda asqotmoq</td></tr>
+              </table>
+            </div>
+          </div>
+
+          <button class="copy-btn" onclick="copyCard(this)">Copy Sample Answer</button>
+        </div>
+
+        <div class="card searchable">
+          <span class="badge">Part 2 • Object</span>
+          <h3>Describe a Useful Piece of Technology</h3>
+          <ul class="question-list">
+            <li>What it is</li>
+            <li>How often you use it</li>
+            <li>What you use it for</li>
+            <li>Explain why it is useful</li>
+          </ul>
+
+          <div class="answer-box">
+            <h4>Band 9.0 Sample Answer</h4>
+            <p>
+              A piece of technology I find particularly useful is my laptop.
+              It is something I use on a daily basis for studying, researching, writing, and even organising my schedule.
+              What makes it so valuable is its versatility. Rather than serving just one function,
+              it acts as a kind of all-in-one tool that helps me stay productive.
+              For instance, I can attend online lessons, store important files, and work on long tasks without interruption.
+              I also appreciate the fact that it enables me to
+              <span class="highlight">work more efficiently and independently</span>.
+              In my view, its usefulness lies not only in convenience, but also in the opportunities it creates for learning and self-improvement.
+            </p>
+          </div>
+
+          <div class="accordion">
+            <button type="button">
+              Difficult Phrases & Vocabulary
+              <span>+</span>
+            </button>
+            <div class="accordion-content">
+              <table class="vocab-table">
+                <tr><th>Phrase / Word</th><th>Meaning in Uzbek</th></tr>
+                <tr><td>particularly useful</td><td>ayniqsa foydali</td></tr>
+                <tr><td>on a daily basis</td><td>har kuni</td></tr>
+                <tr><td>versatility</td><td>ko‘p qirrali foydalilik</td></tr>
+                <tr><td>all-in-one tool</td><td>hamma vazifani bajaruvchi vosita</td></tr>
+                <tr><td>without interruption</td><td>uzluksiz</td></tr>
+                <tr><td>work more efficiently and independently</td><td>yanada samarali va mustaqil ishlamoq</td></tr>
+                <tr><td>self-improvement</td><td>o‘zini rivojlantirish</td></tr>
+              </table>
+            </div>
+          </div>
+
+          <button class="copy-btn" onclick="copyCard(this)">Copy Sample Answer</button>
+        </div>
+
+      </div>
+    </div>
+
+    <div id="part3" class="part-section">
+      <div class="section-header">
+        <div>
+          <h2>Part 3 — Discussion & Abstract Ideas</h2>
+          <p>
+            More analytical questions linked to Part 2. Answers should be broader, more balanced,
+            and include reasons, examples, and comparisons.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid" id="part3Grid">
+
+        <div class="card searchable">
+          <span class="badge">Part 3 • Education</span>
+          <h3>Education & Success</h3>
+          <ul class="question-list">
+            <li>Do you think schools should focus more on practical skills?</li>
+            <li>What makes a good teacher?</li>
+            <li>Is academic success the only kind of success that matters?</li>
+          </ul>
+
+          <div class="answer-box">
+            <h4>Band 9.0 Sample Answer</h4>
+            <p>
+              Yes, I do think schools should place greater emphasis on practical skills because academic knowledge alone
+              is not always enough to prepare students for real-life challenges.
+              Skills such as communication, time management, and problem-solving are
+              <span class="highlight">equally indispensable</span>.
+              As for what makes a good teacher, I would say it is a combination of subject knowledge, patience,
+              and the ability to motivate students. A truly effective teacher does more than deliver information;
+              they cultivate curiosity and confidence. Regarding success, I strongly disagree with the idea that
+              academic achievement is the only metric that matters. Success can take many forms, including personal growth,
+              emotional intelligence, and the capacity to contribute meaningfully to society.
+            </p>
+          </div>
+
+          <div class="accordion">
+            <button type="button">
+              Difficult Phrases & Vocabulary
+              <span>+</span>
+            </button>
+            <div class="accordion-content">
+              <table class="vocab-table">
+                <tr><th>Phrase / Word</th><th>Meaning in Uzbek</th></tr>
+                <tr><td>place greater emphasis on</td><td>ko‘proq urg‘u bermoq</td></tr>
+                <tr><td>real-life challenges</td><td>haqiqiy hayotdagi qiyinchiliklar</td></tr>
+                <tr><td>equally indispensable</td><td>birdek zarur</td></tr>
+                <tr><td>cultivate curiosity</td><td>qiziqishni shakllantirmoq</td></tr>
+                <tr><td>metric</td><td>o‘lchov mezoni</td></tr>
+                <tr><td>emotional intelligence</td><td>hissiy intellekt</td></tr>
+                <tr><td>contribute meaningfully to society</td><td>jamiyatga mazmunli hissa qo‘shmoq</td></tr>
+              </table>
+            </div>
+          </div>
+
+          <button class="copy-btn" onclick="copyCard(this)">Copy Sample Answer</button>
+        </div>
+
+        <div class="card searchable">
+          <span class="badge">Part 3 • Technology & Society</span>
+          <h3>Technology in Modern Life</h3>
+          <ul class="question-list">
+            <li>Has technology made people closer or more isolated?</li>
+            <li>Should children use digital devices from an early age?</li>
+            <li>Will technology replace teachers in the future?</li>
+          </ul>
+
+          <div class="answer-box">
+            <h4>Band 9.0 Sample Answer</h4>
+            <p>
+              I think technology has had a dual effect. On the one hand, it has made communication faster and more convenient,
+              which can certainly bring people closer across long distances. On the other hand, excessive dependence on devices
+              can lead to a form of social disconnection, even when people are physically in the same room.
+              When it comes to children, I believe digital devices can be useful if their use is
+              <span class="highlight">carefully monitored and age-appropriate</span>.
+              They can support learning, but overexposure may affect attention spans and social development.
+              As for whether technology will replace teachers, I doubt it will do so entirely.
+              Technology can assist education, but it cannot fully replicate human encouragement, empathy, and judgment.
+            </p>
+          </div>
+
+          <div class="accordion">
+            <button type="button">
+              Difficult Phrases & Vocabulary
+              <span>+</span>
+            </button>
+            <div class="accordion-content">
+              <table class="vocab-table">
+                <tr><th>Phrase / Word</th><th>Meaning in Uzbek</th></tr>
+                <tr><td>had a dual effect</td><td>ikki xil ta’sir ko‘rsatdi</td></tr>
+                <tr><td>social disconnection</td><td>ijtimoiy uzilish / aloqaning susayishi</td></tr>
+                <tr><td>carefully monitored</td><td>sinchiklab nazorat qilinadigan</td></tr>
+                <tr><td>age-appropriate</td><td>yoshga mos</td></tr>
+                <tr><td>overexposure</td><td>haddan tashqari ko‘p ta’sirga duch kelish</td></tr>
+                <tr><td>attention spans</td><td>diqqatni ushlab turish qobiliyati</td></tr>
+                <tr><td>replicate</td><td>to‘liq qayta yarata olmoq</td></tr>
+              </table>
+            </div>
+          </div>
+
+          <button class="copy-btn" onclick="copyCard(this)">Copy Sample Answer</button>
+        </div>
+
+        <div class="card searchable">
+          <span class="badge">Part 3 • Cities</span>
+          <h3>City Life vs Countryside</h3>
+          <ul class="question-list">
+            <li>Why do many people move to cities?</li>
+            <li>What problems do large cities face?</li>
+            <li>Do you think rural areas will become more popular in the future?</li>
+          </ul>
+
+          <div class="answer-box">
+            <h4>Band 9.0 Sample Answer</h4>
+            <p>
+              Many people are drawn to cities because urban areas tend to offer better employment prospects,
+              educational opportunities, and access to services. In other words, cities are often seen as places where
+              people can <span class="highlight">improve their standard of living</span>.
+              However, large cities also face serious challenges, including traffic congestion, pollution,
+              overcrowding, and rising living costs. These issues can significantly reduce people’s quality of life.
+              As for rural areas, I do think they may become more appealing in the future, particularly if remote work
+              continues to expand. If people can earn a living without commuting daily, they may start to prioritise
+              peace, space, and affordability over constant proximity to city centres.
+            </p>
+          </div>
+
+          <div class="accordion">
+            <button type="button">
+              Difficult Phrases & Vocabulary
+              <span>+</span>
+            </button>
+            <div class="accordion-content">
+              <table class="vocab-table">
+                <tr><th>Phrase / Word</th><th>Meaning in Uzbek</th></tr>
+                <tr><td>drawn to cities</td><td>shaharlarga intilmoq</td></tr>
+                <tr><td>employment prospects</td><td>ish imkoniyatlari</td></tr>
+                <tr><td>access to services</td><td>xizmatlarga kirish imkoniyati</td></tr>
+                <tr><td>improve their standard of living</td><td>turmush darajasini oshirmoq</td></tr>
+                <tr><td>traffic congestion</td><td>tirbandlik</td></tr>
+                <tr><td>overcrowding</td><td>ortiqcha gavjumlik</td></tr>
+                <tr><td>proximity to city centres</td><td>shahar markaziga yaqinlik</td></tr>
+              </table>
+            </div>
+          </div>
+
+          <button class="copy-btn" onclick="copyCard(this)">Copy Sample Answer</button>
+        </div>
+
+        <div class="card searchable">
+          <span class="badge">Part 3 • Environment</span>
+          <h3>Environment & Responsibility</h3>
+          <ul class="question-list">
+            <li>Who should be more responsible for protecting the environment: individuals or governments?</li>
+            <li>Why do some people ignore environmental problems?</li>
+            <li>What can schools do to raise environmental awareness?</li>
+          </ul>
+
+          <div class="answer-box">
+            <h4>Band 9.0 Sample Answer</h4>
+            <p>
+              I think responsibility should be shared, although governments arguably have a greater capacity to bring about
+              large-scale change. They can introduce regulations, invest in sustainable infrastructure, and influence public behaviour.
+              That said, individuals are not exempt from responsibility. Everyday choices, such as reducing waste or using resources more wisely,
+              can collectively have a substantial impact. Some people ignore environmental issues because the consequences often seem distant or abstract,
+              so they do not feel an immediate sense of urgency. Schools can play a crucial role by
+              <span class="highlight">instilling environmentally responsible habits</span> at an early age and showing students
+              that their actions, however small, are part of a broader solution.
+            </p>
+          </div>
+
+          <div class="accordion">
+            <button type="button">
+              Difficult Phrases & Vocabulary
+              <span>+</span>
+            </button>
+            <div class="accordion-content">
+              <table class="vocab-table">
+                <tr><th>Phrase / Word</th><th>Meaning in Uzbek</th></tr>
+                <tr><td>shared responsibility</td><td>bo‘lingan mas’uliyat</td></tr>
+                <tr><td>bring about large-scale change</td><td>katta ko‘lamli o‘zgarish keltirib chiqarmoq</td></tr>
+                <tr><td>sustainable infrastructure</td><td>barqaror infratuzilma</td></tr>
+                <tr><td>not exempt from responsibility</td><td>mas’uliyatdan ozod emas</td></tr>
+                <tr><td>substantial impact</td><td>katta ta’sir</td></tr>
+                <tr><td>sense of urgency</td><td>shoshilinchlik hissi</td></tr>
+                <tr><td>instilling environmentally responsible habits</td><td>ekologik mas’uliyatli odatlarni singdirish</td></tr>
+              </table>
+            </div>
+          </div>
+
+          <button class="copy-btn" onclick="copyCard(this)">Copy Sample Answer</button>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="empty-state" id="emptyState">
+      No matching results found. Try another keyword such as <strong>hometown</strong>, <strong>technology</strong>,
+      <strong>teacher</strong>, <strong>environment</strong>, or <strong>study</strong>.
+    </div>
+
+    <p class="footer-note">
+      Built for IELTS Speaking preparation with a clean and student-friendly layout.
+      You can directly place this file into your website or split the cards into reusable components later.
+    </p>
+    <div id="toast" class="toast">Copied to clipboard!</div>
+  </div>
+
+  <script>
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const sections = document.querySelectorAll('.part-section');
+    const filter = document.getElementById('levelFilter');
+    const searchInput = document.getElementById('searchInput');
+    const emptyState = document.getElementById('emptyState');
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabButtons.forEach(b => b.classList.remove('active'));
+        sections.forEach(s => s.classList.remove('active'));
+
+        btn.classList.add('active');
+        document.getElementById(btn.dataset.tab).classList.add('active');
+        filter.value = btn.dataset.tab;
+        applyFilters();
+      });
+    });
+
+    filter.addEventListener('change', () => {
+      const value = filter.value;
+
+      if (value === 'all') {
+        sections.forEach(s => s.classList.remove('active'));
+        document.getElementById('part1').classList.add('active');
+        tabButtons.forEach(b => b.classList.remove('active'));
+        tabButtons[0].classList.add('active');
+      } else {
+        sections.forEach(s => s.classList.remove('active'));
+        document.getElementById(value).classList.add('active');
+        tabButtons.forEach(b => b.classList.remove('active'));
+        document.querySelector(`[data-tab="${value}"]`).classList.add('active');
+      }
+      applyFilters();
+    });
+
+    document.querySelectorAll('.accordion').forEach(acc => {
+      const btn = acc.querySelector('button');
+      btn.addEventListener('click', () => {
+        acc.classList.toggle('active');
+        btn.querySelector('span').textContent = acc.classList.contains('active') ? '−' : '+';
+      });
+    });
+
+    searchInput.addEventListener('input', applyFilters);
+
+    function applyFilters() {
+      const query = searchInput.value.toLowerCase().trim();
+      const selected = filter.value;
+      const allCards = document.querySelectorAll('.searchable');
+      let visibleCount = 0;
+
+      allCards.forEach(card => {
+        const parentSection = card.closest('.part-section').id;
+        const text = card.innerText.toLowerCase();
+
+        const matchesSection = selected === 'all' ? true : parentSection === selected;
+        const matchesSearch = query === '' ? true : text.includes(query);
+
+        if (matchesSection && matchesSearch) {
+          card.style.display = 'block';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
+    }
+
+    function copyCard(button) {
+      const card = button.closest('.card');
+      const title = card.querySelector('h3')?.innerText || '';
+      const questions = [...card.querySelectorAll('.question-list li')].map(li => '- ' + li.innerText).join('\\n');
+      const answer = card.querySelector('.answer-box p')?.innerText || '';
+
+      const rows = [...card.querySelectorAll('.vocab-table tr')]
+        .slice(1)
+        .map(row => {
+          const cols = row.querySelectorAll('td');
+          return cols.length === 2 ? `${cols[0].innerText} = ${cols[1].innerText}` : '';
+        })
+        .filter(Boolean)
+        .join('\\n');
+
+      const text = `${title}\\n\\nQuestions:\\n${questions}\\n\\nBand 9.0 Sample Answer:\\n${answer}\\n\\nVocabulary & Uzbek Translation:\\n${rows}`;
+
+      navigator.clipboard.writeText(text).then(() => {
+        const toast = document.getElementById('toast');
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2000);
+        
+        const original = button.innerText;
+        button.innerText = 'Copied!';
+        setTimeout(() => button.innerText = original, 1500);
+      });
+    }
+
+    applyFilters();
+  </script>
+</body>
+</html>
