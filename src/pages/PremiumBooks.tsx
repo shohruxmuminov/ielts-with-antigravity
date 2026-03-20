@@ -16,6 +16,7 @@ import {
   Mic2
 } from 'lucide-react';
 import { useAuth } from '../FirebaseProvider';
+import { usePremium } from '../context/PremiumContext';
 import { Link, Navigate } from 'react-router-dom';
 
 const categories = [
