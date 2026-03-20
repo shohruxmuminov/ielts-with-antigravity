@@ -157,9 +157,25 @@ export default function SpeakingPractice() {
       reader.readAsDataURL(audioBlob);
       const base64Audio = await base64Promise;
 
-      const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY! });
-      const response = await ai.models.generateContent({
-        model: "gemini-3-flash-preview",
+      const genAI = new GoogleGenAI(process.env.GEMINI_API_KEY!);
+      const model = genAI.getGenerativeModel({
+        model: "gemini-1.5-flash",
+        generationConfig: {
+          responseMimeType: "application/json",
+          responseSchema: {
+            type: Type.OBJECT,
+            properties: {
+              band: { type: Type.STRING },
+              pronunciation: { type: Type.ARRAY, items: { type: Type.STRING } },
+              fluency: { type: Type.ARRAY, items: { type: Type.STRING } },
+              vocabulary: { type: Type.ARRAY, items: { type: Type.STRING } }
+            },
+            required: ["band", "pronunciation", "fluency", "vocabulary"]
+          }
+        }
+      });
+
+      const response = await model.generateContent({
         contents: [
           {
             parts: [
@@ -179,23 +195,11 @@ export default function SpeakingPractice() {
               }
             ]
           }
-        ],
-        config: {
-          responseMimeType: "application/json",
-          responseSchema: {
-            type: Type.OBJECT,
-            properties: {
-              band: { type: Type.STRING },
-              pronunciation: { type: Type.ARRAY, items: { type: Type.STRING } },
-              fluency: { type: Type.ARRAY, items: { type: Type.STRING } },
-              vocabulary: { type: Type.ARRAY, items: { type: Type.STRING } }
-            },
-            required: ["band", "pronunciation", "fluency", "vocabulary"]
-          }
-        }
+        ]
       });
       
-      const result = JSON.parse(response.text || '{}');
+      const responseText = await response.response.text();
+      const result = JSON.parse(responseText || '{}');
       setFeedback(result);
     } catch (error) {
       // Error evaluating speaking
@@ -613,7 +617,7 @@ function FeedbackSection({ title, items, icon }: any) {
         {title}
       </h3>
       <ul className="space-y-4">
-        {items.map((item: string, i: number) => (
+        {(items || []).map((item: string, i: number) => (
           <li key={i} className="text-sm text-slate-300 flex items-start gap-4 leading-relaxed">
             <span className="w-2 h-2 rounded-full bg-indigo-500 mt-2 shrink-0 shadow-lg shadow-indigo-900/50" />
             {item}

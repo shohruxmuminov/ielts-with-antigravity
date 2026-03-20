@@ -106,19 +106,10 @@ export default function WritingPractice() {
     setFeedback(null);
     setError(null);
     try {
-      const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY! });
-      const response = await ai.models.generateContent({
-        model: "gemini-3-flash-preview",
-        contents: `Evaluate the following IELTS Writing response for the task: "${selectedTask.title}".
-        Task description: ${selectedTask.data}
-        User response: ${text}
-        
-        Provide feedback in JSON format with:
-        - band: string (estimated overall band score)
-        - grammar: string[] (list of points about grammar and accuracy)
-        - vocabulary: string[] (list of points about lexical resource)
-        - coherence: string (summary of coherence and cohesion)`,
-        config: {
+      const genAI = new GoogleGenAI(process.env.GEMINI_API_KEY!);
+      const model = genAI.getGenerativeModel({
+        model: "gemini-1.5-pro",
+        generationConfig: {
           responseMimeType: "application/json",
           responseSchema: {
             type: Type.OBJECT,
@@ -132,8 +123,24 @@ export default function WritingPractice() {
           }
         }
       });
-      
-      const result = JSON.parse(response.text || '{}');
+
+      const response = await model.generateContent({
+        contents: [{
+          parts: [{
+            text: `Evaluate the following IELTS Writing response for the task: "${selectedTask.title}".
+            Task description: ${selectedTask.data}
+            User response: ${text}
+            
+            Provide feedback in JSON format with:
+            - band: string (estimated overall band score)
+            - grammar: string[] (list of points about grammar and accuracy)
+            - vocabulary: string[] (list of points about lexical resource)
+            - coherence: string (summary of coherence and cohesion)`
+          }]
+        }]
+      });
+      const responseText = await response.response.text();
+      const result = JSON.parse(responseText || '{}');
       setFeedback(result);
     } catch (err: any) {
       setError('An error occurred during evaluation. Please try again.');
