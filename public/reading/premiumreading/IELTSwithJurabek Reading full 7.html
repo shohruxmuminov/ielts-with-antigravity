@@ -1,0 +1,1580 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            overflow: hidden;
+        }
+
+        .loading-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f9fafb;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 9999;
+        }
+
+        .loading-content {
+            text-align: center;
+        }
+
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #2563eb;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-title {
+            font-size: 1.2rem;
+            color: #6b7280;
+            margin-bottom: 20px;
+        }
+
+        .loading-subtitle {
+            font-size: 1rem;
+            color: #9ca3af;
+        }
+
+        .start-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f9fafb;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 9998;
+        }
+
+        .start-content {
+            text-align: center;
+        }
+
+        .start-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 24px;
+        }
+
+        .start-subtitle {
+            color: #6b7280;
+            margin-bottom: 24px;
+        }
+
+        .start-button {
+            padding: 12px 32px;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .start-button:hover {
+            background-color: #1d4ed8;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            width: 100vw;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            background-color: #ffffff;
+            color: #333;
+            padding: 8px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            flex-shrink: 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .passage-info {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #2d3748;
+        }
+
+        .timer {
+            background-color: rgba(255, 193, 193, 0.5);
+            padding: 6px 12px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s;
+            min-width: 80px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #c53030;
+            border: 1px solid rgba(255, 120, 120, 0.3);
+        }
+
+        .timer.warning {
+            color: #9b2c2c;
+            background-color: rgba(254, 178, 178, 0.7);
+            border-color: rgba(245, 101, 101, 0.5);
+        }
+
+        .logo-area {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+            cursor: pointer;
+        }
+
+        .logo-area:hover {
+            background-color: #0056b3;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.4);
+        }
+
+        .logo-area i {
+            font-size: 1.1rem;
+        }
+
+        .progress-container {
+            background-color: #f8f9fa;
+            padding: 4px 20px;
+            z-index: 100;
+            flex-shrink: 0;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .progress-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .progress-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 6px;
+        }
+
+        .progress-item {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4a5568;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            border: 1px solid #cbd5e0;
+        }
+
+        .progress-item.current {
+            background-color: #4299e1;
+            color: white;
+            transform: scale(1.1);
+            border-color: #2b6cb0;
+        }
+
+        .progress-item.answered {
+            background-color: #9ae6b4;
+            color: #22543d;
+            border-color: #68d391;
+        }
+
+        .progress-item.correct {
+            background-color: #48bb78;
+            color: white;
+            border-color: #38a169;
+        }
+
+        .progress-item.incorrect {
+            background-color: #fed7d7;
+            color: #c53030;
+            border-color: #feb2b2;
+        }
+
+        .progress-item:hover {
+            background-color: #cbd5e0;
+            transform: scale(1.05);
+        }
+
+        .btn {
+            padding: 6px 14px;
+            border: 1px solid #cbd5e0;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.95rem;
+            background-color: #f7fafc;
+            color: #4a5568;
+        }
+
+        .btn i {
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background-color: #edf2f7;
+            border-color: #a0aec0;
+        }
+
+        .btn-primary {
+            background-color: #f7fafc;
+            color: #4a5568;
+            border: 1px solid #cbd5e0;
+        }
+
+        .btn-primary:hover {
+            background-color: #edf2f7;
+            border-color: #a0aec0;
+        }
+
+        .btn-secondary {
+            background-color: #f7fafc;
+            color: #4a5568;
+            border: 1px solid #cbd5e0;
+        }
+
+        .btn-secondary:hover {
+            background-color: #edf2f7;
+            border-color: #a0aec0;
+        }
+
+        .btn-submit {
+            background-color: #48bb78;
+            color: white;
+            font-weight: 900;
+            border: 1px solid #38a169;
+        }
+
+        .btn-submit:hover {
+            background-color: #38a169;
+            border-color: #2f855a;
+        }
+
+        .btn-submit:disabled {
+            background-color: #9ae6b4;
+            color: #718096;
+            cursor: not-allowed;
+            border: 1px solid #68d391;
+        }
+
+        .main-content {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .passage-container {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: #fafafa;
+            position: relative;
+        }
+
+        .resizer {
+            width: 4px;
+            background-color: #cbd5e0;
+            cursor: col-resize;
+            position: relative;
+            transition: background-color 0.2s;
+        }
+
+        .resizer:hover {
+            background-color: #a0aec0;
+        }
+
+        .resizer::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 30px;
+            height: 60px;
+            background-color: rgba(203, 213, 224, 0.5);
+            border-radius: 4px;
+            pointer-events: none;
+        }
+
+        .questions-container {
+            width: 40%;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: white;
+            border-left: 1px solid #e2e8f0;
+        }
+
+        .passage {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .passage h2 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .passage-content p {
+            margin-top: 15px;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .passage h2 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .passage p {
+            margin-top: 20px;
+            margin-bottom: 25px;
+            text-align: justify;
+        }
+
+        .question-section {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .question {
+            margin-bottom: 25px;
+            padding: 6px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            background-color: #ffffff;
+            transition: box-shadow 0.2s;
+        }
+
+        .question:hover {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .question-text {
+            font-weight: 500;
+            margin-bottom: 12px;
+            color: #2d3748;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .option:hover {
+            background-color: #f7fafc;
+            border-color: #cbd5e0;
+        }
+
+        .option input {
+            margin-right: 2px;
+            width: 16px;
+            height: 16px;
+        }
+
+        .input-field {
+            padding: 8px 10px;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            width: 20%;
+            margin-top: 5px;
+            font-size: 0.9rem;
+        }
+
+        .input-field:focus {
+            border-color: #4299e1;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(66, 153, 225, 0.2);
+        }
+
+        select.input-field {
+            padding: 8px 10px;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            width: 20%;
+            margin-top: 5px;
+            font-size: 0.9rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.9rem;
+        }
+
+        th,
+        td {
+            border: 1px solid #e2e8f0;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f1f5f9;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .answer-indicator {
+            background-color: #e6fffa;
+            border: 1px solid #38b2ac;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        .answer-indicator.correct {
+            background-color: #e6fffa;
+            border-color: #38b2ac;
+            color: #234e52;
+        }
+
+        .answer-indicator.incorrect {
+            background-color: #fed7d7;
+            border-color: #fc8181;
+            color: #742a2a;
+        }
+
+        .question-group {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .question-group-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #2d3748;
+            font-size: 1rem;
+        }
+
+        .highlight {
+            background-color: #ffff00;
+            cursor: pointer;
+        }
+
+        #highlight-btn,
+        #remove-highlight-btn {
+            position: absolute;
+            z-index: 9999;
+            display: none;
+            padding: 6px 12px;
+            font-size: 14px;
+            border: 1px solid #888;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .score-display {
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #2d3748;
+        }
+
+        .score-breakdown {
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .score-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 0.95rem;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+
+            .questions-container {
+                width: 100%;
+                border-left: none;
+                border-top: 1px solid #e2e8f0;
+            }
+
+            .resizer {
+                width: 100%;
+                height: 4px;
+                cursor: row-resize;
+            }
+
+            .resizer::before {
+                width: 60px;
+                height: 30px;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            .progress-item {
+                width: 32px;
+                height: 32px;
+                font-size: 0.85rem;
+            }
+
+            .passage-info {
+                font-size: 0.9rem;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px;
+            }
+
+            .logo-area {
+                order: 1;
+            }
+
+            .passage-info {
+                order: 2;
+            }
+
+            .timer {
+                order: 3;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .progress-item {
+                width: 32px;
+                height: 32px;
+                font-size: 0.85rem;
+            }
+
+            .passage-info {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+
+
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <h2 class="loading-title">Your test will begin shortly</h2>
+            <p class="loading-subtitle">Please wait</p>
+        </div>
+    </div>
+
+<!-- Start Screen -->
+<div id="startScreen" class="start-screen hidden">
+    <div class="start-content">
+        <h1 class="start-title">IELTSwithShohrux</h1>
+        <p class="start-subtitle">Ready to begin your reading test?</p>
+        <button class="start-button" onclick="startTest()">Start Test</button>
+    </div>
+</div>
+
+<!-- Test Container -->
+<div class="container hidden" id="testContainer">
+    <!-- Header -->
+    <header>
+        <div class="passage-info">IELTSwithShohrux</div>
+
+        <!-- timer -->
+        <div class="timer" id="globalTimer">
+            <i class="fas fa-clock"></i>
+            <span>60:00</span>
+        </div>
+
+        <!-- promo button -->
+        <div class="logo-area" onclick="window.open('https://t.me/muminov_bar', '_blank')">
+            <i class="fas fa-paper-plane"></i>
+            <span>Click for more TESTS</span>
+        </div>
+
+        <div class="passage-info" id="headerPassageTitle">Passage 1 of 3</div>
+    </header>
+
+    <!-- Floating highlight buttons -->
+    <button id="highlight-btn" type="button">Highlight</button>
+    <button id="remove-highlight-btn" type="button">Remove Highlight</button>
+
+    <div class="main-content">
+        <!-- ===== PASSAGE 1 ===== -->
+        <div class="passage-container" id="p1_passagePanel" role="region" aria-label="Reading Passage">
+            <h2 class="section-title">READING PASSAGE 1</h2>
+            <div class="passage-content" id="passage1">
+                <h3>The Pyramid of Cestius</h3>
+                <p>A 2000-year-old pyramid in the city of Rome has been restored by archaeologists</p>
+
+                <p><strong>A</strong> Though Rome draws tourists from around the world to its many impressive sites, one notable monument there has never attracted nearly as much interest: The Pyramid of Cestius. But why would there be a pyramid in Italy? After the Roman conquest of Egypt in 30 B.C., Egyptian architectural style became the fashion in Rome. Though obelisks and other monuments inspired by Egypt's great pyramids sprung up around the city, only two actual pyramids are known to have been built. The only one left standing, the Pyramid of Cestius, was designed as the burial pyramid for a Roman politician named Caius Cestius, who ordered that the building work be completed within a period of 330 days.</p>
+
+                <p><strong>B</strong> Construction took place at some point between 18 B.C. and 12 B.C. Cestius pyramid had a layer of white Carrara marble on the outside, and was constructed from brick held together by a basic kind of cement on the inside. One of the things that strikes you when you look at the pyramid is how steep it is, so that the shape of Cestius pyramid is quite unlike that of typical Egyptian ones. This is a difference that could have been the result of inaccurate information sent back to Rome by soldiers who saw the pyramids in person in Egypt. Alternatively, Roman builders could have drawn inspiration from the pyramids in Nubia, a region located in what is today northern Sudan and southern Egypt.</p>
+
+                <p><strong>C</strong> At the time of its construction, since there was a strict Roman law prohibiting the placement of tombs within the city itself, the Pyramid of Cestius would have stood in countryside. Rome grew enormously during the next two centuries, and, by the 3rd century A.D., the pyramid would have been surrounded by buildings. We also know that in the 3rd century A.D., the Pyramid of Cestius was hidden behind a high wall on the orders of Emperor Aurelian; this probably helped it survive throughout the centuries to come, even as other ancient monuments disappeared.</p>
+
+                <p><strong>D</strong> By the Middle Ages, the pyramid was covered in vegetation and thick dirt, and popular myth had developed that it might be a tomb for one of the twin brothers Romulus and Remus, who were regarded as the men who had established the city of Rome. Cestius actual tomb within the pyramid and the inscription identifying the pyramid as his, weren't rediscovered until the 1660s when the pyramid underwent restoration. During excavations, when trees and plants were cleared away, two marble bases were found in front of the pyramid, as well as fragments of bronze statues that had once stood on them on either side of the pyramid. The people employed to excavate the pyramid did not find the urn that would have contained Cestius’ remains, but they did come across a tunnel. It was quite possible, therefore, that robbers had at some earlier time removed the contents of the tomb. But while some of the features of Cestius' tomb no longer exist, at least the pyramid itself has survived.</p>
+
+                <p><strong>E</strong> Today, the foundations of Cestius pyramid rest below street level near an intersection with heavy traffic, so that passing tourists and residents could easily fail to notice its full height of 119 feet. Across the intersection is the Piramide station, located on Line B of the Rome Metro. In 2011, the Japanese clothing company entrepreneur Yuzo Yagi, president of Yagi Tsusho Ltd, announced his intention to help the Italian government pay for an ambitious renovation of the Pyramid of Cestius. 'It's an act of gratitude,' he later told journalists. 'Our company has grown thanks to Italy.' Work began at the site shortly after Yagi signed an official agreement with the Special Superintendency for the Archaeological Heritage of Rome, and was completed ahead of schedule thanks to his 2-million-euro contribution.</p>
+
+                <p><strong>F</strong> As archaeologist Leonardo Guarnieri explained to journalists, officials are now conducting tours of the newly renovated pyramid twice a month by reservation. Visitors who take advantage of the tour can make their way through a narrow corridor in order to enter the burial chamber itself. It is within these walls that they can admire the frescoes: watercolour paintings typical of the time. In the chamber, it is possible to make out four frescoes of the winged Roman goddess of war, Victoria a figure from Roman legend, as well as of a series of vases，the type that would have been used for special rituals and purification purposes. We know from the writings of earlier visitors that there used to be more here, but the majority have disappeared over time.</p>
+
+                <p><strong>G</strong> Only one problem remains now that the restoration is complete. The white exterior of the Pyramid of Cestius will have to be cleaned every few months to remove the layer of urban pollution. A team of free-climbers will be employed to do the job, in order to avoid placing builder's scaffolding around the newly welcoming monument.</p>
+            </div>
+        </div>
+        <div class="resizer"></div>
+
+        <!-- Questions for Passage 1 -->
+        <div class="questions-container" id="p1_questionsPanel" role="region" aria-label="Questions">
+            <h2 class="section-title">Questions 1–13</h2>
+
+            <div class="question-group">
+                <div class="question-group-title">Questions 1–7</div>
+                <p>Choose TRUE if the statement agrees with the information given in the text, choose FALSE if the statement contradicts the information, or choose NOT GIVEN if there is no information on this.</p>
+
+                <div class="question" data-question="1">
+                    <div class="question-text">1 The Pyramid of Cestius has always been one of Rome's most popular tourist attractions.</div>
+                    <div class="options"><label><input type="radio" name="q1" value="TRUE">TRUE</label><label><input type="radio" name="q1" value="FALSE">FALSE</label><label><input type="radio" name="q1" value="NOT GIVEN">NOT GIVEN</label></div>
+                </div>
+                <div class="question" data-question="2">
+                    <div class="question-text">2 The construction of the Pyramid was completed before Cestius' death.</div>
+                    <div class="options"><label><input type="radio" name="q2" value="TRUE">TRUE</label><label><input type="radio" name="q2" value="FALSE">FALSE</label><label><input type="radio" name="q2" value="NOT GIVEN">NOT GIVEN</label></div>
+                </div>
+                <div class="question" data-question="3">
+                    <div class="question-text">3 In the Middle Ages, people thought an original founder of Rome was buried in the Pyramid of Cestius.</div>
+                    <div class="options"><label><input type="radio" name="q3" value="TRUE">TRUE</label><label><input type="radio" name="q3" value="FALSE">FALSE</label><label><input type="radio" name="q3" value="NOT GIVEN">NOT GIVEN</label></div>
+                </div>
+                <div class="question" data-question="4">
+                    <div class="question-text">4 Today the height of the Pyramid is something that tourists and residents immediately notice.</div>
+                    <div class="options"><label><input type="radio" name="q4" value="TRUE">TRUE</label><label><input type="radio" name="q4" value="FALSE">FALSE</label><label><input type="radio" name="q4" value="NOT GIVEN">NOT GIVEN</label></div>
+                </div>
+                <div class="question" data-question="5">
+                    <div class="question-text">5 Japanese businessman Yuzo Yagi was an admirer of both Italian and Egyptian architecture.</div>
+                    <div class="options"><label><input type="radio" name="q5" value="TRUE">TRUE</label><label><input type="radio" name="q5" value="FALSE">FALSE</label><label><input type="radio" name="q5" value="NOT GIVEN">NOT GIVEN</label></div>
+                </div>
+                <div class="question" data-question="6">
+                    <div class="question-text">6 The restoration of the Pyramid of Cestius, which was funded by Yuzo Yagi, finished earlier than expected.</div>
+                    <div class="options"><label><input type="radio" name="q6" value="TRUE">TRUE</label><label><input type="radio" name="q6" value="FALSE">FALSE</label><label><input type="radio" name="q6" value="NOT GIVEN">NOT GIVEN</label></div>
+                </div>
+                <div class="question" data-question="7">
+                    <div class="question-text">7 Most of the original frescoes inside Cestius' tomb have survived to this day.</div>
+                    <div class="options"><label><input type="radio" name="q7" value="TRUE">TRUE</label><label><input type="radio" name="q7" value="FALSE">FALSE</label><label><input type="radio" name="q7" value="NOT GIVEN">NOT GIVEN</label></div>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="question-group-title">Questions 8–13</div>
+                <p>Complete the notes below.</p>
+                <p>Write <strong>ONE WORD ONLY</strong> from the passage for each answer.</p>
+                <p>History of the Pyramid of Cestius</p>
+                <p>Construction of Cestius' pyramid</p>
+                <p>○ it was made from <span class="question-text">8</span> <input type="text" name="q8" maxlength="30">, marble and cement</p>
+                <p>○ its <span class="question-text">9</span> <input type="text" name="q9" maxlength="30"> is different to the pyramids found in Egypt</p>
+                <p>○ it was originally built in the <span class="question-text">10</span> <input type="text" name="q10" maxlength="30"> as building tombs in the city was forbidden</p>
+                <p>○ Emperor Aurelian ordered that a wall had to be built around it</p>
+                <p>Restoration of Cestius' pyramid in the 1660s</p>
+                <p>○ in the 1660s, some broken <span class="question-text">11</span> <input type="text" name="q11" maxlength="30"> were found next to it</p>
+                <p>○ the <span class="question-text">12</span> <input type="text" name="q12" maxlength="30"> inside the tomb suggests that robbers had been there</p>
+                <p>○ the frescoes show mythological scenes, and images of vases</p>
+                <p>Restoration of Cestius' pyramid today</p>
+                <p>○ a Japanese businessman paid for its restoration</p>
+                <p>○ climbers are helping to get rid of signs of <span class="question-text">13</span> <input type="text" name="q13" maxlength="30"></p>
+            </div>
+        </div> <!-- /p1_questionsPanel -->
+
+        <!-- ===== PASSAGE 2 ===== -->
+        <div class="passage-container hidden" id="p2_passagePanel" role="region" aria-label="Reading Passage">
+            <h2 class="section-title">READING PASSAGE 2</h2>
+            <div class="passage-content" id="passage2">
+                <h3>The conquest of malaria in Italy</h3>
+                <p>A review of Frank M Snowden's masterly history of a country's fight to eradicate a deadly disease</p>
+
+                <p><strong>A</strong> The word 'malaria' means 'bad air' in Italian, and this terrible disease marked the life of the people of that country for thousands of years. Yet by 1962, Italy was officially declared malaria-free, and it has remained so ever since. Frank Snowden's study of this successful endeavour is a remarkable piece of historical work. Original, crystal clear, analytical and passionate, Snowden takes us to areas historians have rarely visited before.</p>
+
+                <p><strong>B</strong> Everybody now knows that malaria is carried by mosquitoes. But in the 19th century most experts subscribed to the theory of 'miasma' or 'poisoning of the air'. Others made a link between swamps, water and malaria, but did not make the further leap towards insects. The consequence of these theories was that little was done to combat the disease before the end of that century. The situation was so serious that from a total population of 25m Italians, 11m were 'permanently at risk'. In warm, damp, malarial zones, the life expectancy of land workers was a terrifying 22.5 years. The economic impact of the disease was immense. Epidemics were blamed on people who originated from the hotter parts of Italy, given the widespread belief that malaria was hereditary.</p>
+
+                <p><strong>C</strong> One of the first breakthroughs in the war against malaria came in 1898 when the zoologist Giovanni Battista Grassi demonstrated that the micro-organisms causing the disease were carried in the digestive tract of the mosquito. By releasing mosquitoes into rooms to drink the blood of healthy human volunteers, Grassi was able to make the direct link between the insects and the disease. Definitive proof of this theory was obtained after an extraordinary series of experiments in Italy, where healthy people were introduced into malarial zones but kept free of mosquito bites - and remained well. The recently formed Italian state at last had the necessary information to begin tackling the disease.</p>
+
+                <p><strong>D</strong> A complicated approach was adopted, which made use of quinine - a drug obtained from tree bark which had long been used to combat fever, but was now seen as a crucial part of the war on malaria. Italy introduced a quinine law and a quinine tax in 1904, and the drug was administered to large numbers of rural workers. Despite its often terrible side effects, the drug was successful in limiting the spread of the disease, and in breaking cycles of infection. In addition, Italy setup rural health centres and invested heavily in education programmes. Malaria, as Snowden shows, was not just a medical problem, but a social and regional issue, and could only be defeated through multi-layered strategies.</p>
+
+                <p><strong>E</strong> It was originally decided to give quinine to all those in vulnerable regions - even healthy people. However, peasants were often suspicious of medicine being forced upon them, and doctors were frequently met with hostility and stubborn refusal to accept the treatment offered. But despite the refusals, the strategy as a whole was hugely successful. Deaths from malaria fell by some 80% in the first decade of the 20th century and some areas escaped altogether from the scourge of the disease.</p>
+
+                <p><strong>F</strong> The 1915-18 war delayed the campaign, as funds were diverted to the battlefields. In the 1920s and 1930s the draining of the damp, unhealthy marshlands around Rome had a certain impact on the spread of malaria. However, as war swept through the drained lands in the 1940s, the disease returned with a vengeance. Yet the country's leading malariologist Alberto Missiroli refused to order the distribution of quinine, so allowing the epidemic to spread unchecked. According to Snowden, he did this in order to create the ideal conditions for a new strategy, supported by the US Rockefeller Foundation – a massive experiment involving the extermination of mosquitoes with the chemical DDT. It is estimated that more than a third of the inhabitants in the affected area contracted malaria and countless thousands died.</p>
+
+                <p><strong>G</strong> With the end of the war in 1945, the US government and the Rockefeller Foundation were free to experiment. DDT was sprayed from the air, and 3m Italians had their bodies covered with the chemical. The effects were immense, and by 1962 malaria was more or less gone from the whole country. One of the final victims to die of the disease in Italy was the popular cyclist, Fausto Coppi. He had contracted malaria in Africa in 1960, and the failure of doctors in Italy to spot the disease was a sign of the times. A few decades earlier, they would have immediately noticed the telltale signs; it was later claimed that a small dose of quinine would have saved his life.</p>
+
+                <p><strong>H</strong> As there are still more than 1m deaths every year from malaria worldwide, Snowden's book also has contemporary relevance. This is a disease that affects every level of the societies where it is rampant. The economic miracle of the 1950s and 1960s which made Italy into a modern industrial nation would not have been possible without the eradication of malaria. Moreover, this book convincingly argues that the disease was 'an integral part of the big picture of modern Italian history'. This magnificent study, beautifully written and impeccably documented, deserves an audience beyond specialists in history, or in Italy.</p>
+            </div>
+        </div>
+        <div class="resizer"></div>
+
+        <div class="questions-container hidden" id="p2_questionsPanel" role="region" aria-label="Questions">
+            <h2 class="section-title">Questions 14–26</h2>
+
+            <div class="question-group">
+                <div class="question-group-title">Questions 14–17</div>
+                <p>Complete the summary below.</p>
+                <p>Write <strong>NO MORE THAN TWO WORDS</strong> from the passage for each answer.</p>
+                <p>Malaria in 19th-century Italy</p>
+                <p>Up until the late nineteenth century, experts failed to make the connection between malaria and <span class="question-text">14</span> <input type="text" name="q14" maxlength="30">. The most popular belief at the time was the <span class="question-text">15</span> <input type="text" name="q15" maxlength="30"> theory, which upheld the idea that diseases were carried by unclean air. Another common idea was that malaria was a <span class="question-text">16</span> <input type="text" name="q16" maxlength="30"> disease, and as a result people from certain parts of the country were often held responsible for the spread of epidemics.</p>
+                <p>Malaria was particularly widespread in rural regions, where <span class="question-text">17</span> <input type="text" name="q17" maxlength="30"> could be extremely short.</p>
+            </div>
+
+            <div class="question-group">
+                <div class="question-group-title">Questions 18–20</div>
+                <p>Choose TRUE if the statement agrees with the information given in the text, choose FALSE if the statement contradicts the information, or choose NOT GIVEN if there is no information on this.</p>
+
+                <div class="question" data-question="18">
+                    <div class="question-text">18 The volunteers in Giovanni Battista Grassi's research came from all parts of Italy.</div>
+                    <div class="options"><label><input type="radio" name="q18" value="TRUE">TRUE</label><label><input type="radio" name="q18" value="FALSE">FALSE</label><label><input type="radio" name="q18" value="NOT GIVEN">NOT GIVEN</label></div>
+                </div>
+                <div class="question" data-question="19">
+                    <div class="question-text">19 Experiments in Italy proved that it was possible to remain healthy despite being in malarial zones.</div>
+                    <div class="options"><label><input type="radio" name="q19" value="TRUE">TRUE</label><label><input type="radio" name="q19" value="FALSE">FALSE</label><label><input type="radio" name="q19" value="NOT GIVEN">NOT GIVEN</label></div>
+                </div>
+                <div class="question" data-question="20">
+                    <div class="question-text">20 In the early twentieth century, quinine was successfully administered to all inhabitants of vulnerable regions.</div>
+                    <div class="options"><label><input type="radio" name="q20" value="TRUE">TRUE</label><label><input type="radio" name="q20" value="FALSE">FALSE</label><label><input type="radio" name="q20" value="NOT GIVEN">NOT GIVEN</label></div>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="question-group-title">Questions 21–26</div>
+                <p>Reading Passage 2 has eight paragraphs, A-H.</p>
+                <p>Which paragraph contains the following information?</p>
+                <p>Choose the correct letter, A-H, in boxes 21-26.</p>
+                <div class="question" data-question="21">
+                    <div class="question-text">21 a figure showing the dramatic results of an anti-malarial drug programme</div>
+                    <div class="options"><select name="q21">
+                            <option value="">Select</option>
+                            <option>A</option>
+                            <option>B</option>
+                            <option>C</option>
+                            <option>D</option>
+                            <option>E</option>
+                            <option>F</option>
+                            <option>G</option>
+                            <option>H</option>
+                        </select></div>
+                </div>
+                <div class="question" data-question="22">
+                    <div class="question-text">22 an important discovery about how malaria is spread</div>
+                    <div class="options"><select name="q22">
+                            <option value="">Select</option>
+                            <option>A</option>
+                            <option>B</option>
+                            <option>C</option>
+                            <option>D</option>
+                            <option>E</option>
+                            <option>F</option>
+                            <option>G</option>
+                            <option>H</option>
+                        </select></div>
+                </div>
+                <div class="question" data-question="23">
+                    <div class="question-text">23 mention of an expert's decision not to halt the spread of the disease</div>
+                    <div class="options"><select name="q23">
+                            <option value="">Select</option>
+                            <option>A</option>
+                            <option>B</option>
+                            <option>C</option>
+                            <option>D</option>
+                            <option>E</option>
+                            <option>F</option>
+                            <option>G</option>
+                            <option>H</option>
+                        </select></div>
+                </div>
+                <div class="question" data-question="24">
+                    <div class="question-text">24 the significance of the malaria story for today's readers</div>
+                    <div class="options"><select name="q24">
+                            <option value="">Select</option>
+                            <option>A</option>
+                            <option>B</option>
+                            <option>C</option>
+                            <option>D</option>
+                            <option>E</option>
+                            <option>F</option>
+                            <option>G</option>
+                            <option>H</option>
+                        </select></div>
+                </div>
+                <div class="question" data-question="25">
+                    <div class="question-text">25 examples of false assumptions which held back scientific understanding of malaria</div>
+                    <div class="options"><select name="q25">
+                            <option value="">Select</option>
+                            <option>A</option>
+                            <option>B</option>
+                            <option>C</option>
+                            <option>D</option>
+                            <option>E</option>
+                            <option>F</option>
+                            <option>G</option>
+                            <option>H</option>
+                        </select></div>
+                </div>
+                <div class="question" data-question="26">
+                    <div class="question-text">26 reference to legislation to support the fight against malaria</div>
+                    <div class="options"><select name="q26">
+                            <option value="">Select</option>
+                            <option>A</option>
+                            <option>B</option>
+                            <option>C</option>
+                            <option>D</option>
+                            <option>E</option>
+                            <option>F</option>
+                            <option>G</option>
+                            <option>H</option>
+                        </select></div>
+                </div>
+            </div>
+        </div> <!-- /p2_questionsPanel -->
+
+        <!-- ===== PASSAGE 3 ===== -->
+        <div class="passage-container hidden" id="p3_passagePanel" role="region" aria-label="Reading Passage">
+            <h2 class="section-title">READING PASSAGE 3</h2>
+            <div class="passage-content" id="passage3">
+                <h3>Images and Places</h3>
+                <p>A new research method uses photography to try to explain why people form an attachment to certain places</p>
+
+                <p>Human beings naturally become attached to places they visit or inhabit and these emotional attachments have become increasingly important in research on recreation sites and activities. Research into this phenomenon is called 'sense- of-place research'. This research has employed a variety of approaches to gauge people's feelings toward a place, including surveys and personal interviews, but so far has not used photo-based methods. However, Visitor Employed Photography (VEP), used to capture visitor perceptions of landscape and recreational quality, represents a potential innovation in sense-of-place research.</p>
+
+                <p>A 'place' is a setting that we give meaning to based on the personal experiences, relationships and feelings we associate with it. A crucial distinction that needs to be made is between the more subjective concept of attachment and the symbolic 'meanings' or labels we use to describe the type of place a setting represents. Is, for example, a multiple-use forest area a wilderness? A playground? A workplace? Symbolic meanings are important in that they form the basis of our attachment to a place: we attribute meaning to our settings, and in turn become attached to the meanings (Stedman, 2003).</p>
+
+                <p>All settings can have multiple meanings depending on how we encounter them. Some researchers suggest that, because meaning emerges through individual experience, for example 'my camping trip', place meanings are completely individualistic: a given setting such as a park will contain as many different meanings as there are people using the setting (Meinig, 1979). Others, however, (e.g. Grieder & Garkovich, 1994) assert that meanings are based on social categories and therefore are shared by others within these categories. For example, farmers share certain meanings for a plot of land that are distinct from those of real estate developers or hunters.</p>
+
+                <p>Clearly, place attachment is built through familiarity with a place over a period of months or even years. Relph (1976) describes sense-of-place attachment as the steady accumulation of events within a setting; this creates 'home places'. According to this view, those who have participated fully in the life of the home or community, or have accumulated a series of everyday events in a setting, will have the strongest attachment to it. Extended residence in a place tends to make us feel toward it almost as a living thing, affecting our emotions in the same way as a family would (Ryden, 1993).</p>
+
+                <p>However, Tuan (1977) notes that a sense of place may also develop quite rapidly in 'chosen places', where dramatic landscapes and intense experiences can lead to an immediate attachment. Indeed, many settings, especially those that attract visitors, may simultaneously exist as home places and chosen places.</p>
+
+                <p>Clearly we are dealing with a complex phenomenon and photo-based research methods may help us to understand it better. In VEP, tourists are asked to take photographs. This technique has primarily been used to assess the perceptions of visitors to parks and recreation places. Haywood (1990) describes several benefits of VEP. Photography is an enjoyable, familiar activity to tourists which helps to sharpen observation and identify specific locations that are important. It can give clearer ideas on elements that are liked or disliked and also facilitates comparisons between places.</p>
+
+                <p>However, several methodological issues need to be taken into account. First, who should take the photographs? VEP research typically involves visitors or tourists but, when applied to questions of attachment to a community, this approach has potential pitfalls. Chenoweth (1984) notes that research subjects may take photos that represent only a part of their entire recreational experience. This tendency probably relates to unfamiliarity with the setting. For example, when researchers assign the task of photographing a travel route with which respondents are not familiar, participants may save too many pictures and then use them all up at the end of their visit, even if there is no suitable material. Markwell (1997) noted an opposite tendency in his study of pictures taken on a nature tour: beginnings of excursions were over-represented, due perhaps to the initial novelty of the trip. Furthermore, Haywood (1990) suggests that compressing the photo-taking period into a single day (as he did in his work) may result in an over-representation of tourist icons rather than ordinary places.</p>
+
+                <p>In contrast, Yamashita (2002), when focusing on local residents' perceptions of the qualities of the water around them, noted that residents may have more difficulty expressing visual appeal than visitors, precisely because they are insiders and less conscious of aesthetic qualities. When addressing complex attachment to landscape, we would expect, however, that familiarity ought to increase the validity of the items selected to represent sources of attachment. We also expect that photographs taken by local residents will represent a wider range of phenomena than pictures taken by transient visitors.</p>
+
+                <p>But how should the photographs be interpreted? Goin (2001) notes that with every photo taken 'a fiction is created ... but presents to the uninformed an overwhelming conviction of fact' (p. 363). By implication, what photos appear to be and what they really represent may be very different things, and some follow-up helps to uncover the intended meanings of the participant. Yamashita (2002) notes the utility of asking respondents to provide descriptions of each photo in a notebook or diary. These elaborations are helpful, but in cases of complex phenomena, an interview may help participants clarify their intentions (Markwell, 1997).</p>
+            </div>
+        </div>
+        <div class="resizer"></div>
+
+        <div class="questions-container hidden" id="p3_questionsPanel" role="region" aria-label="Questions">
+            <h2 class="section-title">Questions 27–40</h2>
+
+            <div class="question-group">
+                <div class="question-group-title">Questions 27–32</div>
+                <p>Reading Passage 3 has six sections.</p>
+                <p>Choose the correct heading for each section from the list of headings below.</p>
+                <p>Choose the correct number, i-viii, in boxes 27-32.</p>
+                <p>List of Headings</p>
+                <p>i The relevance of time to the sense of belonging to a place</p>
+                <p>ii Making sense of photographic studies</p>
+                <p>iii The advantages of photography in sense-of-place research</p>
+                <p>iv Reasons for weak attachments</p>
+                <p>v A new approach to sense-of-place research</p>
+                <p>vi Defining the significance of places</p>
+                <p>vii Important considerations when using VEP</p>
+                <p>viii Local residents' feelings towards visitors</p>
+
+                <div class="question" data-question="27">
+                    <div class="question-text">27 Section A</div>
+                    <div class="options"><select name="q27">
+                            <option value="">Select</option>
+                            <option>i</option>
+                            <option>ii</option>
+                            <option>iii</option>
+                            <option>iv</option>
+                            <option>v</option>
+                            <option>vi</option>
+                            <option>vii</option>
+                            <option>viii</option>
+                        </select></div>
+                </div>
+                <div class="question" data-question="28">
+                    <div class="question-text">28 Section B</div>
+                    <div class="options"><select name="q28">
+                            <option value="">Select</option>
+                            <option>i</option>
+                            <option>ii</option>
+                            <option>iii</option>
+                            <option>iv</option>
+                            <option>v</option>
+                            <option>vi</option>
+                            <option>vii</option>
+                            <option>viii</option>
+                        </select></div>
+                </div>
+                <div class="question" data-question="29">
+                    <div class="question-text">29 Section C</div>
+                    <div class="options"><select name="q29">
+                            <option value="">Select</option>
+                            <option>i</option>
+                            <option>ii</option>
+                            <option>iii</option>
+                            <option>iv</option>
+                            <option>v</option>
+                            <option>vi</option>
+                            <option>vii</option>
+                            <option>viii</option>
+                        </select></div>
+                </div>
+                <div class="question" data-question="30">
+                    <div class="question-text">30 Section D</div>
+                    <div class="options"><select name="q30">
+                            <option value="">Select</option>
+                            <option>i</option>
+                            <option>ii</option>
+                            <option>iii</option>
+                            <option>iv</option>
+                            <option>v</option>
+                            <option>vi</option>
+                            <option>vii</option>
+                            <option>viii</option>
+                        </select></div>
+                </div>
+                <div class="question" data-question="31">
+                    <div class="question-text">31 Section E</div>
+                    <div class="options"><select name="q31">
+                            <option value="">Select</option>
+                            <option>i</option>
+                            <option>ii</option>
+                            <option>iii</option>
+                            <option>iv</option>
+                            <option>v</option>
+                            <option>vi</option>
+                            <option>vii</option>
+                            <option>viii</option>
+                        </select></div>
+                </div>
+                <div class="question" data-question="32">
+                    <div class="question-text">32 Section F</div>
+                    <div class="options"><select name="q32">
+                            <option value="">Select</option>
+                            <option>i</option>
+                            <option>ii</option>
+                            <option>iii</option>
+                            <option>iv</option>
+                            <option>v</option>
+                            <option>vi</option>
+                            <option>vii</option>
+                            <option>viii</option>
+                        </select></div>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="question-group-title">Questions 33–38</div>
+                <p>Look at the following observations (Questions 33-38) and the list of people below.</p>
+                <p>Match each observation with the correct person, A-G.</p>
+                <p>Choose the correct letter, A-G, in boxes 33-38.</p>
+                <p>List of People</p>
+                <p>A Meinig</p>
+                <p>B Grieder and Garkovich</p>
+                <p>C Ryden</p>
+                <p>D Tuan</p>
+                <p>E Haywood</p>
+                <p>F Markwell</p>
+                <p>G Yamashita</p>
+
+                <div class="question" data-question="33">
+                    <div class="question-text">33 Our attachment to a place can happen quickly.</div>
+                    <div class="options"><select name="q33">
+                            <option value="">Select</option>
+                            <option>A</option>
+                            <option>B</option>
+                            <option>C</option>
+                            <option>D</option>
+                            <option>E</option>
+                            <option>F</option>
+                            <option>G</option>
+                        </select></div>
+                </div>
+                <div class="question" data-question="34">
+                    <div class="question-text">34 Limiting the amount of time for taking photographs may produce a narrow range of images.</div>
+                    <div class="options"><select name="q34">
+                            <option value="">Select</option>
+                            <option>A</option>
+                            <option>B</option>
+                            <option>C</option>
+                            <option>D</option>
+                            <option>E</option>
+                            <option>F</option>
+                            <option>G</option>
+                        </select></div>
+                </div>
+                <div class="question" data-question="35">
+                    <div class="question-text">35 Members of a group will hold a similar view about a place.</div>
+                    <div class="options"><select name="q35">
+                            <option value="">Select</option>
+                            <option>A</option>
+                            <option>B</option>
+                            <option>C</option>
+                            <option>D</option>
+                            <option>E</option>
+                            <option>F</option>
+                            <option>G</option>
+                        </select></div>
+                </div>
+                <div class="question" data-question="36">
+                    <div class="question-text">36 Given time, a place can have the same impact on us as people do.</div>
+                    <div class="options"><select name="q36">
+                            <option value="">Select</option>
+                            <option>A</option>
+                            <option>B</option>
+                            <option>C</option>
+                            <option>D</option>
+                            <option>E</option>
+                            <option>F</option>
+                            <option>G</option>
+                        </select></div>
+                </div>
+                <div class="question" data-question="37">
+                    <div class="question-text">37 Tourists should keep a written account of their photographs.</div>
+                    <div class="options"><select name="q37">
+                            <option value="">Select</option>
+                            <option>A</option>
+                            <option>B</option>
+                            <option>C</option>
+                            <option>D</option>
+                            <option>E</option>
+                            <option>F</option>
+                            <option>G</option>
+                        </select></div>
+                </div>
+                <div class="question" data-question="38">
+                    <div class="question-text">38 Each place means something different to each visitor.</div>
+                    <div class="options"><select name="q38">
+                            <option value="">Select</option>
+                            <option>A</option>
+                            <option>B</option>
+                            <option>C</option>
+                            <option>D</option>
+                            <option>E</option>
+                            <option>F</option>
+                            <option>G</option>
+                        </select></div>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="question-group-title">Questions 39–40</div>
+                <p>Choose the correct answer.</p>
+
+                <div class="question" data-question="39">
+                    <div class="question-text">39 The 2002 study by Yamashita shows that local residents</div>
+                    <div class="options"><label><input type="radio" name="q39" value="A">A appreciate the beauty of their surroundings.</label><label><input type="radio" name="q39" value="B">B know their surroundings too well to appreciate them.</label><label><input type="radio" name="q39" value="C">C consider water the most important aspect of their surroundings.</label><label><input type="radio" name="q39" value="D">D dislike the negative impact of visitors on their surroundings.</label></div>
+                </div>
+                <div class="question" data-question="40">
+                    <div class="question-text">40 In the final paragraph, the writer states that photographs present</div>
+                    <div class="options"><label><input type="radio" name="q40" value="A">A a factual account of a visit.</label><label><input type="radio" name="q40" value="B">B an unreliable source for research.</label><label><input type="radio" name="q40" value="C">C a clear picture of the visitor's feelings.</label><label><input type="radio" name="q40" value="D">D an image that needs to be explained to others.</label></div>
+                </div>
+            </div>
+        </div> <!-- /p3_questionsPanel -->
+    </div> <!-- /main-content -->
+
+    <!-- Bottom progress/navigation -->
+    <div class="progress-container">
+        <div class="progress-nav">
+            <div class="progress-items" style="gap:10px; flex-wrap:wrap;">
+                <div id="bottomPartTabs"
+                    style="display:flex; gap:14px; justify-content:center; width:100%; align-items:center; flex-wrap:wrap;">
+                </div>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" id="prev-btn" disabled><i class="fas fa-arrow-left"></i>
+                    Previous</button>
+                <button class="btn btn-secondary" id="next-btn">Next <i class="fas fa-arrow-right"></i></button>
+                <button class="btn btn-submit" id="submit-all-btn">Submit All <i
+                        class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+</div> <!-- /container -->
+
+<!-- Results Modal -->
+<div class="modal" id="results-modal">
+    <div class="modal-content">
+        <h2>Test Results</h2>
+        <div class="score-display" id="score-display">0/0</div>
+        <div class="score-breakdown" id="score-breakdown"></div>
+        <div class="modal-buttons">
+            <button class="btn btn-secondary" id="close-modal">Close</button>
+            <button class="btn btn-primary" id="review-answers">Review Answers</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    /* ========= CONFIG ========= */
+    const PARTS = [
+        { id: 1, title: 'Passage 1', qStart: 1, qEnd: 13, passagePanel: 'p1_passagePanel', questionsPanel: 'p1_questionsPanel' },
+        { id: 2, title: 'Passage 2', qStart: 14, qEnd: 26, passagePanel: 'p2_passagePanel', questionsPanel: 'p2_questionsPanel' },
+        { id: 3, title: 'Passage 3', qStart: 27, qEnd: 40, passagePanel: 'p3_passagePanel', questionsPanel: 'p3_questionsPanel' },
+    ];
+
+    /* ======= ANSWER KEY ======= */
+    const correctAnswers = {
+        // Passage 1 – The Pyramid of Cestius (Q1–13)
+        q1: "FALSE", q2: "NOT GIVEN", q3: "TRUE", q4: "FALSE", q5: "NOT GIVEN", q6: "TRUE", q7: "FALSE",
+        q8: "brick", q9: "shape", q10: "countryside", q11: "statues", q12: "tunnel", q13: "pollution",
+
+        // Passage 2 – The conquest of malaria in Italy (Q14–26)
+        q14: "insects", q15: "miasma", q16: "hereditary", q17: "life expectancy",
+        q18: "NOT GIVEN", q19: "TRUE", q20: "FALSE",
+        q21: "E", q22: "C", q23: "F", q24: "H", q25: "B", q26: "D",
+
+        // Passage 3 – Images and Places (Q27–40)
+        q27: "v", q28: "vi", q29: "i", q30: "iii", q31: "vii", q32: "ii",
+        q33: "D", q34: "E", q35: "B", q36: "C", q37: "G", q38: "A",
+        q39: "B", q40: "D"
+    };
+
+    /* ========= STATE ========= */
+    let currentPart = 1;
+    let currentQuestion = 1;
+    let seconds = 60 * 60; // total 60 minutes
+    let timerInterval;
+
+    /* ========= HELPERS ========= */
+    function el(id) { return document.getElementById(id); }
+    function inRange(q, pId) { const p = PARTS[pId - 1]; return q >= p.qStart && q <= p.qEnd; }
+
+    /* ======= BOTTOM TABS + PER-PART NUMBER RAILS (centered) ======= */
+    function renderBottomTabs() {
+        const tabs = el('bottomPartTabs');
+        tabs.innerHTML = '';
+        PARTS.forEach(p => {
+            const btn = document.createElement('button');
+            btn.className = 'btn btn-secondary';
+            btn.style.fontWeight = (p.id === currentPart) ? '900' : '600';
+            btn.innerHTML = (p.id === currentPart) ? `<strong>${p.title}</strong>` : `${p.title}`;
+            btn.onclick = () => switchPart(p.id);
+            tabs.appendChild(btn);
+
+            const rail = document.createElement('div');
+            rail.id = `rail-part-${p.id}`;
+            rail.style.display = (p.id === currentPart) ? 'flex' : 'none';
+            rail.style.gap = '6px';
+            rail.style.flexWrap = 'wrap';
+            rail.style.alignItems = 'center';
+            const total = p.qEnd - p.qStart + 1;
+            for (let q = p.qStart; q <= p.qEnd; q++) {
+                const chip = document.createElement('div');
+                chip.textContent = q;
+                chip.className = 'progress-item' + (q === currentQuestion && p.id === currentPart ? ' current' : '');
+                chip.dataset.question = q;
+                chip.style.width = '30px'; chip.style.height = '20px'; chip.style.borderRadius = '6px';
+                chip.style.fontSize = '14px'; chip.style.padding = '0'; chip.style.lineHeight = '20px';
+                chip.onclick = () => scrollToQuestion(q);
+                rail.appendChild(chip);
+            }
+            tabs.appendChild(rail);
+        });
+    }
+
+    function refreshBottomBar() { renderBottomTabs(); }
+
+    function switchPart(partId) {
+        if (currentPart === partId) return;
+        PARTS.forEach(p => {
+            el(p.passagePanel).classList.add('hidden');
+            el(p.questionsPanel).classList.add('hidden');
+            const r = el(`rail-part-${p.id}`); if (r) r.style.display = 'none';
+        });
+        currentPart = partId;
+        const p = PARTS[currentPart - 1];
+        currentQuestion = p.qStart;
+        el(p.passagePanel).classList.remove('hidden');
+        el(p.questionsPanel).classList.remove('hidden');
+        const r = el(`rail-part-${p.id}`); if (r) r.style.display = 'flex';
+        el('headerPassageTitle').textContent = `Passage ${currentPart} of 3`;
+        // Reset resizer styles for new part
+        const passageEl = el(p.passagePanel);
+        const questionsEl = el(p.questionsPanel);
+        passageEl.style.flex = '50%';
+        questionsEl.style.flex = '50%';
+        scrollToQuestion(currentQuestion, false);
+        refreshBottomBar();
+    }
+
+    function scrollToQuestion(num, smooth = true) {
+        const elQ = document.querySelector(`[data-question="${num}"]`) ||
+            document.querySelector(`input[name="q${num}"]`) ||
+            document.querySelector(`select[name="q${num}"]`);
+        if (elQ) elQ.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'center' });
+        updateCurrentQuestion(num);
+    }
+
+    function updateCurrentQuestion(num) {
+        currentQuestion = num;
+        document.querySelectorAll(`#rail-part-${currentPart} .progress-item`).forEach(it => {
+            it.classList.toggle('current', parseInt(it.dataset.question, 10) === num);
+        });
+    }
+
+    // mark answered when inputs change
+    function attachAnsweredListeners() {
+        document.querySelectorAll('input[type="radio"], input[type="text"], select').forEach(input => {
+            input.addEventListener('change', () => {
+                const m = input.name && input.name.match(/^q(\d+)$/);
+                if (!m) return;
+                const q = parseInt(m[1], 10);
+                const chip = document.querySelector(`.progress-item[data-question="${q}"]`);
+                if (chip) {
+                    const val = (input.type === 'text' ? input.value.trim() : input.value);
+                    if (val) chip.classList.add('answered');
+                }
+            });
+        });
+    }
+
+    /* ===== SUBMIT ALL ===== */
+    el('submit-all-btn').addEventListener('click', () => {
+        if (!confirm('Submit the entire test?')) return;
+
+        let score = 0, total = PARTS[PARTS.length - 1].qEnd;
+        const results = {};
+
+        for (let q = 1; q <= total; q++) {
+            const key = `q${q}`;
+            const corr = correctAnswers[key];
+            let user = null, isCorrect = false;
+
+            const radios = document.querySelectorAll(`input[name="${key}"][type="radio"]`);
+            const text = document.querySelector(`input[name="${key}"][type="text"]`);
+            const sel = document.querySelector(`select[name="${key}"]`);
+
+            if (radios && radios.length) {
+                const c = Array.from(radios).find(r => r.checked);
+                if (c) { user = c.value; isCorrect = (user === corr); radios.forEach(r => r.disabled = true); }
+            } else if (text) {
+                user = (text.value || '').trim();
+                if (user) {
+                    const norm = (s) => String(s).trim().toLowerCase().replace(/\s+/g, ' ');
+                    isCorrect = norm(user) === norm(corr);
+                    text.disabled = true;
+                }
+            } else if (sel) {
+                user = sel.value;
+                if (user) { isCorrect = user === corr; sel.disabled = true; }
+            }
+
+            if (isCorrect) score++;
+            results[key] = { userAnswer: user || 'No answer', correct: corr, isCorrect };
+        }
+
+        // color chips
+        for (let q = 1; q <= total; q++) {
+            const res = results[`q${q}`];
+            const ch = document.querySelector(`.progress-item[data-question="${q}"]`);
+            if (ch) {
+                ch.classList.remove('current', 'answered');
+                if (res) ch.classList.add(res.isCorrect ? 'correct' : 'incorrect');
+            }
+        }
+
+        // modal
+        el('score-display').textContent = `${score}/${total}`;
+        const breakdown = el('score-breakdown');
+        breakdown.innerHTML = PARTS.map(p => {
+            const partScore = Array.from({ length: p.qEnd - p.qStart + 1 }, (_, i) => results[`q${p.qStart + i}`])
+                .filter(r => r && r.isCorrect).length;
+            return `<div class="score-item"><span>Passage ${p.id}:</span><span>${partScore}/${p.qEnd - p.qStart + 1}</span></div>`;
+        }).join('');
+        el('results-modal').style.display = 'flex';
+
+        // review handler
+        el('review-answers').onclick = () => {
+            el('results-modal').style.display = 'none';
+            showCorrectIndicators(results);
+        };
+    });
+
+    // show inline indicators
+    function showCorrectIndicators(results) {
+        document.querySelectorAll('.answer-indicator').forEach(e => e.remove());
+        const total = PARTS[PARTS.length - 1].qEnd;
+
+        for (let q = 1; q <= total; q++) {
+            const key = `q${q}`;
+            const res = results[key];
+            if (!res) continue;
+
+            let target = null;
+            const qEl = document.querySelector(`[data-question="${q}"] .options`);
+            if (qEl) target = qEl;
+            if (!target) {
+                const input = document.querySelector(`input[name="${key}"]`);
+                if (input) target = input.parentNode;
+            }
+            if (!target) {
+                const sel = document.querySelector(`select[name="${key}"]`);
+                if (sel) target = sel.parentNode;
+            }
+            if (!target) continue;
+
+            const box = document.createElement('div');
+            box.className = 'answer-indicator ' + (res.isCorrect ? 'correct' : 'incorrect');
+            box.style.display = 'block';
+            box.style.marginTop = '6px';
+            box.innerHTML = res.isCorrect
+                ? `<i class="fas fa-check"></i> Correct!`
+                : `<i class="fas fa-times"></i> Incorrect. Your answer: <strong>${res.userAnswer}</strong> <strong>Correct:</strong> ${Array.isArray(res.correct) ? res.correct.join(', ') : res.correct}`;
+            target.appendChild(box);
+        }
+    }
+
+    // Timer
+    const timerSpan = document.querySelector('#globalTimer span');
+    const timerContainer = document.querySelector('#globalTimer');
+    function updateTimer() {
+        seconds--;
+        const m = Math.floor(seconds / 60), s = seconds % 60;
+        timerSpan.textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+        if (seconds <= 2 * 60) timerContainer.classList.add('warning');
+        if (seconds <= 0) { clearInterval(timerInterval); alert('Time is up! Submitting all passages.'); el('submit-all-btn').click(); }
+    }
+
+    function startTest() {
+        el('startScreen').classList.add('hidden');
+        el('testContainer').classList.remove('hidden');
+        timerInterval = setInterval(updateTimer, 1000);
+    }
+    window.startTest = startTest;
+
+    // Init
+    setTimeout(() => { el('loadingScreen').classList.add('hidden'); el('startScreen').classList.remove('hidden'); }, 900);
+
+    // default show P1
+    PARTS.forEach(p => {
+        if (p.id === 1) { el(p.passagePanel).classList.remove('hidden'); el(p.questionsPanel).classList.remove('hidden'); }
+        else { el(p.passagePanel).classList.add('hidden'); el(p.questionsPanel).classList.add('hidden'); }
+    });
+    renderBottomTabs();
+    attachAnsweredListeners();
+
+    // Resizer
+    let isResizing = false;
+    document.querySelectorAll('.resizer').forEach(resizer => {
+        resizer.addEventListener('mousedown', () => { isResizing = true; document.body.style.cursor = 'col-resize'; document.body.style.userSelect = 'none'; });
+    });
+    document.addEventListener('mousemove', (e) => {
+        if (!isResizing) return;
+        const container = document.querySelector('.main-content');
+        const rect = container.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left;
+        const leftPct = (mouseX / rect.width) * 100;
+        const rightPct = 100 - leftPct;
+        if (leftPct >= 30 && leftPct <= 70) {
+            const passage = document.querySelector('.passage-container:not(.hidden)');
+            const questions = document.querySelector('.questions-container:not(.hidden)');
+            if (passage) passage.style.flex = leftPct + '%';
+            if (questions) questions.style.flex = rightPct + '%';
+        }
+    });
+    document.addEventListener('mouseup', () => { if (isResizing) { isResizing = false; document.body.style.cursor = ''; document.body.style.userSelect = ''; } });
+
+    // Highlight tools
+    const highlightBtn = el('highlight-btn');
+    const removeHighlightBtn = el('remove-highlight-btn');
+    const passagePanels = PARTS.map(p => el(p.passagePanel));
+    const questionsPanels = PARTS.map(p => el(p.questionsPanel));
+    let lastSelection = null, highlightTarget = null, currentPanel = null;
+
+    function getValidSelection() {
+        const sel = window.getSelection();
+        if (!sel.rangeCount || sel.isCollapsed) return null;
+        const range = sel.getRangeAt(0);
+        if (passagePanels.some(pp => pp && pp.contains(range.commonAncestorContainer))) {
+            currentPanel = passagePanels.find(pp => pp.contains(range.commonAncestorContainer));
+        } else if (questionsPanels.some(qp => qp && qp.contains(range.commonAncestorContainer))) {
+            currentPanel = questionsPanels.find(qp => qp.contains(range.commonAncestorContainer));
+        } else return null;
+        return range;
+    }
+    function showHighlightBtn(range) {
+        const rect = range.getBoundingClientRect();
+        highlightBtn.style.top = (window.scrollY + rect.top - 35) + 'px';
+        highlightBtn.style.left = (window.scrollX + rect.left) + 'px';
+        highlightBtn.style.display = 'block';
+    }
+    function hideHighlightBtn() { highlightBtn.style.display = 'none'; }
+    function showRemoveBtn(span) {
+        const rect = span.getBoundingClientRect();
+        removeHighlightBtn.style.top = (window.scrollY + rect.top - 35) + 'px';
+        removeHighlightBtn.style.left = (window.scrollX + rect.left) + 'px';
+        removeHighlightBtn.style.display = 'block';
+        highlightTarget = span;
+    }
+    function hideRemoveBtn() { removeHighlightBtn.style.display = 'none'; highlightTarget = null; }
+
+    highlightBtn.addEventListener('click', () => {
+        if (lastSelection) {
+            const span = document.createElement('span');
+            span.className = 'highlight';
+            span.appendChild(lastSelection.extractContents());
+            lastSelection.insertNode(span);
+            window.getSelection().removeAllRanges();
+            hideHighlightBtn();
+        }
+    });
+    removeHighlightBtn.addEventListener('click', () => {
+        if (highlightTarget) {
+            const parent = highlightTarget.parentNode;
+            while (highlightTarget.firstChild) parent.insertBefore(highlightTarget.firstChild, highlightTarget);
+            parent.removeChild(highlightTarget);
+            hideRemoveBtn();
+        }
+    });
+    document.addEventListener('selectionchange', () => {
+        hideHighlightBtn(); hideRemoveBtn();
+        const range = getValidSelection();
+        if (range) { lastSelection = range; showHighlightBtn(range); } else { lastSelection = null; }
+    });
+    document.addEventListener('mousedown', (e) => {
+        if (e.target !== highlightBtn && e.target !== removeHighlightBtn) { hideHighlightBtn(); hideRemoveBtn(); }
+    });
+    document.addEventListener('click', (e) => {
+        if (e.target.classList && e.target.classList.contains('highlight')) { e.preventDefault(); showRemoveBtn(e.target); }
+    });
+
+    // Modal close
+    el('close-modal').addEventListener('click', () => { el('results-modal').style.display = 'none'; });
+</script>
+</body>
+
+
+
+
+
+</html>

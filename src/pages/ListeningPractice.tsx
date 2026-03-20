@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function ListeningPractice() {
   const [materials, setMaterials] = useState<any[]>([]);
+  const [premiumMaterials, setPremiumMaterials] = useState<any[]>([]);
   const [selectedMaterial, setSelectedMaterial] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [currentPartIndex, setCurrentPartIndex] = useState(0);
@@ -83,11 +84,18 @@ export default function ListeningPractice() {
       setMaterials([...staticTests, ...sortedDbDocs]);
     } catch (error) {
       console.error("Error fetching listening materials:", error);
-      // Fallback to just static tests if DB fails
       setMaterials(staticTests);
     } finally {
       setLoading(false);
     }
+
+    // Premium listening tests
+    const premiumListeningTests = [
+      { id: 'premium-listening-9', title: 'Premium Listening Test 9', isStatic: true, url: '/listening/premiumlistening/Listening test 9.html', receivedFrom: 'IELTSwithShohrux', createdAt: { seconds: Date.now() / 1000 } },
+      { id: 'premium-listening-10', title: 'Premium Listening Test 10', isStatic: true, url: '/listening/premiumlistening/Listening test 10.html', receivedFrom: 'IELTSwithShohrux', createdAt: { seconds: Date.now() / 1000 } },
+      { id: 'premium-listening-part1', title: 'Premium Part 1 - Australian Agency', isStatic: true, url: '/listening/premiumlistening/PART 1-Australian Overseas Relocation Agency.html', receivedFrom: 'IELTSwithShohrux', createdAt: { seconds: Date.now() / 1000 } },
+    ];
+    setPremiumMaterials(premiumListeningTests);
   };
 
   const handleStartTest = (m: any) => {
@@ -190,7 +198,7 @@ export default function ListeningPractice() {
                     ⭐ Premium
                   </div>
                   <span className={`px-2.5 py-1 rounded-lg text-[10px] font-black ${activeTab === 'premium' ? 'bg-white/20' : 'bg-amber-900/40 text-amber-500'}`}>
-                    {isPremium ? '0' : '🔒'}
+                    {isPremium ? premiumMaterials.length.toString() : '🔒'}
                   </span>
                 </button>
               </div>
@@ -229,10 +237,34 @@ export default function ListeningPractice() {
             )}
 
             {activeTab === 'premium' && isPremium && (
-              <div className="text-center py-20 bg-slate-900/50 rounded-[3rem] border border-dashed border-amber-500/30">
-                <Crown className="w-12 h-12 text-amber-500/50 mx-auto mb-4" />
-                <p className="text-slate-500 font-bold">Premium listening testlar tez orada qo'shiladi.</p>
-              </div>
+              premiumMaterials.length === 0 ? (
+                <div className="text-center py-20 bg-slate-900/50 rounded-[3rem] border border-dashed border-amber-500/30">
+                  <Crown className="w-12 h-12 text-amber-500/50 mx-auto mb-4" />
+                  <p className="text-slate-500 font-bold">Premium listening testlar tez orada qo'shiladi.</p>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+                  {premiumMaterials.map((m: any) => (
+                    <div
+                      key={m.id}
+                      className="bg-slate-900 rounded-[2.5rem] border border-amber-500/20 p-8 shadow-lg hover:shadow-2xl hover:border-amber-500/40 transition-all group cursor-pointer"
+                      onClick={() => handleStartTest(m)}
+                    >
+                      <div className="flex justify-between items-start mb-6">
+                        <span className="bg-amber-500/10 text-amber-400 text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full border border-amber-500/20">
+                          ⭐ Premium
+                        </span>
+                      </div>
+                      <h3 className="text-xl font-black text-white leading-snug mb-3">{m.title}</h3>
+                      <p className="text-slate-500 text-sm font-medium mb-6">Premium listening test material</p>
+                      <button className="w-full bg-amber-500 text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-amber-400 transition-all shadow-lg shadow-amber-900/20 active:scale-95">
+                        <Play className="w-4 h-4 fill-current" />
+                        Boshlash
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )
             )}
 
             {activeTab === 'free' && materials.length === 0 ? (

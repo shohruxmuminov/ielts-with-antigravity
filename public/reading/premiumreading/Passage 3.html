@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            overflow: hidden;
+        }
+
+        .loading-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f9fafb;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 9999;
+        }
+
+        .loading-content {
+            text-align: center;
+        }
+
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #2563eb;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-title {
+            font-size: 1.2rem;
+            color: #6b7280;
+            margin-bottom: 20px;
+        }
+
+        .loading-subtitle {
+            font-size: 1rem;
+            color: #9ca3af;
+        }
+
+        .start-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f9fafb;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 9998;
+        }
+
+        .start-content {
+            text-align: center;
+        }
+
+        .start-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 24px;
+        }
+
+        .start-subtitle {
+            color: #6b7280;
+            margin-bottom: 24px;
+        }
+
+        .start-button {
+            padding: 12px 32px;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .start-button:hover {
+            background-color: #1d4ed8;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            width: 100vw;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            background-color: #ffffff;
+            color: #333;
+            padding: 8px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            flex-shrink: 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .passage-info {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #2d3748;
+        }
+
+        .timer {
+            background-color: rgba(255, 193, 193, 0.5);
+            padding: 6px 12px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s;
+            min-width: 80px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #c53030;
+            border: 1px solid rgba(255, 120, 120, 0.3);
+        }
+
+        .timer.warning {
+            color: #9b2c2c;
+            background-color: rgba(254, 178, 178, 0.7);
+            border-color: rgba(245, 101, 101, 0.5);
+        }
+
+        .logo-area {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+            cursor: pointer;
+        }
+
+        .logo-area:hover {
+            background-color: #0056b3;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.4);
+        }
+
+        .logo-area i {
+            font-size: 1.1rem;
+        }
+
+        .progress-container {
+            background-color: #f8f9fa;
+            padding: 4px 20px;
+            z-index: 100;
+            flex-shrink: 0;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .progress-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .progress-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 6px;
+        }
+
+        .progress-item {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4a5568;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            border: 1px solid #cbd5e0;
+        }
+
+        .progress-item.current {
+            background-color: #4299e1;
+            color: white;
+            transform: scale(1.1);
+            border-color: #2b6cb0;
+        }
+
+        .progress-item.answered {
+            background-color: #9ae6b4;
+            color: #22543d;
+            border-color: #68d391;
+        }
+
+        .progress-item.correct {
+            background-color: #48bb78;
+            color: white;
+            border-color: #38a169;
+        }
+
+        .progress-item.incorrect {
+            background-color: #fed7d7;
+            color: #c53030;
+            border-color: #feb2b2;
+        }
+
+        .progress-item:hover {
+            background-color: #cbd5e0;
+            transform: scale(1.05);
+        }
+
+        .btn {
+            padding: 6px 14px;
+            border: 1px solid #cbd5e0;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.95rem;
+            background-color: #f7fafc;
+            color: #4a5568;
+        }
+
+        .btn i {
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background-color: #edf2f7;
+            border-color: #a0aec0;
+        }
+
+        .btn-primary {
+            background-color: #f7fafc;
+            color: #4a5568;
+            border: 1px solid #cbd5e0;
+        }
+
+        .btn-primary:hover {
+            background-color: #edf2f7;
+            border-color: #a0aec0;
+        }
+
+        .btn-secondary {
+            background-color: #f7fafc;
+            color: #4a5568;
+            border: 1px solid #cbd5e0;
+        }
+
+        .btn-secondary:hover {
+            background-color: #edf2f7;
+            border-color: #a0aec0;
+        }
+
+        .btn-submit {
+            background-color: #48bb78;
+            color: white;
+            font-weight: 900;
+            border: 1px solid #38a169;
+        }
+
+        .btn-submit:hover {
+            background-color: #38a169;
+            border-color: #2f855a;
+        }
+
+        .btn-submit:disabled {
+            background-color: #9ae6b4;
+            color: #718096;
+            cursor: not-allowed;
+            border: 1px solid #68d391;
+        }
+
+        .main-content {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .passage-container {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: #fafafa;
+            position: relative;
+        }
+
+        .resizer {
+            width: 4px;
+            background-color: #cbd5e0;
+            cursor: col-resize;
+            position: relative;
+            transition: background-color 0.2s;
+        }
+
+        .resizer:hover {
+            background-color: #a0aec0;
+        }
+
+        .resizer::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 30px;
+            height: 60px;
+            background-color: rgba(203, 213, 224, 0.5);
+            border-radius: 4px;
+            pointer-events: none;
+        }
+
+        .questions-container {
+            width: 40%;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: white;
+            border-left: 1px solid #e2e8f0;
+        }
+
+        .passage {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .passage h2 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .passage-content p {
+            margin-top: 15px;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .passage h2 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .passage p {
+            margin-top: 20px;
+            margin-bottom: 25px;
+            text-align: justify;
+        }
+
+        .question-section {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .question {
+            margin-bottom: 25px;
+            padding: 6px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            background-color: #ffffff;
+            transition: box-shadow 0.2s;
+        }
+
+        .question:hover {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .question-text {
+            font-weight: 500;
+            margin-bottom: 12px;
+            color: #2d3748;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .option:hover {
+            background-color: #f7fafc;
+            border-color: #cbd5e0;
+        }
+
+        .option input {
+            margin-right: 2px;
+            width: 16px;
+            height: 16px;
+        }
+
+        .input-field {
+            padding: 8px 10px;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            width: 20%;
+            margin-top: 5px;
+            font-size: 0.9rem;
+        }
+
+        .input-field:focus {
+            border-color: #4299e1;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(66, 153, 225, 0.2);
+        }
+
+        select.input-field {
+            padding: 8px 10px;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            width: 20%;
+            margin-top: 5px;
+            font-size: 0.9rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.9rem;
+        }
+
+        th,
+        td {
+            border: 1px solid #e2e8f0;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f1f5f9;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .answer-indicator {
+            background-color: #e6fffa;
+            border: 1px solid #38b2ac;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        .answer-indicator.correct {
+            background-color: #e6fffa;
+            border-color: #38b2ac;
+            color: #234e52;
+        }
+
+        .answer-indicator.incorrect {
+            background-color: #fed7d7;
+            border-color: #fc8181;
+            color: #742a2a;
+        }
+
+        .question-group {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .question-group-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #2d3748;
+            font-size: 1rem;
+        }
+
+        .highlight {
+            background-color: #ffff00;
+            cursor: pointer;
+        }
+
+        #highlight-btn,
+        #remove-highlight-btn {
+            position: absolute;
+            z-index: 9999;
+            display: none;
+            padding: 6px 12px;
+            font-size: 14px;
+            border: 1px solid #888;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .score-display {
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #2d3748;
+        }
+
+        .score-breakdown {
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .score-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 0.95rem;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+
+            .questions-container {
+                width: 100%;
+                border-left: none;
+                border-top: 1px solid #e2e8f0;
+            }
+
+            .resizer {
+                width: 100%;
+                height: 4px;
+                cursor: row-resize;
+            }
+
+            .resizer::before {
+                width: 60px;
+                height: 30px;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            .progress-item {
+                width: 32px;
+                height: 32px;
+                font-size: 0.85rem;
+            }
+
+            .passage-info {
+                font-size: 0.9rem;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px;
+            }
+
+            .logo-area {
+                order: 1;
+            }
+
+            .passage-info {
+                order: 2;
+            }
+
+            .timer {
+                order: 3;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .progress-item {
+                width: 32px;
+                height: 32px;
+                font-size: 0.85rem;
+            }
+
+            .passage-info {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <h2 class="loading-title">Your test will begin shortly</h2>
+            <p class="loading-subtitle">Please wait</p>
+        </div>
+    </div>
+
+    <!-- Start Screen -->
+    <div id="startScreen" class="start-screen hidden">
+        <div class="start-content">
+            <h1 class="start-title">IELTSwithShohrux</h1>
+            <p class="start-subtitle">Ready to begin your reading test?</p>
+            <button class="start-button" onclick="startTest()">Start Test</button>
+        </div>
+    </div>
+
+    <!-- Test Container -->
+    <div class="container hidden" id="testContainer">
+        <header>
+            <div class="passage-info">IELTSwithShohrux</div>
+            <div class="timer">
+                <i class="fas fa-clock"></i>
+                <span>20:00</span>
+            </div>
+            <div class="logo-area" onclick="window.open('https://t.me/muminov_bar', '_blank')">
+                <i class="fas fa-paper-plane"></i>
+                <span>Click for more TESTS</span>
+            </div>
+            <div class="passage-info">Passage 3 of 3</div>
+        </header>
+
+        <button id="highlight-btn" type="button">Highlight</button>
+        <button id="remove-highlight-btn" type="button">Remove Highlight</button>
+
+        <div class="main-content">
+            <!-- Reading Passage -->
+            <div class="passage-container" role="region" aria-label="Reading Passage">
+                <h2 class="section-title">READING PASSAGE 3</h2>
+                <div class="passage-content" id="passage3">
+                    <h3>Elephant Communication</h3>
+                    <p id="A"><span class="label">A</span> A postdoctoral fellow at Stanford University,
+                        O’Connell-Rodwell has come to Namibia’s premiere wildlife sanctuary to explore the mysterious
+                        and complex world of elephant communication. She and her colleagues are part of a scientific
+                        revolution that began nearly two decades ago with the stunning revelation that elephants
+                        communicate over long distances using low-frequency sounds, also called infrasounds, that are
+                        too deep to be heard by most humans.</p>
+                    <p id="B"><span class="label">B</span> As might be expected, the African elephant’s ability to sense
+                        seismic sound may begin in the ears. The hammer bone of the elephant’s inner ear is
+                        proportionally very large for a mammal, but typical for animals that use vibrational signals. It
+                        may, therefore, be a sign that elephants can communicate with seismic sounds. Also, the elephant
+                        and its relative the manatee are unique among mammals in having reverted to a reptilian-like
+                        cochlear structure in the inner ear. The cochlea of reptiles facilitates a keen sensitivity to
+                        vibrations and may do the same in elephants.</p>
+                    <p id="C"><span class="label">C</span> But other aspects of elephant anatomy also support that
+                        ability. First, their enormous bodies, which allow them to generate low-frequency sounds almost
+                        as powerful as those of a jet takeoff, provide ideal frames for receiving ground vibrations and
+                        conducting them to the inner ear. Second, the elephant’s toe bones rest on a fatty pad that
+                        might help focus vibrations from the ground into the bone. Finally, the elephant’s enormous
+                        brain lies in the cranial cavity behind the eyes in line with the auditory canal. The front of
+                        the skull is riddled with sinus cavities that may function as resonating chambers for vibrations
+                        from the ground.</p>
+                    <p id="D"><span class="label">D</span> How the elephants sense these vibrations is still unknown,
+                        but O’Connell-Rodwell, who just earned a graduate degree in entomology at the University of
+                        Hawaii at Manoa, suspects the pachyderms are “listening” with their trunks and feet. The trunk
+                        may be the most versatile appendage in nature. Its uses include drinking, bathing, smelling,
+                        feeding and scratching. Both trunk and feet contain two kinds of pressure-sensitive nerve
+                        endings – one that detects infrasonic vibrations and another that responds to vibrations with
+                        slightly higher frequencies. For O’Connell-Rodwell, the future of the research is boundless and
+                        unpredictable: “Our work is really at the interface of geophysics, neurophysiology and ecology,”
+                        she says. “We’re asking questions that no one has really dealt with before.”</p>
+                    <p id="E"><span class="label">E</span> Scientists have long known that seismic communication is
+                        common in small animals, including spiders, scorpions, insects and a number of vertebrate
+                        species such as white-lipped frogs, blind mole rats, kangaroo rats and golden moles. They also
+                        have found evidence of seismic sensitivity in elephant seals – 2-ton marine mammals that are not
+                        related to elephants. But O’Connell-Rodwell was the first to suggest that a large land animal
+                        also is sending and receiving seismic messages. O’Connell-Rodwell noticed something about the
+                        freezing behavior of Etosha’s six-ton bulls that reminded her of the tiny insects back in her
+                        lab. “I did my masters thesis on seismic communication in planthoppers,” she says. “I’d put a
+                        male planthopper on a stem and playback a female call, and the male would do the same thing the
+                        elephants were doing: He would freeze, then press down on his legs, go forward a little bit,
+                        then freeze again. It was just so fascinating to me, and it’s what got me to think, maybe
+                        there’s something else going on other than acoustic communication.”</p>
+                    <p id="F"><span class="label">F</span> Scientists have determined that an elephant’s ability to
+                        communicate over long distances is essential for its survival, particularly in a place like
+                        Etosha, where more than 2,400 savanna elephants range over an area larger than New Jersey. The
+                        difficulty of finding a mate in this vast wilderness is compounded by elephant reproductive
+                        biology. Females breed only when in estrus – a period of sexual arousal that occurs every two
+                        years and lasts just a few days. “Females in estrus make these very low, long calls that bulls
+                        home in on, because it’s such a rare event,” O’Connell-Rodwell says. These powerful estrus calls
+                        carry more than two miles in the air and may be accompanied by long-distance seismic signals,
+                        she adds. Breeding herds also use low-frequency vocalizations to warn of predators. Adult bulls
+                        and cows have no enemies, except for humans, but young elephants are susceptible to attacks by
+                        lions and hyenas. When a predator appears, older members of the herd emit intense warning calls
+                        that prompt the rest of the herd to clump together for protection, then flee. In 1994,
+                        O’Connell-Rodwell recorded the dramatic cries of a breeding herd threatened by lions at Mushara.
+                        “The elephants got really scared, and the matriarch made these very powerful warning calls, and
+                        then the herd took off screaming and trumpeting,” she recalls. “Since then, every time we’ve
+                        played that particular call at the water hole, we get the same response – the elephants take
+                        off.”</p>
+                    <p id="G"><span class="label">G</span> Reacting to a warning call played in the air is one thing,
+                        but could the elephants detect calls transmitted only through the ground? To find out, the
+                        research team in 2002 devised an experiment using electronic equipment that allowed them to send
+                        signals through the ground at Mushara. The results of our 2002 study showed us that elephants do
+                        indeed detect warning calls played through the ground,” O’Connell-Rodwell observes. “We expected
+                        them to clump up into tight groups and leave the area, and that’s in fact what they did. But
+                        since we only played back one type of call, we couldn’t really say whether they were
+                        interpreting it correctly. Maybe they thought it was a vehicle or something strange instead of a
+                        predator warning.”</p>
+                    <p id="H"><span class="label">H</span> An experiment last year was designed to solve that problem by
+                        using three different recordings – the 1994 warning call from Mushara, an anti-predator call
+                        recorded by scientist Joyce Poole in Kenya and an artificial warble tone. Although still
+                        analyzing data from this experiment, O’Connell-Rodwell is able to make a few preliminary
+                        observations: “The data I’ve seen so far suggest that the elephants were responding as I had
+                        expected. When the ’94 warning call was played back, they tended to clump together and leave the
+                        water hole sooner. But what’s really interesting is that the unfamiliar anti-predator call from
+                        Kenya also caused them to clump up, get nervous and aggressively rumble – but they didn’t
+                        necessarily leave. I didn’t think it was going to be that clear cut.”</p>
+                </div>
+            </div>
+
+            <div class="resizer" id="resizer"></div>
+
+            <!-- Questions -->
+            <div class="questions-container" id="questions" role="region" aria-label="Questions">
+                <h2 class="section-title">Questions 28-40</h2>
+                <p>You should spend about 20 minutes on Questions 28–40, which are based on Reading Passage 3.</p>
+
+                <div class="question-group">
+                    <div class="question-group-title">Questions 28-31</div>
+                    <p>Complete the following summary of the paragraphs of Reading Passage. Using <strong>NO MORE THAN
+                            THREE WORDS</strong> from the Reading Passage for each answer. Write your answers in boxes
+                        28-31 on your answer sheet.</p>
+                    <p><img src="https://i.ibb.co/0pCjLhFF/image.png" alt="Elephant Communication Summary"
+                            style="max-width: 100%; height: auto;"></p>
+                    <div class="question" data-question="28">
+                        <div class="question-text">28. <input type="text" name="q28" maxlength="30"></div>
+                    </div>
+                    <div class="question" data-question="29">
+                        <div class="question-text">29. <input type="text" name="q29" maxlength="30"></div>
+                    </div>
+                    <div class="question" data-question="30">
+                        <div class="question-text">30. <input type="text" name="q30" maxlength="30"></div>
+                    </div>
+                    <div class="question" data-question="31">
+                        <div class="question-text">31. <input type="text" name="q31" maxlength="30"></div>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-group-title">Questions 32-38</div>
+                    <p>Complete the following summary of the paragraphs of Reading Passage. Using <strong>NO MORE THAN
+                            THREE WORDS OR A NUMBER</strong> from the Reading Passage for each answer. Write your
+                        answers in boxes 32-38 on your answer sheet.</p>
+                    <div class="question" data-question="32">
+                        <div class="question-text">32. How the elephants sense these sound vibrations is still unknown,
+                            but O’Connell-Rodwell, a fresh graduate in entomology at the University of Hawaii, proposes
+                            that the elephants are “listening” with their <input type="text" name="q32" maxlength="30">.
+                        </div>
+                    </div>
+                    <div class="question" data-question="33">
+                        <div class="question-text">33. by two kinds of nerve endings – that responds to vibrations with
+                            both <input type="text" name="q33" maxlength="30"> frequency and slightly higher
+                            frequencies.</div>
+                    </div>
+                    <div class="question" data-question="34">
+                        <div class="question-text">34. O’Connell-Rodwell work is at the combination of geophysics,
+                            neurophysiology and <input type="text" name="q34" maxlength="30">.</div>
+                    </div>
+                    <div class="question" data-question="35">
+                        <div class="question-text">35. and it also was the first to indicate that a large land animal
+                            also is sending and receiving <input type="text" name="q35" maxlength="30">.</div>
+                    </div>
+                    <div class="question" data-question="36">
+                        <div class="question-text">36. O’Connell-Rodwell noticed the freezing behavior by putting a male
+                            planthopper communicative approach other than <input type="text" name="q36" maxlength="30">.
+                        </div>
+                    </div>
+                    <div class="question" data-question="37">
+                        <div class="question-text">37. Scientists have determined that an elephant’s ability to
+                            communicate over long distances is essential, especially, when elephant herds are finding a
+                            <input type="text" name="q37" maxlength="30">.
+                        </div>
+                    </div>
+                    <div class="question" data-question="38">
+                        <div class="question-text">38. Finally, the results of our 2002 study showed us that elephants
+                            can detect warning calls played through the <input type="text" name="q38" maxlength="30">.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-group-title">Questions 39-40</div>
+                    <p>Choose the correct letter, A, B, C or D. Write your answers in boxes 39-40 on your answer sheet.
+                    </p>
+                    <div class="question" data-question="39">
+                        <div class="question-text">39. According to the passage, it is determined that an elephant needs
+                            to communicate over long distances for its survival</div>
+                        <div class="options">
+                            <label><input type="radio" name="q39" value="A"> A When a threatening predator
+                                appears.</label>
+                            <label><input type="radio" name="q39" value="B"> B When young elephants meet humans.</label>
+                            <label><input type="radio" name="q39" value="C"> C When older members of the herd want to
+                                flee from the group.</label>
+                            <label><input type="radio" name="q39" value="D"> D When a male elephant is in
+                                estrus.</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="40">
+                        <div class="question-text">40. What is the author’s attitude toward the experiment by using
+                            three different recordings in the paragraph:</div>
+                        <div class="options">
+                            <label><input type="radio" name="q40" value="A"> A the outcome is definitely out of the
+                                original expectation</label>
+                            <label><input type="radio" name="q40" value="B"> B the data can not be very clearly
+                                obtained</label>
+                            <label><input type="radio" name="q40" value="C"> C the result can be somewhat undecided or
+                                inaccurate</label>
+                            <label><input type="radio" name="q40" value="D"> D the result can be unfamiliar to the
+                                public</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-nav">
+                <div class="progress-items">
+                    <div class="progress-item current" data-question="28">28</div>
+                    <div class="progress-item" data-question="29">29</div>
+                    <div class="progress-item" data-question="30">30</div>
+                    <div class="progress-item" data-question="31">31</div>
+                    <div class="progress-item" data-question="32">32</div>
+                    <div class="progress-item" data-question="33">33</div>
+                    <div class="progress-item" data-question="34">34</div>
+                    <div class="progress-item" data-question="35">35</div>
+                    <div class="progress-item" data-question="36">36</div>
+                    <div class="progress-item" data-question="37">37</div>
+                    <div class="progress-item" data-question="38">38</div>
+                    <div class="progress-item" data-question="39">39</div>
+                    <div class="progress-item" data-question="40">40</div>
+                </div>
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary" id="prev-btn" disabled><i class="fas fa-arrow-left"></i>
+                        Previous</button>
+                    <button class="btn btn-secondary" id="next-btn">Next <i class="fas fa-arrow-right"></i></button>
+                    <button class="btn btn-submit" id="submit-btn">Submit Test <i
+                            class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Modal -->
+    <div class="modal" id="results-modal">
+        <div class="modal-content">
+            <h2>Test Results</h2>
+            <div class="score-display" id="score-display">0/13</div>
+            <div class="score-breakdown">
+                <div class="score-item">
+                    <span>Passage 3:</span>
+                    <span id="passage3-score">0/13</span>
+                </div>
+            </div>
+            <div class="modal-buttons">
+                <button class="btn btn-secondary" id="close-modal">Close</button>
+                <button class="btn btn-primary" id="review-answers">Review Answers</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Correct Answers for Questions 28-40
+        const correctAnswers = {
+            q28: "hammer bone",
+            q29: "enormous bodies",
+            q30: "fatty pad",
+            q31: "sinus cavities",
+            q32: "trunks and feet",
+            q33: "infrasonic",
+            q34: "ecology",
+            q35: "seismic messages",
+            q36: "acoustic communication",
+            q37: "mate",
+            q38: "ground",
+            q39: "A",
+            q40: "C"
+        };
+
+        let lastSelection = null;
+        let highlightTarget = null;
+        let currentPanel = null;
+        let submitted = false;
+        let currentQuestion = 28;
+        let isResizing = false;
+        let seconds = 20 * 60; // 20 minutes for Passage 3
+        let timerInterval;
+
+        const highlightBtn = document.getElementById('highlight-btn');
+        const removeHighlightBtn = document.getElementById('remove-highlight-btn');
+        const passagePanel = document.querySelector('.passage-container');
+        const questionsPanel = document.getElementById('questions');
+        const resizer = document.getElementById('resizer');
+        const submitBtn = document.getElementById('submit-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const resultsModal = document.getElementById('results-modal');
+        const scoreDisplay = document.getElementById('score-display');
+        const passage3Score = document.getElementById('passage3-score');
+        const closeModalBtn = document.getElementById('close-modal');
+        const reviewBtn = document.getElementById('review-answers');
+        const timerElement = document.querySelector('.timer span');
+        const timerContainer = document.querySelector('.timer');
+
+        // Timer
+        function updateTimer() {
+            seconds--;
+            const minutes = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            if (seconds <= 2 * 60) {
+                timerContainer.classList.add('warning');
+            }
+            if (seconds <= 0) {
+                clearInterval(timerInterval);
+                if (!submitted) {
+                    alert('Time is up! Submitting your test.');
+                    submitTest();
+                }
+            }
+        }
+
+        // Highlight functionality
+        function getValidSelection() {
+            const sel = window.getSelection();
+            if (!sel.rangeCount || sel.isCollapsed) return null;
+            const range = sel.getRangeAt(0);
+            if (passagePanel.contains(range.commonAncestorContainer)) {
+                currentPanel = passagePanel;
+            } else if (questionsPanel.contains(range.commonAncestorContainer)) {
+                currentPanel = questionsPanel;
+            } else {
+                return null;
+            }
+            return range;
+        }
+
+        function showHighlightBtn(range) {
+            const rect = range.getBoundingClientRect();
+            highlightBtn.style.top = (window.scrollY + rect.top - 35) + 'px';
+            highlightBtn.style.left = (window.scrollX + rect.left) + 'px';
+            highlightBtn.style.display = 'block';
+        }
+
+        function hideHighlightBtn() {
+            highlightBtn.style.display = 'none';
+        }
+
+        function showRemoveBtn(span) {
+            const rect = span.getBoundingClientRect();
+            removeHighlightBtn.style.top = (window.scrollY + rect.top - 35) + 'px';
+            removeHighlightBtn.style.left = (window.scrollX + rect.left) + 'px';
+            removeHighlightBtn.style.display = 'block';
+            highlightTarget = span;
+        }
+
+        function hideRemoveBtn() {
+            removeHighlightBtn.style.display = 'none';
+            highlightTarget = null;
+        }
+
+        highlightBtn.addEventListener('click', () => {
+            if (lastSelection) {
+                const span = document.createElement('span');
+                span.className = 'highlight';
+                span.appendChild(lastSelection.extractContents());
+                lastSelection.insertNode(span);
+                window.getSelection().removeAllRanges();
+                hideHighlightBtn();
+            }
+        });
+
+        removeHighlightBtn.addEventListener('click', () => {
+            if (highlightTarget) {
+                const parent = highlightTarget.parentNode;
+                while (highlightTarget.firstChild) {
+                    parent.insertBefore(highlightTarget.firstChild, highlightTarget);
+                }
+                parent.removeChild(highlightTarget);
+                hideRemoveBtn();
+            }
+        });
+
+        document.addEventListener('selectionchange', () => {
+            hideHighlightBtn();
+            hideRemoveBtn();
+            const range = getValidSelection();
+            if (range) {
+                lastSelection = range;
+                showHighlightBtn(range);
+            } else {
+                lastSelection = null;
+            }
+        });
+
+        [passagePanel, questionsPanel].forEach(panel => {
+            panel.addEventListener('scroll', () => {
+                hideHighlightBtn();
+                hideRemoveBtn();
+            });
+        });
+
+        document.addEventListener('mousedown', (e) => {
+            if (e.target !== highlightBtn && e.target !== removeHighlightBtn) {
+                hideHighlightBtn();
+                hideRemoveBtn();
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('highlight')) {
+                e.preventDefault();
+                showRemoveBtn(e.target);
+            }
+        });
+
+        // Resizer
+        resizer.addEventListener('mousedown', (e) => {
+            isResizing = true;
+            document.body.style.cursor = 'col-resize';
+            document.body.style.userSelect = 'none';
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isResizing) return;
+            const container = document.querySelector('.main-content');
+            const containerRect = container.getBoundingClientRect();
+            const mouseX = e.clientX - containerRect.left;
+            const containerWidth = containerRect.width;
+            const leftPercentage = (mouseX / containerWidth) * 100;
+            const rightPercentage = 100 - leftPercentage;
+            if (leftPercentage >= 30 && leftPercentage <= 70) {
+                document.querySelector('.passage-container').style.flex = leftPercentage + '%';
+                document.querySelector('.questions-container').style.width = rightPercentage + '%';
+            }
+        });
+
+        document.addEventListener('mouseup', () => {
+            if (isResizing) {
+                isResizing = false;
+                document.body.style.cursor = '';
+                document.body.style.userSelect = '';
+            }
+        });
+
+        // Navigation
+        function scrollToQuestion(num) {
+            const el = document.querySelector(`[data-question="${num}"]`) || document.querySelector(`input[name="q${num}"]`);
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            updateCurrentQuestion(num);
+        }
+
+        function updateCurrentQuestion(num) {
+            currentQuestion = num;
+            document.querySelectorAll('.progress-item').forEach(item => {
+                item.classList.remove('current');
+                if (item.dataset.question == num) item.classList.add('current');
+            });
+            prevBtn.disabled = num <= 28;
+            nextBtn.disabled = num >= 40;
+        }
+
+        document.querySelectorAll('.progress-item').forEach(item => {
+            item.addEventListener('click', () => {
+                scrollToQuestion(parseInt(item.dataset.question));
+            });
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentQuestion > 28) scrollToQuestion(currentQuestion - 1);
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentQuestion < 40) scrollToQuestion(currentQuestion + 1);
+        });
+
+        // Event listener for marking questions as answered
+        document.querySelectorAll('input[type="radio"], input[type="text"]').forEach(input => {
+            input.addEventListener('change', () => {
+                if (submitted) return;
+                const qNumMatch = input.name.match(/^q(\d+)$/);
+                if (qNumMatch) {
+                    const qNum = parseInt(qNumMatch[1]);
+                    const item = document.querySelector(`.progress-item[data-question="${qNum}"]`);
+                    if (item && !item.classList.contains('answered')) {
+                        const value = input.value;
+                        if (value) {
+                            item.classList.add('answered');
+                        }
+                    }
+                }
+            });
+        });
+
+        submitBtn.addEventListener('click', submitTest);
+
+        function submitTest() {
+            if (submitted) return;
+            if (!confirm('Are you sure you want to submit?')) return;
+            submitted = true;
+            clearInterval(timerInterval);
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-check"></i> Submitted';
+            let score = 0;
+            const results = {};
+
+            // Process questions 28-38 (text inputs)
+            for (let i = 28; i <= 38; i++) {
+                const key = `q${i}`;
+                let userAnswer = '';
+                let isCorrect = false;
+                const inputEl = document.querySelector(`input[name="${key}"]`);
+                if (inputEl && inputEl.value.trim() !== '') {
+                    userAnswer = inputEl.value.trim().toLowerCase();
+                    isCorrect = userAnswer === correctAnswers[key].toLowerCase();
+                    inputEl.disabled = true;
+                }
+                if (isCorrect) score++;
+                results[key] = { userAnswer, correct: correctAnswers[key], isCorrect };
+            }
+
+            // Process questions 39-40 (radio buttons)
+            for (let i = 39; i <= 40; i++) {
+                const key = `q${i}`;
+                let userAnswer = '';
+                let isCorrect = false;
+                const checkedRadio = document.querySelector(`input[name="${key}"]:checked`);
+                if (checkedRadio) {
+                    userAnswer = checkedRadio.value;
+                    isCorrect = userAnswer === correctAnswers[key];
+                    document.querySelectorAll(`input[name="${key}"]`).forEach(radio => {
+                        radio.disabled = true;
+                    });
+                }
+                if (isCorrect) score++;
+                results[key] = { userAnswer, correct: correctAnswers[key], isCorrect };
+            }
+
+            scoreDisplay.textContent = `${score}/13`;
+            passage3Score.textContent = `${score}/13`;
+            for (let i = 28; i <= 40; i++) {
+                const item = document.querySelector(`.progress-item[data-question="${i}"]`);
+                const res = results[`q${i}`];
+                if (item && res) {
+                    item.classList.remove('current', 'answered');
+                    item.classList.add(res.isCorrect ? 'correct' : 'incorrect');
+                }
+            }
+            window.testResults = results;
+            resultsModal.style.display = 'flex';
+        }
+
+        function showCorrectAnswers() {
+            if (!submitted) return;
+            document.querySelectorAll('.answer-indicator').forEach(el => el.remove());
+
+            // Process questions 28-38 (text inputs)
+            for (let i = 28; i <= 38; i++) {
+                const key = `q${i}`;
+                const res = window.testResults[key];
+                if (!res) continue;
+                const inputEl = document.querySelector(`input[name="${key}"]`);
+                if (!inputEl) continue;
+                const targetElement = inputEl.parentNode;
+                const div = document.createElement('div');
+                div.className = 'answer-indicator';
+                div.classList.add(res.isCorrect ? 'correct' : 'incorrect');
+                div.style.display = 'inline-block';
+                div.style.marginLeft = '10px';
+                if (res.isCorrect) {
+                    div.innerHTML = `<i class="fas fa-check"></i> Correct! You chose: <strong>${res.userAnswer || 'No answer'}</strong>`;
+                } else {
+                    const userDisplay = res.userAnswer || 'No answer';
+                    div.innerHTML = `<i class="fas fa-times"></i> Incorrect. You chose: <strong>${userDisplay}</strong><br><strong>Correct:</strong> ${res.correct}`;
+                }
+                targetElement.appendChild(div);
+            }
+
+            // Process questions 39-40 (radio buttons)
+            for (let i = 39; i <= 40; i++) {
+                const key = `q${i}`;
+                const res = window.testResults[key];
+                if (!res) continue;
+                const targetElement = document.querySelector(`[data-question="${i}"] .options`);
+                if (!targetElement) continue;
+                const div = document.createElement('div');
+                div.className = 'answer-indicator';
+                div.classList.add(res.isCorrect ? 'correct' : 'incorrect');
+                const selectedOption = document.querySelector(`input[name="${key}"][value="${res.userAnswer}"]`);
+                const userDisplay = selectedOption ? selectedOption.parentNode.textContent : (res.userAnswer || 'No answer');
+                if (res.isCorrect) {
+                    div.innerHTML = `<i class="fas fa-check"></i> Correct! You chose: <strong>${userDisplay}</strong>`;
+                } else {
+                    const correctOption = document.querySelector(`input[name="${key}"][value="${res.correct}"]`);
+                    const correctDisplay = correctOption ? correctOption.parentNode.textContent : res.correct;
+                    div.innerHTML = `<i class="fas fa-times"></i> Incorrect. You chose: <strong>${userDisplay}</strong><br><strong>Correct:</strong> ${correctDisplay}`;
+                }
+                targetElement.appendChild(div);
+            }
+        }
+
+        closeModalBtn.addEventListener('click', () => {
+            resultsModal.style.display = 'none';
+        });
+
+        reviewBtn.addEventListener('click', () => {
+            resultsModal.style.display = 'none';
+            showCorrectAnswers();
+            scrollToQuestion(28);
+        });
+
+        function startTest() {
+            document.getElementById('startScreen').classList.add('hidden');
+            document.getElementById('testContainer').classList.remove('hidden');
+            timerInterval = setInterval(updateTimer, 1000);
+        }
+
+        setTimeout(() => {
+            document.getElementById('loadingScreen').classList.add('hidden');
+            document.getElementById('startScreen').classList.remove('hidden');
+        }, 2000);
+    </script>
+</body>
+
+</html>

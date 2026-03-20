@@ -1,0 +1,1736 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            overflow: hidden;
+        }
+
+        .loading-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f9fafb;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 9999;
+        }
+
+        .loading-content {
+            text-align: center;
+        }
+
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #2563eb;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-title {
+            font-size: 1.2rem;
+            color: #6b7280;
+            margin-bottom: 20px;
+        }
+
+        .loading-subtitle {
+            font-size: 1rem;
+            color: #9ca3af;
+        }
+
+        .start-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f9fafb;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 9998;
+        }
+
+        .start-content {
+            text-align: center;
+        }
+
+        .start-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 24px;
+        }
+
+        .start-subtitle {
+            color: #6b7280;
+            margin-bottom: 24px;
+        }
+
+        .start-button {
+            padding: 12px 32px;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .start-button:hover {
+            background-color: #1d4ed8;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            width: 100vw;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            background-color: #ffffff;
+            color: #333;
+            padding: 8px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            flex-shrink: 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .passage-info {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #2d3748;
+        }
+
+        .timer {
+            background-color: rgba(255, 193, 193, 0.5);
+            padding: 6px 12px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s;
+            min-width: 80px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #c53030;
+            border: 1px solid rgba(255, 120, 120, 0.3);
+        }
+
+        .timer.warning {
+            color: #9b2c2c;
+            background-color: rgba(254, 178, 178, 0.7);
+            border-color: rgba(245, 101, 101, 0.5);
+        }
+
+        .logo-area {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+            cursor: pointer;
+        }
+
+        .logo-area:hover {
+            background-color: #0056b3;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.4);
+        }
+
+        .logo-area i {
+            font-size: 1.1rem;
+        }
+
+        .progress-container {
+            background-color: #f8f9fa;
+            padding: 4px 20px;
+            z-index: 100;
+            flex-shrink: 0;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .progress-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .progress-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 6px;
+        }
+
+        .progress-item {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4a5568;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            border: 1px solid #cbd5e0;
+        }
+
+        .progress-item.current {
+            background-color: #4299e1;
+            color: white;
+            transform: scale(1.1);
+            border-color: #2b6cb0;
+        }
+
+        .progress-item.answered {
+            background-color: #9ae6b4;
+            color: #22543d;
+            border-color: #68d391;
+        }
+
+        .progress-item.correct {
+            background-color: #48bb78;
+            color: white;
+            border-color: #38a169;
+        }
+
+        .progress-item.incorrect {
+            background-color: #fed7d7;
+            color: #c53030;
+            border-color: #feb2b2;
+        }
+
+        .progress-item:hover {
+            background-color: #cbd5e0;
+            transform: scale(1.05);
+        }
+
+        .btn {
+            padding: 6px 14px;
+            border: 1px solid #cbd5e0;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.95rem;
+            background-color: #f7fafc;
+            color: #4a5568;
+        }
+
+        .btn i {
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background-color: #edf2f7;
+            border-color: #a0aec0;
+        }
+
+        .btn-primary {
+            background-color: #f7fafc;
+            color: #4a5568;
+            border: 1px solid #cbd5e0;
+        }
+
+        .btn-primary:hover {
+            background-color: #edf2f7;
+            border-color: #a0aec0;
+        }
+
+        .btn-secondary {
+            background-color: #f7fafc;
+            color: #4a5568;
+            border: 1px solid #cbd5e0;
+        }
+
+        .btn-secondary:hover {
+            background-color: #edf2f7;
+            border-color: #a0aec0;
+        }
+
+        .btn-submit {
+            background-color: #48bb78;
+            color: white;
+            font-weight: 900;
+            border: 1px solid #38a169;
+        }
+
+        .btn-submit:hover {
+            background-color: #38a169;
+            border-color: #2f855a;
+        }
+
+        .btn-submit:disabled {
+            background-color: #9ae6b4;
+            color: #718096;
+            cursor: not-allowed;
+            border: 1px solid #68d391;
+        }
+
+        .main-content {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .passage-container {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: #fafafa;
+            position: relative;
+        }
+
+        .resizer {
+            width: 4px;
+            background-color: #cbd5e0;
+            cursor: col-resize;
+            position: relative;
+            transition: background-color 0.2s;
+        }
+
+        .resizer:hover {
+            background-color: #a0aec0;
+        }
+
+        .resizer::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 30px;
+            height: 60px;
+            background-color: rgba(203, 213, 224, 0.5);
+            border-radius: 4px;
+            pointer-events: none;
+        }
+
+        .questions-container {
+            width: 40%;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: white;
+            border-left: 1px solid #e2e8f0;
+        }
+
+        .passage {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .passage h2 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .passage-content p {
+            margin-top: 15px;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .passage h2 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .passage p {
+            margin-top: 20px;
+            margin-bottom: 25px;
+            text-align: justify;
+        }
+
+        .question-section {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .question {
+            margin-bottom: 25px;
+            padding: 6px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            background-color: #ffffff;
+            transition: box-shadow 0.2s;
+        }
+
+        .question:hover {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .question-text {
+            font-weight: 500;
+            margin-bottom: 12px;
+            color: #2d3748;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .option:hover {
+            background-color: #f7fafc;
+            border-color: #cbd5e0;
+        }
+
+        .option input {
+            margin-right: 2px;
+            width: 16px;
+            height: 16px;
+        }
+
+        .input-field {
+            padding: 8px 10px;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            width: 20%;
+            margin-top: 5px;
+            font-size: 0.9rem;
+        }
+
+        .input-field:focus {
+            border-color: #4299e1;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(66, 153, 225, 0.2);
+        }
+
+        select.input-field {
+            padding: 8px 10px;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            width: 20%;
+            margin-top: 5px;
+            font-size: 0.9rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.9rem;
+        }
+
+        th,
+        td {
+            border: 1px solid #e2e8f0;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f1f5f9;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .answer-indicator {
+            background-color: #e6fffa;
+            border: 1px solid #38b2ac;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        .answer-indicator.correct {
+            background-color: #e6fffa;
+            border-color: #38b2ac;
+            color: #234e52;
+        }
+
+        .answer-indicator.incorrect {
+            background-color: #fed7d7;
+            border-color: #fc8181;
+            color: #742a2a;
+        }
+
+        .question-group {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .question-group-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #2d3748;
+            font-size: 1rem;
+        }
+
+        .highlight {
+            background-color: #ffff00;
+            cursor: pointer;
+        }
+
+        #highlight-btn,
+        #remove-highlight-btn {
+            position: absolute;
+            z-index: 9999;
+            display: none;
+            padding: 6px 12px;
+            font-size: 14px;
+            border: 1px solid #888;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .score-display {
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #2d3748;
+        }
+
+        .score-breakdown {
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .score-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 0.95rem;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+
+            .questions-container {
+                width: 100%;
+                border-left: none;
+                border-top: 1px solid #e2e8f0;
+            }
+
+            .resizer {
+                width: 100%;
+                height: 4px;
+                cursor: row-resize;
+            }
+
+            .resizer::before {
+                width: 60px;
+                height: 30px;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            .progress-item {
+                width: 32px;
+                height: 32px;
+                font-size: 0.85rem;
+            }
+
+            .passage-info {
+                font-size: 0.9rem;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px;
+            }
+
+            .logo-area {
+                order: 1;
+            }
+
+            .passage-info {
+                order: 2;
+            }
+
+            .timer {
+                order: 3;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .progress-item {
+                width: 32px;
+                height: 32px;
+                font-size: 0.85rem;
+            }
+
+            .passage-info {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+
+
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <h2 class="loading-title">Your test will begin shortly</h2>
+            <p class="loading-subtitle">Please wait</p>
+        </div>
+    </div>
+
+    <!-- Start Screen -->
+    <div id="startScreen" class="start-screen hidden">
+        <div class="start-content">
+            <h1 class="start-title">IELTSwithShohrux</h1>
+            <p class="start-subtitle">Ready to begin your reading test?</p>
+            <button class="start-button" onclick="startTest()">Start Test</button>
+        </div>
+    </div>
+
+    <!-- Test Container -->
+    <div class="container hidden" id="testContainer">
+        <!-- Header -->
+        <header>
+            <div class="passage-info">IELTSwithShohrux</div>
+
+            <!-- timer -->
+            <div class="timer" id="globalTimer">
+                <i class="fas fa-clock"></i>
+                <span>60:00</span>
+            </div>
+
+            <!-- promo button -->
+            <div class="logo-area" onclick="window.open('https://t.me/IELTSwithShohrux', '_blank')">
+                <i class="fas fa-paper-plane"></i>
+                <span>Click for more TESTS</span>
+            </div>
+
+            <div class="passage-info" id="headerPassageTitle">Passage 1 of 3</div>
+        </header>
+
+        <!-- Floating highlight buttons -->
+        <button id="highlight-btn" type="button">Highlight</button>
+        <button id="remove-highlight-btn" type="button">Remove Highlight</button>
+
+        <div class="main-content">
+            <!-- ===== PASSAGE 1 ===== -->
+            <div class="passage-container" id="p1_passagePanel" role="region" aria-label="Reading Passage">
+                <h2 class="section-title">READING PASSAGE 1</h2>
+                <div class="passage-content" id="passage1">
+                    <h3>The development of the silk industry</h3>
+                    <p><em>Silk, a natural fibre produced by a particular worm called a silkworm, has been used in
+                            clothing for many centuries.</em></p>
+
+                    <p>When silk was first discovered in China over 4,500 years ago, it was reserved exclusively for the
+                        use of the emperor, his close relations and the very highest of his dignitaries. Within the
+                        palace, the emperor is believed to have worn a robe of white silk; outside, he, his principal
+                        wife, and the heir to the throne wore yellow, the colour of the earth.</p>
+                    <p>Gradually silk came into more general use, and the various classes of Chinese society began
+                        wearing tunics of silk. As well as being used for clothing and decoration, silk was quite
+                        quickly put to industrial use, and rapidly became one of the principal elements of the Chinese
+                        economy. It was used in the production of musical instruments, as string for fishing, and even
+                        as the world’s first luxury paper. Eventually even the common people were able to wear garments
+                        of silk.</p>
+                    <p>During the Han dynasty (206 BC–220 AD), silk ceased to be a mere fabric and became a form of
+                        currency. Farmers paid their taxes in grain and silk, and silk was used to pay civil servants
+                        and to reward subjects for outstanding services. Values were calculated in lengths of silk as
+                        they had previously been calculated in weight of gold; together they became a currency used in
+                        trade with foreign countries, which continued into the Tang dynasty (616–907 AD). It is possible
+                        that this added importance was the result of a major increase in production. Silk also found its
+                        way so thoroughly into the Chinese language that 230 of the 5,000 most common characters of
+                        Mandarin have ‘silk’ as their key component.</p>
+                    <p>Silk became a precious commodity, known as much by the art it produced from craft as the skill of
+                        the early weavers; it is believed that the silk trade actually existed before the ‘Silk Road’
+                        was officially opened in the second century BC. An Egyptian mummy with a silk thread in her
+                        hair, dating from 1070 BC, has been discovered in the village of Deir el Medina near the Valley
+                        of the Kings, and is probably the earliest evidence for the silk trade. During the second
+                        century BC, the Chinese emperor Han Wu Di’s ambassadors travelled as far west as Persia and
+                        Mesopotamia, bearing gifts including silks. A range of important finds of Chinese silks have
+                        also been made along the Silk Road. One of the most dramatic of these finds was some Tang silk
+                        discovered in 1900. It is believed that around 1015 AD Buddhist monks, possibly alarmed by the
+                        threat of invasion by Tibetan people, had secreted more than ten thousand manuscripts and silk
+                        paintings, silk banners and textiles in caves near Dunhuang, a trading station on the Silk Road
+                        in north-west China.</p>
+                    <p>Some historians believe the first Europeans to set eyes upon the fabulous fabric were the Roman
+                        legions of Marcus Licinius Crassus, Governor of Syria. According to certain accounts of the
+                        period, at an important battle near the Euphrates River in 53 BC, the Roman soldiers were so
+                        startled by the bright silken banners of the enemy that they ran in panic. Yet, within three
+                        decades Chinese silks were widely worn by the rich and noble women of Rome. The Roman Emperor
+                        Heliogabalus (218–222 AD) wore only silk. By 300 AD, the Roman historian Marcellinus Ammianus
+                        reported that the silk, once confined to the nobility, has now spread to all classes without
+                        distinction – even to the lowest. The desire for silk continued to increase over the centuries.
+                        Despite this demand, the price of silk remained very high.</p>
+                    <p>In spite of their secrecy about production methods, the Chinese eventually lost their monopoly on
+                        silk production. Knowledge of silk production methods reached Korea around 200 BC, when waves of
+                        Chinese immigrants arrived there. Shortly after 300 AD, it travelled westward, and the
+                        cultivation of the silkworm was established in India.</p>
+                    <p>Around 550 AD silk production reached the Middle East. Records indicate that two monks from
+                        Constantinople (modern-day Istanbul), capital of the Byzantine Empire, appeared at their
+                        emperor’s court with silkworm eggs which they had obtained secretly, and hidden in their hollow
+                        bamboo walking sticks. Under their supervision the eggs hatched into worms, and the worms spun
+                        silk threads. Byzantium was in the silk business at last. The Byzantine church and state created
+                        imperial workshops, monopolising production and keeping the secret to themselves. This allowed a
+                        silk industry to be established, undercutting the market for ordinary-grade Chinese silk.
+                        However, high quality silk textiles, woven in China especially for the Middle Eastern market,
+                        continued to achieve high prices in the West, and trade along the Silk Road continued as before.
+                        By the sixth century the Persians, too, had mastered the art of silk weaving, developing their
+                        own rich patterns and techniques. But it wasn’t until the 13th century that Italy began silk
+                        production, with the introduction of 2,000 skilled silk weavers from Constantinople. Eventually,
+                        silk production became widespread throughout Europe.</p>
+                    <p>World silk production has approximately doubled during the last 30 years in spite of man-made
+                        fibres replacing certain uses of silk. Before this period, China and Japan were the two main
+                        producers, together manufacturing more than 50 per cent of world production each year. After the
+                        late 1970s, however, China dramatically increased its silk production, and once again became the
+                        world’s leading producer.</p>
+                </div>
+            </div>
+
+            <!-- Resizer -->
+            <div class="resizer" id="resizer"></div>
+
+            <!-- Questions for Passage 1 -->
+            <div class="questions-container" id="p1_questionsPanel" role="region" aria-label="Questions">
+                <h2 class="section-title">Questions 1–13</h2>
+                <p>Complete the notes below. Choose <strong>ONE WORD ONLY</strong> from the passage for each answer.</p>
+
+                <div class="question-group">
+                    <div class="question-group-title">Questions 1–7 – Chinese silk</div>
+                    <p><strong>Early Uses</strong><br>
+                        <em>Clothing</em><br>
+                        • at first, silk only available to Chinese of high rank<br>
+                        • emperor wore <span class="question-text">1</span> <input type="text" name="q1" maxlength="30">
+                        silk indoors<br>
+                        <em>In industry</em><br>
+                        • silk items included parts of musical instruments, fishing strings and <span
+                            class="question-text">2</span> <input type="text" name="q2" maxlength="30"><br>
+                        <em>Currency</em><br>
+                        • silk was used as payment of <span class="question-text">3</span> <input type="text" name="q3"
+                            maxlength="30"> as well as for wages and rewards<br>
+                        • silk replaced <span class="question-text">4</span> <input type="text" name="q4"
+                            maxlength="30"> as a unit of value<br>
+                        • silk soon used as payment in <span class="question-text">5</span> <input type="text" name="q5"
+                            maxlength="30"> trade
+                    </p>
+                    <p><strong>Evidence of silk trade</strong><br>
+                        1070 BC, Egypt: hair of a <span class="question-text">6</span> <input type="text" name="q6"
+                            maxlength="30"> contained silk<br>
+                        1015 AD, north-west China: silk objects were hidden inside <span class="question-text">7</span>
+                        <input type="text" name="q7" maxlength="30">
+                    </p>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-group-title">Questions 8–13 – TRUE / FALSE / NOT GIVEN</div>
+                    <div class="question" data-question="8">
+                        <div class="question-text">8. Their first sight of silk created fear among Roman soldiers.</div>
+                        <div class="options"><label><input type="radio" name="q8" value="TRUE">
+                                TRUE</label><label><input type="radio" name="q8" value="FALSE">
+                                FALSE</label><label><input type="radio" name="q8" value="NOT GIVEN"> NOT GIVEN</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="9">
+                        <div class="question-text">9. The quality of Chinese silk imported by the early Romans varied
+                            widely.</div>
+                        <div class="options"><label><input type="radio" name="q9" value="TRUE">
+                                TRUE</label><label><input type="radio" name="q9" value="FALSE">
+                                FALSE</label><label><input type="radio" name="q9" value="NOT GIVEN"> NOT GIVEN</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="10">
+                        <div class="question-text">10. The Byzantine emperor first acquired silkworm eggs from the
+                            Chinese emperor.</div>
+                        <div class="options"><label><input type="radio" name="q10" value="TRUE">
+                                TRUE</label><label><input type="radio" name="q10" value="FALSE">
+                                FALSE</label><label><input type="radio" name="q10" value="NOT GIVEN"> NOT GIVEN</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="11">
+                        <div class="question-text">11. The price of high-grade Chinese silk fell due to competition from
+                            Middle-Eastern producers.</div>
+                        <div class="options"><label><input type="radio" name="q11" value="TRUE">
+                                TRUE</label><label><input type="radio" name="q11" value="FALSE">
+                                FALSE</label><label><input type="radio" name="q11" value="NOT GIVEN"> NOT GIVEN</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="12">
+                        <div class="question-text">12. Silk was produced in the Middle East several centuries before it
+                            was produced in Europe.</div>
+                        <div class="options"><label><input type="radio" name="q12" value="TRUE">
+                                TRUE</label><label><input type="radio" name="q12" value="FALSE">
+                                FALSE</label><label><input type="radio" name="q12" value="NOT GIVEN"> NOT GIVEN</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="13">
+                        <div class="question-text">13. Global silk production has declined in recent years.</div>
+                        <div class="options"><label><input type="radio" name="q13" value="TRUE">
+                                TRUE</label><label><input type="radio" name="q13" value="FALSE">
+                                FALSE</label><label><input type="radio" name="q13" value="NOT GIVEN"> NOT GIVEN</label>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- /p1_questionsPanel -->
+
+            <!-- ===== PASSAGE 2 ===== -->
+            <div class="passage-container hidden" id="p2_passagePanel" role="region" aria-label="Reading Passage">
+                <h2 class="section-title">READING PASSAGE 2</h2>
+                <div class="passage-content" id="passage2">
+                    <h3>The discovery of a baby mammoth</h3>
+                    <p><em>A near-perfect frozen mammoth offers clues to a great vanished species</em></p>
+
+                    <p><strong>A</strong> On a May morning in 2007, on the Yamal Peninsula in north-western Siberia, a
+                        Nenets reindeer herder named Yuri Khudi stood on a sandbar on the Yuribey River, looking
+                        carefully at a diminutive corpse. Although he’d never seen such an animal before, Khudi had seen
+                        many mammoth tusks; the thick corkscrew shafts that his people found each summer, and this
+                        persuaded him the corpse was a baby mammoth. It was eerily well preserved. Apart from its
+                        missing hair and toenails, it was perfectly intact. Khudi realised the find might be significant
+                        and he knew he couldn’t just return home and forget all about it. He therefore decided to travel
+                        to the small town of Yar-Sale to consult an old friend named Kirill Serotetto. His friend took
+                        him to meet the director of the local museum, who persuaded the local authorities to fly Khudi
+                        and Serotetto back to the Yuribey River to collect the baby mammoth.</p>
+
+                    <p><strong>B</strong> Mammoths became extinct between 14,000 and 10,000 years ago and since the
+                        extinctions coincided with the end of the most recent Ice Age, many researchers believe that the
+                        primary cause of the great die-off was the sharp rise in temperature, which dramatically altered
+                        the vegetation. ‘We have strong evidence that the temperature rise played a significant part in
+                        their extinction,’ says Adrian Lister, a palaeontologist and mammoth expert at London’s Natural
+                        History Museum. ‘In Eurasia, the timing of the two events matches closely.’ The extinctions also
+                        coincided, however, with the arrival of modern humans. In addition to exploiting mammoths for
+                        food, they used their bones and tusks to make weapons, tools, and even dwellings. Some
+                        scientists believe humans were as much to blame as the temperature rise for the great die-off.
+                        Some may say they caused it.</p>
+
+                    <p><strong>C</strong> The body of the baby mammoth was eventually sent to the St Petersburg
+                        Zoological Museum in Russia. Alexei Tikhonov, the museum’s director, was one of the first
+                        scientists to view the baby, a female. According to Tikhonov, Khudi had rescued ‘the best
+                        preserved mammoth to come down to us from the Ice Age’, and he gratefully named her Lyuba, after
+                        Khudi’s wife. Tikhonov knew that no-one would be more excited by the find than Dan Fisher, an
+                        American colleague at the University of Michigan who had spent 30 years researching the lives of
+                        mammoths. Tikhonov invited Fisher, along with Bernard Buigues, a French mammoth hunter, to come
+                        and view the baby mammoth. Fisher and Buigues had examined other specimens together, including
+                        infants, but these had been in a relatively poor state. Lyuba was another story entirely. Other
+                        than the missing hair and toenails, the only flaw in her pristine appearance was a curious dent
+                        above the trunk.</p>
+
+                    <p><strong>D</strong> Fisher was particularly excited about one specific part of Lyuba’s anatomy:
+                        her milk tusks. Through his career, Fisher has taken hundreds of tusk samples. Most of these
+                        came from the Great Lakes region of North America, and his research showed that these animals
+                        frequently died in late Pleistocene ‘pre-winter’ when they should have been in their peak after
+                        summer grazing and less likely to die of natural causes, but also when humans would have been
+                        most eager to stockpile meat for the coming winter. He has done limited work in Siberia, but his
+                        analysis of tusks from Wrangel Island, off the coast of Siberia, suggests the same conclusion.
+                    </p>
+
+                    <p><strong>E</strong> In December 2007, Buigues arranged for the specimen to be transported to Japan
+                        to undergo a CT scan by Naoki Suzuki of the Jikei University School of Medicine. The test
+                        confirmed her skeleton was undamaged, and her internal organs seemed largely intact. It also
+                        showed that the end of her trunk, and her throat, mouth, and windpipe were filled with dense
+                        sediment. Six months later, in a laboratory in St Petersburg, Fisher, Buigues, Suzuki, Tikhonov
+                        and other colleagues began a three-day series of tests on Lyuba. During these, Fisher noted a
+                        dense mix of clay and sand in her trunk, mouth and throat, which had been indicated earlier by
+                        the scan. In fact, the sediment in Lyuba’s trunk was packed so tightly that Fisher saw it as a
+                        possible explanation for the dent above her trunk. If she was frantically fighting for breath
+                        and inhaled convulsively, perhaps a partial vacuum was created in the base of her trunk, which
+                        would have flattened surrounding soft tissue. To Fisher, the circumstances of Lyuba’s death were
+                        clear: she had asphyxiated. Suzuki, however, proposed a different interpretation, seeing more
+                        evidence for drowning than asphyxiation.</p>
+
+                    <p><strong>F</strong> Studies are ongoing, but Lyuba has begun to shed the secrets of her short life
+                        and some clues to the fate of her kind. Her good general health was shown in the record of her
+                        dental development, a confirmation for Fisher that dental research is useful for evaluating
+                        health and thus key to investigating the causes of mammoth extinction. Analysis of her
+                        well-preserved DNA has revealed that she belonged to a distinct population of <em>Mammuthus
+                            primigenius</em> and that, soon after her time, another population migrating to Siberia from
+                        North America would take their place. Finally, Lyuba’s premolars and tusks revealed that she had
+                        been born in late spring and was only a month old when she died.</p>
+                </div>
+            </div>
+
+            <div class="questions-container hidden" id="p2_questionsPanel" role="region" aria-label="Questions">
+                <h2 class="section-title">Questions 14–26</h2>
+
+                <div class="question-group">
+                    <div class="question-group-title">Questions 14–18 – Which paragraph contains the information?</div>
+                    <div class="question" data-question="14">
+                        <div class="question-text">14. Similarities between studies of mammoth remains from different
+                            parts of the world.</div>
+                        <div class="options"><select name="q14">
+                                <option value="">Select</option>
+                                <option>A</option>
+                                <option>B</option>
+                                <option>C</option>
+                                <option>D</option>
+                                <option>E</option>
+                                <option>F</option>
+                            </select></div>
+                    </div>
+                    <div class="question" data-question="15">
+                        <div class="question-text">15. Details of the uses to which mammoth body parts were put.</div>
+                        <div class="options"><select name="q15">
+                                <option value="">Select</option>
+                                <option>A</option>
+                                <option>B</option>
+                                <option>C</option>
+                                <option>D</option>
+                                <option>E</option>
+                                <option>F</option>
+                            </select></div>
+                    </div>
+                    <div class="question" data-question="16">
+                        <div class="question-text">16. A theory that accounts for the damage to Lyuba’s face.</div>
+                        <div class="options"><select name="q16">
+                                <option value="">Select</option>
+                                <option>A</option>
+                                <option>B</option>
+                                <option>C</option>
+                                <option>D</option>
+                                <option>E</option>
+                                <option>F</option>
+                            </select></div>
+                    </div>
+                    <div class="question" data-question="17">
+                        <div class="question-text">17. An explanation of how an individual was able to identify a small
+                            corpse.</div>
+                        <div class="options"><select name="q17">
+                                <option value="">Select</option>
+                                <option>A</option>
+                                <option>B</option>
+                                <option>C</option>
+                                <option>D</option>
+                                <option>E</option>
+                                <option>F</option>
+                            </select></div>
+                    </div>
+                    <div class="question" data-question="18">
+                        <div class="question-text">18. A comparison between Lyuba and other young mammoth corpses.</div>
+                        <div class="options"><select name="q18">
+                                <option value="">Select</option>
+                                <option>A</option>
+                                <option>B</option>
+                                <option>C</option>
+                                <option>D</option>
+                                <option>E</option>
+                                <option>F</option>
+                            </select></div>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-group-title">Questions 19–23 – Match the statement to the person (A–G)</div>
+                    <div class="question" data-question="19">
+                        <div class="question-text">19. The indications are that mammoths died as a result of climate
+                            change.</div>
+                        <div class="options"><select name="q19">
+                                <option value="">Select</option>
+                                <option value="A">A Yuri Khudi</option>
+                                <option value="B">B Kirill Serotetto</option>
+                                <option value="C">C Adrian Lister</option>
+                                <option value="D">D Alexei Tikhonov</option>
+                                <option value="E">E Dan Fisher</option>
+                                <option value="F">F Bernard Buigues</option>
+                                <option value="G">G Naoki Suzuki</option>
+                            </select></div>
+                    </div>
+                    <div class="question" data-question="20">
+                        <div class="question-text">20. Teeth analysis is important in discovering why mammoths died out.
+                        </div>
+                        <div class="options"><select name="q20">
+                                <option value="">Select</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                                <option value="E">E</option>
+                                <option value="F">F</option>
+                                <option value="G">G</option>
+                            </select></div>
+                    </div>
+                    <div class="question" data-question="21">
+                        <div class="question-text">21. The corpse of the baby mammoth is in better condition than any
+                            other that has been discovered.</div>
+                        <div class="options"><select name="q21">
+                                <option value="">Select</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                                <option value="E">E</option>
+                                <option value="F">F</option>
+                                <option value="G">G</option>
+                            </select></div>
+                    </div>
+                    <div class="question" data-question="22">
+                        <div class="question-text">22. It would be a mistake to ignore the baby mammoth’s discovery,
+                            because of its potential importance.</div>
+                        <div class="options"><select name="q22">
+                                <option value="">Select</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                                <option value="E">E</option>
+                                <option value="F">F</option>
+                                <option value="G">G</option>
+                            </select></div>
+                    </div>
+                    <div class="question" data-question="23">
+                        <div class="question-text">23. Mammoths often died at a time of year when they should have been
+                            in good physical condition.</div>
+                        <div class="options"><select name="q23">
+                                <option value="">Select</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                                <option value="E">E</option>
+                                <option value="F">F</option>
+                                <option value="G">G</option>
+                            </select></div>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-group-title">Questions 24–26 – Sentence completion (NO MORE THAN TWO WORDS)
+                    </div>
+                    <div class="question" data-question="24">
+                        <div class="question-text">24. Some researchers say that a marked rise in temperature impacted
+                            on mammoths by changing the type of <input type="text" name="q24" maxlength="30"> available.
+                        </div>
+                    </div>
+                    <div class="question" data-question="25">
+                        <div class="question-text">25. Fisher concluded that many of the mammoth tusks he looked at
+                            displayed signs of <input type="text" name="q25" maxlength="30">.</div>
+                    </div>
+                    <div class="question" data-question="26">
+                        <div class="question-text">26. Not long after Lyuba’s death, the <em>Mammuthus primigenius</em>
+                            group she belonged to was replaced by another group that came from <input type="text"
+                                name="q26" maxlength="30">.</div>
+                    </div>
+                </div>
+            </div> <!-- /p2_questionsPanel -->
+
+            <!-- ===== PASSAGE 3 ===== -->
+            <div class="passage-container hidden" id="p3_passagePanel" role="region" aria-label="Reading Passage">
+                <h2 class="section-title">READING PASSAGE 3</h2>
+                <div class="passage-content" id="passage3">
+                    <h3>What makes a musical expert?</h3>
+                    <p><em>How does someone become expert in music? And is it really possible to have a ‘talent’ for
+                            music?</em></p>
+
+                    <p>Does that class of people acknowledged to be musical experts just have more of the same basic
+                        skills we are all endowed with, or do they have a set of abilities – or neural structures – that
+                        are totally different from those of the rest of us? Are high levels of musical achievement
+                        simply the result of training and practice, or are they based on innate brain structure – what
+                        we refer to as ‘talent’? Talent can be defined as something that originates in genetic
+                        structures and that is identifiable by trained people who can recognise its existence before a
+                        person has achieved exceptional levels of performance. The emphasis on early identification
+                        means that to investigate it, we study the development of skills in children.</p>
+
+                    <p>It is evident that some children acquire skills more rapidly than others: the age of onset for
+                        walking and talking varies widely, even between children in the same household. There may be
+                        genetic factors at work, but these are closely linked with other factors – with a presumably
+                        environmental component – such as motivation and family dynamics. Similar factors can influence
+                        musical development and can mask the contribution of genetics to musical ability.</p>
+
+                    <p>Brain studies, so far, haven’t been of much use in sorting out the issues. Gottfried Schlaug at
+                        Harvard collected brain scans of individuals with absolute pitch (‘AP’) and showed that a region
+                        in the brain called the planum temporale is larger in these people than in others. This suggests
+                        that the planum is involved in AP, but it’s not clear if it starts out larger in people who
+                        eventually acquire AP, or if the acquisition of AP makes the planum increase in size.</p>
+
+                    <p>Results of research into those areas of the brain involved in skilled motor movement are more
+                        conclusive. Studies of violin players have shown that the region of the brain responsible for
+                        controlling the movement of the left hand (the hand that requires greater precision in violin
+                        playing) increases in size as a result of practice. We do not know yet if the propensity for
+                        increase pre-exists in some people, or not.</p>
+
+                    <p>The evidence against talent comes from research on how much training the experts do. Like experts
+                        in mathematics, chess, or sports, experts in music require lengthy periods of instruction and
+                        practice. In several studies, the very best music students practiced two to three times as much
+                        as others. In another study, students were secretly divided into two groups based on the
+                        teachers’ perceptions of their talent, and they were given more challenging tasks and more
+                        opportunities; the highest performance ratings had far more to do with the extra instruction
+                        they had been assigned to, suggesting that practice does not merely correlate with achievement,
+                        but causes it.</p>
+
+                    <p>Anders Ericsson, at Florida State University, approaches the topic of musical expertise as a
+                        general problem in cognitive psychology. He takes as a starting point the assumption that there
+                        are certain issues involved in becoming an expert at anything; that we can learn about musical
+                        expertise by studying expert chess players, athletes, artists, mathematicians, as well as the
+                        musicians themselves. The emerging picture from such studies is that ten thousand hours of
+                        practice is required to achieve the level of mastery associated with being a world-class expert
+                        – in anything. In study after study, of composers, ice skaters, concert pianists, chess players
+                        and master criminals, this number comes up again and again. Someone would do this amount of
+                        practice if they practiced, for example, roughly 20 hours a week for ten years. Of course, this
+                        does not address why some people do not seem to get anywhere when they practice, and why some
+                        people get more out of their practice sessions than others. But no-one has yet found a case in
+                        which true world-class expertise was accomplished in less time. It seems that it takes the brain
+                        this long to assimilate all that it needs to know to achieve true mastery.</p>
+
+                    <p>The ten-thousand-hour theory is consistent with what we know about how the brain learns. Learning
+                        requires the assimilation and consolidation of information in neural tissue. The more
+                        experiences we have with something, the stronger the memory/learning trace for that information
+                        becomes. Although people differ in how long it takes them to consolidate information neurally,
+                        it remains true that increased practice leads to a greater number of neural traces, which create
+                        stronger memory representation.</p>
+
+                    <p>The classic rebuttal to this theory goes something like this: ‘What about Mozart? I hear that he
+                        composed his first symphony at the age of four!’ First, there is a factual error here: Mozart
+                        did not write it until he was eight. Still, this is unusual, to say the least. However, this
+                        early work received little acclaim and was not performed very often. In fact, the only reason we
+                        know about it is because the child who wrote it grew up to become Mozart. And Mozart had an
+                        expert teacher in his father, who was renowned as a teacher of musicians all over Europe. We do
+                        not know how much Mozart practiced, but if he started at age two and worked thirty-two hours a
+                        week (quite possible, given that his father was a stern taskmaster) he would have made his ten
+                        thousand hours by the time he composed his first symphony. This does not mean that there are no
+                        genetic factors involved in Mozart’s greatness, but that inborn traits may not be the only
+                        cause.</p>
+                </div>
+            </div>
+
+            <div class="questions-container hidden" id="p3_questionsPanel" role="region" aria-label="Questions">
+                <h2 class="section-title">Questions 27–40</h2>
+
+                <div class="question-group">
+                    <div class="question-group-title">Questions 27–30 – Choose the correct letter, A–D</div>
+                    <div class="question" data-question="27">
+                        <div class="question-text">27. In the first paragraph, the writer suggests that a musician who
+                            IS talented is someone …</div>
+                        <div class="options"><label><input type="radio" name="q27" value="A"> A. Who is aware of being
+                                set apart from other people</label><label><input type="radio" name="q27" value="B"> B.
+                                Whose brain structure is unlike that of other people</label><label><input type="radio"
+                                    name="q27" value="C"> C. Who can perform extremely well in early
+                                childhood</label><label><input type="radio" name="q27" value="D"> D. Whose essential
+                                skills are more varied that those of ordinary people</label></div>
+                    </div>
+                    <div class="question" data-question="28">
+                        <div class="question-text">28. According to the writer, what is unclear about the findings of
+                            Gottfried Schlaug?</div>
+                        <div class="options"><label><input type="radio" name="q28" value="A"> A. which part of the brain
+                                is linked to a particular musical skill</label><label><input type="radio" name="q28"
+                                    value="B"> B. which type of musical skill leads to the greates change in the
+                                brain</label><label><input type="radio" name="q28" value="C"> C. whether afeature of the
+                                brain is a cause or and effect of a musical skill</label><label><input type="radio"
+                                    name="q28" value="D"> D. whether the acquisition of a musical skill is easier for
+                                some people that others.</label></div>
+                    </div>
+                    <div class="question" data-question="29">
+                        <div class="question-text">29. According to the writer, what has been established by studies of
+                            violin players?</div>
+                        <div class="options"><label><input type="radio" name="q29" value="A"> A. Changes may occur in
+                                the brain following violin practice</label><label><input type="radio" name="q29"
+                                    value="B"> B. left-handed violinists have a different brain structure from other
+                                people</label><label><input type="radio" name="q29" value="C"> C. a violinist's hand
+                                size is not due to practice but ot genetic factors</label><label><input type="radio"
+                                    name="q29" value="D"> D. Violinists are born with brains that have a particular
+                                structure</label></div>
+                    </div>
+                    <div class="question" data-question="30">
+                        <div class="question-text">30. According to the writer, findings on the amount of practice done
+                            by expert musicians suggest that …</div>
+                        <div class="options"><label><input type="radio" name="q30" value="A"> A. talent may have little
+                                to do with expertise</label><label><input type="radio" name="q30" value="B"> B. practice
+                                may actually prevent the development of talent</label><label><input type="radio"
+                                    name="q30" value="C"> C. talent may not be recognised by
+                                teachers</label><label><input type="radio" name="q30" value="D"> D. expertise may be
+                                related to quality of instruction</label></div>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-group-title">Questions 31–36 – YES / NO / NOT GIVEN</div>
+                    <div class="question" data-question="31">
+                        <div class="question-text">31. Anders Ericsson’s work with cognitive psychology has influenced
+                            other researchers.</div>
+                        <div class="options"><label><input type="radio" name="q31" value="YES"> YES</label><label><input
+                                    type="radio" name="q31" value="NO"> NO</label><label><input type="radio" name="q31"
+                                    value="NOT GIVEN"> NOT GIVEN</label></div>
+                    </div>
+                    <div class="question" data-question="32">
+                        <div class="question-text">32. Different areas of expertise seem to have one specific thing in
+                            common.</div>
+                        <div class="options"><label><input type="radio" name="q32" value="YES"> YES</label><label><input
+                                    type="radio" name="q32" value="NO"> NO</label><label><input type="radio" name="q32"
+                                    value="NOT GIVEN"> NOT GIVEN</label></div>
+                    </div>
+                    <div class="question" data-question="33">
+                        <div class="question-text">33. In order to be useful, practice must be carried out regularly
+                            every day.</div>
+                        <div class="options"><label><input type="radio" name="q33" value="YES"> YES</label><label><input
+                                    type="radio" name="q33" value="NO"> NO</label><label><input type="radio" name="q33"
+                                    value="NOT GIVEN"> NOT GIVEN</label></div>
+                    </div>
+                    <div class="question" data-question="34">
+                        <div class="question-text">34. Anyone who practices for long enough can reach the level of a
+                            world-class expert.</div>
+                        <div class="options"><label><input type="radio" name="q34" value="YES"> YES</label><label><input
+                                    type="radio" name="q34" value="NO"> NO</label><label><input type="radio" name="q34"
+                                    value="NOT GIVEN"> NOT GIVEN</label></div>
+                    </div>
+                    <div class="question" data-question="35">
+                        <div class="question-text">35. Occasionally, someone can become an expert at global level with
+                            fewer than 10,000 hours’ practice.</div>
+                        <div class="options"><label><input type="radio" name="q35" value="YES"> YES</label><label><input
+                                    type="radio" name="q35" value="NO"> NO</label><label><input type="radio" name="q35"
+                                    value="NOT GIVEN"> NOT GIVEN</label></div>
+                    </div>
+                    <div class="question" data-question="36">
+                        <div class="question-text">36. Existing knowledge of learning and cognitive skills supports the
+                            importance of practice.</div>
+                        <div class="options"><label><input type="radio" name="q36" value="YES"> YES</label><label><input
+                                    type="radio" name="q36" value="NO"> NO</label><label><input type="radio" name="q36"
+                                    value="NOT GIVEN"> NOT GIVEN</label></div>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-group-title">Questions 37–40 – Complete the summary using A–J</div>
+                    <p><strong>Mozart</strong><br>
+                        The case of Mozart could be quoted as evidence against the 10,000-hour-practice theory. However,
+                        the writer points out that the young Mozart received a lot of <span
+                            class="question-text">37</span>
+                        <select name="q37">
+                            <option value="" disabled selected>Select</option>
+                            <option value="A">A. popular</option>
+                            <option value="B">B. artistic</option>
+                            <option value="C">C. completed</option>
+                            <option value="D">D. eight</option>
+                            <option value="E">E. tuition</option>
+                            <option value="F">F. encouragement</option>
+                            <option value="G">G. inherited</option>
+                            <option value="H">H. four</option>
+                            <option value="I">I. practice</option>
+                            <option value="J">J. two</option>
+                        </select>
+                        from his father, and that the symphony he wrote at the age of <span
+                            class="question-text">38</span>
+                        <select name="q38">
+                            <option value="" disabled selected>Select</option>
+                            <option value="A">A. popular</option>
+                            <option value="B">B. artistic</option>
+                            <option value="C">C. completed</option>
+                            <option value="D">D. eight</option>
+                            <option value="E">E. tuition</option>
+                            <option value="F">F. encouragement</option>
+                            <option value="G">G. inherited</option>
+                            <option value="H">H. four</option>
+                            <option value="I">I. practice</option>
+                            <option value="J">J. two</option>
+                        </select>
+                        was not <span class="question-text">39</span>
+                        <select name="q39">
+                            <option value="" disabled selected>Select</option>
+                            <option value="A">A. popular</option>
+                            <option value="B">B. artistic</option>
+                            <option value="C">C. completed</option>
+                            <option value="D">D. eight</option>
+                            <option value="E">E. tuition</option>
+                            <option value="F">F. encouragement</option>
+                            <option value="G">G. inherited</option>
+                            <option value="H">H. four</option>
+                            <option value="I">I. practice</option>
+                            <option value="J">J. two</option>
+                        </select>
+                        and may be only of academic interest. The case therefore supports the view that expertise is not
+                        solely the result of <span class="question-text">40</span>
+                        <select name="q40">
+                            <option value="" disabled selected>Select</option>
+                            <option value="A">A. popular</option>
+                            <option value="B">B. artistic</option>
+                            <option value="C">C. completed</option>
+                            <option value="D">D. eight</option>
+                            <option value="E">E. tuition</option>
+                            <option value="F">F. encouragement</option>
+                            <option value="G">G. inherited</option>
+                            <option value="H">H. four</option>
+                            <option value="I">I. practice</option>
+                            <option value="J">J. two</option>
+                        </select>
+                        characteristics.
+                    </p>
+                </div>
+            </div> <!-- /p3_questionsPanel -->
+        </div> <!-- /main-content -->
+
+        <!-- Bottom progress/navigation -->
+        <div class="progress-container">
+            <div class="progress-nav">
+                <div class="progress-items" style="gap:10px; flex-wrap:wrap;">
+                    <div id="bottomPartTabs"
+                        style="display:flex; gap:14px; justify-content:center; width:100%; align-items:center; flex-wrap:wrap;">
+                    </div>
+                </div>
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary" id="prev-btn" disabled><i class="fas fa-arrow-left"></i>
+                        Previous</button>
+                    <button class="btn btn-secondary" id="next-btn">Next <i class="fas fa-arrow-right"></i></button>
+                    <button class="btn btn-submit" id="submit-all-btn">Submit All <i
+                            class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </div>
+    </div> <!-- /container -->
+
+    <!-- Results Modal -->
+    <div class="modal" id="results-modal">
+        <div class="modal-content">
+            <h2>Test Results</h2>
+            <div class="score-display" id="score-display">0/0</div>
+            <div class="score-breakdown" id="score-breakdown"></div>
+            <div class="modal-buttons">
+                <button class="btn btn-secondary" id="close-modal">Close</button>
+                <button class="btn btn-primary" id="review-answers">Review Answers</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* ========= CONFIG ========= */
+        const PARTS = [
+            { id: 1, title: 'Passage 1', qStart: 1, qEnd: 13, passagePanel: 'p1_passagePanel', questionsPanel: 'p1_questionsPanel' },
+            { id: 2, title: 'Passage 2', qStart: 14, qEnd: 26, passagePanel: 'p2_passagePanel', questionsPanel: 'p2_questionsPanel' },
+            { id: 3, title: 'Passage 3', qStart: 27, qEnd: 40, passagePanel: 'p3_passagePanel', questionsPanel: 'p3_questionsPanel' },
+        ];
+
+        /* ======= ANSWER KEY ======= */
+        const correctAnswers = {
+            // Passage 1 – Silk (Q1–13)
+            q1: "white", q2: "paper", q3: "taxes", q4: "gold", q5: "foreign", q6: "mummy", q7: "caves",
+            q8: "TRUE", q9: "NOT GIVEN", q10: "FALSE", q11: "FALSE", q12: "TRUE", q13: "FALSE",
+
+            // Passage 2 – Baby mammoth (Q14–26)
+            q14: "D", q15: "B", q16: "E", q17: "A", q18: "C",
+            q19: "C", q20: "E", q21: "D", q22: "A", q23: "E",
+            q24: "vegetable", q25: "human hunting", q26: "North America",
+
+            // Passage 3 – Musical expert (Q27–40)
+            q27: "C", q28: "C", q29: "A", q30: "A",
+            q31: "NOT GIVEN", q32: "YES", q33: "NOT GIVEN", q34: "NO", q35: "NO", q36: "YES",
+            q37: "E", q38: "D", q39: "A", q40: "G"
+        };
+
+        /* ========= STATE ========= */
+        let currentPart = 1;
+        let currentQuestion = 1;
+        let seconds = 60 * 60; // total 60 minutes
+        let timerInterval;
+
+        /* ========= HELPERS ========= */
+        function el(id) { return document.getElementById(id); }
+        function inRange(q, pId) { const p = PARTS[pId - 1]; return q >= p.qStart && q <= p.qEnd; }
+
+        /* ======= BOTTOM TABS + PER-PART NUMBER RAILS (centered) ======= */
+        function renderBottomTabs() {
+            const tabs = el('bottomPartTabs');
+            tabs.innerHTML = '';
+            PARTS.forEach(p => {
+                const btn = document.createElement('button');
+                btn.className = 'btn btn-secondary';
+                btn.style.fontWeight = (p.id === currentPart) ? '900' : '600';
+                btn.innerHTML = (p.id === currentPart) ? `<strong>${p.title}</strong>` : `${p.title}`;
+                btn.onclick = () => switchPart(p.id);
+                tabs.appendChild(btn);
+
+                const rail = document.createElement('div');
+                rail.id = `rail-part-${p.id}`;
+                rail.style.display = (p.id === currentPart) ? 'flex' : 'none';
+                rail.style.gap = '6px';
+                rail.style.flexWrap = 'wrap';
+                rail.style.alignItems = 'center';
+                const total = p.qEnd - p.qStart + 1;
+                for (let q = p.qStart; q <= p.qEnd; q++) {
+                    const chip = document.createElement('div');
+                    chip.textContent = q;
+                    chip.className = 'progress-item' + (q === currentQuestion && p.id === currentPart ? ' current' : '');
+                    chip.dataset.question = q;
+                    chip.style.width = '30px'; chip.style.height = '20px'; chip.style.borderRadius = '6px';
+                    chip.style.fontSize = '14px'; chip.style.padding = '0'; chip.style.lineHeight = '20px';
+                    chip.onclick = () => scrollToQuestion(q);
+                    rail.appendChild(chip);
+                }
+                tabs.appendChild(rail);
+            });
+        }
+
+        function refreshBottomBar() { renderBottomTabs(); }
+
+        function switchPart(partId) {
+            if (currentPart === partId) return;
+            PARTS.forEach(p => {
+                el(p.passagePanel).classList.add('hidden');
+                el(p.questionsPanel).classList.add('hidden');
+                const r = el(`rail-part-${p.id}`); if (r) r.style.display = 'none';
+            });
+            currentPart = partId;
+            const p = PARTS[currentPart - 1];
+            currentQuestion = p.qStart;
+            el(p.passagePanel).classList.remove('hidden');
+            el(p.questionsPanel).classList.remove('hidden');
+            const r = el(`rail-part-${p.id}`); if (r) r.style.display = 'flex';
+            el('headerPassageTitle').textContent = `Passage ${currentPart} of 3`;
+            scrollToQuestion(currentQuestion, false);
+            refreshBottomBar();
+        }
+
+        function scrollToQuestion(num, smooth = true) {
+            const elQ = document.querySelector(`[data-question="${num}"]`) ||
+                document.querySelector(`input[name="q${num}"]`) ||
+                document.querySelector(`select[name="q${num}"]`);
+            if (elQ) elQ.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'center' });
+            updateCurrentQuestion(num);
+        }
+
+        function updateCurrentQuestion(num) {
+            currentQuestion = num;
+            document.querySelectorAll(`#rail-part-${currentPart} .progress-item`).forEach(it => {
+                it.classList.toggle('current', parseInt(it.dataset.question, 10) === num);
+            });
+        }
+
+        // mark answered when inputs change
+        function attachAnsweredListeners() {
+            document.querySelectorAll('input[type="radio"], input[type="text"], select').forEach(input => {
+                input.addEventListener('change', () => {
+                    const m = input.name && input.name.match(/^q(\d+)$/);
+                    if (!m) return;
+                    const q = parseInt(m[1], 10);
+                    const chip = document.querySelector(`.progress-item[data-question="${q}"]`);
+                    if (chip) {
+                        const val = (input.type === 'text' ? input.value.trim() : input.value);
+                        if (val) chip.classList.add('answered');
+                    }
+                });
+            });
+        }
+
+        /* ===== SUBMIT ALL ===== */
+        el('submit-all-btn').addEventListener('click', () => {
+            if (!confirm('Submit the entire test?')) return;
+
+            let score = 0, total = PARTS[PARTS.length - 1].qEnd;
+            const results = {};
+
+            for (let q = 1; q <= total; q++) {
+                const key = `q${q}`;
+                const corr = correctAnswers[key];
+                let user = null, isCorrect = false;
+
+                const radios = document.querySelectorAll(`input[name="${key}"][type="radio"]`);
+                const text = document.querySelector(`input[name="${key}"][type="text"]`);
+                const sel = document.querySelector(`select[name="${key}"]`);
+
+                if (radios && radios.length) {
+                    const c = Array.from(radios).find(r => r.checked);
+                    if (c) { user = c.value; isCorrect = (user === corr); radios.forEach(r => r.disabled = true); }
+                } else if (text) {
+                    user = (text.value || '').trim();
+                    if (user) {
+                        const norm = (s) => String(s).trim().toLowerCase().replace(/\s+/g, ' ');
+                        isCorrect = norm(user) === norm(corr);
+                        text.disabled = true;
+                    }
+                } else if (sel) {
+                    user = sel.value;
+                    if (user) { isCorrect = user === corr; sel.disabled = true; }
+                }
+
+                if (isCorrect) score++;
+                results[key] = { userAnswer: user || 'No answer', correct: corr, isCorrect };
+            }
+
+            // color chips
+            for (let q = 1; q <= total; q++) {
+                const res = results[`q${q}`];
+                const ch = document.querySelector(`.progress-item[data-question="${q}"]`);
+                if (ch) {
+                    ch.classList.remove('current', 'answered');
+                    if (res) ch.classList.add(res.isCorrect ? 'correct' : 'incorrect');
+                }
+            }
+
+            // modal
+            el('score-display').textContent = `${score}/${total}`;
+            const breakdown = el('score-breakdown');
+            breakdown.innerHTML = PARTS.map(p => {
+                const partScore = Array.from({ length: p.qEnd - p.qStart + 1 }, (_, i) => results[`q${p.qStart + i}`])
+                    .filter(r => r && r.isCorrect).length;
+                return `<div class="score-item"><span>Passage ${p.id}:</span><span>${partScore}/${p.qEnd - p.qStart + 1}</span></div>`;
+            }).join('');
+            el('results-modal').style.display = 'flex';
+
+            // review handler
+            el('review-answers').onclick = () => {
+                el('results-modal').style.display = 'none';
+                showCorrectIndicators(results);
+            };
+        });
+
+        // show inline indicators
+        function showCorrectIndicators(results) {
+            document.querySelectorAll('.answer-indicator').forEach(e => e.remove());
+            const total = PARTS[PARTS.length - 1].qEnd;
+
+            for (let q = 1; q <= total; q++) {
+                const key = `q${q}`;
+                const res = results[key];
+                if (!res) continue;
+
+                let target = null;
+                const qEl = document.querySelector(`[data-question="${q}"] .options`);
+                if (qEl) target = qEl;
+                if (!target) {
+                    const input = document.querySelector(`input[name="${key}"]`);
+                    if (input) target = input.parentNode;
+                }
+                if (!target) {
+                    const sel = document.querySelector(`select[name="${key}"]`);
+                    if (sel) target = sel.parentNode;
+                }
+                if (!target) continue;
+
+                const box = document.createElement('div');
+                box.className = 'answer-indicator ' + (res.isCorrect ? 'correct' : 'incorrect');
+                box.style.display = 'block';
+                box.style.marginTop = '6px';
+                box.innerHTML = res.isCorrect
+                    ? `<i class="fas fa-check"></i> Correct!`
+                    : `<i class="fas fa-times"></i> Incorrect. Your answer: <strong>${res.userAnswer}</strong><br><strong>Correct:</strong> ${Array.isArray(res.correct) ? res.correct.join(', ') : res.correct}`;
+                target.appendChild(box);
+            }
+        }
+
+        // Timer
+        const timerSpan = document.querySelector('#globalTimer span');
+        const timerContainer = document.querySelector('#globalTimer');
+        function updateTimer() {
+            seconds--;
+            const m = Math.floor(seconds / 60), s = seconds % 60;
+            timerSpan.textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+            if (seconds <= 2 * 60) timerContainer.classList.add('warning');
+            if (seconds <= 0) { clearInterval(timerInterval); alert('Time is up! Submitting all passages.'); el('submit-all-btn').click(); }
+        }
+
+        function startTest() {
+            el('startScreen').classList.add('hidden');
+            el('testContainer').classList.remove('hidden');
+            timerInterval = setInterval(updateTimer, 1000);
+        }
+        window.startTest = startTest;
+
+        // Init
+        setTimeout(() => { el('loadingScreen').classList.add('hidden'); el('startScreen').classList.remove('hidden'); }, 900);
+
+        // default show P1
+        PARTS.forEach(p => {
+            if (p.id === 1) { el(p.passagePanel).classList.remove('hidden'); el(p.questionsPanel).classList.remove('hidden'); }
+            else { el(p.passagePanel).classList.add('hidden'); el(p.questionsPanel).classList.add('hidden'); }
+        });
+        renderBottomTabs();
+        attachAnsweredListeners();
+
+        // Resizer
+        let isResizing = false;
+        el('resizer').addEventListener('mousedown', () => { isResizing = true; document.body.style.cursor = 'col-resize'; document.body.style.userSelect = 'none'; });
+        document.addEventListener('mousemove', (e) => {
+            if (!isResizing) return;
+            const container = document.querySelector('.main-content');
+            const rect = container.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const leftPct = (mouseX / rect.width) * 100;
+            const rightPct = 100 - leftPct;
+            if (leftPct >= 30 && leftPct <= 70) {
+                document.querySelector('.passage-container:not(.hidden)').style.flex = leftPct + '%';
+                document.querySelector('.questions-container:not(.hidden)').style.width = rightPct + '%';
+            }
+        });
+        document.addEventListener('mouseup', () => { if (isResizing) { isResizing = false; document.body.style.cursor = ''; document.body.style.userSelect = ''; } });
+
+        // Highlight tools
+        const highlightBtn = el('highlight-btn');
+        const removeHighlightBtn = el('remove-highlight-btn');
+        const passagePanels = PARTS.map(p => el(p.passagePanel));
+        const questionsPanels = PARTS.map(p => el(p.questionsPanel));
+        let lastSelection = null, highlightTarget = null, currentPanel = null;
+
+        function getValidSelection() {
+            const sel = window.getSelection();
+            if (!sel.rangeCount || sel.isCollapsed) return null;
+            const range = sel.getRangeAt(0);
+            if (passagePanels.some(pp => pp && pp.contains(range.commonAncestorContainer))) {
+                currentPanel = passagePanels.find(pp => pp.contains(range.commonAncestorContainer));
+            } else if (questionsPanels.some(qp => qp && qp.contains(range.commonAncestorContainer))) {
+                currentPanel = questionsPanels.find(qp => qp.contains(range.commonAncestorContainer));
+            } else return null;
+            return range;
+        }
+        function showHighlightBtn(range) {
+            const rect = range.getBoundingClientRect();
+            highlightBtn.style.top = (window.scrollY + rect.top - 35) + 'px';
+            highlightBtn.style.left = (window.scrollX + rect.left) + 'px';
+            highlightBtn.style.display = 'block';
+        }
+        function hideHighlightBtn() { highlightBtn.style.display = 'none'; }
+        function showRemoveBtn(span) {
+            const rect = span.getBoundingClientRect();
+            removeHighlightBtn.style.top = (window.scrollY + rect.top - 35) + 'px';
+            removeHighlightBtn.style.left = (window.scrollX + rect.left) + 'px';
+            removeHighlightBtn.style.display = 'block';
+            highlightTarget = span;
+        }
+        function hideRemoveBtn() { removeHighlightBtn.style.display = 'none'; highlightTarget = null; }
+
+        highlightBtn.addEventListener('click', () => {
+            if (lastSelection) {
+                const span = document.createElement('span');
+                span.className = 'highlight';
+                span.appendChild(lastSelection.extractContents());
+                lastSelection.insertNode(span);
+                window.getSelection().removeAllRanges();
+                hideHighlightBtn();
+            }
+        });
+        removeHighlightBtn.addEventListener('click', () => {
+            if (highlightTarget) {
+                const parent = highlightTarget.parentNode;
+                while (highlightTarget.firstChild) parent.insertBefore(highlightTarget.firstChild, highlightTarget);
+                parent.removeChild(highlightTarget);
+                hideRemoveBtn();
+            }
+        });
+        document.addEventListener('selectionchange', () => {
+            hideHighlightBtn(); hideRemoveBtn();
+            const range = getValidSelection();
+            if (range) { lastSelection = range; showHighlightBtn(range); } else { lastSelection = null; }
+        });
+        document.addEventListener('mousedown', (e) => {
+            if (e.target !== highlightBtn && e.target !== removeHighlightBtn) { hideHighlightBtn(); hideRemoveBtn(); }
+        });
+        document.addEventListener('click', (e) => {
+            if (e.target.classList && e.target.classList.contains('highlight')) { e.preventDefault(); showRemoveBtn(e.target); }
+        });
+
+        // Modal close
+        el('close-modal').addEventListener('click', () => { el('results-modal').style.display = 'none'; });
+    </script>
+</body>
+
+
+
+
+
+
+</html>

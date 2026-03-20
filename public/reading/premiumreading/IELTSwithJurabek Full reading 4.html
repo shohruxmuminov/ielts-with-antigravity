@@ -1,0 +1,1664 @@
+
+
+
+
+<!--made by IELTSwithShohrux-->
+
+<!DOCTYPE html>
+<html lang="en">
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+
+<!--made by IELTSwithShohrux-->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            overflow: hidden;
+        }
+
+        .loading-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f9fafb;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 9999;
+        }
+
+        .loading-content {
+            text-align: center;
+        }
+
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #2563eb;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-title {
+            font-size: 1.2rem;
+            color: #6b7280;
+            margin-bottom: 20px;
+        }
+
+        .loading-subtitle {
+            font-size: 1rem;
+            color: #9ca3af;
+        }
+
+        .start-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f9fafb;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 9998;
+        }
+
+        .start-content {
+            text-align: center;
+        }
+
+        .start-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 24px;
+        }
+
+        .start-subtitle {
+            color: #6b7280;
+            margin-bottom: 24px;
+        }
+
+        .start-button {
+            padding: 12px 32px;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .start-button:hover {
+            background-color: #1d4ed8;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            width: 100vw;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            background-color: #ffffff;
+            color: #333;
+            padding: 8px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            flex-shrink: 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .passage-info {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #2d3748;
+        }
+
+        .timer {
+            background-color: rgba(255, 193, 193, 0.5);
+            padding: 6px 12px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s;
+            min-width: 80px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #c53030;
+            border: 1px solid rgba(255, 120, 120, 0.3);
+        }
+
+        .timer.warning {
+            color: #9b2c2c;
+            background-color: rgba(254, 178, 178, 0.7);
+            border-color: rgba(245, 101, 101, 0.5);
+        }
+
+        .logo-area {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+            cursor: pointer;
+        }
+
+        .logo-area:hover {
+            background-color: #0056b3;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.4);
+        }
+
+        .logo-area i {
+            font-size: 1.1rem;
+        }
+
+        .progress-container {
+            background-color: #f8f9fa;
+            padding: 4px 20px;
+            z-index: 100;
+            flex-shrink: 0;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .progress-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .progress-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 6px;
+        }
+
+        .progress-item {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4a5568;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            border: 1px solid #cbd5e0;
+        }
+
+        .progress-item.current {
+            background-color: #4299e1;
+            color: white;
+            transform: scale(1.1);
+            border-color: #2b6cb0;
+        }
+
+        .progress-item.answered {
+            background-color: #9ae6b4;
+            color: #22543d;
+            border-color: #68d391;
+        }
+
+        .progress-item.correct {
+            background-color: #48bb78;
+            color: white;
+            border-color: #38a169;
+        }
+
+        .progress-item.incorrect {
+            background-color: #fed7d7;
+            color: #c53030;
+            border-color: #feb2b2;
+        }
+
+        .progress-item:hover {
+            background-color: #cbd5e0;
+            transform: scale(1.05);
+        }
+
+        .btn {
+            padding: 6px 14px;
+            border: 1px solid #cbd5e0;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.95rem;
+            background-color: #f7fafc;
+            color: #4a5568;
+        }
+
+        .btn i {
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background-color: #edf2f7;
+            border-color: #a0aec0;
+        }
+
+        .btn-primary {
+            background-color: #f7fafc;
+            color: #4a5568;
+            border: 1px solid #cbd5e0;
+        }
+
+        .btn-primary:hover {
+            background-color: #edf2f7;
+            border-color: #a0aec0;
+        }
+
+        .btn-secondary {
+            background-color: #f7fafc;
+            color: #4a5568;
+            border: 1px solid #cbd5e0;
+        }
+
+        .btn-secondary:hover {
+            background-color: #edf2f7;
+            border-color: #a0aec0;
+        }
+
+        .btn-submit {
+            background-color: #48bb78;
+            color: white;
+            font-weight: 900;
+            border: 1px solid #38a169;
+        }
+
+        .btn-submit:hover {
+            background-color: #38a169;
+            border-color: #2f855a;
+        }
+
+        .btn-submit:disabled {
+            background-color: #9ae6b4;
+            color: #718096;
+            cursor: not-allowed;
+            border: 1px solid #68d391;
+        }
+
+        .main-content {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .passage-container {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: #fafafa;
+            position: relative;
+        }
+
+        .resizer {
+            width: 4px;
+            background-color: #cbd5e0;
+            cursor: col-resize;
+            position: relative;
+            transition: background-color 0.2s;
+        }
+
+        .resizer:hover {
+            background-color: #a0aec0;
+        }
+
+        .resizer::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 30px;
+            height: 60px;
+            background-color: rgba(203, 213, 224, 0.5);
+            border-radius: 4px;
+            pointer-events: none;
+        }
+
+        .questions-container {
+            width: 40%;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: white;
+            border-left: 1px solid #e2e8f0;
+        }
+
+        .passage {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .passage h2 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .passage-content p {
+            margin-top: 15px;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .passage h2 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .passage p {
+            margin-top: 20px;
+            margin-bottom: 25px;
+            text-align: justify;
+        }
+
+        .question-section {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .question {
+            margin-bottom: 25px;
+            padding: 6px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            background-color: #ffffff;
+            transition: box-shadow 0.2s;
+        }
+
+        .question:hover {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .question-text {
+            font-weight: 500;
+            margin-bottom: 12px;
+            color: #2d3748;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .option:hover {
+            background-color: #f7fafc;
+            border-color: #cbd5e0;
+        }
+
+        .option input {
+            margin-right: 2px;
+            width: 16px;
+            height: 16px;
+        }
+
+        .input-field {
+            padding: 8px 10px;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            width: 20%;
+            margin-top: 5px;
+            font-size: 0.9rem;
+        }
+
+        .input-field:focus {
+            border-color: #4299e1;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(66, 153, 225, 0.2);
+        }
+
+        select.input-field {
+            padding: 8px 10px;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            width: 20%;
+            margin-top: 5px;
+            font-size: 0.9rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.9rem;
+        }
+
+        th,
+        td {
+            border: 1px solid #e2e8f0;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f1f5f9;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .answer-indicator {
+            background-color: #e6fffa;
+            border: 1px solid #38b2ac;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        .answer-indicator.correct {
+            background-color: #e6fffa;
+            border-color: #38b2ac;
+            color: #234e52;
+        }
+
+        .answer-indicator.incorrect {
+            background-color: #fed7d7;
+            border-color: #fc8181;
+            color: #742a2a;
+        }
+
+        .question-group {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .question-group-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #2d3748;
+            font-size: 1rem;
+        }
+
+        .highlight {
+            background-color: #ffff00;
+            cursor: pointer;
+        }
+
+        #highlight-btn,
+        #remove-highlight-btn {
+            position: absolute;
+            z-index: 9999;
+            display: none;
+            padding: 6px 12px;
+            font-size: 14px;
+            border: 1px solid #888;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .score-display {
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #2d3748;
+        }
+
+        .score-breakdown {
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .score-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 0.95rem;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+
+            .questions-container {
+                width: 100%;
+                border-left: none;
+                border-top: 1px solid #e2e8f0;
+            }
+
+            .resizer {
+                width: 100%;
+                height: 4px;
+                cursor: row-resize;
+            }
+
+            .resizer::before {
+                width: 60px;
+                height: 30px;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            .progress-item {
+                width: 32px;
+                height: 32px;
+                font-size: 0.85rem;
+            }
+
+            .passage-info {
+                font-size: 0.9rem;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px;
+            }
+
+            .logo-area {
+                order: 1;
+            }
+
+            .passage-info {
+                order: 2;
+            }
+
+            .timer {
+                order: 3;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .progress-item {
+                width: 32px;
+                height: 32px;
+                font-size: 0.85rem;
+            }
+
+            .passage-info {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+
+<!--made by IELTSwithShohrux-->
+
+
+
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <h2 class="loading-title">Your test will begin shortly</h2>
+            <p class="loading-subtitle">Please wait</p>
+        </div>
+    </div>
+
+    <!-- Start Screen -->
+    <div id="startScreen" class="start-screen hidden">
+        <div class="start-content">
+            <h1 class="start-title">IELTSwith Shohrux</h1>
+            <p class="start-subtitle">Ready to begin your reading test?</p>
+            <button class="start-button" onclick="startTest()">Start Test</button>
+        </div>
+    </div>
+
+    <!-- Test Container -->
+    <div class="container hidden" id="testContainer">
+        <!-- Header -->
+        <header>
+            <div class="passage-info">IELTS with Shohrux</div>
+
+            <!-- Timer -->
+            <div class="timer" id="globalTimer">
+                <i class="fas fa-clock"></i>
+                <span>60:00</span>
+            </div>
+
+            <!-- Promo Button -->
+            <div class="logo-area" onclick="window.open('https://t.me/IELTSwithShohrux', '_blank')">
+                <i class="fas fa-paper-plane"></i>
+                <span>Click for more TESTS</span>
+            </div>
+
+            <div class="passage-info" id="headerPassageTitle">Passage 1 of 3</div>
+        </header>
+
+        <!-- Floating Highlight Buttons -->
+        <button id="highlight-btn" type="button">Highlight</button>
+        <button id="remove-highlight-btn" type="button">Remove Highlight</button>
+
+        <div class="main-content">
+            <!-- ===== PASSAGE 1 ===== -->
+            <div class="passage-container" id="p1_passagePanel" role="region" aria-label="Reading Passage">
+                <h2 class="section-title">READING PASSAGE 1</h2>
+                <div class="passage-content" id="passage1">
+                    <h3>Fishbourne Roman Palace</h3>
+                    <p>The largest Roman villa in Britain</p>
+                    <p>Fishbourne Roman Palace is in the village of Fishbourne in West Sussex. England. This large palace was built in the 1st century AD, around thirty years after the Roman conquest of Britain, on the site of Roman army grain stores which had been established after the invasion, in the reign of the Roman Emperor Claudius in 43 AD. The rectangular palace was built around formal gardens, the northern half of which have been reconstructed. There were extensive alterations in the 2nd and 3rd centuries AD, with many of the original black and white mosaic floors being overlaid with more sophisticated coloured ones, including a perfectly preserved mosaic of a dolphin in the north wing. More alterations were in progress when the palace burnt down in around 270 AD, after which it was abandoned.</p>
+
+                    <p>Local people had long believed that a Roman palace once existed in the area. However, it was not until 1960 that the archaeologist Barry Cunliffe, of Oxford University, first systematically excavated the site, after workmen had accidentally uncovered a wall while they were laying a water main. The Roman villa excavated by Cunliffe's team was so grand that it became known as Eishbourne Roman Palace, and a museum was erected to preserve some of the remains. This is administered by the Sussex Archaeological Society.</p>
+
+                    <p>In its day, the completed palace would have comprised four large wings with colonnaded fronts. The north and east wings consisted of suites of private rooms built around courtyards, with ainpnumental entrance in the middle of the east wing. In the north-east corner there was an assembly hall. The west wing contained state rooms, a large ceremonial reception room, and a gallery. The south wing contained the owner's private apartments. The palace included as many as 50 mosaic floors, under-floor central heating and a bathhouse. In size, Fishbourne Palace would have been approximately equivalent to some of the great Roman palaces of Italy, and was by far thelargest known Roman residence north of the European Alps, at about 500 feet (150 m) square. A team of volunteers and professional archaeologists are involved in an ongoing archaeological excavation on the site of nearby, possibly military, buildings.</p>
+
+                    <p>The first buildings to be erected on the site were constructed in the early part of the conquest in 43 AD. Later, two timber buildings were constructed, one with clay and mortar floors and plaster walls, which appears to have been a house of some comfort. These buildings were demolished in the 60s AD and replaced by a substantial stone house, which included colonnades, and a bath suite. It has been suggested that the palace itself, incorporating the previous house in its south-east corner, was constructed around 73 - 75 AD. However, Dr Miles Russell, of Bournemouth University, reinterpreted the ground plan and the collection of objects found and has suggested that, given the extremely close parallels with the imperial palace of Domitian in Rome, its construction may more plausibly date to after 92 AD.With regard to who lived in Fishbourne Palace, there are a number of theories; for example, one proposed by Professor Cunliffe is that, in its early phase, the palace was the residence of Tiberius Claudius Cogidubnus, a local chieftain who supported the Romans, and who may have been installed as king of a number of territories following the first stage of the conquest. Cogidubnus is known from a reference to his loyalty in Agricola, a work by the Roman writer Tacitus, and from an inscription commemorating a temple dedicated to the gods Neptune and Minerva found in the nearby city of Chichester. Another theory is that it was built for Sallustius Lucullus, a Roman governor of Britain of the late 1st century, who may have been the son of the British prince Adminius. Two inscriptions recording the presence of Lucullus have been found in Chichester, and the redating by Miles Russell of the palace to the early 90s AD would fit far more securely with such an interpretation. If the palace was designed for Lucullus, then it may have only been in use for a few years, as the Roman historian Suetonius records that Lucullus was executed by the Emperor Domitian in or shortly after 93 AD.</p>
+
+                    <p>Additional theories suggest that either Verica, a British king of the Roman Empire in the years preceding the Claudian invasion, was owner of the palace, or Tiberius Claudius Catuarus, following the recent discovery of a gold ring belonging to him. The palace outlasted the original owner, whoever he was, and was extensively re-planned early in the 2nd century AD, and subdivided into a series of lesser apartments. Further redevelopment was begun in the late 3rd century AD, but these alterations were incomplete when the north wing was destroyed in a fire in around 270 AD. The damage was too great to repair, and the palace was abandoned and later dismantled.</p>
+
+                    <p>A modern museum has been built by the Sussex Archaeological Society, incorporating most of the visible remains, including one wing of the palace. The gardens have been re¬planted using authentic plants from the Roman period.</p>
+                </div>
+            </div>
+            <div class="resizer"></div>
+
+            <!-- Questions for Passage 1 -->
+            <div class="questions-container" id="p1_questionsPanel" role="region" aria-label="Questions">
+                <h2 class="section-title">Questions 1–13</h2>
+
+                <div class="question-group">
+                    <div class="question-group-title">Questions 1-6</div>
+                    <p>Do the following statements agree with the information given in Reading Passage 1?</p>
+                    <p>In boxes 1-6 on your answer sheet, write</p>
+                    <p><strong>TRUE</strong> if the statement agrees with the information</p>
+                    <p><strong>FALSE</strong> if the statement contradicts the information</p>
+                    <p><strong>NOT GIVEN</strong> if there is no information on this</p>
+
+                    <div class="question" data-question="1">
+                        <div class="question-text">1 Fishbourne Palace was the first structure to be built on its site.</div>
+                        <div class="options">
+                            <label><input type="radio" name="q1" value="TRUE"> TRUE</label>
+                            <label><input type="radio" name="q1" value="FALSE"> FALSE</label>
+                            <label><input type="radio" name="q1" value="NOT GIVEN"> NOT GIVEN</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="2">
+                        <div class="question-text">2 Fishbourne Palace was renovated more than once.</div>
+                        <div class="options">
+                            <label><input type="radio" name="q2" value="TRUE"> TRUE</label>
+                            <label><input type="radio" name="q2" value="FALSE"> FALSE</label>
+                            <label><input type="radio" name="q2" value="NOT GIVEN"> NOT GIVEN</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="3">
+                        <div class="question-text">3 Fishbourne Palace was large in comparison with Roman palaces in Italy.</div>
+                        <div class="options">
+                            <label><input type="radio" name="q3" value="TRUE"> TRUE</label>
+                            <label><input type="radio" name="q3" value="FALSE"> FALSE</label>
+                            <label><input type="radio" name="q3" value="NOT GIVEN"> NOT GIVEN</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="4">
+                        <div class="question-text">4 Research is continuing in the area close to Fishbourne Palace.</div>
+                        <div class="options">
+                            <label><input type="radio" name="q4" value="TRUE"> TRUE</label>
+                            <label><input type="radio" name="q4" value="FALSE"> FALSE</label>
+                            <label><input type="radio" name="q4" value="NOT GIVEN"> NOT GIVEN</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="5">
+                        <div class="question-text">5 Researchers agree on the identity of the person for whom Fishbourne Palace was constructed.</div>
+                        <div class="options">
+                            <label><input type="radio" name="q5" value="TRUE"> TRUE</label>
+                            <label><input type="radio" name="q5" value="FALSE"> FALSE</label>
+                            <label><input type="radio" name="q5" value="NOT GIVEN"> NOT GIVEN</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="6">
+                        <div class="question-text">6 Fishbourne Palace was burnt down by local people.</div>
+                        <div class="options">
+                            <label><input type="radio" name="q6" value="TRUE"> TRUE</label>
+                            <label><input type="radio" name="q6" value="FALSE"> FALSE</label>
+                            <label><input type="radio" name="q6" value="NOT GIVEN"> NOT GIVEN</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-group-title">Questions 7-13</div>
+                    <p>Complete the notes below.</p>
+                    <p>Choose NO MORE THAN TWO WORDS AND/OR A NUMBER from the passage for each answer.</p>
+                    <p>Write your answers in boxes 7-13 on your answer sheet.</p>
+
+                    <div class="question" data-question="7">
+                        <div class="question-text">Fishbourne Palace</div>
+                        <div class="question-subtext">Construction</div>
+                        <div class="question-subtext">•The first buildings on the site contained food for the <input type="text" name="q7" placeholder="Answer..."></div>
+                    </div>
+
+                    <div class="question" data-question="8">
+                        <div class="question-subtext">•The palace building surrounded <input type="text" name="q8" placeholder="Answer..."></div>
+                    </div>
+
+                    <div class="question" data-question="9">
+                        <div class="question-subtext">•In the 2nd and 3rd centuries colour was added to the <input type="text" name="q9" placeholder="Answer..."> of the palace.</div>
+                    </div>
+
+                    <div class="question" data-question="10">
+                        <div class="question-text">Discovery</div>
+                        <div class="question-subtext">•The first part of the palace to be found was part of a <input type="text" name="q10" placeholder="Answer..."></div>
+                    </div>
+
+                    <div class="question" data-question="11">
+                        <div class="question-text">Possible inhabitants</div>
+                        <div class="question-subtext">•Cogidubnus - he is named in several writings</div>
+                        <div class="question-subtext">•Sallustius Lucullus - he may have lived there until approximately <input type="text" name="q11" placeholder="Answer..."> AD</div>
+                    </div>
+
+                    <div class="question" data-question="12">
+                        <div class="question-subtext">•Verica - a British king</div>
+                        <div class="question-subtext">•Catuarus - his <input type="text" name="q12" placeholder="Answer..."> was found there</div>
+                    </div>
+
+                    <div class="question" data-question="13">
+                        <div class="question-text">Present Day</div>
+                        <div class="question-subtext">•A <input type="text" name="q13" placeholder="Answer..."> has been built on the site to help protect it.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== PASSAGE 2 ===== -->
+            <div class="passage-container hidden" id="p2_passagePanel" role="region" aria-label="Reading Passage">
+                <h2 class="section-title">READING PASSAGE 2</h2>
+                <div class="passage-content" id="passage2">
+                    <h3>The horseshoe crab</h3>
+                    <p><strong>A</strong> One of the world's oldest animal species, the horseshoe crab, is found along the east coast of the United States and Mexico. Fossil records indicate this creature dates back 450 million years, and it has changed very little over time. This is because its anatomy has been so successful. In fact, the horseshoe crab is more closely related to spiders, scorpions and ticks than it is to true crabs and other crustaceans.</p>
+
+                    <p><strong>B</strong> The soft body of the horseshoe crab is protected by a large oval shell with jagged, point spines. The two-part body consists of a head and an abdominal region. The head region contains a brain, heart, mouth, four eyes and six pairs of legs. What is significant is that horseshoe crabs possess the rare ability to regrow lost limbs. They also use crawling as their primary means of movement, and commonly bury themselves under the surface of the sand. However, in the water, they will occasionally turn onto their backs and swim upside-down. The mouth of the horseshoe carb is located between the twelve legs. They can only eat when crawling, as the motion allows them to open and close their mouths. Their diet consists mainly of worms and clams.</p>
+
+                    <p>The abdominal region contains mules far movement and Is for breathing. A long spine forming a tail, called a telson, is located behind the abdominal region. Although this part of the body looks intimidating, it is not dangerous, poisonous or used to sting. Horseshoe crabs use it to flip over if they happen to be pushed on their backs, but this is only possible under the sea. Every year, about 10 percent of the horseshoe crab breeding population dies while on the beach, when rough surf flips the creatures onto their backs, a position from which they often cannot right themselves.</p>
+
+                    <p><strong>C</strong> Another distinctive feature of horseshoe crabs is that they do not have hemoglobin (a protein that contains the mineral iron), which gives blood its red color. Hemoglobin is the basis of oxygen transport in the blood of mammals, reptiles and birds. Rather, the blood of horseshoe crabs has a copper-containing protein called hemocyanin. Hemocyanin is dark blue when it is transporting oxygen and colorless when it is not. The oxygen is also transported in a fluid on the exterior of the cell, in contrast to most animals, where oxygen molecules are transported inside red blood bacteria and fungi. In fact, there enzymes are used by astronauts in the International Space Station to test surfaces for unwanted bacteria and fungi. Another application is a protein from horseshoe crab blood that is under investigation as an antibiotic.</p>
+
+                    <p><strong>D</strong> The horseshoe crab faces the greatest dangers in early life. Between April and June, adult horseshoe crabs travel from deep ocean waters to converge on beaches. Crawling out of the sea and onto the beach is especially common at high tides during full and new moons. The males arrive first and await the females for breeding. Female horseshoe crabs communicate by releasing a scent to signal to the males. Then female horseshoe crabs cratenests by digging holes in the sand and laying between 60,000 and 120,000 eggs at a time before covering them with sand for Protection. Most eggs do not survive the hatching period before being eaten, as the eggs are a food source for numerous birds, reptiles and fish.</p>
+
+                    <p><strong>E</strong> If the egg does survive, the young horseshoe crab will hatch after five weeks. Referred to as larvae, they look like miniature versions of adult horseshoe crabs. When first entering the sea, they exhibit a 'swimming frenzy' similar to that of newborn sea turtles, swimming vigorously and continuously for hours. During the larval stage, which can last a year or more, newly hatched horseshoe crabs travel into the ocean water and settle on the sandy bottom in shallow waters. As they develop, they move into deeper waters. After the larval stage, horseshoe crabs move into the juvenile period. The juvenile horseshoe crabs will slowly grow over a period of about ten years. The growing process requires shedding small exterior shells, known as exoskeletons, in exchange for larger shells. Horseshoe crabs can shed up to 17 exoskeletons during development and their entire life span can be over twenty years. Mature females can reach 45-50 centimeters from head to tail, while the males grow to approximately 35-40 centimeters.</p>
+
+                    <p><strong>F</strong> Despite their long history, horseshoe crabs face increased threats in modern times. For this reason. scientists have been studying the populations of horseshoe crabs, but more investigation is needed, particularly on the coast of Florida. A widespread decline in their abundance in the last 20 ears may be especially severe in the Indian River Lagoon system in Florida, While the horseshoe crab is not currently listed as threatened, there is rising concern about the fact that it is increasingly absent from the Indian River Lagoon system, where it has historically been common. Loss of the horseshoe crab would negatively impact species that feed on the animal and its eggs and would decrease the biodiversity of the lagoon. Moreover, this development might indicate serious ecological disturbance in the region. In the northeast, the use of horseshoe crabs as bait to catch fish over the past ten years is, in part, responsible for a rapidly declining population of this unique species, and it is suspected that this is also a problem in Florida. However, the extent of this has not been well documented.</p>
+                </div>
+            </div>
+            <div class="resizer"></div>
+
+            <!-- Questions for Passage 2 -->
+            <div class="questions-container hidden" id="p2_questionsPanel" role="region" aria-label="Questions">
+                <h2 class="section-title">Questions 14–26</h2>
+
+                <div class="question-group">
+                    <div class="question-group-title">Questions 14-18</div>
+                    <p>Reading Passage 2 has six sections, A-F</p>
+                    <p>Which section contains the following information?</p>
+                    <p>Write the correct letter, A-F in boxes 14-18 on your answer sheet.</p>
+                    <p><strong>NB</strong>You may use any letter more than once.</p>
+
+                    <div class="question" data-question="14">
+                        <div class="question-text">14 a mention of the horseshoe crab's potential value in medical science</div>
+                        <div class="options">
+                            <select name="q14">
+                                <option value="">Select</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                                <option value="E">E</option>
+                                <option value="F">F</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="question" data-question="15">
+                        <div class="question-text">15 an explanation of the function of the horseshoe crab's tail</div>
+                        <div class="options">
+                            <select name="q15">
+                                <option value="">Select</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                                <option value="E">E</option>
+                                <option value="F">F</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="question" data-question="16">
+                        <div class="question-text">16 a reference to the horseshoe crab's feeding habits</div>
+                        <div class="options">
+                            <select name="q16">
+                                <option value="">Select</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                                <option value="E">E</option>
+                                <option value="F">F</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="question" data-question="17">
+                        <div class="question-text">17 a description of horseshoe crab reproduction</div>
+                        <div class="options">
+                            <select name="q17">
+                                <option value="">Select</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                                <option value="E">E</option>
+                                <option value="F">F</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="question" data-question="18">
+                        <div class="question-text">18 an account of the horseshoe crab's development to adulthood</div>
+                        <div class="options">
+                            <select name="q18">
+                                <option value="">Select</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                                <option value="E">E</option>
+                                <option value="F">F</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-group-title">Questions 19 and 20</div>
+                    <p>Choose TWO letters, A-E</p>
+                    <p>Write the correct letters in boxes 19 and 20 on your answer sheet.</p>
+                    <p>According to the writer, which TWO of the following are true about the characteristics of horseshoe crabs?</p>
+
+                    <div class="options-list">
+                        <p><strong>A</strong> They bury themselves upside down.</p>
+                        <p><strong>B</strong> They must continue moving while eating.</p>
+                        <p><strong>C</strong> They most commonly move by swimming</p>
+                        <p><strong>D</strong> They are able to replace their missing legs.</p>
+                        <p><strong>E</strong> They breathe through their mouth while on land.</p>
+                    </div>
+
+                    <div class="question" data-question="19">
+                        <div class="question-text">19</div>
+                        <div class="options">
+                            <select name="q19">
+                                <option value="">Select</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                                <option value="E">E</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="question" data-question="20">
+                        <div class="question-text">20</div>
+                        <div class="options">
+                            <select name="q20">
+                                <option value="">Select</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                                <option value="E">E</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-group-title">Questions 21 and 22</div>
+                    <p>Choose TWO letters, A-E</p>
+                    <p>Write the correct letters in boxes 21 and 22 on your answer sheet.</p>
+                    <p>According to the writer, in which TWO ways is horseshoe crab blood different from that of most other animals?</p>
+
+                    <div class="options-list">
+                        <p><strong>A</strong> It has a different mineral composition.</p>
+                        <p><strong>B</strong> It lacks a bacteria-fighting protein.</p>
+                        <p><strong>C</strong> Harmless fungi regularly grow in the blood.</p>
+                        <p><strong>D</strong> Its colour changes from blue to red as it circulates.</p>
+                        <p><strong>E</strong> The blood cell carries oxygen its surface.</p>
+                    </div>
+
+                    <div class="question" data-question="21">
+                        <div class="question-text">21</div>
+                        <div class="options">
+                            <select name="q21">
+                                <option value="">Select</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                                <option value="E">E</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="question" data-question="22">
+                        <div class="question-text">22</div>
+                        <div class="options">
+                            <select name="q22">
+                                <option value="">Select</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                                <option value="E">E</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+               <div class="question-group">
+    <div class="question-group-title">Questions 23-26</div>
+    <p>Complete the summary below.</p>
+    <p>Choose ONE WORD ONLY from the passage for each answer.</p>
+    <p>Write your answers in boxes 23-26 on your answer sheet.</p>
+    <p class="summary-text">The horseshoe crab in Florida A study of the Indian River Lagoon system in Florida has shown a <input type="text" name="q23" placeholder="Answer..." style="width: 100px; margin: 0 5px;"> in the horseshoe crab's population. This means that animals that eat both horseshoe crabs and their <input type="text" name="q24" placeholder="Answer..." style="width: 100px; margin: 0 5px;"> could also be impacted. The result would affect the Indian River Lagoon system's <input type="text" name="q25" placeholder="Answer..." style="width: 100px; margin: 0 5px;"> Local fishermen taking horseshoe crabs for <input type="text" name="q26" placeholder="Answer..." style="width: 100px; margin: 0 5px;">could be one cause of the reduction in numbers.</p>
+</div>
+
+
+            </div>
+
+            <!-- ===== PASSAGE 3 ===== -->
+            <div class="passage-container hidden" id="p3_passagePanel" role="region" aria-label="Reading Passage">
+                <h2 class="section-title">READING PASSAGE 3</h2>
+                <div class="passage-content" id="passage3">
+                    <h3>The strange world of sight</h3>
+                    <p>Seeing is believing, it is said. But, asks Richard Gregory, could it be the other way round?</p>
+
+                    <p>Two of the great British men of the 17th century, the philosopher John Locke and the physicist Isaac Newton, were both aware that objects are not coloured, and that against all appearances light is not coloured either. This is still not generally recognised even now, 400 years later, because it seems to implausible. Yet it tells us something very important – that perceptions are not identical with what we perceive, and may be very different.</p>
+
+                    <p>The most accurate historical account of perception is that date 19th-century German scientist Hermann von Helmholtz. However, it was ridiculed at the time. Von Helmholtz thought that perceptions are unconscious inferences we make based on a combination of clues provided by the eyes and other senses, and knowledge of the world. This idea of unconscious inference for perception preceded, by several years, the psychoanalyst Freud’s notion of the unconscious, which was also initially treated with derision because it undermined the notion of humans as pre-eminently rational beings who could he held responsible for their actions and awarded blame or praise accordingly.</p>
+
+                    <p>Crucially, perception of the present depends on rich, though of course not always correct or appropriate, knowledge from the past. We interpret sense data (what we hear, touch, taste, see and smell) from the present according to what we already know. This raises the question: if we see the present through memory, why aren’t past and present confused? The pioneering Russian neurologist Alexander Luria described the case of Mr S, who had a remarkable memory. However, he was prone to just such confusions, for example mistaking seeing his clock for remembering it, and so failing to get up in the morning. This suggests that perhaps an important function of perception is to underline the present. Individual perceptions have a vividness that is rare for memories, which might be how we are able to separate them. Try this: look at something for a few seconds, and then shut your eyes and visualise it in memory. You will almost certainly find that the memory is pale by comparison with the perception. Perhaps this is why past and present are not normally confused. Luria’s Mr S had exceptionally vivid memories, and rich synaesthesia (experiencing perceptions from another sense as well as the one being stimulated, such as musical notes experienced as colours), which may be why he confused seeing with having seen.</p>
+
+                    <p>The complexity of processes involved in how we see first impressed itself on me 45 years ago. With my colleague Jean Wallace, I studied the rare case of Sydney Bradford, a man who had been born blind but, through a corneal graft at the age of 52, suddenly found himself able to see. Almost immediately after the operation he was able to ‘see’ but he could only see those things that he already knew about, having experienced theta through touch. It was his touch memories that enabled him to perceive them with his eyes. When Bradford was firsttaken to the zoo, he proved utterly unable to see an elephant as he had no knowledge to make sense of his perceptions.</p>
+
+                    <p>The more recent case in California of Mike May, who was also born blind, is similar. Since his operation, his sight has gradually improved as he learns to see, for example, by understanding how shadows represent depth and tell us about the shape of things. Some of the consequences of May’s new-found vision were less happy. He had been a champion blind skier, but following the operation, he would have to shut his eyes while skiing to block out what he now found was a terrifying sight.</p>
+
+                    <p>But acceptance of this intimate connection between memory and perception, even though it was first noticed in the 17th century, has been slow in brain science. Despite the fact that state-of-the-art brain imaging shows that perception animates parts of the brain associated with both present information and memory, most research on memory and perception is still undertaken as if these were separate processes. Seeing used to be thought of as taking place only in the eyes, and in quite specialised brain regions; but now it seems that half the brain is occupied with seeing, requiring a lot of energy. Perhaps this is why we shut our eyes for a rest.</p>
+
+                    <p>It is not just extreme cases like Mike May, but also much more common errors of seeing – illusions – that can reveal the crucial role of memory in governing what we (think we) see. Perception depends on specific knowledge and probabilities. Our brains calculate the likelihood of what is out there, and when too far-fetched, perceptions are rejected. A dramatic and discomforting example is looking at the two sides of a face-mask. From the front it is a convex shape with the nose sticking out. Then if the mask is rotated, the back of the mask will be seen as convex, though we know that it must be concave. It is almost, if not quite, impossible to sketch the back of a hollow mask to look as it is – hollow. Science often learns from what does not happen: people not seeing a hollow face as hollow is the most revealing experiment on perception. The unsettling truth from brain science is that even people with no visual impairment see what, at some level, they expect to see, and often miss things as they really are.</p>
+                </div>
+            </div>
+            <div class="resizer"></div>
+
+            <!-- Questions for Passage 3 -->
+            <div class="questions-container hidden" id="p3_questionsPanel" role="region" aria-label="Questions">
+                <h2 class="section-title">Questions 27–40</h2>
+
+                <div class="question-group">
+                    <div class="question-group-title">Questions 27 – 30</div>
+                    <p>Choose the correct letter, A, B, C or D.</p>
+                    <p>Write the correct letter in boxes 27-30 on your answer sheet.</p>
+
+                    <div class="question" data-question="27">
+                        <div class="question-text">27 Why does the writer refer to Locke and Newton in the first paragraph?</div>
+                        <div class="options">
+                            <label><input type="radio" name="q27" value="A"> <strong>A</strong> to indicate that his article will cover several scientific fields</label>
+                            <label><input type="radio" name="q27" value="B"> <strong>B</strong> to stress how much physics has changed in 400 years</label>
+                            <label><input type="radio" name="q27" value="C"> <strong>C</strong> to persuade the reader to take him seriously</label>
+                            <label><input type="radio" name="q27" value="D"> <strong>D</strong> to point out that his notions are not new</label>
+                        </div>
+                    </div>
+
+                    <div class="question" data-question="28">
+                        <div class="question-text">28 According to the writer, why was Freud's theory of the unconscious mocked?</div>
+                        <div class="options">
+                            <label><input type="radio" name="q28" value="A"> <strong>A</strong> It was too complex for his contemporaries to understand.</label>
+                            <label><input type="radio" name="q28" value="B"> <strong>B</strong> It involved criticism of the way people behaved in society.</label>
+                            <label><input type="radio" name="q28" value="C"> <strong>C</strong> People felt that it devalued the accepted concept of humanity.</label>
+                            <label><input type="radio" name="q28" value="D"> <strong>D</strong> People assumed that it was intended as a joke</label>
+                        </div>
+                    </div>
+
+                    <div class="question" data-question="29">
+                        <div class="question-text">29 The writer describes Mr S failing to get up in order to demonstrate</div>
+                        <div class="options">
+                            <label><input type="radio" name="q29" value="A"> <strong>A</strong> how realistic most people’s memories are.</label>
+                            <label><input type="radio" name="q29" value="B"> <strong>B</strong> how hard it is to tell dreaming and waking apart.</label>
+                            <label><input type="radio" name="q29" value="C"> <strong>C</strong> how unusual it is to mistake a perception for a memory.</label>
+                            <label><input type="radio" name="q29" value="D"> <strong>D</strong> how valuable knowledge of the past can be.</label>
+                        </div>
+                    </div>
+
+                    <div class="question" data-question="30">
+                        <div class="question-text">30 What point is the writer making in the text as a whole?</div>
+                        <div class="options">
+                            <label><input type="radio" name="q30" value="A"> <strong>A</strong> Perception involves much more than the data collected by the eyes.</label>
+                            <label><input type="radio" name="q30" value="B"> <strong>B</strong> Learning to see as an adult can be a time-consuming process.</label>
+                            <label><input type="radio" name="q30" value="C"> <strong>C</strong> Science is failing to devote enough attention to sight.</label>
+                            <label><input type="radio" name="q30" value="D"> <strong>D</strong> Human perception is remarkably reliable.</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-group-title">Questions 31 – 36</div>
+                    <p>Do the following statements agree with the views of the writer in Reading Passage 3?</p>
+                    <p>In boxes 31-36 on your answer sheet, write</p>
+                    <p><strong>YES</strong> if the statement agrees with the views of the writer</p>
+                    <p><strong>NO</strong> if the statement contradicts the views of the writer</p>
+                    <p><strong>NOT GIVEN</strong> if it is impossible to say what the writer thinks about this</p>
+
+                    <div class="question" data-question="31">
+                        <div class="question-text">31 Sydney Bradford relied on recollections of objects he had been told about to help him see after his operation.</div>
+                        <div class="options">
+                            <label><input type="radio" name="q31" value="YES"> YES</label>
+                            <label><input type="radio" name="q31" value="NO"> NO</label>
+                            <label><input type="radio" name="q31" value="NOT GIVEN"> NOT GIVEN</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="32">
+                        <div class="question-text">32 People who only start to see as adults can learn to see as other people do in time.</div>
+                        <div class="options">
+                            <label><input type="radio" name="q32" value="YES"> YES</label>
+                            <label><input type="radio" name="q32" value="NO"> NO</label>
+                            <label><input type="radio" name="q32" value="NOT GIVEN"> NOT GIVEN</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="33">
+                        <div class="question-text">33 People who have gained their sight as adults find certain activities harder to do than before.</div>
+                        <div class="options">
+                            <label><input type="radio" name="q33" value="YES"> YES</label>
+                            <label><input type="radio" name="q33" value="NO"> NO</label>
+                            <label><input type="radio" name="q33" value="NOT GIVEN"> NOT GIVEN</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="34">
+                        <div class="question-text">34 It is evident now that sight involves the eyes and one particular area of the brain.</div>
+                        <div class="options">
+                            <label><input type="radio" name="q34" value="YES"> YES</label>
+                            <label><input type="radio" name="q34" value="NO"> NO</label>
+                            <label><input type="radio" name="q34" value="NOT GIVEN"> NOT GIVEN</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="35">
+                        <div class="question-text">35 The mask experiment is particularly useful in training people who are regaining their sight.</div>
+                        <div class="options">
+                            <label><input type="radio" name="q35" value="YES"> YES</label>
+                            <label><input type="radio" name="q35" value="NO"> NO</label>
+                            <label><input type="radio" name="q35" value="NOT GIVEN"> NOT GIVEN</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="36">
+                        <div class="question-text">36 People with perfect vision can fail to interpret objects correctly under certain circumstances.</div>
+                        <div class="options">
+                            <label><input type="radio" name="q36" value="YES"> YES</label>
+                            <label><input type="radio" name="q36" value="NO"> NO</label>
+                            <label><input type="radio" name="q36" value="NOT GIVEN"> NOT GIVEN</label>
+                        </div>
+                    </div>
+                </div>
+
+               <div class="question-group">
+    <div class="question-group-title">Questions 37 – 40</div>
+    <p>Complete the summary using the list of words, A-J, below.</p>
+    <p>Write the correct letter, A-J, in boxes 37-40 on your answer sheet.</p>
+
+<div class="options-list">
+    <p><strong>A</strong> back</p>
+    <p><strong>B</strong> brain</p>
+    <p><strong>C</strong> view</p>
+    <p><strong>D</strong> convex</p>
+    <p><strong>E</strong> sight</p>
+    <p><strong>F</strong> nose</p>
+    <p><strong>G</strong> hollow</p>
+    <p><strong>H</strong> round</p>
+    <p><strong>I</strong> drawing</p>
+    <p><strong>J</strong> preconception</p>
+</div>
+
+<p class="summary-text">The mask experiment In this experiment, having looked at the front of a simple face-mask, subjects look at the reverse. However, the subjects are convinced that they are still looking at a mask which is <select name="q37" style="width: 50px; margin: 0 5px;">
+    <option value="">Select</option>
+    <option value="A">A</option>
+    <option value="B">B</option>
+    <option value="C">C</option>
+    <option value="D">D</option>
+    <option value="E">E</option>
+    <option value="F">F</option>
+    <option value="G">G</option>
+    <option value="H">H</option>
+    <option value="I">I</option>
+    <option value="J">J</option>
+</select> in shape. They believe that the <select name="q38" style="width: 50px; margin: 0 5px;">
+    <option value="">Select</option>
+    <option value="A">A</option>
+    <option value="B">B</option>
+    <option value="C">C</option>
+    <option value="D">D</option>
+    <option value="E">E</option>
+    <option value="F">F</option>
+    <option value="G">G</option>
+    <option value="H">H</option>
+    <option value="I">I</option>
+    <option value="J">J</option>
+</select> is poking out in the normal manner because that is what they are used to seeing. Attempting to make a <select name="q39" style="width: 50px; margin: 0 5px;">
+    <option value="">Select</option>
+    <option value="A">A</option>
+    <option value="B">B</option>
+    <option value="C">C</option>
+    <option value="D">D</option>
+    <option value="E">E</option>
+    <option value="F">F</option>
+    <option value="G">G</option>
+    <option value="H">H</option>
+    <option value="I">I</option>
+    <option value="J">J</option>
+</select> of the mask in this orientation leads to the same problem. The subjects fail to see a concave form because of the <select name="q40" style="width: 50px; margin: 0 5px;">
+    <option value="">Select</option>
+    <option value="A">A</option>
+    <option value="B">B</option>
+    <option value="C">C</option>
+    <option value="D">D</option>
+    <option value="E">E</option>
+    <option value="F">F</option>
+    <option value="G">G</option>
+    <option value="H">H</option>
+    <option value="I">I</option>
+    <option value="J">J</option>
+</select> they have that the features of a face stick out.</p></div>
+
+
+            </div>
+        </div>
+
+        <!-- Bottom Progress/Navigation -->
+        <div class="progress-container">
+            <div class="progress-nav">
+                <div class="progress-items" style="gap:10px; flex-wrap:wrap;">
+                    <div id="bottomPartTabs" style="display:flex; gap:14px; justify-content:center; width:100%; align-items:center; flex-wrap:wrap;"></div>
+                </div>
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary" id="prev-btn" disabled>Previous</button>
+                    <button class="btn btn-secondary" id="next-btn">Next</button>
+                    <button class="btn btn-submit" id="submit-all-btn">Submit All</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Modal -->
+    <div class="modal" id="results-modal">
+        <div class="modal-content">
+            <h2>Test Results</h2>
+            <div class="score-display" id="score-display">0/0</div>
+            <div class="score-breakdown" id="score-breakdown"></div>
+            <div class="modal-buttons">
+                <button class="btn btn-secondary" id="close-modal">Close</button>
+                <button class="btn btn-primary" id="review-answers">Review Answers</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* ========= CONFIG ========= */
+        const PARTS = [
+            { id: 1, title: 'Passage 1', qStart: 1, qEnd: 13, passagePanel: 'p1_passagePanel', questionsPanel: 'p1_questionsPanel' },
+            { id: 2, title: 'Passage 2', qStart: 14, qEnd: 26, passagePanel: 'p2_passagePanel', questionsPanel: 'p2_questionsPanel' },
+            { id: 3, title: 'Passage 3', qStart: 27, qEnd: 40, passagePanel: 'p3_passagePanel', questionsPanel: 'p3_questionsPanel' },
+        ];
+
+        /* ======= ANSWER KEY ======= */
+        const correctAnswers = {
+            q1: "FALSE", q2: "TRUE", q3: "TRUE", q4: "TRUE", q5: "FALSE", q6: "NOT GIVEN",
+            q7: "ROMAN ARMY", q8: "FORMAL GARDENS", q9: "MOSAIC FLOORS", q10: "WALL", q11: "93", q12: "GOLD RING", q13: "MODERN MUSEUM",
+            q14: "C", q15: "B", q16: "B", q17: "D", q18: "E",
+            q19: "D", q20: "B",
+            q21: "A", q22: "E",
+            q23: "DECLINE", q24: "EGGS", q25: "BIODIVERSITY", q26: "BAIT",
+            q27: "D", q28: "C", q29: "C", q30: "A",
+            q31: "NO", q32: "YES", q33: "YES", q34: "NO", q35: "NOT GIVEN", q36: "YES",
+            q37: "D", q38: "F", q39: "I", q40: "J"
+        };
+
+        /* ========= STATE ========= */
+        let currentPart = 1;
+        let currentQuestion = 1;
+        let seconds = 60 * 60;
+        let timerInterval;
+
+        /* ========= HELPERS ========= */
+        function el(id) { return document.getElementById(id); }
+        function inRange(q, pId) { const p = PARTS[pId - 1]; return q >= p.qStart && q <= p.qEnd; }
+
+        /* ======= BOTTOM TABS + PER-PART NUMBER RAILS ======= */
+        function renderBottomTabs() {
+            const tabs = el('bottomPartTabs');
+            tabs.innerHTML = '';
+            PARTS.forEach(p => {
+                const btn = document.createElement('button');
+                btn.className = 'btn btn-secondary';
+                btn.style.fontWeight = (p.id === currentPart) ? '900' : '600';
+                btn.innerHTML = (p.id === currentPart) ? `<strong>${p.title}</strong>` : `${p.title}`;
+                btn.onclick = () => switchPart(p.id);
+                tabs.appendChild(btn);
+
+                const rail = document.createElement('div');
+                rail.id = `rail-part-${p.id}`;
+                rail.style.display = (p.id === currentPart) ? 'flex' : 'none';
+                rail.style.gap = '6px';
+                rail.style.flexWrap = 'wrap';
+                rail.style.alignItems = 'center';
+                const total = p.qEnd - p.qStart + 1;
+                for (let q = p.qStart; q <= p.qEnd; q++) {
+                    const chip = document.createElement('div');
+                    chip.textContent = q;
+                    chip.className = 'progress-item' + (q === currentQuestion && p.id === currentPart ? ' current' : '');
+                    chip.dataset.question = q;
+                    chip.style.width = '30px'; chip.style.height = '20px'; chip.style.borderRadius = '6px';
+                    chip.style.fontSize = '14px'; chip.style.padding = '0'; chip.style.lineHeight = '20px';
+                    chip.onclick = () => scrollToQuestion(q);
+                    rail.appendChild(chip);
+                }
+                tabs.appendChild(rail);
+            });
+        }
+
+        function refreshBottomBar() { renderBottomTabs(); }
+
+        function switchPart(partId) {
+            if (currentPart === partId) return;
+            PARTS.forEach(p => {
+                el(p.passagePanel).classList.add('hidden');
+                el(p.questionsPanel).classList.add('hidden');
+                const r = el(`rail-part-${p.id}`); if (r) r.style.display = 'none';
+            });
+            currentPart = partId;
+            const p = PARTS[currentPart - 1];
+            currentQuestion = p.qStart;
+            el(p.passagePanel).classList.remove('hidden');
+            el(p.questionsPanel).classList.remove('hidden');
+            const r = el(`rail-part-${p.id}`); if (r) r.style.display = 'flex';
+            el('headerPassageTitle').textContent = `Passage ${currentPart} of 3`;
+            scrollToQuestion(currentQuestion, false);
+            refreshBottomBar();
+        }
+
+        function scrollToQuestion(num, smooth = true) {
+            const elQ = document.querySelector(`[data-question="${num}"]`) ||
+                document.querySelector(`input[name="q${num}"]`) ||
+                document.querySelector(`select[name="q${num}"]`);
+            if (elQ) elQ.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'center' });
+            updateCurrentQuestion(num);
+        }
+
+        function updateCurrentQuestion(num) {
+            currentQuestion = num;
+            document.querySelectorAll(`#rail-part-${currentPart} .progress-item`).forEach(it => {
+                it.classList.toggle('current', parseInt(it.dataset.question, 10) === num);
+            });
+        }
+
+        function attachAnsweredListeners() {
+            document.querySelectorAll('input[type="radio"], input[type="text"], select, input[type="checkbox"]').forEach(input => {
+                input.addEventListener('change', () => {
+                    const m = input.name && input.name.match(/^q(\d+)$/);
+                    if (!m) return;
+                    const q = parseInt(m[1], 10);
+                    const chip = document.querySelector(`.progress-item[data-question="${q}"]`);
+                    if (chip) {
+                        let val = '';
+                        if (input.type === 'text') val = input.value.trim();
+                        else if (input.type === 'checkbox') val = Array.from(document.querySelectorAll(`input[name="${input.name}"]:checked`)).map(cb => cb.value).join(',');
+                        else val = input.value;
+                        if (val) chip.classList.add('answered');
+                    }
+                });
+            });
+        }
+
+        /* ===== SUBMIT ALL ===== */
+        el('submit-all-btn').addEventListener('click', () => {
+            if (!confirm('Submit the entire test?')) return;
+
+            let score = 0, total = PARTS[PARTS.length - 1].qEnd;
+            const results = {};
+
+            for (let q = 1; q <= total; q++) {
+                const key = `q${q}`;
+                const corr = correctAnswers[key];
+                let user = null, isCorrect = false;
+
+                const radios = document.querySelectorAll(`input[name="${key}"][type="radio"]`);
+                const text = document.querySelector(`input[name="${key}"][type="text"]`);
+                const sel = document.querySelector(`select[name="${key}"]`);
+                const cbs = document.querySelectorAll(`input[name="${key}"][type="checkbox"]`);
+
+                if (radios.length > 0) {
+                    const c = Array.from(radios).find(r => r.checked);
+                    if (c) { user = c.value; isCorrect = (user === corr); radios.forEach(r => r.disabled = true); }
+                } else if (cbs.length > 0) {
+                    user = Array.from(cbs).filter(cb => cb.checked).map(cb => cb.value).sort().join(',');
+                    if (user) {
+                        const corrArr = Array.isArray(corr) ? corr.sort().join(',') : '';
+                        isCorrect = user === corrArr;
+                        cbs.forEach(cb => cb.disabled = true);
+                    }
+                } else if (text) {
+                    user = (text.value || '').trim();
+                    if (user) {
+                        const norm = (s) => String(s).trim().toLowerCase().replace(/\s+/g, ' ');
+                        isCorrect = norm(user) === norm(corr);
+                        text.disabled = true;
+                    }
+                } else if (sel) {
+                    user = sel.value;
+                    if (user) { isCorrect = user === corr; sel.disabled = true; }
+                }
+
+                if (isCorrect) score++;
+                results[key] = { userAnswer: user || 'No answer', correct: corr, isCorrect };
+            }
+
+            for (let q = 1; q <= total; q++) {
+                const res = results[`q${q}`];
+                const ch = document.querySelector(`.progress-item[data-question="${q}"]`);
+                if (ch) {
+                    ch.classList.remove('current', 'answered');
+                    if (res) ch.classList.add(res.isCorrect ? 'correct' : 'incorrect');
+                }
+            }
+
+            el('score-display').textContent = `${score}/${total}`;
+            const breakdown = el('score-breakdown');
+            breakdown.innerHTML = PARTS.map(p => {
+                const partScore = Array.from({ length: p.qEnd - p.qStart + 1 }, (_, i) => results[`q${p.qStart + i}`])
+                    .filter(r => r && r.isCorrect).length;
+                return `<div class="score-item"><span>Passage ${p.id}:</span><span>${partScore}/${p.qEnd - p.qStart + 1}</span></div>`;
+            }).join('');
+            el('results-modal').style.display = 'flex';
+
+            el('review-answers').onclick = () => {
+                el('results-modal').style.display = 'none';
+                showCorrectIndicators(results);
+            };
+        });
+
+        function showCorrectIndicators(results) {
+            document.querySelectorAll('.answer-indicator').forEach(e => e.remove());
+            const total = PARTS[PARTS.length - 1].qEnd;
+
+            for (let q = 1; q <= total; q++) {
+                const key = `q${q}`;
+                const res = results[key];
+                if (!res) continue;
+
+                let target = null;
+                const qEl = document.querySelector(`[data-question="${q}"] .options`);
+                if (qEl) target = qEl;
+                if (!target) {
+                    const input = document.querySelector(`input[name="${key}"]`);
+                    if (input) target = input.parentNode;
+                }
+                if (!target) {
+                    const sel = document.querySelector(`select[name="${key}"]`);
+                    if (sel) target = sel.parentNode;
+                }
+                if (!target) continue;
+
+                const box = document.createElement('div');
+                box.className = 'answer-indicator ' + (res.isCorrect ? 'correct' : 'incorrect');
+                box.style.display = 'block';
+                box.style.marginTop = '6px';
+                box.innerHTML = res.isCorrect
+                    ? `<i class="fas fa-check"></i> Correct!`
+                    : `<i class="fas fa-times"></i> Incorrect. Your answer: <strong>${res.userAnswer}</strong> <strong>Correct:</strong> ${Array.isArray(res.correct) ? res.correct.join(', ') : res.correct}`;
+                target.appendChild(box);
+            }
+        }
+
+        const timerSpan = document.querySelector('#globalTimer span');
+        const timerContainer = document.querySelector('#globalTimer');
+        function updateTimer() {
+            seconds--;
+            const m = Math.floor(seconds / 60), s = seconds % 60;
+            timerSpan.textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+            if (seconds <= 2 * 60) timerContainer.classList.add('warning');
+            if (seconds <= 0) { clearInterval(timerInterval); alert('Time is up! Submitting all passages.'); el('submit-all-btn').click(); }
+        }
+
+        function startTest() {
+            el('startScreen').classList.add('hidden');
+            el('testContainer').classList.remove('hidden');
+            timerInterval = setInterval(updateTimer, 1000);
+        }
+        window.startTest = startTest;
+
+        setTimeout(() => { el('loadingScreen').classList.add('hidden'); el('startScreen').classList.remove('hidden'); }, 900);
+
+        PARTS.forEach(p => {
+            if (p.id === 1) { el(p.passagePanel).classList.remove('hidden'); el(p.questionsPanel).classList.remove('hidden'); }
+            else { el(p.passagePanel).classList.add('hidden'); el(p.questionsPanel).classList.add('hidden'); }
+        });
+        renderBottomTabs();
+        attachAnsweredListeners();
+
+        let isResizing = false;
+        document.querySelectorAll('.resizer').forEach(resizer => {
+            resizer.addEventListener('mousedown', () => { isResizing = true; document.body.style.cursor = 'col-resize'; document.body.style.userSelect = 'none'; });
+        });
+        document.addEventListener('mousemove', (e) => {
+            if (!isResizing) return;
+            const container = document.querySelector('.main-content');
+            const rect = container.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const leftPct = (mouseX / rect.width) * 100;
+            const rightPct = 100 - leftPct;
+            if (leftPct >= 30 && leftPct <= 70) {
+                const passage = document.querySelector('.passage-container:not(.hidden)');
+                const questions = document.querySelector('.questions-container:not(.hidden)');
+                if (passage) passage.style.flex = leftPct + '%';
+                if (questions) questions.style.flex = rightPct + '%';
+            }
+        });
+        document.addEventListener('mouseup', () => { if (isResizing) { isResizing = false; document.body.style.cursor = ''; document.body.style.userSelect = ''; } });
+
+        const highlightBtn = el('highlight-btn');
+        const removeHighlightBtn = el('remove-highlight-btn');
+        const passagePanels = PARTS.map(p => el(p.passagePanel));
+        const questionsPanels = PARTS.map(p => el(p.questionsPanel));
+        let lastSelection = null, highlightTarget = null, currentPanel = null;
+
+        function getValidSelection() {
+            const sel = window.getSelection();
+            if (!sel.rangeCount || sel.isCollapsed) return null;
+            const range = sel.getRangeAt(0);
+            if (passagePanels.some(pp => pp && pp.contains(range.commonAncestorContainer))) {
+                currentPanel = passagePanels.find(pp => pp.contains(range.commonAncestorContainer));
+            } else if (questionsPanels.some(qp => qp && qp.contains(range.commonAncestorContainer))) {
+                currentPanel = questionsPanels.find(qp => qp.contains(range.commonAncestorContainer));
+            } else return null;
+            return range;
+        }
+        function showHighlightBtn(range) {
+            const rect = range.getBoundingClientRect();
+            highlightBtn.style.top = (window.scrollY + rect.top - 35) + 'px';
+            highlightBtn.style.left = (window.scrollX + rect.left) + 'px';
+            highlightBtn.style.display = 'block';
+        }
+        function hideHighlightBtn() { highlightBtn.style.display = 'none'; }
+        function showRemoveBtn(span) {
+            const rect = span.getBoundingClientRect();
+            removeHighlightBtn.style.top = (window.scrollY + rect.top - 35) + 'px';
+            removeHighlightBtn.style.left = (window.scrollX + rect.left) + 'px';
+            removeHighlightBtn.style.display = 'block';
+            highlightTarget = span;
+        }
+        function hideRemoveBtn() { removeHighlightBtn.style.display = 'none'; highlightTarget = null; }
+
+        highlightBtn.addEventListener('click', () => {
+            if (lastSelection) {
+                const span = document.createElement('span');
+                span.className = 'highlight';
+                span.appendChild(lastSelection.extractContents());
+                lastSelection.insertNode(span);
+                window.getSelection().removeAllRanges();
+                hideHighlightBtn();
+            }
+        });
+        removeHighlightBtn.addEventListener('click', () => {
+            if (highlightTarget) {
+                const parent = highlightTarget.parentNode;
+                while (highlightTarget.firstChild) parent.insertBefore(highlightTarget.firstChild, highlightTarget);
+                parent.removeChild(highlightTarget);
+                hideRemoveBtn();
+            }
+        });
+        document.addEventListener('selectionchange', () => {
+            hideHighlightBtn(); hideRemoveBtn();
+            const range = getValidSelection();
+            if (range) { lastSelection = range; showHighlightBtn(range); } else { lastSelection = null; }
+        });
+        document.addEventListener('mousedown', (e) => {
+            if (e.target !== highlightBtn && e.target !== removeHighlightBtn) { hideHighlightBtn(); hideRemoveBtn(); }
+        });
+        document.addEventListener('click', (e) => {
+            if (e.target.classList && e.target.classList.contains('highlight')) { e.preventDefault(); showRemoveBtn(e.target); }
+        });
+
+        el('close-modal').addEventListener('click', () => { el('results-modal').style.display = 'none'; });
+    </script>
+</body>
+
+</html>

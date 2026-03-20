@@ -1,0 +1,1464 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            overflow: hidden;
+        }
+
+        .loading-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f9fafb;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 9999;
+        }
+
+        .loading-content {
+            text-align: center;
+        }
+
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #2563eb;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-title {
+            font-size: 1.2rem;
+            color: #6b7280;
+            margin-bottom: 20px;
+        }
+
+        .loading-subtitle {
+            font-size: 1rem;
+            color: #9ca3af;
+        }
+
+        .start-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f9fafb;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 9998;
+        }
+
+        .start-content {
+            text-align: center;
+        }
+
+        .start-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 24px;
+        }
+
+        .start-subtitle {
+            color: #6b7280;
+            margin-bottom: 24px;
+        }
+
+        .start-button {
+            padding: 12px 32px;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .start-button:hover {
+            background-color: #1d4ed8;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            width: 100vw;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            background-color: #ffffff;
+            color: #333;
+            padding: 8px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            flex-shrink: 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .passage-info {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #2d3748;
+        }
+
+        .timer {
+            background-color: rgba(255, 193, 193, 0.5);
+            padding: 6px 12px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s;
+            min-width: 80px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #c53030;
+            border: 1px solid rgba(255, 120, 120, 0.3);
+        }
+
+        .timer.warning {
+            color: #9b2c2c;
+            background-color: rgba(254, 178, 178, 0.7);
+            border-color: rgba(245, 101, 101, 0.5);
+        }
+
+        .logo-area {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+            cursor: pointer;
+        }
+
+        .logo-area:hover {
+            background-color: #0056b3;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.4);
+        }
+
+        .logo-area i {
+            font-size: 1.1rem;
+        }
+
+        .progress-container {
+            background-color: #f8f9fa;
+            padding: 4px 20px;
+            z-index: 100;
+            flex-shrink: 0;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .progress-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .progress-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 6px;
+        }
+
+        .progress-item {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4a5568;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            border: 1px solid #cbd5e0;
+        }
+
+        .progress-item.current {
+            background-color: #4299e1;
+            color: white;
+            transform: scale(1.1);
+            border-color: #2b6cb0;
+        }
+
+        .progress-item.answered {
+            background-color: #9ae6b4;
+            color: #22543d;
+            border-color: #68d391;
+        }
+
+        .progress-item.correct {
+            background-color: #48bb78;
+            color: white;
+            border-color: #38a169;
+        }
+
+        .progress-item.incorrect {
+            background-color: #fed7d7;
+            color: #c53030;
+            border-color: #feb2b2;
+        }
+
+        .progress-item:hover {
+            background-color: #cbd5e0;
+            transform: scale(1.05);
+        }
+
+        .btn {
+            padding: 6px 14px;
+            border: 1px solid #cbd5e0;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.95rem;
+            background-color: #f7fafc;
+            color: #4a5568;
+        }
+
+        .btn i {
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background-color: #edf2f7;
+            border-color: #a0aec0;
+        }
+
+        .btn-primary {
+            background-color: #f7fafc;
+            color: #4a5568;
+            border: 1px solid #cbd5e0;
+        }
+
+        .btn-primary:hover {
+            background-color: #edf2f7;
+            border-color: #a0aec0;
+        }
+
+        .btn-secondary {
+            background-color: #f7fafc;
+            color: #4a5568;
+            border: 1px solid #cbd5e0;
+        }
+
+        .btn-secondary:hover {
+            background-color: #edf2f7;
+            border-color: #a0aec0;
+        }
+
+        .btn-submit {
+            background-color: #48bb78;
+            color: white;
+            font-weight: 900;
+            border: 1px solid #38a169;
+        }
+
+        .btn-submit:hover {
+            background-color: #38a169;
+            border-color: #2f855a;
+        }
+
+        .btn-submit:disabled {
+            background-color: #9ae6b4;
+            color: #718096;
+            cursor: not-allowed;
+            border: 1px solid #68d391;
+        }
+
+        .main-content {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .passage-container {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: #fafafa;
+            position: relative;
+        }
+
+        .resizer {
+            width: 4px;
+            background-color: #cbd5e0;
+            cursor: col-resize;
+            position: relative;
+            transition: background-color 0.2s;
+        }
+
+        .resizer:hover {
+            background-color: #a0aec0;
+        }
+
+        .resizer::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 30px;
+            height: 60px;
+            background-color: rgba(203, 213, 224, 0.5);
+            border-radius: 4px;
+            pointer-events: none;
+        }
+
+        .questions-container {
+            width: 40%;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: white;
+            border-left: 1px solid #e2e8f0;
+        }
+
+        .passage {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .passage h2 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .passage-content p {
+            margin-top: 15px;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .passage h2 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .passage p {
+            margin-top: 20px;
+            margin-bottom: 25px;
+            text-align: justify;
+        }
+
+        .question-section {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .question {
+            margin-bottom: 25px;
+            padding: 6px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            background-color: #ffffff;
+            transition: box-shadow 0.2s;
+        }
+
+        .question:hover {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .question-text {
+            font-weight: 500;
+            margin-bottom: 12px;
+            color: #2d3748;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .option:hover {
+            background-color: #f7fafc;
+            border-color: #cbd5e0;
+        }
+
+        .option input {
+            margin-right: 2px;
+            width: 16px;
+            height: 16px;
+        }
+
+        .input-field {
+            padding: 8px 10px;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            width: 20%;
+            margin-top: 5px;
+            font-size: 0.9rem;
+        }
+
+        .input-field:focus {
+            border-color: #4299e1;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(66, 153, 225, 0.2);
+        }
+
+        select.input-field {
+            padding: 8px 10px;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            width: 20%;
+            margin-top: 5px;
+            font-size: 0.9rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.9rem;
+        }
+
+        th,
+        td {
+            border: 1px solid #e2e8f0;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f1f5f9;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .answer-indicator {
+            background-color: #e6fffa;
+            border: 1px solid #38b2ac;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        .answer-indicator.correct {
+            background-color: #e6fffa;
+            border-color: #38b2ac;
+            color: #234e52;
+        }
+
+        .answer-indicator.incorrect {
+            background-color: #fed7d7;
+            border-color: #fc8181;
+            color: #742a2a;
+        }
+
+        .question-group {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .question-group-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #2d3748;
+            font-size: 1rem;
+        }
+
+        .highlight {
+            background-color: #ffff00;
+            cursor: pointer;
+        }
+
+        #highlight-btn,
+        #remove-highlight-btn {
+            position: absolute;
+            z-index: 9999;
+            display: none;
+            padding: 6px 12px;
+            font-size: 14px;
+            border: 1px solid #888;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .score-display {
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #2d3748;
+        }
+
+        .score-breakdown {
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .score-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 0.95rem;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+
+            .questions-container {
+                width: 100%;
+                border-left: none;
+                border-top: 1px solid #e2e8f0;
+            }
+
+            .resizer {
+                width: 100%;
+                height: 4px;
+                cursor: row-resize;
+            }
+
+            .resizer::before {
+                width: 60px;
+                height: 30px;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            .progress-item {
+                width: 32px;
+                height: 32px;
+                font-size: 0.85rem;
+            }
+
+            .passage-info {
+                font-size: 0.9rem;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px;
+            }
+
+            .logo-area {
+                order: 1;
+            }
+
+            .passage-info {
+                order: 2;
+            }
+
+            .timer {
+                order: 3;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .progress-item {
+                width: 32px;
+                height: 32px;
+                font-size: 0.85rem;
+            }
+
+            .passage-info {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+
+
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <h2 class="loading-title">Your test will begin shortly</h2>
+            <p class="loading-subtitle">Please wait</p>
+        </div>
+    </div>
+
+<!-- Start Screen -->
+<div id="startScreen" class="start-screen hidden">
+    <div class="start-content">
+        <h1 class="start-title">IELTSwithShohrux</h1>
+        <p class="start-subtitle">Ready to begin your reading test?</p>
+        <button class="start-button" onclick="startTest()">Start Test</button>
+    </div>
+</div>
+
+<!-- Test Container -->
+<div class="container hidden" id="testContainer">
+    <!-- Header -->
+    <header>
+        <div class="passage-info">IELTSwithShohrux</div>
+
+        <!-- timer -->
+        <div class="timer" id="globalTimer">
+            <i class="fas fa-clock"></i>
+            <span>60:00</span>
+        </div>
+
+        <!-- promo button -->
+        <div class="logo-area" onclick="window.open('https://t.me/muminov_bar', '_blank')">
+            <i class="fas fa-paper-plane"></i>
+            <span>Click for more TESTS</span>
+        </div>
+
+        <div class="passage-info" id="headerPassageTitle">Passage 1 of 3</div>
+    </header>
+
+    <!-- Floating highlight buttons -->
+    <button id="highlight-btn" type="button">Highlight</button>
+    <button id="remove-highlight-btn" type="button">Remove Highlight</button>
+
+    <div class="main-content">
+        <!-- ===== PASSAGE 1 ===== -->
+        <div class="passage-container" id="p1_passagePanel" role="region" aria-label="Reading Passage">
+            <h2 class="section-title">READING PASSAGE 1</h2>
+            <div class="passage-content" id="passage1">
+                <h3>Chilli Peppers</h3>
+
+                <p><strong>A</strong> For thousands of years, humans have taken painful pleasure from adding chillies (also known as peppers or chilli peppers) to their food. A study published in the British Medical Journal in 2015 indicated that a diet filled with spices – including chillies – was beneficial for health. The study, which was carried out by scientists at the Chinese Academy of Medical Sciences, tracked the health of nearly half a million participants in China for several years. They found that participants who ate spicy food once or twice a week had a mortality rate 10% lower than those who ate spicy food less than once a week. Risk of death reduced still further for people who ate spicy food six or seven days a week. Chilli peppers were the most commonly used spice among the sample, and those who ate fresh chilli had a lower probability of death from cancer, heart disease and diabetes.</p>
+
+                <p><strong>B</strong> The health-promoting properties of chillies can be found in capsaicin, which is the odourless, colourless chemical compound that makes chillies hot. Inside a chilli there are yellow stalks that attach the seeds to its sides and in many types of chilli, this is the location of capsaicin, but there are several varieties where this is not the case. The heat of a chilli is measured in Scoville heat units, which is the number of times a sample of dissolved dried chilli must be diluted by its own weight in sugar water before it loses its heat. For a green bell pepper this is zero. But habanero peppers have a Scoville value of between 100,000 and 350,000. For pure capsaicin the figure is 16 million. Pure capsaicin can be bought on the internet, though its use as a food additive is banned in the European Union. The use of chilli peppers as weapons dates back to pre-Columbian times (before 1492), when, it is said, Mayans burned rows of them to create a stinging smokescreen to protect themselves from their enemies. The Aztecs also put chilli on their teeth to kill toothache pain, and the use of capsaicin as a pain reliever continues today.</p>
+
+                <p><strong>C</strong> Joshua Tewksbury, a natural historian at the University of Washington, thinks the burning sensation we experience when we come into contact with chillies is an evolutionary trick. 'We're not actually being damaged by the capsaicin the way we would be if we were touching a stove, but our brain thinks we are,' he says, adding that all mammals experience the same sensation but that birds do not. 'They can eat chillies like popcorn and they don't feel the heat.' In this way, Tewksbury suggests, the plant evolved to repel animals that might crush its seeds with their teeth, but not ones that would help spread them.</p>
+
+                <p><strong>D</strong> Chillies also fight bacteria. This was of great value in the days before refrigeration, when, particularly in the tropics, people were vulnerable to bacteria that could harm them directly or cause their food to spoil. Chillies kill or inhibit 75% of such bacteria. That may just explain the spice's world-conquering success. Just two or three years after the explorer Christopher Columbus brought chilli seeds back to Europe from the New World in 1493, Portuguese merchants took the plants to Asia, where they would transform the cuisine. People in hot countries are said to use more chilli because it makes them generate a lot of sweat, which cools them down. But in 1998, researchers at Cornell University pointed out that the greater use of spices in countries such as India, Thailand and China was likely to be linked to the antibacterial function. By studying books filled with recipes from all over the world, the researchers found that spices including chilli were more likely to be used close to the equator, and were also used more in valleys with high levels of humidity than on high plateaux.</p>
+
+                <p><strong>E</strong> Capsaicin has even been suggested as a potential weight-loss tool. Research conducted by the University of Wyoming on mice that had been fed a high-fat diet found that the substance increased the metabolism of the animals, causing them to burn more energy and preventing weight gain. In another study, researchers at the University of Adelaide found that certain receptors that interact with capsaicin and are located inside the stomach play a role in sensing when you are full. Previous studies on humans seem to back the idea that eating spicy food may curb our appetite.</p>
+
+                <p><strong>F</strong> Capsaicin is a natural painkiller. Capsaicin creams and patches are available in chemists to ease pain. But it's only recently that we have come to understand how something that causes pain can ease it too. Capsaicin binds to the pain receptor TRPV1, which our brains also use to detect changes in temperature-that's why we think chillies are hot. But after being over-stimulated the neurons stop responding, killing the pain. This process involves the release of endorphins, which can give us a ' rush' not unlike the feeling we have when we have done some exercise. This may explain why some people believe that hot food is addictive.</p>
+            </div>
+        </div>
+        <div class="resizer"></div>
+
+        <!-- Questions for Passage 1 -->
+        <div class="questions-container" id="p1_questionsPanel" role="region" aria-label="Questions">
+            <h2 class="section-title">Questions 1–13</h2>
+
+            <div class="question-group">
+                <div class="question-group-title">Questions 1–7</div>
+                <p>Choose TRUE if the statement agrees with the information given in the text, choose FALSE if the statement contradicts the information, or choose NOT GIVEN if there is no information on this.</p>
+
+                <div class="question" data-question="1">
+                    <div class="question-text">1 The study done by the Chinese Academy of Medical Sciences looked at eating habits in several countries.</div>
+                    <div class="options"><label><input type="radio" name="q1" value="TRUE">TRUE</label><label><input type="radio" name="q1" value="FALSE">FALSE</label><label><input type="radio" name="q1" value="NOT GIVEN">NOT GIVEN</label></div>
+                </div>
+                <div class="question" data-question="2">
+                    <div class="question-text">2 Eating fresh chillies can decrease the likelihood of dying from certain serious illnesses.</div>
+                    <div class="options"><label><input type="radio" name="q2" value="TRUE">TRUE</label><label><input type="radio" name="q2" value="FALSE">FALSE</label><label><input type="radio" name="q2" value="NOT GIVEN">NOT GIVEN</label></div>
+                </div>
+                <div class="question" data-question="3">
+                    <div class="question-text">3 Capsaicin is found in the same place in all chilli varieties.</div>
+                    <div class="options"><label><input type="radio" name="q3" value="TRUE">TRUE</label><label><input type="radio" name="q3" value="FALSE">FALSE</label><label><input type="radio" name="q3" value="NOT GIVEN">NOT GIVEN</label></div>
+                </div>
+                <div class="question" data-question="4">
+                    <div class="question-text">4 Habanero peppers are the hottest known peppers.</div>
+                    <div class="options"><label><input type="radio" name="q4" value="TRUE">TRUE</label><label><input type="radio" name="q4" value="FALSE">FALSE</label><label><input type="radio" name="q4" value="NOT GIVEN">NOT GIVEN</label></div>
+                </div>
+                <div class="question" data-question="5">
+                    <div class="question-text">5 Pure capsaicin is licensed for use in food products in the European Union.</div>
+                    <div class="options"><label><input type="radio" name="q5" value="TRUE">TRUE</label><label><input type="radio" name="q5" value="FALSE">FALSE</label><label><input type="radio" name="q5" value="NOT GIVEN">NOT GIVEN</label></div>
+                </div>
+                <div class="question" data-question="6">
+                    <div class="question-text">6 The Aztecs were the first to use capsaicin as a pain killer.</div>
+                    <div class="options"><label><input type="radio" name="q6" value="TRUE">TRUE</label><label><input type="radio" name="q6" value="FALSE">FALSE</label><label><input type="radio" name="q6" value="NOT GIVEN">NOT GIVEN</label></div>
+                </div>
+                <div class="question" data-question="7">
+                    <div class="question-text">7 Birds have different physical responses to eating chillies to those of mammals.</div>
+                    <div class="options"><label><input type="radio" name="q7" value="TRUE">TRUE</label><label><input type="radio" name="q7" value="FALSE">FALSE</label><label><input type="radio" name="q7" value="NOT GIVEN">NOT GIVEN</label></div>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="question-group-title">Questions 8–13</div>
+                <p>Complete the notes below.</p>
+                <p>Write <strong>ONE WORD ONLY</strong> from the passage for each answer.</p>
+
+                <div class="question" data-question="8">
+                    <div class="question-text">The health benefits of chilli</div>
+                    <div class="question-text">Using chilli to fight bacteria</div>
+                    <div class="question-text">○ chilli's ability to fight germs was very significant before the invention of <input type="text" name="q8" maxlength="30"></div>
+                </div>
+                <div class="question" data-question="9">
+                    <div class="question-text">○ it was thought that chilli was eaten because it causes bodies to produce <input type="text" name="q9" maxlength="30"> which reduces body heat</div>
+                </div>
+                <div class="question" data-question="10">
+                    <div class="question-text">○ books of <input type="text" name="q10" maxlength="30"> from around the world show chilli is more commonly used in certain geographical areas</div>
+                </div>
+                <div class="question" data-question="11">
+                    <div class="question-text">○ chilli is most likely to be used in valleys with a lot of humidity</div>
+                    <div class="question-text">Using chilli for weight loss</div>
+                    <div class="question-text">○ the University of Wyoming found that chilli raised the mice's <input type="text" name="q11" maxlength="30"></div>
+                </div>
+                <div class="question" data-question="12">
+                    <div class="question-text">○ the University of Adelaide found that receptors in the <input type="text" name="q12" maxlength="30"> react with chilli to indicate when you've had enough to eat</div>
+                </div>
+                <div class="question" data-question="13">
+                    <div class="question-text">Using chilli as pain relief</div>
+                    <div class="question-text">○ it reacts with the part of our brain that notices a difference in temperature</div>
+                    <div class="question-text">○ the sensation we have when eating chilli is similar to the one we have after <input type="text" name="q13" maxlength="30"></div>
+                </div>
+            </div>
+        </div> <!-- /p1_questionsPanel -->
+
+        <!-- ===== PASSAGE 2 ===== -->
+        <div class="passage-container hidden" id="p2_passagePanel" role="region" aria-label="Reading Passage">
+            <h2 class="section-title">READING PASSAGE 2</h2>
+            <div class="passage-content" id="passage2">
+                <h3>STRESS LESS</h3>
+
+                <p><strong>A</strong> How busy is too busy? For some it means sometimes having to have a short lunch; for others it may mean missing lunch altogether. For a few, it is not being able to take a day off once a month. Then there is a group of people for whom working every evening and weekend is normal, and feeling stressed is taken for granted. For most senior executives, workloads swing between extremely busy and frenzied. Neil Plumridge, vice-president of a management consultancy company, says that his weeks vary from a 'manageable' 45 hours to 80 hours, but average 60 hours.</p>
+
+                <p><strong>B</strong> Three signs warn Plumridge about his workload: sleep, scheduling and family. He knows he is doing too much when he gets less than six hours' sleep for three consecutive nights, when he is constantly having to reschedule appointments, and when he misses a family birthday or anniversary. 'Then', he says, 'I know things are out of control'. Plumridge states that stress is often caused by his having unrealistic expectations of himself. 'I'll promise a client that I'll do something tomorrow, and then I'll promise another client that I'll do the same thing, when I know it's not going to happen. I could have said: "Why don't I give that to you in 48 hours?" The client wouldn't care.'</p>
+
+                <p><strong>C</strong> Over-committing is something people experience as an individual problem. However, new research indicates that people may be designed to over-commit. A study in the JOURNAL OF EXPERIMENTAL PSYCHOLOGY shows that people always believe that they will be less busy in the future. This is a misapprehension according to the authors of the report, Gal Zauberman of the University of North Carolina and John Lynch of Duke University. 'On average, an individual will be just as busy two weeks or a month from now as he or she is today. But that is not how it appears in everyday life,' they say. 'People make commitments long in advance that they would never make if the same commitments required immediate action. They discount future time investments relatively steeply.'</p>
+
+                <p><strong>D</strong> Being 'too busy' is highly subjective, but for any individual there are some concrete signs of stress: disturbed sleep and declining mental and physical health are the most common examples. Figures for National Workers' Compensation (insurance against injury caused by work) show that stress causes the most lost time of any workplace injury: employees suffering stress are absent from work for an average of 16.6 weeks. The effects of stress are also expensive. The Australian Government insurer reports that in 2003-2004, claims for stress-related psychological injury accounted for 7% of insurance claims, but almost 27% of the amount paid out in claim payments.</p>
+
+                <p><strong>E</strong> Experts say the key to dealing with stress is not to focus on relief – a game of golf or a massage – but to reassess workloads. Neil Plumridge says he makes it a priority to work out what has to change: that might mean allocating extra staff to a job, allowing more time, or changing expectations. He also relies on the advice of colleagues, saying that his peers coach each other on business problems: 'Just a fresh pair of eyes over an issue can help,' he states.</p>
+
+                <p><strong>F</strong> Executive stress is not confined to big organisations. Vanessa Stoykov has been running her own advertising agency and public relations business for seven years. Her company has grown so fast that it appeared on the BUSINESS REVIEW WEEKLY 'Fast 100' list of fastest-growing small enterprises in 2004, just after Stoykov had her first child. In 2005, revenue was projected to double to $2.4 million. She had just had her second child. With a fast-growing business and two small children, Stoykov says she has mastered the art of caring for children, typing, and talking on the phone at the same time. But, unlike many others, she appears to thrive on the mental stimulation of running her own business, despite the stress.</p>
+
+                <p><strong>G</strong> Jan Elsner, a psychologist who specialises in executive coaching, says that doing well on a demanding workload is typical of senior executives. Some people work best with high-adrenaline periods followed by quieter times, while others thrive under sustained pressure. Elsner's practice is based on a movement known as positive psychology, a school of thought that argues that positive experiences – feeling engaged and challenged, for example – do not balance out negative experiences such as stress; instead they help people increase their resilience over time. Elsner says that many of the senior business people she coaches are increasingly relying more on regulating stress through methods such as meditation. She points to research showing that meditation can alter the biochemistry of the brain and the way that brains and bodies react to stress.</p>
+
+                <p><strong>H</strong> Some experts believe there is too much emphasis on treating job stress as an individual problem. Tony LaMontagne, of the University of Melbourne, says that while personality traits do have some effect on stress, it is systemic stressors – qualities of job roles and organisations themselves – that have a far greater effect. His recent research shows that the major predictor of stress is the level of job control a person has. The best type of job combines challenging work with high autonomy. The worst jobs combine challenging work and low control. People with demanding jobs but little autonomy have up to four times the probability of depression and more than double the risk of heart attack.</p>
+            </div>
+        </div>
+        <div class="resizer"></div>
+
+        <div class="questions-container hidden" id="p2_questionsPanel" role="region" aria-label="Questions">
+            <h2 class="section-title">Questions 14–26</h2>
+
+            <div class="question-group">
+                <div class="question-group-title">Questions 14–18</div>
+                <p>Look at the following statements (Questions 14-18) and the list of people below.</p>
+                <p>Match each statement with the correct person, A-D.</p>
+                <p>Choose the correct letter, A-D, in boxes 14-18.</p>
+                <p>NB You may use any letter more than once.</p>
+                <p>List of People</p>
+                <p>A Neil Plumridge</p>
+                <p>B Gal Zauberman and John Lynch</p>
+                <p>C Jan Elsner</p>
+                <p>D Tony LaMontagne</p>
+
+                <div class="question" data-question="14">
+                    <div class="question-text">14 High-level workers tend to react positively to stress.</div>
+                    <div class="options"><select name="q14">
+                            <option value="">Select</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                        </select></div>
+                </div>
+                <div class="question" data-question="15">
+                    <div class="question-text">15 Stress levels are increased by trying to please customers.</div>
+                    <div class="options"><select name="q15">
+                            <option value="">Select</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                        </select></div>
+                </div>
+                <div class="question" data-question="16">
+                    <div class="question-text">16 Support from other workers may relieve stress.</div>
+                    <div class="options"><select name="q16">
+                            <option value="">Select</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                        </select></div>
+                </div>
+                <div class="question" data-question="17">
+                    <div class="question-text">17 Lack of independence at work is often responsible for stress.</div>
+                    <div class="options"><select name="q17">
+                            <option value="">Select</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                        </select></div>
+                </div>
+                <div class="question" data-question="18">
+                    <div class="question-text">18 Workers commonly expect their workloads to lessen over time.</div>
+                    <div class="options"><select name="q18">
+                            <option value="">Select</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                        </select></div>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="question-group-title">Questions 19–21</div>
+                <p>Choose the correct answer.</p>
+
+                <div class="question" data-question="19">
+                    <div class="question-text">19 Which of the following is NOT mentioned by Neil Plumridge as an indication that his workload is too heavy?</div>
+                    <div class="options"><label><input type="radio" name="q19" value="A">A an inability to keep to his schedule</label><label><input type="radio" name="q19" value="B">B inattention to family celebrations</label><label><input type="radio" name="q19" value="C">C a lack of concentration on a task</label><label><input type="radio" name="q19" value="D">D a period of insufficient sleep</label></div>
+                </div>
+                <div class="question" data-question="20">
+                    <div class="question-text">20 Which method of lessening work stress is NOT suggested by Neil Plumridge?</div>
+                    <div class="options"><label><input type="radio" name="q20" value="A">A rethinking ideas of what can be achieved</label><label><input type="radio" name="q20" value="B">B extending the deadline for completing the task</label><label><input type="radio" name="q20" value="C">C using more workers on a project</label><label><input type="radio" name="q20" value="D">D taking more time off for sport or other recreation</label></div>
+                </div>
+                <div class="question" data-question="21">
+                    <div class="question-text">21 According to Jan Elsner, meditation offers a method of</div>
+                    <div class="options"><label><input type="radio" name="q21" value="A">A taking a worker's mind off his troubles.</label><label><input type="radio" name="q21" value="B">B changing physical response to stress.</label><label><input type="radio" name="q21" value="C">C resting more effectively.</label><label><input type="radio" name="q21" value="D">D encouraging executives to take breaks.</label></div>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="question-group-title">Questions 22–26</div>
+                <p>Complete the summary below.</p>
+                <p>Write <strong>NO MORE THAN TWO WORDS AND/OR A NUMBER</strong> from the passage for each answer.</p>
+
+                <div class="question" data-question="22">
+                    <div class="question-text">Stress: its effects and how to reduce it</div>
+                    <div class="question-text">Statistics on workers' compensation show that people take more time off work due to stress than for any other <input type="text" name="q22" maxlength="30"> at work.</div>
+                </div>
+                <div class="question" data-question="23">
+                    <div class="question-text">On average, workers who take time off because of stress stay away for <input type="text" name="q23" maxlength="30"> .</div>
+                </div>
+                <div class="question" data-question="24">
+                    <div class="question-text">This absence comes at a high price – while the number of insurance claims due to stress amount to only <input type="text" name="q24" maxlength="30"> of the total, they account for a much higher proportion of the cost of claims payments.</div>
+                </div>
+                <div class="question" data-question="25">
+                    <div class="question-text">Experts believe that seeking to relieve stress through physical therapies such as sport or <input type="text" name="q25" maxlength="30"> may be less effective than simply reviewing your <input type="text" name="q26" maxlength="30">.</div>
+                </div>
+            </div>
+        </div> <!-- /p2_questionsPanel -->
+
+        <!-- ===== PASSAGE 3 ===== -->
+        <div class="passage-container hidden" id="p3_passagePanel" role="region" aria-label="Reading Passage">
+            <h2 class="section-title">READING PASSAGE 3</h2>
+            <div class="passage-content" id="passage3">
+                <h3>Robert Louis Stevenson</h3>
+
+                <p><strong>A</strong> It is more than 100 years since the death of the Scottish writer Robert Louis Stevenson on the South Pacific Island of Samoa, and it seems that time has not been kind to Stevenson's memory. Immediately after his death, his family and friends set to work to fashion the legend of Robert Louis Stevenson or RLS, as he became known one of the few writers familiar from his initials alone. Subsequent works of biography then turned him into a writer of almost religious importance. One example was literary critic Balfour, who in 1901 portrayed Stevenson's family as ministering angels to the dying genius during his final illness. Similarly, the biographer Crouch absurdly overstated Stevenson's significance by placing him in the same company as those most revered names in English literature: Shakespeare and Keats. The reaction to this nonsense was a number of highly critical assessments of Stevenson's legacy in the 1920s.</p>
+
+                <p><strong>B</strong> Normally, the critical pendulum can be relied on to swing back again, but there are several aspects of Stevenson's work that have, until recently, acted against a more balanced appraisal. First is the allegation that Stevenson was a mere master of linguistic fireworks, who lacked moral depth. Some critics accused him of being a literary charlatan, of juggling words very prettily to strike effects which overawed an ignorant public, and served to distract from the inadequacy of his ideas.</p>
+
+                <p><strong>C</strong> Then there has long been a prejudice against the adventure story as the proper medium for deep moral seriousness, a prejudice which is still extremely influential today. It seems that we can accept that an adventure film can successfully express profound moral truths, but we reject the same idea for a book. The absurdity of this becomes apparent when we think of writers like Joseph Conrad and Graham Greene, but it is no use pretending that this bias against adventure stories is not part of our high culture. A further problem is that Stevenson has often not found favour in the land of his birth because his conservatism so often collides with the strong radical tradition in Scotland. His many escapist stories and preference for living abroad have led to accusations that he camouflaged Scotland's health problems. Lastly the high adventure of Stevenson's own lifestyle has sometimes obscured his output. His globe- trotting, and above all the final phase of his life in Samoa, tended to make his own life a greater story than any he could devise. This was precisely what his friends feared would happen towards the end of his short life: his art might be overwhelmed by the drama of life in Samoa.</p>
+
+                <p><strong>D</strong> One consequence of this has been that Stevenson's influence on other writers has too often been neglected. The writer and poet Oscar Wilde was deeply influenced by Stevenson, even though he declared that Stevenson would have produced better work if he had lived in London rather than Samoa. Stevenson tends to stick in the throat even of those writers who would like to spit him out, such as Shaw, who claimed to have learned from him that the romantic hero is always mocked by reality. Likewise, the writer Galsworthy, who began as a determined critic, later changed his mind and said that the superiority of Stevenson over the novelist Hardy was that Stevenson was all life and Hardy all death. The influence on the novelist Chesterton would also repay detailed study, for it was through him that Stevenson has managed to cross the ages, emerging as an influence on the modernist movement and our own contemporary Latin American school of 'magical realism'.</p>
+
+                <p><strong>E</strong> When making an assessment of his life and work one question must inevitably be asked: was Robert Louis Stevenson Scotland's greatest writer of English prose? For most commentators this honour falls to Sir Walter Scott, author of Ivanhoe among many other classic novels and it is true that in terms of craftsmanship, precision and the ability to minutely regulate language to create the desired effect, Scott takes the Prize. However, this is not the something at all as inherent talent: by way of comparison one may take the example of the two great Russian composers Shostakovich and Prokofiev, of whom the former had learned more precise skills of execution but the latter's intrinsic genius was greater, and so it seems to be with Scott and Stevenson. Admittedly, Scott's detailed style does permit his stories to explore levels of tragedy that are beyond Stevenson's reach, but in this regard they have the musty smell of the museum, somehow artificial and removed from modern day reality. On the other hand, Stevenson's skill with plotting and narrative give his books a timeless quality, so that they still live today. And Stevenson was also the shrewder judge of behaviour and psychology. For example, his compelling descriptions of a man with a split personality in The Strange Case of Dr. Jekyll and Mr. Hyde have proved so accessible and accurate that the expression 'Jekyll and Hyde' has entered common English usage. Even if we do not see a revival of critical interest in this great Scottish writer, it is to be hoped that readers go back to Robert Louis Stevenson's magnificent stories and reassess this neglected genius.</p>
+            </div>
+        </div>
+        <div class="resizer"></div>
+
+        <div class="questions-container hidden" id="p3_questionsPanel" role="region" aria-label="Questions">
+            <h2 class="section-title">Questions 27–40</h2>
+
+            <div class="question-group">
+                <div class="question-group-title">Questions 27–31</div>
+                <p>Choose the correct answer.</p>
+
+                <div class="question" data-question="27">
+                    <div class="question-text">27 In the opinion of the writer, the biographers Balfour and Crouch</div>
+                    <div class="options"><label><input type="radio" name="q27" value="A">A understated the role played by Stevenson's family</label><label><input type="radio" name="q27" value="B">B misunderstood Stevenson's religious beliefs</label><label><input type="radio" name="q27" value="C">C overestimated other writers' influence on Stevenson</label><label><input type="radio" name="q27" value="D">D elevated Stevenson above his true status as a writer</label></div>
+                </div>
+                <div class="question" data-question="28">
+                    <div class="question-text">28 What point does the writer make about Stevenson in the second paragraph?</div>
+                    <div class="options"><label><input type="radio" name="q28" value="A">A The public judged him more fairly than the critics.</label><label><input type="radio" name="q28" value="B">B Recent criticism of him has been justified.</label><label><input type="radio" name="q28" value="C">C Critics argued that his style covered up his faults.</label><label><input type="radio" name="q28" value="D">D The ethical nature of his stories was often criticized.</label></div>
+                </div>
+                <div class="question" data-question="29">
+                    <div class="question-text">29 According to the writer, the adventure story</div>
+                    <div class="options"><label><input type="radio" name="q29" value="A">A is more appropriate for books than films.</label><label><input type="radio" name="q29" value="B">B can be used by writers to tell moral stories.</label><label><input type="radio" name="q29" value="C">C is more fashionable today than in the past.</label><label><input type="radio" name="q29" value="D">D has been used by other writers but not Stevenson.</label></div>
+                </div>
+                <div class="question" data-question="30">
+                    <div class="question-text">30 What point does the writer make about Stevenson and Scotland?</div>
+                    <div class="options"><label><input type="radio" name="q30" value="A">A His ideas contrasted with those of many Scots.</label><label><input type="radio" name="q30" value="B">B He demonstrated great sympathy for Scotland's problems.</label><label><input type="radio" name="q30" value="C">C He was not considered a true Scot as he was not born there.</label><label><input type="radio" name="q30" value="D">D His unflattering stories about Scotland angered many Scots.</label></div>
+                </div>
+                <div class="question" data-question="31">
+                    <div class="question-text">31 According to the writer, Stevenson's own lifestyle</div>
+                    <div class="options"><label><input type="radio" name="q31" value="A">A was envied by his friends.</label><label><input type="radio" name="q31" value="B">B was responsible for his early death.</label><label><input type="radio" name="q31" value="C">C attracted more attention than his books.</label><label><input type="radio" name="q31" value="D">D did not prepare him for living in Samoa.</label></div>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="question-group-title">Questions 32–35</div>
+                <p>Choose YES if the statement agrees with the claims of the writer, choose NO if the statement contradicts the claims of the writer, or NOT GIVEN if it is impossible to say what the writer thinks about this.</p>
+
+                <div class="question" data-question="32">
+                    <div class="question-text">32 Although Oscar Wilde admired Stevenson's work, he believed Stevenson could have written something better.</div>
+                    <div class="options"><label><input type="radio" name="q32" value="YES">YES</label><label><input type="radio" name="q32" value="NO">NO</label><label><input type="radio" name="q32" value="NOT GIVEN">NOT GIVEN</label></div>
+                </div>
+                <div class="question" data-question="33">
+                    <div class="question-text">33 Stevenson encouraged Oscar Wilde to start writing.</div>
+                    <div class="options"><label><input type="radio" name="q33" value="YES">YES</label><label><input type="radio" name="q33" value="NO">NO</label><label><input type="radio" name="q33" value="NOT GIVEN">NOT GIVEN</label></div>
+                </div>
+                <div class="question" data-question="34">
+                    <div class="question-text">34 Galsworthy had greater respect for Hardy than Stevenson.</div>
+                    <div class="options"><label><input type="radio" name="q34" value="YES">YES</label><label><input type="radio" name="q34" value="NO">NO</label><label><input type="radio" name="q34" value="NOT GIVEN">NOT GIVEN</label></div>
+                </div>
+                <div class="question" data-question="35">
+                    <div class="question-text">35 More research is needed regarding Stevenson's influence on Chesterton.</div>
+                    <div class="options"><label><input type="radio" name="q35" value="YES">YES</label><label><input type="radio" name="q35" value="NO">NO</label><label><input type="radio" name="q35" value="NOT GIVEN">NOT GIVEN</label></div>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="question-group-title">Questions 36–40</div>
+                <p>Complete the summary using the list of words, A-I, below.</p>
+                <p>Robert Louis Stevenson and Sir Walter Scott</p>
+                <p>Opinions differ as to whether Robert Louis Stevenson or Sir Walter Scott should be considered Scotland's best writer. Scott had greater <span class="question-text">36</span> <select name="q36">
+                    <option value="">Select</option>
+                    <option value="A">A natural ability</option>
+                    <option value="B">B critical acclaim</option>
+                    <option value="C">C humour</option>
+                    <option value="D">D romance</option>
+                    <option value="E">E colourful language</option>
+                    <option value="F">F technical control</option>
+                    <option value="G">G story telling</option>
+                    <option value="H">H depth</option>
+                    <option value="I">I human nature</option>
+                </select> but Stevenson had more <span class="question-text">37</span> <select name="q37">
+                    <option value="">Select</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="E">E</option>
+                    <option value="F">F</option>
+                    <option value="G">G</option>
+                    <option value="H">H</option>
+                    <option value="I">I</option>
+                </select> and the same distinction can be made between the two composers Shostakovich and Prokofiev. It is true that Scott's books showed more <span class="question-text">38</span> <select name="q38">
+                    <option value="">Select</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="E">E</option>
+                    <option value="F">F</option>
+                    <option value="G">G</option>
+                    <option value="H">H</option>
+                    <option value="I">I</option>
+                </select> when it came to tragedy though in an old-fashioned way while Stevenson's books are still popular because of his <span class="question-text">39</span> <select name="q39">
+                    <option value="">Select</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="E">E</option>
+                    <option value="F">F</option>
+                    <option value="G">G</option>
+                    <option value="H">H</option>
+                    <option value="I">I</option>
+                </select>. And Stevenson's understanding of <span class="question-text">40</span> <select name="q40">
+                    <option value="">Select</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="E">E</option>
+                    <option value="F">F</option>
+                    <option value="G">G</option>
+                    <option value="H">H</option>
+                    <option value="I">I</option>
+                </select> has resulted in the widespread use of an express from one of his books.</p>
+            </div>
+        </div> <!-- /p3_questionsPanel -->
+    </div> <!-- /main-content -->
+
+    <!-- Bottom progress/navigation -->
+    <div class="progress-container">
+        <div class="progress-nav">
+            <div class="progress-items" style="gap:10px; flex-wrap:wrap;">
+                <div id="bottomPartTabs"
+                    style="display:flex; gap:14px; justify-content:center; width:100%; align-items:center; flex-wrap:wrap;">
+                </div>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" id="prev-btn" disabled><i class="fas fa-arrow-left"></i>
+                    Previous</button>
+                <button class="btn btn-secondary" id="next-btn">Next <i class="fas fa-arrow-right"></i></button>
+                <button class="btn btn-submit" id="submit-all-btn">Submit All <i
+                        class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+</div> <!-- /container -->
+
+<!-- Results Modal -->
+<div class="modal" id="results-modal">
+    <div class="modal-content">
+        <h2>Test Results</h2>
+        <div class="score-display" id="score-display">0/0</div>
+        <div class="score-breakdown" id="score-breakdown"></div>
+        <div class="modal-buttons">
+            <button class="btn btn-secondary" id="close-modal">Close</button>
+            <button class="btn btn-primary" id="review-answers">Review Answers</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    /* ========= CONFIG ========= */
+    const PARTS = [
+        { id: 1, title: 'Passage 1', qStart: 1, qEnd: 13, passagePanel: 'p1_passagePanel', questionsPanel: 'p1_questionsPanel' },
+        { id: 2, title: 'Passage 2', qStart: 14, qEnd: 26, passagePanel: 'p2_passagePanel', questionsPanel: 'p2_questionsPanel' },
+        { id: 3, title: 'Passage 3', qStart: 27, qEnd: 40, passagePanel: 'p3_passagePanel', questionsPanel: 'p3_questionsPanel' },
+    ];
+
+    /* ======= ANSWER KEY ======= */
+    const correctAnswers = {
+        // Passage 1 – Chilli Peppers (Q1–13)
+        q1: "FALSE", q2: "TRUE", q3: "FALSE", q4: "NOT GIVEN", q5: "FALSE", q6: "NOT GIVEN", q7: "TRUE",
+        q8: "refrigeration", q9: "sweat", q10: "recipes", q11: "metabolism", q12: "stomach", q13: "exercise",
+
+        // Passage 2 – STRESS LESS (Q14–26)
+        q14: "C", q15: "A", q16: "A", q17: "D", q18: "B",
+        q19: "C", q20: "D", q21: "B",
+        q22: "injury", q23: "16.6 weeks", q24: "7%", q25: "massage", q26: "workloads",
+
+        // Passage 3 – Robert Louis Stevenson (Q27–40)
+        q27: "D", q28: "C", q29: "B", q30: "A", q31: "C",
+        q32: "YES", q33: "NOT GIVEN", q34: "NO", q35: "YES",
+        q36: "F", q37: "A", q38: "H", q39: "G", q40: "I"
+    };
+
+    /* ========= STATE ========= */
+    let currentPart = 1;
+    let currentQuestion = 1;
+    let seconds = 60 * 60; // total 60 minutes
+    let timerInterval;
+
+    /* ========= HELPERS ========= */
+    function el(id) { return document.getElementById(id); }
+    function inRange(q, pId) { const p = PARTS[pId - 1]; return q >= p.qStart && q <= p.qEnd; }
+
+    /* ======= BOTTOM TABS + PER-PART NUMBER RAILS (centered) ======= */
+    function renderBottomTabs() {
+        const tabs = el('bottomPartTabs');
+        tabs.innerHTML = '';
+        PARTS.forEach(p => {
+            const btn = document.createElement('button');
+            btn.className = 'btn btn-secondary';
+            btn.style.fontWeight = (p.id === currentPart) ? '900' : '600';
+            btn.innerHTML = (p.id === currentPart) ? `<strong>${p.title}</strong>` : `${p.title}`;
+            btn.onclick = () => switchPart(p.id);
+            tabs.appendChild(btn);
+
+            const rail = document.createElement('div');
+            rail.id = `rail-part-${p.id}`;
+            rail.style.display = (p.id === currentPart) ? 'flex' : 'none';
+            rail.style.gap = '6px';
+            rail.style.flexWrap = 'wrap';
+            rail.style.alignItems = 'center';
+            const total = p.qEnd - p.qStart + 1;
+            for (let q = p.qStart; q <= p.qEnd; q++) {
+                const chip = document.createElement('div');
+                chip.textContent = q;
+                chip.className = 'progress-item' + (q === currentQuestion && p.id === currentPart ? ' current' : '');
+                chip.dataset.question = q;
+                chip.style.width = '30px'; chip.style.height = '20px'; chip.style.borderRadius = '6px';
+                chip.style.fontSize = '14px'; chip.style.padding = '0'; chip.style.lineHeight = '20px';
+                chip.onclick = () => scrollToQuestion(q);
+                rail.appendChild(chip);
+            }
+            tabs.appendChild(rail);
+        });
+    }
+
+    function refreshBottomBar() { renderBottomTabs(); }
+
+    function switchPart(partId) {
+        if (currentPart === partId) return;
+        PARTS.forEach(p => {
+            el(p.passagePanel).classList.add('hidden');
+            el(p.questionsPanel).classList.add('hidden');
+            const r = el(`rail-part-${p.id}`); if (r) r.style.display = 'none';
+        });
+        currentPart = partId;
+        const p = PARTS[currentPart - 1];
+        currentQuestion = p.qStart;
+        el(p.passagePanel).classList.remove('hidden');
+        el(p.questionsPanel).classList.remove('hidden');
+        const r = el(`rail-part-${p.id}`); if (r) r.style.display = 'flex';
+        el('headerPassageTitle').textContent = `Passage ${currentPart} of 3`;
+        // Reset resizer styles for new part
+        const passageEl = el(p.passagePanel);
+        const questionsEl = el(p.questionsPanel);
+        passageEl.style.flex = '50%';
+        questionsEl.style.flex = '50%';
+        scrollToQuestion(currentQuestion, false);
+        refreshBottomBar();
+    }
+
+    function scrollToQuestion(num, smooth = true) {
+        const elQ = document.querySelector(`[data-question="${num}"]`) ||
+            document.querySelector(`input[name="q${num}"]`) ||
+            document.querySelector(`select[name="q${num}"]`);
+        if (elQ) elQ.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'center' });
+        updateCurrentQuestion(num);
+    }
+
+    function updateCurrentQuestion(num) {
+        currentQuestion = num;
+        document.querySelectorAll(`#rail-part-${currentPart} .progress-item`).forEach(it => {
+            it.classList.toggle('current', parseInt(it.dataset.question, 10) === num);
+        });
+    }
+
+    // mark answered when inputs change
+    function attachAnsweredListeners() {
+        document.querySelectorAll('input[type="radio"], input[type="text"], select').forEach(input => {
+            input.addEventListener('change', () => {
+                const m = input.name && input.name.match(/^q(\d+)$/);
+                if (!m) return;
+                const q = parseInt(m[1], 10);
+                const chip = document.querySelector(`.progress-item[data-question="${q}"]`);
+                if (chip) {
+                    const val = (input.type === 'text' ? input.value.trim() : input.value);
+                    if (val) chip.classList.add('answered');
+                }
+            });
+        });
+    }
+
+    /* ===== SUBMIT ALL ===== */
+    el('submit-all-btn').addEventListener('click', () => {
+        if (!confirm('Submit the entire test?')) return;
+
+        let score = 0, total = PARTS[PARTS.length - 1].qEnd;
+        const results = {};
+
+        for (let q = 1; q <= total; q++) {
+            const key = `q${q}`;
+            const corr = correctAnswers[key];
+            let user = null, isCorrect = false;
+
+            const radios = document.querySelectorAll(`input[name="${key}"][type="radio"]`);
+            const text = document.querySelector(`input[name="${key}"][type="text"]`);
+            const sel = document.querySelector(`select[name="${key}"]`);
+
+            if (radios && radios.length) {
+                const c = Array.from(radios).find(r => r.checked);
+                if (c) { user = c.value; isCorrect = (user === corr); radios.forEach(r => r.disabled = true); }
+            } else if (text) {
+                user = (text.value || '').trim();
+                if (user) {
+                    const norm = (s) => String(s).trim().toLowerCase().replace(/\s+/g, ' ');
+                    isCorrect = norm(user) === norm(corr);
+                    text.disabled = true;
+                }
+            } else if (sel) {
+                user = sel.value;
+                if (user) { isCorrect = user === corr; sel.disabled = true; }
+            }
+
+            if (isCorrect) score++;
+            results[key] = { userAnswer: user || 'No answer', correct: corr, isCorrect };
+        }
+
+        // color chips
+        for (let q = 1; q <= total; q++) {
+            const res = results[`q${q}`];
+            const ch = document.querySelector(`.progress-item[data-question="${q}"]`);
+            if (ch) {
+                ch.classList.remove('current', 'answered');
+                if (res) ch.classList.add(res.isCorrect ? 'correct' : 'incorrect');
+            }
+        }
+
+        // modal
+        el('score-display').textContent = `${score}/${total}`;
+        const breakdown = el('score-breakdown');
+        breakdown.innerHTML = PARTS.map(p => {
+            const partScore = Array.from({ length: p.qEnd - p.qStart + 1 }, (_, i) => results[`q${p.qStart + i}`])
+                .filter(r => r && r.isCorrect).length;
+            return `<div class="score-item"><span>Passage ${p.id}:</span><span>${partScore}/${p.qEnd - p.qStart + 1}</span></div>`;
+        }).join('');
+        el('results-modal').style.display = 'flex';
+
+        // review handler
+        el('review-answers').onclick = () => {
+            el('results-modal').style.display = 'none';
+            showCorrectIndicators(results);
+        };
+    });
+
+    // show inline indicators
+    function showCorrectIndicators(results) {
+        document.querySelectorAll('.answer-indicator').forEach(e => e.remove());
+        const total = PARTS[PARTS.length - 1].qEnd;
+
+        for (let q = 1; q <= total; q++) {
+            const key = `q${q}`;
+            const res = results[key];
+            if (!res) continue;
+
+            let target = null;
+            const qEl = document.querySelector(`[data-question="${q}"] .options`);
+            if (qEl) target = qEl;
+            if (!target) {
+                const input = document.querySelector(`input[name="${key}"]`);
+                if (input) target = input.parentNode;
+            }
+            if (!target) {
+                const sel = document.querySelector(`select[name="${key}"]`);
+                if (sel) target = sel.parentNode;
+            }
+            if (!target) continue;
+
+            const box = document.createElement('div');
+            box.className = 'answer-indicator ' + (res.isCorrect ? 'correct' : 'incorrect');
+            box.style.display = 'block';
+            box.style.marginTop = '6px';
+            box.innerHTML = res.isCorrect
+                ? `<i class="fas fa-check"></i> Correct!`
+                : `<i class="fas fa-times"></i> Incorrect. Your answer: <strong>${res.userAnswer}</strong> <strong>Correct:</strong> ${Array.isArray(res.correct) ? res.correct.join(', ') : res.correct}`;
+            target.appendChild(box);
+        }
+    }
+
+    // Timer
+    const timerSpan = document.querySelector('#globalTimer span');
+    const timerContainer = document.querySelector('#globalTimer');
+    function updateTimer() {
+        seconds--;
+        const m = Math.floor(seconds / 60), s = seconds % 60;
+        timerSpan.textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+        if (seconds <= 2 * 60) timerContainer.classList.add('warning');
+        if (seconds <= 0) { clearInterval(timerInterval); alert('Time is up! Submitting all passages.'); el('submit-all-btn').click(); }
+    }
+
+    function startTest() {
+        el('startScreen').classList.add('hidden');
+        el('testContainer').classList.remove('hidden');
+        timerInterval = setInterval(updateTimer, 1000);
+    }
+    window.startTest = startTest;
+
+    // Init
+    setTimeout(() => { el('loadingScreen').classList.add('hidden'); el('startScreen').classList.remove('hidden'); }, 900);
+
+    // default show P1
+    PARTS.forEach(p => {
+        if (p.id === 1) { el(p.passagePanel).classList.remove('hidden'); el(p.questionsPanel).classList.remove('hidden'); }
+        else { el(p.passagePanel).classList.add('hidden'); el(p.questionsPanel).classList.add('hidden'); }
+    });
+    renderBottomTabs();
+    attachAnsweredListeners();
+
+    // Resizer
+    let isResizing = false;
+    document.querySelectorAll('.resizer').forEach(resizer => {
+        resizer.addEventListener('mousedown', () => { isResizing = true; document.body.style.cursor = 'col-resize'; document.body.style.userSelect = 'none'; });
+    });
+    document.addEventListener('mousemove', (e) => {
+        if (!isResizing) return;
+        const container = document.querySelector('.main-content');
+        const rect = container.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left;
+        const leftPct = (mouseX / rect.width) * 100;
+        const rightPct = 100 - leftPct;
+        if (leftPct >= 30 && leftPct <= 70) {
+            const passage = document.querySelector('.passage-container:not(.hidden)');
+            const questions = document.querySelector('.questions-container:not(.hidden)');
+            if (passage) passage.style.flex = leftPct + '%';
+            if (questions) questions.style.flex = rightPct + '%';
+        }
+    });
+    document.addEventListener('mouseup', () => { if (isResizing) { isResizing = false; document.body.style.cursor = ''; document.body.style.userSelect = ''; } });
+
+    // Highlight tools
+    const highlightBtn = el('highlight-btn');
+    const removeHighlightBtn = el('remove-highlight-btn');
+    const passagePanels = PARTS.map(p => el(p.passagePanel));
+    const questionsPanels = PARTS.map(p => el(p.questionsPanel));
+    let lastSelection = null, highlightTarget = null, currentPanel = null;
+
+    function getValidSelection() {
+        const sel = window.getSelection();
+        if (!sel.rangeCount || sel.isCollapsed) return null;
+        const range = sel.getRangeAt(0);
+        if (passagePanels.some(pp => pp && pp.contains(range.commonAncestorContainer))) {
+            currentPanel = passagePanels.find(pp => pp.contains(range.commonAncestorContainer));
+        } else if (questionsPanels.some(qp => qp && qp.contains(range.commonAncestorContainer))) {
+            currentPanel = questionsPanels.find(qp => qp.contains(range.commonAncestorContainer));
+        } else return null;
+        return range;
+    }
+    function showHighlightBtn(range) {
+        const rect = range.getBoundingClientRect();
+        highlightBtn.style.top = (window.scrollY + rect.top - 35) + 'px';
+        highlightBtn.style.left = (window.scrollX + rect.left) + 'px';
+        highlightBtn.style.display = 'block';
+    }
+    function hideHighlightBtn() { highlightBtn.style.display = 'none'; }
+    function showRemoveBtn(span) {
+        const rect = span.getBoundingClientRect();
+        removeHighlightBtn.style.top = (window.scrollY + rect.top - 35) + 'px';
+        removeHighlightBtn.style.left = (window.scrollX + rect.left) + 'px';
+        removeHighlightBtn.style.display = 'block';
+        highlightTarget = span;
+    }
+    function hideRemoveBtn() { removeHighlightBtn.style.display = 'none'; highlightTarget = null; }
+
+    highlightBtn.addEventListener('click', () => {
+        if (lastSelection) {
+            const span = document.createElement('span');
+            span.className = 'highlight';
+            span.appendChild(lastSelection.extractContents());
+            lastSelection.insertNode(span);
+            window.getSelection().removeAllRanges();
+            hideHighlightBtn();
+        }
+    });
+    removeHighlightBtn.addEventListener('click', () => {
+        if (highlightTarget) {
+            const parent = highlightTarget.parentNode;
+            while (highlightTarget.firstChild) parent.insertBefore(highlightTarget.firstChild, highlightTarget);
+            parent.removeChild(highlightTarget);
+            hideRemoveBtn();
+        }
+    });
+    document.addEventListener('selectionchange', () => {
+        hideHighlightBtn(); hideRemoveBtn();
+        const range = getValidSelection();
+        if (range) { lastSelection = range; showHighlightBtn(range); } else { lastSelection = null; }
+    });
+    document.addEventListener('mousedown', (e) => {
+        if (e.target !== highlightBtn && e.target !== removeHighlightBtn) { hideHighlightBtn(); hideRemoveBtn(); }
+    });
+    document.addEventListener('click', (e) => {
+        if (e.target.classList && e.target.classList.contains('highlight')) { e.preventDefault(); showRemoveBtn(e.target); }
+    });
+
+    // Modal close
+    el('close-modal').addEventListener('click', () => { el('results-modal').style.display = 'none'; });
+</script>
+</body>
+
+
+
+
+</html>

@@ -1,0 +1,1662 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CDI IELTS Listening Test Simulation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f9fafb;
+            line-height: 1.5;
+        }
+
+        .loading-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f9fafb;
+        }
+
+        .loading-content {
+            text-align: center;
+        }
+
+        .spinner {
+            width: 64px;
+            height: 64px;
+            border: 4px solid #d1d5db;
+            border-top: 4px solid #111827;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 32px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 8px;
+        }
+
+        .loading-subtitle {
+            color: #6b7280;
+        }
+
+        .start-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f9fafb;
+        }
+
+        .start-content {
+            text-align: center;
+        }
+
+        .start-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 24px;
+        }
+
+        .start-subtitle {
+            color: #6b7280;
+            margin-bottom: 24px;
+        }
+
+        .start-button {
+            padding: 12px 32px;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .start-button:hover {
+            background-color: #1d4ed8;
+        }
+
+        .test-interface {
+            min-height: 100vh;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 80px;
+        }
+
+        .header {
+            background-color: white;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .ielts-logo {
+            color: #dc2626;
+            font-weight: bold;
+            font-size: 1.125rem;
+        }
+
+        .test-id {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .support-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #2563eb;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .support-link:hover {
+            color: #0844eb;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .icon {
+            width: 20px;
+            height: 20px;
+            color: #6b7280;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 16px 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .part-header {
+            background-color: #f3f4f6;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 24px;
+        }
+
+        .part-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 8px;
+        }
+
+        .part-instructions {
+            color: #374151;
+        }
+
+        .questions-section {
+            margin-bottom: 24px;
+        }
+
+        .questions-title {
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 8px;
+        }
+
+        .questions-description {
+            color: #374151;
+            margin-bottom: 16px;
+        }
+
+        .scenario-title {
+            font-weight: 500;
+            color: #111827;
+            margin-bottom: 24px;
+        }
+
+        .question-group {
+            margin-bottom: 24px;
+        }
+
+        .question-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .question-input {
+            width: 120px;
+            height: 32px;
+            text-align: center;
+            border: 2px solid #3b82f6;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            outline: none;
+            padding: 4px;
+        }
+
+        .question-input:focus {
+            border-color: #1d4ed8;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .question-input.correct {
+            border-color: #10b981;
+            background-color: #d1fae5;
+        }
+
+        .question-input.incorrect {
+            border-color: #ef4444;
+            background-color: #fee2e2;
+        }
+
+        .question-input.partial {
+            border-color: #f59e0b;
+            background-color: #fef3c7;
+        }
+
+        .multiple-choice {
+            margin-left: 20px;
+        }
+
+        .choice-item {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .choice-input {
+            margin-right: 8px;
+        }
+
+        .choice-item.correct {
+            background-color: #d1fae5;
+            padding: 4px;
+            border-radius: 4px;
+        }
+
+        .choice-item.incorrect {
+            background-color: #fee2e2;
+            padding: 4px;
+            border-radius: 4px;
+        }
+
+        .matching-section {
+            background-color: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+
+        .matching-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .matching-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 8px;
+        }
+
+        .matching-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 20px;
+        }
+
+        .cities-list {
+            background-color: #f8fafc;
+            padding: 16px;
+            border-radius: 8px;
+        }
+
+        .features-list {
+            background-color: #f8fafc;
+            padding: 16px;
+            border-radius: 8px;
+        }
+
+        .city-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .submit-section {
+            text-align: center;
+            padding: 24px;
+            border-top: 1px solid #e5e7eb;
+            background-color: #f9fafb;
+            margin-top: 40px;
+            border-radius: 8px;
+        }
+
+        .submit-button {
+            padding: 12px 48px;
+            background-color: #059669;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .submit-button:hover {
+            background-color: #047857;
+        }
+
+        .submit-button:disabled {
+            background-color: #9ca3af;
+            cursor: not-allowed;
+        }
+
+        .results-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .results-content {
+            background-color: white;
+            padding: 32px;
+            border-radius: 12px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .results-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .score-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .score-item {
+            text-align: center;
+            padding: 16px;
+            border-radius: 8px;
+            background-color: #f3f4f6;
+        }
+
+        .score-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #059669;
+        }
+
+        .score-label {
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-top: 4px;
+        }
+
+        .close-button {
+            width: 100%;
+            padding: 12px;
+            background-color: #6b7280;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 16px;
+        }
+
+        .close-button:hover {
+            background-color: #4b5563;
+        }
+
+        .bottom-navigation {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: white;
+            border-top: 1px solid #e5e7eb;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 100;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .parts-navigation {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .part-nav-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .part-button {
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .part-button.active {
+            background-color: #2563eb;
+            color: white;
+        }
+
+        .part-button:not(.active) {
+            color: #6b7280;
+            background-color: transparent;
+        }
+
+        .part-button:not(.active):hover {
+            color: #111827;
+        }
+
+        .question-numbers {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            flex-wrap: wrap;
+        }
+
+        .question-number {
+            width: 24px;
+            height: 24px;
+            font-size: 0.75rem;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            background-color: #e5e7eb;
+            color: #6b7280;
+        }
+
+        .question-number:hover {
+            background-color: #d1d5db;
+        }
+
+        .nav-arrow {
+            background-color: #000;
+            color: white;
+            border: none;
+            padding: 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .nav-arrow:hover:not(:disabled) {
+            background-color: #374151;
+        }
+
+        .nav-arrow:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .selectable-text {
+            user-select: text;
+            cursor: text;
+        }
+
+        /* Highlight functionality styles */
+        .highlight {
+            background-color: #ffff00;
+            cursor: pointer;
+        }
+
+        #highlight-btn,
+        #remove-highlight-btn {
+            position: absolute;
+            z-index: 9999;
+            display: none;
+            padding: 6px 12px;
+            font-size: 14px;
+            border: 1px solid #888;
+            border-radius: 4px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        #highlight-btn {
+            background: #fffbe7;
+        }
+
+        #remove-highlight-btn {
+            background: #ffeaea;
+            color: #b00;
+            border-color: #b00;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 12px 16px;
+            }
+
+            .parts-navigation {
+                gap: 12px;
+            }
+
+            .question-numbers {
+                max-width: 200px;
+            }
+
+            .bottom-navigation {
+                padding: 8px 12px;
+            }
+
+            .matching-layout {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <h2 class="loading-title">Your test will begin shortly</h2>
+            <p class="loading-subtitle">Please wait</p>
+        </div>
+    </div>
+    <!-- Start Screen -->
+    <div id="startScreen" class="start-screen hidden">
+        <div class="start-content">
+            <h1 class="start-title">CDI IELTS Listening Test</h1>
+            <p class="start-subtitle">Ready to begin your listening test?</p>
+            <button class="start-button" onclick="startTest()">Start Test</button>
+        </div>
+    </div>
+    <!-- Test Interface -->
+    <div id="testInterface" class="test-interface hidden">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-left">
+                <div class="ielts-logo">IELTS</div>
+                <div class="test-id">Test taker ID</div>
+            </div>
+            <div>
+                <a href="https://t.me/IELTSwithShohrux" target="_blank" class="support-link">
+                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                    </svg>
+                    IELTSwithShohrux
+                </a>
+            </div>
+            <div class="header-right">
+                <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M8.111 16.404a5.5 5.5 0 717.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0">
+                    </path>
+                </svg>
+                <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M15 17h5l-5 5-5-5h5v-5a7.5 7.5 0 00-15 0v5h5l-5 5-5-5h5V7a12 12 0 0124 0v10z"></path>
+                </svg>
+                <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                    </path>
+                </svg>
+            </div>
+        </div>
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Part Header -->
+            <div class="part-header">
+                <h1 class="part-title" id="partTitle">PART 1</h1>
+                <p class="part-instructions" id="partInstructions">Questions 1-13</p>
+            </div>
+            <!-- Questions Section -->
+            <div class="questions-section">
+                <h2 class="questions-title" id="questionsTitle">Questions 1–13</h2>
+                <p class="questions-description selectable-text" id="questionsDescription">Complete the form below.
+                    Write ONE WORD AND/OR A NUMBER for each answer.</p>
+
+                <!-- Part 1 Content -->
+                <div id="part1Content">
+                    <h3 class="scenario-title selectable-text">Airport Parking Registration Form</h3>
+                    <div class="question-group">
+                        <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">Trip Details</h4>
+                        <div class="question-item">
+                            <span class="selectable-text">Departure: leaving from Caldecote Airport's </span>
+                            <input type="text" class="question-input" id="q1" onchange="saveAnswer(1, this.value)"
+                                placeholder="1">
+                            <span class="selectable-text"> terminal</span>
+                        </div>
+                        <div class="question-item">
+                            <span class="selectable-text">Check-in date: 26th August</span>
+
+                        </div>
+                        <div class="question-item">
+                            <span class="selectable-text">Check-out date: </span>
+                            <input type="text" class="question-input" id="q2" onchange="saveAnswer(2, this.value)"
+                                placeholder="2">
+                        </div>
+                        <div class="question-item">
+                            <span class="selectable-text">Parking location: outside in the </span>
+                            <input type="text" class="question-input" id="q3" onchange="saveAnswer(3, this.value)"
+                                placeholder="3">
+                            <span class="selectable-text"> car park</span>
+                        </div>
+                        <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">Car Details</h4>
+                        <div class="question-item">
+                            <span class="selectable-text">Make and color: Toyota (color: </span>
+                            <input type="text" class="question-input" id="q4" onchange="saveAnswer(4, this.value)"
+                                placeholder="4">
+                            <span class="selectable-text">)</span>
+                        </div>
+                        <div class="question-item">
+                            <span class="selectable-text">Registration number: </span>
+                            <input type="text" class="question-input" id="q5" onchange="saveAnswer(5, this.value)"
+                                placeholder="5">
+                        </div>
+                        <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">Customer Details</h4>
+                        <div class="question-item">
+                            <span class="selectable-text">Name: Ronald </span>
+                            <input type="text" class="question-input" id="q6" onchange="saveAnswer(6, this.value)"
+                                placeholder="6">
+                        </div>
+                        <div class="question-item">
+                            <span class="selectable-text">Address: 115 Granville Road, </span>
+                            <input type="text" class="question-input" id="q7" onchange="saveAnswer(7, this.value)"
+                                placeholder="7">
+                        </div>
+                        <div class="question-item">
+                            <span class="selectable-text">Mobile number: </span>
+                            <input type="text" class="question-input" id="q8" onchange="saveAnswer(8, this.value)"
+                                placeholder="8">
+                        </div>
+                        <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">Extra Services
+                            Requested</h4>
+                        <div class="question-item">
+                            <span class="selectable-text">Car cleaning: </span>
+                            <input type="text" class="question-input" id="q9" onchange="saveAnswer(9, this.value)"
+                                placeholder="9">
+                            <span class="selectable-text"> clean* option (including vacuum)</span>
+                        </div>
+                        <div class="question-item">
+                            <span class="selectable-text">Mechanical: remove stains - children split </span>
+                            <input type="text" class="question-input" id="q10" onchange="saveAnswer(10, this.value)"
+                                placeholder="10">
+                            <span class="selectable-text"> (back seats)</span>
+                        </div>
+                        <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">Other Comments</h4>
+                        <div class="question-item">
+                            <span class="selectable-text">Check the </span>
+                            <input type="text" class="question-input" id="q11" onchange="saveAnswer(11, this.value)"
+                                placeholder="11">
+                            <span class="selectable-text"> before pick-up</span>
+                        </div>
+                        <div class="question-item">
+                            <span class="selectable-text">Keys: Leave the keys in the </span>
+                            <input type="text" class="question-input" id="q12" onchange="saveAnswer(12, this.value)"
+                                placeholder="12">
+                        </div>
+                        <div class="question-item">
+                            <span class="selectable-text">Heard about company: from a </span>
+                            <input type="text" class="question-input" id="q13" onchange="saveAnswer(13, this.value)"
+                                placeholder="13">
+                            <span class="selectable-text"> advertisement</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Part 2 Content -->
+                <div id="part2Content" class="hidden">
+                    <h3 class="scenario-title selectable-text">Iron River Food Festival</h3>
+                    <div class="question-group">
+                        <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">Questions 14–15</h4>
+                        <p class="selectable-text" style="margin-bottom: 16px;">Choose TWO letters, A–E. Which TWO facts
+                            are given about this year's Iron River Food Festival?</p>
+                        <div class="multiple-choice">
+                            <div class="choice-item">
+                                <input type="checkbox" name="q14_15" value="A" class="choice-input"
+                                    onchange="saveMultipleAnswer([14, 15], this)">
+                                <span class="selectable-text">A. It will feature a new cooking competition</span>
+                            </div>
+                            <div class="choice-item">
+                                <input type="checkbox" name="q14_15" value="B" class="choice-input"
+                                    onchange="saveMultipleAnswer([14, 15], this)">
+                                <span class="selectable-text">B. The festival site will be larger than before</span>
+                            </div>
+                            <div class="choice-item">
+                                <input type="checkbox" name="q14_15" value="C" class="choice-input"
+                                    onchange="saveMultipleAnswer([14, 15], this)">
+                                <span class="selectable-text">C. It will be held on different dates</span>
+                            </div>
+                            <div class="choice-item">
+                                <input type="checkbox" name="q14_15" value="D" class="choice-input"
+                                    onchange="saveMultipleAnswer([14, 15], this)">
+                                <span class="selectable-text">D. The price of tickets will be higher</span>
+                            </div>
+                            <div class="choice-item">
+                                <input type="checkbox" name="q14_15" value="E" class="choice-input"
+                                    onchange="saveMultipleAnswer([14, 15], this)">
+                                <span class="selectable-text">E. More chefs will do cooking demonstrations</span>
+                            </div>
+                        </div>
+                        <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">Questions 16–17</h4>
+                        <p class="selectable-text" style="margin-bottom: 16px;">Choose TWO letters, A–E. Which TWO of
+                            the following duties will the volunteers have?</p>
+                        <div class="multiple-choice">
+                            <div class="choice-item">
+                                <input type="checkbox" name="q16_17" value="A" class="choice-input"
+                                    onchange="saveMultipleAnswer([16, 17], this)">
+                                <span class="selectable-text">A. taking photographs</span>
+                            </div>
+                            <div class="choice-item">
+                                <input type="checkbox" name="q16_17" value="B" class="choice-input"
+                                    onchange="saveMultipleAnswer([16, 17], this)">
+                                <span class="selectable-text">B. judging competitions</span>
+                            </div>
+                            <div class="choice-item">
+                                <input type="checkbox" name="q16_17" value="C" class="choice-input"
+                                    onchange="saveMultipleAnswer([16, 17], this)">
+                                <span class="selectable-text">C. selling food</span>
+                            </div>
+                            <div class="choice-item">
+                                <input type="checkbox" name="q16_17" value="D" class="choice-input"
+                                    onchange="saveMultipleAnswer([16, 17], this)">
+                                <span class="selectable-text">D. managing parking</span>
+                            </div>
+                            <div class="choice-item">
+                                <input type="checkbox" name="q16_17" value="E" class="choice-input"
+                                    onchange="saveMultipleAnswer([16, 17], this)">
+                                <span class="selectable-text">E. cleaning the facilities</span>
+                            </div>
+                        </div>
+                        <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">Questions 18–19</h4>
+                        <p class="selectable-text" style="margin-bottom: 16px;">Choose TWO letters, A–E. Which TWO
+                            things still need to be done?</p>
+                        <div class="multiple-choice">
+                            <div class="choice-item">
+                                <input type="checkbox" name="q18_19" value="A" class="choice-input"
+                                    onchange="saveMultipleAnswer([18, 19], this)">
+                                <span class="selectable-text">A. organizing the festival schedule</span>
+                            </div>
+                            <div class="choice-item">
+                                <input type="checkbox" name="q18_19" value="B" class="choice-input"
+                                    onchange="saveMultipleAnswer([18, 19], this)">
+                                <span class="selectable-text">B. finding additional sponsors</span>
+                            </div>
+                            <div class="choice-item">
+                                <input type="checkbox" name="q18_19" value="C" class="choice-input"
+                                    onchange="saveMultipleAnswer([18, 19], this)">
+                                <span class="selectable-text">C. hiring the cooking equipment</span>
+                            </div>
+                            <div class="choice-item">
+                                <input type="checkbox" name="q18_19" value="D" class="choice-input"
+                                    onchange="saveMultipleAnswer([18, 19], this)">
+                                <span class="selectable-text">D. arranging publicity with local media</span>
+                            </div>
+                            <div class="choice-item">
+                                <input type="checkbox" name="q18_19" value="E" class="choice-input"
+                                    onchange="saveMultipleAnswer([18, 19], this)">
+                                <span class="selectable-text">E. booking additional musical acts</span>
+                            </div>
+                        </div>
+                        <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">Questions 20–26</h4>
+                        <p class="selectable-text" style="margin-bottom: 16px;">Label the map below. Write the correct
+                            letter, A–J, next to questions 20–26.</p>
+                        <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">Iron River Food
+                            Festival Site</h4>
+                        <div style="margin-bottom: 20px;">
+                            <!-- Placeholder for the map image -->
+                            <img src="https://i.postimg.cc/7L4VcYcy/image.png" alt="Iron River Food Festival Map"
+                                style="max-width: 100%; height: auto;">
+                            <p class="selectable-text">
+                                *Note: The map should display locations labeled A–J corresponding to the festival site
+                                layout.
+                            </p>
+                        </div>
+
+                        <div class="question-item">
+                            <span class="selectable-text">20. Undercover seating area: </span>
+                            <input type="text" class="question-input" id="q20" onchange="saveAnswer(20, this.value)"
+                                placeholder="20">
+                        </div>
+                        <div class="question-item">
+                            <span class="selectable-text">21. Live music stage: </span>
+                            <input type="text" class="question-input" id="q21" onchange="saveAnswer(21, this.value)"
+                                placeholder="21">
+                        </div>
+                        <div class="question-item">
+                            <span class="selectable-text">22. Cooking demonstration area: </span>
+                            <input type="text" class="question-input" id="q22" onchange="saveAnswer(22, this.value)"
+                                placeholder="22">
+                        </div>
+                        <div class="question-item">
+                            <span class="selectable-text">23. Judging tent: </span>
+                            <input type="text" class="question-input" id="q23" onchange="saveAnswer(23, this.value)"
+                                placeholder="23">
+                        </div>
+                        <div class="question-item">
+                            <span class="selectable-text">24. First aid tent: </span>
+                            <input type="text" class="question-input" id="q24" onchange="saveAnswer(24, this.value)"
+                                placeholder="24">
+                        </div>
+                        <div class="question-item">
+                            <span class="selectable-text">25. Descent skills: </span>
+                            <input type="text" class="question-input" id="q25" onchange="saveAnswer(25, this.value)"
+                                placeholder="25">
+                        </div>
+                        <div class="question-item">
+                            <span class="selectable-text">26. Merchandise tent: </span>
+                            <input type="text" class="question-input" id="q26" onchange="saveAnswer(26, this.value)"
+                                placeholder="26">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Part 3 Content -->
+                <div id="part3Content" class="hidden">
+                    <h3 class="scenario-title selectable-text">Food Science</h3>
+                    <div class="question-group">
+                        <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">Questions 27–30</h4>
+                        <p class="selectable-text" style="margin-bottom: 16px;">Choose the correct letter, A, B, or C.
+                        </p>
+                        <div style="margin-bottom: 20px;">
+                            <div class="selectable-text" style="font-weight: 500;">27. According to Sue, the reason
+                                there are so many cookery books is:</div>
+                            <div class="multiple-choice">
+                                <div class="choice-item">
+                                    <input type="radio" name="q27" value="A" class="choice-input"
+                                        onchange="saveAnswer(27, this.value)">
+                                    <span class="selectable-text">A. they reflect the fact that cooking is a basic
+                                        need</span>
+                                </div>
+                                <div class="choice-item">
+                                    <input type="radio" name="q27" value="B" class="choice-input"
+                                        onchange="saveAnswer(27, this.value)">
+                                    <span class="selectable-text">B. they reflect people's desire for a certain
+                                        lifestyle</span>
+                                </div>
+                                <div class="choice-item">
+                                    <input type="radio" name="q27" value="C" class="choice-input"
+                                        onchange="saveAnswer(27, this.value)">
+                                    <span class="selectable-text">C. they help busy families and others save time</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 20px;">
+                            <div class="selectable-text" style="font-weight: 500;">28. What does Sue say about Apollo's
+                                cookbook?</div>
+                            <div class="multiple-choice">
+                                <div class="choice-item">
+                                    <input type="radio" name="q28" value="A" class="choice-input"
+                                        onchange="saveAnswer(28, this.value)">
+                                    <span class="selectable-text">A. It contains hundreds of recipes</span>
+                                </div>
+                                <div class="choice-item">
+                                    <input type="radio" name="q28" value="B" class="choice-input"
+                                        onchange="saveAnswer(28, this.value)">
+                                    <span class="selectable-text">B. It was written by a famous cook</span>
+                                </div>
+                                <div class="choice-item">
+                                    <input type="radio" name="q28" value="C" class="choice-input"
+                                        onchange="saveAnswer(28, this.value)">
+                                    <span class="selectable-text">C. It is poorly organized</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 20px;">
+                            <div class="selectable-text" style="font-weight: 500;">29. Bill and Sue agree that it is
+                                difficult to use early cookbooks today because:</div>
+                            <div class="multiple-choice">
+                                <div class="choice-item">
+                                    <input type="radio" name="q29" value="A" class="choice-input"
+                                        onchange="saveAnswer(29, this.value)">
+                                    <span class="selectable-text">A. the ingredients are difficult to find</span>
+                                </div>
+                                <div class="choice-item">
+                                    <input type="radio" name="q29" value="B" class="choice-input"
+                                        onchange="saveAnswer(29, this.value)">
+                                    <span class="selectable-text">B. they were written for professional cooks</span>
+                                </div>
+                                <div class="choice-item">
+                                    <input type="radio" name="q29" value="C" class="choice-input"
+                                        onchange="saveAnswer(29, this.value)">
+                                    <span class="selectable-text">C. people's tastes have changed</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 20px;">
+                            <div class="selectable-text" style="font-weight: 500;">30. The organization of early cookery
+                                books suggests that:</div>
+                            <div class="multiple-choice">
+                                <div class="choice-item">
+                                    <input type="radio" name="q30" value="A" class="choice-input"
+                                        onchange="saveAnswer(30, this.value)">
+                                    <span class="selectable-text">A. they were written quite quickly</span>
+                                </div>
+                                <div class="choice-item">
+                                    <input type="radio" name="q30" value="B" class="choice-input"
+                                        onchange="saveAnswer(30, this.value)">
+                                    <span class="selectable-text">B. they were read by children</span>
+                                </div>
+                                <div class="choice-item">
+                                    <input type="radio" name="q30" value="C" class="choice-input"
+                                        onchange="saveAnswer(30, this.value)">
+                                    <span class="selectable-text">C. they were not meant to be read for pleasure</span>
+                                </div>
+                            </div>
+                        </div>
+                        <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">Questions 31–36</h4>
+                        <p class="selectable-text" style="margin-bottom: 16px;">What is the best feature of each of the
+                            following books on the reading list? Choose SIX answers from the box and write the correct
+                            letter, A–I, next to questions 31–36.</p>
+                        <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">Best Features</h4>
+                        <div class="question-item selectable-text" style="margin-bottom: 10px;">A. has a good
+                            bibliography</div>
+                        <div class="question-item selectable-text" style="margin-bottom: 10px;">B. every epic date</div>
+                        <div class="question-item selectable-text" style="margin-bottom: 10px;">C. reveals a new angle
+                        </div>
+                        <div class="question-item selectable-text" style="margin-bottom: 10px;">D. vast research</div>
+                        <div class="question-item selectable-text" style="margin-bottom: 10px;">E. is very practical
+                        </div>
+                        <div class="question-item selectable-text" style="margin-bottom: 10px;">F. is well-researched
+                        </div>
+                        <div class="question-item selectable-text" style="margin-bottom: 10px;">G. contains clear
+                            visuals</div>
+                        <div class="question-item selectable-text" style="margin-bottom: 10px;">H. is good for the
+                            history</div>
+                        <div class="question-item selectable-text" style="margin-bottom: 10px;">I. has useful self-study
+                            questions</div>
+                        <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">Books on the Reading
+                            List</h4>
+                        <div class="question-item">
+                            <span class="selectable-text">31. Analysis of Human Nutrition: </span>
+                            <input type="text" class="question-input" id="q31" onchange="saveAnswer(31, this.value)"
+                                placeholder="31">
+                        </div>
+                        <div class="question-item">
+                            <span class="selectable-text">32. Food Microbiology: </span>
+                            <input type="text" class="question-input" id="q32" onchange="saveAnswer(32, this.value)"
+                                placeholder="32">
+                        </div>
+                        <div class="question-item">
+                            <span class="selectable-text">33. Food Product Development Case Studies: </span>
+                            <input type="text" class="question-input" id="q33" onchange="saveAnswer(33, this.value)"
+                                placeholder="33">
+                        </div>
+                        <div class="question-item">
+                            <span class="selectable-text">34. Core Scientific Disciplines in Food Science: </span>
+                            <input type="text" class="question-input" id="q34" onchange="saveAnswer(34, this.value)"
+                                placeholder="34">
+                        </div>
+                        <div class="question-item">
+                            <span class="selectable-text">35. Marketing Food Products: </span>
+                            <input type="text" class="question-input" id="q35" onchange="saveAnswer(35, this.value)"
+                                placeholder="35">
+                        </div>
+                        <div class="question-item">
+                            <span class="selectable-text">36. The Science of Food Composition: </span>
+                            <input type="text" class="question-input" id="q36" onchange="saveAnswer(36, this.value)"
+                                placeholder="36">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Part 4 Content -->
+                <div id="part4Content" class="hidden">
+                    <h3 class="scenario-title selectable-text">The Perception of Color</h3>
+                    <div class="question-group">
+                        <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">Questions 37–49</h4>
+                        <p class="selectable-text" style="margin-bottom: 16px;">Complete the notes below. Write ONE WORD
+                            ONLY for each answer.</p>
+                        <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">How do we perceive
+                            color?</h4>
+                        <div class="question-item">
+                            <span class="selectable-text">Color is interpreted by the eyes and the </span>
+                            <input type="text" class="question-input" id="q37" onchange="saveAnswer(37, this.value)"
+                                placeholder="37">
+                        </div>
+                        <div class="question-item">
+                            <span class="selectable-text">Not everyone sees the same shades of color.</span>
+                        </div>
+                        <div class="question-item">
+                            <span class="selectable-text">Cartooning color is subjective and influenced by an
+                                individual's </span>
+                            <input type="text" class="question-input" id="q38" onchange="saveAnswer(38, this.value)"
+                                placeholder="38">
+                        </div>
+                        <div class="question-item">
+                            <span class="selectable-text">Some people have a condition in which they associate color
+                                with </span>
+                            <input type="text" class="question-input" id="q39" onchange="saveAnswer(39, this.value)"
+                                placeholder="39">
+                        </div>
+                        <div class="question-item">
+                            <span class="selectable-text">Some people are color blind because of issues which affect the
+                            </span>
+                            <input type="text" class="question-input" id="q40" onchange="saveAnswer(40, this.value)"
+                                placeholder="40">
+                            <span class="selectable-text"> in the eye.</span>
+                        </div>
+                        <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">Uses of Color</h4>
+                        <div class="question-item">
+                            <span class="selectable-text">Different colors can affect our </span>
+                            <input type="text" class="question-input" id="q41" onchange="saveAnswer(41, this.value)"
+                                placeholder="41">
+                        </div>
+                        <div class="question-item">
+                            <span class="selectable-text">Color psychology has been used in areas of business, e.g.
+                            </span>
+                            <input type="text" class="question-input" id="q42" onchange="saveAnswer(42, this.value)"
+                                placeholder="42">
+                            <span class="selectable-text"> and sales.</span>
+                        </div>
+                        <div class="question-item">
+                            <span class="selectable-text">Color can be used in therapy to help people with </span>
+                            <input type="text" class="question-input" id="q43" onchange="saveAnswer(43, this.value)"
+                                placeholder="43">
+                        </div>
+                        <div class="question-item">
+                            <span class="selectable-text">Perceiving color can help us to stay healthy, e.g. to predict
+                            </span>
+                            <input type="text" class="question-input" id="q44" onchange="saveAnswer(44, this.value)"
+                                placeholder="44">
+                        </div>
+                        <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">Color and Language
+                        </h4>
+                        <div class="question-item">
+                            <span class="selectable-text">Language can influence perception, e.g. Greek speakers and the
+                                color </span>
+                            <input type="text" class="question-input" id="q45" onchange="saveAnswer(45, this.value)"
+                                placeholder="45">
+                        </div>
+                        <div class="question-item">
+                            <span class="selectable-text">The Dani and Bassa languages have two terms: dark and
+                                light.</span>
+                        </div>
+                        <div class="question-item">
+                            <span class="selectable-text">Dark (e.g. black, green) refers to </span>
+                            <input type="text" class="question-input" id="q46" onchange="saveAnswer(46, this.value)"
+                                placeholder="46">
+                            <span class="selectable-text"> colors.</span>
+                        </div>
+                        <div class="question-item">
+                            <span class="selectable-text">The Waripiri people describe objects in terms of </span>
+                            <input type="text" class="question-input" id="q47" onchange="saveAnswer(47, this.value)"
+                                placeholder="47">
+                            <span class="selectable-text"> not color.</span>
+                        </div>
+                        <div class="question-item">
+                            <span class="selectable-text">Color names may be used more in a society that relies on
+                            </span>
+                            <input type="text" class="question-input" id="q48" onchange="saveAnswer(48, this.value)"
+                                placeholder="48">
+                        </div>
+                        <div class="question-item">
+                            <span class="selectable-text">The Cardoishi people are thought to have no distinct words for
+                                colors. A color's name can depend on an object's location: on a table, something red is
+                                described as being 'like ripe fruit'. On the floor, something red is described as being
+                                'like </span>
+                            <input type="text" class="question-input" id="q49" onchange="saveAnswer(49, this.value)"
+                                placeholder="49">
+                            <span class="selectable-text">'. </span>
+                        </div>
+                        <!-- Submit Button -->
+                        <div class="submit-section">
+                            <button class="submit-button" onclick="submitTest()" id="submitBtn">Submit Test</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Bottom Navigation -->
+        <div class="bottom-navigation">
+            <div class="parts-navigation">
+                <div class="part-nav-item">
+                    <button class="part-button active" onclick="switchPart(0)" id="part1Btn">Part 1</button>
+                    <div class="question-numbers" id="part1Questions">
+                        <button class="question-number" onclick="focusQuestion(1)">1</button>
+                        <button class="question-number" onclick="focusQuestion(2)">2</button>
+                        <button class="question-number" onclick="focusQuestion(3)">3</button>
+                        <button class="question-number" onclick="focusQuestion(4)">4</button>
+                        <button class="question-number" onclick="focusQuestion(5)">5</button>
+                        <button class="question-number" onclick="focusQuestion(6)">6</button>
+                        <button class="question-number" onclick="focusQuestion(7)">7</button>
+                        <button class="question-number" onclick="focusQuestion(8)">8</button>
+                        <button class="question-number" onclick="focusQuestion(9)">9</button>
+                        <button class="question-number" onclick="focusQuestion(10)">10</button>
+                        <button class="question-number" onclick="focusQuestion(11)">11</button>
+                        <button class="question-number" onclick="focusQuestion(12)">12</button>
+                        <button class="question-number" onclick="focusQuestion(13)">13</button>
+                    </div>
+                </div>
+                <div class="part-nav-item">
+                    <button class="part-button" onclick="switchPart(1)" id="part2Btn">Part 2</button>
+                    <div class="question-numbers hidden" id="part2Questions">
+                        <button class="question-number" onclick="focusQuestion(14)">14</button>
+                        <button class="question-number" onclick="focusQuestion(15)">15</button>
+                        <button class="question-number" onclick="focusQuestion(16)">16</button>
+                        <button class="question-number" onclick="focusQuestion(17)">17</button>
+                        <button class="question-number" onclick="focusQuestion(18)">18</button>
+                        <button class="question-number" onclick="focusQuestion(19)">19</button>
+                        <button class="question-number" onclick="focusQuestion(20)">20</button>
+                        <button class="question-number" onclick="focusQuestion(21)">21</button>
+                        <button class="question-number" onclick="focusQuestion(22)">22</button>
+                        <button class="question-number" onclick="focusQuestion(23)">23</button>
+                        <button class="question-number" onclick="focusQuestion(24)">24</button>
+                        <button class="question-number" onclick="focusQuestion(25)">25</button>
+                        <button class="question-number" onclick="focusQuestion(26)">26</button>
+                    </div>
+                </div>
+                <div class="part-nav-item">
+                    <button class="part-button" onclick="switchPart(2)" id="part3Btn">Part 3</button>
+                    <div class="question-numbers hidden" id="part3Questions">
+                        <button class="question-number" onclick="focusQuestion(27)">27</button>
+                        <button class="question-number" onclick="focusQuestion(28)">28</button>
+                        <button class="question-number" onclick="focusQuestion(29)">29</button>
+                        <button class="question-number" onclick="focusQuestion(30)">30</button>
+                        <button class="question-number" onclick="focusQuestion(31)">31</button>
+                        <button class="question-number" onclick="focusQuestion(32)">32</button>
+                        <button class="question-number" onclick="focusQuestion(33)">33</button>
+                        <button class="question-number" onclick="focusQuestion(34)">34</button>
+                        <button class="question-number" onclick="focusQuestion(35)">35</button>
+                        <button class="question-number" onclick="focusQuestion(36)">36</button>
+                    </div>
+                </div>
+                <div class="part-nav-item">
+                    <button class="part-button" onclick="switchPart(3)" id="part4Btn">Part 4</button>
+                    <div class="question-numbers hidden" id="part4Questions">
+                        <button class="question-number" onclick="focusQuestion(37)">37</button>
+                        <button class="question-number" onclick="focusQuestion(38)">38</button>
+                        <button class="question-number" onclick="focusQuestion(39)">39</button>
+                        <button class="question-number" onclick="focusQuestion(40)">40</button>
+                        <button class="question-number" onclick="focusQuestion(41)">41</button>
+                        <button class="question-number" onclick="focusQuestion(42)">42</button>
+                        <button class="question-number" onclick="focusQuestion(43)">43</button>
+                        <button class="question-number" onclick="focusQuestion(44)">44</button>
+                        <button class="question-number" onclick="focusQuestion(45)">45</button>
+                        <button class="question-number" onclick="focusQuestion(46)">46</button>
+                        <button class="question-number" onclick="focusQuestion(47)">47</button>
+                        <button class="question-number" onclick="focusQuestion(48)">48</button>
+                        <button class="question-number" onclick="focusQuestion(49)">49</button>
+                    </div>
+                </div>
+            </div>
+            <button class="nav-arrow" onclick="nextPart()" id="nextButton">
+                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+            </button>
+        </div>
+        <!-- Results Modal -->
+        <div id="resultsModal" class="results-modal hidden">
+            <div class="results-content">
+                <h2 class="results-title">Test Results</h2>
+                <div class="score-summary">
+                    <div class="score-item">
+                        <div class="score-number" id="totalScore">0/49</div>
+                        <div class="score-label">Total Score</div>
+                    </div>
+                    <div class="score-item">
+                        <div class="score-number" id="part1Score">0/13</div>
+                        <div class="score-label">Part 1</div>
+                    </div>
+                    <div class="score-item">
+                        <div class="score-number" id="part2Score">0/13</div>
+                        <div class="score-label">Part 2</div>
+                    </div>
+                    <div class="score-item">
+                        <div class="score-number" id="part3Score">0/10</div>
+                        <div class="score-label">Part 3</div>
+                    </div>
+                    <div class="score-item">
+                        <div class="score-number" id="part4Score">0/13</div>
+                        <div class="score-label">Part 4</div>
+                    </div>
+                </div>
+                <button class="close-button" onclick="closeResults()">Close Results</button>
+            </div>
+        </div>
+        <!-- Highlight Buttons -->
+        <button id="highlight-btn">Highlight</button>
+        <button id="remove-highlight-btn">Remove</button>
+        <!-- Script -->
+        <script>
+            // Global variables
+            let currentPart = 0;
+            let answers = {};
+            let testSubmitted = false;
+            let lastSelection = null;
+            let highlightTarget = null;
+
+            // Correct Answers
+            const correctAnswers = {
+                1: "international",
+                2: "October 18",
+                3: "east",
+                4: "yellow",
+                5: "582 HTI",
+                6: "Winter",
+                7: "GERRALONG",
+                8: "0961275331",
+                9: "complete",
+                10: "juice",
+                11: "lights",
+                12: "box",
+                13: "radio",
+                14: ["D", "E"],
+                15: ["D", "E"],
+                16: ["C", "D"],
+                17: ["C", "D"],
+                18: ["A", "E"],
+                19: ["A", "E"],
+                20: "J",
+                21: "F",
+                22: "C",
+                23: "E",
+                24: "B",
+                25: "G",
+                26: "A",
+                27: "B",
+                28: "C",
+                29: "B",
+                30: "C",
+                31: "B",
+                32: "H",
+                33: "D",
+                34: "F",
+                35: "A",
+                36: "I",
+                37: "brain",
+                38: "experience",
+                39: "sound",
+                40: "cells",
+                41: "emotion",
+                42: "marketing",
+                43: "communication",
+                44: "taste",
+                45: "names",
+                46: "cool",
+                47: "function",
+                48: "manufacturing",
+                49: "blood"
+            };
+
+            // Test Section Data
+            const testData = [
+                { title: "PART 1", instructions: "Questions 1-13", description: "Complete the form below. Write ONE WORD AND/OR A NUMBER for each answer.", questionRange: "1–13" },
+                { title: "PART 2", instructions: "Questions 14-26", description: "Iron River Food Festival", questionRange: "14–26" },
+                { title: "PART 3", instructions: "Questions 27-36", description: "Food Science", questionRange: "27–36" },
+                { title: "PART 4", instructions: "Questions 37-49", description: "The Perception of Color", questionRange: "37–49" }
+            ];
+
+            // Initialize on load
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    document.getElementById('loadingScreen').classList.add('hidden');
+                    document.getElementById('startScreen').classList.remove('hidden');
+                }, 3000);
+            });
+
+            function startTest() {
+                document.getElementById('startScreen').classList.add('hidden');
+                document.getElementById('testInterface').classList.remove('hidden');
+                updatePartDisplay();
+                updateNavigation();
+                initializeHighlighting();
+            }
+
+            function switchPart(partIndex) {
+                currentPart = partIndex;
+                updatePartDisplay();
+                updateNavigation();
+            }
+
+            function nextPart() {
+                if (currentPart < testData.length - 1) {
+                    switchPart(currentPart + 1);
+                }
+            }
+
+            function updatePartDisplay() {
+                const partData = testData[currentPart];
+                document.getElementById('partTitle').textContent = partData.title;
+                document.getElementById('partInstructions').textContent = partData.instructions;
+                document.getElementById('questionsTitle').textContent = `Questions ${partData.questionRange}`;
+                document.getElementById('questionsDescription').textContent = partData.description;
+                for (let i = 1; i <= 4; i++) {
+                    document.getElementById(`part${i}Content`).classList.add('hidden');
+                }
+                document.getElementById(`part${currentPart + 1}Content`).classList.remove('hidden');
+            }
+
+            function updateNavigation() {
+                for (let i = 1; i <= 4; i++) {
+                    const btn = document.getElementById(`part${i}Btn`);
+                    btn.classList.toggle('active', i === currentPart + 1);
+                }
+                for (let i = 1; i <= 4; i++) {
+                    const nums = document.getElementById(`part${i}Questions`);
+                    nums.classList.toggle('hidden', i !== currentPart + 1);
+                }
+                document.getElementById('nextButton').disabled = (currentPart === 3);
+            }
+
+            function focusQuestion(qNum) {
+                const el = document.getElementById(`q${qNum}`);
+                if (el) {
+                    el.focus();
+                    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+
+            function saveAnswer(qId, value) {
+                answers[qId] = value;
+            }
+
+            function saveMultipleAnswer(qIds, checkbox) {
+                const groupName = checkbox.name;
+                const selected = Array.from(document.querySelectorAll(`input[name="${groupName}"]:checked`)).map(input => input.value);
+                qIds.forEach((qId, index) => {
+                    answers[qId] = selected[index] || '';
+                });
+            }
+
+            function submitTest() {
+                if (testSubmitted) return;
+                testSubmitted = true;
+                document.getElementById('submitBtn').disabled = true;
+                const results = checkAnswers();
+                showResults(results);
+                highlightAnswers();
+                showCorrectAnswers();
+            }
+
+            function checkAnswers() {
+                let totalCorrect = 0;
+                let partScores = [0, 0, 0, 0];
+                let detailedResults = [];
+
+                // Handle questions 1–49
+                for (let i = 1; i <= 49; i++) {
+                    let isCorrect = false;
+                    let userAnswer = (answers[i] || '').trim();
+                    let correctAnswer = correctAnswers[i];
+
+                    // Handle questions 14–19 (multiple-choice pairs)
+                    if (i >= 14 && i <= 19) {
+                        const selected = i <= 15 ? [answers[14] || '', answers[15] || ''].filter(a => a)
+                            : i <= 17 ? [answers[16] || '', answers[17] || ''].filter(a => a)
+                                : [answers[18] || '', answers[19] || ''].filter(a => a);
+                        let score = 0;
+                        const correct = correctAnswers[i <= 15 ? 14 : i <= 17 ? 16 : 18];
+                        if (correct.length === 2) {
+                            if (selected.includes(correct[0]) && selected.includes(correct[1])) {
+                                score = 2;
+                                isCorrect = true;
+                            } else if (selected.includes(correct[0]) || selected.includes(correct[1])) {
+                                score = 1;
+                                isCorrect = true;
+                            }
+                        }
+                        if (i === 14 || i === 16 || i === 18) {
+                            partScores[1] += score;
+                            totalCorrect += score;
+                        }
+                        correctAnswer = correct.join(', ');
+                        userAnswer = selected.join(', ') || 'No answer';
+                    }
+                    // Handle single-answer questions
+                    else {
+                        const user = userAnswer.toLowerCase();
+                        const correct = Array.isArray(correctAnswer) ? correctAnswer.join(', ').toLowerCase() : (correctAnswer || '').trim().toLowerCase();
+                        isCorrect = user === correct && correct !== '';
+                        if (isCorrect) {
+                            if (i <= 13) partScores[0]++;
+                            else if (i <= 26) partScores[1]++;
+                            else if (i <= 36) partScores[2]++;
+                            else partScores[3]++;
+                            totalCorrect++;
+                        }
+                        userAnswer = userAnswer || 'No answer';
+                        correctAnswer = correctAnswer || 'Unknown';
+                    }
+
+                    detailedResults.push({ questionId: i, userAnswer, correctAnswer, isCorrect });
+                }
+
+                window.testResults = detailedResults;
+                return { totalCorrect, partScores, detailedResults };
+            }
+
+            function showCorrectAnswers() {
+                document.querySelectorAll('.answer-feedback').forEach(el => el.remove());
+
+                for (let i = 1; i <= 49; i++) {
+                    let userAnswer = (answers[i] || '').trim();
+                    let correctAnswer = Array.isArray(correctAnswers[i]) ? correctAnswers[i].join(', ') : correctAnswers[i] || 'Unknown';
+                    let isCorrect = false;
+
+                    if (i >= 14 && i <= 19) {
+                        const selected = i <= 15 ? [answers[14] || '', answers[15] || ''].filter(a => a)
+                            : i <= 17 ? [answers[16] || '', answers[17] || ''].filter(a => a)
+                                : [answers[18] || '', answers[19] || ''].filter(a => a);
+                        const correct = correctAnswers[i <= 15 ? 14 : i <= 17 ? 16 : 18];
+                        isCorrect = correct.length === 2 && (selected.includes(correct[0]) || selected.includes(correct[1]));
+                        userAnswer = selected.join(', ') || 'No answer';
+                        correctAnswer = correct.join(', ');
+                        if (i === 14 || i === 16 || i === 18) {
+                            const groupName = i === 14 ? 'q14_15' : i === 16 ? 'q16_17' : 'q18_19';
+                            const container = document.querySelector(`input[name="${groupName}"]`).closest('.multiple-choice');
+                            const feedback = document.createElement('div');
+                            feedback.className = 'answer-feedback';
+                            feedback.style.padding = '8px';
+                            feedback.style.margin = '6px 0';
+                            feedback.style.fontSize = '14px';
+                            feedback.style.borderRadius = '4px';
+                            feedback.style.backgroundColor = isCorrect ? '#d4edda' : '#f8d7da';
+                            feedback.style.color = isCorrect ? '#155724' : '#721c24';
+                            feedback.innerHTML = isCorrect
+                                ? `<strong>✓ Correct${selected.length === 2 && selected.includes(correct[0]) && selected.includes(correct[1]) ? ' (Both)' : ' (At least one)'}</strong> You chose: <em>${userAnswer}</em>`
+                                : `<strong>✗ Incorrect.</strong> You chose: <em>${userAnswer}</em><br><strong>Correct:</strong> <em>${correctAnswer}</em>`;
+                            container.appendChild(feedback);
+                        }
+                        continue;
+                    }
+
+                    if (i >= 27 && i <= 30) {
+                        const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                        if (selected) {
+                            const container = selected.closest('.choice-item').parentNode;
+                            userAnswer = selected.value;
+                            isCorrect = userAnswer === correctAnswers[i];
+                            const feedback = document.createElement('div');
+                            feedback.className = 'answer-feedback';
+                            feedback.style.padding = '8px';
+                            feedback.style.margin = '6px 0';
+                            feedback.style.fontSize = '14px';
+                            feedback.style.borderRadius = '4px';
+                            feedback.style.backgroundColor = isCorrect ? '#d4edda' : '#f8d7da';
+                            feedback.style.color = isCorrect ? '#155724' : '#721c24';
+                            feedback.innerHTML = isCorrect
+                                ? `<strong>✓ Correct!</strong> You chose: <em>${userAnswer}</em>`
+                                : `<strong>✗ Incorrect.</strong> You chose: <em>${userAnswer}</em><br><strong>Correct:</strong> <em>${correctAnswer}</em>`;
+                            container.appendChild(feedback);
+                        }
+                        continue;
+                    }
+
+                    const input = document.getElementById(`q${i}`);
+                    if (input) {
+                        isCorrect = userAnswer.toLowerCase() === (correctAnswers[i] || '').toLowerCase() && correctAnswers[i] !== '';
+                        userAnswer = userAnswer || 'No answer';
+                        const container = input.parentNode;
+                        const feedback = document.createElement('div');
+                        feedback.className = 'answer-feedback';
+                        feedback.style.padding = '8px';
+                        feedback.style.margin = '6px 0';
+                        feedback.style.fontSize = '14px';
+                        feedback.style.borderRadius = '4px';
+                        feedback.style.backgroundColor = isCorrect ? '#d4edda' : '#f8d7da';
+                        feedback.style.color = isCorrect ? '#155724' : '#721c24';
+                        feedback.innerHTML = isCorrect
+                            ? `<strong>✓ Correct!</strong> You chose: <em>${userAnswer}</em>`
+                            : `<strong>✗ Incorrect.</strong> You chose: <em>${userAnswer}</em><br><strong>Correct:</strong> <em>${correctAnswer}</em>`;
+                        container.appendChild(feedback);
+                    }
+                }
+            }
+
+            function highlightAnswers() {
+                document.querySelectorAll('.correct, .incorrect').forEach(el => {
+                    el.classList.remove('correct', 'incorrect');
+                });
+                document.querySelectorAll('.choice-item').forEach(el => {
+                    el.classList.remove('correct', 'incorrect');
+                });
+
+                for (let i = 1; i <= 49; i++) {
+                    if (i >= 14 && i <= 19) continue;
+                    const input = document.getElementById(`q${i}`);
+                    if (input) {
+                        const user = (answers[i] || '').trim().toLowerCase();
+                        const correct = (correctAnswers[i] || '').trim().toLowerCase();
+                        const isCorrect = user === correct && correct !== '';
+                        input.classList.add(isCorrect ? 'correct' : 'incorrect');
+                    }
+                }
+
+                for (let qId = 27; qId <= 30; qId++) {
+                    document.querySelectorAll(`input[name="q${qId}"]`).forEach(radio => {
+                        const item = radio.closest('.choice-item');
+                        if (radio.value === correctAnswers[qId]) {
+                            item.classList.add('correct');
+                        } else if (radio.checked) {
+                            item.classList.add('incorrect');
+                        }
+                    });
+                }
+
+                ['q14_15', 'q16_17', 'q18_19'].forEach((groupName, idx) => {
+                    const qId = [14, 16, 18][idx];
+                    document.querySelectorAll(`input[name="${groupName}"]`).forEach(checkbox => {
+                        const item = checkbox.closest('.choice-item');
+                        if (correctAnswers[qId].includes(checkbox.value)) {
+                            item.classList.add('correct');
+                        } else if (checkbox.checked) {
+                            item.classList.add('incorrect');
+                        }
+                    });
+                });
+            }
+
+            function showResults(results) {
+                document.getElementById('totalScore').textContent = `${results.totalCorrect}/49`;
+                document.getElementById('part1Score').textContent = `${results.partScores[0]}/13`;
+                document.getElementById('part2Score').textContent = `${results.partScores[1]}/13`;
+                document.getElementById('part3Score').textContent = `${results.partScores[2]}/10`;
+                document.getElementById('part4Score').textContent = `${results.partScores[3]}/13`;
+                document.getElementById('resultsModal').classList.remove('hidden');
+            }
+
+            function closeResults() {
+                document.getElementById('resultsModal').classList.add('hidden');
+            }
+
+            function initializeHighlighting() {
+                const highlightBtn = document.getElementById('highlight-btn');
+                const removeBtn = document.getElementById('remove-highlight-btn');
+                const panel = document.querySelector('.questions-section');
+
+                function getSelection() {
+                    const sel = window.getSelection();
+                    if (sel.rangeCount && !sel.isCollapsed && panel.contains(sel.getRangeAt(0).commonAncestorContainer)) {
+                        return sel.getRangeAt(0);
+                    }
+                    return null;
+                }
+
+                highlightBtn.addEventListener('click', () => {
+                    const range = getSelection();
+                    if (range) {
+                        const span = document.createElement('span');
+                        span.className = 'highlight';
+                        span.appendChild(range.extractContents());
+                        range.insertNode(span);
+                        window.getSelection().removeAllRanges();
+                        highlightBtn.style.display = 'none';
+                    }
+                });
+
+                removeBtn.addEventListener('click', () => {
+                    if (highlightTarget) {
+                        const parent = highlightTarget.parentNode;
+                        while (highlightTarget.firstChild) parent.insertBefore(highlightTarget.firstChild, highlightTarget);
+                        parent.removeChild(highlightTarget);
+                        removeBtn.style.display = 'none';
+                    }
+                });
+
+                document.addEventListener('selectionchange', () => {
+                    const range = getSelection();
+                    if (range) {
+                        const rect = range.getBoundingClientRect();
+                        highlightBtn.style.top = (window.scrollY + rect.top - 35) + 'px';
+                        highlightBtn.style.left = (window.scrollX + rect.left) + 'px';
+                        highlightBtn.style.display = 'block';
+                    } else {
+                        highlightBtn.style.display = 'none';
+                    }
+                });
+
+                panel.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('highlight')) {
+                        highlightTarget = e.target;
+                        const rect = e.target.getBoundingClientRect();
+                        removeBtn.style.top = (window.scrollY + rect.top - 35) + 'px';
+                        removeBtn.style.left = (window.scrollX + rect.left) + 'px';
+                        removeBtn.style.display = 'block';
+                    }
+                });
+
+                document.addEventListener('mousedown', (e) => {
+                    if (!['highlight-btn', 'remove-highlight-btn'].includes(e.target.id)) {
+                        highlightBtn.style.display = 'none';
+                        removeBtn.style.display = 'none';
+                    }
+                });
+            }
+        </script>
+    </div>
+</body>
+
+</html>

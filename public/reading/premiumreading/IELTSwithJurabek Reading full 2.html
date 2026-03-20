@@ -1,0 +1,1929 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            overflow: hidden;
+        }
+
+        .loading-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f9fafb;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 9999;
+        }
+
+        .loading-content {
+            text-align: center;
+        }
+
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #2563eb;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-title {
+            font-size: 1.2rem;
+            color: #6b7280;
+            margin-bottom: 20px;
+        }
+
+        .loading-subtitle {
+            font-size: 1rem;
+            color: #9ca3af;
+        }
+
+        .start-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f9fafb;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 9998;
+        }
+
+        .start-content {
+            text-align: center;
+        }
+
+        .start-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 24px;
+        }
+
+        .start-subtitle {
+            color: #6b7280;
+            margin-bottom: 24px;
+        }
+
+        .start-button {
+            padding: 12px 32px;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .start-button:hover {
+            background-color: #1d4ed8;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            width: 100vw;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            background-color: #ffffff;
+            color: #333;
+            padding: 8px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            flex-shrink: 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .passage-info {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #2d3748;
+        }
+
+        .timer {
+            background-color: rgba(255, 193, 193, 0.5);
+            padding: 6px 12px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s;
+            min-width: 80px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #c53030;
+            border: 1px solid rgba(255, 120, 120, 0.3);
+        }
+
+        .timer.warning {
+            color: #9b2c2c;
+            background-color: rgba(254, 178, 178, 0.7);
+            border-color: rgba(245, 101, 101, 0.5);
+        }
+
+        .logo-area {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+            cursor: pointer;
+        }
+
+        .logo-area:hover {
+            background-color: #0056b3;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.4);
+        }
+
+        .logo-area i {
+            font-size: 1.1rem;
+        }
+
+        .progress-container {
+            background-color: #f8f9fa;
+            padding: 4px 20px;
+            z-index: 100;
+            flex-shrink: 0;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .progress-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .progress-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 6px;
+        }
+
+        .progress-item {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4a5568;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            border: 1px solid #cbd5e0;
+        }
+
+        .progress-item.current {
+            background-color: #4299e1;
+            color: white;
+            transform: scale(1.1);
+            border-color: #2b6cb0;
+        }
+
+        .progress-item.answered {
+            background-color: #9ae6b4;
+            color: #22543d;
+            border-color: #68d391;
+        }
+
+        .progress-item.correct {
+            background-color: #48bb78;
+            color: white;
+            border-color: #38a169;
+        }
+
+        .progress-item.incorrect {
+            background-color: #fed7d7;
+            color: #c53030;
+            border-color: #feb2b2;
+        }
+
+        .progress-item:hover {
+            background-color: #cbd5e0;
+            transform: scale(1.05);
+        }
+
+        .btn {
+            padding: 6px 14px;
+            border: 1px solid #cbd5e0;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.95rem;
+            background-color: #f7fafc;
+            color: #4a5568;
+        }
+
+        .btn i {
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background-color: #edf2f7;
+            border-color: #a0aec0;
+        }
+
+        .btn-primary {
+            background-color: #f7fafc;
+            color: #4a5568;
+            border: 1px solid #cbd5e0;
+        }
+
+        .btn-primary:hover {
+            background-color: #edf2f7;
+            border-color: #a0aec0;
+        }
+
+        .btn-secondary {
+            background-color: #f7fafc;
+            color: #4a5568;
+            border: 1px solid #cbd5e0;
+        }
+
+        .btn-secondary:hover {
+            background-color: #edf2f7;
+            border-color: #a0aec0;
+        }
+
+        .btn-submit {
+            background-color: #48bb78;
+            color: white;
+            font-weight: 900;
+            border: 1px solid #38a169;
+        }
+
+        .btn-submit:hover {
+            background-color: #38a169;
+            border-color: #2f855a;
+        }
+
+        .btn-submit:disabled {
+            background-color: #9ae6b4;
+            color: #718096;
+            cursor: not-allowed;
+            border: 1px solid #68d391;
+        }
+
+        .main-content {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .passage-container {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: #fafafa;
+            position: relative;
+        }
+
+        .resizer {
+            width: 4px;
+            background-color: #cbd5e0;
+            cursor: col-resize;
+            position: relative;
+            transition: background-color 0.2s;
+        }
+
+        .resizer:hover {
+            background-color: #a0aec0;
+        }
+
+        .resizer::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 30px;
+            height: 60px;
+            background-color: rgba(203, 213, 224, 0.5);
+            border-radius: 4px;
+            pointer-events: none;
+        }
+
+        .questions-container {
+            width: 40%;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: white;
+            border-left: 1px solid #e2e8f0;
+        }
+
+        .passage {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .passage h2 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .passage-content p {
+            margin-top: 15px;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .passage h2 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .passage p {
+            margin-top: 20px;
+            margin-bottom: 25px;
+            text-align: justify;
+        }
+
+        .question-section {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .question {
+            margin-bottom: 25px;
+            padding: 6px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            background-color: #ffffff;
+            transition: box-shadow 0.2s;
+        }
+
+        .question:hover {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .question-text {
+            font-weight: 500;
+            margin-bottom: 12px;
+            color: #2d3748;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .option:hover {
+            background-color: #f7fafc;
+            border-color: #cbd5e0;
+        }
+
+        .option input {
+            margin-right: 2px;
+            width: 16px;
+            height: 16px;
+        }
+
+        .input-field {
+            padding: 8px 10px;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            width: 20%;
+            margin-top: 5px;
+            font-size: 0.9rem;
+        }
+
+        .input-field:focus {
+            border-color: #4299e1;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(66, 153, 225, 0.2);
+        }
+
+        select.input-field {
+            padding: 8px 10px;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            width: 20%;
+            margin-top: 5px;
+            font-size: 0.9rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.9rem;
+        }
+
+        th,
+        td {
+            border: 1px solid #e2e8f0;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f1f5f9;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .answer-indicator {
+            background-color: #e6fffa;
+            border: 1px solid #38b2ac;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        .answer-indicator.correct {
+            background-color: #e6fffa;
+            border-color: #38b2ac;
+            color: #234e52;
+        }
+
+        .answer-indicator.incorrect {
+            background-color: #fed7d7;
+            border-color: #fc8181;
+            color: #742a2a;
+        }
+
+        .question-group {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .question-group-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #2d3748;
+            font-size: 1rem;
+        }
+
+        .highlight {
+            background-color: #ffff00;
+            cursor: pointer;
+        }
+
+        #highlight-btn,
+        #remove-highlight-btn {
+            position: absolute;
+            z-index: 9999;
+            display: none;
+            padding: 6px 12px;
+            font-size: 14px;
+            border: 1px solid #888;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .score-display {
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #2d3748;
+        }
+
+        .score-breakdown {
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .score-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 0.95rem;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+
+            .questions-container {
+                width: 100%;
+                border-left: none;
+                border-top: 1px solid #e2e8f0;
+            }
+
+            .resizer {
+                width: 100%;
+                height: 4px;
+                cursor: row-resize;
+            }
+
+            .resizer::before {
+                width: 60px;
+                height: 30px;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            .progress-item {
+                width: 32px;
+                height: 32px;
+                font-size: 0.85rem;
+            }
+
+            .passage-info {
+                font-size: 0.9rem;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px;
+            }
+
+            .logo-area {
+                order: 1;
+            }
+
+            .passage-info {
+                order: 2;
+            }
+
+            .timer {
+                order: 3;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .progress-item {
+                width: 32px;
+                height: 32px;
+                font-size: 0.85rem;
+            }
+
+            .passage-info {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+
+
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <h2 class="loading-title">Your test will begin shortly</h2>
+            <p class="loading-subtitle">Please wait</p>
+        </div>
+    </div>
+
+<!-- Start Screen -->
+<div id="startScreen" class="start-screen hidden">
+    <div class="start-content">
+        <h1 class="start-title">IELTSwithShohrux</h1>
+        <p class="start-subtitle">Ready to begin your reading test?</p>
+        <button class="start-button" onclick="startTest()">Start Test</button>
+    </div>
+</div>
+
+<!-- Test Container -->
+<div class="container hidden" id="testContainer">
+    <!-- Header -->
+    <header>
+        <div class="passage-info">IELTSwithShohrux</div>
+
+        <!-- timer -->
+        <div class="timer" id="globalTimer">
+            <i class="fas fa-clock"></i>
+            <span>60:00</span>
+        </div>
+
+        <!-- promo button -->
+        <div class="logo-area" onclick="window.open('https://t.me/muminov_bar', '_blank')">
+            <i class="fas fa-paper-plane"></i>
+            <span>Click for more TESTS</span>
+        </div>
+
+        <div class="passage-info" id="headerPassageTitle">Passage 1 of 3</div>
+    </header>
+
+    <!-- Floating highlight buttons -->
+    <button id="highlight-btn" type="button">Highlight</button>
+    <button id="remove-highlight-btn" type="button">Remove Highlight</button>
+
+    <div class="main-content">
+        <!-- ===== PASSAGE 1 ===== -->
+        <div class="passage-container" id="p1_passagePanel" role="region" aria-label="Reading Passage">
+            <h2 class="section-title">READING PASSAGE 1</h2>
+            <div class="passage-content" id="passage1">
+                <h3>Dyes and fabric dyeing</h3>
+                <p><em>Putting color into clothes</em></p>
+
+                <p>When primitive people began using their hands to be creative, they began to add color to
+                    their lives. They used natural materials like ochre to stain animal hides, decorate shells and
+                    feathers, and paint on the walls of caves. Ochre is a naturally occurring brownish yellow
+                    earth containing iron oxide. Scientists have been able to date the black, white, yellow and
+                    reddish pigments made from ochre, used in cave paintings, to over 15,000 BCE. With the
+                    development of fixed settlements and agriculture, around 7,000 to 2,000 BCE, people began
+                    to produce fabrics, and used natural substances such as ochre to color them.</p>
+
+                <p>Natural dyes, or dyes made from substances found in nature, can be broken down into two
+                    categories: substantive and adjective. Substantive, or direct dyes, become fixed to fibers to
+                    without the aid of any other chemicals or additives. Adjective dyes require a mordant
+                    (usually a metal salt) which acts as a fixative and prevents the color from washing out or
+                    being bleached by sunlight. Most natural dyes are adjective dyes, and require the
+                    application of a mordant solution to the fibers at some point in the dyeing process.</p>
+
+                <p>Historically, three natural fibers were used in making fabrics: wool, silk and cotton. Wool
+                    fabric remains have been found in Europe dating back to 2,000 BCE. It was a common
+                    medieval fabric worn in both dyed and natural colors and was processed by both
+                    professional manufacturers and by people in their own homes. Silk was imported from
+                    China to Europe, and in the 14th to 16th centuries major silk manufacturing centers were
+                    set up in France, Spain and Italy. These silk production centers also became centers of dye
+                    technology, as most silk was dyed and required the highest quality dyes available. Cotton
+                    was considered a luxury fabric in Europe, as it was imported all the way from India and was
+                    dyed before it was shipped. Cotton was also valued because of the brightness and
+                    colorfastness of the dyes used to color it.</p>
+
+                <p>Dyes that gave fabrics a good bright color and were able to withstand washing and
+                    exposure to sunlight without losing their color were highly prized. The names of some of
+                    these valued and traded colors are still familiar today. The color known as Tyrian purple, for
+                    example, originated in the Mediterranean 2,000 years ago, and cochineal is the name given
+                    to the red dye from Latin America. Both of these colors came from animals; the mucus
+                    found in certain species of shellfish produced the deep rich Tyrian purple and cochineal was
+                    extracted from insects. Two other natural sources of color were saffron and indigo. Saffron,
+                    the base of yellow dyes, comes from the flowers of a particular kind of crocus which is
+                    thought to have first been cultivated on Crete in the eastern Mediterranean. The leaves of a
+                    plant native to India were used to produce indigo, which was the main source of the color
+                    blue.</p>
+
+                <p>As societies developed over the centuries the demand for dyes and dyed fabric grew, and
+                    by the 17th century a world-wide shipping and trading network was in place, allowing
+                    dyestuffs from all parts of the world to be brought to Europe. This meant that numerous
+                    dyestuffs could be blended to create a variety of colors for the rich and powerful. Fiber
+                    dyeing in the lower classes was a bit more restrictive. Without the money to buy exotic
+                    imported dyes, clothing in the countryside tended to be black, brown, grey and tan. Country
+                    people had some resources they could use to get a wider range of colors. They had always
+                    used local plants as food, and many of these plants were also used as medicines and in
+                    some cases as sources of dyes. Home dyers used any plants they could find that would give
+                    a good color. People who picked blackberries to make jam soon recognized this wild fruit as
+                    a source for a blue dye. Washing beehives in preparation for making mead (a popular drink
+                    containing honey) yielded a liquid that could be used as a yellow dye. The mosses which
+                    grow in many parts of Europe were used to produce green dye.</p>
+
+                <p>With the tremendous rise of interest in chemistry in the mid-19th century, several
+                    important innovations in dyeing came about. WH Perkin, a student of celebrated European
+                    scientist Wilhelm von Hofmann, accidentally discovered the first synthetic dye, later called
+                    mauve. The color was so popular that Perkin was able to open a factory of his own and
+                    went on to develop more synthetic dye colors. Synthetic dye production grew in Europe,
+                    and hardly a year passed until the end of the century without a new synthetic dye being
+                    patented.</p>
+
+                <p>Eventually, the old natural dyes lost popularity in favor of the newer synthetic ones and
+                    now the use of natural dyes on a commercial scale only exists in a few remote areas where
+                    people have either little access to synthetic dyes or a vested interest in retaining their
+                    ancient dyeing customs.</p>
+            </div>
+        </div>
+
+        <!-- Resizer -->
+        <div class="resizer" id="resizer"></div>
+
+        <!-- Questions for Passage 1 -->
+        <div class="questions-container" id="p1_questionsPanel" role="region" aria-label="Questions">
+            <h2 class="section-title">Questions 1–13</h2>
+            <p>Do the following statements agree with the information given in Reading Passage 1?</p>
+
+            <div class="question-group">
+                <div class="question-group-title">Questions 1–8</div>
+                <div class="question" data-question="1">
+                    <div class="question-text">1 Ochre was used in paintings before it was used in fabric dyes.</div>
+                    <div class="options"><label><input type="radio" name="q1" value="TRUE">
+                            TRUE</label><label><input type="radio" name="q1" value="FALSE">
+                            FALSE</label><label><input type="radio" name="q1" value="NOT GIVEN"> NOT GIVEN</label>
+                    </div>
+                </div>
+                <div class="question" data-question="2">
+                    <div class="question-text">2 Natural dyes that need a mordant are rare.</div>
+                    <div class="options"><label><input type="radio" name="q2" value="TRUE">
+                            TRUE</label><label><input type="radio" name="q2" value="FALSE">
+                            FALSE</label><label><input type="radio" name="q2" value="NOT GIVEN"> NOT GIVEN</label>
+                    </div>
+                </div>
+                <div class="question" data-question="3">
+                    <div class="question-text">3 In medieval times people sometimes wore fabric made of undyed wool.</div>
+                    <div class="options"><label><input type="radio" name="q3" value="TRUE">
+                            TRUE</label><label><input type="radio" name="q3" value="FALSE">
+                            FALSE</label><label><input type="radio" name="q3" value="NOT GIVEN"> NOT GIVEN</label>
+                    </div>
+                </div>
+                <div class="question" data-question="4">
+                    <div class="question-text">4 Silk has always been more expensive than cotton and wool.</div>
+                    <div class="options"><label><input type="radio" name="q4" value="TRUE">
+                            TRUE</label><label><input type="radio" name="q4" value="FALSE">
+                            FALSE</label><label><input type="radio" name="q4" value="NOT GIVEN"> NOT GIVEN</label>
+                    </div>
+                </div>
+                <div class="question" data-question="5">
+                    <div class="question-text">5 Cotton imported from India was dyed upon arrival in Europe.</div>
+                    <div class="options"><label><input type="radio" name="q5" value="TRUE">
+                            TRUE</label><label><input type="radio" name="q5" value="FALSE">
+                            FALSE</label><label><input type="radio" name="q5" value="NOT GIVEN"> NOT GIVEN</label>
+                    </div>
+                </div>
+                <div class="question" data-question="6">
+                    <div class="question-text">6 Perkin became more famous than his teacher, von Hofmann.</div>
+                    <div class="options"><label><input type="radio" name="q6" value="TRUE">
+                            TRUE</label><label><input type="radio" name="q6" value="FALSE">
+                            FALSE</label><label><input type="radio" name="q6" value="NOT GIVEN"> NOT GIVEN</label>
+                    </div>
+                </div>
+                <div class="question" data-question="7">
+                    <div class="question-text">7 Very few synthetic dyes were produced in Europe in the second half of the 19th
+                        century.</div>
+                    <div class="options"><label><input type="radio" name="q7" value="TRUE">
+                            TRUE</label><label><input type="radio" name="q7" value="FALSE">
+                            FALSE</label><label><input type="radio" name="q7" value="NOT GIVEN"> NOT GIVEN</label>
+                    </div>
+                </div>
+                <div class="question" data-question="8">
+                    <div class="question-text">8 Today the commercial production of natural dyes is limited to a small number of
+                        isolated communities.</div>
+                    <div class="options"><label><input type="radio" name="q8" value="TRUE">
+                            TRUE</label><label><input type="radio" name="q8" value="FALSE">
+                            FALSE</label><label><input type="radio" name="q8" value="NOT GIVEN"> NOT GIVEN</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="question-group-title">Questions 9–13</div>
+                <p>Complete the notes below.
+
+                    Choose <strong>ONE WORD ONLY</strong> from the passage for each answer.</p>
+
+                <div class="question" data-question="9">
+                    <div class="question-text">Highly valued dyes
+
+                        Tyrian purple
+
+                        - mucus from <span class="question-text">9</span> <input type="text" name="q9" maxlength="30">
+                        …………………………found in the Mediterranean</div>
+                </div>
+                <div class="question" data-question="10">
+                    <div class="question-text">cochineal (a red dye)
+
+                        - made from <span class="question-text">10</span> <input type="text" name="q10" maxlength="30">
+                        …………………………found in Latin America</div>
+                </div>
+                <div class="question" data-question="11">
+                    <div class="question-text">17th century Europe
+
+                        dyes made by country people:
+
+                         <span class="question-text">11</span> <input type="text" name="q11" maxlength="30">
+                        …………………………had two uses
+
+                        - jam
+
+                        - blue dye</div>
+                </div>
+                <div class="question" data-question="12">
+                    <div class="question-text"> liquid from cleaning <span class="question-text">12</span> <input type="text" name="q12" maxlength="30">
+                        …………………………had two uses
+
+                        - making mead
+
+                        - yellow dye</div>
+                </div>
+                <div class="question" data-question="13">
+                    <div class="question-text">19th century Europe
+
+                         progress in study of <span class="question-text">13</span> <input type="text" name="q13" maxlength="30">
+                        …………………………led to synthetic dyes</div>
+                </div>
+            </div>
+        </div> <!-- /p1_questionsPanel -->
+
+        <!-- ===== PASSAGE 2 ===== -->
+        <div class="passage-container hidden" id="p2_passagePanel" role="region" aria-label="Reading Passage">
+            <h2 class="section-title">READING PASSAGE 2</h2>
+            <div class="passage-content" id="passage2">
+                <h3>A mechanical friend for children</h3>
+
+                <p><strong>A</strong> The development of robots that
+                    interact socially with people and assist
+                    them in everyday life has been an
+                    elusive goal of modern science.
+                    Despite impressive advances in the
+                    mechanical aspects of this problem,
+                    producing robots that bond and
+                    socialize with people for sustained
+                    periods of time has proven difficult.
+                    The most successful robots so far have
+                    been storytellers, but they have only
+                    been able to maintain human interest
+                    for a limited time and typically rely on
+                    the robot telling stories that change
+                    over time. In practice, commercially
+                    available robots seldom cross the 10-
+                    hour barrier (i.e. individual users tend
+                    to spend less than a combined total of
+                    10 hours with the robots before losing
+                    interest). This observation is in sharp
+                    contrast to the long-term interactions
+                    and bonding that commonly develop
+                    between humans and their pets.</p>
+
+                <p><strong>B</strong> In a recent study, researchers from the
+                    Institute for Neural Computation in
+                    California introduced a state-of-the-
+                    art social robot into a classroom of 18-
+                    to 24-month-olds for five months as a
+                    way of studying human/robot
+                    interactions. The researchers,
+                    including Fumihide Tanaka and Javier
+                    R Movellan, introduced a toddler-sized
+                    humanoid robot into a classroom at a
+                    childhood education center. One of
+                    the QRIO series of robots, the 58cm
+                    machine, was originally developed by
+                    Sony. 'Children of toddler age were
+                    chosen because they have no
+                    preconceived notions of robots,
+                    according to Tanaka. One of the goals
+                    of the study was to establish whether
+                    it was possible for social robots to
+                    maintain the interest of children
+                    beyond the 10-hour barrier.</p>
+
+                <p><strong>C</strong>The researchers sent instructions to
+                    the robot about every two minutes to
+                    do things like giggle, dance, sit down,
+                    fall down or walk in a certain direction.
+                    The 45 sessions were videotaped, and
+                    interactions between toddlers and the
+                    robot were later analyzed. The results
+                    showed that the quality of those
+                    interactions improved steadily over 27
+                    sessions. The interactions deteriorated
+                    quickly over the next 15 sessions,
+                    when the robot was ordered to
+                    behave in a more limited, predictable
+                    manner. Finally, the human/robot
+                    relations improved in the last three
+                    sessions, after the robot had been
+                    instructed to display its full range of
+                    behaviors.</p>
+
+                <p><strong>D</strong>'Initially the children treated the robot
+                    very differently from the way they
+                    treated each other,' Tanaka said. 'Early
+                    in the study some children cried when
+                    QRIO fell. But a month into the study,
+                    the toddlers helped QRIO stand up by
+                    pushing its back or pulling its hands.'
+                    The most important aspect of
+                    interaction was touch, Tanaka said. At
+                    first the toddlers would touch the
+                    robot on its face, but later on they
+                    would touch it only on its hands and
+                    arms, like they would with other
+                    humans. Another robot-like toy
+                    named Robby, which resembled QRIO
+                    but did not move, was used as a
+                    control in the study. While hugging of
+                    QRIO increased, hugging of Robby
+                    decreased throughout the study.
+                    Furthermore, when QRIO laid down on
+                    the floor as its batteries ran down, a
+                    toddler would put a blanket over his
+                    silver-colored 'friend' and say 'night-
+                    night'. Care- taking behaviors were
+                    frequently observed toward QRIO but
+                    seldom toward Robby.</p>
+
+                <p><strong>E</strong> The study concluded that after 45 days
+                    of immersion in a childcare center
+                    over a period of five months, long-
+                    term bonding and socialization
+                    occurred between toddlers and a
+                    state-of-the-art social robot. Overall,
+                    the interaction between children and
+                    the robot improved over time and the
+                    children progressively treated it more
+                    as a peer than a plaything. 'To my
+                    knowledge, this is the first long-term
+                    study of this sort,' said Ronald Arkin, a
+                    roboticist at po the Georgia Institute
+                    of Technology in the US.</p>
+
+                <p><strong>F</strong> Tanaka and Movellan are now
+                    developing autonomous robots for the
+                    toddler classroom. 'It could have great
+                    potential in educational settings
+                    assisting teachers and enriching the
+                    classroom environment,' Tanaka said.
+                    The researchers hope that more
+                    advanced versions of robots like QRIO
+                    could become personalized tutors to
+                    assist teachers in classrooms. A
+                    robotic tutor could react on the spot
+                    to social wed totoo an cues and
+                    approximate social skills like facial
+                    expression and eye gaze, they said. 'It
+                    is becoming clear that, to achieve this
+                    goal, we are going to [need to] endow
+                    machines with something similar to
+                    emotion, not just traditional forms of
+                    intelligence,' said Movellan.</p>
+
+                <p><strong>G</strong> Associate professor David Powers, an
+                    to sel expert in artificial intelligence
+                    and cognitive science at Flinders
+                    University in South Australia,
+                    commented, 'In this study it is clearly
+                    demonstrated that a limited range of
+                    robot behaviors, however impressive,
+                    is nowhere near as important to
+                    human/robot interaction as being able
+                    to make appropriate responses from a
+                    broad repertoire of behaviors. Ronald
+                    Arkin A was not surprised by the
+                    affection demonstrated by the
+                    toddlers toward the robot. 'Humans
+                    have a tremendous propensity to
+                    bond with artifacts, whether it be a
+                    car, a doll, or a robot,' he said. But he
+                    also cautioned that researchers do not
+                    yet understand the 封 consequences
+                    of increased human/robot interaction.
+                    'Studying how robots and humans
+                    work together can give us insight into
+                    whether this is a good thing or a bad
+                    thing for society,' Arkin said. "We need
+                    to find out what the consequences are
+                    of introducing a robot into a cadre of
+                    children. How will that enhance, or
+                    potentially interfere with, their social
+                    development? Do we really
+                    understand the long-term impact of
+                    having a robot as a childhood friend?'</p>
+            </div>
+        </div>
+
+        <div class="questions-container hidden" id="p2_questionsPanel" role="region" aria-label="Questions">
+            <h2 class="section-title">Questions 14–26</h2>
+
+            <div class="question-group">
+                <div class="question-group-title">Questions 14–18</div>
+                <p>Reading Passage 2 has seven paragraphs, A-G</p>
+                <p>Which paragraph contains the following information?</p>
+                <div class="question" data-question="14">
+                    <div class="question-text">14 a comparison of children's reactions towards different robots</div>
+                    <div class="options"><select name="q14">
+                            <option value="">Select</option>
+                            <option>A</option>
+                            <option>B</option>
+                            <option>C</option>
+                            <option>D</option>
+                            <option>E</option>
+                            <option>F</option>
+                            <option>G</option>
+                        </select></div>
+                </div>
+                <div class="question" data-question="15">
+                    <div class="question-text">15 a speculation about ways robots may be able to communicate</div>
+                    <div class="options"><select name="q15">
+                            <option value="">Select</option>
+                            <option>A</option>
+                            <option>B</option>
+                            <option>C</option>
+                            <option>D</option>
+                            <option>E</option>
+                            <option>F</option>
+                            <option>G</option>
+                        </select></div>
+                </div>
+                <div class="question" data-question="16">
+                    <div class="question-text">16 a description of changes in the way the children physically handled a robot</div>
+                    <div class="options"><select name="q16">
+                            <option value="">Select</option>
+                            <option>A</option>
+                            <option>B</option>
+                            <option>C</option>
+                            <option>D</option>
+                            <option>E</option>
+                            <option>F</option>
+                            <option>G</option>
+                        </select></div>
+                </div>
+                <div class="question" data-question="17">
+                    <div class="question-text">17 a comparison between people's connections with animals and their connections with
+                        robots</div>
+                    <div class="options"><select name="q17">
+                            <option value="">Select</option>
+                            <option>A</option>
+                            <option>B</option>
+                            <option>C</option>
+                            <option>D</option>
+                            <option>E</option>
+                            <option>F</option>
+                            <option>G</option>
+                        </select></div>
+                </div>
+                <div class="question" data-question="18">
+                    <div class="question-text">18 an account of the way one robot was programmed</div>
+                    <div class="options"><select name="q18">
+                            <option value="">Select</option>
+                            <option>A</option>
+                            <option>B</option>
+                            <option>C</option>
+                            <option>D</option>
+                            <option>E</option>
+                            <option>F</option>
+                            <option>G</option>
+                        </select></div>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="question-group-title">Questions 19–23</div>
+                <p>Look at the following statements (Questions 19-23) and the list of people below.</p>
+                <p>Match each statement with the correct person, A, B, C or D.</p>
+                <div class="question" data-question="19">
+                    <div class="question-text">19 In future, robots will not only have to think, but also to show feelings.</div>
+                    <div class="options"><select name="q19">
+                            <option value="">Select</option>
+                            <option value="A">A Fumihide Tanaka</option>
+                            <option value="B">B Javier R Movellan</option>
+                            <option value="C">C Ronald Arkin</option>
+                            <option value="D">D David Powers</option>
+                        </select></div>
+                </div>
+                <div class="question" data-question="20">
+                    <div class="question-text">20 It is uncertain whether more contact between people and robots will be beneficial.</div>
+                    <div class="options"><select name="q20">
+                            <option value="">Select</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                        </select></div>
+                </div>
+                <div class="question" data-question="21">
+                    <div class="question-text">21 Very young children have not yet developed ideas about robots.</div>
+                    <div class="options"><select name="q21">
+                            <option value="">Select</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                        </select></div>
+                </div>
+                <div class="question" data-question="22">
+                    <div class="question-text">22 Robots need to perform a wide variety of actions for people to relate to them.</div>
+                    <div class="options"><select name="q22">
+                            <option value="">Select</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                        </select></div>
+                </div>
+                <div class="question" data-question="23">
+                    <div class="question-text">23 Using robots as an aid in schools may have many benefits.</div>
+                    <div class="options"><select name="q23">
+                            <option value="">Select</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                        </select></div>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="question-group-title">Questions 24–26</div>
+                <p>Complete the sentences below.</p>
+                <p>Choose <strong>ONE WORD ONLY</strong> from the passage for each answer.</p>
+                <div class="question" data-question="24">
+                    <div class="question-text">24 Until recently, robots that were best at holding people's attention were those that
+                        acted as<span class="question-text"><input type="text" name="q24" maxlength="30"></span>………………………</div>
+                </div>
+                <div class="question" data-question="25">
+                    <div class="question-text">25 The children responded to the QRIO robot as a friend or a<span class="question-text"><input type="text" name="q25" maxlength="30"></span>, rather
+                        than as a toy.</div>
+                </div>
+                <div class="question" data-question="26">
+                    <div class="question-text">26 Arkin expected that the children would show<span class="question-text"><input type="text" name="q26" maxlength="30"></span>towards the QRIO robot.</div>
+                </div>
+            </div>
+        </div> <!-- /p2_questionsPanel -->
+
+        <!-- ===== PASSAGE 3 ===== -->
+        <div class="passage-container hidden" id="p3_passagePanel" role="region" aria-label="Reading Passage">
+            <h2 class="section-title">READING PASSAGE 3</h2>
+            <div class="passage-content" id="passage3">
+                <h3>Animals predicting earthquakes?</h3>
+                <p>Surely it is too much to believe that animals can predict earthquakes when we haven't
+                    worked out how to do it ourselves?</p>
+
+                <p>On 26 December 2004, villagers from Bang
+                    Koey in Thailand noticed buffalo on the
+                    beach lift their heads, look out to sea, then
+                    stampede to the top of a nearby hill.
+                    Minutes later, the tsunami struck. Could
+                    these creatures have been sensing early
+                    warning signs of the earthquake that
+                    triggered the Asian tsunami? It is a strange
+                    assertion but the possibility that animals
+                    might hold the answer cannot be ignored,
+                    as a warning system could save many lives.</p>
+
+                <p>The idea that animals can predict
+                    earthquakes has ancient origins. From 373
+                    BC there are stories of rats, dogs and snakes
+                    deserting the Greek city of Helice before an
+                    earthquake hit. It was the first in a long line
+                    of such anecdotes. What has been lacking is
+                    any real scientific data linking animal
+                    behaviour with earthquakes.</p>
+
+                <p>In late 2000, however, Stanley Coren
+                    from the University of British Columbia
+                    started a study to discover whether dogs
+                    suffer from ‘seasonal affective disorder.’
+                    Twice weekly, he emailed 200 dog owners
+                    in Vancouver, asking them to rate their pets'
+                    activity and anxiety levels using a nine-point
+                    scale. In general there was little daily
+                    variability; Coren's initial analysis of many
+                    months' worth of information strongly
+                    refuted his suspicion that dogs become
+                    depressed during winter, and he abandoned
+                    the project. When he finally went through
+                    the figures in detail several years later
+                    however, he noticed that on 27 February
+                    2001, nearly 50 per cent were well above
+                    their usual baseline for activity and anxiety.
+                    The likelihood of such a difference was
+                    remote and Coren searched through the
+                    newspaper archives for a cause. He found
+                    that on 28 February a quake of magnitude
+                    6.8 shook the Pacific north- west, with an
+                    epicentre at Nisqually about 240 kilometres
+                    south of Vancouver. Coren wondered what
+                    the dogs could have sensed. There was little
+                    to guide him.</p>
+
+                <p>Even the most comprehensive
+                    earthquake research project in the world,
+                    the Parkfield experiment in California,
+                    couldn't help. Since 1985, researchers from
+                    the US Geological Survey (USGS) have
+                    monitored a section of the San Andreas
+                    fault near the town of Parkfield. They have
+                    analysed every tremor, and measured tiny
+                    movements of the fault at 10- minute
+                    intervals, but to date the project has
+                    revealed nothing that would reliably
+                    indicate that an earthquake is imminent.</p>
+
+                <p>There is still much speculation about
+                    animals predicting earthquakes. For
+                    example, one idea is that some animals
+                    detect changes in the Earth's electrical field.
+                    Another theory is that animals are
+                    responding to gas such as radon released
+                    from rocks before a quake, despite the fact
+                    that few experts accept such gas is
+                    produced. Rupert Sheldrake, a British
+                    researcher, suggests that ‘people notice
+                    unusual animal behaviour before disasters. I
+                    think animals are picking up on something
+                    that we can't, perhaps by using a sixth
+                    sense.’</p>
+
+                <p>Coren, however, had read about
+                    rescue dogs hearing avalanche victims
+                    under the snow, and suspected the dogs in
+                    his study might also be hearing vibrations.
+                    So he returned to his data to search for
+                    supporting evidence. He discovered that
+                    only one of the 14 hearing- impaired dogs in
+                    his study had shown any significant increase
+                    in anxiety on 27 February, and it was living
+                    with a hearing dog that had become anxious.
+                    Dogs with floppy ears showed only half the
+                    change in activity and one-third the change
+                    in anxiety level of dogs with pricked ears.
+                    Not only would an ear flap reduce the
+                    amount of sound reaching the inner ear;
+                    Coren also realised that it would weaken
+                    high frequency sounds more than low
+                    frequency ones. Further, dogs with smaller
+                    heads were significantly more likely to
+                    behave strangely than those with larger
+                    heads, which was interesting, given that
+                    smaller-headed dogs are more sensitive to
+                    higher frequencies.</p>
+
+                <p>Taken together, Coren's results
+                    present an alluring hypothesis. He suggests
+                    that the kind of high frequency sounds that
+                    many dogs can hear are emitted before an
+                    earthquake, perhaps from rocks scraping
+                    underground. Admittedly this is only one
+                    study. Even if Coren is right, is it still
+                    possible that other animals could predict
+                    quakes in different ways? Eric
+                    Wikramanayake, a conservation scientist
+                    who used radio collars and happened to be
+                    studying elephants in Sri Lanka when the
+                    tsunami struck, is entirely sceptical.
+                    What he found was precisely nothing.
+                    One herd was only 100 metres away from
+                    the beach when the tsunami arrived and
+                    they just took cover behind a large sand
+                    dune when the wave came in sight. The
+                    other herd was safely located about 5
+                    kilometres inland and did not show any
+                    unusual movements.</p>
+
+                <p>Even if some quakes are preceded by
+                    high- frequency vibrations, is it feasible that
+                    dogs in Vancouver could detect sounds
+                    emitted near Nisqually? USGS seismologist
+                    Andy Michael points out that the epicentre
+                    was over 240 kilometres south of
+                    Vancouver. 'It is physically implausible for
+                    seismic waves in the kilohertz range to
+                    travel that far,' he says. Although
+                    unconvinced by Coren's ideas, Michael adds
+                    a cautionary tale. 'When Alfred Wegener
+                    presented his theory of continental drift, his
+                    core ideas about tectonics were right but
+                    nobody listened because the mechanisms
+                    were wrong.'</p>
+
+                <p>So if animals are able to foretell
+                    earthquakes, does it matter how? In fact,
+                    while western society has been reluctant to
+                    use animals as earthquake predictors, China
+                    has already embraced the idea. Experts
+                    there use a video link to keep a 24-hour
+                    watch on snakes in farms nationwide. If
+                    they try to escape from their enclosure,
+                    observers raise a warning.</p>
+
+                <p>Other governments may not be
+                    willing to go that far just yet, but Coren
+                    believes that a centre that people could call
+                    when they see unusual things would be
+                    useful. 'We would be able to collect much
+                    more data and give warnings when we get
+                    hundreds of calls from a single area,' he says.
+                    It could cost little more than the price of
+                    setting up a phone line. Put that way, what
+                    have we got to lose?</p>
+
+                <p>* tsunami: large, destructive wave caused by earthquakes</p>
+                <p>** seasonal affective disorder, emotional and psychological changes created by changes in the
+                    amount of daylight in winter</p>
+            </div>
+        </div>
+
+        <div class="questions-container hidden" id="p3_questionsPanel" role="region" aria-label="Questions">
+            <h2 class="section-title">Questions 27–40</h2>
+
+            <div class="question-group">
+                <div class="question-group-title">Questions 27–30</div>
+                <p>Do the following statements agree with the views of the writer in Reading Passage 3?</p>
+                <div class="question" data-question="27">
+                    <div class="question-text">27 There is historical scientific evidence to support stories of animals predicting
+                        earthquakes.</div>
+                    <div class="options"><label><input type="radio" name="q27" value="YES"> YES</label><label><input
+                                type="radio" name="q27" value="NO"> NO</label><label><input type="radio" name="q27"
+                                value="NOT GIVEN"> NOT GIVEN</label></div>
+                </div>
+                <div class="question" data-question="28">
+                    <div class="question-text">28 Coren's decision to investigate the possibility that dogs can anticipate an earthquake
+                        was based on some archive information.</div>
+                    <div class="options"><label><input type="radio" name="q28" value="YES"> YES</label><label><input
+                                type="radio" name="q28" value="NO"> NO</label><label><input type="radio" name="q28"
+                                value="NOT GIVEN"> NOT GIVEN</label></div>
+                </div>
+                <div class="question" data-question="29">
+                    <div class="question-text">29 Dogs may be more sensitive to changes in the Earth's electrical field than other
+                        animals.</div>
+                    <div class="options"><label><input type="radio" name="q29" value="YES"> YES</label><label><input
+                                type="radio" name="q29" value="NO"> NO</label><label><input type="radio" name="q29"
+                                value="NOT GIVEN"> NOT GIVEN</label></div>
+                </div>
+                <div class="question" data-question="30">
+                    <div class="question-text">30 Coren's findings from his original study of dogs clearly prove they can hear high
+                        ofrequencies which signal earthquakes.</div>
+                    <div class="options"><label><input type="radio" name="q30" value="YES"> YES</label><label><input
+                                type="radio" name="q30" value="NO"> NO</label><label><input type="radio" name="q30"
+                                value="NOT GIVEN"> NOT GIVEN</label></div>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="question-group-title">Questions 31–35</div>
+                <p>Choose the correct letter, A, B, C or D.</p>
+                <div class="question" data-question="31">
+                    <div class="question-text">31 What is the writer's main point in paragraph 4?</div>
+                    <div class="options"><label><input type="radio" name="q31" value="A"> A. The strength of the next earthquake along the San Andreas fault is
+                            unpredictable.</label><label><input type="radio" name="q31" value="B"> B. It is not the first time that the theory of animal prediction has been
+                            investigated.</label><label><input type="radio" name="q31" value="C"> C. Experts have never identified any reliable predictors for earthquakes.</label><label><input type="radio" name="q31" value="D"> D. The Parkfield project depended on unreliable methods for earthquake
+                            detection.</label></div>
+                </div>
+                <div class="question" data-question="32">
+                    <div class="question-text">32 When Coren re-analysed his data for 27 February he found that on that day</div>
+                    <div class="options"><label><input type="radio" name="q32" value="A"> A dogs with either poor or good hearing were equally anxious.</label><label><input type="radio" name="q32" value="B"> B the shape of a dog's ear seemed to correlate with its behaviour.</label><label><input type="radio" name="q32" value="C"> C dogs with larger heads were the most sensitive to tremors</label><label><input type="radio" name="q32" value="D"> D the level of activity amongst dogs reduced as the earthquake occurred.</label></div>
+                </div>
+                <div class="question" data-question="33">
+                    <div class="question-text">33 Seismologist Andy Michael refers to Alfred Wegener in order to</div>
+                    <div class="options"><label><input type="radio" name="q33" value="A"> A suggest there may be an aspect of Coren's theory which is correct.</label><label><input type="radio" name="q33" value="B"> B dismiss the idea that dogs are capable of sensing earthquakes.</label><label><input type="radio" name="q33" value="C"> C demonstrate how data can be falsified by subjective researchers.</label><label><input type="radio" name="q33" value="D"> D criticise certain scientists for not being careful in their research.</label></div>
+                </div>
+                <div class="question" data-question="34">
+                    <div class="question-text">34 What is the writer doing in the penultimate paragraph?</div>
+                    <div class="options"><label><input type="radio" name="q34" value="A"> A explaining why western researchers do not trust animal behaviour</label><label><input type="radio" name="q34" value="B"> B arguing how animal prediction is superior to science-based prediction</label><label><input type="radio" name="q34" value="C"> C suggesting a more reliable animal than the dog for predictive purposes</label><label><input type="radio" name="q34" value="D"> D illustrating how animal behaviour is already exploited by some researchers</label></div>
+                </div>
+                <div class="question" data-question="35">
+                    <div class="question-text">35 What point is the writer making by using the phrase 'what have we got to lose' in the
+                        final paragraph?</div>
+                    <div class="options"><label><input type="radio" name="q35" value="A"> A The cost of setting up a data collection centre needs to be considered.</label><label><input type="radio" name="q35" value="B"> B It is worth setting up a call centre to record animal behaviour.</label><label><input type="radio" name="q35" value="C"> C The pros and cons of different data collection methods must be weighed up.</label><label><input type="radio" name="q35" value="D"> D There is a danger that existing data may be lost if not stored carefully.</label></div>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="question-group-title">Questions 36–40</div>
+                <p>Complete each sentence with the correct ending, A-H, below.</p>
+                <p><strong>The belief in the ability of animals to predict earthquakes</strong> <select name="q36">
+                        <option value="" disabled selected>Select</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                        <option value="E">E</option>
+                        <option value="F">F</option>
+                        <option value="G">G</option>
+                        <option value="H">H</option>
+                    </select>
+
+                    <strong>Experts think it is unlikely that gas</strong> <select name="q37">
+                        <option value="" disabled selected>Select</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                        <option value="E">E</option>
+                        <option value="F">F</option>
+                        <option value="G">G</option>
+                        <option value="H">H</option>
+                    </select>
+
+                    <strong>Sheldrake says that an animal's ability to predict disasters</strong> <select name="q38">
+                        <option value="" disabled selected>Select</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                        <option value="E">E</option>
+                        <option value="F">F</option>
+                        <option value="G">G</option>
+                        <option value="H">H</option>
+                    </select>
+
+                    <strong>Coren speculated that a dog's ability to predict earthquakes</strong> <select name="q39">
+                        <option value="" disabled selected>Select</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                        <option value="E">E</option>
+                        <option value="F">F</option>
+                        <option value="G">G</option>
+                        <option value="H">H</option>
+                    </select>
+
+                    <strong>The behaviour of the elephant herds in Wikramanayake's study</strong> <select name="q40">
+                        <option value="" disabled selected>Select</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                        <option value="E">E</option>
+                        <option value="F">F</option>
+                        <option value="G">G</option>
+                        <option value="H">H</option>
+                    </select>
+
+                    <p><strong>A</strong> is released during earthquakes.
+
+                    <strong>B</strong> showed little variation during the tsunami.
+
+                    <strong>C</strong> would have an effect on most dogs.
+
+                    <strong>D</strong> could be linked to their ability to detect movement in the ground.
+
+                    <strong>E</strong> was based on Chinese data-collection methods.
+
+                    <strong>F</strong> could be explained by extra-sensory perception.
+
+                    <strong>G</strong> dates back to before modern civilisation.
+
+                    <strong>H</strong> derived from poorly conducted research.</p>
+                </p>
+            </div>
+        </div> <!-- /p3_questionsPanel -->
+    </div> <!-- /main-content -->
+
+    <!-- Bottom progress/navigation -->
+    <div class="progress-container">
+        <div class="progress-nav">
+            <div class="progress-items" style="gap:10px; flex-wrap:wrap;">
+                <div id="bottomPartTabs"
+                    style="display:flex; gap:14px; justify-content:center; width:100%; align-items:center; flex-wrap:wrap;">
+                </div>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" id="prev-btn" disabled><i class="fas fa-arrow-left"></i>
+                    Previous</button>
+                <button class="btn btn-secondary" id="next-btn">Next <i class="fas fa-arrow-right"></i></button>
+                <button class="btn btn-submit" id="submit-all-btn">Submit All <i
+                        class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+</div> <!-- /container -->
+
+<!-- Results Modal -->
+<div class="modal" id="results-modal">
+    <div class="modal-content">
+        <h2>Test Results</h2>
+        <div class="score-display" id="score-display">0/0</div>
+        <div class="score-breakdown" id="score-breakdown"></div>
+        <div class="modal-buttons">
+            <button class="btn btn-secondary" id="close-modal">Close</button>
+            <button class="btn btn-primary" id="review-answers">Review Answers</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    /* ========= CONFIG ========= */
+    const PARTS = [
+        { id: 1, title: 'Passage 1', qStart: 1, qEnd: 13, passagePanel: 'p1_passagePanel', questionsPanel: 'p1_questionsPanel' },
+        { id: 2, title: 'Passage 2', qStart: 14, qEnd: 26, passagePanel: 'p2_passagePanel', questionsPanel: 'p2_questionsPanel' },
+        { id: 3, title: 'Passage 3', qStart: 27, qEnd: 40, passagePanel: 'p3_passagePanel', questionsPanel: 'p3_questionsPanel' },
+    ];
+
+    /* ======= ANSWER KEY ======= */
+    const correctAnswers = {
+        // Passage 1 – Dyes and fabric dyeing (Q1–13)
+        q1: "TRUE", q2: "FALSE", q3: "TRUE", q4: "NOT GIVEN", q5: "FALSE", q6: "NOT GIVEN", q7: "FALSE", q8: "TRUE",
+        q9: "shellfish", q10: "insects", q11: "blackberries", q12: "beehives", q13: "chemistry",
+
+        // Passage 2 – A mechanical friend for children (Q14–26)
+        q14: "D", q15: "F", q16: "D", q17: "A", q18: "C",
+        q19: "B", q20: "C", q21: "A", q22: "D", q23: "A",
+        q24: "storytellers", q25: "peer", q26: "affection",
+
+        // Passage 3 – Animals predicting earthquakes? (Q27–40)
+        q27: "NO", q28: "YES", q29: "NOT GIVEN", q30: "NO", q31: "C", q32: "B", q33: "A", q34: "D", q35: "B",
+        q36: "G", q37: "A", q38: "F", q39: "D", q40: "B"
+    };
+
+    /* ========= STATE ========= */
+    let currentPart = 1;
+    let currentQuestion = 1;
+    let seconds = 60 * 60; // total 60 minutes
+    let timerInterval;
+
+    /* ========= HELPERS ========= */
+    function el(id) { return document.getElementById(id); }
+    function inRange(q, pId) { const p = PARTS[pId - 1]; return q >= p.qStart && q <= p.qEnd; }
+
+    /* ======= BOTTOM TABS + PER-PART NUMBER RAILS (centered) ======= */
+    function renderBottomTabs() {
+        const tabs = el('bottomPartTabs');
+        tabs.innerHTML = '';
+        PARTS.forEach(p => {
+            const btn = document.createElement('button');
+            btn.className = 'btn btn-secondary';
+            btn.style.fontWeight = (p.id === currentPart) ? '900' : '600';
+            btn.innerHTML = (p.id === currentPart) ? `<strong>${p.title}</strong>` : `${p.title}`;
+            btn.onclick = () => switchPart(p.id);
+            tabs.appendChild(btn);
+
+            const rail = document.createElement('div');
+            rail.id = `rail-part-${p.id}`;
+            rail.style.display = (p.id === currentPart) ? 'flex' : 'none';
+            rail.style.gap = '6px';
+            rail.style.flexWrap = 'wrap';
+            rail.style.alignItems = 'center';
+            const total = p.qEnd - p.qStart + 1;
+            for (let q = p.qStart; q <= p.qEnd; q++) {
+                const chip = document.createElement('div');
+                chip.textContent = q;
+                chip.className = 'progress-item' + (q === currentQuestion && p.id === currentPart ? ' current' : '');
+                chip.dataset.question = q;
+                chip.style.width = '30px'; chip.style.height = '20px'; chip.style.borderRadius = '6px';
+                chip.style.fontSize = '14px'; chip.style.padding = '0'; chip.style.lineHeight = '20px';
+                chip.onclick = () => scrollToQuestion(q);
+                rail.appendChild(chip);
+            }
+            tabs.appendChild(rail);
+        });
+    }
+
+    function refreshBottomBar() { renderBottomTabs(); }
+
+    function switchPart(partId) {
+        if (currentPart === partId) return;
+        PARTS.forEach(p => {
+            el(p.passagePanel).classList.add('hidden');
+            el(p.questionsPanel).classList.add('hidden');
+            const r = el(`rail-part-${p.id}`); if (r) r.style.display = 'none';
+        });
+        currentPart = partId;
+        const p = PARTS[currentPart - 1];
+        currentQuestion = p.qStart;
+        el(p.passagePanel).classList.remove('hidden');
+        el(p.questionsPanel).classList.remove('hidden');
+        const r = el(`rail-part-${p.id}`); if (r) r.style.display = 'flex';
+        el('headerPassageTitle').textContent = `Passage ${currentPart} of 3`;
+        scrollToQuestion(currentQuestion, false);
+        refreshBottomBar();
+    }
+
+    function scrollToQuestion(num, smooth = true) {
+        const elQ = document.querySelector(`[data-question="${num}"]`) ||
+            document.querySelector(`input[name="q${num}"]`) ||
+            document.querySelector(`select[name="q${num}"]`);
+        if (elQ) elQ.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'center' });
+        updateCurrentQuestion(num);
+    }
+
+    function updateCurrentQuestion(num) {
+        currentQuestion = num;
+        document.querySelectorAll(`#rail-part-${currentPart} .progress-item`).forEach(it => {
+            it.classList.toggle('current', parseInt(it.dataset.question, 10) === num);
+        });
+    }
+
+    // mark answered when inputs change
+    function attachAnsweredListeners() {
+        document.querySelectorAll('input[type="radio"], input[type="text"], select').forEach(input => {
+            input.addEventListener('change', () => {
+                const m = input.name && input.name.match(/^q(\d+)$/);
+                if (!m) return;
+                const q = parseInt(m[1], 10);
+                const chip = document.querySelector(`.progress-item[data-question="${q}"]`);
+                if (chip) {
+                    const val = (input.type === 'text' ? input.value.trim() : input.value);
+                    if (val) chip.classList.add('answered');
+                }
+            });
+        });
+    }
+
+    /* ===== SUBMIT ALL ===== */
+    el('submit-all-btn').addEventListener('click', () => {
+        if (!confirm('Submit the entire test?')) return;
+
+        let score = 0, total = PARTS[PARTS.length - 1].qEnd;
+        const results = {};
+
+        for (let q = 1; q <= total; q++) {
+            const key = `q${q}`;
+            const corr = correctAnswers[key];
+            let user = null, isCorrect = false;
+
+            const radios = document.querySelectorAll(`input[name="${key}"][type="radio"]`);
+            const text = document.querySelector(`input[name="${key}"][type="text"]`);
+            const sel = document.querySelector(`select[name="${key}"]`);
+
+            if (radios && radios.length) {
+                const c = Array.from(radios).find(r => r.checked);
+                if (c) { user = c.value; isCorrect = (user === corr); radios.forEach(r => r.disabled = true); }
+            } else if (text) {
+                user = (text.value || '').trim();
+                if (user) {
+                    const norm = (s) => String(s).trim().toLowerCase().replace(/\s+/g, ' ');
+                    isCorrect = norm(user) === norm(corr);
+                    text.disabled = true;
+                }
+            } else if (sel) {
+                user = sel.value;
+                if (user) { isCorrect = user === corr; sel.disabled = true; }
+            }
+
+            if (isCorrect) score++;
+            results[key] = { userAnswer: user || 'No answer', correct: corr, isCorrect };
+        }
+
+        // color chips
+        for (let q = 1; q <= total; q++) {
+            const res = results[`q${q}`];
+            const ch = document.querySelector(`.progress-item[data-question="${q}"]`);
+            if (ch) {
+                ch.classList.remove('current', 'answered');
+                if (res) ch.classList.add(res.isCorrect ? 'correct' : 'incorrect');
+            }
+        }
+
+        // modal
+        el('score-display').textContent = `${score}/${total}`;
+        const breakdown = el('score-breakdown');
+        breakdown.innerHTML = PARTS.map(p => {
+            const partScore = Array.from({ length: p.qEnd - p.qStart + 1 }, (_, i) => results[`q${p.qStart + i}`])
+                .filter(r => r && r.isCorrect).length;
+            return `<div class="score-item"><span>Passage ${p.id}:</span><span>${partScore}/${p.qEnd - p.qStart + 1}</span></div>`;
+        }).join('');
+        el('results-modal').style.display = 'flex';
+
+        // review handler
+        el('review-answers').onclick = () => {
+            el('results-modal').style.display = 'none';
+            showCorrectIndicators(results);
+        };
+    });
+
+    // show inline indicators
+    function showCorrectIndicators(results) {
+        document.querySelectorAll('.answer-indicator').forEach(e => e.remove());
+        const total = PARTS[PARTS.length - 1].qEnd;
+
+        for (let q = 1; q <= total; q++) {
+            const key = `q${q}`;
+            const res = results[key];
+            if (!res) continue;
+
+            let target = null;
+            const qEl = document.querySelector(`[data-question="${q}"] .options`);
+            if (qEl) target = qEl;
+            if (!target) {
+                const input = document.querySelector(`input[name="${key}"]`);
+                if (input) target = input.parentNode;
+            }
+            if (!target) {
+                const sel = document.querySelector(`select[name="${key}"]`);
+                if (sel) target = sel.parentNode;
+            }
+            if (!target) continue;
+
+            const box = document.createElement('div');
+            box.className = 'answer-indicator ' + (res.isCorrect ? 'correct' : 'incorrect');
+            box.style.display = 'block';
+            box.style.marginTop = '6px';
+            box.innerHTML = res.isCorrect
+                ? `<i class="fas fa-check"></i> Correct!`
+                : `<i class="fas fa-times"></i> Incorrect. Your answer: <strong>${res.userAnswer}</strong>
+<strong>Correct:</strong> ${Array.isArray(res.correct) ? res.correct.join(', ') : res.correct}`;
+            target.appendChild(box);
+        }
+    }
+
+    // Timer
+    const timerSpan = document.querySelector('#globalTimer span');
+    const timerContainer = document.querySelector('#globalTimer');
+    function updateTimer() {
+        seconds--;
+        const m = Math.floor(seconds / 60), s = seconds % 60;
+        timerSpan.textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+        if (seconds <= 2 * 60) timerContainer.classList.add('warning');
+        if (seconds <= 0) { clearInterval(timerInterval); alert('Time is up! Submitting all passages.'); el('submit-all-btn').click(); }
+    }
+
+    function startTest() {
+        el('startScreen').classList.add('hidden');
+        el('testContainer').classList.remove('hidden');
+        timerInterval = setInterval(updateTimer, 1000);
+    }
+    window.startTest = startTest;
+
+    // Init
+    setTimeout(() => { el('loadingScreen').classList.add('hidden'); el('startScreen').classList.remove('hidden'); }, 900);
+
+    // default show P1
+    PARTS.forEach(p => {
+        if (p.id === 1) { el(p.passagePanel).classList.remove('hidden'); el(p.questionsPanel).classList.remove('hidden'); }
+        else { el(p.passagePanel).classList.add('hidden'); el(p.questionsPanel).classList.add('hidden'); }
+    });
+    renderBottomTabs();
+    attachAnsweredListeners();
+
+    // Resizer
+    let isResizing = false;
+    el('resizer').addEventListener('mousedown', () => { isResizing = true; document.body.style.cursor = 'col-resize'; document.body.style.userSelect = 'none'; });
+    document.addEventListener('mousemove', (e) => {
+        if (!isResizing) return;
+        const container = document.querySelector('.main-content');
+        const rect = container.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left;
+        const leftPct = (mouseX / rect.width) * 100;
+        const rightPct = 100 - leftPct;
+        if (leftPct >= 30 && leftPct <= 70) {
+            document.querySelector('.passage-container:not(.hidden)').style.flex = leftPct + '%';
+            document.querySelector('.questions-container:not(.hidden)').style.width = rightPct + '%';
+        }
+    });
+    document.addEventListener('mouseup', () => { if (isResizing) { isResizing = false; document.body.style.cursor = ''; document.body.style.userSelect = ''; } });
+
+    // Highlight tools
+    const highlightBtn = el('highlight-btn');
+    const removeHighlightBtn = el('remove-highlight-btn');
+    const passagePanels = PARTS.map(p => el(p.passagePanel));
+    const questionsPanels = PARTS.map(p => el(p.questionsPanel));
+    let lastSelection = null, highlightTarget = null, currentPanel = null;
+
+    function getValidSelection() {
+        const sel = window.getSelection();
+        if (!sel.rangeCount || sel.isCollapsed) return null;
+        const range = sel.getRangeAt(0);
+        if (passagePanels.some(pp => pp && pp.contains(range.commonAncestorContainer))) {
+            currentPanel = passagePanels.find(pp => pp.contains(range.commonAncestorContainer));
+        } else if (questionsPanels.some(qp => qp && qp.contains(range.commonAncestorContainer))) {
+            currentPanel = questionsPanels.find(qp => qp.contains(range.commonAncestorContainer));
+        } else return null;
+        return range;
+    }
+    function showHighlightBtn(range) {
+        const rect = range.getBoundingClientRect();
+        highlightBtn.style.top = (window.scrollY + rect.top - 35) + 'px';
+        highlightBtn.style.left = (window.scrollX + rect.left) + 'px';
+        highlightBtn.style.display = 'block';
+    }
+    function hideHighlightBtn() { highlightBtn.style.display = 'none'; }
+    function showRemoveBtn(span) {
+        const rect = span.getBoundingClientRect();
+        removeHighlightBtn.style.top = (window.scrollY + rect.top - 35) + 'px';
+        removeHighlightBtn.style.left = (window.scrollX + rect.left) + 'px';
+        removeHighlightBtn.style.display = 'block';
+        highlightTarget = span;
+    }
+    function hideRemoveBtn() { removeHighlightBtn.style.display = 'none'; highlightTarget = null; }
+
+    highlightBtn.addEventListener('click', () => {
+        if (lastSelection) {
+            const span = document.createElement('span');
+            span.className = 'highlight';
+            span.appendChild(lastSelection.extractContents());
+            lastSelection.insertNode(span);
+            window.getSelection().removeAllRanges();
+            hideHighlightBtn();
+        }
+    });
+    removeHighlightBtn.addEventListener('click', () => {
+        if (highlightTarget) {
+            const parent = highlightTarget.parentNode;
+            while (highlightTarget.firstChild) parent.insertBefore(highlightTarget.firstChild, highlightTarget);
+            parent.removeChild(highlightTarget);
+            hideRemoveBtn();
+        }
+    });
+    document.addEventListener('selectionchange', () => {
+        hideHighlightBtn(); hideRemoveBtn();
+        const range = getValidSelection();
+        if (range) { lastSelection = range; showHighlightBtn(range); } else { lastSelection = null; }
+    });
+    document.addEventListener('mousedown', (e) => {
+        if (e.target !== highlightBtn && e.target !== removeHighlightBtn) { hideHighlightBtn(); hideRemoveBtn(); }
+    });
+    document.addEventListener('click', (e) => {
+        if (e.target.classList && e.target.classList.contains('highlight')) { e.preventDefault(); showRemoveBtn(e.target); }
+    });
+
+    // Modal close
+    el('close-modal').addEventListener('click', () => { el('results-modal').style.display = 'none'; });
+</script></body>
+
+
+
+
+
+
+
+</html>

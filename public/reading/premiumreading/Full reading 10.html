@@ -1,0 +1,1446 @@
+
+
+
+
+<!--made by IELTSwithShohrux-->
+
+<!DOCTYPE html>
+<html lang="en">
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+
+<!--made by IELTSwithShohrux-->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            overflow: hidden;
+        }
+
+        .loading-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f9fafb;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 9999;
+        }
+
+        .loading-content {
+            text-align: center;
+        }
+
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #2563eb;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-title {
+            font-size: 1.2rem;
+            color: #6b7280;
+            margin-bottom: 20px;
+        }
+
+        .loading-subtitle {
+            font-size: 1rem;
+            color: #9ca3af;
+        }
+
+        .start-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f9fafb;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 9998;
+        }
+
+        .start-content {
+            text-align: center;
+        }
+
+        .start-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 24px;
+        }
+
+        .start-subtitle {
+            color: #6b7280;
+            margin-bottom: 24px;
+        }
+
+        .start-button {
+            padding: 12px 32px;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .start-button:hover {
+            background-color: #1d4ed8;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            width: 100vw;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            background-color: #ffffff;
+            color: #333;
+            padding: 8px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            flex-shrink: 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .passage-info {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #2d3748;
+        }
+
+        .timer {
+            background-color: rgba(255, 193, 193, 0.5);
+            padding: 6px 12px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s;
+            min-width: 80px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #c53030;
+            border: 1px solid rgba(255, 120, 120, 0.3);
+        }
+
+        .timer.warning {
+            color: #9b2c2c;
+            background-color: rgba(254, 178, 178, 0.7);
+            border-color: rgba(245, 101, 101, 0.5);
+        }
+
+        .logo-area {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+            cursor: pointer;
+        }
+
+        .logo-area:hover {
+            background-color: #0056b3;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.4);
+        }
+
+        .logo-area i {
+            font-size: 1.1rem;
+        }
+
+        .progress-container {
+            background-color: #f8f9fa;
+            padding: 4px 20px;
+            z-index: 100;
+            flex-shrink: 0;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .progress-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .progress-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 6px;
+        }
+
+        .progress-item {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4a5568;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            border: 1px solid #cbd5e0;
+        }
+
+        .progress-item.current {
+            background-color: #4299e1;
+            color: white;
+            transform: scale(1.1);
+            border-color: #2b6cb0;
+        }
+
+        .progress-item.answered {
+            background-color: #9ae6b4;
+            color: #22543d;
+            border-color: #68d391;
+        }
+
+        .progress-item.correct {
+            background-color: #48bb78;
+            color: white;
+            border-color: #38a169;
+        }
+
+        .progress-item.incorrect {
+            background-color: #fed7d7;
+            color: #c53030;
+            border-color: #feb2b2;
+        }
+
+        .progress-item:hover {
+            background-color: #cbd5e0;
+            transform: scale(1.05);
+        }
+
+        .btn {
+            padding: 6px 14px;
+            border: 1px solid #cbd5e0;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.95rem;
+            background-color: #f7fafc;
+            color: #4a5568;
+        }
+
+        .btn i {
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background-color: #edf2f7;
+            border-color: #a0aec0;
+        }
+
+        .btn-primary {
+            background-color: #f7fafc;
+            color: #4a5568;
+            border: 1px solid #cbd5e0;
+        }
+
+        .btn-primary:hover {
+            background-color: #edf2f7;
+            border-color: #a0aec0;
+        }
+
+        .btn-secondary {
+            background-color: #f7fafc;
+            color: #4a5568;
+            border: 1px solid #cbd5e0;
+        }
+
+        .btn-secondary:hover {
+            background-color: #edf2f7;
+            border-color: #a0aec0;
+        }
+
+        .btn-submit {
+            background-color: #48bb78;
+            color: white;
+            font-weight: 900;
+            border: 1px solid #38a169;
+        }
+
+        .btn-submit:hover {
+            background-color: #38a169;
+            border-color: #2f855a;
+        }
+
+        .btn-submit:disabled {
+            background-color: #9ae6b4;
+            color: #718096;
+            cursor: not-allowed;
+            border: 1px solid #68d391;
+        }
+
+        .main-content {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .passage-container {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: #fafafa;
+            position: relative;
+        }
+
+        .resizer {
+            width: 4px;
+            background-color: #cbd5e0;
+            cursor: col-resize;
+            position: relative;
+            transition: background-color 0.2s;
+        }
+
+        .resizer:hover {
+            background-color: #a0aec0;
+        }
+
+        .resizer::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 30px;
+            height: 60px;
+            background-color: rgba(203, 213, 224, 0.5);
+            border-radius: 4px;
+            pointer-events: none;
+        }
+
+        .questions-container {
+            width: 40%;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: white;
+            border-left: 1px solid #e2e8f0;
+        }
+
+        .passage {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .passage h2 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .passage-content p {
+            margin-top: 15px;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .passage h2 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .passage p {
+            margin-top: 20px;
+            margin-bottom: 25px;
+            text-align: justify;
+        }
+
+        .question-section {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .question {
+            margin-bottom: 25px;
+            padding: 6px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            background-color: #ffffff;
+            transition: box-shadow 0.2s;
+        }
+
+        .question:hover {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .question-text {
+            font-weight: 500;
+            margin-bottom: 12px;
+            color: #2d3748;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .option:hover {
+            background-color: #f7fafc;
+            border-color: #cbd5e0;
+        }
+
+        .option input {
+            margin-right: 2px;
+            width: 16px;
+            height: 16px;
+        }
+
+        .input-field {
+            padding: 8px 10px;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            width: 20%;
+            margin-top: 5px;
+            font-size: 0.9rem;
+        }
+
+        .input-field:focus {
+            border-color: #4299e1;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(66, 153, 225, 0.2);
+        }
+
+        select.input-field {
+            padding: 8px 10px;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            width: 20%;
+            margin-top: 5px;
+            font-size: 0.9rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.9rem;
+        }
+
+        th,
+        td {
+            border: 1px solid #e2e8f0;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f1f5f9;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .answer-indicator {
+            background-color: #e6fffa;
+            border: 1px solid #38b2ac;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        .answer-indicator.correct {
+            background-color: #e6fffa;
+            border-color: #38b2ac;
+            color: #234e52;
+        }
+
+        .answer-indicator.incorrect {
+            background-color: #fed7d7;
+            border-color: #fc8181;
+            color: #742a2a;
+        }
+
+        .question-group {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .question-group-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #2d3748;
+            font-size: 1rem;
+        }
+
+        .highlight {
+            background-color: #ffff00;
+            cursor: pointer;
+        }
+
+        #highlight-btn,
+        #remove-highlight-btn {
+            position: absolute;
+            z-index: 9999;
+            display: none;
+            padding: 6px 12px;
+            font-size: 14px;
+            border: 1px solid #888;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .score-display {
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #2d3748;
+        }
+
+        .score-breakdown {
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .score-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 0.95rem;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+
+            .questions-container {
+                width: 100%;
+                border-left: none;
+                border-top: 1px solid #e2e8f0;
+            }
+
+            .resizer {
+                width: 100%;
+                height: 4px;
+                cursor: row-resize;
+            }
+
+            .resizer::before {
+                width: 60px;
+                height: 30px;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            .progress-item {
+                width: 32px;
+                height: 32px;
+                font-size: 0.85rem;
+            }
+
+            .passage-info {
+                font-size: 0.9rem;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px;
+            }
+
+            .logo-area {
+                order: 1;
+            }
+
+            .passage-info {
+                order: 2;
+            }
+
+            .timer {
+                order: 3;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .progress-item {
+                width: 32px;
+                height: 32px;
+                font-size: 0.85rem;
+            }
+
+            .passage-info {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+
+<!--made by IELTSwithShohrux-->
+
+
+
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <h2 class="loading-title">Your test will begin shortly</h2>
+            <p class="loading-subtitle">Please wait</p>
+        </div>
+    </div>
+
+    <!-- Start Screen -->
+    <div id="startScreen" class="start-screen hidden">
+        <div class="start-content">
+            <h1 class="start-title">IELTSwith Shohrux</h1>
+            <p class="start-subtitle">Ready to begin your reading test?</p>
+            <button class="start-button" onclick="startTest()">Start Test</button>
+        </div>
+    </div>
+
+    <!-- Test Container -->
+    <div class="container hidden" id="testContainer">
+        <!-- Header -->
+        <header>
+            <div class="passage-info">IELTSwithShohrux</div>
+
+            <!-- timer -->
+            <div class="timer" id="globalTimer">
+                <i class="fas fa-clock"></i>
+                <span>60:00</span>
+            </div>
+
+            <!-- promo button -->
+            <div class="logo-area" onclick="window.open('https://t.me/muminov_bar', '_blank')">
+                <i class="fas fa-paper-plane"></i>
+                <span>Click for more TESTS</span>
+            </div>
+
+            <div class="passage-info" id="headerPassageTitle">Passage 1 of 3</div>
+        </header>
+
+        <!-- Floating highlight buttons -->
+        <button id="highlight-btn" type="button">Highlight</button>
+        <button id="remove-highlight-btn" type="button">Remove Highlight</button>
+
+        <div class="main-content">
+            <!-- ===== PASSAGE 1 ===== -->
+            <div class="passage-container" id="p1_passagePanel" role="region" aria-label="Reading Passage">
+                <h2 class="section-title">READING PASSAGE 1</h2>
+                <div class="passage-content" id="passage1">
+                    <h3>Caral: an ancient South American city</h3>
+                    <p>Huge earth and rock mounds rise out of the desert of the Supe Valley near the coast of Peru in South America. These immense mounds appear simply to be part of the geographical landscape in this arid region squeezed between the Pacific Ocean and the Andes mountains. But looks deceive. These are actually human-made pyramids. Strong evidence indicates they are the remains of a city known as Caral that flourished nearly 5,000 years ago. If true, it would be the oldest known urban center in the Americas and among the most ancient in the world.</p>
+
+                    <p>Research undertaken by Peruvian archaeologist Ruth Shady suggests that the 150-acre complex of pyramids, plazas and residential buildings was a thriving metropolis when Egypt’s great pyramids were still being built. Though discovered in 1905, for years Caral attracted little attention, largely because archaeologists believed the structures were fairly recent. But the monumental scale of the pyramids had long interested Shady, who began excavations at the site in 1996, about 22 kilometers from the coast and 190 kilometers north of Peru’s capital city of Lima.</p>
+
+                    <p>Shady and her crew searched for broken remains of the pots and containers that most such sites contain. Not finding any only made her more excited: it meant Caral could be what archaeologists term pre-ceramic. that is, existing before the advent in the area of pot-firing techniques. Shady’s team undertook the task of excavating Piramide Mayor, the largest of the pyramids. After carefully clearing away many hundreds of years’ worth of rubble and sand, they identified staircases, walls covered with remnants of colored plaster, and brickwork. In the foundations, they found the remains of grass-like reeds woven into bags. The original workers, she surmised, must have filled these bags with stones from a nearby quarry and laid them atop one another inside retaining walls, gradually giving rise to the pyramid’s immense structure. Shady had samples of the reeds subjected to radiocarbon dating and found that the reeds were 4,600 years old. This evidence indicated that Caral was, in fact, more than 1,000 years older than what had previously been thought to be the oldest urban center in the Americas.</p>
+
+                    <p>What amazed archaeologists was not just the age, but the complexity and scope of Caral. Piramide Mayor alone covers an area nearly the size of four football fields and is 18 meters tall. A nine-meter-wide staircase rises from a circular plaza at the foot of the pyramid, passing over three terraced levels until it reaches the top. Thousands of manual laborers would have been needed to build such a project. not counting the many architects. craftsmen, and managers. Shady’s team found the remains of a large amphitheater, containing almost 70 musical instruments made of bird and deer bones. Clearly, music played an important role in Caral’s society Around the perimeter of Caral are a series of smaller mounds and various buildings. These indicate a hierarchy of living arrangements: large, well-kept rooms atop pyramids for the elite, ground-level quarters for craftsmen, and shabbier outlying dwellings for workers.</p>
+
+                    <p>But why had Caral been built in the first place? Her excavations convinced Shady that Caral once served as a trade center for the region, which extends from the rainforests of the Amazonto the high forests of the Andes. Shady found evidence of a rich trading environment, including seeds of the cocoa bush and necklaces of shells, neither of which was native to the immediate Caral area. This environment gave rise to people who did not take part in the production of food, allowing them to become priests and planners, builders and designers Thus occupational specialization, elemental to an urban society, emerged.</p>
+
+                    <p>But what sustained such a trading center and drew travelers to it? Was it food? Shady and her team found the bones of small edible fish, which must have come from the Pacific coast to the west, in the excavations. But they also found evidence of squash, sweet potatoes and beans having been grown locally. Shady theorized that Caral’s early farmers diverted the area’s rivers into canals, which still cross the Supe Valley today, to irrigate their fields. But because she found no traces of maize, which can be traded or stored and used in times of crop failure, she concluded that Caral’s trade leverage was not based on stockpiling food supplies.</p>
+
+                    <p>It was evidence of another crop in the excavations that gave Shady the best clue to Caral’s success. In nearly every excavated building, her team discovered evidence of cotton – seeds, fibers and textiles. Her theory fell into place when a large fishing net made of those fibers, unearthed in an unrelated dig on Peru’s coast, turned out to be as old as Carat. ‘The farmers of Caral grew the cotton that the fishermen needed to make their nets,’ Shady speculates. ‘And the fishermen gave them shellfish and dried fish in exchange for these nets.’ In essence, the people of Caral enabled fishermen to work with larger and more effective nets, which made the resources of the sea more readily available. and the fishermen probably used dried squash grown by the Caral people as flotation devices for their nets.</p>
+                </div>
+            </div>
+            <div class="resizer"></div>
+
+            <!-- Questions for Passage 1 -->
+            <div class="questions-container" id="p1_questionsPanel" role="region" aria-label="Questions">
+                <h2 class="section-title">Questions 1–13</h2>
+
+                <div class="question-group">
+                    <div class="question-group-title">Questions 1–6</div>
+                    <p>Do the following statements agree with the information given in Reading Passage 1?</p>
+                    <p>In boxes 1-6 on your answer sheet, write</p>
+                    <p>TRUE if the statement agrees with the information</p>
+                    <p>FALSE if the statement contradicts the information</p>
+                    <p>NOT GIVEN if there is no information on this</p>
+
+                    <div class="question" data-question="1">
+                        <div class="question-text">1 Caral was built at the same time as the construction of the Egyptian pyramids.</div>
+                        <div class="options"><label><input type="radio" name="q1" value="TRUE"> TRUE</label><label><input type="radio" name="q1" value="FALSE"> FALSE</label><label><input type="radio" name="q1" value="NOT GIVEN"> NOT GIVEN</label></div>
+                    </div>
+                    <div class="question" data-question="2">
+                        <div class="question-text">2 The absence of pottery at the archaeological dig gave Shady a significant clue to the age of the site.</div>
+                        <div class="options"><label><input type="radio" name="q2" value="TRUE"> TRUE</label><label><input type="radio" name="q2" value="FALSE"> FALSE</label><label><input type="radio" name="q2" value="NOT GIVEN"> NOT GIVEN</label></div>
+                    </div>
+                    <div class="question" data-question="3">
+                        <div class="question-text">3 The stones used to build Piramide Mayor came from a location far away.</div>
+                        <div class="options"><label><input type="radio" name="q3" value="TRUE"> TRUE</label><label><input type="radio" name="q3" value="FALSE"> FALSE</label><label><input type="radio" name="q3" value="NOT GIVEN"> NOT GIVEN</label></div>
+                    </div>
+                    <div class="question" data-question="4">
+                        <div class="question-text">4 The huge and complicated structures of Piramide Mayor suggest that its construction required an organised team of builders.</div>
+                        <div class="options"><label><input type="radio" name="q4" value="TRUE"> TRUE</label><label><input type="radio" name="q4" value="FALSE"> FALSE</label><label><input type="radio" name="q4" value="NOT GIVEN"> NOT GIVEN</label></div>
+                    </div>
+                    <div class="question" data-question="5">
+                        <div class="question-text">5 Archaeological evidence shows that the residents of Caral were highly skilled musicians.</div>
+                        <div class="options"><label><input type="radio" name="q5" value="TRUE"> TRUE</label><label><input type="radio" name="q5" value="FALSE"> FALSE</label><label><input type="radio" name="q5" value="NOT GIVEN"> NOT GIVEN</label></div>
+                    </div>
+                    <div class="question" data-question="6">
+                        <div class="question-text">6 The remains of housing areas at Caral suggest that there were no class distinctions in residential areas.</div>
+                        <div class="options"><label><input type="radio" name="q6" value="TRUE"> TRUE</label><label><input type="radio" name="q6" value="FALSE"> FALSE</label><label><input type="radio" name="q6" value="NOT GIVEN"> NOT GIVEN</label></div>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-group-title">Questions 7–13</div>
+                    <p>Complete the notes below.</p>
+                    <p>Choose <strong>ONE WORD ONLY</strong> from the passage for each answer.</p>
+                    <p>Write your answers in boxes 7-13 on your answer sheet.</p>
+
+                    <div class="notes-container">
+                        <div class="notes-title">Caral as a trading centre</div>
+                        <p>Items discovered at Caral but not naturally occurring in the area</p>
+                        <ul>
+                            <li>the <input type="text" name="q7" maxlength="30" class="notes-input"> of a certain plant</li>
+                            <li><input type="text" name="q8" maxlength="30" class="notes-input"> used to make jewellery</li>
+                            <li>the remains of certain food such as <input type="text" name="q9" maxlength="30" class="notes-input"></li>
+                        </ul>
+                        <p>Clues to farming around Caral</p>
+                        <ul>
+                            <li><input type="text" name="q10" maxlength="30" class="notes-input"> still in existence today indicate water diverted from rivers</li>
+                            <li>no evidence that <input type="text" name="q11" maxlength="30" class="notes-input"> was grown</li>
+                        </ul>
+                        <p>Evidence of relationship with fishing communities</p>
+                        <ul>
+                            <li>the excavation findings and fishing nets found on the coast suggest Caral farmers traded <input type="text" name="q12" maxlength="30" class="notes-input"></li>
+                            <li>dried squash may have been used to aid <input type="text" name="q13" maxlength="30" class="notes-input"> of fishing nets</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== PASSAGE 2 ===== -->
+            <div class="passage-container hidden" id="p2_passagePanel" role="region" aria-label="Reading Passage">
+                <h2 class="section-title">READING PASSAGE 2</h2>
+                <div class="passage-content" id="passage2">
+                    <p>It was that summer, scientists now realise, when global warming at last made itself unmistakably felt. People in the Northern Hemisphere knew that summer 2003 was remarkable. Britain had record high temperatures; Europe had out-of-control forest fires, great rivers drying to a trickle and thousands of heat-related deaths. But how remarkable that summer was is only now becoming clear.</p>
+
+                    <p>June, July and August were the warmest three months recorded in western and central Europe. And they were the warmest by a very long way. Like Britain, Portugal, Germany and Switzerland had record national highs. Over a great rectangular block stretching from west of Paris to northern Italy, taking in Switzerland and southern Germany, the average temperature for the summer months was 3.78 °C higher than the long-term norm, says the University of East Anglia’s Tyndall Centre for Climate Change Research, one of the world’s leading institutions for monitoring and analysing temperature records That might not seem a lot until you are aware of the usual pattern. But then you realise it is enormous. There is nothing like this in previous data. It is considered so exceptional that Professor Phil Jones, the unit’s director, says openly - in a way that few scientists have done - that 2003’s extreme temperatures may be directly attributed to global warming caused by human actions, rather than natural climate variations.</p>
+
+                    <p>Meteorologists have hitherto contented themselves with the formula that recent high temperatures are ‘consistent with predictions' of climate change. For the great block of the map in question, the unit has reliable temperature records dating back to 1781. Using as a baseline the average summer temperature between 1961 and 1990, departures from the temperature norm, ‘anomalies’, can easily be plotted.</p>
+
+                    <p>Over the past 200 years, there have been at least half a dozen excess temperature anomalies approaching, or even exceeding, 2 °C. But there has been nothing remotely like that year, when the anomaly was nearly 4 °C. ‘That is quite remarkable,’ Professor Jones says. ‘It’s very unusual in a statistical sense. If this series had a normal statistical distribution you wouldn't get this number. The return period (i.e. how often it could be expected to recur) would be something like one in 1,000 years. If we look at an excess above the average of nearly 4 °C, then perhaps nearly 3 °C of that is natural variability, because we’ve seen that in past summers. But the final degree of it is likely to be due to global warming, caused by human action.’</p>
+
+                    <p>That year's summer had in a sense been one that climate scientists had long been anticipating Until then, the warming had been manifesting itself mainly in winters that were less cold rather than in summers that were much hotter. Last week, the UN predicted that winters were warming so quickly that some of Europe's lower-level ski resorts will die out.</p>
+
+                    <p>But sooner or later the unprecedented hot summer was bound to come - and that year it did Over a large swathe of the western part of the European continent, records were broken in all three months It wasn't only monthly averages, but daily extremes and the lengths of spells above thresholds National records were set in at least four countries.One of the most dramatic features of the summer was the hot nights, especially in the first half of August The high night-time temperatures were related to the 15,000 extra deaths in France during August, compared with previous years They gradually increased during the first 12 days of the month, peaking at about 2,000 a day on August 12 and 13 and severely overloading the medical services Then they dropped dramatically after August 14 when minimum temperatures fell by about 5 °C The elderly were most affected - their death rate rose 70 per cent.</p>
+
+                    <p>For Britain, the year as a whole is likely to be the warmest recorded But despite the temperature record on August 10, the summer itself - defined as the June, July and August period - comes behind 1976 and 1995, when there were longer periods of intense heat At the moment, the year is likely to be the third-hottest in the global temperature record (which goes back to 1856), behind 1998 and 2002. But when the records for October, November and December are collated, it might move into second place. The ten hottest years in the record have occurred since 1990.</p>
+
+                    <p>Professor Jones is in no doubt about the astonishing nature of that year’s European summer. ‘The temperatures recorded that year were out of all proportion to the previous record,’ he says. ‘It was the warmest summer in the last 500 years and probably way beyond that. It was enormously exceptional.’</p>
+
+                    <p>His colleagues at the Tyndall Centre are planning a study of it. ‘It was a summer that had not been experienced before, either in terms of the temperature extremes that were reached, or the range and diversity of the effects of the extreme heat,’ says the centre's executive director, Professor Mike Hulme. ‘It will certainly have left its mark on a number of countries as to how they think and plan for climate change, much as the 2000 floods revolutionised the way the Government is thinking about flooding in the UK The 2003 heatwave will have similar repercussions across Europe.'</p>
+                </div>
+            </div>
+            <div class="resizer"></div>
+
+            <div class="questions-container hidden" id="p2_questionsPanel" role="region" aria-label="Questions">
+                <h2 class="section-title">Questions 14–26</h2>
+
+                <div class="question-group">
+                    <div class="question-group-title">Questions 14–19</div>
+                    <p>Do the following statements agree with the information given in Reading Passage 2?</p>
+                    <p>In boxes 14-19 on your answer sheet, write</p>
+                    <p>TRUE if the statement agrees with the information</p>
+                    <p>FALSE if the statement contradicts the information</p>
+                    <p>NOT GIVEN if there is no information on this</p>
+
+                    <div class="question" data-question="14">
+                        <div class="question-text">14 In 2003, the average temperature for June to August in parts of Europe was almost 4 °C higher than usual.</div>
+                        <div class="options"><label><input type="radio" name="q14" value="TRUE"> TRUE</label><label><input type="radio" name="q14" value="FALSE"> FALSE</label><label><input type="radio" name="q14" value="NOT GIVEN"> NOT GIVEN</label></div>
+                    </div>
+                    <div class="question" data-question="15">
+                        <div class="question-text">15 According to Phil Jones, the impact people have on the planet was one reason for 2003’s record summer.</div>
+                        <div class="options"><label><input type="radio" name="q15" value="TRUE"> TRUE</label><label><input type="radio" name="q15" value="FALSE"> FALSE</label><label><input type="radio" name="q15" value="NOT GIVEN"> NOT GIVEN</label></div>
+                    </div>
+                    <div class="question" data-question="16">
+                        <div class="question-text">16 Temperatures are recorded twice daily in major cities.</div>
+                        <div class="options"><label><input type="radio" name="q16" value="TRUE"> TRUE</label><label><input type="radio" name="q16" value="FALSE"> FALSE</label><label><input type="radio" name="q16" value="NOT GIVEN"> NOT GIVEN</label></div>
+                    </div>
+                    <div class="question" data-question="17">
+                        <div class="question-text">17 Professor Phil Jones believes that the exceptional summer temperatures are within normal variation.</div>
+                        <div class="options"><label><input type="radio" name="q17" value="TRUE"> TRUE</label><label><input type="radio" name="q17" value="FALSE"> FALSE</label><label><input type="radio" name="q17" value="NOT GIVEN"> NOT GIVEN</label></div>
+                    </div>
+                    <div class="question" data-question="18">
+                        <div class="question-text">18 Before 2003, global warming generally caused milder winter months, not warmer summers.</div>
+                        <div class="options"><label><input type="radio" name="q18" value="TRUE"> TRUE</label><label><input type="radio" name="q18" value="FALSE"> FALSE</label><label><input type="radio" name="q18" value="NOT GIVEN"> NOT GIVEN</label></div>
+                    </div>
+                    <div class="question" data-question="19">
+                        <div class="question-text">19 New ski resorts are being built at higher altitudes in some countries.</div>
+                        <div class="options"><label><input type="radio" name="q19" value="TRUE"> TRUE</label><label><input type="radio" name="q19" value="FALSE"> FALSE</label><label><input type="radio" name="q19" value="NOT GIVEN"> NOT GIVEN</label></div>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-group-title">Questions 20 and 21</div>
+                    <p>Answer the questions below.</p>
+                    <p>Choose <strong>NO MORE THAN THREE WORDS AND/OR NUMBERS</strong> from the passage for each answer.</p>
+                    <p>Write your answers in boxes 20 and 21 on your answer sheet.</p>
+
+                    <div class="question" data-question="20">
+                        <div class="question-text">20 In Britain, which <strong>TWO</strong> years had hotter summers than the one under discussion?</div>
+                        <div class="options"><input type="text" name="q20" maxlength="50" placeholder="e.g., 1976, 1995" class="short-answer-input"></div>
+                    </div>
+                    <div class="question" data-question="21">
+                        <div class="question-text">21 Apart from the extreme summer of 2003, what other natural event has affected the way Britain is planning for the future?</div>
+                        <div class="options"><input type="text" name="q21" maxlength="50" class="short-answer-input"></div>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-group-title">Questions 22–25</div>
+                    <p>Complete the summary below.</p>
+                    <p>Choose <strong>ONE WORD AND/OR A NUMBER</strong> from the passage for each answer.</p>
+                    <p>Write your answers in boxes 22-25 on your answer sheet.</p>
+
+                    <div class="summary-container">
+                        <div class="summary-title">Summary of the 2003 Heatwave</div>
+                        <p>The three warmest years since global temperature records began in <input type="text" name="q22" maxlength="30" class="summary-input"> have been 1998, 2002 and 2003. It is significant that the warmest ten years have all been after <input type="text" name="q23" maxlength="30" class="summary-input">. Recorded temperatures in Europe in summer 2003 were the highest for at least <input type="text" name="q24" maxlength="30" class="summary-input"> years and had serious consequences. For example, in August alone, thousands of people died in <input type="text" name="q25" maxlength="30" class="summary-input">.</p>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-group-title">Question 26</div>
+                    <p>Choose the correct letter, <strong>A</strong>, <strong>B</strong>, <strong>C</strong> or <strong>D</strong>.</p>
+                    <p>Write the correct letter in box 26 on your answer sheet.</p>
+
+                    <div class="question" data-question="26">
+                        <div class="question-text">26 Which of the following is the most suitable title for Reading Passage 2?</div>
+                        <div class="options">
+                            <label><input type="radio" name="q26" value="A"> A The Causes of Global Warming</label>
+                            <label><input type="radio" name="q26" value="B"> B The Effects of Extreme Heat</label>
+                            <label><input type="radio" name="q26" value="C"> C The History of Temperature Recording</label>
+                            <label><input type="radio" name="q26" value="D"> D The Year of European Heat</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== PASSAGE 3 ===== -->
+            <div class="passage-container hidden" id="p3_passagePanel" role="region" aria-label="Reading Passage">
+                <h2 class="section-title">READING PASSAGE 3</h2>
+                <div class="passage-content" id="passage3">
+                    <h3>The art of deception</h3>
+                    <p>Do tiny changes of facial expression show whether someone is telling lies?</p>
+
+                    <p>Forty years ago, the research psychologist Dr Paul Ekman was addressing a group of young psychiatrists in training when he was asked a question, the answer to which has kept him busy ever since. Suppose, the group wanted to know, a particular patient swears they are telling the truth. They look and sound sincere. So here is the question: is there any way you can be sure they are telling the truth? Ekman did not know the answer then, but wanted to find out.</p>
+
+                    <p>As part of his research, he had already filmed a series of 12-minute interviews with psychiatric patients. In a subsequent conversation, one of the patients told hint that she had lies to him. So Ekman sat and looked at the film but saw nothing noteworthy. Then he slowed it down and looked again. Then he slowed it even further. And suddenly, there, across just two frames of the film, he saw it: an intense expression of extreme anguish. It lasted less than a 15th of a second, but once he had spotted the first expression, he soon found three more examples in that same interview. He termed his discovery ‘micro-expressions’ : very rapid, intense demonstrations of emotion that the subject intended to be concealed.</p>
+
+                    <p>Over the course of the next four decades, Ekman successfully demonstrated a proposition first suggested by Charles Darwin: that the ways in which we express rage, disgust, contempt, fear, surprise, happiness and sadness are universal. The facial muscles triggered by those seven basic emotions are, he has shown, essentially standard, regardless of language and culture, from the US to Japan, and Brazil to Papua New Guinea. What is more, expressions of emotion are impossible to suppress and, particularly when we are lying, micro-expressions of powerfully felt emotions will inevitably flit across our faces before we get the chance to stop them.</p>
+
+                    <p>Fortunately for liars, most people will fail to spot these fleeting signals of inner torment. Of the l5,000 Ekman has tested, only 50 people, whom he calls ‘naturals’, have been able to do it. But given a little more training, Ekman says, almost anyone can develop the skill. He should know: since these tests were completed in the mid-1980s and the first publication of his research, he has been called in by the FBI and CIA (among countless more law-enforcement and other agencies around the world), not just to solve cases, but to teach them how to use his technique for themselves. He has held workshops for defence and prosecution lawyers, health professionals, even jealous spouses, all of them wanting to know exactly when someone is not being 100 per cent candid.</p>
+
+                    <p>Most recently, Ekman’s research has resulted in a new television series about the exploits of the fictional Dr Cal Lightman, a scientist who studies involuntary body language to discover not only if you are lying, but why you might have been motivated to do so. According to the publicity blurb, Lightman is a ‘human lie detector’, even more accurate than a polygraph test. Ekman concedes he was sceptical when the producer first approached him with the idea of turning his life's work into a TV series, and initially would have stopped the project if he could. In particular, he was fearful that the show would exaggerate the effectiveness of his techniques and create the quite inaccurate impression among audiences that criminals couldno longer hope to get away with lying. In the worst can scenario, he was concerned about unfair convictions: that one day someone nut properly trained in his techniques might be sitting on a jury and wrongly find someone guilty of I crime simply on the basis of a television programme.</p>
+
+                    <p>In the end though, he was won over because the series is unusual in several respects. It is the first time, as far as Ekman is aware, than commercial TV drama has been based on the work of just one scientist. That scientist is also deeply involved in the project, talking through plot ideas and checking five successive drafts of each script to ensure details arc correct. He was also impressed with the producer’s manifestly serious and well-intentioned reasons for making the programme. Now that the first series has been completed, he believes probably 80-90 per cent of the show is based on fact, and that's good enough for what is, after all, a drama, not a documentary.</p>
+
+                    <p>Ekman, incidentally, professes to have been a terrible liar ever since he was a small boy and observes that the ability to detect a lie and the ability to lie successfully arc completely unrelated. He has been asked by people running for high office if he could teach them to become ‘more credible’ with the public, but has always refused to use his skills in that way on ethical grounds. He also insists that there are various kinds of lies. A 'true' lie can be identified by having two essential characteristics: there must be a deliberate intent to mislead and there must be no notification that this is what is occurring. This means that an actor or a poker player isn't a true liar. They're supposed to be deceiving you, it's part of the game, and the same is true of flattery. lie prefers to focus on the kinds of lies where the liar would be in grave trouble if they were found out, and where the target would feel properly aggrieved if they knew.</p>
+                </div>
+            </div>
+            <div class="resizer"></div>
+
+            <!-- Questions for Passage 3 -->
+            <div class="questions-container hidden" id="p3_questionsPanel" role="region" aria-label="Questions">
+                <h2 class="section-title">Questions 27–40</h2>
+
+                <div class="question-group">
+                    <div class="question-group-title">Questions 27–31</div>
+                    <p>Choose the correct letter, <strong>A</strong>, <strong>B</strong>, <strong>C</strong> or <strong>D</strong>.</p>
+                    <p>Write the correct letter in boxes 27-31 on your answer sheet.</p>
+
+                    <div class="question" data-question="27">
+                        <div class="question-text">27 According to the writer, Ekman became interested in lying after a question from his</div>
+                        <div class="options">
+                            <label><input type="radio" name="q27" value="A"> A peers.</label>
+                            <label><input type="radio" name="q27" value="B"> B patients.</label>
+                            <label><input type="radio" name="q27" value="C"> C students.</label>
+                            <label><input type="radio" name="q27" value="D"> D teachers.</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="28">
+                        <div class="question-text">28 The writer refers to the 12-minute interviews in order to</div>
+                        <div class="options">
+                            <label><input type="radio" name="q28" value="A"> A illustrate how frequently patients lie.</label>
+                            <label><input type="radio" name="q28" value="B"> B describe the origins of Ekman's theories.</label>
+                            <label><input type="radio" name="q28" value="C"> C compare Ekman's research to previous studies.</label>
+                            <label><input type="radio" name="q28" value="D"> D show how patients' behaviour is affected by filming.</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="29">
+                        <div class="question-text">29 What are we told about Ekman's conclusions from his tests?</div>
+                        <div class="options">
+                            <label><input type="radio" name="q29" value="A"> A It's natural for people to lie.</label>
+                            <label><input type="radio" name="q29" value="B"> B Few untrained people can detect lying.</label>
+                            <label><input type="radio" name="q29" value="C"> C Most liars suffer from periods of depression.</label>
+                            <label><input type="radio" name="q29" value="D"> D All of his subjects were trained to identify micro-expressions.</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="30">
+                        <div class="question-text">30 What point does the writer make about Ekman's techniques in the fourth paragraph?</div>
+                        <div class="options">
+                            <label><input type="radio" name="q30" value="A"> A They take decades to teach.</label>
+                            <label><input type="radio" name="q30" value="B"> B They have been in great demand.</label>
+                            <label><input type="radio" name="q30" value="C"> C They have aroused the suspicions of some agencies.</label>
+                            <label><input type="radio" name="q30" value="D"> D They can be used by a limited range of occupations.</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="31">
+                        <div class="question-text">31 What is the writer's point in the third paragraph?</div>
+                        <div class="options">
+                            <label><input type="radio" name="q31" value="A"> A Recent research has refuted an old idea.</label>
+                            <label><input type="radio" name="q31" value="B"> B With practice we can learn to control our micro-expressions.</label>
+                            <label><input type="radio" name="q31" value="C"> C Human society is too complex to allow for generalisations.</label>
+                            <label><input type="radio" name="q31" value="D"> D Micro-expressions are common to all people.</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-group-title">Questions 32–36</div>
+                    <p>Complete the summary using the list of words, <strong>A-I</strong>, below.</p>
+                    <p>Write the correct letter, <strong>A-I</strong>, in boxes 32-36 on your answer sheet.</p>
+
+                    <div class="summary-container">
+                        <div class="summary-title">The television series based on Ekman's work</div>
+                        <p>A new TV series based on Ekman's work features a hero named Lightman, who detects lies. Initially, Ekman was unenthusiastic about the TV project, because he feared the possibility of encouraging viewers' <select name="q32" class="summary-select"><option value="">Select</option><option value="A">A consequences</option><option value="B">B crimes</option><option value="C">C false beliefs</option><option value="D">D motives</option><option value="E">E justice</option><option value="F">F accuracy</option><option value="G">G acting</option><option value="H">H research</option><option value="I">I ratings</option></select>. For example, he was worried that one day the programme could result in <select name="q33" class="summary-select"><option value="">Select</option><option value="A">A consequences</option><option value="B">B crimes</option><option value="C">C false beliefs</option><option value="D">D motives</option><option value="E">E justice</option><option value="F">F accuracy</option><option value="G">G acting</option><option value="H">H research</option><option value="I">I ratings</option></select> not being carried out. Ultimately though, he has given the show his blessing because he is not aware of any other comparable programme based on a single person's <select name="q34" class="summary-select"><option value="">Select</option><option value="A">A consequences</option><option value="B">B crimes</option><option value="C">C false beliefs</option><option value="D">D motives</option><option value="E">E justice</option><option value="F">F accuracy</option><option value="G">G acting</option><option value="H">H research</option><option value="I">I ratings</option></select>. The <select name="q35" class="summary-select"><option value="">Select</option><option value="A">A consequences</option><option value="B">B crimes</option><option value="C">C false beliefs</option><option value="D">D motives</option><option value="E">E justice</option><option value="F">F accuracy</option><option value="G">G acting</option><option value="H">H research</option><option value="I">I ratings</option></select> of the show's producer have been another pleasant surprise and, considering the genre of the programme, Ekman is happy with the show's overall <select name="q36" class="summary-select"><option value="">Select</option><option value="A">A consequences</option><option value="B">B crimes</option><option value="C">C false beliefs</option><option value="D">D motives</option><option value="E">E justice</option><option value="F">F accuracy</option><option value="G">G acting</option><option value="H">H research</option><option value="I">I ratings</option></select>.</p>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-group-title">Questions 37–40</div>
+                    <p>Do the following statements agree with the claims of the writer in Reading Passage 3?</p>
+                    <p>In boxes 37-40 on your answer sheet, write</p>
+                    <p>YES if the statement agrees with the claims of the writer</p>
+                    <p>NO if the statement contradicts the claims of the writer</p>
+                    <p>NOT GIVEN if it is impossible to say what the writer thinks about this</p>
+
+                    <div class="question" data-question="37">
+                        <div class="question-text">37 Ekman regrets the lies he told as a child.</div>
+                        <div class="options"><label><input type="radio" name="q37" value="YES"> YES</label><label><input type="radio" name="q37" value="NO"> NO</label><label><input type="radio" name="q37" value="NOT GIVEN"> NOT GIVEN</label></div>
+                    </div>
+                    <div class="question" data-question="38">
+                        <div class="question-text">38 People who are good at lying tend to be good at detecting lies.</div>
+                        <div class="options"><label><input type="radio" name="q38" value="YES"> YES</label><label><input type="radio" name="q38" value="NO"> NO</label><label><input type="radio" name="q38" value="NOT GIVEN"> NOT GIVEN</label></div>
+                    </div>
+                    <div class="question" data-question="39">
+                        <div class="question-text">39 Ekman has worked with poker players to help them lie more convincingly.</div>
+                        <div class="options"><label><input type="radio" name="q39" value="YES"> YES</label><label><input type="radio" name="q39" value="NO"> NO</label><label><input type="radio" name="q39" value="NOT GIVEN"> NOT GIVEN</label></div>
+                    </div>
+                    <div class="question" data-question="40">
+                        <div class="question-text">40 Ekman is more interested in the types of lies with serious consequences.</div>
+                        <div class="options"><label><input type="radio" name="q40" value="YES"> YES</label><label><input type="radio" name="q40" value="NO"> NO</label><label><input type="radio" name="q40" value="NOT GIVEN"> NOT GIVEN</label></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom progress/navigation -->
+        <div class="progress-container">
+            <div class="progress-nav">
+                <div class="progress-items" style="gap:10px; flex-wrap:wrap;">
+                    <div id="bottomPartTabs" style="display:flex; gap:14px; justify-content:center; width:100%; align-items:center; flex-wrap:wrap;"></div>
+                </div>
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary" id="prev-btn" disabled><i class="fas fa-arrow-left"></i> Previous</button>
+                    <button class="btn btn-secondary" id="next-btn">Next <i class="fas fa-arrow-right"></i></button>
+                    <button class="btn btn-submit" id="submit-all-btn">Submit All <i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Modal -->
+    <div class="modal" id="results-modal">
+        <div class="modal-content">
+            <h2>Test Results</h2>
+            <div class="score-display" id="score-display">0/0</div>
+            <div class="score-breakdown" id="score-breakdown"></div>
+            <div class="modal-buttons">
+                <button class="btn btn-secondary" id="close-modal">Close</button>
+                <button class="btn btn-primary" id="review-answers">Review Answers</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* ========= CONFIG ========= */
+        const PARTS = [
+            { id: 1, title: 'Passage 1', qStart: 1, qEnd: 13, passagePanel: 'p1_passagePanel', questionsPanel: 'p1_questionsPanel' },
+            { id: 2, title: 'Passage 2', qStart: 14, qEnd: 26, passagePanel: 'p2_passagePanel', questionsPanel: 'p2_questionsPanel' },
+            { id: 3, title: 'Passage 3', qStart: 27, qEnd: 40, passagePanel: 'p3_passagePanel', questionsPanel: 'p3_questionsPanel' },
+        ];
+
+        /* ======= ANSWER KEY ======= */
+        const correctAnswers = {
+            q1: "FALSE", q2: "TRUE", q3: "FALSE", q4: "TRUE", q5: "NOT GIVEN", q6: "FALSE",
+            q7: "seeds", q8: "shells", q9: "fish", q10: "canals", q11: "maize", q12: "cotton", q13: "flotation",
+            q14: "TRUE", q15: "TRUE", q16: "NOT GIVEN", q17: "FALSE", q18: "TRUE", q19: "NOT GIVEN",
+            q20: "1976, 1995", q21: "2000 floods", q22: "1856", q23: "1990", q24: "500", q25: "France", q26: "D",
+            q27: "C", q28: "B", q29: "A", q30: "B", q31: "B",
+            q32: "C", q33: "E", q34: "H", q35: "D", q36: "F",
+            q37: "NOT GIVEN", q38: "NO", q39: "NOT GIVEN", q40: "YES"
+        };
+
+        /* ========= STATE ========= */
+        let currentPart = 1;
+        let currentQuestion = 1;
+        let seconds = 60 * 60;
+        let timerInterval;
+
+        /* ========= HELPERS ========= */
+        function el(id) { return document.getElementById(id); }
+        function inRange(q, pId) { const p = PARTS[pId - 1]; return q >= p.qStart && q <= p.qEnd; }
+
+        /* ======= BOTTOM TABS + PER-PART NUMBER RAILS ======= */
+        function renderBottomTabs() {
+            const tabs = el('bottomPartTabs');
+            tabs.innerHTML = '';
+            PARTS.forEach(p => {
+                const btn = document.createElement('button');
+                btn.className = 'btn btn-secondary';
+                btn.style.fontWeight = (p.id === currentPart) ? '900' : '600';
+                btn.innerHTML = (p.id === currentPart) ? `<strong>${p.title}</strong>` : `${p.title}`;
+                btn.onclick = () => switchPart(p.id);
+                tabs.appendChild(btn);
+
+                const rail = document.createElement('div');
+                rail.id = `rail-part-${p.id}`;
+                rail.style.display = (p.id === currentPart) ? 'flex' : 'none';
+                rail.style.gap = '6px';
+                rail.style.flexWrap = 'wrap';
+                rail.style.alignItems = 'center';
+                const total = p.qEnd - p.qStart + 1;
+                for (let q = p.qStart; q <= p.qEnd; q++) {
+                    const chip = document.createElement('div');
+                    chip.textContent = q;
+                    chip.className = 'progress-item' + (q === currentQuestion && p.id === currentPart ? ' current' : '');
+                    chip.dataset.question = q;
+                    chip.style.width = '30px'; chip.style.height = '20px'; chip.style.borderRadius = '6px';
+                    chip.style.fontSize = '14px'; chip.style.padding = '0'; chip.style.lineHeight = '20px';
+                    chip.onclick = () => scrollToQuestion(q);
+                    rail.appendChild(chip);
+                }
+                tabs.appendChild(rail);
+            });
+        }
+
+        function refreshBottomBar() { renderBottomTabs(); }
+
+        function switchPart(partId) {
+            if (currentPart === partId) return;
+            PARTS.forEach(p => {
+                el(p.passagePanel).classList.add('hidden');
+                el(p.questionsPanel).classList.add('hidden');
+                const r = el(`rail-part-${p.id}`); if (r) r.style.display = 'none';
+            });
+            currentPart = partId;
+            const p = PARTS[currentPart - 1];
+            currentQuestion = p.qStart;
+            el(p.passagePanel).classList.remove('hidden');
+            el(p.questionsPanel).classList.remove('hidden');
+            const r = el(`rail-part-${p.id}`); if (r) r.style.display = 'flex';
+            el('headerPassageTitle').textContent = `Passage ${currentPart} of 3`;
+            scrollToQuestion(currentQuestion, false);
+            refreshBottomBar();
+        }
+
+        function scrollToQuestion(num, smooth = true) {
+            const elQ = document.querySelector(`[data-question="${num}"]`) ||
+                document.querySelector(`input[name="q${num}"]`) ||
+                document.querySelector(`select[name="q${num}"]`);
+            if (elQ) elQ.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'center' });
+            updateCurrentQuestion(num);
+        }
+
+        function updateCurrentQuestion(num) {
+            currentQuestion = num;
+            document.querySelectorAll(`#rail-part-${currentPart} .progress-item`).forEach(it => {
+                it.classList.toggle('current', parseInt(it.dataset.question, 10) === num);
+            });
+        }
+
+        function attachAnsweredListeners() {
+            document.querySelectorAll('input[type="radio"], input[type="text"], select, input[type="checkbox"]').forEach(input => {
+                input.addEventListener('change', () => {
+                    const m = input.name && input.name.match(/^q(\d+)$/);
+                    if (!m) return;
+                    const q = parseInt(m[1], 10);
+                    const chip = document.querySelector(`.progress-item[data-question="${q}"]`);
+                    if (chip) {
+                        let val = '';
+                        if (input.type === 'text') val = input.value.trim();
+                        else if (input.type === 'checkbox') val = Array.from(document.querySelectorAll(`input[name="${input.name}"]:checked`)).map(cb => cb.value).join(',');
+                        else val = input.value;
+                        if (val) chip.classList.add('answered');
+                    }
+                });
+            });
+        }
+
+        /* ===== SUBMIT ALL ===== */
+        el('submit-all-btn').addEventListener('click', () => {
+            if (!confirm('Submit the entire test?')) return;
+
+            let score = 0, total = PARTS[PARTS.length - 1].qEnd;
+            const results = {};
+
+            for (let q = 1; q <= total; q++) {
+                const key = `q${q}`;
+                const corr = correctAnswers[key];
+                let user = null, isCorrect = false;
+
+                const radios = document.querySelectorAll(`input[name="${key}"][type="radio"]`);
+                const text = document.querySelector(`input[name="${key}"][type="text"]`);
+                const sel = document.querySelector(`select[name="${key}"]`);
+                const cbs = document.querySelectorAll(`input[name="${key}"][type="checkbox"]`);
+
+                if (radios.length > 0) {
+                    const c = Array.from(radios).find(r => r.checked);
+                    if (c) { user = c.value; isCorrect = (user === corr); radios.forEach(r => r.disabled = true); }
+                } else if (cbs.length > 0) {
+                    user = Array.from(cbs).filter(cb => cb.checked).map(cb => cb.value).sort().join(',');
+                    if (user) {
+                        const corrArr = Array.isArray(corr) ? corr.sort().join(',') : '';
+                        isCorrect = user === corrArr;
+                        cbs.forEach(cb => cb.disabled = true);
+                    }
+                } else if (text) {
+                    user = (text.value || '').trim();
+                    if (user) {
+                        const norm = (s) => String(s).trim().toLowerCase().replace(/\s+/g, ' ').replace(/,/g, '');
+                        isCorrect = norm(user) === norm(corr);
+                        text.disabled = true;
+                    }
+                } else if (sel) {
+                    user = sel.value;
+                    if (user) { isCorrect = user === corr; sel.disabled = true; }
+                }
+
+                if (isCorrect) score++;
+                results[key] = { userAnswer: user || 'No answer', correct: corr, isCorrect };
+            }
+
+            for (let q = 1; q <= total; q++) {
+                const res = results[`q${q}`];
+                const ch = document.querySelector(`.progress-item[data-question="${q}"]`);
+                if (ch) {
+                    ch.classList.remove('current', 'answered');
+                    if (res) ch.classList.add(res.isCorrect ? 'correct' : 'incorrect');
+                }
+            }
+
+            el('score-display').textContent = `${score}/${total}`;
+            const breakdown = el('score-breakdown');
+            breakdown.innerHTML = PARTS.map(p => {
+                const partScore = Array.from({ length: p.qEnd - p.qStart + 1 }, (_, i) => results[`q${p.qStart + i}`])
+                    .filter(r => r && r.isCorrect).length;
+                return `<div class="score-item"><span>Passage ${p.id}:</span><span>${partScore}/${p.qEnd - p.qStart + 1}</span></div>`;
+            }).join('');
+            el('results-modal').style.display = 'flex';
+
+            el('review-answers').onclick = () => {
+                el('results-modal').style.display = 'none';
+                showCorrectIndicators(results);
+            };
+        });
+
+        function showCorrectIndicators(results) {
+            document.querySelectorAll('.answer-indicator').forEach(e => e.remove());
+            const total = PARTS[PARTS.length - 1].qEnd;
+
+            for (let q = 1; q <= total; q++) {
+                const key = `q${q}`;
+                const res = results[key];
+                if (!res) continue;
+
+                let target = null;
+                const qEl = document.querySelector(`[data-question="${q}"] .options`);
+                if (qEl) target = qEl;
+                if (!target) {
+                    const input = document.querySelector(`input[name="${key}"]`);
+                    if (input) target = input.parentNode;
+                }
+                if (!target) {
+                    const sel = document.querySelector(`select[name="${key}"]`);
+                    if (sel) target = sel.parentNode;
+                }
+                if (!target) continue;
+
+                const box = document.createElement('div');
+                box.className = 'answer-indicator ' + (res.isCorrect ? 'correct' : 'incorrect');
+                box.style.display = 'block';
+                box.style.marginTop = '6px';
+                box.innerHTML = res.isCorrect
+                    ? `<i class="fas fa-check"></i> Correct!`
+                    : `<i class="fas fa-times"></i> Incorrect. Your answer: <strong>${res.userAnswer}</strong> <strong>Correct:</strong> ${Array.isArray(res.correct) ? res.correct.join(', ') : res.correct}`;
+                target.appendChild(box);
+            }
+        }
+
+        const timerSpan = document.querySelector('#globalTimer span');
+        const timerContainer = document.querySelector('#globalTimer');
+        function updateTimer() {
+            seconds--;
+            const m = Math.floor(seconds / 60), s = seconds % 60;
+            timerSpan.textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+            if (seconds <= 2 * 60) timerContainer.classList.add('warning');
+            if (seconds <= 0) { clearInterval(timerInterval); alert('Time is up! Submitting all passages.'); el('submit-all-btn').click(); }
+        }
+
+        function startTest() {
+            el('startScreen').classList.add('hidden');
+            el('testContainer').classList.remove('hidden');
+            timerInterval = setInterval(updateTimer, 1000);
+        }
+        window.startTest = startTest;
+
+        setTimeout(() => { el('loadingScreen').classList.add('hidden'); el('startScreen').classList.remove('hidden'); }, 900);
+
+        PARTS.forEach(p => {
+            if (p.id === 1) { el(p.passagePanel).classList.remove('hidden'); el(p.questionsPanel).classList.remove('hidden'); }
+            else { el(p.passagePanel).classList.add('hidden'); el(p.questionsPanel).classList.add('hidden'); }
+        });
+        renderBottomTabs();
+        attachAnsweredListeners();
+
+        let isResizing = false;
+        document.querySelectorAll('.resizer').forEach(resizer => {
+            resizer.addEventListener('mousedown', () => { isResizing = true; document.body.style.cursor = 'col-resize'; document.body.style.userSelect = 'none'; });
+        });
+        document.addEventListener('mousemove', (e) => {
+            if (!isResizing) return;
+            const container = document.querySelector('.main-content');
+            const rect = container.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const leftPct = (mouseX / rect.width) * 100;
+            const rightPct = 100 - leftPct;
+            if (leftPct >= 30 && leftPct <= 70) {
+                const passage = document.querySelector('.passage-container:not(.hidden)');
+                const questions = document.querySelector('.questions-container:not(.hidden)');
+                if (passage) passage.style.flex = leftPct + '%';
+                if (questions) questions.style.flex = rightPct + '%';
+            }
+        });
+        document.addEventListener('mouseup', () => { if (isResizing) { isResizing = false; document.body.style.cursor = ''; document.body.style.userSelect = ''; } });
+
+        const highlightBtn = el('highlight-btn');
+        const removeHighlightBtn = el('remove-highlight-btn');
+        const passagePanels = PARTS.map(p => el(p.passagePanel));
+        const questionsPanels = PARTS.map(p => el(p.questionsPanel));
+        let lastSelection = null, highlightTarget = null, currentPanel = null;
+
+        function getValidSelection() {
+            const sel = window.getSelection();
+            if (!sel.rangeCount || sel.isCollapsed) return null;
+            const range = sel.getRangeAt(0);
+            if (passagePanels.some(pp => pp && pp.contains(range.commonAncestorContainer))) {
+                currentPanel = passagePanels.find(pp => pp.contains(range.commonAncestorContainer));
+            } else if (questionsPanels.some(qp => qp && qp.contains(range.commonAncestorContainer))) {
+                currentPanel = questionsPanels.find(qp => qp.contains(range.commonAncestorContainer));
+            } else return null;
+            return range;
+        }
+        function showHighlightBtn(range) {
+            const rect = range.getBoundingClientRect();
+            highlightBtn.style.top = (window.scrollY + rect.top - 35) + 'px';
+            highlightBtn.style.left = (window.scrollX + rect.left) + 'px';
+            highlightBtn.style.display = 'block';
+        }
+        function hideHighlightBtn() { highlightBtn.style.display = 'none'; }
+        function showRemoveBtn(span) {
+            const rect = span.getBoundingClientRect();
+            removeHighlightBtn.style.top = (window.scrollY + rect.top - 35) + 'px';
+            removeHighlightBtn.style.left = (window.scrollX + rect.left) + 'px';
+            removeHighlightBtn.style.display = 'block';
+            highlightTarget = span;
+        }
+        function hideRemoveBtn() { removeHighlightBtn.style.display = 'none'; highlightTarget = null; }
+
+        highlightBtn.addEventListener('click', () => {
+            if (lastSelection) {
+                const span = document.createElement('span');
+                span.className = 'highlight';
+                span.appendChild(lastSelection.extractContents());
+                lastSelection.insertNode(span);
+                window.getSelection().removeAllRanges();
+                hideHighlightBtn();
+            }
+        });
+        removeHighlightBtn.addEventListener('click', () => {
+            if (highlightTarget) {
+                const parent = highlightTarget.parentNode;
+                while (highlightTarget.firstChild) parent.insertBefore(highlightTarget.firstChild, highlightTarget);
+                parent.removeChild(highlightTarget);
+                hideRemoveBtn();
+            }
+        });
+        document.addEventListener('selectionchange', () => {
+            hideHighlightBtn(); hideRemoveBtn();
+            const range = getValidSelection();
+            if (range) { lastSelection = range; showHighlightBtn(range); } else { lastSelection = null; }
+        });
+        document.addEventListener('mousedown', (e) => {
+            if (e.target !== highlightBtn && e.target !== removeHighlightBtn) { hideHighlightBtn(); hideRemoveBtn(); }
+        });
+        document.addEventListener('click', (e) => {
+            if (e.target.classList && e.target.classList.contains('highlight')) { e.preventDefault(); showRemoveBtn(e.target); }
+        });
+
+        el('close-modal').addEventListener('click', () => { el('results-modal').style.display = 'none'; });
+    </script>
+</body>
+
+</html>

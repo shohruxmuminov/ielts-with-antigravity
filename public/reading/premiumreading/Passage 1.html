@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            overflow: hidden;
+        }
+
+        .loading-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f9fafb;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 9999;
+        }
+
+        .loading-content {
+            text-align: center;
+        }
+
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #2563eb;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-title {
+            font-size: 1.2rem;
+            color: #6b7280;
+            margin-bottom: 20px;
+        }
+
+        .loading-subtitle {
+            font-size: 1rem;
+            color: #9ca3af;
+        }
+
+        .start-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f9fafb;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 9998;
+        }
+
+        .start-content {
+            text-align: center;
+        }
+
+        .start-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 24px;
+        }
+
+        .start-subtitle {
+            color: #6b7280;
+            margin-bottom: 24px;
+        }
+
+        .start-button {
+            padding: 12px 32px;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .start-button:hover {
+            background-color: #1d4ed8;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            width: 100vw;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            background-color: #ffffff;
+            color: #333;
+            padding: 8px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            flex-shrink: 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .passage-info {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #2d3748;
+        }
+
+        .timer {
+            background-color: rgba(255, 193, 193, 0.5);
+            padding: 6px 12px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s;
+            min-width: 80px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #c53030;
+            border: 1px solid rgba(255, 120, 120, 0.3);
+        }
+
+        .timer.warning {
+            color: #9b2c2c;
+            background-color: rgba(254, 178, 178, 0.7);
+            border-color: rgba(245, 101, 101, 0.5);
+        }
+
+        .logo-area {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+            cursor: pointer;
+        }
+
+        .logo-area:hover {
+            background-color: #0056b3;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.4);
+        }
+
+        .logo-area i {
+            font-size: 1.1rem;
+        }
+
+        .progress-container {
+            background-color: #f8f9fa;
+            padding: 4px 20px;
+            z-index: 100;
+            flex-shrink: 0;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .progress-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .progress-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 6px;
+        }
+
+        .progress-item {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4a5568;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            border: 1px solid #cbd5e0;
+        }
+
+        .progress-item.current {
+            background-color: #4299e1;
+            color: white;
+            transform: scale(1.1);
+            border-color: #2b6cb0;
+        }
+
+        .progress-item.answered {
+            background-color: #9ae6b4;
+            color: #22543d;
+            border-color: #68d391;
+        }
+
+        .progress-item.correct {
+            background-color: #48bb78;
+            color: white;
+            border-color: #38a169;
+        }
+
+        .progress-item.incorrect {
+            background-color: #fed7d7;
+            color: #c53030;
+            border-color: #feb2b2;
+        }
+
+        .progress-item:hover {
+            background-color: #cbd5e0;
+            transform: scale(1.05);
+        }
+
+        .btn {
+            padding: 6px 14px;
+            border: 1px solid #cbd5e0;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.95rem;
+            background-color: #f7fafc;
+            color: #4a5568;
+        }
+
+        .btn i {
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background-color: #edf2f7;
+            border-color: #a0aec0;
+        }
+
+        .btn-primary {
+            background-color: #f7fafc;
+            color: #4a5568;
+            border: 1px solid #cbd5e0;
+        }
+
+        .btn-primary:hover {
+            background-color: #edf2f7;
+            border-color: #a0aec0;
+        }
+
+        .btn-secondary {
+            background-color: #f7fafc;
+            color: #4a5568;
+            border: 1px solid #cbd5e0;
+        }
+
+        .btn-secondary:hover {
+            background-color: #edf2f7;
+            border-color: #a0aec0;
+        }
+
+        .btn-submit {
+            background-color: #48bb78;
+            color: white;
+            font-weight: 900;
+            border: 1px solid #38a169;
+        }
+
+        .btn-submit:hover {
+            background-color: #38a169;
+            border-color: #2f855a;
+        }
+
+        .btn-submit:disabled {
+            background-color: #9ae6b4;
+            color: #718096;
+            cursor: not-allowed;
+            border: 1px solid #68d391;
+        }
+
+        .main-content {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .passage-container {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: #fafafa;
+            position: relative;
+        }
+
+        .resizer {
+            width: 4px;
+            background-color: #cbd5e0;
+            cursor: col-resize;
+            position: relative;
+            transition: background-color 0.2s;
+        }
+
+        .resizer:hover {
+            background-color: #a0aec0;
+        }
+
+        .resizer::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 30px;
+            height: 60px;
+            background-color: rgba(203, 213, 224, 0.5);
+            border-radius: 4px;
+            pointer-events: none;
+        }
+
+        .questions-container {
+            width: 40%;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: white;
+            border-left: 1px solid #e2e8f0;
+        }
+
+        .passage {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .passage h2 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .passage-content p {
+            margin-top: 15px;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .passage h2 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .passage p {
+            margin-top: 20px;
+            margin-bottom: 25px;
+            text-align: justify;
+        }
+
+        .question-section {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .question {
+            margin-bottom: 25px;
+            padding: 6px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            background-color: #ffffff;
+            transition: box-shadow 0.2s;
+        }
+
+        .question:hover {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .question-text {
+            font-weight: 500;
+            margin-bottom: 12px;
+            color: #2d3748;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .option:hover {
+            background-color: #f7fafc;
+            border-color: #cbd5e0;
+        }
+
+        .option input {
+            margin-right: 2px;
+            width: 16px;
+            height: 16px;
+        }
+
+        .input-field {
+            padding: 8px 10px;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            width: 20%;
+            margin-top: 5px;
+            font-size: 0.9rem;
+        }
+
+        .input-field:focus {
+            border-color: #4299e1;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(66, 153, 225, 0.2);
+        }
+
+        select.input-field {
+            padding: 8px 10px;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            width: 20%;
+            margin-top: 5px;
+            font-size: 0.9rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.9rem;
+        }
+
+        th,
+        td {
+            border: 1px solid #e2e8f0;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f1f5f9;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .answer-indicator {
+            background-color: #e6fffa;
+            border: 1px solid #38b2ac;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        .answer-indicator.correct {
+            background-color: #e6fffa;
+            border-color: #38b2ac;
+            color: #234e52;
+        }
+
+        .answer-indicator.incorrect {
+            background-color: #fed7d7;
+            border-color: #fc8181;
+            color: #742a2a;
+        }
+
+        .question-group {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .question-group-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #2d3748;
+            font-size: 1rem;
+        }
+
+        .highlight {
+            background-color: #ffff00;
+            cursor: pointer;
+        }
+
+        #highlight-btn,
+        #remove-highlight-btn {
+            position: absolute;
+            z-index: 9999;
+            display: none;
+            padding: 6px 12px;
+            font-size: 14px;
+            border: 1px solid #888;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .score-display {
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #2d3748;
+        }
+
+        .score-breakdown {
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .score-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 0.95rem;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+
+            .questions-container {
+                width: 100%;
+                border-left: none;
+                border-top: 1px solid #e2e8f0;
+            }
+
+            .resizer {
+                width: 100%;
+                height: 4px;
+                cursor: row-resize;
+            }
+
+            .resizer::before {
+                width: 60px;
+                height: 30px;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            .progress-item {
+                width: 32px;
+                height: 32px;
+                font-size: 0.85rem;
+            }
+
+            .passage-info {
+                font-size: 0.9rem;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px;
+            }
+
+            .logo-area {
+                order: 1;
+            }
+
+            .passage-info {
+                order: 2;
+            }
+
+            .timer {
+                order: 3;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .progress-item {
+                width: 32px;
+                height: 32px;
+                font-size: 0.85rem;
+            }
+
+            .passage-info {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+
+
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <h2 class="loading-title">Your test will begin shortly</h2>
+            <p class="loading-subtitle">Please wait</p>
+        </div>
+    </div>
+
+    <!-- Start Screen -->
+    <div id="startScreen" class="start-screen hidden">
+        <div class="start-content">
+            <h1 class="start-title">IELTSwithShohrux</h1>
+            <p class="start-subtitle">Ready to begin your reading test?</p>
+            <button class="start-button" onclick="startTest()">Start Test</button>
+        </div>
+    </div>
+
+    <!-- Test Container -->
+    <div class="container hidden" id="testContainer">
+        <header>
+            <div class="passage-info">IELTSwithShohrux</div>
+            <div class="timer">
+                <i class="fas fa-clock"></i>
+                <span>20:00</span>
+            </div>
+            <div class="logo-area" onclick="window.open('https://t.me/muminov_bar', '_blank')">
+                <i class="fas fa-paper-plane"></i>
+                <span>Click for more TESTS</span>
+            </div>
+            <div class="passage-info">Passage 1 of 3</div>
+        </header>
+
+        <button id="highlight-btn" type="button">Highlight</button>
+        <button id="remove-highlight-btn" type="button">Remove Highlight</button>
+
+        <div class="main-content">
+            <!-- Reading Passage -->
+            <div class="passage-container" role="region" aria-label="Reading Passage">
+                <h2 class="section-title">READING PASSAGE 1</h2>
+                <div class="passage-content" id="passage1">
+                    <h3>The Development of Plastics</h3>
+                    <p id="A"><span class="label">A</span> The first plastics were developed as a substitute for natural
+                        rubber. Chemically, rubber is a polymer—a compound containing large molecules that are formed by
+                        the bonding of many smaller, simpler units, repeated over and over again. The same bonding
+                        principle—polymerization—is the basis of the creation of a huge range of plastics by the
+                        chemical industry.</p>
+                    <p id="B"><span class="label">B</span> The first plastic was developed as a result of a competition
+                        in the USA. In the 1860s, $10,000 was offered to anybody who could replace ivory—supplies of
+                        which were declining—with something equally good as a material for making billiard balls. The
+                        prize was won by John Wesley Hyatt, with a material called celluloid. Celluloid was made by
+                        dissolving cellulose, a carbohydrate obtained from plants, in a solution of camphor dissolved in
+                        ethanol. This new material rapidly found other applications in the manufacture of everyday
+                        products such as knife handles and detachable collars and cuffs. But perhaps the best-known
+                        celluloid product was photographic film, without which the film industry could never have taken
+                        off at the end of the 19th century.</p>
+                    <p id="C"><span class="label">C</span> Celluloid can be repeatedly softened and reshaped by heat,
+                        and is known as a thermoplastic. In 1907, Leo Baekeland (1863-1944), a Belgian chemist working
+                        in the USA, invented a different kind of plastic, by causing phenol and formaldehyde to react
+                        together. Baekeland called it Bakelite, and it was the first of the thermosets—plastic that can
+                        be cast and moulded while hot, but cannot be softened by heat and reshaped once they have set.
+                        Bakelite was a good insulator, and was resistant to water and acid. With these properties it was
+                        soon being used in the manufacture of electrical switches as well as a variety of domestic
+                        items.</p>
+                    <p id="D"><span class="label">D</span> As the century went on, the range of newly developed plastics
+                        increased. Chemists began looking for other small molecules that could be strung together to
+                        make polymers. In the 1930s, chemists in Britain discovered that the gas ethylene would
+                        polymerize under heat and pressure to form a thermoplastic they called polythene. Polypropylene
+                        followed in the 1950s. Both are used to make bottles, pipes, and plastic bags. A small change in
+                        the starting material—replacing a hydrogen atom in ethylene with a chlorine atom—produced rigid
+                        PVC (polyvinyl chloride), a fireproof plastic suitable for drains and gutters. By adding certain
+                        chemicals, a soft form of PVC can be produced, suitable as a substitute for rubber in items such
+                        as waterproof clothing. A closely related plastic is Teflon or PTFE (polytetrafluoroethylene).
+                        It produces very little friction, making it ideal for products such as non-stick frying pans.
+                    </p>
+                    <p id="E"><span class="label">E</span> Polystyrene, a hard, clear material like glass, was developed
+                        during the 1930s in Germany, and its applications included food containers and toys. Expanded
+                        polystyrene is rigid and is widely used in packaging and insulation. Polyurethane, developed in
+                        the same country, was commonly produced as a foam which was very useful in the production of
+                        insulating materials.</p>
+                    <p id="F"><span class="label">F</span> In the 1930s, the first of the man-made fibres was
+                        created—nylon. Its inventor was a chemist called Wallace Carothers (1896-1937), who worked for
+                        the Du Pont company in the USA. He found that under the right conditions two particular
+                        chemicals would form a polymer that could be pumped out through holes and then stretched to form
+                        long glossy threads that could be woven like silk. Its first use was to make parachutes for the
+                        US armed forces in World War II. In the postwar years, it completely replaced silk in the
+                        manufacture of stockings.</p>
+                    <p id="G"><span class="label">G</span> Many other synthetic fibres joined nylon, including Orion,
+                        Acrilan, and Terylene. Today most garments are made of a blend of natural fibres, such as cotton
+                        and wool, and man-made fibres that make fabrics easier to look after.</p>
+                    <p id="H"><span class="label">H</span> Despite its enormous usefulness, plastic has its drawbacks.
+                        In fact, one of its great strengths—its indestructibility—is its greatest disadvantage. Beaches
+                        all over the world, even on the remotest islands, are littered with plastic bottles that nothing
+                        can destroy. Nor is it very easy to recycle plastics, as different types of plastics are often
+                        found in the same items and call for different treatments. Plastics can be made biodegradable by
+                        incorporating into their structure a material such as starch, which is attacked by bacteria and
+                        causes the plastic to fall apart. Other materials can be incorporated that gradually decay in
+                        sunlight—although bottles made of such materials have to be stored in the dark, to ensure they
+                        do not disintegrate before they have been used.</p>
+                </div>
+            </div>
+
+            <div class="resizer" id="resizer"></div>
+
+            <!-- Questions -->
+            <div class="questions-container" id="questions" role="region" aria-label="Questions">
+                <h2 class="section-title">Questions 1-13</h2>
+                <p>You should spend about 20 minutes on Questions 1–13, which are based on Reading Passage 1.</p>
+
+                <div class="question-group">
+                    <div class="question-group-title">Questions 1-7</div>
+                    <p>Complete the table below. Write <strong>NO MORE THAN TWO WORDS</strong> from the passage for each
+                        answer.</p>
+                    <table class="question-table">
+                        <thead>
+                            <tr>
+                                <th colspan="4">Early types of plastic</th>
+                            </tr>
+                            <tr>
+                                <th>Name</th>
+                                <th>Date</th>
+                                <th>Country of origin</th>
+                                <th>Properties</th>
+                                <th>Common uses</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Celluloid</td>
+                                <td>1860s</td>
+                                <td>USA</td>
+                                <td>Can be softened and reshaped by heat</td>
+                                <td>billiard balls (original use); cutlery; clothing; <span
+                                        class="question-text">1</span> <input type="text" name="q1" maxlength="30"></td>
+                            </tr>
+                            <tr>
+                                <td><span class="question-text">2</span> <input type="text" name="q2" maxlength="30">
+                                </td>
+                                <td>1907</td>
+                                <td>USA</td>
+                                <td>Can’t be softened after setting; good insulator; resistant to water and acid</td>
+                                <td><span class="question-text">3</span> <input type="text" name="q3" maxlength="30">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Polythene</td>
+                                <td>1930s</td>
+                                <td><span class="question-text">4</span> <input type="text" name="q4" maxlength="30">
+                                </td>
+                                <td>Can be softened and reshaped by heat</td>
+                                <td>bottles; pipes; plastic bags</td>
+                            </tr>
+                            <tr>
+                                <td>Polypropylene</td>
+                                <td>1950s</td>
+                                <td></td>
+                                <td></td>
+                                <td>bottles; pipes; plastic bags</td>
+                            </tr>
+                            <tr>
+                                <td>Rigid PVC</td>
+                                <td></td>
+                                <td></td>
+                                <td>Is <span class="question-text">5</span> <input type="text" name="q5" maxlength="30">
+                                </td>
+                                <td>external piping</td>
+                            </tr>
+                            <tr>
+                                <td>Soft PVC</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>outdoor clothing</td>
+                            </tr>
+                            <tr>
+                                <td>Polystyrene</td>
+                                <td>1930s</td>
+                                <td>Germany</td>
+                                <td>Resembles <span class="question-text">6</span> <input type="text" name="q6"
+                                        maxlength="30"></td>
+                                <td>food containers; toys</td>
+                            </tr>
+                            <tr>
+                                <td>Polyurethane</td>
+                                <td></td>
+                                <td>Germany</td>
+                                <td>Usually manufactured as a <span class="question-text">7</span> <input type="text"
+                                        name="q7" maxlength="30"></td>
+                                <td>insulation</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-group-title">Questions 8-13</div>
+                    <p>In boxes <strong>8–13</strong> on your answer sheet, write:<br>
+                        <strong>TRUE</strong> – if the statement agrees with the information given in Reading Passage
+                        1<br>
+                        <strong>FALSE</strong> – if the statement contradicts the information<br>
+                        <strong>NOT GIVEN</strong> – if there is no information on this
+                    </p>
+                    <div class="question" data-question="8">
+                        <div class="question-text">8. The chemical structure of rubber is very different to that of
+                            plastics.</div>
+                        <div class="options">
+                            <label><input type="radio" name="q8" value="TRUE"> TRUE</label>
+                            <label><input type="radio" name="q8" value="FALSE"> FALSE</label>
+                            <label><input type="radio" name="q8" value="NOT GIVEN"> NOT GIVEN</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="9">
+                        <div class="question-text">9. John Wesley Hyatt was an industrial chemist.</div>
+                        <div class="options">
+                            <label><input type="radio" name="q9" value="TRUE"> TRUE</label>
+                            <label><input type="radio" name="q9" value="FALSE"> FALSE</label>
+                            <label><input type="radio" name="q9" value="NOT GIVEN"> NOT GIVEN</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="10">
+                        <div class="question-text">10. Celluloid and Bakelite react in the same way to heat.</div>
+                        <div class="options">
+                            <label><input type="radio" name="q10" value="TRUE"> TRUE</label>
+                            <label><input type="radio" name="q10" value="FALSE"> FALSE</label>
+                            <label><input type="radio" name="q10" value="NOT GIVEN"> NOT GIVEN</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="11">
+                        <div class="question-text">11. If an object is made of several plastics, these prove hard to
+                            break down and reuse.</div>
+                        <div class="options">
+                            <label><input type="radio" name="q11" value="TRUE"> TRUE</label>
+                            <label><input type="radio" name="q11" value="FALSE"> FALSE</label>
+                            <label><input type="radio" name="q11" value="NOT GIVEN"> NOT GIVEN</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="12">
+                        <div class="question-text">12. Adding starch to plastic makes it more durable.</div>
+                        <div class="options">
+                            <label><input type="radio" name="q12" value="TRUE"> TRUE</label>
+                            <label><input type="radio" name="q12" value="FALSE"> FALSE</label>
+                            <label><input type="radio" name="q12" value="NOT GIVEN"> NOT GIVEN</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="13">
+                        <div class="question-text">13. Containers which are designed to decompose need particular
+                            storage conditions.</div>
+                        <div class="options">
+                            <label><input type="radio" name="q13" value="TRUE"> TRUE</label>
+                            <label><input type="radio" name="q13" value="FALSE"> FALSE</label>
+                            <label><input type="radio" name="q13" value="NOT GIVEN"> NOT GIVEN</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-nav">
+                <div class="progress-items">
+                    <div class="progress-item current" data-question="1">1</div>
+                    <div class="progress-item" data-question="2">2</div>
+                    <div class="progress-item" data-question="3">3</div>
+                    <div class="progress-item" data-question="4">4</div>
+                    <div class="progress-item" data-question="5">5</div>
+                    <div class="progress-item" data-question="6">6</div>
+                    <div class="progress-item" data-question="7">7</div>
+                    <div class="progress-item" data-question="8">8</div>
+                    <div class="progress-item" data-question="9">9</div>
+                    <div class="progress-item" data-question="10">10</div>
+                    <div class="progress-item" data-question="11">11</div>
+                    <div class="progress-item" data-question="12">12</div>
+                    <div class="progress-item" data-question="13">13</div>
+                </div>
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary" id="prev-btn" disabled><i class="fas fa-arrow-left"></i>
+                        Previous</button>
+                    <button class="btn btn-secondary" id="next-btn">Next <i class="fas fa-arrow-right"></i></button>
+                    <button class="btn btn-submit" id="submit-btn">Submit Test <i
+                            class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Modal -->
+    <div class="modal" id="results-modal">
+        <div class="modal-content">
+            <h2>Test Results</h2>
+            <div class="score-display" id="score-display">0/13</div>
+            <div class="score-breakdown">
+                <div class="score-item">
+                    <span>Passage 1:</span>
+                    <span id="passage1-score">0/13</span>
+                </div>
+            </div>
+            <div class="modal-buttons">
+                <button class="btn btn-secondary" id="close-modal">Close</button>
+                <button class="btn btn-primary" id="review-answers">Review Answers</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Correct Answers for Questions 1-13
+        const correctAnswers = {
+            q1: "photographic film",
+            q2: "Bakelite",
+            q3: "electrical switches",
+            q4: "Britain",
+            q5: "fireproof",
+            q6: "glass",
+            q7: "foam",
+            q8: "FALSE",
+            q9: "NOT GIVEN",
+            q10: "FALSE",
+            q11: "TRUE",
+            q12: "FALSE",
+            q13: "TRUE"
+        };
+
+        let lastSelection = null;
+        let highlightTarget = null;
+        let currentPanel = null;
+        let submitted = false;
+        let currentQuestion = 1;
+        let isResizing = false;
+        let seconds = 20 * 60; // 20 minutes for Passage 1
+        let timerInterval;
+
+        const highlightBtn = document.getElementById('highlight-btn');
+        const removeHighlightBtn = document.getElementById('remove-highlight-btn');
+        const passagePanel = document.querySelector('.passage-container');
+        const questionsPanel = document.getElementById('questions');
+        const resizer = document.getElementById('resizer');
+        const submitBtn = document.getElementById('submit-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const resultsModal = document.getElementById('results-modal');
+        const scoreDisplay = document.getElementById('score-display');
+        const passage1Score = document.getElementById('passage1-score');
+        const closeModalBtn = document.getElementById('close-modal');
+        const reviewBtn = document.getElementById('review-answers');
+        const timerElement = document.querySelector('.timer span');
+        const timerContainer = document.querySelector('.timer');
+
+        // Timer
+        function updateTimer() {
+            seconds--;
+            const minutes = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            if (seconds <= 2 * 60) {
+                timerContainer.classList.add('warning');
+            }
+            if (seconds <= 0) {
+                clearInterval(timerInterval);
+                if (!submitted) {
+                    alert('Time is up! Submitting your test.');
+                    submitTest();
+                }
+            }
+        }
+
+        // Highlight functionality
+        function getValidSelection() {
+            const sel = window.getSelection();
+            if (!sel.rangeCount || sel.isCollapsed) return null;
+            const range = sel.getRangeAt(0);
+            if (passagePanel.contains(range.commonAncestorContainer)) {
+                currentPanel = passagePanel;
+            } else if (questionsPanel.contains(range.commonAncestorContainer)) {
+                currentPanel = questionsPanel;
+            } else {
+                return null;
+            }
+            return range;
+        }
+
+        function showHighlightBtn(range) {
+            const rect = range.getBoundingClientRect();
+            highlightBtn.style.top = (window.scrollY + rect.top - 35) + 'px';
+            highlightBtn.style.left = (window.scrollX + rect.left) + 'px';
+            highlightBtn.style.display = 'block';
+        }
+
+        function hideHighlightBtn() {
+            highlightBtn.style.display = 'none';
+        }
+
+        function showRemoveBtn(span) {
+            const rect = span.getBoundingClientRect();
+            removeHighlightBtn.style.top = (window.scrollY + rect.top - 35) + 'px';
+            removeHighlightBtn.style.left = (window.scrollX + rect.left) + 'px';
+            removeHighlightBtn.style.display = 'block';
+            highlightTarget = span;
+        }
+
+        function hideRemoveBtn() {
+            removeHighlightBtn.style.display = 'none';
+            highlightTarget = null;
+        }
+
+        highlightBtn.addEventListener('click', () => {
+            if (lastSelection) {
+                const span = document.createElement('span');
+                span.className = 'highlight';
+                span.appendChild(lastSelection.extractContents());
+                lastSelection.insertNode(span);
+                window.getSelection().removeAllRanges();
+                hideHighlightBtn();
+            }
+        });
+
+        removeHighlightBtn.addEventListener('click', () => {
+            if (highlightTarget) {
+                const parent = highlightTarget.parentNode;
+                while (highlightTarget.firstChild) {
+                    parent.insertBefore(highlightTarget.firstChild, highlightTarget);
+                }
+                parent.removeChild(highlightTarget);
+                hideRemoveBtn();
+            }
+        });
+
+        document.addEventListener('selectionchange', () => {
+            hideHighlightBtn();
+            hideRemoveBtn();
+            const range = getValidSelection();
+            if (range) {
+                lastSelection = range;
+                showHighlightBtn(range);
+            } else {
+                lastSelection = null;
+            }
+        });
+
+        [passagePanel, questionsPanel].forEach(panel => {
+            panel.addEventListener('scroll', () => {
+                hideHighlightBtn();
+                hideRemoveBtn();
+            });
+        });
+
+        document.addEventListener('mousedown', (e) => {
+            if (e.target !== highlightBtn && e.target !== removeHighlightBtn) {
+                hideHighlightBtn();
+                hideRemoveBtn();
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('highlight')) {
+                e.preventDefault();
+                showRemoveBtn(e.target);
+            }
+        });
+
+        // Resizer
+        resizer.addEventListener('mousedown', (e) => {
+            isResizing = true;
+            document.body.style.cursor = 'col-resize';
+            document.body.style.userSelect = 'none';
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isResizing) return;
+            const container = document.querySelector('.main-content');
+            const containerRect = container.getBoundingClientRect();
+            const mouseX = e.clientX - containerRect.left;
+            const containerWidth = containerRect.width;
+            const leftPercentage = (mouseX / containerWidth) * 100;
+            const rightPercentage = 100 - leftPercentage;
+            if (leftPercentage >= 30 && leftPercentage <= 70) {
+                document.querySelector('.passage-container').style.flex = leftPercentage + '%';
+                document.querySelector('.questions-container').style.width = rightPercentage + '%';
+            }
+        });
+
+        document.addEventListener('mouseup', () => {
+            if (isResizing) {
+                isResizing = false;
+                document.body.style.cursor = '';
+                document.body.style.userSelect = '';
+            }
+        });
+
+        // Navigation
+        function scrollToQuestion(num) {
+            const el = document.querySelector(`[data-question="${num}"]`) || document.querySelector(`input[name="q${num}"]`);
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            updateCurrentQuestion(num);
+        }
+
+        function updateCurrentQuestion(num) {
+            currentQuestion = num;
+            document.querySelectorAll('.progress-item').forEach(item => {
+                item.classList.remove('current');
+                if (item.dataset.question == num) item.classList.add('current');
+            });
+            prevBtn.disabled = num <= 1;
+            nextBtn.disabled = num >= 13;
+        }
+
+        document.querySelectorAll('.progress-item').forEach(item => {
+            item.addEventListener('click', () => {
+                scrollToQuestion(parseInt(item.dataset.question));
+            });
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentQuestion > 1) scrollToQuestion(currentQuestion - 1);
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentQuestion < 13) scrollToQuestion(currentQuestion + 1);
+        });
+
+        // Event listener for marking questions as answered
+        document.querySelectorAll('input[type="radio"], input[type="text"]').forEach(input => {
+            input.addEventListener('change', () => {
+                if (submitted) return;
+                const qNumMatch = input.name.match(/^q(\d+)$/);
+                if (qNumMatch) {
+                    const qNum = parseInt(qNumMatch[1]);
+                    const item = document.querySelector(`.progress-item[data-question="${qNum}"]`);
+                    if (item && !item.classList.contains('answered')) {
+                        const value = input.value;
+                        if (value) {
+                            item.classList.add('answered');
+                        }
+                    }
+                }
+            });
+        });
+
+        submitBtn.addEventListener('click', submitTest);
+
+        function submitTest() {
+            if (submitted) return;
+            if (!confirm('Are you sure you want to submit?')) return;
+            submitted = true;
+            clearInterval(timerInterval);
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-check"></i> Submitted';
+            let score = 0;
+            const results = {};
+
+            // Process questions 1-7 (text inputs)
+            for (let i = 1; i <= 7; i++) {
+                const key = `q${i}`;
+                let userAnswer = '';
+                let isCorrect = false;
+                const inputEl = document.querySelector(`input[name="${key}"]`);
+                if (inputEl && inputEl.value.trim() !== '') {
+                    userAnswer = inputEl.value.trim().toLowerCase();
+                    isCorrect = userAnswer === correctAnswers[key].toLowerCase();
+                    inputEl.disabled = true;
+                }
+                if (isCorrect) score++;
+                results[key] = { userAnswer, correct: correctAnswers[key], isCorrect };
+            }
+
+            // Process questions 8-13 (radio buttons)
+            for (let i = 8; i <= 13; i++) {
+                const key = `q${i}`;
+                let userAnswer = '';
+                let isCorrect = false;
+                const checkedRadio = document.querySelector(`input[name="${key}"]:checked`);
+                if (checkedRadio) {
+                    userAnswer = checkedRadio.value;
+                    isCorrect = userAnswer === correctAnswers[key];
+                    document.querySelectorAll(`input[name="${key}"]`).forEach(radio => {
+                        radio.disabled = true;
+                    });
+                }
+                if (isCorrect) score++;
+                results[key] = { userAnswer, correct: correctAnswers[key], isCorrect };
+            }
+
+            scoreDisplay.textContent = `${score}/13`;
+            passage1Score.textContent = `${score}/13`;
+            for (let i = 1; i <= 13; i++) {
+                const item = document.querySelector(`.progress-item[data-question="${i}"]`);
+                const res = results[`q${i}`];
+                if (item && res) {
+                    item.classList.remove('current', 'answered');
+                    item.classList.add(res.isCorrect ? 'correct' : 'incorrect');
+                }
+            }
+            window.testResults = results;
+            resultsModal.style.display = 'flex';
+        }
+
+        function showCorrectAnswers() {
+            if (!submitted) return;
+            document.querySelectorAll('.answer-indicator').forEach(el => el.remove());
+
+            // Process questions 1-7 (text inputs)
+            for (let i = 1; i <= 7; i++) {
+                const key = `q${i}`;
+                const res = window.testResults[key];
+                if (!res) continue;
+                const inputEl = document.querySelector(`input[name="${key}"]`);
+                if (!inputEl) continue;
+                const targetElement = inputEl.parentNode;
+                const div = document.createElement('div');
+                div.className = 'answer-indicator';
+                div.classList.add(res.isCorrect ? 'correct' : 'incorrect');
+                div.style.display = 'inline-block';
+                div.style.marginLeft = '10px';
+                if (res.isCorrect) {
+                    div.innerHTML = `<i class="fas fa-check"></i> Correct! You chose: <strong>${res.userAnswer || 'No answer'}</strong>`;
+                } else {
+                    const userDisplay = res.userAnswer || 'No answer';
+                    div.innerHTML = `<i class="fas fa-times"></i> Incorrect. You chose: <strong>${userDisplay}</strong><br><strong>Correct:</strong> ${res.correct}`;
+                }
+                targetElement.appendChild(div);
+            }
+
+            // Process questions 8-13 (radio buttons)
+            for (let i = 8; i <= 13; i++) {
+                const key = `q${i}`;
+                const res = window.testResults[key];
+                if (!res) continue;
+                const targetElement = document.querySelector(`[data-question="${i}"] .options`);
+                if (!targetElement) continue;
+                const div = document.createElement('div');
+                div.className = 'answer-indicator';
+                div.classList.add(res.isCorrect ? 'correct' : 'incorrect');
+                if (res.isCorrect) {
+                    div.innerHTML = `<i class="fas fa-check"></i> Correct! You chose: <strong>${res.userAnswer || 'No answer'}</strong>`;
+                } else {
+                    const userDisplay = res.userAnswer || 'No answer';
+                    div.innerHTML = `<i class="fas fa-times"></i> Incorrect. You chose: <strong>${userDisplay}</strong><br><strong>Correct:</strong> ${res.correct}`;
+                }
+                targetElement.appendChild(div);
+            }
+        }
+
+        closeModalBtn.addEventListener('click', () => {
+            resultsModal.style.display = 'none';
+        });
+
+        reviewBtn.addEventListener('click', () => {
+            resultsModal.style.display = 'none';
+            showCorrectAnswers();
+            scrollToQuestion(1);
+        });
+
+        function startTest() {
+            document.getElementById('startScreen').classList.add('hidden');
+            document.getElementById('testContainer').classList.remove('hidden');
+            timerInterval = setInterval(updateTimer, 1000);
+        }
+
+        setTimeout(() => {
+            document.getElementById('loadingScreen').classList.add('hidden');
+            document.getElementById('startScreen').classList.remove('hidden');
+        }, 2000);
+    </script>
+</body>
+
+</html>

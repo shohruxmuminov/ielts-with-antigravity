@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Full Reading Test 12</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: #f9fafb; min-height: 100vh; }
+        .nav { position: sticky; top: 0; z-index: 100; background: white; border-bottom: 1px solid #e5e7eb; padding: 12px 24px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .nav h2 { font-size: 1rem; color: #1f2937; }
+        .tabs { display: flex; gap: 8px; }
+        .tab { padding: 8px 20px; border-radius: 8px; border: 1px solid #d1d5db; background: white; cursor: pointer; font-weight: 600; font-size: 0.9rem; color: #6b7280; transition: all 0.2s; }
+        .tab.active { background: #2563eb; color: white; border-color: #2563eb; }
+        .tab:hover:not(.active) { background: #f3f4f6; }
+        .frame-container { width: 100%; height: calc(100vh - 56px); }
+        iframe { width: 100%; height: 100%; border: none; }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <h2>IELTSwithShohrux — Full Reading Test 12</h2>
+        <div class="tabs">
+            <button class="tab active" onclick="showPassage(1)">Passage 1</button>
+            <button class="tab" onclick="showPassage(2)">Passage 2</button>
+            <button class="tab" onclick="showPassage(3)">Passage 3</button>
+        </div>
+    </div>
+    <div class="frame-container">
+        <iframe id="passageFrame" src="Passage 1.html"></iframe>
+    </div>
+    <script>
+        function showPassage(num) {
+            document.getElementById('passageFrame').src = 'Passage ' + num + '.html';
+            document.querySelectorAll('.tab').forEach((t, i) => {
+                t.classList.toggle('active', i === num - 1);
+            });
+        }
+    </script>
+</body>
+</html>

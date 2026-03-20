@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            overflow: hidden;
+        }
+
+        .loading-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f9fafb;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 9999;
+        }
+
+        .loading-content {
+            text-align: center;
+        }
+
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #2563eb;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-title {
+            font-size: 1.2rem;
+            color: #6b7280;
+            margin-bottom: 20px;
+        }
+
+        .loading-subtitle {
+            font-size: 1rem;
+            color: #9ca3af;
+        }
+
+        .start-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f9fafb;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 9998;
+        }
+
+        .start-content {
+            text-align: center;
+        }
+
+        .start-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 24px;
+        }
+
+        .start-subtitle {
+            color: #6b7280;
+            margin-bottom: 24px;
+        }
+
+        .start-button {
+            padding: 12px 32px;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .start-button:hover {
+            background-color: #1d4ed8;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            width: 100vw;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            background-color: #ffffff;
+            color: #333;
+            padding: 8px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            flex-shrink: 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .passage-info {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #2d3748;
+        }
+
+        .timer {
+            background-color: rgba(255, 193, 193, 0.5);
+            padding: 6px 12px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s;
+            min-width: 80px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #c53030;
+            border: 1px solid rgba(255, 120, 120, 0.3);
+        }
+
+        .timer.warning {
+            color: #9b2c2c;
+            background-color: rgba(254, 178, 178, 0.7);
+            border-color: rgba(245, 101, 101, 0.5);
+        }
+
+        .logo-area {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+            cursor: pointer;
+        }
+
+        .logo-area:hover {
+            background-color: #0056b3;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.4);
+        }
+
+        .logo-area i {
+            font-size: 1.1rem;
+        }
+
+        .progress-container {
+            background-color: #f8f9fa;
+            padding: 4px 20px;
+            z-index: 100;
+            flex-shrink: 0;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .progress-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .progress-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 6px;
+        }
+
+        .progress-item {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4a5568;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            border: 1px solid #cbd5e0;
+        }
+
+        .progress-item.current {
+            background-color: #4299e1;
+            color: white;
+            transform: scale(1.1);
+            border-color: #2b6cb0;
+        }
+
+        .progress-item.answered {
+            background-color: #9ae6b4;
+            color: #22543d;
+            border-color: #68d391;
+        }
+
+        .progress-item.correct {
+            background-color: #48bb78;
+            color: white;
+            border-color: #38a169;
+        }
+
+        .progress-item.incorrect {
+            background-color: #fed7d7;
+            color: #c53030;
+            border-color: #feb2b2;
+        }
+
+        .progress-item:hover {
+            background-color: #cbd5e0;
+            transform: scale(1.05);
+        }
+
+        .btn {
+            padding: 6px 14px;
+            border: 1px solid #cbd5e0;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.95rem;
+            background-color: #f7fafc;
+            color: #4a5568;
+        }
+
+        .btn i {
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background-color: #edf2f7;
+            border-color: #a0aec0;
+        }
+
+        .btn-primary {
+            background-color: #f7fafc;
+            color: #4a5568;
+            border: 1px solid #cbd5e0;
+        }
+
+        .btn-primary:hover {
+            background-color: #edf2f7;
+            border-color: #a0aec0;
+        }
+
+        .btn-secondary {
+            background-color: #f7fafc;
+            color: #4a5568;
+            border: 1px solid #cbd5e0;
+        }
+
+        .btn-secondary:hover {
+            background-color: #edf2f7;
+            border-color: #a0aec0;
+        }
+
+        .btn-submit {
+            background-color: #48bb78;
+            color: white;
+            font-weight: 900;
+            border: 1px solid #38a169;
+        }
+
+        .btn-submit:hover {
+            background-color: #38a169;
+            border-color: #2f855a;
+        }
+
+        .btn-submit:disabled {
+            background-color: #9ae6b4;
+            color: #718096;
+            cursor: not-allowed;
+            border: 1px solid #68d391;
+        }
+
+        .main-content {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .passage-container {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: #fafafa;
+            position: relative;
+        }
+
+        .resizer {
+            width: 4px;
+            background-color: #cbd5e0;
+            cursor: col-resize;
+            position: relative;
+            transition: background-color 0.2s;
+        }
+
+        .resizer:hover {
+            background-color: #a0aec0;
+        }
+
+        .resizer::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 30px;
+            height: 60px;
+            background-color: rgba(203, 213, 224, 0.5);
+            border-radius: 4px;
+            pointer-events: none;
+        }
+
+        .questions-container {
+            width: 40%;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: white;
+            border-left: 1px solid #e2e8f0;
+        }
+
+        .passage {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .passage h2 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .passage-content p {
+            margin-top: 15px;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .passage h2 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .passage p {
+            margin-top: 20px;
+            margin-bottom: 25px;
+            text-align: justify;
+        }
+
+        .question-section {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .question {
+            margin-bottom: 25px;
+            padding: 6px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            background-color: #ffffff;
+            transition: box-shadow 0.2s;
+        }
+
+        .question:hover {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .question-text {
+            font-weight: 500;
+            margin-bottom: 12px;
+            color: #2d3748;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .option:hover {
+            background-color: #f7fafc;
+            border-color: #cbd5e0;
+        }
+
+        .option input {
+            margin-right: 2px;
+            width: 16px;
+            height: 16px;
+        }
+
+        .input-field {
+            padding: 8px 10px;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            width: 20%;
+            margin-top: 5px;
+            font-size: 0.9rem;
+        }
+
+        .input-field:focus {
+            border-color: #4299e1;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(66, 153, 225, 0.2);
+        }
+
+        select.input-field {
+            padding: 8px 10px;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            width: 20%;
+            margin-top: 5px;
+            font-size: 0.9rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.9rem;
+        }
+
+        th,
+        td {
+            border: 1px solid #e2e8f0;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f1f5f9;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .answer-indicator {
+            background-color: #e6fffa;
+            border: 1px solid #38b2ac;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        .answer-indicator.correct {
+            background-color: #e6fffa;
+            border-color: #38b2ac;
+            color: #234e52;
+        }
+
+        .answer-indicator.incorrect {
+            background-color: #fed7d7;
+            border-color: #fc8181;
+            color: #742a2a;
+        }
+
+        .question-group {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .question-group-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #2d3748;
+            font-size: 1rem;
+        }
+
+        .highlight {
+            background-color: #ffff00;
+            cursor: pointer;
+        }
+
+        #highlight-btn,
+        #remove-highlight-btn {
+            position: absolute;
+            z-index: 9999;
+            display: none;
+            padding: 6px 12px;
+            font-size: 14px;
+            border: 1px solid #888;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .score-display {
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #2d3748;
+        }
+
+        .score-breakdown {
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .score-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 0.95rem;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+
+            .questions-container {
+                width: 100%;
+                border-left: none;
+                border-top: 1px solid #e2e8f0;
+            }
+
+            .resizer {
+                width: 100%;
+                height: 4px;
+                cursor: row-resize;
+            }
+
+            .resizer::before {
+                width: 60px;
+                height: 30px;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            .progress-item {
+                width: 32px;
+                height: 32px;
+                font-size: 0.85rem;
+            }
+
+            .passage-info {
+                font-size: 0.9rem;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px;
+            }
+
+            .logo-area {
+                order: 1;
+            }
+
+            .passage-info {
+                order: 2;
+            }
+
+            .timer {
+                order: 3;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .progress-item {
+                width: 32px;
+                height: 32px;
+                font-size: 0.85rem;
+            }
+
+            .passage-info {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <h2 class="loading-title">Your test will begin shortly</h2>
+            <p class="loading-subtitle">Please wait</p>
+        </div>
+    </div>
+
+    <!-- Start Screen -->
+    <div id="startScreen" class="start-screen hidden">
+        <div class="start-content">
+            <h1 class="start-title">IELTSwithShohrux</h1>
+            <p class="start-subtitle">Ready to begin your reading test?</p>
+            <button class="start-button" onclick="startTest()">Start Test</button>
+        </div>
+    </div>
+
+    <!-- Test Container -->
+    <div class="container hidden" id="testContainer">
+        <header>
+            <div class="passage-info">IELTSwithShohrux</div>
+            <div class="timer">
+                <i class="fas fa-clock"></i>
+                <span>20:00</span>
+            </div>
+            <div class="logo-area" onclick="window.open('https://t.me/IELTSwithShohrux', '_blank')">
+                <i class="fas fa-paper-plane"></i>
+                <span>Click for more TESTS</span>
+            </div>
+            <div class="passage-info">Passage 2 of 3</div>
+        </header>
+
+        <button id="highlight-btn" type="button">Highlight</button>
+        <button id="remove-highlight-btn" type="button">Remove Highlight</button>
+
+        <div class="main-content">
+            <!-- Reading Passage -->
+            <div class="passage-container" role="region" aria-label="Reading Passage">
+                <h2 class="section-title">READING PASSAGE 2</h2>
+                <div class="passage-content" id="passage2">
+                    <h3>Lean Production Innovation – in Manufacturing Systems</h3>
+                    <p id="A"><span class="label">A</span> After the First World War, car makers Henry Ford and Arthur
+                        Sloan of General Motors moved world manufacturing from centuries of craft production into the
+                        age of mass production. Largely as a result of this, the United States soon dominated the world
+                        economy. After the Second World War, and approximately a hundred years after Japan opened up to
+                        the modern world, Eiji Toyoda and Taiichi Ohno pioneered the concept of lean production at the
+                        Toyota car company. And now, although superimposing the method on existing mass production
+                        systems causes pain and upheaval, manufacturers around the world are trying to embrace this
+                        innovative system.</p>
+                    <p id="B"><span class="label">B</span> Perhaps the best way to describe lean production is to
+                        compare it with the two other major manufacturing systems: craft production and mass production.
+                        The craft producer uses highly skilled workers and simple but flexible tools to make exactly
+                        what the customer asks for – one item at a time. A present-day example of this method is the
+                        customised production of a few exotic sports cars. The concept of craft production remains very
+                        popular, but the problem with it is obvious. Goods produced by the craft method – as cars once
+                        exclusively were – cost too much for most of us to afford. So at the beginning of the twentieth
+                        century, mass production was developed as an alternative method. The mass producer uses narrowly
+                        skilled professionals to design products which are then made by unskilled or semi-skilled
+                        workers, using expensive, single-purpose machines. These churn out standardised products in very
+                        high volumes. Because the machinery costs so much, and is so intolerant of disruption, the mass
+                        producer keeps standard designs in production for as long as possible. The result is that the
+                        customer gets lower costs, but at the expense of variety, and by means of work methods which
+                        most employees find boring and dispiriting. By contrast, the lean production system combines the
+                        advantages of craft and mass production, while avoiding the high cost of the former and the
+                        rigidity of the latter. Towards this end, companies appoint teams of multi-skilled workers to
+                        all levels of the organisation, and use highly flexible and increasingly automated machines to
+                        produce goods in enormous volume and variety.</p>
+                    <p id="C"><span class="label">C</span> Lean production is so called because, compared with mass
+                        production, it uses less of everything – half the human effort in the factory, half the
+                        manufacturing space, half the investment in tools, and half the engineering hours to develop the
+                        new product. It also results in far fewer defects.</p>
+                    <p id="D"><span class="label">D</span> Perhaps the most striking contrast between mass and lean
+                        production systems lies in their production standards. Mass producers set a limited goal for
+                        themselves: 'good enough', which translates into an acceptable number of defects, a maximum
+                        acceptable number of inventories, and a narrow range of standardised products. Lean producers,
+                        on the other hand, are unwilling to compromise standards in any of these areas.</p>
+                    <p id="E"><span class="label">E</span> Although cost reduction is the primary objective of the lean
+                        production system, it must meet three other intermediate objectives in order to achieve this:
+                        quantity control, quality assurance and respect for humanity. Firstly, the system must be able
+                        to adapt to daily and monthly fluctuations in demand. Secondly, each separate process must
+                        supply only good units to the subsequent process. Thirdly, in as far as the system uses human
+                        resources to attain its cost objectives, respect for human needs must be cultivated. It should
+                        be emphasised that none of these three objectives can be achieved separately.</p>
+                    <p id="F"><span class="label">F</span> The continuous flow of lean manufacturing production relies
+                        on two practical mechanisms: just-in-time and autonamation. Just-in-time means, for example,
+                        that in the process of assembling the parts to build a car, components from the preceding
+                        process should arrive at the next part of the line at exactly the right time and in the correct
+                        quantities. If just-in-time is fully realised throughout the company, then superfluous
+                        inventories are completely eliminated from the factory, making stores or warehouses unnecessary.
+                        However, relying solely on a central planning approach to control schedules for all stages of
+                        the production process simultaneously is very difficult in the case of cars, which consist of
+                        thousands of parts. So the lean system looks at the production flow in reverse; in other words,
+                        employees go to the preceding process to withdraw the necessary quantity of units at the
+                        appropriate time. The preceding process must produce only sufficient quantities of units to
+                        replace those that have been withdrawn, and in turn withdraws the requisite number of components
+                        from the process that precedes it.</p>
+                    <p id="G"><span class="label">G</span> Autonamation is the automatic checking for abnormalities in
+                        the production process. In order to realise just-in-time perfectly, only units which are in
+                        perfect condition must be allowed to flow to the next process, and this flow must be regular and
+                        uninterrupted. In other words, quality control must coexist with just-in-time procedures
+                        throughout the system. Autonamation involves building in a mechanism to prevent the
+                        multiplication of defects in machines or product lines. For example, in Toyota factories almost
+                        all the machines have been fitted with stopping devices, and the concept of autonamation has
+                        been extended to manual production lines. If something abnormal happens there, the worker pushes
+                        a button to stop the whole line, and lights, which are hung so high in the factory that they are
+                        visible to everyone, indicate the position of the problem.</p>
+                </div>
+            </div>
+
+            <div class="resizer" id="resizer"></div>
+
+            <!-- Questions -->
+            <div class="questions-container" id="questions" role="region" aria-label="Questions">
+                <h2 class="section-title">Questions 14-26</h2>
+                <p>You should spend about 20 minutes on Questions 14–26, which are based on Reading Passage 2.</p>
+
+                <div class="question-group">
+                    <div class="question-group-title">Questions 14-20</div>
+                    <p>Reading Passage 2 has seven paragraphs. Choose the correct heading for each paragraph from the
+                        list of headings below. Choose the correct number, i-x, in boxes 14-20.</p>
+                    <p><strong>List of Headings</strong></p>
+                    <ul>
+                        <li>i Global resistance to lean manufacturing</li>
+                        <li>ii The historical context</li>
+                        <li>iii Procedures for controlling quality</li>
+                        <li>iv The pros and cons of different production systems</li>
+                        <li>v Working conditions</li>
+                        <li>vi The impact on profits</li>
+                        <li>vii The origin of the term</li>
+                        <li>viii A crucial difference in levels of quality</li>
+                        <li>ix Procedures for controlling supply</li>
+                        <li>x Interdependent strategies for controlling expenditure</li>
+                    </ul>
+                    <div class="question" data-question="14">
+                        <div class="question-text">14. Paragraph A</div>
+                        <select name="q14">
+                            <option value="">Select an option</option>
+                            <option value="i">i Global resistance to lean manufacturing</option>
+                            <option value="ii">ii The historical context</option>
+                            <option value="iii">iii Procedures for controlling quality</option>
+                            <option value="iv">iv The pros and cons of different production systems</option>
+                            <option value="v">v Working conditions</option>
+                            <option value="vi">vi The impact on profits</option>
+                            <option value="vii">vii The origin of the term</option>
+                            <option value="viii">viii A crucial difference in levels of quality</option>
+                            <option value="ix">ix Procedures for controlling supply</option>
+                            <option value="x">x Interdependent strategies for controlling expenditure</option>
+                        </select>
+                    </div>
+                    <div class="question" data-question="15">
+                        <div class="question-text">15. Paragraph B</div>
+                        <select name="q15">
+                            <option value="">Select an option</option>
+                            <option value="i">i Global resistance to lean manufacturing</option>
+                            <option value="ii">ii The historical context</option>
+                            <option value="iii">iii Procedures for controlling quality</option>
+                            <option value="iv">iv The pros and cons of different production systems</option>
+                            <option value="v">v Working conditions</option>
+                            <option value="vi">vi The impact on profits</option>
+                            <option value="vii">vii The origin of the term</option>
+                            <option value="viii">viii A crucial difference in levels of quality</option>
+                            <option value="ix">ix Procedures for controlling supply</option>
+                            <option value="x">x Interdependent strategies for controlling expenditure</option>
+                        </select>
+                    </div>
+                    <div class="question" data-question="16">
+                        <div class="question-text">16. Paragraph C</div>
+                        <select name="q16">
+                            <option value="">Select an option</option>
+                            <option value="i">i Global resistance to lean manufacturing</option>
+                            <option value="ii">ii The historical context</option>
+                            <option value="iii">iii Procedures for controlling quality</option>
+                            <option value="iv">iv The pros and cons of different production systems</option>
+                            <option value="v">v Working conditions</option>
+                            <option value="vi">vi The impact on profits</option>
+                            <option value="vii">vii The origin of the term</option>
+                            <option value="viii">viii A crucial difference in levels of quality</option>
+                            <option value="ix">ix Procedures for controlling supply</option>
+                            <option value="x">x Interdependent strategies for controlling expenditure</option>
+                        </select>
+                    </div>
+                    <div class="question" data-question="17">
+                        <div class="question-text">17. Paragraph D</div>
+                        <select name="q17">
+                            <option value="">Select an option</option>
+                            <option value="i">i Global resistance to lean manufacturing</option>
+                            <option value="ii">ii The historical context</option>
+                            <option value="iii">iii Procedures for controlling quality</option>
+                            <option value="iv">iv The pros and cons of different production systems</option>
+                            <option value="v">v Working conditions</option>
+                            <option value="vi">vi The impact on profits</option>
+                            <option value="vii">vii The origin of the term</option>
+                            <option value="viii">viii A crucial difference in levels of quality</option>
+                            <option value="ix">ix Procedures for controlling supply</option>
+                            <option value="x">x Interdependent strategies for controlling expenditure</option>
+                        </select>
+                    </div>
+                    <div class="question" data-question="18">
+                        <div class="question-text">18. Paragraph E</div>
+                        <select name="q18">
+                            <option value="">Select an option</option>
+                            <option value="i">i Global resistance to lean manufacturing</option>
+                            <option value="ii">ii The historical context</option>
+                            <option value="iii">iii Procedures for controlling quality</option>
+                            <option value="iv">iv The pros and cons of different production systems</option>
+                            <option value="v">v Working conditions</option>
+                            <option value="vi">vi The impact on profits</option>
+                            <option value="vii">vii The origin of the term</option>
+                            <option value="viii">viii A crucial difference in levels of quality</option>
+                            <option value="ix">ix Procedures for controlling supply</option>
+                            <option value="x">x Interdependent strategies for controlling expenditure</option>
+                        </select>
+                    </div>
+                    <div class="question" data-question="19">
+                        <div class="question-text">19. Paragraph F</div>
+                        <select name="q19">
+                            <option value="">Select an option</option>
+                            <option value="i">i Global resistance to lean manufacturing</option>
+                            <option value="ii">ii The historical context</option>
+                            <option value="iii">iii Procedures for controlling quality</option>
+                            <option value="iv">iv The pros and cons of different production systems</option>
+                            <option value="v">v Working conditions</option>
+                            <option value="vi">vi The impact on profits</option>
+                            <option value="vii">vii The origin of the term</option>
+                            <option value="viii">viii A crucial difference in levels of quality</option>
+                            <option value="ix">ix Procedures for controlling supply</option>
+                            <option value="x">x Interdependent strategies for controlling expenditure</option>
+                        </select>
+                    </div>
+                    <div class="question" data-question="20">
+                        <div class="question-text">20. Paragraph G</div>
+                        <select name="q20">
+                            <option value="">Select an option</option>
+                            <option value="i">i Global resistance to lean manufacturing</option>
+                            <option value="ii">ii The historical context</option>
+                            <option value="iii">iii Procedures for controlling quality</option>
+                            <option value="iv">iv The pros and cons of different production systems</option>
+                            <option value="v">v Working conditions</option>
+                            <option value="vi">vi The impact on profits</option>
+                            <option value="vii">vii The origin of the term</option>
+                            <option value="viii">viii A crucial difference in levels of quality</option>
+                            <option value="ix">ix Procedures for controlling supply</option>
+                            <option value="x">x Interdependent strategies for controlling expenditure</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-group-title">Questions 21-26</div>
+                    <p>Complete the sentences below. Write <strong>NO MORE THAN THREE WORDS</strong> from the passage
+                        for each answer.</p>
+                    <div class="question" data-question="21">
+                        <div class="question-text">21. A small number of unusual cars are still produced by the <input
+                                type="text" name="q21" maxlength="30"> method.</div>
+                    </div>
+                    <div class="question" data-question="22">
+                        <div class="question-text">22. Lean production requires staff who are <input type="text"
+                                name="q22" maxlength="30">.</div>
+                    </div>
+                    <div class="question" data-question="23">
+                        <div class="question-text">23. Lean production employs fewer people, and uses less <input
+                                type="text" name="q23" maxlength="30">, equipment and time.</div>
+                    </div>
+                    <div class="question" data-question="24">
+                        <div class="question-text">24. Storage facilities are not needed if a procedure known as <input
+                                type="text" name="q24" maxlength="30"> is implemented in the lean production method.
+                        </div>
+                    </div>
+                    <div class="question" data-question="25">
+                        <div class="question-text">25. Autonamation is a procedure for spotting any <input type="text"
+                                name="q25" maxlength="30"> in the products on a production line.</div>
+                    </div>
+                    <div class="question" data-question="26">
+                        <div class="question-text">26. At Toyota factories, <input type="text" name="q26"
+                                maxlength="30"> are suspended above manual production lines in order to show where
+                            production has to be halted.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-nav">
+                <div class="progress-items">
+                    <div class="progress-item current" data-question="14">14</div>
+                    <div class="progress-item" data-question="15">15</div>
+                    <div class="progress-item" data-question="16">16</div>
+                    <div class="progress-item" data-question="17">17</div>
+                    <div class="progress-item" data-question="18">18</div>
+                    <div class="progress-item" data-question="19">19</div>
+                    <div class="progress-item" data-question="20">20</div>
+                    <div class="progress-item" data-question="21">21</div>
+                    <div class="progress-item" data-question="22">22</div>
+                    <div class="progress-item" data-question="23">23</div>
+                    <div class="progress-item" data-question="24">24</div>
+                    <div class="progress-item" data-question="25">25</div>
+                    <div class="progress-item" data-question="26">26</div>
+                </div>
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary" id="prev-btn" disabled><i class="fas fa-arrow-left"></i>
+                        Previous</button>
+                    <button class="btn btn-secondary" id="next-btn">Next <i class="fas fa-arrow-right"></i></button>
+                    <button class="btn btn-submit" id="submit-btn">Submit Test <i
+                            class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Modal -->
+    <div class="modal" id="results-modal">
+        <div class="modal-content">
+            <h2>Test Results</h2>
+            <div class="score-display" id="score-display">0/13</div>
+            <div class="score-breakdown">
+                <div class="score-item">
+                    <span>Passage 2:</span>
+                    <span id="passage2-score">0/13</span>
+                </div>
+            </div>
+            <div class="modal-buttons">
+                <button class="btn btn-secondary" id="close-modal">Close</button>
+                <button class="btn btn-primary" id="review-answers">Review Answers</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Correct Answers for Questions 14-26
+        const correctAnswers = {
+            q14: "ii",
+            q15: "iv",
+            q16: "vii",
+            q17: "viii",
+            q18: "x",
+            q19: "ix",
+            q20: "iii",
+            q21: "craft production",
+            q22: "multi-skilled",
+            q23: "manufacturing space",
+            q24: "just-in-time",
+            q25: "abnormalities",
+            q26: "lights"
+        };
+
+        let lastSelection = null;
+        let highlightTarget = null;
+        let currentPanel = null;
+        let submitted = false;
+        let currentQuestion = 14;
+        let isResizing = false;
+        let seconds = 20 * 60; // 20 minutes for Passage 2
+        let timerInterval;
+
+        const highlightBtn = document.getElementById('highlight-btn');
+        const removeHighlightBtn = document.getElementById('remove-highlight-btn');
+        const passagePanel = document.querySelector('.passage-container');
+        const questionsPanel = document.getElementById('questions');
+        const resizer = document.getElementById('resizer');
+        const submitBtn = document.getElementById('submit-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const resultsModal = document.getElementById('results-modal');
+        const scoreDisplay = document.getElementById('score-display');
+        const passage2Score = document.getElementById('passage2-score');
+        const closeModalBtn = document.getElementById('close-modal');
+        const reviewBtn = document.getElementById('review-answers');
+        const timerElement = document.querySelector('.timer span');
+        const timerContainer = document.querySelector('.timer');
+
+        // Timer
+        function updateTimer() {
+            seconds--;
+            const minutes = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            if (seconds <= 2 * 60) {
+                timerContainer.classList.add('warning');
+            }
+            if (seconds <= 0) {
+                clearInterval(timerInterval);
+                if (!submitted) {
+                    alert('Time is up! Submitting your test.');
+                    submitTest();
+                }
+            }
+        }
+
+        // Highlight functionality
+        function getValidSelection() {
+            const sel = window.getSelection();
+            if (!sel.rangeCount || sel.isCollapsed) return null;
+            const range = sel.getRangeAt(0);
+            if (passagePanel.contains(range.commonAncestorContainer)) {
+                currentPanel = passagePanel;
+            } else if (questionsPanel.contains(range.commonAncestorContainer)) {
+                currentPanel = questionsPanel;
+            } else {
+                return null;
+            }
+            return range;
+        }
+
+        function showHighlightBtn(range) {
+            const rect = range.getBoundingClientRect();
+            highlightBtn.style.top = (window.scrollY + rect.top - 35) + 'px';
+            highlightBtn.style.left = (window.scrollX + rect.left) + 'px';
+            highlightBtn.style.display = 'block';
+        }
+
+        function hideHighlightBtn() {
+            highlightBtn.style.display = 'none';
+        }
+
+        function showRemoveBtn(span) {
+            const rect = span.getBoundingClientRect();
+            removeHighlightBtn.style.top = (window.scrollY + rect.top - 35) + 'px';
+            removeHighlightBtn.style.left = (window.scrollX + rect.left) + 'px';
+            removeHighlightBtn.style.display = 'block';
+            highlightTarget = span;
+        }
+
+        function hideRemoveBtn() {
+            removeHighlightBtn.style.display = 'none';
+            highlightTarget = null;
+        }
+
+        highlightBtn.addEventListener('click', () => {
+            if (lastSelection) {
+                const span = document.createElement('span');
+                span.className = 'highlight';
+                span.appendChild(lastSelection.extractContents());
+                lastSelection.insertNode(span);
+                window.getSelection().removeAllRanges();
+                hideHighlightBtn();
+            }
+        });
+
+        removeHighlightBtn.addEventListener('click', () => {
+            if (highlightTarget) {
+                const parent = highlightTarget.parentNode;
+                while (highlightTarget.firstChild) {
+                    parent.insertBefore(highlightTarget.firstChild, highlightTarget);
+                }
+                parent.removeChild(highlightTarget);
+                hideRemoveBtn();
+            }
+        });
+
+        document.addEventListener('selectionchange', () => {
+            hideHighlightBtn();
+            hideRemoveBtn();
+            const range = getValidSelection();
+            if (range) {
+                lastSelection = range;
+                showHighlightBtn(range);
+            } else {
+                lastSelection = null;
+            }
+        });
+
+        [passagePanel, questionsPanel].forEach(panel => {
+            panel.addEventListener('scroll', () => {
+                hideHighlightBtn();
+                hideRemoveBtn();
+            });
+        });
+
+        document.addEventListener('mousedown', (e) => {
+            if (e.target !== highlightBtn && e.target !== removeHighlightBtn) {
+                hideHighlightBtn();
+                hideRemoveBtn();
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('highlight')) {
+                e.preventDefault();
+                showRemoveBtn(e.target);
+            }
+        });
+
+        // Resizer
+        resizer.addEventListener('mousedown', (e) => {
+            isResizing = true;
+            document.body.style.cursor = 'col-resize';
+            document.body.style.userSelect = 'none';
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isResizing) return;
+            const container = document.querySelector('.main-content');
+            const containerRect = container.getBoundingClientRect();
+            const mouseX = e.clientX - containerRect.left;
+            const containerWidth = containerRect.width;
+            const leftPercentage = (mouseX / containerWidth) * 100;
+            const rightPercentage = 100 - leftPercentage;
+            if (leftPercentage >= 30 && leftPercentage <= 70) {
+                document.querySelector('.passage-container').style.flex = leftPercentage + '%';
+                document.querySelector('.questions-container').style.width = rightPercentage + '%';
+            }
+        });
+
+        document.addEventListener('mouseup', () => {
+            if (isResizing) {
+                isResizing = false;
+                document.body.style.cursor = '';
+                document.body.style.userSelect = '';
+            }
+        });
+
+        // Navigation
+        function scrollToQuestion(num) {
+            const el = document.querySelector(`[data-question="${num}"]`) || document.querySelector(`select[name="q${num}"], input[name="q${num}"]`);
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            updateCurrentQuestion(num);
+        }
+
+        function updateCurrentQuestion(num) {
+            currentQuestion = num;
+            document.querySelectorAll('.progress-item').forEach(item => {
+                item.classList.remove('current');
+                if (item.dataset.question == num) item.classList.add('current');
+            });
+            prevBtn.disabled = num <= 14;
+            nextBtn.disabled = num >= 26;
+        }
+
+        document.querySelectorAll('.progress-item').forEach(item => {
+            item.addEventListener('click', () => {
+                scrollToQuestion(parseInt(item.dataset.question));
+            });
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentQuestion > 14) scrollToQuestion(currentQuestion - 1);
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentQuestion < 26) scrollToQuestion(currentQuestion + 1);
+        });
+
+        // Event listener for marking questions as answered
+        document.querySelectorAll('select, input[type="text"]').forEach(input => {
+            input.addEventListener('change', () => {
+                if (submitted) return;
+                const qNumMatch = input.name.match(/^q(\d+)$/);
+                if (qNumMatch) {
+                    const qNum = parseInt(qNumMatch[1]);
+                    const item = document.querySelector(`.progress-item[data-question="${qNum}"]`);
+                    if (item && !item.classList.contains('answered')) {
+                        const value = input.value;
+                        if (value) {
+                            item.classList.add('answered');
+                        }
+                    }
+                }
+            });
+        });
+
+        submitBtn.addEventListener('click', submitTest);
+
+        function submitTest() {
+            if (submitted) return;
+            if (!confirm('Are you sure you want to submit?')) return;
+            submitted = true;
+            clearInterval(timerInterval);
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-check"></i> Submitted';
+            let score = 0;
+            const results = {};
+
+            // Process questions 14-26 (select and text inputs)
+            for (let i = 14; i <= 26; i++) {
+                const key = `q${i}`;
+                let userAnswer = '';
+                let isCorrect = false;
+                const inputEl = document.querySelector(`select[name="${key}"], input[name="${key}"]`);
+                if (inputEl && inputEl.value.trim() !== '') {
+                    userAnswer = inputEl.value.trim().toLowerCase();
+                    isCorrect = userAnswer === correctAnswers[key].toLowerCase();
+                    inputEl.disabled = true;
+                }
+                if (isCorrect) score++;
+                results[key] = { userAnswer, correct: correctAnswers[key], isCorrect };
+            }
+
+            scoreDisplay.textContent = `${score}/13`;
+            passage2Score.textContent = `${score}/13`;
+            for (let i = 14; i <= 26; i++) {
+                const item = document.querySelector(`.progress-item[data-question="${i}"]`);
+                const res = results[`q${i}`];
+                if (item && res) {
+                    item.classList.remove('current', 'answered');
+                    item.classList.add(res.isCorrect ? 'correct' : 'incorrect');
+                }
+            }
+            window.testResults = results;
+            resultsModal.style.display = 'flex';
+        }
+
+        function showCorrectAnswers() {
+            if (!submitted) return;
+            document.querySelectorAll('.answer-indicator').forEach(el => el.remove());
+
+            // Process questions 14-20 (select inputs)
+            for (let i = 14; i <= 20; i++) {
+                const key = `q${i}`;
+                const res = window.testResults[key];
+                if (!res) continue;
+                const targetElement = document.querySelector(`[data-question="${i}"]`);
+                if (!targetElement) continue;
+                const div = document.createElement('div');
+                div.className = 'answer-indicator';
+                div.classList.add(res.isCorrect ? 'correct' : 'incorrect');
+                const selectedOption = document.querySelector(`select[name="${key}"] option[value="${res.userAnswer}"]`);
+                const userDisplay = selectedOption ? selectedOption.textContent : (res.userAnswer || 'No answer');
+                if (res.isCorrect) {
+                    div.innerHTML = `<i class="fas fa-check"></i> Correct! You chose: <strong>${userDisplay}</strong>`;
+                } else {
+                    const correctOption = document.querySelector(`select[name="${key}"] option[value="${res.correct}"]`);
+                    const correctDisplay = correctOption ? correctOption.textContent : res.correct;
+                    div.innerHTML = `<i class="fas fa-times"></i> Incorrect. You chose: <strong>${userDisplay}</strong><br><strong>Correct:</strong> ${correctDisplay}`;
+                }
+                targetElement.appendChild(div);
+            }
+
+            // Process questions 21-26 (text inputs)
+            for (let i = 21; i <= 26; i++) {
+                const key = `q${i}`;
+                const res = window.testResults[key];
+                if (!res) continue;
+                const inputEl = document.querySelector(`input[name="${key}"]`);
+                if (!inputEl) continue;
+                const targetElement = inputEl.parentNode;
+                const div = document.createElement('div');
+                div.className = 'answer-indicator';
+                div.classList.add(res.isCorrect ? 'correct' : 'incorrect');
+                div.style.display = 'inline-block';
+                div.style.marginLeft = '10px';
+                if (res.isCorrect) {
+                    div.innerHTML = `<i class="fas fa-check"></i> Correct! You chose: <strong>${res.userAnswer || 'No answer'}</strong>`;
+                } else {
+                    const userDisplay = res.userAnswer || 'No answer';
+                    div.innerHTML = `<i class="fas fa-times"></i> Incorrect. You chose: <strong>${userDisplay}</strong><br><strong>Correct:</strong> ${res.correct}`;
+                }
+                targetElement.appendChild(div);
+            }
+        }
+
+        closeModalBtn.addEventListener('click', () => {
+            resultsModal.style.display = 'none';
+        });
+
+        reviewBtn.addEventListener('click', () => {
+            resultsModal.style.display = 'none';
+            showCorrectAnswers();
+            scrollToQuestion(14);
+        });
+
+        function startTest() {
+            document.getElementById('startScreen').classList.add('hidden');
+            document.getElementById('testContainer').classList.remove('hidden');
+            timerInterval = setInterval(updateTimer, 1000);
+        }
+
+        setTimeout(() => {
+            document.getElementById('loadingScreen').classList.add('hidden');
+            document.getElementById('startScreen').classList.remove('hidden');
+        }, 2000);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,1554 @@
+
+
+
+
+<!--made by IELTSwithShohrux-->
+
+<!DOCTYPE html>
+<html lang="en">
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux--><!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+
+<!--made by IELTSwithShohrux-->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            overflow: hidden;
+        }
+
+        .loading-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f9fafb;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 9999;
+        }
+
+        .loading-content {
+            text-align: center;
+        }
+
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #2563eb;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-title {
+            font-size: 1.2rem;
+            color: #6b7280;
+            margin-bottom: 20px;
+        }
+
+        .loading-subtitle {
+            font-size: 1rem;
+            color: #9ca3af;
+        }
+
+        .start-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f9fafb;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 9998;
+        }
+
+        .start-content {
+            text-align: center;
+        }
+
+        .start-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 24px;
+        }
+
+        .start-subtitle {
+            color: #6b7280;
+            margin-bottom: 24px;
+        }
+
+        .start-button {
+            padding: 12px 32px;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .start-button:hover {
+            background-color: #1d4ed8;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            width: 100vw;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            background-color: #ffffff;
+            color: #333;
+            padding: 8px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            flex-shrink: 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .passage-info {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #2d3748;
+        }
+
+        .timer {
+            background-color: rgba(255, 193, 193, 0.5);
+            padding: 6px 12px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s;
+            min-width: 80px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #c53030;
+            border: 1px solid rgba(255, 120, 120, 0.3);
+        }
+
+        .timer.warning {
+            color: #9b2c2c;
+            background-color: rgba(254, 178, 178, 0.7);
+            border-color: rgba(245, 101, 101, 0.5);
+        }
+
+        .logo-area {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+            cursor: pointer;
+        }
+
+        .logo-area:hover {
+            background-color: #0056b3;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.4);
+        }
+
+        .logo-area i {
+            font-size: 1.1rem;
+        }
+
+        .progress-container {
+            background-color: #f8f9fa;
+            padding: 4px 20px;
+            z-index: 100;
+            flex-shrink: 0;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .progress-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .progress-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 6px;
+        }
+
+        .progress-item {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4a5568;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            border: 1px solid #cbd5e0;
+        }
+
+        .progress-item.current {
+            background-color: #4299e1;
+            color: white;
+            transform: scale(1.1);
+            border-color: #2b6cb0;
+        }
+
+        .progress-item.answered {
+            background-color: #9ae6b4;
+            color: #22543d;
+            border-color: #68d391;
+        }
+
+        .progress-item.correct {
+            background-color: #48bb78;
+            color: white;
+            border-color: #38a169;
+        }
+
+        .progress-item.incorrect {
+            background-color: #fed7d7;
+            color: #c53030;
+            border-color: #feb2b2;
+        }
+
+        .progress-item:hover {
+            background-color: #cbd5e0;
+            transform: scale(1.05);
+        }
+
+        .btn {
+            padding: 6px 14px;
+            border: 1px solid #cbd5e0;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.95rem;
+            background-color: #f7fafc;
+            color: #4a5568;
+        }
+
+        .btn i {
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background-color: #edf2f7;
+            border-color: #a0aec0;
+        }
+
+        .btn-primary {
+            background-color: #f7fafc;
+            color: #4a5568;
+            border: 1px solid #cbd5e0;
+        }
+
+        .btn-primary:hover {
+            background-color: #edf2f7;
+            border-color: #a0aec0;
+        }
+
+        .btn-secondary {
+            background-color: #f7fafc;
+            color: #4a5568;
+            border: 1px solid #cbd5e0;
+        }
+
+        .btn-secondary:hover {
+            background-color: #edf2f7;
+            border-color: #a0aec0;
+        }
+
+        .btn-submit {
+            background-color: #48bb78;
+            color: white;
+            font-weight: 900;
+            border: 1px solid #38a169;
+        }
+
+        .btn-submit:hover {
+            background-color: #38a169;
+            border-color: #2f855a;
+        }
+
+        .btn-submit:disabled {
+            background-color: #9ae6b4;
+            color: #718096;
+            cursor: not-allowed;
+            border: 1px solid #68d391;
+        }
+
+        .main-content {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .passage-container {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: #fafafa;
+            position: relative;
+        }
+
+        .resizer {
+            width: 4px;
+            background-color: #cbd5e0;
+            cursor: col-resize;
+            position: relative;
+            transition: background-color 0.2s;
+        }
+
+        .resizer:hover {
+            background-color: #a0aec0;
+        }
+
+        .resizer::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 30px;
+            height: 60px;
+            background-color: rgba(203, 213, 224, 0.5);
+            border-radius: 4px;
+            pointer-events: none;
+        }
+
+        .questions-container {
+            width: 40%;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: white;
+            border-left: 1px solid #e2e8f0;
+        }
+
+        .passage {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .passage h2 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .passage-content p {
+            margin-top: 15px;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .passage h2 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .passage p {
+            margin-top: 20px;
+            margin-bottom: 25px;
+            text-align: justify;
+        }
+
+        .question-section {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .question {
+            margin-bottom: 25px;
+            padding: 6px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            background-color: #ffffff;
+            transition: box-shadow 0.2s;
+        }
+
+        .question:hover {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .question-text {
+            font-weight: 500;
+            margin-bottom: 12px;
+            color: #2d3748;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .option:hover {
+            background-color: #f7fafc;
+            border-color: #cbd5e0;
+        }
+
+        .option input {
+            margin-right: 2px;
+            width: 16px;
+            height: 16px;
+        }
+
+        .input-field {
+            padding: 8px 10px;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            width: 20%;
+            margin-top: 5px;
+            font-size: 0.9rem;
+        }
+
+        .input-field:focus {
+            border-color: #4299e1;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(66, 153, 225, 0.2);
+        }
+
+        select.input-field {
+            padding: 8px 10px;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            width: 20%;
+            margin-top: 5px;
+            font-size: 0.9rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.9rem;
+        }
+
+        th,
+        td {
+            border: 1px solid #e2e8f0;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f1f5f9;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .answer-indicator {
+            background-color: #e6fffa;
+            border: 1px solid #38b2ac;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        .answer-indicator.correct {
+            background-color: #e6fffa;
+            border-color: #38b2ac;
+            color: #234e52;
+        }
+
+        .answer-indicator.incorrect {
+            background-color: #fed7d7;
+            border-color: #fc8181;
+            color: #742a2a;
+        }
+
+        .question-group {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .question-group-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #2d3748;
+            font-size: 1rem;
+        }
+
+        .highlight {
+            background-color: #ffff00;
+            cursor: pointer;
+        }
+
+        #highlight-btn,
+        #remove-highlight-btn {
+            position: absolute;
+            z-index: 9999;
+            display: none;
+            padding: 6px 12px;
+            font-size: 14px;
+            border: 1px solid #888;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .score-display {
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #2d3748;
+        }
+
+        .score-breakdown {
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .score-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 0.95rem;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+
+            .questions-container {
+                width: 100%;
+                border-left: none;
+                border-top: 1px solid #e2e8f0;
+            }
+
+            .resizer {
+                width: 100%;
+                height: 4px;
+                cursor: row-resize;
+            }
+
+            .resizer::before {
+                width: 60px;
+                height: 30px;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            .progress-item {
+                width: 32px;
+                height: 32px;
+                font-size: 0.85rem;
+            }
+
+            .passage-info {
+                font-size: 0.9rem;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px;
+            }
+
+            .logo-area {
+                order: 1;
+            }
+
+            .passage-info {
+                order: 2;
+            }
+
+            .timer {
+                order: 3;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .progress-item {
+                width: 32px;
+                height: 32px;
+                font-size: 0.85rem;
+            }
+
+            .passage-info {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+<!--made by IELTSwithShohrux-->
+
+<!--made by IELTSwithShohrux-->
+
+
+
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <h2 class="loading-title">Your test will begin shortly</h2>
+            <p class="loading-subtitle">Please wait</p>
+        </div>
+    </div>
+
+<!-- Start Screen -->
+<div id="startScreen" class="start-screen hidden">
+    <div class="start-content">
+        <h1 class="start-title">IELTSwithShohrux</h1>
+        <p class="start-subtitle">Ready to begin your reading test?</p>
+        <button class="start-button" onclick="startTest()">Start Test</button>
+    </div>
+</div>
+
+<!-- Test Container -->
+<div class="container hidden" id="testContainer">
+    <!-- Header -->
+    <header>
+        <div class="passage-info">IELTSwithShohrux</div>
+
+        <!-- timer -->
+        <div class="timer" id="globalTimer">
+            <i class="fas fa-clock"></i>
+            <span>60:00</span>
+        </div>
+
+        <!-- promo button -->
+        <div class="logo-area" onclick="window.open('https://t.me/IELTSwithShohrux', '_blank')">
+            <i class="fas fa-paper-plane"></i>
+            <span>Click for more TESTS</span>
+        </div>
+
+        <div class="passage-info" id="headerPassageTitle">Passage 1 of 3</div>
+    </header>
+
+    <!-- Floating highlight buttons -->
+    <button id="highlight-btn" type="button">Highlight</button>
+    <button id="remove-highlight-btn" type="button">Remove Highlight</button>
+
+    <div class="main-content">
+        <!-- ===== PASSAGE 1 ===== -->
+        <div class="passage-container" id="p1_passagePanel" role="region" aria-label="Reading Passage">
+            <h2 class="section-title">READING PASSAGE 1</h2>
+            <div class="passage-content" id="passage1">
+                <h3>A Brief History of Humans and Food</h3>
+
+                <p>During the journey from our hunter-gatherer ancestors to the present day there have been three seismic changes that have had an impact on the food we eat: the discovery of cooking, the emergence of agriculture and the invention of methods of preserving food.</p>
+
+                <p>The 19th-century scientist Charles Darwin thought that cooking, after language, was the greatest discovery made by man. All of us eat some raw food, for instance fruit and vegetables, but the great majority of food we eat is cooked. Cooking can turn plants that are inedible into edible food by destroying toxic chemicals that plants often manufacture to protect themselves against attack by insects or other herbivorous animals. These toxic chemicals are referred to as ‘plant secondary compounds’, because they are not directly involved in the plant’s normal growth, development and reproduction, and are produced purely as chemical defences. They give many of the plants we consume, such as coffee or brussels sprouts. their bitter taste.</p>
+
+                <p>Cooked food is often more digestible, because heat breaks down tough cellulose cell walls in plants or tough connective tissue in animals. Chewing raw turnip, a plate of uncooked rice, or a raw leg of lamb is much harder work than eating the cooked equivalent. The energy expended in chewing to break down the tough material is replaced by energy from the fuel that is used in cooking the food, so the ratio of energy gained to energy expended by the body is greater when food is cooked.</p>
+
+                <p>Until the development of agriculture, hunter-gatherers spent up to seven hours a day gathering food. This all began to change around 10,500 years ago with the advent of farming, which led to some dramatic changes in human societies. People began to create a variety of new tools to help with survival, and in turn populations increased in size. These changes led to the possibility of specialisation of different tasks within society. It was around this time that writing became more sophisticated and allowed people to maintain records of the harvest and taxes. Eventually. formalised structures of government were established as people settled in one area.</p>
+
+                <p>The arrival of agriculture meant that, for the first time, our ancestors had more food than they could eat immediately. This, combined with the seasonality of production, led them to discover methods of preserving food: smoking, drying, adding acid by fermentation or adding salt. These four methods all share one feature in common: they make the food a more hostile environment for bacteria that can cause it to spoil. They also tend to slow down any natural chemical reactions in the food that would cause decay.</p>
+
+                <p>Although foods today are still preserved in the ancient ways. two more recent methods of preserving food have become more common: canning and freezing. Canning was invented by a Frenchman, Nicholas Appert, in the early-19th century. He sealed food in bottles fabricated from glass and then heated them in boiling water to cook the contents. Appert’s method had great advantages over older methods of food preservation: it could be applied to a wide range of foods, and the flavour of the food as well as the texture were similar to the freshly cooked product. His idea was soon copied be Englishman, Peter Durand. Until this point containers had weighed too much to be widely used, but he produced the first ones which were light andresistant to damage. Two years later, in 1812, two Englishmen, Bryan Donkin and John Hall, started the commercial canning of food, although the real take-off in popularity of canning had to wait until the can opener was invented in 1855. Up to this time, cans were opened with a chisel which was used to break open the top when hit with a hammer. Canning is an extremely effective way of preserving food: one can which contained meat dating from 1824 was opened in 1939 and the contents were still in good condition.</p>
+
+                <p>In the 21st century, the dominance of canning as a method of food preservation has been overtaken by another technology: freezing. Chilling food to keep it fresh is an old idea. The earliest mentions of icehouses, thick-walled buildings, half underground, date back to 1,700BC in northwest Iran. In early 16th-century Italy, water was mixed with chemicals to lower its freezing point to -18 degrees Celsius, and several centuries later frozen fish and other goods were transported by ship from Australia to England. But the modern frozen food industry was started in the 1920s by an American, Clarence Birdseye. While Birdseye was on a fishing trip with the Inuit in the Canadian Arctic, he observed that very rapid freezing creates smaller ice crystals and therefore causes less damage to food. This was something he had not expected. Nevertheless, the big growth in demand for frozen food came about with the arrival of freezers in the homes of ordinary people. The advantages of frozen over canned food include the fact that the flavour and consistency are often identical to the equivalent fresh product, and that freezing can be used to preserve a huge variety of foods.</p>
+            </div>
+        </div>
+        <div class="resizer"></div>
+
+        <!-- Questions for Passage 1 -->
+        <div class="questions-container" id="p1_questionsPanel" role="region" aria-label="Questions">
+            <h2 class="section-title">Questions 1–13</h2>
+
+            <div class="question-group">
+                <div class="question-group-title">Questions 1–5</div>
+                <p>Do the following statements agree with the information given in Reading Passage 1?</p>
+                <p>In boxes 1-5 on your answer sheet, write</p>
+                <p>TRUE if the statement agrees with the information</p>
+                <p>FALSE if the statement contradicts the information</p>
+                <p>NOT GIVEN if there is no information on this</p>
+
+                <div class="question" data-question="1">
+                    <div class="question-text">1 According to Darwin, cooking was the most significant development in human history.</div>
+                    <div class="options"><label><input type="radio" name="q1" value="TRUE">TRUE</label><label><input type="radio" name="q1" value="FALSE">FALSE</label><label><input type="radio" name="q1" value="NOT GIVEN">NOT GIVEN</label></div>
+                </div>
+                <div class="question" data-question="2">
+                    <div class="question-text">2 The process of cooking gets rid of some plant poisons.</div>
+                    <div class="options"><label><input type="radio" name="q2" value="TRUE">TRUE</label><label><input type="radio" name="q2" value="FALSE">FALSE</label><label><input type="radio" name="q2" value="NOT GIVEN">NOT GIVEN</label></div>
+                </div>
+                <div class="question" data-question="3">
+                    <div class="question-text">3 Eating cooked food is more energy efficient than eating raw food.</div>
+                    <div class="options"><label><input type="radio" name="q3" value="TRUE">TRUE</label><label><input type="radio" name="q3" value="FALSE">FALSE</label><label><input type="radio" name="q3" value="NOT GIVEN">NOT GIVEN</label></div>
+                </div>
+                <div class="question" data-question="4">
+                    <div class="question-text">4 Clarence Birdseye had previously worked in the Australian food industry.</div>
+                    <div class="options"><label><input type="radio" name="q4" value="TRUE">TRUE</label><label><input type="radio" name="q4" value="FALSE">FALSE</label><label><input type="radio" name="q4" value="NOT GIVEN">NOT GIVEN</label></div>
+                </div>
+                <div class="question" data-question="5">
+                    <div class="question-text">5 Birdseye’s trip with the Inuit confirmed what he already believed about rapid freezing.</div>
+                    <div class="options"><label><input type="radio" name="q5" value="TRUE">TRUE</label><label><input type="radio" name="q5" value="FALSE">FALSE</label><label><input type="radio" name="q5" value="NOT GIVEN">NOT GIVEN</label></div>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="question-group-title">Questions 6–13</div>
+                <p>Complete the notes below.</p>
+                <p>Choose ONE WORD ONLY from the passage for each answer.</p>
+                <p>Write your answers in boxes 6-13 on your answer sheet.</p>
+
+                <div class="question" data-question="6">
+                    <div class="question-text">The changes agriculture brought about were:</div>
+                    <div class="question-text">• the development of equipment and larger <input type="text" name="q6" maxlength="30"> populations</div>
+                </div>
+                <div class="question" data-question="7">
+                    <div class="question-text">• the ability to keep <input type="text" name="q7" maxlength="30"> as writing developed</div>
+                </div>
+                <div class="question" data-question="8">
+                    <div class="question-text">• the setting up of organised government</div>
+                    <div class="question-text">Food preservation</div>
+                    <div class="question-text">• early methods of food preservation included: smoking, drying and combining food with acid or <input type="text" name="q8" maxlength="30"></div>
+                </div>
+                <div class="question" data-question="9">
+                    <div class="question-text">• canning</div>
+                    <div class="question-text">- Nicholas Appert put food into containers made of <input type="text" name="q9" maxlength="30"></div>
+                </div>
+                <div class="question" data-question="10">
+                    <div class="question-text">- Appert’s method resulted in preserved food that had the same taste and <input type="text" name="q10" maxlength="30"> as fresh food</div>
+                </div>
+                <div class="question" data-question="11">
+                    <div class="question-text">- Peter Durand introduced cans which had the advantage of being <input type="text" name="q11" maxlength="30"> and hard to break</div>
+                </div>
+                <div class="question" data-question="12">
+                    <div class="question-text">- in 1855, the metal can opener replaced the <input type="text" name="q12" maxlength="30"> which had been used with a hammer to open cans</div>
+                </div>
+                <div class="question" data-question="13">
+                    <div class="question-text">- some food was still found to be edible after more than a hundred years, e.g. an old can of <input type="text" name="q13" maxlength="30"></div>
+                </div>
+            </div>
+        </div> <!-- /p1_questionsPanel -->
+
+        <!-- ===== PASSAGE 2 ===== -->
+        <div class="passage-container hidden" id="p2_passagePanel" role="region" aria-label="Reading Passage">
+            <h2 class="section-title">READING PASSAGE 2</h2>
+            <div class="passage-content" id="passage2">
+                <h3>Photovoltaics</h3>
+                <p>Residential use of photovoltaics – by day excess power is sent to the grid, and by night power is supplied to the home.</p>
+
+                <p><strong>A</strong> In the past, urban home owners have not always had much choice in the way electricity is supplied to their homes. Now, however, there is a choice, and a rapidly increasing number of households worldwide are choosing the solar energy option. Solar energy, the conversion of sunlight into energy, is made possible through the use of ‘photovoltaics’, which are simple appliances that fit onto the roof of a house.</p>
+
+                <p><strong>B</strong> The photovoltaic-powered home remains connected to the power lines, but no storage is required on-site, only a box of electronics (the inverter) to interface between the photovoltaics and the grid network. Figure 1 illustrates the system. During the day, when the home may not be using much electricity, excess power from the solar array is fed back to the grid, to factories offices that need daytime power. At night, power flows the opposite way. The grid network effectively provides storage. If the demand for electricity is well matched to when the sun shines, solar energy is especially valuable. This occurs in places like California in the US and Japan, where air-conditioning loads for offices and factories are large but heating loads for the home are small.</p>
+
+                <p><strong>C</strong> The first systematic exploration of the use of photovoltaics on homes began in the US during the 1970s, a well-conceived program started with the siting of a number of ‘residential experiment stations’ at selected locations around the country, representing different climatic zones. These stations contained a number of ‘dummy’ houses, each with a different solar-energy system design. Homes within the communities close to these stations were monitored to see how well their energy use matched the energy generated by the stations’ dummy roofs. A change in US government priorities in the early 1980s halted this program.</p>
+
+                <p><strong>D</strong> with the US effort dropping away, the Japanese Sunshine Project came to the fore. A large residential test station was installed on Rokko Island beginning in 1986. This installation consists of 18 ‘dummy’ house, each equipped with its own 2-5 kilowatt photovoltaic system (about 20-50 square metres for each system). For the other systems, electronics simulate these household loads. This test station has allowed the technical issues involved in using photovoltaics within the electricity network to be explored in a systematic way, under well-controlled test conditions. With no insurmountable problems identified, the Japanese have used the experience gained from this station to begin their own massive residential photovoltaics campaign.</p>
+
+                <p><strong>E</strong> Meanwhile, Germany began a very important ‘1000 roof program’ in 1990, aimed at installing photovoltaics on the roofs of 1000 private homes. Large federal and regional government subsidies were involved, accounting in most cases for 70 per cent of the total system costs. The program proved immensely popular, forcing its extension to over 2000 homes scattered across Germany. The success of this program stimulated other European countries to launch similar programs.</p>
+
+                <p><strong>F</strong> Japan’s ‘one million roof program’ was prompted by the experience gained in the Rokko Island test site and success of the German 1000 roof program. The initially quoted aims of the Japanese New Energy Development Organisation were to have 70,000 homes equipped with photovoltaics by the year 2000, on the way to one million by 2020. The program made a modest start in 1994, when 539 systems were installed with a government subsidy of 50 per cent. Under this program, entire new suburban developments are using photovoltaics.</p>
+
+                <p><strong>G</strong> The Japanese initiative in embracing residential photovoltaics on a large scale prompted responses in both Europe and the US. The European Commission has called for one million solar residential systems before the year 2010, with 500,000 in Europe and 500,000 in the developing world, to be subsidised by the Commission. In 1997, a similar one million roof target was announced in the US. Since then, several other countries including Germany, Italy, the Netherlands and Australia, have announced their own targets for residential photovoltaics.</p>
+
+                <p><strong>H</strong> This is good news, not only for the photovoltaic industry, but for everyone concerned with the environment. The use of fossil fuels to generate electricity is not only costly in financial terms, but also in terms of environmental damage. Gases produced by the burning of fossil fuels in the production of electricity are a major contributor to the greenhouse effect. To deal with this problem, many governments are now proposing stringent targets on the amount of greenhouse gas emissions permitted. These targets mean that all sources of greenhouse gas emissions, including residential electricity use, will receive closer attention in the future.</p>
+
+                <p><strong>I</strong> It is likely that, in the future, governments will develop building codes that attempt to constrain the energy demands of new housing. For example, the use of photovoltaics or the equivalent may be stipulated to lessen demands on the grid network and hence reduce fossil fuel emissions. Approvals for building renovations may also be conditional upon talking such energy-saving measures. If this were to happen, everyone would benefit. Although there is an initial cost in attaching the system to the rooftop, the householder’s outlay is soon compensated with the savings on energy bills. In addition, everyone living on the planet stands to gain from the more benign environmental impact.</p>
+            </div>
+        </div>
+        <div class="resizer"></div>
+
+        <div class="questions-container hidden" id="p2_questionsPanel" role="region" aria-label="Questions">
+            <h2 class="section-title">Questions 14–26</h2>
+
+            <div class="question-group">
+                <div class="question-group-title">Questions 14–19</div>
+                <p>The text has nine paragraphs, A-I. Which paragraph contains the following information?</p>
+                <p>NB You may choose any paragraph more than once.</p>
+
+                <div class="question" data-question="14">
+                    <div class="question-text">14 examples of countries where electricity use is greater during the day than at night</div>
+                    <div class="options"><select name="q14">
+                            <option value="">Select</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                            <option value="F">F</option>
+                            <option value="G">G</option>
+                            <option value="H">H</option>
+                            <option value="I">I</option>
+                        </select></div>
+                </div>
+                <div class="question" data-question="15">
+                    <div class="question-text">15 a detailed description of an experiment that led to photovoltaics being promoted throughout the country</div>
+                    <div class="options"><select name="q15">
+                            <option value="">Select</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                            <option value="F">F</option>
+                            <option value="G">G</option>
+                            <option value="H">H</option>
+                            <option value="I">I</option>
+                        </select></div>
+                </div>
+                <div class="question" data-question="16">
+                    <div class="question-text">16 the negative effects of using conventional means of generating electricity</div>
+                    <div class="options"><select name="q16">
+                            <option value="">Select</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                            <option value="F">F</option>
+                            <option value="G">G</option>
+                            <option value="H">H</option>
+                            <option value="I">I</option>
+                        </select></div>
+                </div>
+                <div class="question" data-question="17">
+                    <div class="question-text">17 an explanation of the photovoltaic system</div>
+                    <div class="options"><select name="q17">
+                            <option value="">Select</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                            <option value="F">F</option>
+                            <option value="G">G</option>
+                            <option value="H">H</option>
+                            <option value="I">I</option>
+                        </select></div>
+                </div>
+                <div class="question" data-question="18">
+                    <div class="question-text">18 the long-term benefits of using photovoltaics</div>
+                    <div class="options"><select name="q18">
+                            <option value="">Select</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                            <option value="F">F</option>
+                            <option value="G">G</option>
+                            <option value="H">H</option>
+                            <option value="I">I</option>
+                        </select></div>
+                </div>
+                <div class="question" data-question="19">
+                    <div class="question-text">19 a reference to wealthy countries being prepared to help less wealthy countries have access to photovoltaics</div>
+                    <div class="options"><select name="q19">
+                            <option value="">Select</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                            <option value="F">F</option>
+                            <option value="G">G</option>
+                            <option value="H">H</option>
+                            <option value="I">I</option>
+                        </select></div>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="question-group-title">Questions 20–26</div>
+                <p>Do the following statements agree with the information given in the text?</p>
+                <p>In boxes 20-26 on your answer sheet, write</p>
+                <p>TRUE if the statement agrees with the information</p>
+                <p>FALSE if the statement contradicts the information</p>
+                <p>NOT GIVEN if there is no information on this</p>
+
+                <div class="question" data-question="20">
+                    <div class="question-text">20 Photovoltaics are used to store electricity.</div>
+                    <div class="options"><label><input type="radio" name="q20" value="TRUE">TRUE</label><label><input type="radio" name="q20" value="FALSE">FALSE</label><label><input type="radio" name="q20" value="NOT GIVEN">NOT GIVEN</label></div>
+                </div>
+                <div class="question" data-question="21">
+                    <div class="question-text">21 Since the 1970s, the US government has provided continuous support for the use of photovoltaics on homes.</div>
+                    <div class="options"><label><input type="radio" name="q21" value="TRUE">TRUE</label><label><input type="radio" name="q21" value="FALSE">FALSE</label><label><input type="radio" name="q21" value="NOT GIVEN">NOT GIVEN</label></div>
+                </div>
+                <div class="question" data-question="22">
+                    <div class="question-text">22 The solar-powered houses on Rokko Island are uninhabited.</div>
+                    <div class="options"><label><input type="radio" name="q22" value="TRUE">TRUE</label><label><input type="radio" name="q22" value="FALSE">FALSE</label><label><input type="radio" name="q22" value="NOT GIVEN">NOT GIVEN</label></div>
+                </div>
+                <div class="question" data-question="23">
+                    <div class="question-text">23 In 1994, the Japanese government was providing half the money required for installing photovoltaics on homes.</div>
+                    <div class="options"><label><input type="radio" name="q23" value="TRUE">TRUE</label><label><input type="radio" name="q23" value="FALSE">FALSE</label><label><input type="radio" name="q23" value="NOT GIVEN">NOT GIVEN</label></div>
+                </div>
+                <div class="question" data-question="24">
+                    <div class="question-text">24 Germany, Italy, the Netherlands and Australia all have strict goals with regard to greenhouse gas emissions.</div>
+                    <div class="options"><label><input type="radio" name="q24" value="TRUE">TRUE</label><label><input type="radio" name="q24" value="FALSE">FALSE</label><label><input type="radio" name="q24" value="NOT GIVEN">NOT GIVEN</label></div>
+                </div>
+                <div class="question" data-question="25">
+                    <div class="question-text">25 Residential electricity use is the major source of greenhouse gas emissions.</div>
+                    <div class="options"><label><input type="radio" name="q25" value="TRUE">TRUE</label><label><input type="radio" name="q25" value="FALSE">FALSE</label><label><input type="radio" name="q25" value="NOT GIVEN">NOT GIVEN</label></div>
+                </div>
+                <div class="question" data-question="26">
+                    <div class="question-text">26 Energy-saving measures must now be included in the design of all new homes and improvements to buildings.</div>
+                    <div class="options"><label><input type="radio" name="q26" value="TRUE">TRUE</label><label><input type="radio" name="q26" value="FALSE">FALSE</label><label><input type="radio" name="q26" value="NOT GIVEN">NOT GIVEN</label></div>
+                </div>
+            </div>
+        </div> <!-- /p2_questionsPanel -->
+
+        <!-- ===== PASSAGE 3 ===== -->
+        <div class="passage-container hidden" id="p3_passagePanel" role="region" aria-label="Reading Passage">
+            <h2 class="section-title">READING PASSAGE 3</h2>
+            <div class="passage-content" id="passage3">
+                <h3>Crossing the Threshold</h3>
+                <p>The renovated Auckland Art Gallery in New Zealand unites old and new, creating an irresistible urge to step inside</p>
+
+                <p>Architects are finding it very difficult in today’s cultural landscape. The profession faces a three-way threat: a public that apparently doesn’t understand what architects do, developers who couldn’t care less what they do, and overbearing councils micromanaging every single aspect of what they do. According to sources within the architectural profession, the situation is much worse when architects work on municipal buildings, as architects FJMT and Archimedia discovered with their Auckland Gallery makeover, where a vast number of external pressures threatened the project, and with so many bureaucratic difficulties it looked doomed to fail.</p>
+
+                <p>The major challenge of the gallery renovation project was that it involved two parts. The first was to restore the heritage building, dating back to 1888, which contained a network of small spaces, refurbished so often it contained 17 different floor heights. The second was to deliver a new extension that would not only double floor and exhibition space but also attract new patrons, a total necessity. While the old building’s circulation was off-putting, so was something intangible yet just as powerful: its atmosphere. For many, Auckland Art Gallery was just an old building that served a limited range of patrons with highbrow interests, missing its chance to engage with new audiences.</p>
+
+                <p>A 2003 survey of young people’s impressions of the gallery confirmed this opinion, sounding more like references to an abandoned building. For the survey authors, ‘threshold fear’ – where certain groups are intimidated from entering certain spaces by their off-putting atmosphere – was the institution’s undoing, something no architect wants anything to do with. For those young people Auckland Art Gallery was undemocratic, ‘dusty’ and ‘cold’ – the epitome of threshold fear. Also, 16% of the sample group had no idea where it even was, despite being interviewed on the pavement right outside it. Clearly, the gallery was fatally out of step at a time when New Zealand’s national museum in Wellington was successfully engaging broader audiences with contemporary branding and marketing, interactive displays and temporary events.</p>
+
+                <p>The decision to evolve the gallery was actually made in 2000, although it too eight years for building to commence, the architects fought off heritage committees and conservationists trying stop them. The architects were not just dealing with a disillusioned public, but also with precious timber and the parkland which surrounds the building. Pushing the design through the Environment Court, the body which approves renovations of this scale, alone took three years. During this time the budget blew out by several million dollars, the funding dried up, and the new wing had to be completely redesigned. Even after the redesign, the use of kauri timber, with its significance to New Zealand’s Maori people*, stirred up political debate.</p>
+
+                <p>In the new building the architects have used kauri to produce a canopy with a curving interior roof supported by tapered. steel columns, also clad in kauri. The canopy represents a signature public face, its curvature filtering light to the forecourt to the west and creating a visual echo of the canopy of pohutukawa trees in Albert Park to the east. The park also has cultural significance to Maori as it was the site of early settlements.</p>
+
+                <p>The connection is reinforced by sculptures from Maori artist Arnold Wilson decorating the columns, while fellow artist Bernard Makoare was a consultant, ensuring the gallery emphasised Maori beliefs. Still that didn’t stop the conservationist Stephen King from accusing the architects of ‘throwing’ kauri at a ‘mediocre building’ and of misappropriating the ‘mana’ (spiritual energy) of the precious material (which is almost extinct: harvesting of both petrified and swamp kauri has been likened to a gold rush). However, the kauri that was used here was from the forest floor, and King’s misconceptions sum up the prejudice that surrounded the project.</p>
+
+                <p>Objections also came from the Auckland Regional Council, worrying about the extension’s impact on Albert Park, yet the project’s relationship with parkland is one of the most successful outcomes. Impact is not only minimal, but improves the park’s social function. The extension’s enormous glass atrium opens up the building by directing the gaze from street level to the parkland beyond, while inside, the new art space is fronted along the east by a continuous glass wall incorporating the park into the gallery. The glass becomes a ‘screen’ for viewing the outside world and makes the art accessible to those in the park, a far cry from both ‘white cube’ galleries worldwide, the plain boxes where paintings are hung in antiseptic white surroundings. and also the dusty impermeable Auckland Gallery of old.</p>
+
+                <p>Another success is the refurbishment of the heritage building, especially the Mackelvie Gallery, in disrepair after its characteristic early twentieth-century Edwardian decoration had been stripped out or walled away in previous renovations. Remarkably the Mackelvie space has been reconstructed from two old photos, although the problem of multiple floor levels was so serious that scaffolding had to be erected at the highest level, with work progressing downwards, the reverse of normal practice. When it was over, a fascinating detail was retained: the lowest level visible under glass embedded in the new floor, the building itself as artwork, while elsewhere columns from the old gallery have been exposed in the walls of the new wing.</p>
+
+                <p>In 2008 the gallery averaged just 190,000 visitors annually. After reopening, it had 300,000 in five months. Cynics will chalk that up to novelty of the new, but the fact is the gallery is now an alluring cultural space which is crawling with young people.</p>
+            </div>
+        </div>
+        <div class="resizer"></div>
+
+        <!-- Questions for Passage 3 -->
+        <div class="questions-container hidden" id="p3_questionsPanel" role="region" aria-label="Questions">
+            <h2 class="section-title">Questions 27–40</h2>
+
+            <div class="question-group">
+                <div class="question-group-title">Questions 27–31</div>
+                <p>Choose the correct letter, A, B, C or D.</p>
+                <p>Write the correct letter in boxes 27-31 on your answer sheet.</p>
+
+                <div class="question" data-question="27">
+                    <div class="question-text">27 What is the writer’s main point in the first paragraph?</div>
+                    <div class="options"><label><input type="radio" name="q27" value="A">A Criticism of architects by different groups is unfair.</label><label><input type="radio" name="q27" value="B">B The architectural profession is generally well respected.</label><label><input type="radio" name="q27" value="C">C The most difficult projects for architects are public buildings.</label><label><input type="radio" name="q27" value="D">D Failure to deliver buildings is a result of poor communication.</label></div>
+                </div>
+                <div class="question" data-question="28">
+                    <div class="question-text">28 The Auckland Gallery project was particularly difficult because</div>
+                    <div class="options"><label><input type="radio" name="q28" value="A">A the existing building was old and parts of it had fallen down.</label><label><input type="radio" name="q28" value="B">B there was a high number of floors in the building.</label><label><input type="radio" name="q28" value="C">C it needed to satisfy the requirements of the existing patrons.</label><label><input type="radio" name="q28" value="D">D it involved renovating the existing building and adding a new one.</label></div>
+                </div>
+                <div class="question" data-question="29">
+                    <div class="question-text">29 What point is the writer making when he says that 16% of the sample group did not know where the museum was?</div>
+                    <div class="options"><label><input type="radio" name="q29" value="A">A The gallery's visibility was poor.</label><label><input type="radio" name="q29" value="B">B The gallery was not reaching out to involve young people.</label><label><input type="radio" name="q29" value="C">C The entrance to the gallery was not well signposted.</label><label><input type="radio" name="q29" value="D">D The location of the gallery was difficult to access.</label></div>
+                </div>
+                <div class="question" data-question="30">
+                    <div class="question-text">30 What disturbing information did the architects find out from the survey of young people?</div>
+                    <div class="options"><label><input type="radio" name="q30" value="A">A Young people are not interested in galleries.</label><label><input type="radio" name="q30" value="B">B They did not visit the gallery because of the way it made them feel.</label><label><input type="radio" name="q30" value="C">C They thought that the gallery buildings were not in use.</label><label><input type="radio" name="q30" value="D">D The gallery had the reputation of being dirty.</label></div>
+                </div>
+                <div class="question" data-question="31">
+                    <div class="question-text">31 Maori artists were used on this project to</div>
+                    <div class="options"><label><input type="radio" name="q31" value="A">A satisfy the concerns of conservationists.</label><label><input type="radio" name="q31" value="B">B protect sacred materials in the Albert Park site.</label><label><input type="radio" name="q31" value="C">C make sure the gallery respects Maori culture.</label><label><input type="radio" name="q31" value="D">D ensure that certain sources of kauri were not used.</label></div>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="question-group-title">Questions 32–36</div>
+                <p>Do the following statements agree with the claims of the writer in Reading Passage 3?</p>
+                <p>In boxes 32-36 on your answer sheet, write</p>
+                <p>YES if the statement agrees with the claims of the writer</p>
+                <p>NO if the statement contradicts the claims of the writer</p>
+                <p>NOT GIVEN if it is impossible to say what the writer thinks about this</p>
+
+                <div class="question" data-question="32">
+                    <div class="question-text">32 Before the renovation, the Auckland Art Gallery was regarded as an elitist institution.</div>
+                    <div class="options"><label><input type="radio" name="q32" value="YES">YES</label><label><input type="radio" name="q32" value="NO">NO</label><label><input type="radio" name="q32" value="NOT GIVEN">NOT GIVEN</label></div>
+                </div>
+                <div class="question" data-question="33">
+                    <div class="question-text">33 Stephen King’s intervention in the project shows his understanding of the architects’ use of kauri.</div>
+                    <div class="options"><label><input type="radio" name="q33" value="YES">YES</label><label><input type="radio" name="q33" value="NO">NO</label><label><input type="radio" name="q33" value="NOT GIVEN">NOT GIVEN</label></div>
+                </div>
+                <div class="question" data-question="34">
+                    <div class="question-text">34 The way the building interacts with its surroundings is a triumph.</div>
+                    <div class="options"><label><input type="radio" name="q34" value="YES">YES</label><label><input type="radio" name="q34" value="NO">NO</label><label><input type="radio" name="q34" value="NOT GIVEN">NOT GIVEN</label></div>
+                </div>
+                <div class="question" data-question="35">
+                    <div class="question-text">35 The glass screen along the east wall was one of the most costly items in the rebuild.</div>
+                    <div class="options"><label><input type="radio" name="q35" value="YES">YES</label><label><input type="radio" name="q35" value="NO">NO</label><label><input type="radio" name="q35" value="NOT GIVEN">NOT GIVEN</label></div>
+                </div>
+                <div class="question" data-question="36">
+                    <div class="question-text">36 The design of the extension to the Auckland Art Gallery is similar to the design of ‘white cube’ galleries in other parts of the world.</div>
+                    <div class="options"><label><input type="radio" name="q36" value="YES">YES</label><label><input type="radio" name="q36" value="NO">NO</label><label><input type="radio" name="q36" value="NOT GIVEN">NOT GIVEN</label></div>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="question-group-title">Questions 37–40</div>
+                <p>Complete each sentence with the correct ending, A-F, below.</p>
+                <p>Write the correct letter, A-F, in boxes 37-40 on your answer sheet.</p>
+
+                <div class="question" data-question="37">
+                    <div class="question-text">37 The destruction of Edwardian ornamentation</div>
+                    <div class="options"><select name="q37">
+                            <option value="">Select</option>
+                            <option value="A">A resulted in work being done in the opposite direction to that usually followed.</option>
+                            <option value="B">B is more than cosmetic and has improved the circulation.</option>
+                            <option value="C">C was the clue to rebuilding the Mackelvie Gallery successfully.</option>
+                            <option value="D">D has resulted in the building itself becoming a work of art.</option>
+                            <option value="E">E means that you should be able to tell whether you are in the old wing or the new one.</option>
+                            <option value="F">F was the result of earlier attempts to modernise the building.</option>
+                        </select></div>
+                </div>
+                <div class="question" data-question="38">
+                    <div class="question-text">38 It is extraordinary that a limited number of photographs</div>
+                    <div class="options"><select name="q38">
+                            <option value="">Select</option>
+                            <option value="A">A resulted in work being done in the opposite direction to that usually followed.</option>
+                            <option value="B">B is more than cosmetic and has improved the circulation.</option>
+                            <option value="C">C was the clue to rebuilding the Mackelvie Gallery successfully.</option>
+                            <option value="D">D has resulted in the building itself becoming a work of art.</option>
+                            <option value="E">E means that you should be able to tell whether you are in the old wing or the new one.</option>
+                            <option value="F">F was the result of earlier attempts to modernise the building.</option>
+                        </select></div>
+                </div>
+                <div class="question" data-question="39">
+                    <div class="question-text">39 The problem of having so many floor levels to deal with</div>
+                    <div class="options"><select name="q39">
+                            <option value="">Select</option>
+                            <option value="A">A resulted in work being done in the opposite direction to that usually followed.</option>
+                            <option value="B">B is more than cosmetic and has improved the circulation.</option>
+                            <option value="C">C was the clue to rebuilding the Mackelvie Gallery successfully.</option>
+                            <option value="D">D has resulted in the building itself becoming a work of art.</option>
+                            <option value="E">E means that you should be able to tell whether you are in the old wing or the new one.</option>
+                            <option value="F">F was the result of earlier attempts to modernise the building.</option>
+                        </select></div>
+                </div>
+                <div class="question" data-question="40">
+                    <div class="question-text">40 The glass flooring in the Mackelvie Gallery which reveals old features</div>
+                    <div class="options"><select name="q40">
+                            <option value="">Select</option>
+                            <option value="A">A resulted in work being done in the opposite direction to that usually followed.</option>
+                            <option value="B">B is more than cosmetic and has improved the circulation.</option>
+                            <option value="C">C was the clue to rebuilding the Mackelvie Gallery successfully.</option>
+                            <option value="D">D has resulted in the building itself becoming a work of art.</option>
+                            <option value="E">E means that you should be able to tell whether you are in the old wing or the new one.</option>
+                            <option value="F">F was the result of earlier attempts to modernise the building.</option>
+                        </select></div>
+                </div>
+            </div>
+        </div> <!-- /p3_questionsPanel -->
+    </div> <!-- /main-content -->
+
+    <!-- Bottom progress/navigation -->
+    <div class="progress-container">
+        <div class="progress-nav">
+            <div class="progress-items" style="gap:10px; flex-wrap:wrap;">
+                <div id="bottomPartTabs"
+                    style="display:flex; gap:14px; justify-content:center; width:100%; align-items:center; flex-wrap:wrap;">
+                </div>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" id="prev-btn" disabled><i class="fas fa-arrow-left"></i>
+                    Previous</button>
+                <button class="btn btn-secondary" id="next-btn">Next <i class="fas fa-arrow-right"></i></button>
+                <button class="btn btn-submit" id="submit-all-btn">Submit All <i
+                        class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+</div> <!-- /container -->
+
+<!-- Results Modal -->
+<div class="modal" id="results-modal">
+    <div class="modal-content">
+        <h2>Test Results</h2>
+        <div class="score-display" id="score-display">0/0</div>
+        <div class="score-breakdown" id="score-breakdown"></div>
+        <div class="modal-buttons">
+            <button class="btn btn-secondary" id="close-modal">Close</button>
+            <button class="btn btn-primary" id="review-answers">Review Answers</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    /* ========= CONFIG ========= */
+    const PARTS = [
+        { id: 1, title: 'Passage 1', qStart: 1, qEnd: 13, passagePanel: 'p1_passagePanel', questionsPanel: 'p1_questionsPanel' },
+        { id: 2, title: 'Passage 2', qStart: 14, qEnd: 26, passagePanel: 'p2_passagePanel', questionsPanel: 'p2_questionsPanel' },
+        { id: 3, title: 'Passage 3', qStart: 27, qEnd: 40, passagePanel: 'p3_passagePanel', questionsPanel: 'p3_questionsPanel' },
+    ];
+
+    /* ======= ANSWER KEY ======= */
+    const correctAnswers = {
+        // Passage 1 (Q1–13)
+        q1: "FALSE", q2: "TRUE", q3: "TRUE", q4: "NOT GIVEN", q5: "FALSE",
+        q6: "population", q7: "records", q8: "salt", q9: "glass", q10: "texture", q11: "light", q12: "chisel", q13: "meat",
+
+        // Passage 2 (Q14–26)
+        q14: "B", q15: "D", q16: "H", q17: "B", q18: "I", q19: "G",
+        q20: "FALSE", q21: "FALSE", q22: "TRUE", q23: "TRUE", q24: "NOT GIVEN", q25: "NOT GIVEN", q26: "FALSE",
+
+        // Passage 3 (Q27–40)
+        q27: "D", q28: "D", q29: "A", q30: "B", q31: "C",
+        q32: "YES", q33: "NO", q34: "YES", q35: "NOT GIVEN", q36: "NO",
+        q37: "F", q38: "C", q39: "A", q40: "D"
+    };
+
+    /* ========= STATE ========= */
+    let currentPart = 1;
+    let currentQuestion = 1;
+    let seconds = 60 * 60; // total 60 minutes
+    let timerInterval;
+
+    /* ========= HELPERS ========= */
+    function el(id) { return document.getElementById(id); }
+    function inRange(q, pId) { const p = PARTS[pId - 1]; return q >= p.qStart && q <= p.qEnd; }
+
+    /* ======= BOTTOM TABS + PER-PART NUMBER RAILS (centered) ======= */
+    function renderBottomTabs() {
+        const tabs = el('bottomPartTabs');
+        tabs.innerHTML = '';
+        PARTS.forEach(p => {
+            const btn = document.createElement('button');
+            btn.className = 'btn btn-secondary';
+            btn.style.fontWeight = (p.id === currentPart) ? '900' : '600';
+            btn.innerHTML = (p.id === currentPart) ? `<strong>${p.title}</strong>` : `${p.title}`;
+            btn.onclick = () => switchPart(p.id);
+            tabs.appendChild(btn);
+
+            const rail = document.createElement('div');
+            rail.id = `rail-part-${p.id}`;
+            rail.style.display = (p.id === currentPart) ? 'flex' : 'none';
+            rail.style.gap = '6px';
+            rail.style.flexWrap = 'wrap';
+            rail.style.alignItems = 'center';
+            const total = p.qEnd - p.qStart + 1;
+            for (let q = p.qStart; q <= p.qEnd; q++) {
+                const chip = document.createElement('div');
+                chip.textContent = q;
+                chip.className = 'progress-item' + (q === currentQuestion && p.id === currentPart ? ' current' : '');
+                chip.dataset.question = q;
+                chip.style.width = '30px'; chip.style.height = '20px'; chip.style.borderRadius = '6px';
+                chip.style.fontSize = '14px'; chip.style.padding = '0'; chip.style.lineHeight = '20px';
+                chip.onclick = () => scrollToQuestion(q);
+                rail.appendChild(chip);
+            }
+            tabs.appendChild(rail);
+        });
+    }
+
+    function refreshBottomBar() { renderBottomTabs(); }
+
+    function switchPart(partId) {
+        if (currentPart === partId) return;
+        PARTS.forEach(p => {
+            el(p.passagePanel).classList.add('hidden');
+            el(p.questionsPanel).classList.add('hidden');
+            const r = el(`rail-part-${p.id}`); if (r) r.style.display = 'none';
+        });
+        currentPart = partId;
+        const p = PARTS[currentPart - 1];
+        currentQuestion = p.qStart;
+        el(p.passagePanel).classList.remove('hidden');
+        el(p.questionsPanel).classList.remove('hidden');
+        const r = el(`rail-part-${p.id}`); if (r) r.style.display = 'flex';
+        el('headerPassageTitle').textContent = `Passage ${currentPart} of 3`;
+        // Reset resizer styles for new part
+        const passageEl = el(p.passagePanel);
+        const questionsEl = el(p.questionsPanel);
+        passageEl.style.flex = '50%';
+        questionsEl.style.flex = '50%';
+        scrollToQuestion(currentQuestion, false);
+        refreshBottomBar();
+    }
+
+    function scrollToQuestion(num, smooth = true) {
+        const elQ = document.querySelector(`[data-question="${num}"]`) ||
+            document.querySelector(`input[name="q${num}"]`) ||
+            document.querySelector(`select[name="q${num}"]`);
+        if (elQ) elQ.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'center' });
+        updateCurrentQuestion(num);
+    }
+
+    function updateCurrentQuestion(num) {
+        currentQuestion = num;
+        document.querySelectorAll(`#rail-part-${currentPart} .progress-item`).forEach(it => {
+            it.classList.toggle('current', parseInt(it.dataset.question, 10) === num);
+        });
+    }
+
+    // mark answered when inputs change
+    function attachAnsweredListeners() {
+        document.querySelectorAll('input[type="radio"], input[type="text"], select').forEach(input => {
+            input.addEventListener('change', () => {
+                const m = input.name && input.name.match(/^q(\d+)$/);
+                if (!m) return;
+                const q = parseInt(m[1], 10);
+                const chip = document.querySelector(`.progress-item[data-question="${q}"]`);
+                if (chip) {
+                    const val = (input.type === 'text' ? input.value.trim() : input.value);
+                    if (val) chip.classList.add('answered');
+                }
+            });
+        });
+    }
+
+    /* ===== SUBMIT ALL ===== */
+    el('submit-all-btn').addEventListener('click', () => {
+        if (!confirm('Submit the entire test?')) return;
+
+        let score = 0, total = PARTS[PARTS.length - 1].qEnd;
+        const results = {};
+
+        for (let q = 1; q <= total; q++) {
+            const key = `q${q}`;
+            const corr = correctAnswers[key];
+            let user = null, isCorrect = false;
+
+            const radios = document.querySelectorAll(`input[name="${key}"][type="radio"]`);
+            const text = document.querySelector(`input[name="${key}"][type="text"]`);
+            const sel = document.querySelector(`select[name="${key}"]`);
+
+            if (radios && radios.length) {
+                const c = Array.from(radios).find(r => r.checked);
+                if (c) { user = c.value; isCorrect = (user === corr); radios.forEach(r => r.disabled = true); }
+            } else if (text) {
+                user = (text.value || '').trim();
+                if (user) {
+                    const norm = (s) => String(s).trim().toLowerCase().replace(/\s+/g, ' ');
+                    isCorrect = norm(user) === norm(corr);
+                    text.disabled = true;
+                }
+            } else if (sel) {
+                user = sel.value;
+                if (user) { isCorrect = user === corr; sel.disabled = true; }
+            }
+
+            if (isCorrect) score++;
+            results[key] = { userAnswer: user || 'No answer', correct: corr, isCorrect };
+        }
+
+        // color chips
+        for (let q = 1; q <= total; q++) {
+            const res = results[`q${q}`];
+            const ch = document.querySelector(`.progress-item[data-question="${q}"]`);
+            if (ch) {
+                ch.classList.remove('current', 'answered');
+                if (res) ch.classList.add(res.isCorrect ? 'correct' : 'incorrect');
+            }
+        }
+
+        // modal
+        el('score-display').textContent = `${score}/${total}`;
+        const breakdown = el('score-breakdown');
+        breakdown.innerHTML = PARTS.map(p => {
+            const partScore = Array.from({ length: p.qEnd - p.qStart + 1 }, (_, i) => results[`q${p.qStart + i}`])
+                .filter(r => r && r.isCorrect).length;
+            return `<div class="score-item"><span>Passage ${p.id}:</span><span>${partScore}/${p.qEnd - p.qStart + 1}</span></div>`;
+        }).join('');
+        el('results-modal').style.display = 'flex';
+
+        // review handler
+        el('review-answers').onclick = () => {
+            el('results-modal').style.display = 'none';
+            showCorrectIndicators(results);
+        };
+    });
+
+    // show inline indicators
+    function showCorrectIndicators(results) {
+        document.querySelectorAll('.answer-indicator').forEach(e => e.remove());
+        const total = PARTS[PARTS.length - 1].qEnd;
+
+        for (let q = 1; q <= total; q++) {
+            const key = `q${q}`;
+            const res = results[key];
+            if (!res) continue;
+
+            let target = null;
+            const qEl = document.querySelector(`[data-question="${q}"] .options`);
+            if (qEl) target = qEl;
+            if (!target) {
+                const input = document.querySelector(`input[name="${key}"]`);
+                if (input) target = input.parentNode;
+            }
+            if (!target) {
+                const sel = document.querySelector(`select[name="${key}"]`);
+                if (sel) target = sel.parentNode;
+            }
+            if (!target) continue;
+
+            const box = document.createElement('div');
+            box.className = 'answer-indicator ' + (res.isCorrect ? 'correct' : 'incorrect');
+            box.style.display = 'block';
+            box.style.marginTop = '6px';
+            box.innerHTML = res.isCorrect
+                ? `<i class="fas fa-check"></i> Correct!`
+                : `<i class="fas fa-times"></i> Incorrect. Your answer: <strong>${res.userAnswer}</strong> <strong>Correct:</strong> ${Array.isArray(res.correct) ? res.correct.join(', ') : res.correct}`;
+            target.appendChild(box);
+        }
+    }
+
+    // Timer
+    const timerSpan = document.querySelector('#globalTimer span');
+    const timerContainer = document.querySelector('#globalTimer');
+    function updateTimer() {
+        seconds--;
+        const m = Math.floor(seconds / 60), s = seconds % 60;
+        timerSpan.textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+        if (seconds <= 2 * 60) timerContainer.classList.add('warning');
+        if (seconds <= 0) { clearInterval(timerInterval); alert('Time is up! Submitting all passages.'); el('submit-all-btn').click(); }
+    }
+
+    function startTest() {
+        el('startScreen').classList.add('hidden');
+        el('testContainer').classList.remove('hidden');
+        timerInterval = setInterval(updateTimer, 1000);
+    }
+    window.startTest = startTest;
+
+    // Init
+    setTimeout(() => { el('loadingScreen').classList.add('hidden'); el('startScreen').classList.remove('hidden'); }, 900);
+
+    // default show P1
+    PARTS.forEach(p => {
+        if (p.id === 1) { el(p.passagePanel).classList.remove('hidden'); el(p.questionsPanel).classList.remove('hidden'); }
+        else { el(p.passagePanel).classList.add('hidden'); el(p.questionsPanel).classList.add('hidden'); }
+    });
+    renderBottomTabs();
+    attachAnsweredListeners();
+
+    // Resizer
+    let isResizing = false;
+    document.querySelectorAll('.resizer').forEach(resizer => {
+        resizer.addEventListener('mousedown', () => { isResizing = true; document.body.style.cursor = 'col-resize'; document.body.style.userSelect = 'none'; });
+    });
+    document.addEventListener('mousemove', (e) => {
+        if (!isResizing) return;
+        const container = document.querySelector('.main-content');
+        const rect = container.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left;
+        const leftPct = (mouseX / rect.width) * 100;
+        const rightPct = 100 - leftPct;
+        if (leftPct >= 30 && leftPct <= 70) {
+            const passage = document.querySelector('.passage-container:not(.hidden)');
+            const questions = document.querySelector('.questions-container:not(.hidden)');
+            if (passage) passage.style.flex = leftPct + '%';
+            if (questions) questions.style.flex = rightPct + '%';
+        }
+    });
+    document.addEventListener('mouseup', () => { if (isResizing) { isResizing = false; document.body.style.cursor = ''; document.body.style.userSelect = ''; } });
+
+    // Highlight tools
+    const highlightBtn = el('highlight-btn');
+    const removeHighlightBtn = el('remove-highlight-btn');
+    const passagePanels = PARTS.map(p => el(p.passagePanel));
+    const questionsPanels = PARTS.map(p => el(p.questionsPanel));
+    let lastSelection = null, highlightTarget = null, currentPanel = null;
+
+    function getValidSelection() {
+        const sel = window.getSelection();
+        if (!sel.rangeCount || sel.isCollapsed) return null;
+        const range = sel.getRangeAt(0);
+        if (passagePanels.some(pp => pp && pp.contains(range.commonAncestorContainer))) {
+            currentPanel = passagePanels.find(pp => pp.contains(range.commonAncestorContainer));
+        } else if (questionsPanels.some(qp => qp && qp.contains(range.commonAncestorContainer))) {
+            currentPanel = questionsPanels.find(qp => qp.contains(range.commonAncestorContainer));
+        } else return null;
+        return range;
+    }
+    function showHighlightBtn(range) {
+        const rect = range.getBoundingClientRect();
+        highlightBtn.style.top = (window.scrollY + rect.top - 35) + 'px';
+        highlightBtn.style.left = (window.scrollX + rect.left) + 'px';
+        highlightBtn.style.display = 'block';
+    }
+    function hideHighlightBtn() { highlightBtn.style.display = 'none'; }
+    function showRemoveBtn(span) {
+        const rect = span.getBoundingClientRect();
+        removeHighlightBtn.style.top = (window.scrollY + rect.top - 35) + 'px';
+        removeHighlightBtn.style.left = (window.scrollX + rect.left) + 'px';
+        removeHighlightBtn.style.display = 'block';
+        highlightTarget = span;
+    }
+    function hideRemoveBtn() { removeHighlightBtn.style.display = 'none'; highlightTarget = null; }
+
+    highlightBtn.addEventListener('click', () => {
+        if (lastSelection) {
+            const span = document.createElement('span');
+            span.className = 'highlight';
+            span.appendChild(lastSelection.extractContents());
+            lastSelection.insertNode(span);
+            window.getSelection().removeAllRanges();
+            hideHighlightBtn();
+        }
+    });
+    removeHighlightBtn.addEventListener('click', () => {
+        if (highlightTarget) {
+            const parent = highlightTarget.parentNode;
+            while (highlightTarget.firstChild) parent.insertBefore(highlightTarget.firstChild, highlightTarget);
+            parent.removeChild(highlightTarget);
+            hideRemoveBtn();
+        }
+    });
+    document.addEventListener('selectionchange', () => {
+        hideHighlightBtn(); hideRemoveBtn();
+        const range = getValidSelection();
+        if (range) { lastSelection = range; showHighlightBtn(range); } else { lastSelection = null; }
+    });
+    document.addEventListener('mousedown', (e) => {
+        if (e.target !== highlightBtn && e.target !== removeHighlightBtn) { hideHighlightBtn(); hideRemoveBtn(); }
+    });
+    document.addEventListener('click', (e) => {
+        if (e.target.classList && e.target.classList.contains('highlight')) { e.preventDefault(); showRemoveBtn(e.target); }
+    });
+
+    // Modal close
+    el('close-modal').addEventListener('click', () => { el('results-modal').style.display = 'none'; });
+</script>
+</body>
+
+
+</html>

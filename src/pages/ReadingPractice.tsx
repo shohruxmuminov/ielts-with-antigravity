@@ -85,8 +85,20 @@ export default function ReadingPractice() {
 
       setTests([...staticFreeTests, ...freeDbTests]);
 
-      // Premium static tests – add files to /public/premiumreading/ and list them here
-      const staticPremiumTests: ReadingTest[] = [];
+      // Premium static tests
+      const staticPremiumTests: ReadingTest[] = [
+        { id: 'premium-reading-1', title: 'Premium Full Reading 1', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/IELTSwithJurabek FULL Reading 1.html', htmlContent: '', correctAnswers: '' },
+        { id: 'premium-reading-2', title: 'Premium Full Reading 2', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/IELTSwithJurabek Reading full 2.html', htmlContent: '', correctAnswers: '' },
+        { id: 'premium-reading-3', title: 'Premium Full Reading 3', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/IELTSwithJurabek Full reading 3.html', htmlContent: '', correctAnswers: '' },
+        { id: 'premium-reading-4', title: 'Premium Full Reading 4', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/IELTSwithJurabek Full reading 4.html', htmlContent: '', correctAnswers: '' },
+        { id: 'premium-reading-5', title: 'Premium Full Reading 5', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/IELTSwithJurabek full reading 5.html', htmlContent: '', correctAnswers: '' },
+        { id: 'premium-reading-6', title: 'Premium Full Reading 6', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/IELTSwithJurabek FULL Reading 6.html', htmlContent: '', correctAnswers: '' },
+        { id: 'premium-reading-7', title: 'Premium Full Reading 7', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/IELTSwithJurabek Reading full 7.html', htmlContent: '', correctAnswers: '' },
+        { id: 'premium-reading-8', title: 'Premium Full Reading 8', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/Full reading 8.html', htmlContent: '', correctAnswers: '' },
+        { id: 'premium-reading-10', title: 'Premium Full Reading 10', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/Full reading 10.html', htmlContent: '', correctAnswers: '' },
+        { id: 'premium-reading-11', title: 'Premium Full Reading 11', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/IELTSwithJurabek FULL Reading 11.html', htmlContent: '', correctAnswers: '' },
+        { id: 'premium-reading-12', title: 'Premium Full Reading 12 (3 Passages)', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/Full Reading 12.html', htmlContent: '', correctAnswers: '' },
+      ];
       setPremiumTests([...staticPremiumTests, ...premiumDbTests]);
       setLoading(false);
     }, () => {
