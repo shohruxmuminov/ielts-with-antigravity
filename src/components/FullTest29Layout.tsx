@@ -205,9 +205,7 @@ export default function FullTest29Layout({ onBack }: FullTest29LayoutProps) {
                 </button>
             </div>
         </div>
-        <a href="https://t.me/muminov_bar" target="_blank" rel="noreferrer" className="telegram-link">
-            Full Exam Materials
-        </a>
+
       </div>
 
       <div className="main-container">
