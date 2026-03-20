@@ -13,6 +13,7 @@ import Profile from './pages/Profile';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import PremiumPanel from './pages/PremiumPanel';
+import PremiumBooks from './pages/PremiumBooks';
 
 export default function App() {
   return (
@@ -33,6 +34,7 @@ export default function App() {
           <Route path="/analytics" element={<Analytics />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/premium" element={<PremiumPanel />} />
+          <Route path="/premium-books" element={<PremiumBooks />} />
         </Route>
       </Routes>
     </Router>

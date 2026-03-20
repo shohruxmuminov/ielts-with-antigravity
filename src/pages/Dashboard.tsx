@@ -12,7 +12,8 @@ import {
   Smartphone,
   Sparkles,
   Volume2,
-  VolumeX
+  VolumeX,
+  Book
 } from 'lucide-react';
 import { useAuth } from '../FirebaseProvider';
 import { Link } from 'react-router-dom';
@@ -124,6 +125,13 @@ export default function Dashboard() {
       path: '/writing', 
       icon: PenTool,
       colors: { start: '#ff9966', mid: '#ff5e62', glow: '#ff9966', shadow: 'rgba(255, 153, 102, 0.3)' }
+    },
+    { 
+      id: 'premium-books', 
+      name: 'My Premium Books', 
+      path: '/premium-books', 
+      icon: Book,
+      colors: { start: '#4f46e5', mid: '#7c3aed', glow: '#6366f1', shadow: 'rgba(99, 102, 241, 0.3)' }
     },
   ];
 
