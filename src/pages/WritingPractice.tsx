@@ -87,14 +87,6 @@ export default function WritingPractice() {
           createdAt: { seconds: Date.now() / 1000 }
         },
         {
-          id: 'jurabek-writing-2',
-          title: 'IELTS with Jurabek - Writing 2',
-          type: 'full',
-          data: '/writing/@IELTSwithJurabekwriting 2.html',
-          isStatic: true,
-          createdAt: { seconds: Date.now() / 1000 }
-        },
-        {
           id: 'appeared-full-writing-2',
           title: 'APPEARED Full Writing 2',
           type: 'full',
@@ -107,22 +99,6 @@ export default function WritingPractice() {
           title: 'APPEARED Writing 1',
           type: 'full',
           data: '/writing/APPEARED writing 1.html',
-          isStatic: true,
-          createdAt: { seconds: Date.now() / 1000 }
-        },
-        {
-          id: 'jurabek-writing-3',
-          title: 'IELTS with Jurabek 3',
-          type: 'full',
-          data: '/writing/IELTSwithJurabek 3.html',
-          isStatic: true,
-          createdAt: { seconds: Date.now() / 1000 }
-        },
-        {
-          id: 'jurabek-writing-main',
-          title: 'IELTS with Jurabek Writing',
-          type: 'full',
-          data: '/writing/IELTSwithJurabek writing.html',
           isStatic: true,
           createdAt: { seconds: Date.now() / 1000 }
         },
@@ -176,14 +152,6 @@ export default function WritingPractice() {
           createdAt: { seconds: Date.now() / 1000 }
         },
         {
-          id: 'jurabek-writing-2',
-          title: 'IELTS with Jurabek - Writing 2',
-          type: 'full',
-          data: '/writing/@IELTSwithJurabekwriting 2.html',
-          isStatic: true,
-          createdAt: { seconds: Date.now() / 1000 }
-        },
-        {
           id: 'appeared-full-writing-2',
           title: 'APPEARED Full Writing 2',
           type: 'full',
@@ -196,22 +164,6 @@ export default function WritingPractice() {
           title: 'APPEARED Writing 1',
           type: 'full',
           data: '/writing/APPEARED writing 1.html',
-          isStatic: true,
-          createdAt: { seconds: Date.now() / 1000 }
-        },
-        {
-          id: 'jurabek-writing-3',
-          title: 'IELTS with Jurabek 3',
-          type: 'full',
-          data: '/writing/IELTSwithJurabek 3.html',
-          isStatic: true,
-          createdAt: { seconds: Date.now() / 1000 }
-        },
-        {
-          id: 'jurabek-writing-main',
-          title: 'IELTS with Jurabek Writing',
-          type: 'full',
-          data: '/writing/IELTSwithJurabek writing.html',
           isStatic: true,
           createdAt: { seconds: Date.now() / 1000 }
         },
