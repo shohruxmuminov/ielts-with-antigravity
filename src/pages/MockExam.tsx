@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Play, Clock, BookOpen, Headphones, PenTool, AlertCircle, CheckCircle2, X, ChevronRight, ArrowLeft, Crown, Lock } from 'lucide-react';
 import { usePremium } from '../context/PremiumContext';
+import { useAuth } from '../FirebaseProvider';
 import { useNavigate } from 'react-router-dom';
+import { saveTestResult, getUserCompletions } from '../utils/testTracker';
 
 // ─── MOCK TEST DEFINITIONS ───
 // Har safar yangi mock test qo'shganda, shu arrayga bitta yangi object qo'shing
@@ -16,17 +18,6 @@ const MOCK_TESTS = [
       { id: 'writing',   title: 'Writing',   icon: 'pen',        time: '60 min', url: '/mock test/Writing-Task 1 and 2.html' },
     ],
   },
-  // Yangi test qo'shish uchun nusxa oling:
-  // {
-  //   id: 'mock-2',
-  //   title: 'Mock Test 2',
-  //   description: 'IELTS Full Mock — Listening, Reading, Writing',
-  //   sections: [
-  //     { id: 'listening', title: 'Listening', icon: 'headphones', time: '30 min', url: '/mock test/...' },
-  //     { id: 'reading',   title: 'Reading',   icon: 'book',       time: '60 min', url: '/mock test/...' },
-  //     { id: 'writing',   title: 'Writing',   icon: 'pen',        time: '60 min', url: '/mock test/...' },
-  //   ],
-  // },
 ];
 
 const ICON_MAP: Record<string, any> = {
@@ -41,8 +32,18 @@ export default function MockExam() {
   const [activeTab, setActiveTab] = useState<'free' | 'premium'>('free');
   const [testResults, setTestResults] = useState<Record<string, { score: number | string, band: number | string, evaluation?: any }>>({});
   const [isEvaluating, setIsEvaluating] = useState(false);
+  const [completedTestIds, setCompletedTestIds] = useState<string[]>([]);
   const { isPremium } = usePremium();
+  const { user } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      getUserCompletions(user.uid, 'mock').then(results => {
+        setCompletedTestIds(results.map(r => r.testId));
+      });
+    }
+  }, [user]);
 
   useEffect(() => {
     const handleMessage = async (event: MessageEvent) => {
@@ -108,10 +109,50 @@ export default function MockExam() {
   };
 
   const handleSelectTest = (test: typeof MOCK_TESTS[0]) => {
+    if (completedTestIds.includes(test.id)) {
+      alert('Siz bu testni allaqachon bajargansiz!');
+      return;
+    }
     setSelectedTest(test);
     setCurrentStep(-1);
     setTestResults({});
   };
+
+  // Automated result saving and reporting
+  useEffect(() => {
+    if (currentStep >= (selectedTest?.sections?.length || 0) && selectedTest && !isEvaluating) {
+      const saveAndReport = async () => {
+        if (!user || completedTestIds.includes(selectedTest.id)) return;
+
+        const overallBand = calculateOverallBand();
+        
+        // 1. Save to Firestore
+        await saveTestResult({
+          userId: user.uid,
+          testId: selectedTest.id,
+          testType: 'mock',
+          title: selectedTest.title,
+          score: 'N/A', // Mock tests have sectioned scores
+          band: overallBand,
+          details: testResults
+        });
+
+        // 2. Generate PDF and send to Telegram
+        try {
+          const { generateTestReport, sendToTelegram } = await import('../utils/pdfGenerator');
+          const pdfBase64 = await generateTestReport(user.displayName || user.email || 'Student', selectedTest.title, testResults);
+          await sendToTelegram(pdfBase64, `${selectedTest.title}_${user.uid}`);
+        } catch (err) {
+          console.error('PDF/Telegram reporting failed:', err);
+        }
+
+        // 3. Update local state to block re-take
+        setCompletedTestIds(prev => [...prev, selectedTest.id]);
+      };
+
+      saveAndReport();
+    }
+  }, [currentStep, selectedTest, isEvaluating]);
 
   const handleStart = () => {
     setCurrentStep(0);
@@ -228,13 +269,20 @@ export default function MockExam() {
                   })}
                 </div>
 
-                <button
-                  onClick={() => handleSelectTest(test)}
-                  className="w-full bg-indigo-600 text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-indigo-500 transition-all shadow-lg shadow-indigo-900/20 active:scale-95"
-                >
-                  <Play className="w-4 h-4 fill-current" />
-                  Boshlash
-                </button>
+                {completedTestIds.includes(test.id) ? (
+                  <div className="w-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 py-3 rounded-xl font-bold flex items-center justify-center gap-2">
+                    <CheckCircle2 className="w-4 h-4" />
+                    Test yakunlangan
+                  </div>
+                ) : (
+                  <button
+                    onClick={() => handleSelectTest(test)}
+                    className="w-full bg-indigo-600 text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-indigo-500 transition-all shadow-lg shadow-indigo-900/20 active:scale-95"
+                  >
+                    <Play className="w-4 h-4 fill-current" />
+                    Boshlash
+                  </button>
+                )}
               </div>
             </div>
           ))}

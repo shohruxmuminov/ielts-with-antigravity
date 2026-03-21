@@ -5,10 +5,13 @@ import {
   Crown,
   Play,
   Lock,
+  CheckCircle2
 } from 'lucide-react';
 import { collection, query, where, orderBy, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebase';
 import { usePremium } from '../context/PremiumContext';
+import { useAuth } from '../FirebaseProvider';
+import { getUserCompletions } from '../utils/testTracker';
 import IELTSReadingLayout from '../components/IELTSReadingLayout';
 import StaticReadingLayout from '../components/StaticReadingLayout';
 import { useNavigate } from 'react-router-dom';
@@ -35,8 +38,18 @@ export default function ReadingPractice() {
   const [selectedTest, setSelectedTest] = useState<ReadingTest | null>(null);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<TabType>('free');
+  const [completedTestIds, setCompletedTestIds] = useState<string[]>([]);
   const { isPremium } = usePremium();
+  const { user } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      getUserCompletions(user.uid, 'reading').then(results => {
+        setCompletedTestIds(results.map(r => r.testId));
+      });
+    }
+  }, [user]);
 
   useEffect(() => {
     const q = query(
@@ -54,78 +67,9 @@ export default function ReadingPractice() {
           category: data.category || 'free',
           isNew: data.isNew ?? false,
           htmlContent: data.htmlContent || data.data || '',
-        };
-      }) as ReadingTest[];
-      
-      const staticFreeTests: ReadingTest[] = [
-        {
-          id: 'jurabek-reading-1',
-          title: 'IELTS with Jurabek - Reading Test 1',
-          type: 'Academic',
-          category: 'free',
-          isNew: true,
-          htmlContent: '/reading/IELTSwithJurabek Reading.html',
-          correctAnswers: '',
-          createdAt: { seconds: Date.now() / 1000 }
-        } as ReadingTest,
-        {
-          id: 'jurabek-reading-2',
-          title: 'IELTS with Jurabek - Reading Test 2',
-          type: 'Academic',
-          category: 'free',
-          isNew: true,
-          htmlContent: '/reading/IELTSwithJurabek.html',
-          correctAnswers: '',
-          createdAt: { seconds: Date.now() / 1000 }
-        } as ReadingTest,
-        {
-          id: 'cdi-reading-full',
-          title: 'CDI Full Reading',
-          type: 'Academic',
-          category: 'free',
-          isNew: true,
-          isStatic: true,
-          url: '/reading/CDI Full reading.html',
-          htmlContent: '/reading/CDI Full reading.html',
-          correctAnswers: '',
-          createdAt: { seconds: Date.now() / 1000 }
-        } as ReadingTest,
-        {
-          id: 'cdi-reading-single',
-          title: 'CDI Reading',
-          type: 'Academic',
-          category: 'free',
-          isNew: true,
-          isStatic: true,
-          url: '/reading/CDI Reading.html',
-          htmlContent: '/reading/CDI Reading.html',
-          correctAnswers: '',
-          createdAt: { seconds: Date.now() / 1000 }
-        } as ReadingTest
-      ];
+        } as ReadingTest;
+      });
 
-      const freeDbTests = dbTests.filter(t => t.category !== 'premium');
-      const premiumDbTests = dbTests.filter(t => t.category === 'premium');
-
-      setTests([...staticFreeTests, ...freeDbTests]);
-
-      // Premium static tests
-      const staticPremiumTests: ReadingTest[] = [
-        { id: 'premium-reading-1', title: 'Premium Full Reading 1', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/IELTSwithJurabek FULL Reading 1.html', htmlContent: '', correctAnswers: '' },
-        { id: 'premium-reading-2', title: 'Premium Full Reading 2', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/IELTSwithJurabek Reading full 2.html', htmlContent: '', correctAnswers: '' },
-        { id: 'premium-reading-3', title: 'Premium Full Reading 3', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/IELTSwithJurabek Full reading 3.html', htmlContent: '', correctAnswers: '' },
-        { id: 'premium-reading-4', title: 'Premium Full Reading 4', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/IELTSwithJurabek Full reading 4.html', htmlContent: '', correctAnswers: '' },
-        { id: 'premium-reading-5', title: 'Premium Full Reading 5', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/IELTSwithJurabek full reading 5.html', htmlContent: '', correctAnswers: '' },
-        { id: 'premium-reading-6', title: 'Premium Full Reading 6', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/IELTSwithJurabek FULL Reading 6.html', htmlContent: '', correctAnswers: '' },
-        { id: 'premium-reading-7', title: 'Premium Full Reading 7', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/IELTSwithJurabek Reading full 7.html', htmlContent: '', correctAnswers: '' },
-        { id: 'premium-reading-8', title: 'Premium Full Reading 8', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/Full reading 8.html', htmlContent: '', correctAnswers: '' },
-        { id: 'premium-reading-10', title: 'Premium Full Reading 10', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/Full reading 10.html', htmlContent: '', correctAnswers: '' },
-        { id: 'premium-reading-11', title: 'Premium Full Reading 11', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/IELTSwithJurabek FULL Reading 11.html', htmlContent: '', correctAnswers: '' },
-        { id: 'premium-reading-12', title: 'Premium Full Reading 12 (3 Passages)', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/Full Reading 12.html', htmlContent: '', correctAnswers: '' },
-      ];
-      setPremiumTests([...staticPremiumTests, ...premiumDbTests]);
-      setLoading(false);
-    }, () => {
       const staticFreeTests: ReadingTest[] = [
         {
           id: 'jurabek-reading-1',
@@ -176,8 +120,13 @@ export default function ReadingPractice() {
           createdAt: { seconds: Date.now() / 1000 }
         } as ReadingTest
       ];
-      setTests(staticFreeTests);
-      setPremiumTests([
+
+      const freeDbTests = dbTests.filter(t => t.category !== 'premium');
+      const premiumDbTests = dbTests.filter(t => t.category === 'premium');
+
+      setTests([...staticFreeTests, ...freeDbTests]);
+
+      const staticPremiumTests: ReadingTest[] = [
         { id: 'premium-reading-1', title: 'Premium Full Reading 1', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/IELTSwithJurabek FULL Reading 1.html', htmlContent: '', correctAnswers: '' },
         { id: 'premium-reading-2', title: 'Premium Full Reading 2', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/IELTSwithJurabek Reading full 2.html', htmlContent: '', correctAnswers: '' },
         { id: 'premium-reading-3', title: 'Premium Full Reading 3', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/IELTSwithJurabek Full reading 3.html', htmlContent: '', correctAnswers: '' },
@@ -189,7 +138,11 @@ export default function ReadingPractice() {
         { id: 'premium-reading-10', title: 'Premium Full Reading 10', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/Full reading 10.html', htmlContent: '', correctAnswers: '' },
         { id: 'premium-reading-11', title: 'Premium Full Reading 11', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/IELTSwithJurabek FULL Reading 11.html', htmlContent: '', correctAnswers: '' },
         { id: 'premium-reading-12', title: 'Premium Full Reading 12 (3 Passages)', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/Full Reading 12.html', htmlContent: '', correctAnswers: '' },
-      ]);
+      ];
+      setPremiumTests([...staticPremiumTests, ...premiumDbTests]);
+      setLoading(false);
+    }, (error) => {
+      console.error("Error fetching materials:", error);
       setLoading(false);
     });
 
@@ -197,6 +150,14 @@ export default function ReadingPractice() {
   }, []);
 
   const handleStartTest = (test: ReadingTest) => {
+    if (completedTestIds.includes(test.id)) {
+      alert('Siz bu testni allaqachon bajargansiz!');
+      return;
+    }
+    if (test.category === 'premium' && !isPremium) {
+      navigate('/premium');
+      return;
+    }
     if (document.documentElement.requestFullscreen) {
       document.documentElement.requestFullscreen().catch(err => {
         console.error(`Error attempting to enable full-screen mode: ${err.message}`);
@@ -216,6 +177,8 @@ export default function ReadingPractice() {
     if (selectedTest.isStatic && selectedTest.url) {
       return (
         <StaticReadingLayout 
+          testId={selectedTest.id}
+          testTitle={selectedTest.title}
           testUrl={selectedTest.url} 
           onBack={handleBack} 
         />
@@ -250,7 +213,6 @@ export default function ReadingPractice() {
       </header>
 
       <div className="flex-1 flex max-w-[1400px] mx-auto w-full p-6 lg:p-10 gap-8">
-        {/* Sidebar */}
         <aside className="w-72 hidden md:block">
           <div className="bg-slate-900 rounded-3xl border border-slate-800 p-6 sticky top-10 shadow-xl">
             <h2 className="text-xs font-black text-slate-500 uppercase tracking-[0.2em] mb-6 px-2">Testlar turi</h2>
@@ -288,9 +250,7 @@ export default function ReadingPractice() {
           </div>
         </aside>
 
-        {/* Main */}
         <main className="flex-1">
-          {/* Mobile Tabs */}
           <div className="flex gap-2 mb-6 md:hidden">
             <button onClick={() => setActiveTab('free')} className={`flex-1 py-3 rounded-xl font-bold text-sm ${activeTab === 'free' ? 'bg-blue-600 text-white' : 'bg-slate-800 text-slate-400'}`}>Free</button>
             <button onClick={() => setActiveTab('premium')} className={`flex-1 py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 ${activeTab === 'premium' ? 'bg-amber-500 text-white' : 'bg-slate-800 text-amber-400 border border-amber-500/30'}`}>
@@ -298,7 +258,6 @@ export default function ReadingPractice() {
             </button>
           </div>
 
-          {/* Locked Screen */}
           {activeTab === 'premium' && !isPremium && (
             <div className="flex flex-col items-center justify-center min-h-[400px] bg-slate-900 rounded-[2rem] border-2 border-dashed border-amber-500/30 p-12 text-center">
               <div className="w-20 h-20 bg-amber-500/10 rounded-3xl flex items-center justify-center mb-6 border border-amber-500/20">
@@ -318,7 +277,6 @@ export default function ReadingPractice() {
             </div>
           )}
 
-          {/* Test List */}
           {(activeTab === 'free' || isPremium) && (
             loading ? (
               <div className="flex justify-center items-center h-64">
@@ -330,7 +288,7 @@ export default function ReadingPractice() {
                   <div key={test.id} className="bg-slate-900 rounded-[2rem] border border-slate-800 overflow-hidden shadow-xl hover:border-slate-700 transition-all group flex flex-col h-full">
                     <div className="p-6 flex-1 flex flex-col">
                       <div className="flex justify-between items-start mb-4">
-                        {activeTab === 'premium' ? (
+                        {test.category === 'premium' ? (
                           <span className="bg-amber-500/10 text-amber-400 text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full border border-amber-500/20 flex items-center gap-1">
                             <Crown className="w-3 h-3" /> Premium
                           </span>
@@ -344,15 +302,22 @@ export default function ReadingPractice() {
                         )}
                       </div>
                       <h3 className="text-lg font-black text-white leading-snug mb-6 flex-1">{test.title}</h3>
-                      <button 
-                        onClick={() => handleStartTest(test)}
-                        className={`w-full text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2 transition-all shadow-lg active:scale-95 ${
-                          activeTab === 'premium' ? 'bg-amber-500 hover:bg-amber-400 shadow-amber-900/20' : 'bg-blue-600 hover:bg-blue-500 shadow-blue-900/20'
-                        }`}
-                      >
-                        <Play className="w-4 h-4 fill-current" />
-                        Start
-                      </button>
+                      {completedTestIds.includes(test.id) ? (
+                        <div className="w-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 py-3 rounded-xl font-bold flex items-center justify-center gap-2">
+                          <CheckCircle2 className="w-4 h-4" />
+                          Bajarilgan
+                        </div>
+                      ) : (
+                        <button 
+                          onClick={() => handleStartTest(test)}
+                          className={`w-full text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2 transition-all shadow-lg active:scale-95 ${
+                            test.category === 'premium' ? 'bg-amber-500 hover:bg-amber-400 shadow-amber-900/20' : 'bg-blue-600 hover:bg-blue-500 shadow-blue-900/20'
+                          }`}
+                        >
+                          <Play className="w-4 h-4 fill-current" />
+                          Start
+                        </button>
+                      )}
                     </div>
                   </div>
                 ))}

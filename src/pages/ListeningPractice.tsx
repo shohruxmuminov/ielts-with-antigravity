@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Play, Pause, Clock, CheckCircle, Volume2, ChevronLeft, ChevronRight, Info, BookOpen, Headphones, ArrowRight, Trophy, Crown, Lock } from 'lucide-react';
+import { Play, Pause, Clock, CheckCircle, Volume2, ChevronLeft, ChevronRight, Info, BookOpen, Headphones, ArrowRight, Trophy, Crown, Lock, CheckCircle2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { db } from '../firebase';
 import { collection, query, where, getDocs, orderBy } from 'firebase/firestore';
@@ -7,6 +7,9 @@ import { calculateBandScore } from '../utils/scoring';
 import StaticListeningLayout from '../components/StaticListeningLayout';
 import { usePremium } from '../context/PremiumContext';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../FirebaseProvider';
+import { saveTestResult, getUserCompletions } from '../utils/testTracker';
+import { generateTestReport, sendToTelegram } from '../utils/pdfGenerator';
 
 export default function ListeningPractice() {
   const [materials, setMaterials] = useState<any[]>([]);
@@ -22,9 +25,19 @@ export default function ListeningPractice() {
   const [score, setScore] = useState(0);
   const [bandScore, setBandScore] = useState("0.0");
   const [activeTab, setActiveTab] = useState<'free' | 'premium'>('free');
+  const [completedTestIds, setCompletedTestIds] = useState<string[]>([]);
   const audioRef = useRef<HTMLVideoElement>(null);
   const { isPremium } = usePremium();
+  const { user } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      getUserCompletions(user.uid, 'listening').then(results => {
+        setCompletedTestIds(results.map(r => r.testId));
+      });
+    }
+  }, [user]);
 
   useEffect(() => {
     fetchMaterials();
@@ -68,7 +81,6 @@ export default function ListeningPractice() {
 
     setLoading(true);
     try {
-      // Simplified query without orderBy to avoid index requirement issues
       const q = query(
         collection(db, 'materials'),
         where('type', '==', 'listening')
@@ -76,7 +88,6 @@ export default function ListeningPractice() {
       const querySnapshot = await getDocs(q);
       const dbDocs = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       
-      // Sort manually to avoid Firestore Index issues
       const sortedDbDocs = dbDocs.sort((a: any, b: any) => 
         (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0)
       );
@@ -89,7 +100,6 @@ export default function ListeningPractice() {
       setLoading(false);
     }
 
-    // Premium listening tests
     const premiumListeningTests = [
       { id: 'premium-listening-9', title: 'Premium Listening Test 9', isStatic: true, url: '/listening/premiumlistening/Listening test 9.html', receivedFrom: 'IELTSwithShohrux', createdAt: { seconds: Date.now() / 1000 } },
       { id: 'premium-listening-10', title: 'Premium Listening Test 10', isStatic: true, url: '/listening/premiumlistening/Listening test 10.html', receivedFrom: 'IELTSwithShohrux', createdAt: { seconds: Date.now() / 1000 } },
@@ -100,6 +110,10 @@ export default function ListeningPractice() {
   };
 
   const handleStartTest = (m: any) => {
+    if (completedTestIds.includes(m.id)) {
+      alert('Siz bu testni allaqachon bajargansiz!');
+      return;
+    }
     if (m.isStatic) {
       setSelectedMaterial(m);
       return;
@@ -136,6 +150,8 @@ export default function ListeningPractice() {
   if (selectedMaterial?.isStatic) {
     return (
       <StaticListeningLayout 
+        testId={selectedMaterial.id}
+        testTitle={selectedMaterial.title}
         testUrl={selectedMaterial.url} 
         onBack={handleBack} 
       />
@@ -166,26 +182,19 @@ export default function ListeningPractice() {
             <div className="bg-slate-900 rounded-[2.5rem] shadow-xl border border-slate-800 p-8 sticky top-8">
               <h2 className="text-xs font-black text-slate-500 uppercase tracking-[0.2em] mb-8">Filter Tests</h2>
               <div className="space-y-3">
-                {[
-                  { id: 'free', label: 'Free Tests', count: materials.length, color: 'emerald' },
-                ].map((filter) => (
-                  <button
-                    key={filter.id}
-                    onClick={() => setActiveTab('free')}
-                    className={`w-full flex items-center justify-between px-5 py-4 rounded-2xl text-sm font-bold transition-all ${
-                      activeTab === 'free'
-                        ? "bg-emerald-600 text-white shadow-lg shadow-emerald-900/40" 
-                        : "text-slate-400 hover:bg-slate-800 hover:text-slate-200"
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      {filter.label}
-                    </div>
-                    <span className={`px-2.5 py-1 rounded-lg text-[10px] font-black ${activeTab === 'free' ? 'bg-white/20' : 'bg-slate-800 text-slate-500'}`}>
-                      {filter.count}
-                    </span>
-                  </button>
-                ))}
+                <button
+                  onClick={() => setActiveTab('free')}
+                  className={`w-full flex items-center justify-between px-5 py-4 rounded-2xl text-sm font-bold transition-all ${
+                    activeTab === 'free'
+                      ? "bg-emerald-600 text-white shadow-lg shadow-emerald-900/40" 
+                      : "text-slate-400 hover:bg-slate-800 hover:text-slate-200"
+                  }`}
+                >
+                  <div className="flex items-center gap-3">Free Tests</div>
+                  <span className={`px-2.5 py-1 rounded-lg text-[10px] font-black ${activeTab === 'free' ? 'bg-white/20' : 'bg-slate-800 text-slate-500'}`}>
+                    {materials.length}
+                  </span>
+                </button>
                 <button
                   onClick={() => setActiveTab('premium')}
                   className={`w-full flex items-center justify-between px-5 py-4 rounded-2xl text-sm font-bold transition-all ${
@@ -237,55 +246,20 @@ export default function ListeningPractice() {
               </div>
             )}
 
-            {activeTab === 'premium' && isPremium && (
-              premiumMaterials.length === 0 ? (
-                <div className="text-center py-20 bg-slate-900/50 rounded-[3rem] border border-dashed border-amber-500/30">
-                  <Crown className="w-12 h-12 text-amber-500/50 mx-auto mb-4" />
-                  <p className="text-slate-500 font-bold">Premium listening testlar tez orada qo'shiladi.</p>
-                </div>
-              ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-                  {premiumMaterials.map((m: any) => (
-                    <div
-                      key={m.id}
-                      className="bg-slate-900 rounded-[2.5rem] border border-amber-500/20 p-8 shadow-lg hover:shadow-2xl hover:border-amber-500/40 transition-all group cursor-pointer"
-                      onClick={() => handleStartTest(m)}
-                    >
-                      <div className="flex justify-between items-start mb-6">
-                        <span className="bg-amber-500/10 text-amber-400 text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full border border-amber-500/20">
-                          ⭐ Premium
-                        </span>
-                      </div>
-                      <h3 className="text-xl font-black text-white leading-snug mb-3">{m.title}</h3>
-                      <p className="text-slate-500 text-sm font-medium mb-6">Premium listening test material</p>
-                      <button className="w-full bg-amber-500 text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-amber-400 transition-all shadow-lg shadow-amber-900/20 active:scale-95">
-                        <Play className="w-4 h-4 fill-current" />
-                        Boshlash
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              )
-            )}
-
-            {activeTab === 'free' && materials.length === 0 ? (
-              <div className="bg-slate-900 rounded-[3rem] border-2 border-dashed border-slate-800 p-24 text-center">
-                <Headphones className="w-20 h-20 text-slate-800 mx-auto mb-8" />
-                <h3 className="text-3xl font-black text-white mb-3">No tests available yet</h3>
-                <p className="text-slate-500 text-lg font-medium">The admin hasn't uploaded any listening tests yet.</p>
-              </div>
-            ) : (
+            {(activeTab === 'free' || isPremium) && (
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-                {materials.map((m) => (
+                {(activeTab === 'free' ? materials : premiumMaterials).map((m: any) => (
                   <motion.div
                     key={m.id}
                     whileHover={{ y: -8 }}
-                    className="bg-slate-900 rounded-[2.5rem] border border-slate-800 p-8 shadow-lg hover:shadow-2xl hover:border-emerald-500/30 transition-all group"
+                    className="bg-slate-900 rounded-[2.5rem] border border-slate-800 p-8 shadow-lg hover:shadow-2xl hover:border-emerald-500/30 transition-all group relative"
                   >
                     <div className="flex items-center gap-2 mb-6">
-                      <span className="bg-emerald-900/40 text-emerald-400 text-[10px] font-black px-3 py-1.5 rounded-xl border border-emerald-900/50 flex items-center gap-1.5 uppercase tracking-widest">
-                        <CheckCircle className="w-3.5 h-3.5" />
-                        FREE
+                      <span className={`text-[10px] font-black px-3 py-1.5 rounded-xl border flex items-center gap-1.5 uppercase tracking-widest ${
+                        activeTab === 'premium' ? 'bg-amber-900/40 text-amber-400 border-amber-900/50' : 'bg-emerald-900/40 text-emerald-400 border-emerald-900/50'
+                      }`}>
+                        {activeTab === 'premium' ? <Crown className="w-3.5 h-3.5" /> : <CheckCircle className="w-3.5 h-3.5" />}
+                        {activeTab === 'premium' ? 'PREMIUM' : 'FREE'}
                       </span>
                     </div>
                     <h3 className="text-xl font-black text-white mb-2 line-clamp-2 min-h-[3rem] leading-tight">{m.title}</h3>
@@ -295,13 +269,23 @@ export default function ListeningPractice() {
                         Received from {m.receivedFrom}
                       </p>
                     )}
-                    <button
-                      onClick={() => handleStartTest(m)}
-                      className="w-full bg-emerald-600 text-white py-4 rounded-2xl font-black flex items-center justify-center gap-2 hover:bg-emerald-500 transition-all shadow-lg shadow-emerald-900/40"
-                    >
-                      <Play className="w-4 h-4 fill-current" />
-                      Start Test
-                    </button>
+                    
+                    {completedTestIds.includes(m.id) ? (
+                      <div className="w-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 py-3 rounded-xl font-bold flex items-center justify-center gap-2">
+                        <CheckCircle2 className="w-4 h-4" />
+                        Bajarilgan
+                      </div>
+                    ) : (
+                      <button
+                        onClick={() => handleStartTest(m)}
+                        className={`w-full text-white py-4 rounded-2xl font-black flex items-center justify-center gap-2 transition-all shadow-lg active:scale-95 ${
+                          activeTab === 'premium' ? 'bg-amber-500 hover:bg-amber-400 shadow-amber-900/20' : 'bg-emerald-600 hover:bg-emerald-500 shadow-emerald-900/40'
+                        }`}
+                      >
+                        <Play className="w-4 h-4 fill-current" />
+                        Start Test
+                      </button>
+                    )}
                   </motion.div>
                 ))}
               </div>
@@ -374,19 +358,37 @@ export default function ListeningPractice() {
     return userAns === correctAns;
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (window.confirm("Finish and submit your answers?")) {
       const correctCount = calculateScore();
+      const bScore = calculateBandScore(correctCount);
       setScore(correctCount);
-      setBandScore(calculateBandScore(correctCount));
+      setBandScore(bScore);
       setSubmitted(true);
+      
+      if (user) {
+        await saveTestResult({
+          userId: user.uid,
+          testId: selectedMaterial.id,
+          testType: 'listening',
+          title: selectedMaterial.title,
+          score: correctCount,
+          band: bScore
+        });
+
+        const report = await generateTestReport(user.displayName || user.email || 'Student', selectedMaterial.title, {
+          listening: { score: correctCount, band: bScore }
+        });
+
+        await sendToTelegram(report, `${selectedMaterial.title}_Result.pdf`);
+      }
+
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100">
-      {/* Test Header */}
       <div className="bg-slate-900 border-b border-slate-800 sticky top-0 z-30 shadow-lg">
         <div className="max-w-[1600px] mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
@@ -429,7 +431,6 @@ export default function ListeningPractice() {
       </div>
 
       <div className="max-w-[1600px] mx-auto flex flex-col lg:flex-row min-h-[calc(100vh-73px)]">
-        {/* Left Panel: Audio & Instructions */}
         <div className="w-full lg:w-[450px] bg-slate-900 border-r border-slate-800 p-8 flex flex-col gap-8 sticky top-[73px] h-fit lg:h-[calc(100vh-73px)] overflow-y-auto">
           <div className="space-y-8">
             <div className="bg-slate-800 rounded-[2.5rem] p-8 border border-slate-700 shadow-inner">
@@ -513,10 +514,8 @@ export default function ListeningPractice() {
           </div>
         </div>
 
-        {/* Right Panel: Questions */}
         <div className="flex-1 bg-slate-950 p-8 lg:p-16 overflow-y-auto">
           <div className="max-w-3xl mx-auto space-y-16">
-            {/* Section Tabs */}
             <div className="flex gap-2 bg-slate-900 p-2 rounded-2xl border border-slate-800 shadow-xl w-fit mx-auto lg:mx-0">
               {testData.parts.map((part: any, idx: number) => (
                 <button
@@ -657,7 +656,6 @@ export default function ListeningPractice() {
               </motion.div>
             </AnimatePresence>
 
-            {/* Bottom Nav */}
             <div className="flex items-center justify-between pt-12 border-t border-slate-800">
               <button 
                 onClick={() => setCurrentPartIndex(prev => Math.max(0, prev - 1))}

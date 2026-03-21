@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { X, Trophy, CheckCircle, ArrowRight, BarChart3 } from 'lucide-react';
+import { useAuth } from '../FirebaseProvider';
+import { saveTestResult } from '../utils/testTracker';
+import { generateTestReport, sendToTelegram } from '../utils/pdfGenerator';
 
 interface StaticReadingLayoutProps {
+  testId: string;
+  testTitle: string;
   testUrl: string;
   onBack: () => void;
 }
@@ -12,24 +17,48 @@ interface TestResult {
   band: number;
 }
 
-const StaticReadingLayout: React.FC<StaticReadingLayoutProps> = ({ testUrl, onBack }) => {
+const StaticReadingLayout: React.FC<StaticReadingLayoutProps> = ({ testId, testTitle, testUrl, onBack }) => {
   const [result, setResult] = useState<TestResult | null>(null);
+  const { user } = useAuth();
 
   useEffect(() => {
-    const handleMessage = (event: MessageEvent) => {
+    const handleMessage = async (event: MessageEvent) => {
       if (event.data?.type === 'PRACTICE_TEST_RESULT' && event.data.result) {
         const { score, total, band } = event.data.result;
-        setResult({
+        const testResult = {
           score: typeof score === 'number' ? score : 0,
           total: typeof total === 'number' ? total : 40,
           band: typeof band === 'number' ? band : 0
-        });
+        };
+        setResult(testResult);
+
+        // Save and Report
+        if (user) {
+          try {
+            await saveTestResult({
+              userId: user.uid,
+              testId,
+              testType: 'reading',
+              title: testTitle,
+              score: `${testResult.score}/${testResult.total}`,
+              band: testResult.band,
+            });
+
+            // Send to Telegram
+            const pdfBase64 = await generateTestReport(user.displayName || user.email || 'Student', testTitle, {
+              reading: { score: `${testResult.score}/${testResult.total}`, band: testResult.band }
+            });
+            await sendToTelegram(pdfBase64, `${testTitle}_${user.uid}`);
+          } catch (err) {
+            console.error('Failed to save or report test results:', err);
+          }
+        }
       }
     };
 
     window.addEventListener('message', handleMessage);
     return () => window.removeEventListener('message', handleMessage);
-  }, []);
+  }, [user, testId, testTitle]);
 
   return (
     <div className="fixed inset-0 z-[100] bg-slate-950 flex flex-col font-sans">

@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { calculateBandScore } from '../utils/scoring';
+import { useAuth } from '../FirebaseProvider';
+import { saveTestResult } from '../utils/testTracker';
+import { generateTestReport, sendToTelegram } from '../utils/pdfGenerator';
 import '../styles/ielts-reading.css';
 
 interface IELTSReadingLayoutProps {
@@ -23,6 +26,36 @@ export default function IELTSReadingLayout({ test, onBack }: IELTSReadingLayoutP
   const [userAnswers, setUserAnswers] = useState<Record<string, string>>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [score, setScore] = useState(0);
+  const { user } = useAuth();
+
+  // Save and report when submitted
+  useEffect(() => {
+    if (isSubmitted && user) {
+      const saveAndReport = async () => {
+        const band = calculateBandScore(score);
+        try {
+          await saveTestResult({
+            userId: user.uid,
+            testId: test.id,
+            testType: 'reading',
+            title: test.title,
+            score: `${score}/40`,
+            band: band,
+          });
+
+          // Send to Telegram
+          const pdfBase64 = await generateTestReport(user.displayName || user.email || 'Student', test.title, {
+            reading: { score: `${score}/40`, band: band }
+          });
+          await sendToTelegram(pdfBase64, `${test.title}_${user.uid}`);
+        } catch (err) {
+          console.error('Failed to save or report test results:', err);
+        }
+      };
+      saveAndReport();
+    }
+  }, [isSubmitted, user, test.id, test.title, score]);
+
 
   const passageRef = useRef<HTMLDivElement>(null);
   const questionsRef = useRef<HTMLDivElement>(null);

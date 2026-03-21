@@ -93,13 +93,13 @@ Provide a detailed evaluation in JSON format including:
       const systemInstruction = `You are an expert IELTS examiner. Evaluate the following IELTS Speaking response based on the audio provided.
 The prompt was: "${prompt}"
 Provide a detailed evaluation including:
-1. Estimated Band Score (0-9, in 0.5 increments)
-2. Pronunciation feedback (list of 2-3 points)
-3. Fluency & Coherence feedback (list of 2-3 points)
-4. Lexical Resource (Vocabulary) feedback (list of 2-3 points)`;
+1. band: number (Estimated Band Score 0-9, in 0.5 increments)
+2. pronunciation: string[] (feedback points)
+3. fluency: string[] (feedback points)
+4. vocabulary: string[] (feedback points)`;
 
       const response = await ai.models.generateContent({
-        model: 'gemini-3.1-pro-preview',
+        model: 'gemini-1.5-pro',
         contents: [
           {
             inlineData: {
@@ -115,10 +115,10 @@ Provide a detailed evaluation including:
           responseSchema: {
             type: Type.OBJECT,
             properties: {
-              band: { type: Type.NUMBER, description: "Estimated band score" },
-              pronunciation: { type: Type.ARRAY, items: { type: Type.STRING }, description: "Pronunciation feedback points" },
-              fluency: { type: Type.ARRAY, items: { type: Type.STRING }, description: "Fluency feedback points" },
-              vocabulary: { type: Type.ARRAY, items: { type: Type.STRING }, description: "Vocabulary feedback points" }
+              band: { type: Type.NUMBER },
+              pronunciation: { type: Type.ARRAY, items: { type: Type.STRING } },
+              fluency: { type: Type.ARRAY, items: { type: Type.STRING } },
+              vocabulary: { type: Type.ARRAY, items: { type: Type.STRING } }
             },
             required: ["band", "pronunciation", "fluency", "vocabulary"]
           }
@@ -128,8 +128,43 @@ Provide a detailed evaluation including:
       const result = JSON.parse(response.text || '{}');
       res.json(result);
     } catch (error) {
-      // Error evaluating speaking
+      console.error('Speaking evaluation error:', error);
       res.status(500).json({ error: 'Failed to evaluate speaking' });
+    }
+  });
+
+  // ─── TELEGRAM REPORTING ───
+  app.post('/api/telegram/send-report', async (req, res) => {
+    try {
+      const { pdfData, filename, caption } = req.body;
+      const botToken = process.env.TELEGRAM_BOT_TOKEN;
+      const chatId = process.env.TELEGRAM_CHAT_ID;
+
+      if (!botToken || !chatId) {
+        return res.status(400).json({ error: 'Telegram bot token or chat ID not configured' });
+      }
+
+      const blob = Buffer.from(pdfData, 'base64');
+      const formData = new FormData();
+      formData.append('chat_id', chatId);
+      formData.append('document', new Blob([blob], { type: 'application/pdf' }), `${filename}.pdf`);
+      formData.append('caption', caption || 'New IELTS Test Result');
+
+      const tgRes = await fetch(`https://api.telegram.org/bot${botToken}/sendDocument`, {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!tgRes.ok) {
+        const errText = await tgRes.text();
+        console.error('Telegram API error:', errText);
+        throw new Error('Failed to send to Telegram');
+      }
+
+      res.json({ status: 'ok' });
+    } catch (error) {
+      console.error('Telegram report error:', error);
+      res.status(500).json({ error: 'Failed to send report to Telegram' });
     }
   });
 
