@@ -1026,6 +1026,16 @@ COMMON MISTAKES TO AVOID:
             if (confirm(`Are you sure you want to submit your writing?\n\nPart 1: ${part1WordCount} words\nPart 2: ${part2WordCount} words`)) {
                 clearInterval(timerInterval);
                 showProcessingMessage();
+
+                // Notify parent of the writing tasks
+                if (window.parent !== window) {
+                    window.parent.postMessage({
+                        type: 'MOCK_TEST_WRITING_SUBMIT',
+                        task1: part1Content,
+                        task2: part2Content
+                    }, '*');
+                }
+
                 setTimeout(() => {
                     downloadBothTasksPDF();
                     setTimeout(() => {

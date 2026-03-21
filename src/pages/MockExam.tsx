@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Play, Clock, BookOpen, Headphones, PenTool, AlertCircle, CheckCircle2, X, ChevronRight, ArrowLeft, Crown, Lock } from 'lucide-react';
 import { usePremium } from '../context/PremiumContext';
 import { useNavigate } from 'react-router-dom';
@@ -39,12 +39,78 @@ export default function MockExam() {
   const [selectedTest, setSelectedTest] = useState<typeof MOCK_TESTS[0] | null>(null);
   const [currentStep, setCurrentStep] = useState(-1);
   const [activeTab, setActiveTab] = useState<'free' | 'premium'>('free');
+  const [testResults, setTestResults] = useState<Record<string, { score: number | string, band: number | string, evaluation?: any }>>({});
+  const [isEvaluating, setIsEvaluating] = useState(false);
   const { isPremium } = usePremium();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleMessage = async (event: MessageEvent) => {
+      const data = event.data;
+      if (data.type === 'MOCK_TEST_RESULT') {
+        setTestResults(prev => ({
+          ...prev,
+          [data.section]: { score: data.score, band: data.band }
+        }));
+      } else if (data.type === 'MOCK_TEST_WRITING_SUBMIT') {
+        await evaluateFullWriting(data.task1, data.task2);
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+  }, []);
+
+  const evaluateFullWriting = async (task1: string, task2: string) => {
+    setIsEvaluating(true);
+    try {
+      const [res1, res2] = await Promise.all([
+        fetch('/api/evaluate/writing', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ text: task1, taskType: 'Task 1', prompt: 'Academic Writing Task 1' })
+        }).then(r => r.json()),
+        fetch('/api/evaluate/writing', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ text: task2, taskType: 'Task 2', prompt: 'Academic Writing Task 2' })
+        }).then(r => r.json())
+      ]);
+
+      const averageBand = ((res1.band || 0) + (res2.band || 0)) / 2;
+      const roundedBand = Math.round(averageBand * 2) / 2;
+
+      setTestResults(prev => ({
+        ...prev,
+        writing: { 
+          score: 'AI Evaluated', 
+          band: roundedBand.toFixed(1),
+          evaluation: { task1: res1, task2: res2 }
+        }
+      }));
+    } catch (error) {
+      console.error('Writing evaluation failed:', error);
+    } finally {
+      setIsEvaluating(false);
+    }
+  };
+
+  const calculateOverallBand = () => {
+    const l = parseFloat(String(testResults.listening?.band || 0));
+    const r = parseFloat(String(testResults.reading?.band || 0));
+    const w = parseFloat(String(testResults.writing?.band || 0));
+    
+    if (l === 0 && r === 0 && w === 0) return "0.0";
+    
+    // Simple average of 3 sections
+    const avg = (l + r + w) / 3;
+    return (Math.round(avg * 2) / 2).toFixed(1);
+  };
 
   const handleSelectTest = (test: typeof MOCK_TESTS[0]) => {
     setSelectedTest(test);
     setCurrentStep(-1);
+    setTestResults({});
   };
 
   const handleStart = () => {
@@ -190,38 +256,151 @@ export default function MockExam() {
 
   // ─── COMPLETION SCREEN ───
   if (currentStep >= sections.length) {
+    const overallBand = calculateOverallBand();
+    
     return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center p-6">
-        <div className="max-w-xl w-full bg-slate-900 p-10 rounded-[2.5rem] border border-slate-800 shadow-xl text-center space-y-8">
-          <div className="w-24 h-24 bg-emerald-900/30 rounded-full flex items-center justify-center mx-auto">
-            <CheckCircle2 className="w-12 h-12 text-emerald-400" />
+      <div className="min-h-screen bg-slate-950 flex flex-col items-center py-10 px-6 overflow-y-auto">
+        <div className="max-w-4xl w-full bg-slate-900 p-10 rounded-[2.5rem] border border-slate-800 shadow-xl text-center space-y-8">
+          <div className="w-20 h-20 bg-emerald-900/30 rounded-full flex items-center justify-center mx-auto">
+            <CheckCircle2 className="w-10 h-10 text-emerald-400" />
           </div>
-          <h2 className="text-3xl font-black text-white">{selectedTest.title} Yakunlandi!</h2>
-          <p className="text-slate-400 font-medium max-w-md mx-auto">
-            Siz barcha bo'limlarni muvaffaqiyatli yakunladingiz. Tabriklaymiz!
-          </p>
+          <h2 className="text-4xl font-black text-white">{selectedTest.title} Overall Result</h2>
+          
+          <div className="bg-indigo-600/10 border border-indigo-500/20 p-8 rounded-3xl">
+            <span className="text-indigo-400 text-sm font-black uppercase tracking-[0.2em]">Overall Band Score</span>
+            <div className="text-7xl font-black text-white mt-2">{overallBand}</div>
+          </div>
 
-          <div className="space-y-3 text-left">
-            {sections.map(section => {
-              const Icon = ICON_MAP[section.icon];
-              return (
-                <div key={section.id} className="flex items-center justify-between p-4 rounded-xl bg-slate-800 border border-slate-700">
-                  <div className="flex items-center gap-3">
-                    <Icon className="w-5 h-5 text-slate-400" />
-                    <span className="font-bold text-slate-200">{section.title}</span>
-                  </div>
-                  <CheckCircle2 className="w-5 h-5 text-emerald-400" />
+          <div className="overflow-hidden rounded-3xl border border-slate-800 bg-slate-900/50">
+            <table className="w-full text-left">
+              <thead>
+                <tr className="bg-slate-800/50">
+                  <th className="p-5 font-black text-slate-400 uppercase text-xs tracking-widest">Section</th>
+                  <th className="p-5 font-black text-slate-400 uppercase text-xs tracking-widest">Raw Score</th>
+                  <th className="p-5 font-black text-slate-400 uppercase text-xs tracking-widest text-right">Band</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-800">
+                {sections.map(section => {
+                  const result = testResults[section.id];
+                  const Icon = ICON_MAP[section.icon];
+                  
+                  return (
+                    <tr key={section.id} className="hover:bg-slate-800/30 transition-colors">
+                      <td className="p-5 font-bold text-white">
+                        <div className="flex items-center gap-3">
+                          <Icon className="w-5 h-5 text-indigo-400" />
+                          {section.title}
+                        </div>
+                      </td>
+                      <td className="p-5 text-slate-400 font-bold">
+                        {section.id === 'writing' && isEvaluating ? (
+                          <div className="flex items-center gap-2 text-indigo-400">
+                            <div className="w-4 h-4 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin" />
+                            AI is grading...
+                          </div>
+                        ) : result?.score || '0'}
+                      </td>
+                      <td className="p-5 text-white font-black text-right text-xl">
+                        {section.id === 'writing' && isEvaluating ? '...' : result?.band || '0.0'}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+
+          {/* AI Writing Feedback Section */}
+          {testResults.writing?.evaluation && (
+            <div className="space-y-6 text-left pt-8 border-t border-slate-800">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-10 h-10 bg-indigo-600/20 rounded-xl flex items-center justify-center">
+                  <PenTool className="w-6 h-6 text-indigo-400" />
                 </div>
-              );
-            })}
-          </div>
+                <div>
+                  <h3 className="text-2xl font-black text-white">AI Examiner Feedback</h3>
+                  <p className="text-slate-500 text-sm font-medium">Detailed breakdown of your writing performance</p>
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {['task1', 'task2'].map((key) => {
+                  const evalData = testResults.writing?.evaluation[key];
+                  if (!evalData) return null;
+                  
+                  return (
+                    <div key={key} className="bg-slate-800/40 border border-slate-700/50 p-6 rounded-[2rem] space-y-4">
+                      <div className="flex justify-between items-center pb-4 border-b border-slate-700/50">
+                        <div className="flex flex-col">
+                          <span className="text-[10px] font-black text-indigo-400 uppercase tracking-widest mb-1">Writing</span>
+                          <span className="text-lg font-black text-white">{key === 'task1' ? 'Task 1' : 'Task 2'}</span>
+                        </div>
+                        <div className="bg-indigo-600 text-white w-14 h-14 rounded-2xl flex flex-col items-center justify-center leading-none shadow-lg shadow-indigo-900/20">
+                          <span className="text-[10px] font-black uppercase mb-1">Band</span>
+                          <span className="text-xl font-black">{evalData.band}</span>
+                        </div>
+                      </div>
+                      
+                      <div className="space-y-5">
+                        <section>
+                          <h4 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-3 flex items-center gap-2">
+                             <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                             Grammar & Accuracy
+                          </h4>
+                          <ul className="space-y-2">
+                            {evalData.grammar?.map((point: string, i: number) => (
+                              <li key={i} className="text-sm text-slate-400 flex gap-2">
+                                <span className="text-indigo-400 font-bold">•</span>
+                                {point}
+                              </li>
+                            ))}
+                          </ul>
+                        </section>
 
-          <button
-            onClick={handleBackToList}
-            className="w-full bg-indigo-600 text-white py-4 rounded-2xl font-bold text-lg hover:bg-indigo-500 transition-all shadow-lg shadow-indigo-900/40"
-          >
-            Testlar ro'yxatiga qaytish
-          </button>
+                        <section>
+                          <h4 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-3 flex items-center gap-2">
+                             <div className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+                             Vocabulary (Lexical)
+                          </h4>
+                          <ul className="space-y-2">
+                            {evalData.vocabulary?.map((point: string, i: number) => (
+                              <li key={i} className="text-sm text-slate-400 flex gap-2">
+                                <span className="text-indigo-400 font-bold">•</span>
+                                {point}
+                              </li>
+                            ))}
+                          </ul>
+                        </section>
+
+                        <section className="bg-slate-900/50 p-4 rounded-xl border border-slate-700/30">
+                          <h4 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-2">Coherence & Cohesion</h4>
+                          <p className="text-sm text-slate-400 leading-relaxed italic">
+                            "{evalData.coherence}"
+                          </p>
+                        </section>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          <div className="flex flex-col sm:flex-row gap-4 pt-6">
+            <button
+              onClick={handleBackToList}
+              className="flex-1 bg-slate-800 hover:bg-slate-700 text-slate-200 py-4 rounded-2xl font-bold text-lg transition-all border border-slate-700 active:scale-95"
+            >
+              Finish Review
+            </button>
+            <button
+              onClick={() => window.print()}
+              className="flex-1 bg-indigo-600 hover:bg-indigo-500 text-white py-4 rounded-2xl font-bold text-lg transition-all shadow-xl shadow-indigo-900/20 active:scale-95"
+            >
+              Save as PDF
+            </button>
+          </div>
         </div>
       </div>
     );

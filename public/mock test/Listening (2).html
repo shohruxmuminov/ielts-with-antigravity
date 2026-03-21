@@ -1334,6 +1334,17 @@
         deliverBtn.parentNode.replaceChild(newBtn, deliverBtn);
 
         modal.style.display = 'flex';
+
+        // Notify parent of the results
+        if (window.parent !== window) {
+            window.parent.postMessage({
+                type: 'MOCK_TEST_RESULT',
+                section: 'listening',
+                score: score,
+                band: band,
+                results: results
+            }, '*');
+        }
     }
 
     // ============================================================

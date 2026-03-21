@@ -1855,6 +1855,16 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('results-score').textContent = score;
         document.getElementById('results-band').textContent = calcBand(score);
         document.getElementById('results-modal').classList.remove('hidden');
+
+        // Notify parent of the results
+        if (window.parent !== window) {
+            window.parent.postMessage({
+                type: 'MOCK_TEST_RESULT',
+                section: 'reading',
+                score: score,
+                band: calcBand(score)
+            }, '*');
+        }
     }
 
     function calcBand(score) {
