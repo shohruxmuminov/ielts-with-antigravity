@@ -110,7 +110,7 @@ export default function ListeningPractice() {
   };
 
   const handleStartTest = (m: any) => {
-    if (completedTestIds.includes(m.id)) {
+    if (completedTestIds.includes(m.id) && !isPremium) {
       alert('Siz bu testni allaqachon bajargansiz!');
       return;
     }
@@ -270,7 +270,7 @@ export default function ListeningPractice() {
                       </p>
                     )}
                     
-                    {completedTestIds.includes(m.id) ? (
+                    {completedTestIds.includes(m.id) && !isPremium ? (
                       <div className="w-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 py-3 rounded-xl font-bold flex items-center justify-center gap-2">
                         <CheckCircle2 className="w-4 h-4" />
                         Bajarilgan
@@ -283,7 +283,7 @@ export default function ListeningPractice() {
                         }`}
                       >
                         <Play className="w-4 h-4 fill-current" />
-                        Start Test
+                        {completedTestIds.includes(m.id) && isPremium ? 'Retake Test' : 'Start Test'}
                       </button>
                     )}
                   </motion.div>

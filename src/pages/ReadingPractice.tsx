@@ -150,7 +150,7 @@ export default function ReadingPractice() {
   }, []);
 
   const handleStartTest = (test: ReadingTest) => {
-    if (completedTestIds.includes(test.id)) {
+    if (completedTestIds.includes(test.id) && !isPremium) {
       alert('Siz bu testni allaqachon bajargansiz!');
       return;
     }
@@ -302,7 +302,7 @@ export default function ReadingPractice() {
                         )}
                       </div>
                       <h3 className="text-lg font-black text-white leading-snug mb-6 flex-1">{test.title}</h3>
-                      {completedTestIds.includes(test.id) ? (
+                      {completedTestIds.includes(test.id) && !isPremium ? (
                         <div className="w-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 py-3 rounded-xl font-bold flex items-center justify-center gap-2">
                           <CheckCircle2 className="w-4 h-4" />
                           Bajarilgan
@@ -315,7 +315,7 @@ export default function ReadingPractice() {
                           }`}
                         >
                           <Play className="w-4 h-4 fill-current" />
-                          Start
+                          {completedTestIds.includes(test.id) && isPremium ? 'Retake' : 'Start'}
                         </button>
                       )}
                     </div>

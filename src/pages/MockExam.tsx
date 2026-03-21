@@ -109,7 +109,7 @@ export default function MockExam() {
   };
 
   const handleSelectTest = (test: typeof MOCK_TESTS[0]) => {
-    if (completedTestIds.includes(test.id)) {
+    if (completedTestIds.includes(test.id) && !isPremium) {
       alert('Siz bu testni allaqachon bajargansiz!');
       return;
     }
@@ -269,7 +269,7 @@ export default function MockExam() {
                   })}
                 </div>
 
-                {completedTestIds.includes(test.id) ? (
+                {completedTestIds.includes(test.id) && !isPremium ? (
                   <div className="w-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 py-3 rounded-xl font-bold flex items-center justify-center gap-2">
                     <CheckCircle2 className="w-4 h-4" />
                     Test yakunlangan
@@ -280,7 +280,7 @@ export default function MockExam() {
                     className="w-full bg-indigo-600 text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-indigo-500 transition-all shadow-lg shadow-indigo-900/20 active:scale-95"
                   >
                     <Play className="w-4 h-4 fill-current" />
-                    Boshlash
+                    {completedTestIds.includes(test.id) && isPremium ? 'Qayta ishlash' : 'Boshlash'}
                   </button>
                 )}
               </div>
