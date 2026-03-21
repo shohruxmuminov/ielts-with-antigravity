@@ -71,6 +71,7 @@ const booksData = {
     "Writing Task 1 (Letter writing).pdf",
     "Writing Task 2 Actual Tests.pdf",
     "[@IELTS_WITH_US_N1]_100 Writing Mistakes.pdf",
+    "Writing - February (@realexamielts).pdf",
     "england_usa Topic Ideas,.pdf",
     "how_to_structure_your_writing_task_for_Academic_task_1_pie_chart.pdf"
   ],
@@ -86,6 +87,7 @@ const booksData = {
     "IELTS-Speaking-Preparation-Full-Course (2).pdf",
     "IELTS_Speaking_Actual_Tests_with_Answers_January.pdf",
     "IELTS_speaking_study_planner_May_August_Full_version.pdf",
+    "IELTS Assistant App.pdf",
     "Master IELTS Speaking.pdf",
     "Question speaking quý 1.2025 (Jan to April)- còn update.pdf",
     "SPEAKING 2025-JANUARTY TO APRIL.pdf",

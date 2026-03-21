@@ -77,6 +77,30 @@ export default function ReadingPractice() {
           htmlContent: '/reading/IELTSwithJurabek.html',
           correctAnswers: '',
           createdAt: { seconds: Date.now() / 1000 }
+        } as ReadingTest,
+        {
+          id: 'cdi-reading-full',
+          title: 'CDI Full reading (@realexamielts)',
+          type: 'Academic',
+          category: 'free',
+          isNew: true,
+          isStatic: true,
+          url: '/reading/CDI Full reading (@realexamielts).html',
+          htmlContent: '/reading/CDI Full reading (@realexamielts).html',
+          correctAnswers: '',
+          createdAt: { seconds: Date.now() / 1000 }
+        } as ReadingTest,
+        {
+          id: 'cdi-reading-single',
+          title: 'CDI Reading (@realexamielts)',
+          type: 'Academic',
+          category: 'free',
+          isNew: true,
+          isStatic: true,
+          url: '/reading/CDI Reading (@realexamielts).html',
+          htmlContent: '/reading/CDI Reading (@realexamielts).html',
+          correctAnswers: '',
+          createdAt: { seconds: Date.now() / 1000 }
         } as ReadingTest
       ];
 
@@ -123,6 +147,30 @@ export default function ReadingPractice() {
           isNew: true,
           isStatic: true,
           url: '/reading/IELTSwithJurabek.html',
+          htmlContent: '',
+          correctAnswers: '',
+          createdAt: { seconds: Date.now() / 1000 }
+        } as ReadingTest,
+        {
+          id: 'cdi-reading-full',
+          title: 'CDI Full reading (@realexamielts)',
+          type: 'Academic',
+          category: 'free',
+          isNew: true,
+          isStatic: true,
+          url: '/reading/CDI Full reading (@realexamielts).html',
+          htmlContent: '',
+          correctAnswers: '',
+          createdAt: { seconds: Date.now() / 1000 }
+        } as ReadingTest,
+        {
+          id: 'cdi-reading-single',
+          title: 'CDI Reading (@realexamielts)',
+          type: 'Academic',
+          category: 'free',
+          isNew: true,
+          isStatic: true,
+          url: '/reading/CDI Reading (@realexamielts).html',
           htmlContent: '',
           correctAnswers: '',
           createdAt: { seconds: Date.now() / 1000 }
