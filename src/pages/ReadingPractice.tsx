@@ -52,10 +52,79 @@ export default function ReadingPractice() {
   }, [user]);
 
   useEffect(() => {
+    const staticFreeTests: ReadingTest[] = [
+      {
+        id: 'jurabek-reading-1',
+        title: 'IELTS with Jurabek - Reading Test 1',
+        type: 'Academic',
+        category: 'free',
+        isNew: true,
+        isStatic: true,
+        url: '/reading/IELTSwithJurabek Reading.html',
+        htmlContent: '',
+        correctAnswers: '',
+        createdAt: { seconds: Date.now() / 1000 }
+      } as ReadingTest,
+      {
+        id: 'jurabek-reading-2',
+        title: 'IELTS with Jurabek - Reading Test 2',
+        type: 'Academic',
+        category: 'free',
+        isNew: true,
+        isStatic: true,
+        url: '/reading/IELTSwithJurabek.html',
+        htmlContent: '',
+        correctAnswers: '',
+        createdAt: { seconds: Date.now() / 1000 }
+      } as ReadingTest,
+      {
+        id: 'cdi-reading-full',
+        title: 'CDI Full Reading',
+        type: 'Academic',
+        category: 'free',
+        isNew: true,
+        isStatic: true,
+        url: '/reading/CDI Full reading.html',
+        htmlContent: '',
+        correctAnswers: '',
+        createdAt: { seconds: Date.now() / 1000 }
+      } as ReadingTest,
+      {
+        id: 'cdi-reading-single',
+        title: 'CDI Reading',
+        type: 'Academic',
+        category: 'free',
+        isNew: true,
+        isStatic: true,
+        url: '/reading/CDI Reading.html',
+        htmlContent: '',
+        correctAnswers: '',
+        createdAt: { seconds: Date.now() / 1000 }
+      } as ReadingTest
+    ];
+
+    const staticPremiumTests: ReadingTest[] = [
+      { id: 'premium-reading-1', title: 'Premium Full Reading 1', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/IELTSwithJurabek FULL Reading 1.html', htmlContent: '', correctAnswers: '' },
+      { id: 'premium-reading-2', title: 'Premium Full Reading 2', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/IELTSwithJurabek Reading full 2.html', htmlContent: '', correctAnswers: '' },
+      { id: 'premium-reading-3', title: 'Premium Full Reading 3', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/IELTSwithJurabek Full reading 3.html', htmlContent: '', correctAnswers: '' },
+      { id: 'premium-reading-4', title: 'Premium Full Reading 4', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/IELTSwithJurabek Full reading 4.html', htmlContent: '', correctAnswers: '' },
+      { id: 'premium-reading-5', title: 'Premium Full Reading 5', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/IELTSwithJurabek full reading 5.html', htmlContent: '', correctAnswers: '' },
+      { id: 'premium-reading-6', title: 'Premium Full Reading 6', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/IELTSwithJurabek FULL Reading 6.html', htmlContent: '', correctAnswers: '' },
+      { id: 'premium-reading-7', title: 'Premium Full Reading 7', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/IELTSwithJurabek Reading full 7.html', htmlContent: '', correctAnswers: '' },
+      { id: 'premium-reading-8', title: 'Premium Full Reading 8', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/Full reading 8.html', htmlContent: '', correctAnswers: '' },
+      { id: 'premium-reading-9', title: 'Premium Full Reading 9 (3 Passages)', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/Full Reading 12.html', htmlContent: '', correctAnswers: '' },
+      { id: 'premium-reading-10', title: 'Premium Full Reading 10', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/Full reading 10.html', htmlContent: '', correctAnswers: '' },
+      { id: 'premium-reading-11', title: 'Premium Full Reading 11', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/IELTSwithJurabek FULL Reading 11.html', htmlContent: '', correctAnswers: '' },
+      { id: 'premium-reading-12', title: 'Premium Full Reading 12', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/Full Reading 12.html', htmlContent: '', correctAnswers: '' },
+    ];
+
+    // Initial state with static tests
+    setTests(staticFreeTests);
+    setPremiumTests(staticPremiumTests);
+
     const q = query(
       collection(db, 'materials'),
-      where('type', '==', 'reading'),
-      orderBy('createdAt', 'desc')
+      where('type', '==', 'reading')
     );
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
@@ -70,79 +139,18 @@ export default function ReadingPractice() {
         } as ReadingTest;
       });
 
-      const staticFreeTests: ReadingTest[] = [
-        {
-          id: 'jurabek-reading-1',
-          title: 'IELTS with Jurabek - Reading Test 1',
-          type: 'Academic',
-          category: 'free',
-          isNew: true,
-          isStatic: true,
-          url: '/reading/IELTSwithJurabek Reading.html',
-          htmlContent: '',
-          correctAnswers: '',
-          createdAt: { seconds: Date.now() / 1000 }
-        } as ReadingTest,
-        {
-          id: 'jurabek-reading-2',
-          title: 'IELTS with Jurabek - Reading Test 2',
-          type: 'Academic',
-          category: 'free',
-          isNew: true,
-          isStatic: true,
-          url: '/reading/IELTSwithJurabek.html',
-          htmlContent: '',
-          correctAnswers: '',
-          createdAt: { seconds: Date.now() / 1000 }
-        } as ReadingTest,
-        {
-          id: 'cdi-reading-full',
-          title: 'CDI Full Reading',
-          type: 'Academic',
-          category: 'free',
-          isNew: true,
-          isStatic: true,
-          url: '/reading/CDI Full reading.html',
-          htmlContent: '',
-          correctAnswers: '',
-          createdAt: { seconds: Date.now() / 1000 }
-        } as ReadingTest,
-        {
-          id: 'cdi-reading-single',
-          title: 'CDI Reading',
-          type: 'Academic',
-          category: 'free',
-          isNew: true,
-          isStatic: true,
-          url: '/reading/CDI Reading.html',
-          htmlContent: '',
-          correctAnswers: '',
-          createdAt: { seconds: Date.now() / 1000 }
-        } as ReadingTest
-      ];
+      // Sort by createdAt desc locally
+      dbTests.sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
 
       const freeDbTests = dbTests.filter(t => t.category !== 'premium');
       const premiumDbTests = dbTests.filter(t => t.category === 'premium');
 
       setTests([...staticFreeTests, ...freeDbTests]);
-
-      const staticPremiumTests: ReadingTest[] = [
-        { id: 'premium-reading-1', title: 'Premium Full Reading 1', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/IELTSwithJurabek FULL Reading 1.html', htmlContent: '', correctAnswers: '' },
-        { id: 'premium-reading-2', title: 'Premium Full Reading 2', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/IELTSwithJurabek Reading full 2.html', htmlContent: '', correctAnswers: '' },
-        { id: 'premium-reading-3', title: 'Premium Full Reading 3', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/IELTSwithJurabek Full reading 3.html', htmlContent: '', correctAnswers: '' },
-        { id: 'premium-reading-4', title: 'Premium Full Reading 4', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/IELTSwithJurabek Full reading 4.html', htmlContent: '', correctAnswers: '' },
-        { id: 'premium-reading-5', title: 'Premium Full Reading 5', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/IELTSwithJurabek full reading 5.html', htmlContent: '', correctAnswers: '' },
-        { id: 'premium-reading-6', title: 'Premium Full Reading 6', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/IELTSwithJurabek FULL Reading 6.html', htmlContent: '', correctAnswers: '' },
-        { id: 'premium-reading-7', title: 'Premium Full Reading 7', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/IELTSwithJurabek Reading full 7.html', htmlContent: '', correctAnswers: '' },
-        { id: 'premium-reading-8', title: 'Premium Full Reading 8', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/Full reading 8.html', htmlContent: '', correctAnswers: '' },
-        { id: 'premium-reading-10', title: 'Premium Full Reading 10', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/Full reading 10.html', htmlContent: '', correctAnswers: '' },
-        { id: 'premium-reading-11', title: 'Premium Full Reading 11', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/IELTSwithJurabek FULL Reading 11.html', htmlContent: '', correctAnswers: '' },
-        { id: 'premium-reading-12', title: 'Premium Full Reading 12 (3 Passages)', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/Full Reading 12.html', htmlContent: '', correctAnswers: '' },
-      ];
       setPremiumTests([...staticPremiumTests, ...premiumDbTests]);
       setLoading(false);
     }, (error) => {
       console.error("Error fetching materials:", error);
+      // Even if fetch fails, we already have static tests from initial state
       setLoading(false);
     });
 
