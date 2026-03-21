@@ -19,6 +19,7 @@ import VocabularyBank from './pages/VocabularyBank';
 import MatchingGame from './pages/MatchingGame';
 import VocabularyQuiz from './pages/VocabularyQuiz';
 import TypingPractice from './pages/TypingPractice';
+import AiEssayChecker from './pages/AiEssayChecker';
 
 export default function App() {
   return (
@@ -33,6 +34,7 @@ export default function App() {
           <Route path="/reading" element={<ReadingPractice />} />
           <Route path="/listening" element={<ListeningPractice />} />
           <Route path="/writing" element={<WritingPractice />} />
+          <Route path="/writing/ai-checker" element={<AiEssayChecker />} />
           <Route path="/speaking" element={<SpeakingPractice />} />
           <Route path="/vocabulary" element={<Vocabulary />} />
           <Route path="/vocabulary/trainer" element={<VocabularyTrainer />} />

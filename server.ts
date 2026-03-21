@@ -39,23 +39,24 @@ async function startServer() {
 
   app.post('/api/evaluate/writing', async (req, res) => {
     try {
-      const { text, taskType, prompt } = req.body;
+      const { text, taskType = 'Task 2', prompt = 'General IELTS Writing' } = req.body;
       
       if (!text || text.trim().length < 50) {
-        return res.status(400).json({ error: 'Text is too short for evaluation' });
+        return res.status(400).json({ error: 'Text is too short for evaluation (minimum 50 words)' });
       }
 
       const systemInstruction = `You are an expert IELTS examiner. Evaluate the following IELTS Writing ${taskType} response.
-The prompt was: "${prompt}"
-Provide a detailed evaluation including:
-1. Estimated Band Score (0-9, in 0.5 increments)
-2. Grammar & Accuracy feedback (list of 2-3 points)
-3. Lexical Resource (Vocabulary) feedback (list of 2-3 points)
-4. Coherence & Cohesion feedback (1 paragraph)`;
+The prompt/topic was: "${prompt}"
+Provide a detailed evaluation in JSON format including:
+1. band: number (Estimated Band Score 0-9, in 0.5 increments)
+2. grammar: string[] (Grammar & Accuracy feedback, 2-3 specific points)
+3. vocabulary: string[] (Lexical Resource/Vocabulary feedback, 2-3 specific points)
+4. coherence: string (Coherence & Cohesion feedback, 1-2 paragraphs)
+5. improvements: string[] (Practical suggestions for improvement)`;
 
       const response = await ai.models.generateContent({
-        model: 'gemini-3.1-pro-preview',
-        contents: text,
+        model: 'gemini-1.5-pro',
+        contents: [{ role: 'user', parts: [{ text }] }],
         config: {
           systemInstruction,
           responseMimeType: 'application/json',
@@ -65,9 +66,10 @@ Provide a detailed evaluation including:
               band: { type: Type.NUMBER, description: "Estimated band score" },
               grammar: { type: Type.ARRAY, items: { type: Type.STRING }, description: "Grammar feedback points" },
               vocabulary: { type: Type.ARRAY, items: { type: Type.STRING }, description: "Vocabulary feedback points" },
-              coherence: { type: Type.STRING, description: "Coherence feedback paragraph" }
+              coherence: { type: Type.STRING, description: "Coherence feedback paragraph" },
+              improvements: { type: Type.ARRAY, items: { type: Type.STRING }, description: "Suggestions for improvement" }
             },
-            required: ["band", "grammar", "vocabulary", "coherence"]
+            required: ["band", "grammar", "vocabulary", "coherence", "improvements"]
           }
         }
       });
@@ -75,8 +77,8 @@ Provide a detailed evaluation including:
       const result = JSON.parse(response.text || '{}');
       res.json(result);
     } catch (error) {
-      // Error evaluating writing
-      res.status(500).json({ error: 'Failed to evaluate writing' });
+      console.error('Error evaluating writing:', error);
+      res.status(500).json({ error: 'Failed to evaluate writing. Please try again later.' });
     }
   });
 

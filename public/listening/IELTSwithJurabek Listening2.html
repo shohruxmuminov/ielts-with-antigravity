@@ -2540,11 +2540,40 @@
             function submitTest() {
                 if (testSubmitted) return;
                 testSubmitted = true;
-                document.getElementById('submitBtn').disabled = true;
+                const submitBtn = document.getElementById('submitBtn');
+                if (submitBtn) submitBtn.disabled = true;
                 const results = checkAnswers();
                 showResults(results);
                 highlightAnswers();
                 showCorrectAnswers();
+
+                // Notify parent of the practice test result
+                if (window.parent !== window) {
+                    window.parent.postMessage({
+                        type: 'PRACTICE_TEST_RESULT',
+                        result: {
+                            section: 'listening',
+                            score: results.totalCorrect,
+                            total: 40,
+                            band: calculateBandScore(results.totalCorrect)
+                        }
+                    }, '*');
+                }
+            }
+
+            function calculateBandScore(score) {
+                if (score >= 39) return 9.0;
+                if (score >= 37) return 8.5;
+                if (score >= 35) return 8.0;
+                if (score >= 32) return 7.5;
+                if (score >= 30) return 7.0;
+                if (score >= 26) return 6.5;
+                if (score >= 23) return 6.0;
+                if (score >= 18) return 5.5;
+                if (score >= 13) return 5.0;
+                if (score >= 10) return 4.5;
+                if (score >= 6) return 4.0;
+                return 3.5;
             }
 
             function checkAnswers() {

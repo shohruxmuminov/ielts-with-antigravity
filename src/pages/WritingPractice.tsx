@@ -423,7 +423,10 @@ export default function WritingPractice() {
               <span>Available Question Sets: <span className="text-[#e61e25] dark:text-rose-500 font-black text-lg">{tasks.length}</span></span>
             </div>
           </div>
-          <button className="bg-blue-600 dark:bg-indigo-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-bold flex items-center gap-2 transition-colors shadow-sm">
+          <button 
+            onClick={() => navigate('/writing/ai-checker')}
+            className="bg-blue-600 dark:bg-indigo-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-bold flex items-center gap-2 transition-colors shadow-sm"
+          >
             <Bot className="w-4 h-4" />
             AI Essay Checker
           </button>

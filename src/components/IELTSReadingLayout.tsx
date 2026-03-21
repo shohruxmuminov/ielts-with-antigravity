@@ -236,15 +236,46 @@ export default function IELTSReadingLayout({ test, onBack }: IELTSReadingLayoutP
             onChange={handleInputChange}
             onInput={handleInputChange}
           >
+            {/* Results Modal */}
             {isSubmitted && (
-              <div className="mb-6 p-6 bg-indigo-900/30 rounded-xl border border-indigo-900/50 flex items-center justify-between">
-                <div>
-                  <h3 className="text-xl font-bold text-indigo-100">Test Completed</h3>
-                  <p className="text-indigo-300">You scored {score} out of 40.</p>
-                </div>
-                <div className="text-center">
-                  <div className="text-sm font-bold text-indigo-400 uppercase">Band Score</div>
-                  <div className="text-4xl font-black text-indigo-100">{calculateBandScore(score)}</div>
+              <div className="fixed inset-0 z-[101] bg-slate-950/90 backdrop-blur-md flex items-center justify-center p-6 animate-in fade-in duration-500">
+                <div className="bg-slate-900 border border-slate-800 rounded-[3rem] p-10 max-w-lg w-full shadow-[0_0_50px_rgba(0,0,0,0.5)] text-center space-y-8 transform animate-in zoom-in-95 duration-500">
+                  <div className="flex justify-center">
+                    <div className="w-24 h-24 bg-blue-500/10 rounded-full flex items-center justify-center border-2 border-blue-500/20 shadow-[0_0_30px_rgba(59,130,246,0.2)]">
+                      <span className="text-5xl">🏆</span>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <h2 className="text-3xl font-black text-white italic tracking-tight">EXAM COMPLETED!</h2>
+                    <p className="text-slate-400 font-medium">Your results have been calculated based on the official IELTS scoring system.</p>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="bg-slate-800/50 rounded-3xl p-6 border border-slate-700/50">
+                      <div className="text-blue-400 mb-1 text-xs font-black uppercase tracking-widest">Score</div>
+                      <div className="text-3xl font-black text-white">{score} <span className="text-lg text-slate-500 font-bold">/ 40</span></div>
+                    </div>
+                    <div className="bg-slate-800/50 rounded-3xl p-6 border border-slate-700/50">
+                      <div className="text-emerald-400 mb-1 text-xs font-black uppercase tracking-widest">Band</div>
+                      <div className="text-3xl font-black text-white">{calculateBandScore(score).toFixed(1)}</div>
+                    </div>
+                  </div>
+
+                  <div className="pt-4 flex flex-col gap-3">
+                    <button 
+                      onClick={() => setIsSubmitted(false)}
+                      className="w-full bg-slate-800 hover:bg-slate-700 text-white py-4 rounded-2xl font-black transition-all flex items-center justify-center gap-2 group"
+                    >
+                      Review My Answers
+                    </button>
+                    <button 
+                      onClick={onBack}
+                      className="w-full bg-blue-600 hover:bg-blue-500 text-white py-4 rounded-2xl font-black transition-all shadow-lg shadow-blue-900/20"
+                    >
+                      Done
+                    </button>
+                  </div>
                 </div>
               </div>
             )}

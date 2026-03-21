@@ -264,6 +264,36 @@ function checkAnswers() {
     document.getElementById('result-details').innerHTML = html;
     document.getElementById('result-modal').style.display = 'flex';
     document.getElementById('deliver-button').disabled = true;
+
+    // Notify parent of the practice test result
+    if (window.parent !== window) {
+        window.parent.postMessage({
+            type: 'PRACTICE_TEST_RESULT',
+            result: {
+                section: 'listening',
+                score: score,
+                total: 10,
+                band: calculateBandScore(score)
+            }
+        }, '*');
+    }
+}
+
+function calculateBandScore(score) {
+    // This is for 10 questions, so we scale it to 40
+    const scaledScore = score * 4;
+    if (scaledScore >= 39) return 9.0;
+    if (scaledScore >= 37) return 8.5;
+    if (scaledScore >= 35) return 8.0;
+    if (scaledScore >= 32) return 7.5;
+    if (scaledScore >= 30) return 7.0;
+    if (scaledScore >= 26) return 6.5;
+    if (scaledScore >= 23) return 6.0;
+    if (scaledScore >= 18) return 5.5;
+    if (scaledScore >= 13) return 5.0;
+    if (scaledScore >= 10) return 4.5;
+    if (scaledScore >= 6) return 4.0;
+    return 3.5;
 }
 
 playPauseBtn.onclick = () => {

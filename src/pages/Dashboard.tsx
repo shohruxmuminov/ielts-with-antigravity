@@ -128,6 +128,13 @@ export default function Dashboard() {
       colors: { start: '#ff9966', mid: '#ff5e62', glow: '#ff9966', shadow: 'rgba(255, 153, 102, 0.3)' }
     },
     { 
+      id: 'ai-essay', 
+      name: 'AI Essay Checker', 
+      path: '/writing/ai-checker', 
+      icon: Sparkles,
+      colors: { start: '#f43f5e', mid: '#e11d48', glow: '#fb7185', shadow: 'rgba(244, 63, 94, 0.3)' }
+    },
+    { 
       id: 'premium-books', 
       name: 'My Premium Books', 
       path: '/premium-books', 
