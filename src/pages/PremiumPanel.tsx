@@ -3,24 +3,41 @@ import { Crown, Send, Phone, CheckCircle, Lock, Star, Zap, Shield } from 'lucide
 import { usePremium } from '../context/PremiumContext';
 
 export default function PremiumPanel() {
-  const { isPremium, activatePremium, deactivatePremium } = usePremium();
+  const { isPremium, premiumUntil, activatePremium, deactivatePremium } = usePremium();
   const [code, setCode] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleActivate = () => {
+  const handleActivate = async () => {
     setError('');
     if (!code.trim()) {
       setError('Kodni kiriting!');
       return;
     }
-    const ok = activatePremium(code);
+    
+    setLoading(true);
+    const ok = await activatePremium(code);
+    setLoading(false);
+    
     if (ok) {
       setSuccess(true);
       setCode('');
     } else {
       setError('❌ Noto\'g\'ri kod! Telegram orqali to\'g\'ri kodni oling.');
     }
+  };
+
+  const formatExpiry = (timestamp: number) => {
+    if (!timestamp) return '';
+    const date = new Date(timestamp);
+    return date.toLocaleDateString('uz-UZ', { 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
   };
 
   return (
@@ -77,9 +94,10 @@ export default function PremiumPanel() {
                   <Crown className="w-10 h-10 text-white" />
                 </div>
                 <h3 className="text-3xl font-black text-white mb-3">Premium Faol! ✨</h3>
-                <p className="text-amber-300 font-medium mb-8">
-                  Barcha premium bo'limlarga kirish imkoni mavjud
-                </p>
+                <div className="bg-amber-950/40 rounded-2xl p-4 mb-8 border border-amber-500/20">
+                  <p className="text-amber-500 text-[10px] font-black uppercase tracking-widest mb-1">Amal qilish muddati:</p>
+                  <p className="text-amber-200 font-bold">{formatExpiry(premiumUntil)}</p>
+                </div>
                 <div className="grid grid-cols-2 gap-3 mb-8">
                   {['Reading', 'Listening', 'Writing', 'Speaking', 'Mock Exam', 'Vocabulary'].map(s => (
                     <div key={s} className="flex items-center gap-2 bg-amber-900/30 rounded-xl px-3 py-2 text-sm font-bold text-amber-300 border border-amber-500/20">
@@ -133,17 +151,17 @@ export default function PremiumPanel() {
                     onChange={(e) => { setCode(e.target.value); setError(''); setSuccess(false); }}
                     onKeyDown={(e) => e.key === 'Enter' && handleActivate()}
                     placeholder="Kodni kiriting..."
-                    className="w-full bg-slate-800 border-2 border-slate-700 rounded-2xl px-5 py-4 text-white font-bold text-lg placeholder-slate-600 outline-none focus:border-amber-500 focus:ring-4 focus:ring-amber-500/10 transition-all"
+                    className="w-full bg-slate-800 border-2 border-slate-700 rounded-2xl px-5 py-4 text-white font-bold text-lg placeholder-slate-600 outline-none focus:border-amber-500 focus:ring-4 focus:ring-amber-500/10 transition-all shadow-inner"
                   />
 
                   {error && (
-                    <div className="bg-red-900/30 border border-red-500/30 rounded-xl px-4 py-3 text-red-400 font-bold text-sm">
+                    <div className="bg-red-900/30 border border-red-500/30 rounded-xl px-4 py-3 text-red-400 font-bold text-sm animate-shake">
                       {error}
                     </div>
                   )}
 
                   {success && (
-                    <div className="bg-emerald-900/30 border border-emerald-500/30 rounded-xl px-4 py-3 text-emerald-400 font-bold text-sm flex items-center gap-2">
+                    <div className="bg-emerald-900/30 border border-emerald-500/30 rounded-xl px-4 py-3 text-emerald-400 font-bold text-sm flex items-center gap-2 animate-bounce-in">
                       <CheckCircle className="w-5 h-5" />
                       Premium muvaffaqiyatli aktivlashtirildi! 🎉
                     </div>
@@ -151,10 +169,17 @@ export default function PremiumPanel() {
 
                   <button
                     onClick={handleActivate}
-                    className="w-full bg-gradient-to-r from-amber-500 to-orange-500 text-white py-4 rounded-2xl font-black text-lg hover:from-amber-400 hover:to-orange-400 transition-all shadow-xl shadow-amber-900/30 active:scale-95 flex items-center justify-center gap-3"
+                    disabled={loading}
+                    className="w-full bg-gradient-to-r from-amber-500 to-orange-500 text-white py-4 rounded-2xl font-black text-lg hover:from-amber-400 hover:to-orange-400 transition-all shadow-xl shadow-amber-900/30 active:scale-95 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    <Crown className="w-5 h-5" />
-                    Premiumni Aktivlashtirish
+                    {loading ? (
+                      <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    ) : (
+                      <>
+                        <Crown className="w-5 h-5" />
+                        Premiumni Aktivlashtirish
+                      </>
+                    )}
                   </button>
                 </div>
               </div>
