@@ -59,46 +59,26 @@ export default function ReadingPractice() {
       
       const staticFreeTests: ReadingTest[] = [
         {
-          id: 'jurabek-reading-1',
-          title: 'IELTS with Jurabek - Reading Test 1',
-          type: 'Academic',
-          category: 'free',
-          isNew: true,
-          htmlContent: '/reading/IELTSwithJurabek Reading.html',
-          correctAnswers: '',
-          createdAt: { seconds: Date.now() / 1000 }
-        } as ReadingTest,
-        {
-          id: 'jurabek-reading-2',
-          title: 'IELTS with Jurabek - Reading Test 2',
-          type: 'Academic',
-          category: 'free',
-          isNew: true,
-          htmlContent: '/reading/IELTSwithJurabek.html',
-          correctAnswers: '',
-          createdAt: { seconds: Date.now() / 1000 }
-        } as ReadingTest,
-        {
           id: 'cdi-reading-full',
-          title: 'CDI Full reading (@realexamielts)',
+          title: 'CDI Full Reading',
           type: 'Academic',
           category: 'free',
           isNew: true,
           isStatic: true,
-          url: '/reading/CDI Full reading (@realexamielts).html',
-          htmlContent: '/reading/CDI Full reading (@realexamielts).html',
+          url: '/reading/CDI Full reading.html',
+          htmlContent: '/reading/CDI Full reading.html',
           correctAnswers: '',
           createdAt: { seconds: Date.now() / 1000 }
         } as ReadingTest,
         {
           id: 'cdi-reading-single',
-          title: 'CDI Reading (@realexamielts)',
+          title: 'CDI Reading',
           type: 'Academic',
           category: 'free',
           isNew: true,
           isStatic: true,
-          url: '/reading/CDI Reading (@realexamielts).html',
-          htmlContent: '/reading/CDI Reading (@realexamielts).html',
+          url: '/reading/CDI Reading.html',
+          htmlContent: '/reading/CDI Reading.html',
           correctAnswers: '',
           createdAt: { seconds: Date.now() / 1000 }
         } as ReadingTest
@@ -128,49 +108,25 @@ export default function ReadingPractice() {
     }, () => {
       const staticFreeTests: ReadingTest[] = [
         {
-          id: 'jurabek-reading-1',
-          title: 'IELTS with Jurabek - Reading Test 1',
-          type: 'Academic',
-          category: 'free',
-          isNew: true,
-          isStatic: true,
-          url: '/reading/IELTSwithJurabek Reading.html',
-          htmlContent: '',
-          correctAnswers: '',
-          createdAt: { seconds: Date.now() / 1000 }
-        } as ReadingTest,
-        {
-          id: 'jurabek-reading-2',
-          title: 'IELTS with Jurabek - Reading Test 2',
-          type: 'Academic',
-          category: 'free',
-          isNew: true,
-          isStatic: true,
-          url: '/reading/IELTSwithJurabek.html',
-          htmlContent: '',
-          correctAnswers: '',
-          createdAt: { seconds: Date.now() / 1000 }
-        } as ReadingTest,
-        {
           id: 'cdi-reading-full',
-          title: 'CDI Full reading (@realexamielts)',
+          title: 'CDI Full Reading',
           type: 'Academic',
           category: 'free',
           isNew: true,
           isStatic: true,
-          url: '/reading/CDI Full reading (@realexamielts).html',
+          url: '/reading/CDI Full reading.html',
           htmlContent: '',
           correctAnswers: '',
           createdAt: { seconds: Date.now() / 1000 }
         } as ReadingTest,
         {
           id: 'cdi-reading-single',
-          title: 'CDI Reading (@realexamielts)',
+          title: 'CDI Reading',
           type: 'Academic',
           category: 'free',
           isNew: true,
           isStatic: true,
-          url: '/reading/CDI Reading (@realexamielts).html',
+          url: '/reading/CDI Reading.html',
           htmlContent: '',
           correctAnswers: '',
           createdAt: { seconds: Date.now() / 1000 }
