@@ -17,10 +17,13 @@ export default function Register() {
     const userDoc = await getDoc(userDocRef);
     
     if (!userDoc.exists()) {
+      const email = user.email || '';
+      const defaultName = email ? email.split('@')[0] : 'IELTS Student';
+      
       await setDoc(userDocRef, {
         uid: user.uid,
-        displayName: name || user.displayName || 'IELTS Student',
-        email: user.email,
+        displayName: name || user.displayName || defaultName,
+        email: email,
         targetBand: 7.0,
         currentBand: 0,
         studyStreak: 0,
@@ -35,6 +38,9 @@ export default function Register() {
     setLoading(true);
     try {
       const provider = new OAuthProvider('apple.com');
+      provider.addScope('email');
+      provider.addScope('name');
+      
       const result = await signInWithPopup(auth, provider);
       await createProfile(result.user, result.user.displayName || '');
       navigate('/dashboard');
