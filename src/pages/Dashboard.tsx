@@ -171,6 +171,9 @@ export default function Dashboard() {
               Ready to learn,<br />
               <span className="text-[#a48afd] drop-shadow-[0_0_15px_rgba(168,85,247,0.4)]">{displayName}!</span>
             </h1>
+            <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest opacity-60">
+              Received from IELTSwithJurabek and Sanokulov.uz
+            </p>
           </div>
 
           <div className="flex flex-wrap items-center gap-4">

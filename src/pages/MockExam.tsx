@@ -179,7 +179,12 @@ export default function MockExam() {
     return (
       <div className="max-w-5xl mx-auto w-full space-y-8 bg-slate-950 text-slate-100 p-6 min-h-full">
         <div className="flex items-center justify-between">
-          <h1 className="text-3xl font-black text-white">Full Mock Exams</h1>
+          <div className="space-y-1">
+            <h1 className="text-3xl font-black text-white leading-none">Full Mock Exams</h1>
+            <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest opacity-60">
+              Received from IELTSwithJurabek and Sanokulov.uz
+            </p>
+          </div>
           <span className="text-slate-500 text-sm font-bold">{MOCK_TESTS.length} ta test mavjud</span>
         </div>
 

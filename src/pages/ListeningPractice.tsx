@@ -175,6 +175,11 @@ export default function ListeningPractice() {
               Authentic audio materials with native speakers to improve your listening comprehension
             </p>
           </div>
+          <div className="absolute bottom-4 right-8 z-10 hidden sm:block">
+            <p className="text-[10px] font-black text-emerald-100/40 uppercase tracking-[0.2em]">
+              Received from IELTSwithJurabek and Sanokulov.uz
+            </p>
+          </div>
         </div>
 
         <div className="max-w-7xl mx-auto px-6 py-12 flex flex-col lg:flex-row gap-10">

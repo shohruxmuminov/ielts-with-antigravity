@@ -132,6 +132,9 @@ export default function PremiumBooks() {
               My Premium <span className="text-indigo-500">Books</span>
             </h1>
             <p className="text-slate-400 font-medium">Exclusive strategy guides and practice materials for premium members.</p>
+            <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest opacity-60">
+              Received from IELTSwithJurabek and Sanokulov.uz
+            </p>
           </div>
 
           <div className="relative group">

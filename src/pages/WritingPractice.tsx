@@ -397,13 +397,18 @@ export default function WritingPractice() {
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 font-sans">
       {/* Top Main Header */}
-      <div className="bg-[#e61e25] dark:bg-rose-700 py-6 px-4 md:px-8 text-white shadow-md">
+      <div className="bg-[#e61e25] dark:bg-rose-700 py-6 px-4 md:px-8 text-white shadow-md relative overflow-hidden">
         <div className="max-w-[1400px] mx-auto text-center">
           <h1 className="text-3xl font-bold flex items-center justify-center gap-3 mb-2">
             <PenTool className="w-8 h-8 fill-white" />
             IELTS Writing Practice
           </h1>
           <p className="text-rose-100 font-medium tracking-wide">Choose a question set to practice</p>
+          <div className="absolute bottom-2 right-4 opacity-40 hidden sm:block">
+            <p className="text-[10px] font-black uppercase tracking-widest text-rose-100">
+              Received from IELTSwithJurabek and Sanokulov.uz
+            </p>
+          </div>
         </div>
       </div>
 

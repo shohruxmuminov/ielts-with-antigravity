@@ -117,6 +117,11 @@ export default function AiEssayChecker() {
                </button>
              )}
           </div>
+          <div className="absolute bottom-2 right-6 opacity-30 hidden lg:block text-slate-500">
+            <p className="text-[9px] font-black uppercase tracking-widest ">
+              Received from IELTSwithJurabek and Sanokulov.uz
+            </p>
+          </div>
         </div>
       </div>
 

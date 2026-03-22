@@ -230,6 +230,11 @@ export default function ReadingPractice() {
             Comprehensive reading practice with authentic IELTS materials and detailed feedback
           </p>
         </div>
+        <div className="absolute bottom-4 right-6 z-10 hidden sm:block">
+          <p className="text-[10px] font-black text-blue-200/40 uppercase tracking-[0.2em]">
+            Received from IELTSwithJurabek and Sanokulov.uz
+          </p>
+        </div>
       </header>
 
       <div className="flex-1 flex max-w-[1400px] mx-auto w-full p-6 lg:p-10 gap-8">
