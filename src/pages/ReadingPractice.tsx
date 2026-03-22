@@ -54,6 +54,18 @@ export default function ReadingPractice() {
   useEffect(() => {
     const staticFreeTests: ReadingTest[] = [
       {
+        id: 'premium-reading-13',
+        title: 'Premium Full Reading 25',
+        type: 'Academic',
+        category: 'free',
+        isNew: true,
+        isStatic: true,
+        url: '/reading/premiumreading/Full reading 25.html',
+        htmlContent: '',
+        correctAnswers: '',
+        createdAt: { seconds: Date.now() / 1000 }
+      } as ReadingTest,
+      {
         id: 'jurabek-reading-1',
         title: 'IELTS with Jurabek - Reading Test 1',
         type: 'Academic',
@@ -116,7 +128,6 @@ export default function ReadingPractice() {
       { id: 'premium-reading-10', title: 'Premium Full Reading 10', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/Full reading 10.html', htmlContent: '', correctAnswers: '' },
       { id: 'premium-reading-11', title: 'Premium Full Reading 11', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/IELTSwithJurabek FULL Reading 11.html', htmlContent: '', correctAnswers: '' },
       { id: 'premium-reading-12', title: 'Premium Full Reading 12', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/Full Reading 12.html', htmlContent: '', correctAnswers: '' },
-      { id: 'premium-reading-13', title: 'Premium Full Reading 25', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/Full reading 25.html', htmlContent: '', correctAnswers: '' },
     ];
 
     // Initial state with static tests
