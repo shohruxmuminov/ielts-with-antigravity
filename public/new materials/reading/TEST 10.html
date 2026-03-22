@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IELTS Academic Reading – Test 1</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,Helvetica,sans-serif;font-size:14px;height:100vh;display:flex;flex-direction:column;overflow:hidden;background:#fff;color:#222}
+#hdr{height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;border-bottom:1.5px solid #d0d0d0;background:#fff;flex-shrink:0}
+#hdr-left{display:flex;align-items:center;gap:14px}
+.ielts-badge{background:#c41230;color:#fff;font-family:'Arial Black',Arial,sans-serif;font-weight:900;font-size:19px;padding:3px 10px 4px;letter-spacing:0.5px;border-radius:2px;user-select:none;line-height:1.3}
+#tg-link{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:#222;font-size:13px;font-weight:600;font-family:Arial,sans-serif;background:#fff;border:1.5px solid #d0d0d0;border-radius:22px;padding:5px 14px 5px 6px;transition:border-color .15s,box-shadow .15s}
+#tg-link:hover{border-color:#0088cc;box-shadow:0 0 0 2px rgba(0,136,204,.12);color:#0088cc}
+#tg-link .tg-circle{width:28px;height:28px;border-radius:50%;background:linear-gradient(to bottom,#2aabee,#229ed9);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+#tg-link .tg-circle svg{width:16px;height:16px}
+#hdr-right{display:flex;align-items:center;gap:14px}
+#menu-wrap{position:relative}
+#menu-btn{background:none;border:none;cursor:pointer;padding:4px;display:flex;flex-direction:column;gap:4px;border-radius:4px}
+#menu-btn:hover{background:#f0f0f0}
+#menu-btn span{display:block;width:20px;height:2px;background:#444;border-radius:2px}
+#menu-dropdown{position:absolute;top:calc(100% + 8px);right:0;background:#fff;border:1px solid #d0d0d0;border-radius:6px;box-shadow:0 4px 16px rgba(0,0,0,.12);padding:12px 16px;min-width:180px;z-index:1000;display:none}
+#menu-dropdown.open{display:block}
+#menu-dropdown .md-title{font-size:11px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px}
+#menu-dropdown .md-row{display:flex;align-items:center;gap:8px}
+#menu-dropdown .md-lbl{font-size:13px;color:#333;min-width:60px}
+.fsz-btn{width:30px;height:30px;border:1px solid #ccc;background:#f8f8f8;border-radius:4px;cursor:pointer;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;color:#333;flex-shrink:0}
+.fsz-btn:hover{background:#eee;border-color:#999}
+#pbar{background:#f5f5f5;border-bottom:1px solid #d5d5d5;padding:7px 18px;font-size:13px;flex-shrink:0;color:#222;line-height:1.4}
+#pbar-title{font-weight:700}
+#main{flex:1;display:flex;overflow:hidden;min-height:0}
+#ppane{width:50%;overflow-y:auto;padding:22px 26px;background:#fff;user-select:text;flex-shrink:0}
+#ppane::-webkit-scrollbar{width:6px}
+#ppane::-webkit-scrollbar-track{background:#f2f2f2}
+#ppane::-webkit-scrollbar-thumb{background:#c8c8c8;border-radius:3px}
+#divider{width:10px;background:#e8e8e8;border-left:1px solid #ccc;border-right:1px solid #ccc;cursor:col-resize;flex-shrink:0;display:flex;align-items:center;justify-content:center;position:relative;z-index:10}
+#div-btn{width:26px;height:26px;background:#888;border-radius:3px;color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;user-select:none;position:absolute;line-height:1}
+#div-btn:hover{background:#666}
+#qpane{flex:1;overflow-y:auto;padding:16px 20px;background:#fff;min-width:0;user-select:text}
+#qpane::-webkit-scrollbar{width:6px}
+#qpane::-webkit-scrollbar-track{background:#f2f2f2}
+#qpane::-webkit-scrollbar-thumb{background:#c8c8c8;border-radius:3px}
+.pass-title{font-size:17px;font-weight:700;text-align:center;margin-bottom:6px}
+.pass-sub{font-size:13px;text-align:center;font-style:italic;margin-bottom:14px;color:#333}
+.pass-body p{font-size:14px;line-height:1.65;margin-bottom:13px;color:#111}
+.para-letter{font-weight:700;margin-right:6px}
+.hl{background:#FFE066;border-radius:1px}
+#hl-tip{position:fixed;display:none;background:#111;color:#fff;padding:5px 13px;border-radius:18px;font-size:12px;cursor:pointer;z-index:9999;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.35)}
+#hl-tip:hover{background:#333}
+.qs{font-size:13px;color:#222;margin-bottom:16px}
+.qs-instr{margin-bottom:10px;line-height:1.55;font-size:13px}
+.qs-instr strong{font-weight:700}
+.qs-instr em{font-style:italic}
+.qitem{margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid #efefef}
+.qitem:last-child{border-bottom:none}
+.qrow{display:flex;gap:6px;font-size:13px;line-height:1.5;margin-bottom:6px}
+.qno{font-weight:700;min-width:20px;flex-shrink:0}
+.tfn-opts{display:flex;flex-direction:column;gap:5px;padding-left:26px}
+.tfn-opt{display:flex;align-items:center;gap:7px;font-size:13px;cursor:pointer;color:#222}
+.tfn-opt input[type=radio]{cursor:pointer;width:15px;height:15px;flex-shrink:0}
+.notes-wrap{border:1px solid #bbb;background:#fafafa;padding:12px 14px;margin-top:4px}
+.notes-head{font-weight:700;font-size:14px;text-align:center;margin-bottom:10px}
+.notes-sec{font-weight:700;font-size:13px;margin:10px 0 5px;color:#111}
+.notes-li{display:flex;flex-wrap:wrap;align-items:baseline;gap:3px;font-size:13px;line-height:1.8;margin-bottom:5px;padding-left:6px}
+.notes-sub{font-size:13px;line-height:1.8;margin-bottom:4px;padding-left:22px;color:#222}
+.fill-field{display:inline-flex;align-items:center;border:1px solid #888;border-radius:2px;padding:1px 5px;background:#fff;vertical-align:middle}
+.fill-field .fqn{font-size:11px;font-weight:700;color:#555;margin-right:3px;flex-shrink:0}
+.fill-field input{border:none;outline:none;font-size:13px;font-family:Arial,sans-serif;width:90px;background:transparent;color:#111}
+.qsel{border:1px solid #888;border-radius:2px;padding:3px 6px;font-size:12.5px;font-family:Arial,sans-serif;background:#fff;cursor:pointer;outline:none;color:#111}
+.qsel:focus{border-color:#444}
+.sum-body{padding:6px 0}
+.sum-title{font-weight:700;font-size:14px;text-align:center;margin-bottom:10px}
+.sum-text{font-size:13px;line-height:2.3}
+.mcq-opts{display:flex;flex-direction:column;gap:5px;padding-left:10px}
+.mcq-opt{display:flex;align-items:flex-start;gap:7px;font-size:13px;cursor:default;user-select:none}
+.mcq-opt input{cursor:pointer;width:17px;height:17px;flex-shrink:0;margin-top:1px}
+.mcq-opt .mcq-let{pointer-events:none;font-weight:700;min-width:16px;flex-shrink:0}
+.mcq-opt span:last-child{pointer-events:none}
+.abox{border:1px solid #aaa;margin-bottom:10px;font-size:13px}
+.abox-body{padding:8px 12px}
+.arow{display:flex;gap:8px;font-size:13px;margin-bottom:3px}
+.arl{font-weight:700;min-width:20px}
+.hbox{border:1px solid #aaa;margin-bottom:10px}
+.hbox-title{font-weight:700;font-size:13px;text-align:center;background:#f0f0f0;border-bottom:1px solid #aaa;padding:6px 10px}
+.hbox-body{padding:8px 12px;display:grid;grid-template-columns:1fr 1fr;gap:3px 16px}
+.hi{font-size:13px;display:flex;gap:5px}
+.hi-num{font-style:italic;font-weight:700;min-width:24px;flex-shrink:0}
+.ph-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;font-size:13px}
+.ph-lbl{font-weight:700;min-width:26px;flex-shrink:0}
+.ph-para{font-size:13px;color:#333;min-width:90px}
+#bnav{background:#f0f0f0;border-top:1px solid #ccc;flex-shrink:0;padding:0;min-height:44px;display:flex;align-items:stretch}
+#bnav-inner{display:flex;align-items:center;width:100%;padding:0 10px;gap:0;min-height:44px}
+#bnav-p1{display:flex;align-items:center;gap:5px;flex-shrink:0}
+.bnav-plabel{font-size:13px;font-weight:700;color:#222;white-space:nowrap;cursor:pointer}
+.bnav-plabel:hover{text-decoration:underline}
+#bnav-pills{display:flex;align-items:center;gap:3px;flex-wrap:nowrap}
+.qpill{min-width:26px;height:26px;padding:0 4px;display:flex;align-items:center;justify-content:center;font-size:12px;color:#444;border-radius:3px;border:1px solid transparent;cursor:pointer;user-select:none;background:transparent}
+.qpill:hover{border-color:#999;background:#e6e6e6}
+.qpill.ans{color:#222;font-weight:600}
+.bnav-sep{width:1px;background:#ccc;height:24px;margin:0 12px;flex-shrink:0}
+.bnav-pother{display:flex;align-items:center;gap:6px;flex-shrink:0;cursor:pointer;padding:0 4px}
+.bnav-plabel2{font-size:13px;font-weight:700;color:#666}
+.bnav-pscore{font-size:12px;color:#666}
+#bnav-spacer{flex:1}
+#sub-btn{width:44px;height:44px;background:#e0e0e0;border:none;border-left:1px solid #ccc;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:20px;color:#444}
+#sub-btn:hover{background:#d0d0d0;color:#111}
+#res-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:99999;display:none;align-items:center;justify-content:center}
+#res-modal{background:#fff;width:92vw;max-width:720px;max-height:88vh;overflow-y:auto;border-radius:5px;padding:24px 26px;box-shadow:0 6px 36px rgba(0,0,0,.35)}
+#res-modal::-webkit-scrollbar{width:6px}
+#res-modal::-webkit-scrollbar-thumb{background:#ccc;border-radius:3px}
+.rm-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.rm-title{font-size:18px;font-weight:700}
+.rm-close{background:none;border:none;font-size:24px;cursor:pointer;color:#666;line-height:1;padding:0}
+.rm-close:hover{color:#000}
+.rm-part{margin-bottom:20px;border:1px solid #ddd;border-radius:4px;overflow:hidden}
+.rm-ph{background:#f2f2f2;padding:8px 14px;font-weight:700;font-size:13.5px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #ddd}
+.rm-badge{font-size:12px;color:#fff;padding:2px 11px;border-radius:10px;font-weight:700}
+.rm-badge.good{background:#2e7d32}.rm-badge.ok{background:#e65100}.rm-badge.bad{background:#c41230}
+.rm-tbl{width:100%;border-collapse:collapse;font-size:12.5px}
+.rm-tbl th{background:#f8f8f8;padding:5px 10px;text-align:left;font-weight:700;border-bottom:1px solid #ddd;color:#333}
+.rm-tbl td{padding:5px 10px;border-bottom:1px solid #f0f0f0;vertical-align:top}
+.rm-tbl tr:last-child td{border-bottom:none}
+tr.rr-ok{background:#f1fff4}
+tr.rr-no{background:#fff5f5}
+.mc{color:#2e7d32;font-weight:700}
+.mw{color:#c41230;font-weight:700}
+.total-strip{margin-top:16px;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center}
+.ts-lbl{font-size:15px;font-weight:700}
+.ts-num{font-size:26px;font-weight:900;color:#c41230;text-align:right;line-height:1.1}
+.ts-band{font-size:12px;color:#666;margin-top:2px}
+</style>
+</head>
+<body>
+<div id="hl-tip">✏ Highlight</div>
+
+<div id="hdr">
+  <div id="hdr-left">
+    <div class="ielts-badge">IELTS</div>
+    <a id="tg-link" href="https://t.me/alisher_abduvohobov" target="_blank">
+      <span class="tg-circle">
+        <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" fill="none">
+          <path d="M54 117.9c35-15.2 58.3-25.3 70-30.2 33.3-13.9 40.2-16.3 44.7-16.4 1 0 3.2.2 4.6 1.5 1.2 1 1.5 2.5 1.7 3.5.2 1 .4 3.2.2 4.9-1.9 19.9-10 68.2-14.1 90.5-1.7 9.4-5.1 12.6-8.4 12.9-7.1.7-12.5-4.7-19.4-9.2-10.8-7.1-16.9-11.5-27.4-18.4-12.1-8-4.3-12.4 2.6-19.6 1.8-1.9 33.2-30.4 33.8-33 .1-.3.1-.6-.2-.9-.3-.2-.7-.1-1.1 0-.5.1-7.9 5-22.4 14.9-21.2 14.3-28.6 14.6-37 11.1-3.1-1.3-8.8-3.7-8.8-3.7s-3.2-2 2.2-4.9z" fill="#fff"/>
+        </svg>
+      </span>
+      Alisher's IELTS | 9.0
+    </a>
+  </div>
+  <div id="hdr-right">
+    <div id="menu-wrap">
+      <button id="menu-btn" onclick="toggleMenu()" title="Settings">
+        <span></span><span></span><span></span>
+      </button>
+      <div id="menu-dropdown">
+        <div class="md-title">Text Size</div>
+        <div class="md-row">
+          <span class="md-lbl">Passage</span>
+          <button class="fsz-btn" onclick="changeFontSize('pass',-1)">A−</button>
+          <span id="fsz-pass-val">14px</span>
+          <button class="fsz-btn" onclick="changeFontSize('pass',1)">A+</button>
+        </div>
+        <div class="md-row" style="margin-top:8px">
+          <span class="md-lbl">Questions</span>
+          <button class="fsz-btn" onclick="changeFontSize('q',-1)">A−</button>
+          <span id="fsz-q-val">13px</span>
+          <button class="fsz-btn" onclick="changeFontSize('q',1)">A+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="pbar">
+  <span id="pbar-title">Passage 1</span><span id="pbar-desc">&nbsp;&nbsp;Read the text and answer questions 1–13.</span>
+</div>
+
+<div id="main">
+  <div id="ppane"></div>
+  <div id="divider"><div id="div-btn">↔</div></div>
+  <div id="qpane"></div>
+</div>
+
+<div id="bnav">
+  <div id="bnav-inner">
+    <div id="bnav-p1">
+      <span class="bnav-plabel" onclick="goPart(1)" id="bnav-lbl1">Passage 1</span>
+      <div id="bnav-pills"></div>
+    </div>
+    <div class="bnav-sep"></div>
+    <div class="bnav-pother" id="bnav-po2" onclick="goPart(2)">
+      <span class="bnav-plabel2" id="bnav-lbl2">Passage 2</span>
+      <span class="bnav-pscore" id="pts2">0 of 13</span>
+    </div>
+    <div class="bnav-sep"></div>
+    <div class="bnav-pother" id="bnav-po3" onclick="goPart(3)">
+      <span class="bnav-plabel2" id="bnav-lbl3">Passage 3</span>
+      <span class="bnav-pscore" id="pts3">0 of 14</span>
+    </div>
+    <div id="bnav-spacer"></div>
+    <button id="sub-btn" onclick="showResults()" title="Submit">✓</button>
+  </div>
+</div>
+
+<div id="res-overlay">
+  <div id="res-modal">
+    <div class="rm-hdr">
+      <div class="rm-title">Test Results</div>
+      <button class="rm-close" onclick="closeResults()">✕</button>
+    </div>
+    <div id="res-body"></div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   PASSAGES
+============================================================ */
+const PASSAGES = {
+1:`<div class="pass-title">When Maps were Made for the Public</div>
+<div class="pass-body">
+<p>Since the art of map-making began, maps have largely been made for explorers, academics and rulers. It wasn't until the 19th century that the general public began to demand maps for themselves. More than anything else, it was the appeal of travel to ordinary people that encouraged publishing companies to begin creating and printing more maps than ever before, in order to meet the demand of their new market.</p>
+<p>In the years after the American Civil War (1861–65), the rapidly growing US railroad system had so many independent rail companies, schedules and destinations that maps were critical for planning a person's journey. One publisher, Rand McNally, made a fortune from producing railways maps for different parts of the USA, combined with a timetable and many descriptions of scenery and towns in the same booklet.</p>
+<p>When safety improvements in the 1880s helped to make the bicycle popular, cycling maps quickly followed. Trying to provide something special, publisher George Philip produced attractive-looking maps that would remain in good condition even if they were exposed to water. In 1896, one of the finest cycling maps was produced, in seven parts: George Blum's <em>Cyclers' Guide and Road Book of California</em>. Each cycle road was highlighted in red and labelled with not only the type of surface riders could expect to find, but also an indication of how steep it was.</p>
+<p>The advent of the car brought a need for road maps and travel information. In 1900, André Michelin published a guide about France, with maps that showed the location of different kinds of reasonably priced accommodation and also car assistance for any mechanical problems. However, it was due primarily to its recommendations regarding which was the best restaurant to go to that the guide quickly became something that a huge number of tourists and travellers bought and relied on.</p>
+<p>Nowhere was the need for road maps greater than in the United States. In 1902, the American Automobile Association was founded in Chicago, and three years later it published its first road maps for long-distance drivers. In 1917, Rand McNally began to publish <em>Auto Trails Maps</em>, a series of maps that each focussed in detail on a different region that people might hope to visit within North America. The same publisher also helped to establish the US's system of identifying its roads. Previously roads had names, following the European tradition, but now, thanks in part to Rand McNally, they were allocated numbers instead. Also in the early twentieth century, publisher H. M. Gousha Company developed the <em>Touraide</em>, a set of spiral-bound maps with places to stay and eat and points of interest, ordered in advance and assembled individually for the traveller.</p>
+<p>The oil companies did not take long to realize the profit to be made from Americans exploring the open road, so service stations soon began to distribute free maps to encourage this. Free road maps became part of the fabric of American life, and it has been estimated that more than ten billion were distributed before the 1970s. It was then that the rising costs of oil and subsequent falling consumption led to the oil companies investigating where savings could be made. The maps were one of the first things to go.</p>
+<p>Another map product was the aeronautical chart for pilots. The first examples were produced in France and England around 1911. Techniques progressed greatly during World War 1, and during the 1920s there was continual development of maps for air navigation.</p>
+<p>New maps also became available for those who only wanted to cross town by train. Some of the early maps of the London Underground were based on the city above ground; therefore, although they were accurate in terms of distance and direction, the maps were confusing because the stations in central London were so crowded together. In 1931, Harry Beck produced a map that looked rather like an electrical circuit, with straight lines and symbols. It included only one feature above ground: the river Thames. The stations were also spaced relatively equally, making the map much easier to read. Although Beck's map was initially rejected as too radical, it was approved in 1933. He continued to refine it for the next 25 years.</p>
+<p>Shortly after Beck's contribution to the mapping of subterranean London, an equally significant achievement was performed above ground. Phyllis Pearsall was a painter who, in 1935, became lost on the way to a party in London, due to the lack of a good map. This inspired her to plot all of London, and the next year she traced and catalogued its 23,000 streets. With map-maker James Duncan, Pearsall then produced an atlas and a comprehensive street index. Unable to interest any of the major publishers, the two founded their own company, the Geographer's Map Company Ltd, and produced what was then called the <em>A–Z Atlas and Guide to London</em>. The company still exists and now publishes more than 300 different A–Z maps and atlases.</p>
+</div>`,
+2:`<div class="pass-title">Preserving Antarctic History</div>
+<div class="pass-sub">Protecting early buildings in Antarctica</div>
+<div class="pass-body">
+<p><span class="para-letter">A</span>Few people conjuring up the 'most comfortable dwelling place imaginable' are likely to picture a wooden shelter on an island off the coldest continent on Earth. But that's how Antarctic explorer Robert Falcon Scott described the hut at Cape Evans on Ross Island that was the base for his 1910–13 expedition. The hut is nestled below a small hill on a long stretch of black sand. In 2011, it looked like a building site, but now, seals lie on the ice in front of the newly restored structure and sun reflects off the cliffs of the nearby glacier.</p>
+<p><span class="para-letter">B</span>The New Zealand Antarctic Heritage Trust (NZAHT) and its team of conservation workers recently announced the completion of 10 years of intensive work to save three historic buildings on Ross Island. As well as the hut at Cape Evans, it has worked on the Discovery Hut from Scott's 1901–04 expedition at Hut Point, and the hut at Cape Royds, built for Ernest Shackleton's 1907–09 expedition. When work began, many of the artefacts were temporarily removed while carpenters from the team of conservation workers repaired the walls, floors and roof. In Scott's 'zone of command' was the table where team member Edward Wilson made his enduring biological and botanical illustrations. In a dark corner nearby, Edward Atkinson had once incubated his moulds and parasites. Of particular interest is the small workbench and array of test tubes, sample jars and Bunsen burner stands of biologist Edward Nelson, lit by sunshine through a dusty window. This was where the young scientist preserved marine specimens as part of his search for new species and an understanding of the Antarctic food chain.</p>
+<p><span class="para-letter">C</span>The NZAHT executive director Nigel Watson describes the three restored huts as 'fantastic remnants of humans' first contact with the continent'. The idea for the birth of the conservation project, he says, 'was the fact that we were in great danger of losing them'. When the on-site work began in 2004, snow and ice were building up around, under and sometimes inside the huts, damaging the structures and threatening their contents. 'We now have three buildings that are structurally sound and watertight with a very different feel – they are drier and lighter and the humidity is reduced. It's a much better environment for the collection.'</p>
+<p><span class="para-letter">D</span>As well as heritage carpenters, the NZAHT team on Ross Island has included experts in textile, paper and metal conservation: in total, 62 experts from 11 countries have visited Antarctica to work on the project, often spending a whole summer on-site, sleeping in tents and popping 25km back to Scott Base for the occasional shower. 'It became known as the most exciting conservation project in the world,' says Watson, 'so it attracted top heritage conservation talent.'</p>
+<p><span class="para-letter">E</span>Some of the most exciting discoveries were three intact crates of 'Mackinlay's Rare Old Highland Malt Whisky' found encased in ice beneath Shackleton's hut, a paper notebook that belonged to surgeon, zoologist and photographer George Murray Levick found buried in dirt at Cape Evans and a small box of 22 cellulose nitrate negatives waiting to be developed into photographs found in Herbert Ponting's darkroom. But most of the 18,202 items catalogued and conserved are more mundane: food, tools, clothing and other personal items that were not precious enough to be taken home on the return voyages.</p>
+<p><span class="para-letter">F</span>The NZAHT team's conservation treatments involved thorough cleaning, followed by chemical treatment to help slow, or even reverse, the deterioration. Metal items would go through corrosion removal, followed by a chemical stabilisation treatment, then application of an oxygen and moisture barrier to prevent further corrosion. Treatment of paper items often involved washing to remove harmful acids and salts and to help reinforce the fibres so that in some cases the paper was even stronger than before.</p>
+<p><span class="para-letter">G</span>As a result of the project, the NZAHT has become the world leader in cold-climate heritage conservation and its members have been interviewed for numerous television documentaries and radio reports. The Ross Island huts are the 'jewels in the crown', says Watson, but there are other historic buildings needing attention. With logistics support from <em>Antarctica New Zealand</em>, programme managers Al Fastier and Lizzie Meek will be part of a small team heading to Cape Adare, an exposed site more than 700km north of Scott Base. The two Cape Adare huts, remnants of an 1898–1900 British expedition, 'are not only the first buildings on the continent', says Watson, but also 'the only example of humanity's first buildings on any continent on Earth'.</p>
+<p><span class="para-letter">H</span>The three-year restoration effort will involve construction repairs and the removal, conservation and return of about 1100 objects. Compared with the hut sites on Ross Island, which are relatively sheltered, Cape Adare is 'a very remote and challenging place to work in', says Watson. It's set among the world's biggest colony of Adélie penguins on an exposed spit of land, and it is important that they don't interrupt the functioning of the colony in any way while they are there. Lizzie Meek looks forward to the challenge. 'But I'm also looking forward to going back to the Ross Island huts and seeing them with fresh eyes. After so many years of working on them, to be able to step inside and look around to see what we have accomplished will be amazing.'</p>
+<p><span class="para-letter">I</span>If you can find your way to Antarctica, you'll need a permit to visit any of these huts, which are each in an Antarctic Specially Protected Area. But there's an easier way to see them without making the long journey: the trust has partnered with Google to offer Street View walkthroughs of each of the dwellings, available via Google Earth or through the NZAHT's website.</p>
+</div>`,
+3:`<div class="pass-title">Flower Power</div>
+<div class="pass-body">
+<p><span class="para-letter">A</span>Why do we give people flowers? To offer condolence to those who are grieving. To celebrate. To woo. To ask for forgiveness. We all know intuitively that there is something psychologically powerful about giving flowers; in fact, few objects provoke such a universal emotional response. In the US alone, the flower industry is now worth about $5bn a year – which suggests that, at the very least, they service a compelling human need.</p>
+<p><span class="para-letter">B</span>Recent studies at the Department of Psychology at Rutgers State University of New Jersey investigated claims that flowers are unique among living organisms in their ability to induce profound changes in our emotional state. As the first part of their research, the Rutgers team visited 150 women in their homes. Each was presented with a variety of gifts such as flowers, fruit or sweets. The women were unaware that the study was about the effect of the flowers on their emotions. They were told that it was a study about their daily moods, and that they would receive a gift in return for taking part. Following the presentation of the gift, those receiving flowers were assessed as displaying a much more positive mood than those who got other gifts, and this effect lasted for several days. After receiving flowers, they were also more willing to answer questions concerning their social circle and intimate conversations with friends and family. The results suggest that flowers influence our secondary socio-emotional behaviours, as well as having a strong effect on our immediate emotional expression.</p>
+<p><span class="para-letter">C</span>In the second study, the psychologists observed participants being handed single flowers, or alternative gifts, in a constrained and stressful situation – inside an elevator. Contrary to predictions regarding gender differences, both men and women presented with flowers were more likely to smile, to stand closer and to initiate conversation. Several subjects who were given the alternative gift then learnt that flowers were also being handed out, and returned to the elevator and demanded a flower. The scientists used elevators for this study precisely because the most typical behaviour in sparsely occupied elevators is for people to retreat to opposite corners. The subjects who received flowers, however, closed up that space to a considerable extent – indicating that the flowers not only induced a strong positive mood, but brought a significant affiliation among people who had never previously met.</p>
+<p><span class="para-letter">D</span>The third study involved regularly sending flowers to a selected sample of men and women. The researchers found not only a profound elevation of mood, but also reliable improvements in other measures of cognitive function, like memory. In this series of experiments, some participants produced such extraordinary emotional displays that the psychologists were totally unprepared for them. Subjects gave spontaneous hugs and kisses to the people who delivered the flowers, and sent invitations to the psychologists to come to their homes for refreshments.</p>
+<p><span class="para-letter">E</span>Various evolutionary hypotheses attempt to explain the remarkably powerful psychological effect of flowers. One is that our aesthetic preferences for fertile locations and growing things stem from prehistory, when these clues in our environment could mean the difference between starvation and survival. We may have become hardwired to respond positively to flowers because for early man, finding them in a particular location predicted future food supplies and possibly a better place to rear children. Yet the flaw in this argument is that the supplies and possibly a better place to rear children. Yet the flaw in this argument is that the showy flowers which humans seem to find most visually attractive are generally found on those plants which yield no edible products.</p>
+<p><span class="para-letter">F</span>The Rutgers psychologists' findings show that the various physical attributes of flowers combine to directly affect our emotions through multi-channel interactions. We have evolved preferences for the particular colours, textures, patterned symmetries and specific floral odours which influence our moods. Indeed, previous research has established that popular perfumes, which often have a floral 'top-note', will actually reduce depression. The origins of these inclinations may well be as the evolutionary theories suggest: the patterned symmetries of flowers can be detected easily as a recognisable signal within a wide variety of visual arrays, and a response to certain colour tones is important in finding ripe fruit against a leafy background. But, claim the Rutgers team, these preferences have long been separated from their primary evolutionary use, and become rewarding to us more generally. Thus plants with preferred colours, shapes and odours – despite having no other products – would therefore be protected and dispersed.</p>
+<p><span class="para-letter">G</span>The Rutgers study suggests that flowers may have actually evolved to exploit their peculiar impact on humans. The team's theory proposes a plant-human co-evolution, or even domestication, based on the intense emotional rewards that flowers provide. The idea that flowering plants, with no known food or other basic survival value to man, have co-evolved with us by exploiting an emotional niche instead, is very much like the scenario presented for the evolution of dogs. Flowers may be the plant equivalent of 'companion animals'. If this is true, then there is a very real sense in which, when you next give flowers, they are using you just as much as you are using them.</p>
+</div>`
+};
+
+/* ============================================================
+   ANSWER KEY
+============================================================ */
+const AK = {
+  1:'timetable',2:'surface',3:'accommodation',4:'restaurant',5:'region',6:'numbers',
+  7:'T',8:'T',9:'NGV',10:'F',11:'NGV',12:'F',13:'NGV',
+  14:'E',15:'I',16:'A',17:'G',18:'C',19:'F',
+  20:'A',21:'E',
+  22:'A',23:'B',
+  24:'sheltered',25:'penguins',26:'permit',
+  27:'v',28:'iv',29:'vii',30:'ii',31:'viii',32:'vi',33:'iii',
+  34:'B',35:'A',36:'C',37:'B',
+  38:'food',39:'children',40:'edible'
+};
+
+function displayAK(n){
+  const v=AK[n].toString();
+  if(v==='T')return 'TRUE';
+  if(v==='F')return 'FALSE';
+  if(v==='NGV')return 'NOT GIVEN';
+  return v;
+}
+
+/* ============================================================
+   HELPERS
+============================================================ */
+function fi(n,w){
+  const v=ans[n]||'';
+  return `<span class="fill-field" id="qi${n}"><span class="fqn">${n}</span><input id="fi${n}" value="${v}" style="width:${w||90}px" onchange="setAns(${n},this.value)" onkeyup="setAns(${n},this.value)" placeholder="…"></span>`;
+}
+
+function tfnBlock(n,text){
+  const v=ans[n]||'';
+  return `<div class="qitem" id="qi${n}">
+    <div class="qrow"><span class="qno">${n}</span><span>${text}</span></div>
+    <div class="tfn-opts">
+      ${['TRUE','FALSE','NOT GIVEN'].map(o=>`<label class="tfn-opt"><input type="radio" name="rq${n}" value="${o}" ${v===o?'checked':''} onchange="setAns(${n},this.value)">${o}</label>`).join('')}
+    </div>
+  </div>`;
+}
+
+function paraRow(n,text,letters){
+  const v=ans[n]||'';
+  return `<div class="qitem" id="qi${n}">
+    <div class="qrow"><span class="qno">${n}</span><span>${text}</span></div>
+    <select class="qsel" onchange="setAns(${n},this.value)" style="margin-left:26px;margin-top:4px">
+      <option value="">— paragraph —</option>
+      ${letters.map(l=>`<option value="${l}" ${v===l?'selected':''}>${l}</option>`).join('')}
+    </select>
+  </div>`;
+}
+
+function headRow(n,label,opts){
+  const v=ans[n]||'';
+  return `<div class="ph-row" id="qi${n}">
+    <span class="ph-lbl">${n}</span>
+    <span class="ph-para">Paragraph ${label}</span>
+    <select class="qsel" onchange="setAns(${n},this.value)" style="flex:1">
+      <option value="">— heading —</option>
+      ${opts.map(o=>`<option value="${o.v}" ${v===o.v?'selected':''}>${o.v} – ${o.t}</option>`).join('')}
+    </select>
+  </div>`;
+}
+
+function mcqBlock(n,qtext,opts){
+  const v=ans[n]||'';
+  return `<div class="qitem" id="qi${n}">
+    <div class="qrow"><span class="qno">${n}</span><span>${qtext}</span></div>
+    <div class="mcq-opts">
+      ${Object.entries(opts).map(([l,t])=>`<div class="mcq-opt"><input type="radio" name="rq${n}" value="${l}" ${v===l?'checked':''} onchange="setAns(${n},this.value)"><span class="mcq-let">${l}</span><span>${t}</span></div>`).join('')}
+    </div>
+  </div>`;
+}
+
+function classifyBlock(n,text){
+  const v=ans[n]||'';
+  return `<div class="qitem" id="qi${n}">
+    <div class="qrow"><span class="qno">${n}</span><span>${text}</span></div>
+    <div class="mcq-opts">
+      ${[['A','the first study'],['B','the second study'],['C','the third study']].map(([l,t])=>`<div class="mcq-opt"><input type="radio" name="rq${n}" value="${l}" ${v===l?'checked':''} onchange="setAns(${n},this.value)"><span class="mcq-let">${l}</span><span>${t}</span></div>`).join('')}
+    </div>
+  </div>`;
+}
+
+/* ============================================================
+   RENDER Q1
+============================================================ */
+function renderQ1(){
+  return `
+  <div class="qs">
+    <div class="qs-instr">Questions 1–6<br>Complete the notes below.<br>Choose <strong>ONE WORD ONLY</strong> from the passage for each answer.<br><em>Write your answers in boxes 1–6 on your answer sheet.</em></div>
+    <div class="notes-wrap">
+      <div class="notes-head">The development of maps from the 19th century onwards</div>
+      <div class="notes-li">• a growing interest in travel led to the increased production of maps in the 19th century</div>
+      <div class="notes-sec">After 1865:</div>
+      <div class="notes-li">• Rand McNally made a lot of money by putting a map and a ${fi(1,100)} in one publication</div>
+      <div class="notes-sec">After 1880:</div>
+      <div class="notes-li">• George Philip produced maps that could not be damaged by water</div>
+      <div class="notes-li">• George Blum's cycling map showed</div>
+      <div class="notes-sub">– the kind of ${fi(2,80)} the paths had</div>
+      <div class="notes-sub">– how steep the paths might be</div>
+      <div class="notes-sec">1900 onwards:</div>
+      <div class="notes-li">• André Michelin's guide provided information about</div>
+      <div class="notes-sub">– finding economical ${fi(3,110)}</div>
+      <div class="notes-sub">– what to do if your car broke down</div>
+      <div class="notes-li">• the Michelin guide became popular mainly because it helped people select a ${fi(4,90)}</div>
+      <div class="notes-sec">1917 onwards:</div>
+      <div class="notes-li">• Rand McNally</div>
+      <div class="notes-sub">– the company's <em>Auto Trails Maps</em> helped people explore roads through a particular ${fi(5,80)} of the USA</div>
+      <div class="notes-sub">– the company was also responsible for giving ${fi(6,80)} to American roads</div>
+    </div>
+  </div>
+  <div class="qs">
+    <div class="qs-instr">Questions 7–13<br>Do the following statements agree with the information given in Reading Passage 1?<br>In boxes 7–13 on your answer sheet, write<br><strong>TRUE</strong> &nbsp;if the statement agrees with the information<br><strong>FALSE</strong> &nbsp;if the statement contradicts the information<br><strong>NOT GIVEN</strong> &nbsp;if there is no information on this</div>
+    ${tfnBlock(7,'The <em>Touraide</em> was organised according to the particular needs of each traveller.')}
+    ${tfnBlock(8,'It was the high price of oil that stopped free maps being given out to the public.')}
+    ${tfnBlock(9,'In the 1920s, maps for pilots helped improve safety records for flights.')}
+    ${tfnBlock(10,'People found the early maps of the London Underground easy to read.')}
+    ${tfnBlock(11,'Harry Beck had previous experience of map-making when he produced a map of the underground.')}
+    ${tfnBlock(12,"Beck's first version of the underground map met with a positive reaction.")}
+    ${tfnBlock(13,'Phyllis Pearsall was the first woman to produce a published map.')}
+  </div>`;
+}
+
+/* ============================================================
+   RENDER Q2
+============================================================ */
+function renderQ2(){
+  const PARAS=['A','B','C','D','E','F','G','H','I'];
+  return `
+  <div class="qs">
+    <div class="qs-instr">Questions 14–19<br>Reading Passage 2 has nine paragraphs, <strong>A–I</strong>.<br>Which paragraph contains the following information?<br>Write the correct letter, <strong>A–I</strong>, in boxes 14–19 on your answer sheet.</div>
+    ${paraRow(14,'a reason the early explorers left some objects behind',PARAS)}
+    ${paraRow(15,'an explanation of how to see the huts without travelling to Antarctica',PARAS)}
+    ${paraRow(16,'reference to the fact that Robert Falcon Scott enjoyed the time he spent living in the hut',PARAS)}
+    ${paraRow(17,'reference to how the Ross Island project has received attention from the media',PARAS)}
+    ${paraRow(18,'the reason the trust decided to begin conservation work at Ross Island',PARAS)}
+    ${paraRow(19,'a description of the process for preserving paper',PARAS)}
+  </div>
+  <div class="qs">
+    <div class="qs-instr">Questions 20 and 21<br>Choose <strong>TWO</strong> letters, <strong>A–E</strong>.<br>Write the correct letters in boxes 20 and 21 on your answer sheet.<br>Which <strong>TWO</strong> research activities were carried out by Scott's expedition team?</div>
+    <div class="abox"><div class="abox-body">
+      <div class="arow"><span class="arl">A</span>collecting samples of sea life</div>
+      <div class="arow"><span class="arl">B</span>monitoring penguin behaviour</div>
+      <div class="arow"><span class="arl">C</span>studying the effects of cold on the human body</div>
+      <div class="arow"><span class="arl">D</span>keeping a record of Antarctic weather patterns</div>
+      <div class="arow"><span class="arl">E</span>drawing pictures of plants and animals</div>
+    </div></div>
+    ${mcqBlock(20,'First research activity:',{A:'collecting samples of sea life',B:'monitoring penguin behaviour',C:'studying the effects of cold on the human body',D:'keeping a record of Antarctic weather patterns',E:'drawing pictures of plants and animals'})}
+    ${mcqBlock(21,'Second research activity:',{A:'collecting samples of sea life',B:'monitoring penguin behaviour',C:'studying the effects of cold on the human body',D:'keeping a record of Antarctic weather patterns',E:'drawing pictures of plants and animals'})}
+  </div>
+  <div class="qs">
+    <div class="qs-instr">Questions 22 and 23<br>Choose <strong>TWO</strong> letters, <strong>A–E</strong>.<br>Write the correct letters in boxes 22 and 23 on your answer sheet.<br>Which <strong>TWO</strong> statements are true about the conservation workers on Ross Island?</div>
+    <div class="abox"><div class="abox-body">
+      <div class="arow"><span class="arl">A</span>They lived in Scott's huts while carrying out the work.</div>
+      <div class="arow"><span class="arl">B</span>They were in Antarctica for months at a time.</div>
+      <div class="arow"><span class="arl">C</span>They had previously worked together in New Zealand.</div>
+      <div class="arow"><span class="arl">D</span>They restored the contents as well as the buildings themselves.</div>
+      <div class="arow"><span class="arl">E</span>They had no access to showers at all.</div>
+    </div></div>
+    ${mcqBlock(22,'First statement:',{A:'They lived in Scott\'s huts while carrying out the work.',B:'They were in Antarctica for months at a time.',C:'They had previously worked together in New Zealand.',D:'They restored the contents as well as the buildings themselves.',E:'They had no access to showers at all.'})}
+    ${mcqBlock(23,'Second statement:',{A:'They lived in Scott\'s huts while carrying out the work.',B:'They were in Antarctica for months at a time.',C:'They had previously worked together in New Zealand.',D:'They restored the contents as well as the buildings themselves.',E:'They had no access to showers at all.'})}
+  </div>
+  <div class="qs">
+    <div class="qs-instr">Questions 24–26<br>Complete the summary below.<br>Choose <strong>ONE WORD ONLY</strong> from the passage for each answer.<br><em>Write your answers in boxes 24–26 on your answer sheet.</em></div>
+    <div class="sum-body">
+      <div class="sum-title">Cape Adare</div>
+      <div class="sum-text">Cape Adare is located several hundred kilometres north of Scott's hut. The huts on Cape Adare are not as ${fi(24,85)} as those on Ross Island and the workers have to be careful not to disturb the group of ${fi(25,85)} living nearby. Visitors to Antarctica must have a ${fi(26,80)} to see the restored huts.</div>
+    </div>
+  </div>`;
+}
+
+/* ============================================================
+   RENDER Q3
+============================================================ */
+function renderQ3(){
+  const HEADINGS=[
+    {v:'i',t:'A negative reaction to receiving flowers'},
+    {v:'ii',t:'Some surprisingly strong responses to flowers'},
+    {v:'iii',t:'A mutually beneficial relationship?'},
+    {v:'iv',t:'Becoming more open about personal matters'},
+    {v:'v',t:'Some common social functions of flowers'},
+    {v:'vi',t:'Sensory appeal versus practical purpose of flowers'},
+    {v:'vii',t:'Bridging the gap between strangers in an enclosed space'},
+    {v:'viii',t:'An imperfect theory'}
+  ];
+  const PARAS=[['A','A'],['B','B'],['C','C'],['D','D'],['E','E'],['F','F'],['G','G']];
+  return `
+  <div class="qs">
+    <div class="qs-instr">Questions 27–33<br>Reading Passage 3 has seven paragraphs, <strong>A–G</strong>.<br>Choose the correct heading for each paragraph from the list of headings below.<br><em>Write the correct number, <strong>i–viii</strong>, in boxes 27–33 on your answer sheet.</em></div>
+    <div class="hbox">
+      <div class="hbox-title">List of Headings</div>
+      <div class="hbox-body">
+        ${HEADINGS.map(h=>`<div class="hi"><span class="hi-num">${h.v}</span><span>${h.t}</span></div>`).join('')}
+      </div>
+    </div>
+    ${PARAS.map((p,i)=>headRow(27+i,p[0],HEADINGS)).join('')}
+  </div>
+  <div class="qs">
+    <div class="qs-instr">Questions 34–37<br>Classify the following statements as referring to<br><strong>A</strong> &nbsp;&nbsp;the first study<br><strong>B</strong> &nbsp;&nbsp;the second study<br><strong>C</strong> &nbsp;&nbsp;the third study<br><em>Write the correct letter, <strong>A, B</strong> or <strong>C</strong>, in boxes 34–37 on your answer sheet.</em></div>
+    ${classifyBlock(34,"The study focused on participants' short-term reaction to receiving flowers.")}
+    ${classifyBlock(35,'Participants were deliberately misled as to the aim of the study.')}
+    ${classifyBlock(36,"Receiving flowers had a notable effect on participants' mental capacities.")}
+    ${classifyBlock(37,'Male and female responses were more uniform than expected.')}
+  </div>
+  <div class="qs">
+    <div class="qs-instr">Questions 38–40<br>Complete the summary of paragraph <strong>E</strong> below.<br>Choose <strong>ONE WORD ONLY</strong> from paragraph E for each answer.<br><em>Write your answers in boxes 38–40 on your answer sheet.</em></div>
+    <div class="sum-body">
+      <div class="sum-title">A possible explanation for the appeal of flowers</div>
+      <div class="sum-text">It has been suggested that our intense response to flowers originates in prehistoric times. The presence of flowers might indicate a potential source of ${fi(38,70)} in a particular location, and primitive humans would search for such signs when looking for a suitable site to raise their ${fi(39,80)}. The interpretation of these signs was essential for the survival of our ancestors. However, the problem with this idea is that the plants producing the most attractive flowers do not usually have fruit which is ${fi(40,70)}.</div>
+    </div>
+  </div>`;
+}
+
+/* ============================================================
+   STATE & NAVIGATION
+============================================================ */
+let curPart=1,ans={};
+const pbarDescs={1:'Read the text and answer questions 1–13.',2:'Read the text and answer questions 14–26.',3:'Read the text and answer questions 27–40.'};
+const pRanges={1:[1,13],2:[14,26],3:[27,40]};
+
+function goPart(p){
+  if(p<1||p>3)return;
+  curPart=p;
+  document.getElementById('pbar-title').textContent='Passage '+p;
+  document.getElementById('pbar-desc').textContent='\u00a0\u00a0'+pbarDescs[p];
+  document.getElementById('ppane').innerHTML=PASSAGES[p];
+  document.getElementById('qpane').innerHTML=p===1?renderQ1():p===2?renderQ2():renderQ3();
+  renderPills();
+  document.getElementById('ppane').scrollTop=0;
+  document.getElementById('qpane').scrollTop=0;
+  applyFontSizes();
+}
+
+function setAns(n,v){ans[n]=v.trim();renderPills();}
+
+function renderPills(){
+  for(let p=2;p<=3;p++){
+    const[ps,pe]=pRanges[p];let c=0;
+    for(let i=ps;i<=pe;i++)if(ans[i]&&ans[i]!=='')c++;
+    const el=document.getElementById('pts'+p);if(el)el.textContent=`${c} of ${pe-ps+1}`;
+  }
+  const[s,e]=pRanges[curPart];
+  if(curPart===1){
+    let h='';for(let i=s;i<=e;i++){const a=ans[i]&&ans[i]!=='';h+=`<div class="qpill${a?' ans':''}" onclick="scrollToQ(${i})">${i}</div>`;}
+    document.getElementById('bnav-pills').innerHTML=h;
+    const l1=document.getElementById('bnav-lbl1');if(l1)l1.style.color='#222';
+    document.getElementById('bnav-po2').innerHTML=`<span class="bnav-plabel2" id="bnav-lbl2" style="color:#666">Passage 2</span><span class="bnav-pscore" id="pts2">${countPart(2)} of ${pRanges[2][1]-pRanges[2][0]+1}</span>`;
+    document.getElementById('bnav-po3').innerHTML=`<span class="bnav-plabel2" id="bnav-lbl3" style="color:#666">Passage 3</span><span class="bnav-pscore" id="pts3">${countPart(3)} of ${pRanges[3][1]-pRanges[3][0]+1}</span>`;
+  } else if(curPart===2){
+    document.getElementById('bnav-pills').innerHTML='';
+    const l1=document.getElementById('bnav-lbl1');if(l1)l1.style.color='#666';
+    let h='';for(let i=s;i<=e;i++){const a=ans[i]&&ans[i]!=='';h+=`<div class="qpill${a?' ans':''}" onclick="scrollToQ(${i})">${i}</div>`;}
+    document.getElementById('bnav-po2').innerHTML=`<span class="bnav-plabel2" id="bnav-lbl2" style="color:#222;font-weight:700">Passage 2</span><span style="display:flex;align-items:center;gap:3px">${h}</span>`;
+    document.getElementById('bnav-po3').innerHTML=`<span class="bnav-plabel2" id="bnav-lbl3" style="color:#666">Passage 3</span><span class="bnav-pscore" id="pts3">${countPart(3)} of ${pRanges[3][1]-pRanges[3][0]+1}</span>`;
+  } else {
+    document.getElementById('bnav-pills').innerHTML='';
+    const l1=document.getElementById('bnav-lbl1');if(l1)l1.style.color='#666';
+    document.getElementById('bnav-po2').innerHTML=`<span class="bnav-plabel2" id="bnav-lbl2" style="color:#666">Passage 2</span><span class="bnav-pscore" id="pts2">${countPart(2)} of ${pRanges[2][1]-pRanges[2][0]+1}</span>`;
+    let h='';for(let i=s;i<=e;i++){const a=ans[i]&&ans[i]!=='';h+=`<div class="qpill${a?' ans':''}" onclick="scrollToQ(${i})">${i}</div>`;}
+    document.getElementById('bnav-po3').innerHTML=`<span class="bnav-plabel2" id="bnav-lbl3" style="color:#222;font-weight:700">Passage 3</span><span style="display:flex;align-items:center;gap:3px">${h}</span>`;
+  }
+}
+
+function countPart(p){const[ps,pe]=pRanges[p];let c=0;for(let i=ps;i<=pe;i++)if(ans[i]&&ans[i]!=='')c++;return c;}
+function scrollToQ(n){const el=document.getElementById('qi'+n);if(el)el.scrollIntoView({behavior:'smooth',block:'center'});}
+
+/* ============================================================
+   HIGHLIGHT
+============================================================ */
+const hlTip=document.getElementById('hl-tip');
+let hlRange=null;
+function isInPane(node){const pp=document.getElementById('ppane');const qp=document.getElementById('qpane');return pp.contains(node)||qp.contains(node);}
+document.addEventListener('mouseup',e=>{
+  if(e.target===hlTip)return;
+  const sel=window.getSelection();
+  if(!sel||sel.isCollapsed||!sel.toString().trim()){hlTip.style.display='none';return;}
+  const range=sel.getRangeAt(0);
+  if(!isInPane(range.commonAncestorContainer)){hlTip.style.display='none';return;}
+  hlRange=range.cloneRange();
+  const r=range.getBoundingClientRect();
+  hlTip.style.left=(r.left+r.width/2-38)+'px';
+  hlTip.style.top=(r.top+window.scrollY-34)+'px';
+  hlTip.style.display='block';
+});
+document.addEventListener('mousedown',e=>{if(e.target!==hlTip)hlTip.style.display='none';});
+hlTip.addEventListener('click',()=>{
+  if(!hlRange)return;
+  const sp=document.createElement('span');sp.className='hl';
+  sp.onclick=function(){this.outerHTML=this.innerHTML;};sp.title='Click to remove';
+  try{hlRange.surroundContents(sp);}catch(ex){const f=hlRange.extractContents();sp.appendChild(f);hlRange.insertNode(sp);}
+  hlTip.style.display='none';window.getSelection().removeAllRanges();
+});
+
+/* ============================================================
+   RESIZABLE DIVIDER
+============================================================ */
+let drag=false,dStartX,dStartW;
+const divEl=document.getElementById('divider'),ppEl=document.getElementById('ppane');
+divEl.addEventListener('mousedown',e=>{drag=true;dStartX=e.clientX;dStartW=ppEl.offsetWidth;document.body.style.cursor='col-resize';document.body.style.userSelect='none';});
+document.addEventListener('mousemove',e=>{if(!drag)return;const tot=document.getElementById('main').offsetWidth-10;ppEl.style.width=Math.max(240,Math.min(tot-240,dStartW+(e.clientX-dStartX)))+'px';});
+document.addEventListener('mouseup',()=>{drag=false;document.body.style.cursor='';document.body.style.userSelect='';});
+
+/* ============================================================
+   RESULTS
+============================================================ */
+function normalizeAns(v){
+  const s=v.trim().toLowerCase();
+  if(s==='true')return 't';
+  if(s==='false')return 'f';
+  if(s==='not given')return 'ngv';
+  if(s==='yes')return 'yes';
+  if(s==='no')return 'no';
+  return s;
+}
+function isCorrect(n){return normalizeAns(ans[n]||'')===normalizeAns(AK[n].toString());}
+
+function showResults(){
+  const partNames={1:'Passage 1 – When Maps were Made for the Public (Q1–13)',2:'Passage 2 – Preserving Antarctic History (Q14–26)',3:'Passage 3 – Flower Power (Q27–40)'};
+  let total=0,html='';
+  for(let p=1;p<=3;p++){
+    const[s,e]=pRanges[p];let pc=0,rows='';
+    for(let i=s;i<=e;i++){
+      const ok=isCorrect(i);if(ok){pc++;total++;}
+      const ua=(ans[i]||'').trim()||'—';
+      rows+=`<tr class="${ok?'rr-ok':'rr-no'}"><td><strong>${i}</strong></td><td>${ua}</td><td class="mc">${displayAK(i)}</td><td class="${ok?'mc':'mw'}">${ok?'✓':'✗'}</td></tr>`;
+    }
+    const tot2=e-s+1,pct=Math.round(pc/tot2*100),bc=pct>=70?'good':(pct>=50?'ok':'bad');
+    html+=`<div class="rm-part"><div class="rm-ph">${partNames[p]}<span class="rm-badge ${bc}">${pc}/${tot2} (${pct}%)</span></div>
+      <table class="rm-tbl"><thead><tr><th>Q</th><th>Your Answer</th><th>Correct</th><th></th></tr></thead><tbody>${rows}</tbody></table>
+    </div>`;
+  }
+  const pct=Math.round(total/40*100);
+  const band=total>=39?'9.0':total>=37?'8.5':total>=35?'8.0':total>=33?'7.5':total>=30?'7.0':total>=27?'6.5':total>=23?'6.0':total>=19?'5.5':total>=15?'5.0':total>=13?'4.5':'4.0';
+  html+=`<div class="total-strip"><span class="ts-lbl">Total Score</span><div><div class="ts-num">${total} / 40 <span style="font-size:14px;color:#888">(${pct}%)</span></div><div class="ts-band">Estimated Band Score: <strong>${band}</strong></div></div></div>`;
+  document.getElementById('res-body').innerHTML=html;
+  document.getElementById('res-overlay').style.display='flex';
+}
+function closeResults(){document.getElementById('res-overlay').style.display='none';}
+
+/* ============================================================
+   FONT SIZE
+============================================================ */
+let fsPass=14,fsQ=13;
+const FS_MIN=10,FS_MAX=22;
+function changeFontSize(which,delta){
+  if(which==='pass'){fsPass=Math.max(FS_MIN,Math.min(FS_MAX,fsPass+delta));document.getElementById('fsz-pass-val').textContent=fsPass+'px';}
+  else{fsQ=Math.max(FS_MIN,Math.min(FS_MAX,fsQ+delta));document.getElementById('fsz-q-val').textContent=fsQ+'px';}
+  applyFontSizes();
+}
+function applyFontSizes(){
+  const pp=document.getElementById('ppane');if(pp)pp.querySelectorAll('p').forEach(el=>el.style.fontSize=fsPass+'px');
+  const qp=document.getElementById('qpane');if(qp)qp.style.fontSize=fsQ+'px';
+}
+function toggleMenu(){document.getElementById('menu-dropdown').classList.toggle('open');}
+document.addEventListener('click',e=>{const w=document.getElementById('menu-wrap');if(w&&!w.contains(e.target))document.getElementById('menu-dropdown').classList.remove('open');});
+
+goPart(1);
+</script>
+</body>
+</html>

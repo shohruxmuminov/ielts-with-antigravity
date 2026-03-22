@@ -1,0 +1,2315 @@
+﻿
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full Free Test 6 - IELTS Full Reading Test</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+:root {
+    --bg-color: #ffffff;
+    --text-color: #333333;
+    --passage-bg: #f8f9fa;
+    --questions-bg: #ffffff;
+    --border-color: #e0e0e0;
+    --accent-color: #29b6f6;
+    --header-bg: #ff0000;
+    --header-text: #ffffff;
+    --button-bg: #29b6f6;
+    --button-hover: #0288d1;
+    --progress-complete: #29b6f6;
+    --progress-incomplete: #bdbdbd;
+    --timer-bg: #E1F5FE;
+    --timer-text: #0288d1;
+    --footer-bg: #f5f5f5;
+}
+
+.night-mode {
+    --bg-color: #121212;
+    --text-color: #e0e0e0;
+    --passage-bg: #1e1e1e;
+    --questions-bg: #1e1e1e;
+    --border-color: #424242;
+    --accent-color: #29b6f6;
+    --header-bg: #ff0000;
+    --header-text: #ffffff;
+    --button-bg: #29b6f6;
+    --button-hover: #0288d1;
+    --progress-complete: #29b6f6;
+    --progress-incomplete: #616161;
+    --timer-bg: #01579b;
+    --timer-text: #B3E5FC;
+    --footer-bg: #121212;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-size: 15px;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--header-bg);
+    color: var(--header-text);
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 100;
+    height: 60px;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.telegram-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 6px 12px;
+    border-radius: 20px;
+    transition: background-color 0.3s;
+}
+
+.telegram-link:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.timer-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--timer-bg);
+    padding: 6px 12px;
+    border-radius: 20px;
+}
+
+.timer-display {
+    font-weight: bold;
+    font-size: 16px;
+    color: var(--timer-text);
+    min-width: 60px;
+    text-align: center;
+}
+
+.timer-button {
+    background-color: transparent;
+    border: none;
+    color: var(--timer-text);
+    cursor: pointer;
+    font-size: 14px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.timer-button:hover {
+    background-color: rgba(41, 182, 246, 0.2);
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.font-size-control {
+    display: flex;
+    gap: 5px;
+}
+
+.font-size-button {
+    background: none;
+    border: 2px solid #ffffff;
+    color: #ffffff;
+    padding: 4px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.font-size-button:hover {
+    background-color: #ffffff;
+    color: #ff0000;
+}
+
+.night-mode-toggle {
+    background: none;
+    border: 2px solid #ffffff;
+    color: #ffffff;
+    padding: 8px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.night-mode-toggle:hover {
+    background-color: #ffffff;
+    color: #ff0000;
+}
+
+/* SPLIT SCREEN LAYOUT */
+.container {
+    position: fixed;
+    top: 60px;
+    bottom: 100px;
+    left: 0;
+    right: 0;
+    display: flex;
+    width: 100%;
+}
+
+.passage-section {
+    width: 50%;
+    background-color: var(--passage-bg);
+    border-right: 1px solid var(--border-color);
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 30px;
+    height: 100%;
+}
+
+.questions-section {
+    width: 50%;
+    background-color: var(--questions-bg);
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 30px;
+    height: 100%;
+}
+
+.passage-section h1, .passage-section h2, .questions-section h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--text-color);
+}
+
+.passage-subheading {
+    text-align: center;
+    font-style: italic;
+    font-size: 16px;
+    opacity: 0.9;
+    margin-bottom: 20px;
+}
+
+.passage-instructions {
+    margin-bottom: 25px;
+    padding: 15px;
+    background-color: rgba(41, 182, 246, 0.1);
+    border-radius: 8px;
+}
+
+.passage-number {
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--accent-color);
+    margin-bottom: 8px;
+}
+
+.passage-time-info {
+    font-size: 13px;
+    font-style: italic;
+    opacity: 0.8;
+}
+
+.passage-text {
+    line-height: 1.8;
+    text-align: justify;
+}
+
+.passage-text p {
+    margin-bottom: 15px;
+}
+
+/* Ensure paragraphs have proper spacing everywhere */
+p {
+    margin-bottom: 15px;
+}
+
+p:last-child {
+    margin-bottom: 0;
+}
+
+/* Line breaks should create visible spacing */
+br {
+    display: block;
+    content: "";
+    margin: 8px 0;
+}
+
+/* Passage/Questions Wrappers */
+.passage-content-wrapper,
+.questions-content-wrapper {
+    display: block;
+}
+
+/* Questions Styling */
+.question-group {
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: var(--passage-bg);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+/* Question Header with Flag Button */
+.question-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.question-header > div:first-child {
+    flex: 1;
+}
+
+.flag-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    color: #9e9e9e;
+    font-size: 18px;
+    transition: all 0.3s;
+    flex-shrink: 0;
+}
+
+.flag-button:hover {
+    color: #ff5252;
+    transform: scale(1.1);
+}
+
+.flag-button.flagged {
+    color: #ff0000;
+}
+
+.flag-button.flagged i {
+    animation: flagPulse 0.3s ease-out;
+}
+
+@keyframes flagPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+}
+
+.instructions {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: rgba(41, 182, 246, 0.1);
+    border-left: 4px solid var(--accent-color);
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.question {
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.question:hover {
+    background-color: var(--passage-bg);
+}
+
+.options {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.options label {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.options label:hover {
+    background-color: var(--passage-bg);
+}
+
+.options input[type="radio"],
+.options input[type="checkbox"] {
+    margin-top: 4px;
+    cursor: pointer;
+}
+
+.option-text {
+    flex: 1;
+}
+
+select {
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-size: 14px;
+    margin-top: 10px;
+    cursor: pointer;
+    width: 100%;
+}
+
+input[type="text"].fill-in-the-blank {
+    padding: 8px 12px;
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-size: 14px;
+    text-align: center;
+    transition: all 0.3s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+input[type="text"].fill-in-the-blank:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 2px 6px rgba(41, 182, 246, 0.3);
+}
+
+input[type="text"].fill-in-the-blank:hover {
+    border-color: var(--accent-color);
+}
+
+/* Word Bank */
+.word-bank-container {
+    margin: 20px 0;
+}
+
+.word-bank-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+    padding: 20px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 10px;
+    border: 2px solid #dee2e6;
+}
+
+@media (max-width: 768px) {
+    .word-bank-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .word-bank-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.word-bank-option {
+    padding: 12px 15px;
+    background-color: white;
+    border-radius: 6px;
+    border: 2px solid #dee2e6;
+    font-size: 14px;
+    line-height: 1.5;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.word-bank-option:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-color: #007bff;
+}
+
+.word-bank-option strong {
+    color: #007bff;
+    font-weight: 700;
+    min-width: 20px;
+}
+
+/* Matching Tables */
+.matching-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    table-layout: fixed;
+}
+
+.matching-table th,
+.matching-table td {
+    border: 1px solid var(--border-color);
+    padding: 12px;
+    text-align: center;
+    /* Safari fix: ensure cells are visible */
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.matching-table th.header-cell {
+    min-width: 40px;
+    width: 40px;
+    background-color: var(--passage-bg);
+    font-weight: bold;
+}
+
+.matching-table th.header-cell:first-child {
+    width: auto;
+    min-width: 200px;
+}
+
+.matching-table .question-cell {
+    text-align: left;
+    font-weight: normal;
+    width: auto;
+}
+
+.matching-table td[data-answer] {
+    cursor: pointer;
+    transition: background-color 0.2s;
+    /* Safari fix: ensure empty cells render properly */
+    min-width: 40px;
+    min-height: 40px;
+    height: 40px;
+    width: 40px;
+    position: relative;
+    /* Add visible content placeholder for empty cells */
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* Safari fix: ensure empty cells are clickable */
+.matching-table td[data-answer]::after {
+    content: '';
+    display: block;
+    min-height: 20px;
+}
+
+.matching-table td[data-answer]:hover {
+    background-color: var(--passage-bg);
+}
+
+.matching-table td.selected {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+/* Safari fix: ensure selected cells show checkmark */
+.matching-table td.selected::after {
+    content: '✓';
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    min-height: auto;
+}
+
+/* Matching Headings */
+.matching-headings-container {
+    margin: 20px 0;
+}
+
+.headings-list {
+    background-color: var(--passage-bg);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.heading-option {
+    padding: 8px;
+    margin: 5px 0;
+}
+
+.matching-heading-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+    margin: 10px 0;
+    background-color: var(--passage-bg);
+    border-radius: 4px;
+}
+
+.matching-heading-question select {
+    width: 200px;
+    margin: 0;
+}
+
+/* Matching Options List */
+.matching-options-list {
+    background-color: var(--passage-bg);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.matching-options-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.matching-options-list li {
+    padding: 8px 0;
+}
+
+/* Passage Navigation - Bottom Right */
+.passage-navigation {
+    position: fixed;
+    bottom: 120px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--header-bg);
+    padding: 10px 15px;
+    border-radius: 25px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    z-index: 50;
+}
+
+.nav-button {
+    background-color: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: #ffffff;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+.nav-button:hover:not(:disabled) {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.nav-button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.passage-indicator {
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 14px;
+    min-width: 40px;
+    text-align: center;
+}
+
+/* Footer */
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--footer-bg);
+    padding: 8px 15px;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+    z-index: 90;
+    height: auto;
+    min-height: 80px;
+    max-height: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.progress-container {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 4px;
+    justify-content: center;
+    max-height: 50px;
+    overflow-x: auto;
+}
+
+.progress-indicator {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    background-color: var(--progress-incomplete);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    flex-shrink: 0;
+}
+
+.progress-indicator.completed {
+    background-color: var(--progress-complete);
+}
+
+.progress-indicator:hover {
+    transform: scale(1.1);
+}
+
+/* Flag Indicators Below Progress Bar */
+.flag-indicators-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+    margin-top: 3px;
+    height: 4px;
+}
+
+.flag-indicator {
+    width: 24px;
+    height: 3px;
+    background-color: transparent;
+    border-radius: 2px;
+    transition: all 0.3s;
+}
+
+.flag-indicator.active {
+    background-color: #ff0000;
+    box-shadow: 0 0 8px rgba(255, 0, 0, 0.6);
+    animation: flagGlow 1.5s ease-in-out infinite;
+}
+
+@keyframes flagGlow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+.submit-button {
+    width: 100%;
+    padding: 10px 16px;
+    background-color: var(--button-bg);
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    flex-shrink: 0;
+    min-height: 40px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+.submit-button:hover {
+    background-color: var(--button-hover);
+}
+
+.submit-button:active {
+    transform: scale(0.98);
+}
+
+/* Dual Choice Info */
+.dual-choice-info {
+    font-style: italic;
+    color: var(--accent-color);
+    margin: 10px 0;
+    font-size: 13px;
+}
+
+/* Highlight styles */
+.highlighted-text {
+    padding: 2px 0;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 1024px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .passage-section,
+    .questions-section {
+        width: 100%;
+        height: 50%;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .questions-section {
+        border-bottom: none;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+        gap: 10px;
+    }
+
+    .header-left,
+    .header-right {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .container {
+        top: 80px;
+    }
+
+    .passage-section,
+    .questions-section {
+        padding: 15px;
+    }
+
+    .passage-navigation {
+        bottom: 70px;
+        right: 10px;
+    }
+
+    .progress-indicator {
+        width: 20px;
+        height: 20px;
+        font-size: 9px;
+    }
+
+    .flag-indicator {
+        width: 20px;
+    }
+
+    footer {
+        padding: 6px 10px;
+        min-height: 70px;
+    }
+
+    .submit-button {
+        padding: 12px 16px;
+        font-size: 14px;
+        min-height: 44px;
+    }
+
+    .container {
+        bottom: 90px;
+    }
+}
+
+@media (max-width: 480px) {
+    .progress-container {
+        gap: 2px;
+    }
+
+    .progress-indicator {
+        width: 18px;
+        height: 18px;
+        font-size: 8px;
+        border-radius: 3px;
+    }
+
+    .flag-indicator {
+        width: 18px;
+    }
+
+    footer {
+        padding: 5px 8px;
+        min-height: 65px;
+    }
+
+    .submit-button {
+        padding: 10px 12px;
+        font-size: 13px;
+        min-height: 40px;
+    }
+
+    .container {
+        bottom: 85px;
+    }
+}
+
+</style>
+
+    <!-- Google Analytics (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EBY3TYEJF4"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-EBY3TYEJF4');
+    </script>
+</head>
+<body data-test-id="25">
+    <header>
+        <div class="header-left">
+            <a href="https://t.me/ieltswithsanokulov" target="_blank" class="telegram-link">
+                <i class="fab fa-telegram"></i>
+                <span>Join My Channel</span>
+            </a>
+            <div class="timer-container">
+                <span class="timer-display" id="timer">60:00</span>
+                <button class="timer-button" id="startPauseBtn" onclick="toggleTimer()">
+                    <i class="fas fa-play"></i>
+                </button>
+                <button class="timer-button" onclick="resetTimer()">
+                    <i class="fas fa-redo"></i>
+                </button>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="font-size-control">
+                <button class="font-size-button" onclick="changeFontSize(-1)">A-</button>
+                <button class="font-size-button" onclick="changeFontSize(1)">A+</button>
+            </div>
+            <button class="night-mode-toggle" onclick="toggleNightMode()">
+                <i class="fas fa-moon"></i>
+                <span id="modeText">Night Mode</span>
+            </button>
+        </div>
+    </header>
+
+    <form method="post" id="testForm" autocomplete="off">
+        <input type="hidden" name="csrfmiddlewaretoken" value="wWtZYavF58BYRXV4ObL1QlxismHfKFUGcmSPlO7e4aFs9vqmQKFiObzpNAhu7BPS">
+        
+
+        <div class="container">
+            <!-- LEFT: PASSAGE SECTION -->
+            <div class="passage-section" id="passageSection">
+                
+                <div class="passage-content-wrapper" id="passage1"
+                     >
+
+                    <div class="passage-instructions">
+                        <div class="passage-number">READING PASSAGE 1</div>
+                        
+                        
+                        <div class="passage-time-info">
+                            You should spend about 20 minutes on Questions 1–13, which are based on Reading Passage 1 below.
+                        </div>
+                        
+                        
+                    </div>
+
+                    
+                    <h1>The History of the Chicken</h1>
+                    
+                    
+                    <h2 class="passage-subheading">The story begins 10,000 years ago in a jungle in Asia and ends today in kitchens  all over the world.</h2>
+                    
+
+                    <div class="passage-text" id="passageText1">
+                        <p>Chicken is the universal food of our era, crossing cultural boundaries with ease. With its mild and uniform flavor, it adapts easily to any cuisine. However, until the introduction of large-scale industrial production in the 20th century, the economic and nutritional contribution of chickens was small. Chickens were considered as domestic birds that were useful to humanity, but unlike other animals such as the horse or the ox, they did little to change the course of history. Nonetheless, the chicken has inspired contributions to culture, art, cuisine, science and religion over the millennia. Chickens were, and still are, a sacred animal in some cultures. The hen is a worldwide symbol of nurturing and fertility. The rooster is a universal sign of masculinity.>> Form đăng kí giải đề thi thật IELTS 4 kĩ năng kèm bài giải bộ đề 100 đề PART 2 IELTS SPEAKING quý đang thi (update hàng tuần) từ IELTS TUTOR</p><p>The domesticated chicken has a complicated family tree, stretching back 10,000 years. Recent DNA testing has shown that the chicken's wild ancestor is the red junglefowl. The bird's resemblance to modern chickens is seen in the red feathers on top of its head, the red flesh around its mouth, and its distinctive call in the morning. The females of this breed protect their eggs in the same way modern-day chickens do, and they make the same clucking sounds. In its habitat, which stretches from northeastern India to the Philippines, the red junglefowl looks on the forest floor for insects, seeds and fruit, and flies up to nest in the trees at night. That's about as much flying as it can manage, a trait that made it relatively easy for humans to capture and domesticate it. But the red junglefowl is not the sole ancestor of the modern chicken. Scientists have identified three closely related species that might have bred with the red junglefowl. Precisely how much genetic material these other birds contributed to the DNA of domesticated chickens is unknown. However, recent research suggests that modern chickens inherited at least one trait, their yellow skin, from the grey junglefowl of southern India.</p><p>Once chickens were domesticated, cultural contacts, trade, migration and territorial conquest resulted in their introduction to different regions around the world over several thousand years. Chickens arrived in Egypt in around 1750 BC, as fighting birds and additions to zoos. Drawings of the birds decorated royal tombs, which contained the treasures that the kings and queens would take to the afterlife. Yet it would be another 100 years before the bird became popular among ordinary Egyptians.</p><p>It was in that era that Egyptians mastered the technique of artificial incubation, which freed hens to lay more eggs. This was not easy. Most chicken eggs will hatch in three weeks, but only if the temperature remains at around 38 degrees Celsius. The eggs must also be turned three to five times a day, and the humidity must remain stable at about 55 percent, otherwise physical deformities can result, or the eggs won't hatch. The Egyptians constructed vast complexes of large rooms, which were essentially ovens, and these were connected to a series of corridors and vents that allowed attendants to regulate the heat from fires. The egg attendants kept their methods a secret from outsiders for centuries.</p><p>Around the Mediterranean, archaeologists have uncovered chicken bones from about 800 BC. Chickens were a delicacy among the Romans, whose culinary innovations included the omelette, and the practice of stuffing birds for cooking. European farmers began developing methods to fatten the birds, such as feeding them bread which had been soaked in wine. But the chicken's status in Europe appears to have diminished with the collapse of Rome. In the period after the fall of the Roman Empire, chicken farms vanished and the birds returned to the size they had been 1,000 years earlier.</p><p>Well into the 20th century chickens, although valued as a source of eggs, played a relatively minor role in diet and the economy. Long after cattle had entered the industrial age of centralized and mechanized large-scale production, chicken production was still mostly a small-scale, local enterprise. The breakthrough that made today's huge bird farms possible was the inclusion of antibiotics, along with a mixture of different vitamins, in the food chickens ate. This allowed chickens to be raised indoors and be protected from cold temperatures and heavy rain as well as predators. This factory farming represents the chicken's final step in its transformation into a big protein-producing business.</p><p>Factory farms turning out an increasing amount of chicken have resulted in an increasing demand. Modern chickens are cogs in a system designed to convert grain into protein with staggering efficiency. It takes less than 1 kilogram of feed to produce 400 grams of chicken. By comparison, around 3 kilograms of feed are required to produce 400 grams of beef. A day-old chick can be turned into a 2 kilogram bird in six weeks—half the time it took two generations ago.</p><p>Chickens also make wonderful pets, as breeders will tell you. They are as colorful as tropical fish but more affectionate, as cute as guinea pigs and better at catching mice than cats. In the USA, exotic and heritage breeds of chicken are being sold for considerable sums of money as the fashion for keeping chickens in the backyard becomes more popular.</p><p>All in all, the globe-spanning chicken is an epic story of evolutionary, agricultural and culinary success, outnumbering human beings on the planet by nearly three to one.</p>
+                    </div>
+                </div>
+                
+                <div class="passage-content-wrapper" id="passage2"
+                     style="display: none;">
+
+                    <div class="passage-instructions">
+                        <div class="passage-number">READING PASSAGE 2</div>
+                        
+                        
+                        <div class="passage-time-info">
+                            You should spend about 20 minutes on Questions 14–26, which are based on Reading Passage 2 below.
+                        </div>
+                        
+                        
+                    </div>
+
+                    
+                    <h1>A Study of Introvert and Extrovert Characters</h1>
+                    
+                    
+
+                    <div class="passage-text" id="passageText2">
+                        <p>A<br>We are often labelled as introverts or extroverts, and humans do seem to have biological propensities to behave in certain ways; some of us are naturally more talkative and sociable while others prefer more time alone. But, according to Canadian-born research psychologist Professor Brian Little, our traits are by no means fixed. In his book Me, Myself and Us: The Science of Personality and the Art of Well-Being, Little suggests that we are often able to override our biological make-up through the adoption of what he calls “free-traits”, which allow us to behave in a manner which contrasts with our natural selves. According to Little, we adopt these free-traits only when we need them, in order to meet the demands of different situations and reach targets and goals that are important to us — our “personal projects”. These projects might be big (such as career ambitions) or small (like cleaning the car), and pursuing them shapes our day-to-day behaviour and our relationships with friends, family and workmates.</p><p>B<br>Little recommends that we might usefully think of ourselves as amateur scientists. We are continually exploring and testing the world around us to discover what works and what does not. We do things, say things, and then observe the reactions and unconsciously store the results. We apply the knowledge gained from our “experiments” to the advancement of our personal projects. Sometimes our personal project pursuit requires us to engage in free-traits; at other times, we can just be ourselves. Little proposes that the successful pursuit of personal projects which are meaningful, manageable, supported by others, and generate positive feelings can greatly impact our happiness and the quality of our lives.</p><p>C<br>Professor Little and one of his graduate students, Sanna Balsari-Palsule, have looked into the experiences of employees in a range of organisations. The reason for basing the research on this environment, as Balsari-Palsule explains, is that “in an ideal world, one’s job would fit one’s traits perfectly, but that’s very rarely the case.” As so much can hinge on how we behave with others while at work, she wanted to discover what happens when people push the limits of their ability to act out of character. Do employees experience detriments in their well-being or work performance, and does this increase their chances of burnout?</p><p>D<br>Their findings suggest that extroverts initially experience advantages over introverts at work, in terms of getting noticed and promoted more rapidly. However, when introvert employees higher up in the organisation act out of character and take on extrovert traits, they have equal performance ratings to those extroverts and do not report any negative effects from this use of free-traits. Balsari-Palsule offers an explanation: introvert employees make frequent use of “restorative resources”. These are spaces designed to allow employees to read quietly or simply relax in order to recover their equilibrium after a strenuous session of acting out of character that would otherwise leave them feeling drained. However, if the same employees were expected to act out of character for more prolonged periods, without the chance to recover, the benefits could quickly turn into costs.</p><p>E<br>In the same study, however, extroverts report strikingly different, and much less rewarding, experiences of acting out of character. It appears that more outwardly confident personality types find it extremely hard — and stressful — to rein back their personalities and act as if they were introverted. This difference was most common among younger employees. It may be that introverts are generally so used to acting extrovertly in situations outside of the workplace that it becomes a relatively easy force of habit, particularly in Western cultures where extroversion is often highly valued. On the other hand, extrovert employees at the beginning of their careers are much less used to being isolated in an office for long periods of time, so may feel like caged animals, needing to feed off the energy of others in order to thrive, says Balsari-Palsule.</p><p>F<br>In the second stage of research, Balsari-Palsule is looking into the idiosyncrasies of people’s work projects and how the work environment plays a vital role in supporting or, in some cases, constraining them. For example, highly competitive environments, which place demands on employees to conform to certain types of behaviour, may leave little time for employees to pursue projects which are important to them on a personal level. This could eventually be detrimental to their well-being. She expects that a closer look at the influence of different factors in the work environment, in conjunction with how people behave, will shed more light on what acting out of character may lead to.</p><p>G<br>The implications of Little and Balsari-Palsule’s research are numerous and need to be taken into account by businesses. Balsari-Palsule suggests that it would serve companies well not to dismiss the costs of free-trait acting. She points out that compromised psychological and physical well-being can quickly result in more frequent occurrences of absenteeism. She also believes that management should rely less on handing out personality surveys that pigeonhole employees into introvert and extrovert categories. Instead, organisations should adopt policies and build work environments that are supportive of free-trait expression, and also provide spaces for people to be themselves. Furthermore, making these changes is likely to lead to increases in productivity in the long run.</p>
+                    </div>
+                </div>
+                
+                <div class="passage-content-wrapper" id="passage3"
+                     style="display: none;">
+
+                    <div class="passage-instructions">
+                        <div class="passage-number">READING PASSAGE 3</div>
+                        
+                        
+                        <div class="passage-time-info">
+                            You should spend about 20 minutes on Questions 27–40, which are based on Reading Passage 3 below.
+                        </div>
+                        
+                        
+                    </div>
+
+                    
+                    <h1>The Peopling of Patagonia</h1>
+                    
+                    
+
+                    <div class="passage-text" id="passageText3">
+                        <p>A<br>The human settlement of the southern extremity of the Americas has always fascinated pre-historians. Viewed from a global perspective, this was the last major continental land mass to be reached by human beings. The earliest occupation of Patagonia carries obvious implications for understanding when the North and South American continents were peopled, because it gives a baseline that all calculations regarding the rate of dispersion of humans throughout both continents must take into account.</p><p>B<br>For many years the human settlement of North and South America has been conceived of as beginning in the far north and travelling progressively southwards to Patagonia. However, fundamental disagreements developed concerning the length of time involved. Some scholars accepted a human presence in the Americas as early as 20,000 years ago, while others proposed that it could date no earlier than 8,000 years ago, and the debate is still with us today.</p><p>C<br>The idea of a relatively “late” settlement of the Americas (around 8,000 years ago) implies that a rapid process of migration took place. Herein lies a second debate, which revolves around the question of how migration is to be understood. The “late” model demands a hypothetical migration conceived of as a single continually advancing wave of settlement. This has always been difficult to take seriously, and many scholars now support the idea of an “early” model that sees the migration as a less ordered process. This is surely the most realistic scenario, as migrants slowly adapted to the diverse natural habitats they would have encountered while travelling through the continent.</p><p>D<br>Those who argue for an earlier settlement, however, must contend with the lack of unequivocal evidence for archaeological sites older than around 14,000 years. Nevertheless, evidence for human occupation of the centre of South America is now securely dated to around 12,500 years ago at the Monte Verde site, which casts doubt on the “late” model. The lack of archaeological evidence further south for this time period may be explained by the obstacle to humans on foot posed by the huge glacial streams that were present at that time.</p><p>E<br>We can speculate, then, that the retreat of the Patagonian glaciers around 14,000 years ago allowed the initial human intrusion into a pristine environment, which was similar to that of early post-glacial Europe. Human settlement of the vast horizontal expanse of treeless high country must have been tenuous at best, and the evidence for this occupation remains relatively scant, most of it coming from rock shelters in Argentina and Chile. There is, however, reliable evidence from these sites to confirm the presence of humans by around 11,000 years ago in different habitats, and some hints of an even older occupation. However, some other sites where evidence for even earlier human occupation was initially posited have recently come under fresh scrutiny. This is because anthropologists have come to recognise that bones or other evidence may be deposited in caves by natural agency — in other words, by forces such as floods or predators — and not necessarily by humans.</p><p>F<br>We shall turn now to a more detailed discussion of the archaeological evidence found in various parts of Patagonia. At the site located beside Chinchihuapi Creek, excavations have produced convincing evidence of human occupation, including hut foundations and wooden artefacts. These were buried in layers of peat, which has the property of preserving wood remarkably well, and as a result radiocarbon dating tests have shown these artefacts to date from around 12,500 years ago. One of the most famous Patagonian sites is a cave known as Los Toldos. However, the evidence from this site has recently been called into question, because dispersed flecks of carbon used in the testing process were taken unsystematically from many different places in the site. As a result, the association of this material with the artefacts is not at all clear. About 150 kilometres south is the site called El Ceibo, where a similar collection of artefacts to that found at Los Toldos has been discovered from the lowest levels of the dig, but as yet no radiocarbon dates are available, and further analysis of the existing evidence is required before the site’s value can be confirmed.</p><p>G<br>The Arroyo Feo site is located very close to the high plateau. The artefacts from the earliest occupations were found at the same depth and have the same origins as those from Los Toldos, and have been securely dated to around 9,000 years ago. Another site that is mentioned in the debate is Las Buitreras, where a number of stone flakes associated with bone remains of various animals have been discovered. However, anthropologists now believe that the presumed cut marks on the bones are somewhat dubious, and despite detailed testing there is no way of securely relating any of these remains to human occupation. Finally, some 50 kilometres to the south is the site at Cueva Fell, which was the first Patagonian site to be systematically studied using modern archaeological methods. However, it is now recognised that the utility of this site must be restricted to its direct vicinity, given changes to the nearby area caused by flooding, and findings cannot be freely extrapolated further afield.</p><p>H<br>In conclusion, based on the evidence from a number of reliable sites, it seems probable that human populations reached Patagonia around 11,000 years ago.</p>
+                    </div>
+                </div>
+                
+            </div>
+
+            <!-- RIGHT: QUESTIONS SECTION -->
+            <div class="questions-section" id="questionsSection">
+                
+                <div class="questions-content-wrapper" id="questions1"
+                     >
+
+                    <h2>Questions</h2>
+
+                    
+
+                    
+                    <div class="question-group">
+                        <div class="instructions">
+                            <strong>Questions 1-7</strong><br>
+                            <p>Do the following statements agree with the information given in Reading <br>Passage 1?</p><p>TRUE if the statement agrees with the information <br>FALSE if the statement contradicts the information <br>NOT GIVEN if there is no information on this</p>
+                            
+                        </div>
+
+                        
+                            
+                                
+                                    
+                                    <div class="question" data-question="1">
+                                        <div><strong>1.</strong> Chicken is globally popular because it can be used for different styles of cooking.</div>
+                                        <div class="options">
+                                            <label><input type="radio" name="q1" value="TRUE" onchange="updateProgress()"> TRUE</label>
+                                            <label><input type="radio" name="q1" value="FALSE" onchange="updateProgress()"> FALSE</label>
+                                            <label><input type="radio" name="q1" value="NOT GIVEN" onchange="updateProgress()"> NOT GIVEN</label>
+                                        </div>
+                                    </div>
+                                    
+                                
+                                    
+                                    <div class="question" data-question="2">
+                                        <div><strong>2.</strong> Chickens have poor capacity for flight compared to Junglefowl.</div>
+                                        <div class="options">
+                                            <label><input type="radio" name="q2" value="TRUE" onchange="updateProgress()"> TRUE</label>
+                                            <label><input type="radio" name="q2" value="FALSE" onchange="updateProgress()"> FALSE</label>
+                                            <label><input type="radio" name="q2" value="NOT GIVEN" onchange="updateProgress()"> NOT GIVEN</label>
+                                        </div>
+                                    </div>
+                                    
+                                
+                                    
+                                    <div class="question" data-question="3">
+                                        <div><strong>3.</strong> Scientists believe that the domestic chicken has more than one ancestor.</div>
+                                        <div class="options">
+                                            <label><input type="radio" name="q3" value="TRUE" onchange="updateProgress()"> TRUE</label>
+                                            <label><input type="radio" name="q3" value="FALSE" onchange="updateProgress()"> FALSE</label>
+                                            <label><input type="radio" name="q3" value="NOT GIVEN" onchange="updateProgress()"> NOT GIVEN</label>
+                                        </div>
+                                    </div>
+                                    
+                                
+                                    
+                                    <div class="question" data-question="4">
+                                        <div><strong>4.</strong> A modem chicken has the same skin colour as the grey junglefowl.</div>
+                                        <div class="options">
+                                            <label><input type="radio" name="q4" value="TRUE" onchange="updateProgress()"> TRUE</label>
+                                            <label><input type="radio" name="q4" value="FALSE" onchange="updateProgress()"> FALSE</label>
+                                            <label><input type="radio" name="q4" value="NOT GIVEN" onchange="updateProgress()"> NOT GIVEN</label>
+                                        </div>
+                                    </div>
+                                    
+                                
+                                    
+                                    <div class="question" data-question="5">
+                                        <div><strong>5.</strong> After the Roman Empire ended, chicken consumption in Europe declined.</div>
+                                        <div class="options">
+                                            <label><input type="radio" name="q5" value="TRUE" onchange="updateProgress()"> TRUE</label>
+                                            <label><input type="radio" name="q5" value="FALSE" onchange="updateProgress()"> FALSE</label>
+                                            <label><input type="radio" name="q5" value="NOT GIVEN" onchange="updateProgress()"> NOT GIVEN</label>
+                                        </div>
+                                    </div>
+                                    
+                                
+                                    
+                                    <div class="question" data-question="6">
+                                        <div><strong>6.</strong> Some people criticise the methods involved in factory farming chickens.</div>
+                                        <div class="options">
+                                            <label><input type="radio" name="q6" value="TRUE" onchange="updateProgress()"> TRUE</label>
+                                            <label><input type="radio" name="q6" value="FALSE" onchange="updateProgress()"> FALSE</label>
+                                            <label><input type="radio" name="q6" value="NOT GIVEN" onchange="updateProgress()"> NOT GIVEN</label>
+                                        </div>
+                                    </div>
+                                    
+                                
+                                    
+                                    <div class="question" data-question="7">
+                                        <div><strong>7.</strong> In the USA, fewer people are keeping expensive breeds of chicken at home</div>
+                                        <div class="options">
+                                            <label><input type="radio" name="q7" value="TRUE" onchange="updateProgress()"> TRUE</label>
+                                            <label><input type="radio" name="q7" value="FALSE" onchange="updateProgress()"> FALSE</label>
+                                            <label><input type="radio" name="q7" value="NOT GIVEN" onchange="updateProgress()"> NOT GIVEN</label>
+                                        </div>
+                                    </div>
+                                    
+                                
+                            
+
+                        
+                    </div>
+                    
+                    <div class="question-group">
+                        <div class="instructions">
+                            <strong>Questions 8-13</strong><br>
+                            Complete the notes below. <br>Write ONE WORD ONLY from the passage for each answer.
+                            
+                        </div>
+
+                        
+                            
+                                <div class="question-group-combined" data-question-range="8-13">
+                                    <p><strong>The domestication and farming of chickens</strong></p><p><strong>Egypt</strong><br>• In 1750 BC the first chickens were seen in Egyptian 8. <input type="text" class="fill-in-the-blank" name="q8" placeholder="..." style="width: 100px;" oninput="updateProgress()" data-question="8" autocomplete="one-time-code"> and used in<br>fights.<br>• Pictures of chickens were used on the 9. <input type="text" class="fill-in-the-blank" name="q9" placeholder="..." style="width: 100px;" oninput="updateProgress()" data-question="9" autocomplete="one-time-code"> of kings and queens<br>• Egyptians developed a method of egg 10. <input type="text" class="fill-in-the-blank" name="q10" placeholder="..." style="width: 100px;" oninput="updateProgress()" data-question="10" autocomplete="one-time-code"> that didn't involve hens.<br>• For eggs to hatch, heat and 11. <input type="text" class="fill-in-the-blank" name="q11" placeholder="..." style="width: 100px;" oninput="updateProgress()" data-question="11" autocomplete="one-time-code"> levels had to stay the same. <br>• The eggs were hatched in rooms that functioned as 12.<input type="text" class="fill-in-the-blank" name="q12" placeholder="..." style="width: 130px;" oninput="updateProgress()" data-question="12" autocomplete="one-time-code"></p><p><strong>Romans</strong><br>• Farmers gave chickens a mixture of bread and wine to make them bigger.<br>20th-century farming <br>• Farmers started adding antibiotics and vitamins to chicken feed.<br>• Chickens were kept inside, safe from bad weather and 13<input type="text" class="fill-in-the-blank" name="q13" placeholder="..." style="width: 150px;" oninput="updateProgress()" data-question="13" autocomplete="one-time-code"></p>
+                                </div>
+                            
+
+                        
+                    </div>
+                    
+                </div>
+                
+                <div class="questions-content-wrapper" id="questions2"
+                     style="display: none;">
+
+                    <h2>Questions</h2>
+
+                    
+
+                    
+                    <div class="question-group">
+                        <div class="instructions">
+                            <strong>Questions 14-20</strong><br>
+                            Reading Passage 2 has seven paragraphs. <br>Choose the correct heading for each paragraph from the list of headings below.
+                            
+                        </div>
+
+                        
+                            
+                                <div class="matching-headings-container">
+                                    <div class="headings-list">
+                                        
+                                        <div class="heading-option">
+                                            <strong>i</strong> How company culture can have a negative impact
+                                        </div>
+                                        
+                                        <div class="heading-option">
+                                            <strong>ii</strong> Recommendations for employers
+                                        </div>
+                                        
+                                        <div class="heading-option">
+                                            <strong>iii</strong> The pressure of restraining an outgoing nature
+                                        </div>
+                                        
+                                        <div class="heading-option">
+                                            <strong>iv</strong> Why researchers decided to focus on the workplace
+                                        </div>
+                                        
+                                        <div class="heading-option">
+                                            <strong>v</strong> How does personality influence your choice of career?
+                                        </div>
+                                        
+                                        <div class="heading-option">
+                                            <strong>vi</strong> Examples of various contexts in which we might need to act out of character
+                                        </div>
+                                        
+                                        <div class="heading-option">
+                                            <strong>vii</strong> How workplace facilities aid the success of one personality type
+                                        </div>
+                                        
+                                        <div class="heading-option">
+                                            <strong>viii</strong> Learning by trial and error
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="sections-list">
+                                        
+                                        <div class="matching-heading-question" data-question="14">
+                                            <div class="section-label">
+                                                <strong>14</strong> Paragraph A: _____________
+                                            </div>
+                                            <select name="q14" onchange="updateProgress()">
+                                                <option value="">choose option</option>
+                                                
+                                                <option value="i">i</option>
+                                                
+                                                <option value="ii">ii</option>
+                                                
+                                                <option value="iii">iii</option>
+                                                
+                                                <option value="iv">iv</option>
+                                                
+                                                <option value="v">v</option>
+                                                
+                                                <option value="vi">vi</option>
+                                                
+                                                <option value="vii">vii</option>
+                                                
+                                                <option value="viii">viii</option>
+                                                
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="matching-heading-question" data-question="15">
+                                            <div class="section-label">
+                                                <strong>15</strong> Paragraph B: _____________
+                                            </div>
+                                            <select name="q15" onchange="updateProgress()">
+                                                <option value="">choose option</option>
+                                                
+                                                <option value="i">i</option>
+                                                
+                                                <option value="ii">ii</option>
+                                                
+                                                <option value="iii">iii</option>
+                                                
+                                                <option value="iv">iv</option>
+                                                
+                                                <option value="v">v</option>
+                                                
+                                                <option value="vi">vi</option>
+                                                
+                                                <option value="vii">vii</option>
+                                                
+                                                <option value="viii">viii</option>
+                                                
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="matching-heading-question" data-question="16">
+                                            <div class="section-label">
+                                                <strong>16</strong> Paragraph C:  _____________
+                                            </div>
+                                            <select name="q16" onchange="updateProgress()">
+                                                <option value="">choose option</option>
+                                                
+                                                <option value="i">i</option>
+                                                
+                                                <option value="ii">ii</option>
+                                                
+                                                <option value="iii">iii</option>
+                                                
+                                                <option value="iv">iv</option>
+                                                
+                                                <option value="v">v</option>
+                                                
+                                                <option value="vi">vi</option>
+                                                
+                                                <option value="vii">vii</option>
+                                                
+                                                <option value="viii">viii</option>
+                                                
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="matching-heading-question" data-question="17">
+                                            <div class="section-label">
+                                                <strong>17</strong> Paragraph D: _____________
+                                            </div>
+                                            <select name="q17" onchange="updateProgress()">
+                                                <option value="">choose option</option>
+                                                
+                                                <option value="i">i</option>
+                                                
+                                                <option value="ii">ii</option>
+                                                
+                                                <option value="iii">iii</option>
+                                                
+                                                <option value="iv">iv</option>
+                                                
+                                                <option value="v">v</option>
+                                                
+                                                <option value="vi">vi</option>
+                                                
+                                                <option value="vii">vii</option>
+                                                
+                                                <option value="viii">viii</option>
+                                                
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="matching-heading-question" data-question="18">
+                                            <div class="section-label">
+                                                <strong>18</strong> Paragraph E:_____________
+                                            </div>
+                                            <select name="q18" onchange="updateProgress()">
+                                                <option value="">choose option</option>
+                                                
+                                                <option value="i">i</option>
+                                                
+                                                <option value="ii">ii</option>
+                                                
+                                                <option value="iii">iii</option>
+                                                
+                                                <option value="iv">iv</option>
+                                                
+                                                <option value="v">v</option>
+                                                
+                                                <option value="vi">vi</option>
+                                                
+                                                <option value="vii">vii</option>
+                                                
+                                                <option value="viii">viii</option>
+                                                
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="matching-heading-question" data-question="19">
+                                            <div class="section-label">
+                                                <strong>19</strong> Paragraph F:_____________
+                                            </div>
+                                            <select name="q19" onchange="updateProgress()">
+                                                <option value="">choose option</option>
+                                                
+                                                <option value="i">i</option>
+                                                
+                                                <option value="ii">ii</option>
+                                                
+                                                <option value="iii">iii</option>
+                                                
+                                                <option value="iv">iv</option>
+                                                
+                                                <option value="v">v</option>
+                                                
+                                                <option value="vi">vi</option>
+                                                
+                                                <option value="vii">vii</option>
+                                                
+                                                <option value="viii">viii</option>
+                                                
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="matching-heading-question" data-question="20">
+                                            <div class="section-label">
+                                                <strong>20</strong> Paragraph G:_____________
+                                            </div>
+                                            <select name="q20" onchange="updateProgress()">
+                                                <option value="">choose option</option>
+                                                
+                                                <option value="i">i</option>
+                                                
+                                                <option value="ii">ii</option>
+                                                
+                                                <option value="iii">iii</option>
+                                                
+                                                <option value="iv">iv</option>
+                                                
+                                                <option value="v">v</option>
+                                                
+                                                <option value="vi">vi</option>
+                                                
+                                                <option value="vii">vii</option>
+                                                
+                                                <option value="viii">viii</option>
+                                                
+                                            </select>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            
+
+                        
+                    </div>
+                    
+                    <div class="question-group">
+                        <div class="instructions">
+                            <strong>Questions 21-22</strong><br>
+                            Choose TWO options
+                            
+                        </div>
+
+                        
+                            
+                                
+                                    <div class="question" data-question="21" data-question-2="22">
+                                        <div><strong>21-22.</strong> Which TWO statements are made by Professor Brian Little in the first paragraph?</div>
+                                        <div class="dual-choice-info">Choose TWO answers</div>
+                                        <div class="options">
+                                            <label><input type="checkbox" name="q21" value="A" onchange="updateDualProgress(21, 22); checkDualSelection(this)"> <span class="option-text">A. They can affect the degree to which people are content with what they have.</span></label>
+                                            <label><input type="checkbox" name="q21" value="B" onchange="updateDualProgress(21, 22); checkDualSelection(this)"> <span class="option-text">B. They are not used by people all the time.</span></label>
+                                            <label><input type="checkbox" name="q21" value="C" onchange="updateDualProgress(21, 22); checkDualSelection(this)"> <span class="option-text">C. They influence people's choice of profession.</span></label>
+                                            <label><input type="checkbox" name="q21" value="D" onchange="updateDualProgress(21, 22); checkDualSelection(this)"> <span class="option-text">D. They are useful in the pursuit of objectives assigned by others.</span></label>
+                                            <label><input type="checkbox" name="q21" value="E" onchange="updateDualProgress(21, 22); checkDualSelection(this)"> <span class="option-text">E. They enable people to act in ways which are not typical for them</span></label>
+                                        </div>
+                                    </div>
+                                
+                            
+
+                        
+                    </div>
+                    
+                    <div class="question-group">
+                        <div class="instructions">
+                            <strong>Questions 23-26</strong><br>
+                            Write ONE WORD ONLY from the passage for each answer.
+                            
+                        </div>
+
+                        
+                            
+                                <div class="question-group-combined" data-question-range="23-26">
+                                    <p>23. In the second stage of her reseat, Balsari-Palsule will explore her theory that very<br><input type="text" class="fill-in-the-blank" name="q23" placeholder="..." style="width: 100px;" oninput="updateProgress()" data-question="23" autocomplete="one-time-code"> workplaces prevent employees from completing projects of personal importance.</p><p>24. The research done by Little and Balsari-Palsule has many <input type="text" class="fill-in-the-blank" name="q24" placeholder="..." style="width: 100px;" oninput="updateProgress()" data-question="24" autocomplete="one-time-code"> for businesses.</p><p>25. Balsari-Palsule thinks that managers depend too much on <input type="text" class="fill-in-the-blank" name="q25" placeholder="..." style="width: 100px;" oninput="updateProgress()" data-question="25" autocomplete="one-time-code"> aimed at<br>determining personality types.</p><p>26. Balsari-Palsule thinks that relieving the stress caused by free-trait acting could<br>boost a company's<input type="text" class="fill-in-the-blank" name="q26" placeholder="..." style="width: 110px;" oninput="updateProgress()" data-question="26" autocomplete="one-time-code">  over time</p>
+                                </div>
+                            
+
+                        
+                    </div>
+                    
+                </div>
+                
+                <div class="questions-content-wrapper" id="questions3"
+                     style="display: none;">
+
+                    <h2>Questions</h2>
+
+                    
+
+                    
+                    <div class="question-group">
+                        <div class="instructions">
+                            <strong>Questions 27-31</strong><br>
+                            Choose the correct letter, A-D.
+                            
+                        </div>
+
+                        
+                            
+                                
+                                    
+                                    <div class="question" data-question="27">
+                                        <div><strong>27.</strong> 27 In the first paragraph, what is the writer's main point about migration to Patagonia?</div>
+                                        <div class="options">
+                                            <label><input type="radio" name="q27" value="A" onchange="updateProgress()"> <span class="option-text">A. It started earlier than previously thought.</span></label>
+                                            <label><input type="radio" name="q27" value="B" onchange="updateProgress()"> <span class="option-text">B. Historians have overlooked its importance.</span></label>
+                                            <label><input type="radio" name="q27" value="C" onchange="updateProgress()"> <span class="option-text">C. It impacts on research into the wider region.</span></label>
+                                            <label><input type="radio" name="q27" value="D" onchange="updateProgress()"> <span class="option-text">D. Researchers have calculated its effects on the environment.</span></label>
+                                        </div>
+                                    </div>
+                                    
+                                
+                                    
+                                    <div class="question" data-question="28">
+                                        <div><strong>28.</strong> 28 In the second paragraph, what is the writer's purpose?</div>
+                                        <div class="options">
+                                            <label><input type="radio" name="q28" value="A" onchange="updateProgress()"> <span class="option-text">A. to challenge previous research</span></label>
+                                            <label><input type="radio" name="q28" value="B" onchange="updateProgress()"> <span class="option-text">B. to propose new areas to investigate</span></label>
+                                            <label><input type="radio" name="q28" value="C" onchange="updateProgress()"> <span class="option-text">C. to summarise a scholarly debate</span></label>
+                                            <label><input type="radio" name="q28" value="D" onchange="updateProgress()"> <span class="option-text">D. to suggest reasons for human migration</span></label>
+                                        </div>
+                                    </div>
+                                    
+                                
+                                    
+                                    <div class="question" data-question="29">
+                                        <div><strong>29.</strong> 29 The writer refers to the 'late' model in order to</div>
+                                        <div class="options">
+                                            <label><input type="radio" name="q29" value="A" onchange="updateProgress()"> <span class="option-text">A. compare it with another theory of migration.</span></label>
+                                            <label><input type="radio" name="q29" value="B" onchange="updateProgress()"> <span class="option-text">B. evaluate the success of American migration.</span></label>
+                                            <label><input type="radio" name="q29" value="C" onchange="updateProgress()"> <span class="option-text">C. criticise the speed of research into migration.</span></label>
+                                            <label><input type="radio" name="q29" value="D" onchange="updateProgress()"> <span class="option-text">D. compare migration in different parts of the world.</span></label>
+                                        </div>
+                                    </div>
+                                    
+                                
+                                    
+                                    <div class="question" data-question="30">
+                                        <div><strong>30.</strong> 30 What is the writer's main point about the 'early' model?</div>
+                                        <div class="options">
+                                            <label><input type="radio" name="q30" value="A" onchange="updateProgress()"> <span class="option-text">A. Scholars support the idea of fast migrations.</span></label>
+                                            <label><input type="radio" name="q30" value="B" onchange="updateProgress()"> <span class="option-text">B. It is too random to be convincing theory.</span></label>
+                                            <label><input type="radio" name="q30" value="C" onchange="updateProgress()"> <span class="option-text">C. South America was more habitable at an earlier time.</span></label>
+                                            <label><input type="radio" name="q30" value="D" onchange="updateProgress()"> <span class="option-text">D. It is more consistent with the physical conditions of the land.</span></label>
+                                        </div>
+                                    </div>
+                                    
+                                
+                                    
+                                    <div class="question" data-question="31">
+                                        <div><strong>31.</strong> 31 What does the writer suggest about the Monte Verde site?</div>
+                                        <div class="options">
+                                            <label><input type="radio" name="q31" value="A" onchange="updateProgress()"> <span class="option-text">A. It is much younger than researchers once estimated.</span></label>
+                                            <label><input type="radio" name="q31" value="B" onchange="updateProgress()"> <span class="option-text">B. It provides supporting evidence for relatively early settlement</span></label>
+                                            <label><input type="radio" name="q31" value="C" onchange="updateProgress()"> <span class="option-text">C. Archaeologists believe the site is of questionable value.</span></label>
+                                            <label><input type="radio" name="q31" value="D" onchange="updateProgress()"> <span class="option-text">D. Streams exposed the site, making new research possible.</span></label>
+                                        </div>
+                                    </div>
+                                    
+                                
+                            
+
+                        
+                    </div>
+                    
+                    <div class="question-group">
+                        <div class="instructions">
+                            <strong>Questions 32-35</strong><br>
+                            <p>Do the following statements agree with the claims of the writer?</p><p>YES if the statement agrees <br>NO if the statement contradicts the writer <br>NOT GIVEN if it is impossible to say</p>
+                            
+                        </div>
+
+                        
+                            
+                                
+                                    
+                                    <div class="question" data-question="32">
+                                        <div><strong>32.</strong> The first settlers encountered conditions found nowhere else in the world.</div>
+                                        <div class="options">
+                                            <label><input type="radio" name="q32" value="YES" onchange="updateProgress()"> YES</label>
+                                            <label><input type="radio" name="q32" value="NO" onchange="updateProgress()"> NO</label>
+                                            <label><input type="radio" name="q32" value="NOT GIVEN" onchange="updateProgress()"> NOT GIVEN</label>
+                                        </div>
+                                    </div>
+                                    
+                                
+                                    
+                                    <div class="question" data-question="33">
+                                        <div><strong>33.</strong> Early settlers in highland areas relied mainly on hunting.</div>
+                                        <div class="options">
+                                            <label><input type="radio" name="q33" value="YES" onchange="updateProgress()"> YES</label>
+                                            <label><input type="radio" name="q33" value="NO" onchange="updateProgress()"> NO</label>
+                                            <label><input type="radio" name="q33" value="NOT GIVEN" onchange="updateProgress()"> NOT GIVEN</label>
+                                        </div>
+                                    </div>
+                                    
+                                
+                                    
+                                    <div class="question" data-question="34">
+                                        <div><strong>34.</strong> Archaeologists have drawn no conclusions from rock-shelter evidence.</div>
+                                        <div class="options">
+                                            <label><input type="radio" name="q34" value="YES" onchange="updateProgress()"> YES</label>
+                                            <label><input type="radio" name="q34" value="NO" onchange="updateProgress()"> NO</label>
+                                            <label><input type="radio" name="q34" value="NOT GIVEN" onchange="updateProgress()"> NOT GIVEN</label>
+                                        </div>
+                                    </div>
+                                    
+                                
+                                    
+                                    <div class="question" data-question="35">
+                                        <div><strong>35.</strong> Archaeological material can be relocated by natural processes</div>
+                                        <div class="options">
+                                            <label><input type="radio" name="q35" value="YES" onchange="updateProgress()"> YES</label>
+                                            <label><input type="radio" name="q35" value="NO" onchange="updateProgress()"> NO</label>
+                                            <label><input type="radio" name="q35" value="NOT GIVEN" onchange="updateProgress()"> NOT GIVEN</label>
+                                        </div>
+                                    </div>
+                                    
+                                
+                            
+
+                        
+                    </div>
+                    
+                    <div class="question-group">
+                        <div class="instructions">
+                            <strong>Questions 36-40</strong><br>
+                            Complete the summary below. <br>Choose ONE WORD ONLY from the list A-J.
+                            
+                        </div>
+
+                        
+                            
+                                <div class="word-bank-container">
+                                    <div class="word-bank-grid">
+                                        
+                                        <div class="word-bank-option">
+                                            <strong>A</strong> Fixed Date
+                                        </div>
+                                        
+                                        <div class="word-bank-option">
+                                            <strong>B</strong> random collection
+                                        </div>
+                                        
+                                        <div class="word-bank-option">
+                                            <strong>C</strong> similar properties
+                                        </div>
+                                        
+                                        <div class="word-bank-option">
+                                            <strong>D</strong> good condition
+                                        </div>
+                                        
+                                        <div class="word-bank-option">
+                                            <strong>E</strong> scientific evaluation
+                                        </div>
+                                        
+                                        <div class="word-bank-option">
+                                            <strong>F</strong> huge quantities
+                                        </div>
+                                        
+                                        <div class="word-bank-option">
+                                            <strong>G</strong> new samples
+                                        </div>
+                                        
+                                        <div class="word-bank-option">
+                                            <strong>H</strong> reliable connection
+                                        </div>
+                                        
+                                        <div class="word-bank-option">
+                                            <strong>I</strong> skilled preservation
+                                        </div>
+                                        
+                                        <div class="word-bank-option">
+                                            <strong>J</strong> immediate surroundings
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                <div class="word-bank-passage">
+                                    <p><strong>The archaeological evidence from Patagonia</strong></p><p>Building remains and other evidence have been found in 36 <input type="text" class="fill-in-the-blank" name="q36" placeholder="..." style="width: 100px;" oninput="updateProgress()" data-question="36" autocomplete="one-time-code">, where, at the Chinchihuapi Creek site, it has been possible to date them to around 12,500 years ago. However, the 37 <input type="text" class="fill-in-the-blank" name="q37" placeholder="..." style="width: 100px;" oninput="updateProgress()" data-question="37" autocomplete="one-time-code"> of the sample taken from Los Toldos means that this site is of doubtful value. El Ceibo is a more promising dig, where the examination of artefacts would be beneficial in order to confirm the usefulness of discoveries there.</p><p>The remains found at the Arroyo Feo site show 38 <input type="text" class="fill-in-the-blank" name="q38" placeholder="..." style="width: 100px;" oninput="updateProgress()" data-question="38" autocomplete="one-time-code"> and date from around 9,000 years ago. Unfortunately, no 39 <input type="text" class="fill-in-the-blank" name="q39" placeholder="..." style="width: 100px;" oninput="updateProgress()" data-question="39" autocomplete="one-time-code"> can be made between the samples taken from Las Buitreras and human presence. The findings of the work carried out at Cueva Fell cannot provide useful information beyond the 40 <input type="text" class="fill-in-the-blank" name="q40" placeholder="..." style="width: 100px;" oninput="updateProgress()" data-question="40" autocomplete="one-time-code"></p><p>In conclusion, though the evidence is mixed, it is believed that human population of Patagonia began about 11,000 years ago.</p>
+                                </div>
+                            
+
+                        
+                    </div>
+                    
+                </div>
+                
+            </div>
+        </div>
+
+        <!-- Passage Navigation - Bottom Right -->
+        <div class="passage-navigation">
+            <button type="button" class="nav-button" id="prevPassageBtn" onclick="navigatePassage(-1)">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <span class="passage-indicator">
+                <span id="currentPassageNum">1</span> / 3
+            </span>
+            <button type="button" class="nav-button" id="nextPassageBtn" onclick="navigatePassage(1)">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+
+        <footer>
+            <div class="progress-container" id="progressContainer"></div>
+            
+            <button type="submit" class="submit-button">Submit Test</button>
+            
+        </footer>
+    </form>
+
+<script>
+    // Current passage being displayed
+    let currentPassage = 1;
+    const totalPassages = 3;
+
+    // Navigate between passages
+    function navigatePassage(direction) {
+        const newPassage = currentPassage + direction;
+
+        if (newPassage < 1 || newPassage > totalPassages) {
+            return;
+        }
+
+        // Hide current passage and questions
+        document.getElementById(`passage${currentPassage}`).style.display = 'none';
+        document.getElementById(`questions${currentPassage}`).style.display = 'none';
+
+        // Show new passage and questions
+        document.getElementById(`passage${newPassage}`).style.display = 'block';
+        document.getElementById(`questions${newPassage}`).style.display = 'block';
+
+        // Update current passage
+        currentPassage = newPassage;
+        document.getElementById('currentPassageNum').textContent = currentPassage;
+
+        // Update button states
+        document.getElementById('prevPassageBtn').disabled = (currentPassage === 1);
+        document.getElementById('nextPassageBtn').disabled = (currentPassage === totalPassages);
+
+        // Scroll both sections to top
+        document.getElementById('passageSection').scrollTop = 0;
+        document.getElementById('questionsSection').scrollTop = 0;
+    }
+
+    // Initialize navigation buttons
+    document.getElementById('prevPassageBtn').disabled = true;
+
+    // Highlight text selection in passage
+    let currentHighlightColor = 'orange';
+    const highlightColors = {
+        'orange': '#FFA500',
+        'blue': '#4A90E2',
+        'green': '#7ED321'
+    };
+
+    // Add highlight menu
+    const highlightMenu = document.createElement('div');
+    highlightMenu.id = 'highlightMenu';
+    highlightMenu.style.cssText = 'position: absolute; display: none; background: white; border: 1px solid #ccc; border-radius: 4px; padding: 5px; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1);';
+    highlightMenu.innerHTML = `
+        <button onclick="highlightText('orange')" style="background: #FFA500; width: 30px; height: 30px; border: none; border-radius: 3px; margin: 2px; cursor: pointer;"></button>
+        <button onclick="highlightText('blue')" style="background: #4A90E2; width: 30px; height: 30px; border: none; border-radius: 3px; margin: 2px; cursor: pointer;"></button>
+        <button onclick="highlightText('green')" style="background: #7ED321; width: 30px; height: 30px; border: none; border-radius: 3px; margin: 2px; cursor: pointer;"></button>
+        <button onclick="removeHighlight()" style="background: white; width: 30px; height: 30px; border: 1px solid #ccc; border-radius: 3px; margin: 2px; cursor: pointer;">×</button>
+    `;
+    document.body.appendChild(highlightMenu);
+
+    // Listen for text selection in passage and questions sections
+    document.addEventListener('mouseup', function(e) {
+        const selection = window.getSelection();
+        const selectedText = selection.toString().trim();
+
+        if (selectedText.length > 0) {
+            const range = selection.getRangeAt(0);
+            const commonAncestor = range.commonAncestorContainer;
+
+            // Check if selection spans multiple paragraphs
+            const startContainer = range.startContainer;
+            const endContainer = range.endContainer;
+
+            // Find parent <p> tags
+            let startParagraph = startContainer.nodeType === 3 ? startContainer.parentElement : startContainer;
+            let endParagraph = endContainer.nodeType === 3 ? endContainer.parentElement : endContainer;
+
+            while (startParagraph && startParagraph.tagName !== 'P' && startParagraph !== document.body) {
+                startParagraph = startParagraph.parentElement;
+            }
+            while (endParagraph && endParagraph.tagName !== 'P' && endParagraph !== document.body) {
+                endParagraph = endParagraph.parentElement;
+            }
+
+            // Don't allow highlighting across different paragraphs
+            if (startParagraph !== endParagraph && startParagraph && endParagraph &&
+                startParagraph.tagName === 'P' && endParagraph.tagName === 'P') {
+                highlightMenu.style.display = 'none';
+                return;
+            }
+
+            // Check if selection is within passage-text or questions-section
+            let isInHighlightableArea = false;
+            let element = commonAncestor;
+            while (element && element !== document) {
+                if (element.classList && (element.classList.contains('passage-text') ||
+                    element.classList.contains('questions-section'))) {
+                    isInHighlightableArea = true;
+                    break;
+                }
+                element = element.parentElement;
+            }
+
+            if (isInHighlightableArea) {
+                const rect = range.getBoundingClientRect();
+                highlightMenu.style.display = 'block';
+                highlightMenu.style.left = (rect.left + window.scrollX) + 'px';
+                highlightMenu.style.top = (rect.bottom + window.scrollY + 5) + 'px';
+            } else {
+                highlightMenu.style.display = 'none';
+            }
+        } else {
+            highlightMenu.style.display = 'none';
+        }
+    });
+
+    function highlightText(color) {
+        const selection = window.getSelection();
+        if (selection.rangeCount > 0) {
+            const range = selection.getRangeAt(0);
+            const span = document.createElement('span');
+            span.style.backgroundColor = highlightColors[color];
+            span.style.padding = '2px 0';
+            span.className = 'highlighted-text';
+            span.setAttribute('data-color', color);
+
+            try {
+                range.surroundContents(span);
+            } catch (e) {
+                // If surroundContents fails (e.g., selection crosses element boundaries), use alternative method
+                const fragment = range.extractContents();
+                span.appendChild(fragment);
+                range.insertNode(span);
+            }
+        }
+        highlightMenu.style.display = 'none';
+        window.getSelection().removeAllRanges();
+    }
+
+    function removeHighlight() {
+        const selection = window.getSelection();
+        if (selection.rangeCount > 0) {
+            const range = selection.getRangeAt(0);
+            let element = range.commonAncestorContainer;
+
+            // Find the highlighted span
+            while (element && element !== document) {
+                if (element.classList && element.classList.contains('highlighted-text')) {
+                    const parent = element.parentNode;
+                    while (element.firstChild) {
+                        parent.insertBefore(element.firstChild, element);
+                    }
+                    parent.removeChild(element);
+                    parent.normalize();
+                    break;
+                }
+                element = element.parentElement;
+            }
+        }
+        highlightMenu.style.display = 'none';
+        window.getSelection().removeAllRanges();
+    }
+
+    // Hide highlight menu when clicking elsewhere
+    document.addEventListener('click', function(e) {
+        if (!highlightMenu.contains(e.target) && window.getSelection().toString().trim() === '') {
+            highlightMenu.style.display = 'none';
+        }
+    });
+
+    // Get all question numbers from the test
+    const questionNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40];
+    let totalQuestions = 40;
+
+    // Initialize progress indicators
+    function initializeProgress() {
+        const container = document.getElementById('progressContainer');
+        container.innerHTML = '';
+        questionNumbers.forEach(function(questionNum) {
+            const indicator = document.createElement('div');
+            indicator.className = 'progress-indicator';
+            indicator.id = `progress-${questionNum}`;
+            indicator.textContent = questionNum;
+            indicator.dataset.questionNumber = questionNum;
+
+            // Add click handler to scroll to question
+            indicator.addEventListener('click', function() {
+                const questionNum = this.dataset.questionNumber;
+
+                // Find which passage this question belongs to
+                
+                
+                
+                if (questionNum >= 1 && questionNum <= 13) {
+                    // Navigate to correct passage
+                    if (currentPassage !== 1) {
+                        navigatePassage(1 - currentPassage);
+                    }
+
+                    // Scroll to question after a short delay
+                    setTimeout(() => {
+                        // First try exact match for data-question
+                        let questionElement = document.querySelector(`[data-question="${questionNum}"]`);
+
+                        // If not found, check data-question-2 (for dual questions)
+                        if (!questionElement) {
+                            questionElement = document.querySelector(`[data-question-2="${questionNum}"]`);
+                        }
+
+                        // If still not found, check if questionNum is in a comma-separated list (for multi questions)
+                        if (!questionElement) {
+                            const allQuestions = document.querySelectorAll('[data-question]');
+                            for (const elem of allQuestions) {
+                                const dataQuestion = elem.getAttribute('data-question');
+                                if (dataQuestion && dataQuestion.includes(',')) {
+                                    const questionNums = dataQuestion.split(',').map(n => parseInt(n.trim()));
+                                    if (questionNums.includes(questionNum)) {
+                                        questionElement = elem;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+
+                        if (questionElement) {
+                            questionElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                    }, 100);
+                }
+                
+                
+                
+                
+                
+                if (questionNum >= 14 && questionNum <= 26) {
+                    // Navigate to correct passage
+                    if (currentPassage !== 2) {
+                        navigatePassage(2 - currentPassage);
+                    }
+
+                    // Scroll to question after a short delay
+                    setTimeout(() => {
+                        // First try exact match for data-question
+                        let questionElement = document.querySelector(`[data-question="${questionNum}"]`);
+
+                        // If not found, check data-question-2 (for dual questions)
+                        if (!questionElement) {
+                            questionElement = document.querySelector(`[data-question-2="${questionNum}"]`);
+                        }
+
+                        // If still not found, check if questionNum is in a comma-separated list (for multi questions)
+                        if (!questionElement) {
+                            const allQuestions = document.querySelectorAll('[data-question]');
+                            for (const elem of allQuestions) {
+                                const dataQuestion = elem.getAttribute('data-question');
+                                if (dataQuestion && dataQuestion.includes(',')) {
+                                    const questionNums = dataQuestion.split(',').map(n => parseInt(n.trim()));
+                                    if (questionNums.includes(questionNum)) {
+                                        questionElement = elem;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+
+                        if (questionElement) {
+                            questionElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                    }, 100);
+                }
+                
+                
+                
+                
+                
+                if (questionNum >= 27 && questionNum <= 40) {
+                    // Navigate to correct passage
+                    if (currentPassage !== 3) {
+                        navigatePassage(3 - currentPassage);
+                    }
+
+                    // Scroll to question after a short delay
+                    setTimeout(() => {
+                        // First try exact match for data-question
+                        let questionElement = document.querySelector(`[data-question="${questionNum}"]`);
+
+                        // If not found, check data-question-2 (for dual questions)
+                        if (!questionElement) {
+                            questionElement = document.querySelector(`[data-question-2="${questionNum}"]`);
+                        }
+
+                        // If still not found, check if questionNum is in a comma-separated list (for multi questions)
+                        if (!questionElement) {
+                            const allQuestions = document.querySelectorAll('[data-question]');
+                            for (const elem of allQuestions) {
+                                const dataQuestion = elem.getAttribute('data-question');
+                                if (dataQuestion && dataQuestion.includes(',')) {
+                                    const questionNums = dataQuestion.split(',').map(n => parseInt(n.trim()));
+                                    if (questionNums.includes(questionNum)) {
+                                        questionElement = elem;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+
+                        if (questionElement) {
+                            questionElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                    }, 100);
+                }
+                
+                
+                
+            });
+
+            container.appendChild(indicator);
+        });
+    }
+
+    // Update progress
+    function updateProgress() {
+        questionNumbers.forEach(function(questionNum) {
+            const indicator = document.getElementById(`progress-${questionNum}`);
+            if (!indicator) return;
+
+            let isAnswered = false;
+
+            // Check if this question is part of a dual or multi-choice group
+            // Look for question containers that include this question number
+            const allQuestionDivs = document.querySelectorAll('[data-question]');
+            let isDualOrMulti = false;
+            let baseQuestionNum = questionNum;
+            let questionPosition = 0;
+
+            for (const div of allQuestionDivs) {
+                const dataQuestion = div.getAttribute('data-question');
+
+                // Check if this is a multi question (comma-separated question numbers)
+                if (dataQuestion && dataQuestion.includes(',')) {
+                    const questionNums = dataQuestion.split(',').map(n => parseInt(n.trim()));
+                    const index = questionNums.indexOf(questionNum);
+                    if (index !== -1) {
+                        isDualOrMulti = true;
+                        baseQuestionNum = questionNums[0];
+                        questionPosition = index;
+                        break;
+                    }
+                }
+
+                // Check if this is a dual question (has data-question-2)
+                const dataQuestion2 = div.getAttribute('data-question-2');
+                if (dataQuestion2 && (dataQuestion == questionNum || dataQuestion2 == questionNum)) {
+                    isDualOrMulti = true;
+                    baseQuestionNum = parseInt(dataQuestion);
+                    questionPosition = (questionNum == dataQuestion) ? 0 : 1;
+                    break;
+                }
+            }
+
+            if (isDualOrMulti) {
+                // For dual/multi questions, check checkboxes with the base question name
+                const checkboxes = document.querySelectorAll(`input[type="checkbox"][name="q${baseQuestionNum}"]:checked`);
+                const checkedCount = checkboxes.length;
+
+                // Mark as answered if we have enough selections for this position
+                // e.g., question 27 needs 1+ selections, question 28 needs 2+, question 29 needs 3+
+                if (checkedCount > questionPosition) {
+                    isAnswered = true;
+                }
+            } else {
+                // Regular question - use normal detection
+                const radio = document.querySelector(`input[type="radio"][name="q${questionNum}"]:checked`);
+                if (radio) isAnswered = true;
+
+                const checkboxes = document.querySelectorAll(`input[type="checkbox"][name="q${questionNum}"]:checked`);
+                if (checkboxes.length > 0) isAnswered = true;
+
+                const textInput = document.querySelector(`input[type="text"][name="q${questionNum}"]`);
+                if (textInput && textInput.value.trim() !== '') isAnswered = true;
+
+                const select = document.querySelector(`select[name="q${questionNum}"]`);
+                if (select && select.value !== '') isAnswered = true;
+
+                const hiddenInput = document.querySelector(`input[type="hidden"][name="q${questionNum}"]`);
+                if (hiddenInput && hiddenInput.value !== '') isAnswered = true;
+            }
+
+            if (isAnswered) {
+                indicator.classList.add('completed');
+            } else {
+                indicator.classList.remove('completed');
+            }
+        });
+    }
+
+    function checkDualSelection(checkbox) {
+        const questionNum = parseInt(checkbox.name.substring(1)); // Extract number from "q27"
+        const checkboxes = document.querySelectorAll(`input[type="checkbox"][name="${checkbox.name}"]`);
+        const checked = Array.from(checkboxes).filter(cb => cb.checked);
+        if (checked.length > 2) {
+            // Uncheck the checkbox that was just clicked
+            checkbox.checked = false;
+            // Update progress after unchecking
+            updateDualProgress(questionNum, questionNum + 1);
+        }
+    }
+
+    function updateDualProgress(questionNum1, questionNum2) {
+        const checkboxes = document.querySelectorAll(`input[type="checkbox"][name="q${questionNum1}"]`);
+        const checked = Array.from(checkboxes).filter(cb => cb.checked);
+
+        const indicator1 = document.getElementById(`progress-${questionNum1}`);
+        const indicator2 = document.getElementById(`progress-${questionNum2}`);
+
+        // Light up indicators progressively based on number of selections
+        if (checked.length >= 1) {
+            if (indicator1) indicator1.classList.add('completed');
+        } else {
+            if (indicator1) indicator1.classList.remove('completed');
+        }
+
+        if (checked.length >= 2) {
+            if (indicator2) indicator2.classList.add('completed');
+        } else {
+            if (indicator2) indicator2.classList.remove('completed');
+        }
+    }
+
+    function checkMultiSelection(checkbox, maxCount) {
+        const questionNum = parseInt(checkbox.name.substring(1)); // Extract number from "q27"
+        const checkboxes = document.querySelectorAll(`input[type="checkbox"][name="${checkbox.name}"]`);
+        const checked = Array.from(checkboxes).filter(cb => cb.checked);
+        if (checked.length > maxCount) {
+            // Uncheck the checkbox that was just clicked
+            checkbox.checked = false;
+            // Update progress after unchecking
+            updateProgress();
+        }
+    }
+
+    function updateMultiProgress(questionNumbers, answerCount) {
+        const questionNums = questionNumbers.split(',').map(n => parseInt(n));
+        const checkboxes = document.querySelectorAll(`input[type="checkbox"][name="q${questionNums[0]}"]`);
+        const checked = Array.from(checkboxes).filter(cb => cb.checked);
+
+        // Light up indicators progressively based on number of selections
+        questionNums.forEach((qNum, index) => {
+            const indicator = document.getElementById(`progress-${qNum}`);
+            if (indicator) {
+                if (checked.length > index) {
+                    indicator.classList.add('completed');
+                } else {
+                    indicator.classList.remove('completed');
+                }
+            }
+        });
+    }
+
+    // Timer functionality
+    let timeRemaining = 60 * 60;
+    let timerInterval = null;
+    let isTimerRunning = false;
+
+    function toggleTimer() {
+        const btn = document.getElementById('startPauseBtn');
+        if (isTimerRunning) {
+            clearInterval(timerInterval);
+            btn.innerHTML = '<i class="fas fa-play"></i>';
+            isTimerRunning = false;
+        } else {
+            timerInterval = setInterval(updateTimer, 1000);
+            btn.innerHTML = '<i class="fas fa-pause"></i>';
+            isTimerRunning = true;
+        }
+    }
+
+    function updateTimer() {
+        if (timeRemaining <= 0) {
+            clearInterval(timerInterval);
+            alert('Time is up! Please submit your test.');
+            return;
+        }
+        timeRemaining--;
+        const minutes = Math.floor(timeRemaining / 60);
+        const seconds = timeRemaining % 60;
+        document.getElementById('timer').textContent =
+            `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
+
+    function resetTimer() {
+        clearInterval(timerInterval);
+        timeRemaining = 60 * 60;
+        document.getElementById('timer').textContent = '60:00';
+        document.getElementById('startPauseBtn').innerHTML = '<i class="fas fa-play"></i>';
+        isTimerRunning = false;
+    }
+
+    // Night mode toggle
+    function toggleNightMode() {
+        document.body.classList.toggle('night-mode');
+        const modeText = document.getElementById('modeText');
+        if (document.body.classList.contains('night-mode')) {
+            modeText.textContent = 'Day Mode';
+            localStorage.setItem('nightMode', 'enabled');
+        } else {
+            modeText.textContent = 'Night Mode';
+            localStorage.setItem('nightMode', 'disabled');
+        }
+    }
+
+    if (localStorage.getItem('nightMode') === 'enabled') {
+        document.body.classList.add('night-mode');
+        document.getElementById('modeText').textContent = 'Day Mode';
+    }
+
+    // Font size control
+    let currentFontSize = 15;
+    function changeFontSize(delta) {
+        currentFontSize += delta;
+        if (currentFontSize < 12) currentFontSize = 12;
+        if (currentFontSize > 20) currentFontSize = 20;
+        document.body.style.fontSize = currentFontSize + 'px';
+        localStorage.setItem('fontSize', currentFontSize);
+    }
+
+    const savedFontSize = localStorage.getItem('fontSize');
+    if (savedFontSize) {
+        currentFontSize = parseInt(savedFontSize);
+        document.body.style.fontSize = currentFontSize + 'px';
+    }
+
+    // Matching table functionality
+    document.querySelectorAll('.matching-table tbody tr').forEach(row => {
+        row.querySelectorAll('td[data-answer]').forEach(cell => {
+            cell.addEventListener('click', function() {
+                const questionId = row.dataset.questionId;
+                const answer = this.dataset.answer;
+
+                row.querySelectorAll('td[data-answer]').forEach(td => {
+                    td.classList.remove('selected');
+                });
+
+                this.classList.add('selected');
+
+                let hiddenInput = document.querySelector(`input[name="q${questionId}"]`);
+                if (!hiddenInput) {
+                    hiddenInput = document.createElement('input');
+                    hiddenInput.type = 'hidden';
+                    hiddenInput.name = `q${questionId}`;
+                    document.getElementById('testForm').appendChild(hiddenInput);
+                }
+                hiddenInput.value = answer;
+
+                updateProgress();
+            });
+        });
+    });
+
+    // Initialize on page load
+    window.addEventListener('load', function() {
+        initializeProgress();
+        updateProgress();
+        // Auto-start timer when test loads
+        toggleTimer();
+    });
+
+    // Loading animation for CDI tests
+    function showCDILoadingAnimation() {
+        // Remove any existing loading overlay
+        const existingOverlay = document.getElementById('cdi-loading-overlay');
+        if (existingOverlay) {
+            existingOverlay.remove();
+        }
+
+        // Create loading overlay
+        const loadingOverlay = document.createElement('div');
+        loadingOverlay.id = 'cdi-loading-overlay';
+        loadingOverlay.innerHTML = `
+            <div class="cdi-loading-container">
+                <div class="cdi-dot"></div>
+                <div class="cdi-dot"></div>
+                <div class="cdi-dot"></div>
+                <div class="cdi-dot"></div>
+            </div>
+        `;
+
+        // Add styles
+        const style = document.createElement('style');
+        style.textContent = `
+            #cdi-loading-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: #000000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 9999;
+            }
+
+            .cdi-loading-container {
+                --uib-size: 40px;
+                --uib-color: white;
+                --uib-speed: 1.6s;
+                position: relative;
+                top: 8%;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                height: var(--uib-size);
+                width: var(--uib-size);
+            }
+
+            .cdi-dot {
+                position: absolute;
+                top: 13.5%;
+                left: 0;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                height: 100%;
+                width: 100%;
+                animation: cdi-swing var(--uib-speed) linear infinite;
+            }
+
+            .cdi-dot::before {
+                content: '';
+                height: 25%;
+                width: 25%;
+                border-radius: 50%;
+                background-color: var(--uib-color);
+                transition: background-color 0.3s ease;
+            }
+
+            .cdi-dot:nth-child(1) {
+                animation-delay: calc(var(--uib-speed) * -0.36);
+            }
+
+            .cdi-dot:nth-child(2) {
+                animation-delay: calc(var(--uib-speed) * -0.27);
+                opacity: 0.8;
+            }
+
+            .cdi-dot:nth-child(2)::before {
+                transform: scale(0.9);
+            }
+
+            .cdi-dot:nth-child(3) {
+                animation-delay: calc(var(--uib-speed) * -0.18);
+                opacity: 0.6;
+            }
+
+            .cdi-dot:nth-child(3)::before {
+                transform: scale(0.8);
+            }
+
+            .cdi-dot:nth-child(4) {
+                animation-delay: calc(var(--uib-speed) * -0.09);
+                opacity: 0.4;
+            }
+
+            .cdi-dot:nth-child(4)::before {
+                transform: scale(0.7);
+            }
+
+            @keyframes cdi-swing {
+                0% { transform: rotate(0deg); }
+                15% { transform: rotate(0deg); }
+                50% { transform: rotate(180deg); }
+                65% { transform: rotate(180deg); }
+                100% { transform: rotate(0deg); }
+            }
+        `;
+
+        document.head.appendChild(style);
+        document.body.appendChild(loadingOverlay);
+    }
+
+    // Handle form submission with loading animation for CDI tests
+    
+</script>
+
+</body>
+</html>
+

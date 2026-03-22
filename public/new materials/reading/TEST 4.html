@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IELTS Academic Reading – Test 5</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,Helvetica,sans-serif;font-size:14px;height:100vh;display:flex;flex-direction:column;overflow:hidden;background:#fff;color:#222}
+#hdr{height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;border-bottom:1.5px solid #d0d0d0;background:#fff;flex-shrink:0}
+#hdr-left{display:flex;align-items:center;gap:14px}
+.ielts-badge{background:#c41230;color:#fff;font-family:'Arial Black',Arial,sans-serif;font-weight:900;font-size:19px;padding:3px 10px 4px;letter-spacing:0.5px;border-radius:2px;user-select:none;line-height:1.3}
+#tg-link{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:#222;font-size:13px;font-weight:600;font-family:Arial,sans-serif;background:#fff;border:1.5px solid #d0d0d0;border-radius:22px;padding:5px 14px 5px 6px;transition:border-color .15s,box-shadow .15s}
+#tg-link:hover{border-color:#0088cc;box-shadow:0 0 0 2px rgba(0,136,204,.12);color:#0088cc}
+#tg-link .tg-circle{width:28px;height:28px;border-radius:50%;background:linear-gradient(to bottom,#2aabee,#229ed9);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+#tg-link .tg-circle svg{width:16px;height:16px}
+#hdr-right{display:flex;align-items:center;gap:14px}
+#menu-wrap{position:relative}
+#menu-btn{background:none;border:none;cursor:pointer;padding:4px;display:flex;flex-direction:column;gap:4px;border-radius:4px}
+#menu-btn:hover{background:#f0f0f0}
+#menu-btn span{display:block;width:20px;height:2px;background:#444;border-radius:2px}
+#menu-dropdown{position:absolute;top:calc(100% + 8px);right:0;background:#fff;border:1px solid #d0d0d0;border-radius:6px;box-shadow:0 4px 16px rgba(0,0,0,.12);padding:12px 16px;min-width:180px;z-index:1000;display:none}
+#menu-dropdown.open{display:block}
+#menu-dropdown .md-title{font-size:11px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px;font-family:Arial,sans-serif}
+#menu-dropdown .md-row{display:flex;align-items:center;gap:8px}
+#menu-dropdown .md-lbl{font-size:13px;font-family:Arial,sans-serif;color:#333;min-width:60px}
+.fsz-btn{width:30px;height:30px;border:1px solid #ccc;background:#f8f8f8;border-radius:4px;cursor:pointer;font-size:14px;font-weight:700;font-family:Arial,sans-serif;display:flex;align-items:center;justify-content:center;color:#333;flex-shrink:0}
+.fsz-btn:hover{background:#eee;border-color:#999}
+#pbar{background:#f5f5f5;border-bottom:1px solid #d5d5d5;padding:7px 18px;font-size:13px;flex-shrink:0;color:#222;line-height:1.4}
+#pbar-title{font-weight:700}
+#main{flex:1;display:flex;overflow:hidden;min-height:0}
+#ppane{width:50%;overflow-y:auto;padding:22px 26px;background:#fff;user-select:text;flex-shrink:0}
+#ppane::-webkit-scrollbar{width:6px}
+#ppane::-webkit-scrollbar-track{background:#f2f2f2}
+#ppane::-webkit-scrollbar-thumb{background:#c8c8c8;border-radius:3px}
+#divider{width:10px;background:#e8e8e8;border-left:1px solid #ccc;border-right:1px solid #ccc;cursor:col-resize;flex-shrink:0;display:flex;align-items:center;justify-content:center;position:relative;z-index:10}
+#div-btn{width:26px;height:26px;background:#888;border-radius:3px;color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;user-select:none;position:absolute;line-height:1}
+#div-btn:hover{background:#666}
+#qpane{flex:1;overflow-y:auto;padding:16px 20px;background:#fff;min-width:0;user-select:text}
+#qpane::-webkit-scrollbar{width:6px}
+#qpane::-webkit-scrollbar-track{background:#f2f2f2}
+#qpane::-webkit-scrollbar-thumb{background:#c8c8c8;border-radius:3px}
+.pass-title{font-size:17px;font-weight:700;text-align:center;margin-bottom:3px;font-family:Arial,sans-serif}
+.pass-sub{font-size:12.5px;text-align:center;font-style:italic;margin-bottom:14px;color:#333;font-family:Arial,sans-serif}
+.pass-body p{font-size:14px;line-height:1.65;margin-bottom:13px;font-family:Arial,sans-serif;color:#111;text-align:left}
+.para-letter{font-weight:700;margin-right:6px;color:#111}
+.hl{background:#FFE066;border-radius:1px}
+#hl-tip{position:fixed;display:none;background:#111;color:#fff;padding:5px 13px;border-radius:18px;font-size:12px;font-family:Arial,sans-serif;cursor:pointer;z-index:9999;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.35)}
+#hl-tip:hover{background:#333}
+.qs{font-size:13px;color:#222;margin-bottom:16px}
+.qs-instr{margin-bottom:10px;line-height:1.55;font-size:13px}
+.qs-instr strong{font-weight:700}
+.qs-instr em{font-style:italic}
+.qitem{margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid #efefef}
+.qitem:last-child{border-bottom:none}
+.qrow{display:flex;gap:6px;font-size:13px;line-height:1.5;margin-bottom:6px}
+.qno{font-weight:700;min-width:20px;flex-shrink:0}
+.tfn-opts{display:flex;flex-direction:column;gap:5px;padding-left:26px}
+.tfn-opt{display:flex;align-items:center;gap:7px;font-size:13px;cursor:pointer;color:#222}
+.tfn-opt input[type=radio]{cursor:pointer;width:15px;height:15px;flex-shrink:0}
+.notes-wrap{border:1px solid #bbb;background:#fafafa;padding:12px 14px;margin-top:4px}
+.notes-head{font-weight:700;font-size:14px;text-align:center;margin-bottom:10px}
+.notes-sec-title{font-weight:700;font-size:13px;margin:8px 0 5px}
+.notes-li{display:flex;flex-wrap:wrap;align-items:baseline;gap:3px;font-size:13px;line-height:1.7;margin-bottom:5px;padding-left:10px}
+.notes-li::before{content:"•";margin-right:5px;flex-shrink:0}
+.fill-field{display:inline-flex;align-items:center;border:1px solid #888;border-radius:2px;padding:1px 5px;background:#fff;vertical-align:middle}
+.fill-field .fqn{font-size:11px;font-weight:700;color:#555;margin-right:3px;flex-shrink:0}
+.fill-field input{border:none;outline:none;font-size:13px;font-family:Arial,sans-serif;width:90px;background:transparent;color:#111}
+.hbox{border:1px solid #aaa;margin-bottom:12px}
+.hbox-title{font-weight:700;font-size:13px;text-align:center;background:#f0f0f0;border-bottom:1px solid #aaa;padding:6px 10px}
+.hbox-body{padding:8px 12px}
+.hrow{display:flex;gap:8px;font-size:13px;margin-bottom:4px}
+.hrn{font-weight:700;min-width:24px;flex-shrink:0}
+.abox{border:1px solid #aaa;margin-bottom:12px}
+.abox-title{font-weight:700;font-size:13px;text-align:center;background:#f0f0f0;border-bottom:1px solid #aaa;padding:6px 10px}
+.abox-body{padding:8px 12px}
+.arow{display:flex;gap:8px;font-size:13px;margin-bottom:3px}
+.arl{font-weight:700;min-width:20px}
+.ph-row{display:flex;align-items:center;gap:8px;margin-bottom:9px;font-size:13px}
+.ph-no{font-weight:700;min-width:24px;flex-shrink:0}
+.ph-para-label{font-size:13px;color:#333;min-width:90px}
+.qsel{border:1px solid #888;border-radius:2px;padding:3px 6px;font-size:12.5px;font-family:Arial,sans-serif;background:#fff;cursor:pointer;outline:none;color:#111}
+.qsel:focus{border-color:#444}
+.sum-body{padding:6px 0}
+.sum-title{font-weight:700;font-size:14px;text-align:center;margin-bottom:10px}
+.sum-text{font-size:13px;line-height:2.3}
+.mcq-opts{display:flex;flex-direction:column;gap:5px;padding-left:10px}
+.mcq-opt{display:flex;align-items:flex-start;gap:7px;font-size:13px;cursor:default;user-select:none}
+.mcq-opt input{cursor:pointer;width:17px;height:17px;flex-shrink:0;margin-top:1px}
+.mcq-opt .mcq-let{pointer-events:none}
+.mcq-opt span:last-child{pointer-events:none}
+.mcq-let{font-weight:700;flex-shrink:0;min-width:16px}
+#bnav{background:#f0f0f0;border-top:1px solid #ccc;flex-shrink:0;padding:0;min-height:44px;display:flex;align-items:stretch}
+#bnav-inner{display:flex;align-items:center;width:100%;padding:0 10px;gap:0;min-height:44px}
+#bnav-p1{display:flex;align-items:center;gap:5px;flex-shrink:0}
+.bnav-plabel{font-size:13px;font-weight:700;font-family:Arial,sans-serif;color:#222;white-space:nowrap;cursor:pointer}
+.bnav-plabel:hover{text-decoration:underline}
+#bnav-pills{display:flex;align-items:center;gap:3px;flex-wrap:nowrap}
+.qpill{min-width:26px;height:26px;padding:0 4px;display:flex;align-items:center;justify-content:center;font-size:12px;font-family:Arial,sans-serif;color:#444;border-radius:3px;border:1px solid transparent;cursor:pointer;user-select:none;background:transparent}
+.qpill:hover{border-color:#999;background:#e6e6e6}
+.qpill.ans{color:#222;font-weight:600}
+.bnav-sep{width:1px;background:#ccc;height:24px;margin:0 12px;flex-shrink:0}
+.bnav-pother{display:flex;align-items:center;gap:6px;flex-shrink:0;cursor:pointer;padding:0 4px}
+.bnav-pother:hover .bnav-plabel2{text-decoration:underline}
+.bnav-plabel2{font-size:13px;font-weight:700;font-family:Arial,sans-serif;color:#666}
+.bnav-pother.active .bnav-plabel2{color:#222}
+.bnav-pscore{font-size:12px;color:#666;font-family:Arial,sans-serif}
+#bnav-spacer{flex:1}
+#sub-btn{width:44px;height:44px;background:#e0e0e0;border:none;border-left:1px solid #ccc;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:20px;color:#444}
+#sub-btn:hover{background:#d0d0d0;color:#111}
+#res-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:99999;display:none;align-items:center;justify-content:center}
+#res-modal{background:#fff;width:92vw;max-width:720px;max-height:88vh;overflow-y:auto;border-radius:5px;padding:24px 26px;box-shadow:0 6px 36px rgba(0,0,0,.35);font-family:Arial,sans-serif}
+#res-modal::-webkit-scrollbar{width:6px}
+#res-modal::-webkit-scrollbar-thumb{background:#ccc;border-radius:3px}
+.rm-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.rm-title{font-size:18px;font-weight:700}
+.rm-close{background:none;border:none;font-size:24px;cursor:pointer;color:#666;line-height:1;padding:0}
+.rm-close:hover{color:#000}
+.rm-part{margin-bottom:20px;border:1px solid #ddd;border-radius:4px;overflow:hidden}
+.rm-ph{background:#f2f2f2;padding:8px 14px;font-weight:700;font-size:13.5px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #ddd}
+.rm-badge{font-size:12px;color:#fff;padding:2px 11px;border-radius:10px;font-weight:700}
+.rm-badge.good{background:#2e7d32}.rm-badge.ok{background:#e65100}.rm-badge.bad{background:#c41230}
+.rm-tbl{width:100%;border-collapse:collapse;font-size:12.5px}
+.rm-tbl th{background:#f8f8f8;padding:5px 10px;text-align:left;font-weight:700;border-bottom:1px solid #ddd;color:#333}
+.rm-tbl td{padding:5px 10px;border-bottom:1px solid #f0f0f0;vertical-align:top}
+.rm-tbl tr:last-child td{border-bottom:none}
+tr.rr-ok{background:#f1fff4}
+tr.rr-no{background:#fff5f5}
+.mc{color:#2e7d32;font-weight:700}
+.mw{color:#c41230;font-weight:700}
+.total-strip{margin-top:16px;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center}
+.ts-lbl{font-size:15px;font-weight:700}
+.ts-num{font-size:26px;font-weight:900;color:#c41230;text-align:right;line-height:1.1}
+.ts-band{font-size:12px;color:#666;margin-top:2px}
+</style>
+</head>
+<body>
+<div id="hl-tip">✏ Highlight</div>
+
+<div id="hdr">
+  <div id="hdr-left">
+    <div class="ielts-badge">IELTS</div>
+    <a id="tg-link" href="https://t.me/alisher_abduvohobov" target="_blank">
+      <span class="tg-circle">
+        <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" fill="none">
+          <path d="M54 117.9c35-15.2 58.3-25.3 70-30.2 33.3-13.9 40.2-16.3 44.7-16.4 1 0 3.2.2 4.6 1.5 1.2 1 1.5 2.5 1.7 3.5.2 1 .4 3.2.2 4.9-1.9 19.9-10 68.2-14.1 90.5-1.7 9.4-5.1 12.6-8.4 12.9-7.1.7-12.5-4.7-19.4-9.2-10.8-7.1-16.9-11.5-27.4-18.4-12.1-8-4.3-12.4 2.6-19.6 1.8-1.9 33.2-30.4 33.8-33 .1-.3.1-.6-.2-.9-.3-.2-.7-.1-1.1 0-.5.1-7.9 5-22.4 14.9-21.2 14.3-28.6 14.6-37 11.1-3.1-1.3-8.8-3.7-8.8-3.7s-3.2-2 2.2-4.9z" fill="#fff"/>
+        </svg>
+      </span>
+      Alisher's IELTS | 9.0
+    </a>
+  </div>
+  <div id="hdr-right">
+    <div id="menu-wrap">
+      <button id="menu-btn" onclick="toggleMenu()" title="Settings">
+        <span></span><span></span><span></span>
+      </button>
+      <div id="menu-dropdown">
+        <div class="md-title">Text Size</div>
+        <div class="md-row">
+          <span class="md-lbl">Passage</span>
+          <button class="fsz-btn" onclick="changeFontSize('pass',-1)">A−</button>
+          <span id="fsz-pass-val">14px</span>
+          <button class="fsz-btn" onclick="changeFontSize('pass',1)">A+</button>
+        </div>
+        <div class="md-row" style="margin-top:8px">
+          <span class="md-lbl">Questions</span>
+          <button class="fsz-btn" onclick="changeFontSize('q',-1)">A−</button>
+          <span id="fsz-q-val">13px</span>
+          <button class="fsz-btn" onclick="changeFontSize('q',1)">A+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="pbar">
+  <span id="pbar-title">Passage 1</span><span id="pbar-desc">&nbsp;&nbsp;Read the text and answer questions 1–13.</span>
+</div>
+
+<div id="main">
+  <div id="ppane"></div>
+  <div id="divider"><div id="div-btn">↔</div></div>
+  <div id="qpane"></div>
+</div>
+
+<div id="bnav">
+  <div id="bnav-inner">
+    <div id="bnav-p1">
+      <span class="bnav-plabel" onclick="goPart(1)" id="bnav-lbl1">Passage 1</span>
+      <div id="bnav-pills"></div>
+    </div>
+    <div class="bnav-sep" id="bnav-sep1"></div>
+    <div class="bnav-pother" id="bnav-po2" onclick="goPart(2)">
+      <span class="bnav-plabel2" id="bnav-lbl2">Passage 2</span>
+      <span class="bnav-pscore" id="pts2">0 of 13</span>
+    </div>
+    <div class="bnav-sep" id="bnav-sep2"></div>
+    <div class="bnav-pother" id="bnav-po3" onclick="goPart(3)">
+      <span class="bnav-plabel2" id="bnav-lbl3">Passage 3</span>
+      <span class="bnav-pscore" id="pts3">0 of 14</span>
+    </div>
+    <div id="bnav-spacer"></div>
+    <button id="sub-btn" onclick="showResults()" title="Submit">✓</button>
+  </div>
+</div>
+
+<div id="res-overlay">
+  <div id="res-modal">
+    <div class="rm-hdr">
+      <div class="rm-title">Test Results</div>
+      <button class="rm-close" onclick="closeResults()">✕</button>
+    </div>
+    <div id="res-body"></div>
+  </div>
+</div>
+
+<script>
+const PASSAGES = {
+1: `<div class="pass-title">Caral: an ancient South American city</div>
+<div class="pass-body">
+<p>Huge earth and rock mounds rise out of the desert of the Supe Valley near the coast of Peru in South America. These immense mounds appear simply to be part of the geographical landscape in this arid region squeezed between the Pacific Ocean and the Andes mountains. But looks deceive. These are actually human-made pyramids. Strong evidence indicates they are the remains of a city known as Caral that flourished nearly 5,000 years ago. If true, it would be the oldest known urban center in the Americas and among the most ancient in the world.</p>
+<p>Research undertaken by Peruvian archaeologist Ruth Shady suggests that the 150-acre complex of pyramids, plazas and residential buildings was a thriving metropolis when Egypt's great pyramids were still being built. Though discovered in 1905, for years Caral attracted little attention, largely because archaeologists believed the structures were fairly recent. But the monumental scale of the pyramids had long interested Shady, who began excavations at the site in 1996, about 22 kilometers from the coast and 190 kilometers north of Peru's capital city of Lima.</p>
+<p>Shady and her crew searched for broken remains of the pots and containers that most such sites contain. Not finding any only made her more excited: it meant Caral could be what archaeologists term pre-ceramic, that is, existing before the advent in the area of pot-firing techniques. Shady's team undertook the task of excavating Piramide Mayor, the largest of the pyramids. After carefully clearing away many hundreds of years' worth of rubble and sand, they identified staircases, walls covered with remnants of colored plaster, and brickwork. In the foundations, they found the remains of grass-like reeds woven into bags. The original workers, she surmised, must have filled these bags with stones from a nearby quarry and laid them atop one another inside retaining walls, gradually giving rise to the pyramid's immense structure. Shady had samples of the reeds subjected to radiocarbon dating and found that the reeds were 4,600 years old. This evidence indicated that Caral was, in fact, more than 1,000 years older than what had previously been thought to be the oldest urban center in the Americas.</p>
+<p>What amazed archaeologists was not just the age, but the complexity and scope of Caral. Piramide Mayor alone covers an area nearly the size of four football fields and is 18 meters tall. A nine-meter-wide staircase rises from a circular plaza at the foot of the pyramid, passing over three terraced levels until it reaches the top. Thousands of manual laborers would have been needed to build such a project, not counting the many architects, craftsmen, and managers. Shady's team found the remains of a large amphitheater, containing almost 70 musical instruments made of bird and deer bones. Clearly music played an important role in Caral's society. Around the perimeter of Caral are a series of smaller mounds and various buildings. These indicate a hierarchy of living arrangements: large, well-kept rooms atop pyramids for the elite, ground-level quarters for craftsmen, and shabbier outlying dwellings for workers.</p>
+<p>But why had Caral been built in the first place? Her excavations convinced Shady that Caral once served as a trade center for the region, which extends from the rainforests of the Amazon to the high forests of the Andes. Shady found evidence of a rich trading environment, including seeds of the cocoa bush and necklaces of shells, neither of which was native to the immediate Caral area. This environment gave rise to people who did not take part in the production of food, allowing them to become priests and planners, builders and designers. Thus occupational specialization, elemental to an urban society, emerged.</p>
+<p>But what sustained such a trading center and drew travelers to it? Was it food? Shady and her team found the bones of small edible fish, which must have come from the Pacific coast to the west, in the excavations. But they also found evidence of squash, sweet potatoes and beans having been grown locally. Shady theorized that Caral's early farmers diverted the area's rivers into canals, which still cross the Supe Valley today, to irrigate their fields. But because she found no traces of maize, which can be traded or stored and used in times of crop failure, she concluded that Caral's trade leverage was not based on stockpiling food supplies.</p>
+<p>It was evidence of another crop in the excavations that gave Shady the best clue to Caral's success. In nearly every excavated building, her team discovered evidence of cotton — seeds, fibers and textiles. Her theory fell into place when a large fishing net made of those fibers, unearthed in an unrelated dig on Peru's coast, turned out to be as old as Caral. 'The farmers of Caral grew the cotton that the fishermen needed to make their nets,' Shady speculates. 'And the fishermen gave them shellfish and dried fish in exchange for these nets.' In essence, the people of Caral enabled fishermen to work with larger and more effective nets, which made the resources of the sea more readily available, and the fishermen probably used dried squash grown by the Caral people as flotation devices for their nets.</p>
+</div>`,
+2: `<div class="pass-title">Should space be explored by robots or by humans?</div>
+<div class="pass-body">
+<p><span class="para-letter">A</span>The advisability of humans participating directly in space travel continues to cause many debates. There is no doubt that the presence of people on board a space vehicle makes its design much more complex and challenging, and produces a large increase in costs, since safety requirements are greatly increased, and the technology providing necessities for human passengers such as oxygen, food and water must be guaranteed. Moreover, the systems required are bulky and costly, and their complexity increases for long-duration missions. Meanwhile, advances in electronics and computer science allow increasingly complex tasks to be entrusted to robots, and unmanned space probes are becoming lighter, smaller and more convenient.</p>
+<p><span class="para-letter">B</span>However, experience has shown that the idea of humans in space is popular with the public. Humans can also be useful; there are many cases when only direct intervention by an astronaut or cosmonaut can correct the malfunction of an automatic device. Astronauts and cosmonauts have proved that they can adapt to conditions of weightlessness and work in space without encountering too many problems, as was seen in the operations to repair and to upgrade the Hubble Space Telescope. One human characteristic which is particularly precious in space missions, and which so far is lacking in robots, is the ability to perform a great variety of tasks. In addition, robots are not good at reacting to situations they have not been specifically prepared for. This is especially important in the case of deep space missions. While, in the case of the Moon, it is possible for someone on Earth to 'tele-operate' a robotic device such as a probe, as the two-way link time is only a couple of seconds, on Mars the two-way link time is several minutes, so sending instructions from Earth is more difficult.</p>
+<p><span class="para-letter">C</span>Many of the promises of artificial intelligence are still far from being fulfilled. The construction of machines simulating human logical reasoning moves towards ever more distant dates. The more the performance of computers improves, the more we realise how difficult it is to build machines which display logical abilities. In the past it was confidently predicted that we would soon have fully automated factories in which all operations were performed without any human intervention, and forecasts of the complete substitution of workers by robots in many production areas were made. Today, these perspectives are being revised. It seems that all machines, even the smartest ones, must cooperate with humans. Rather than replacing humans, the present need appears to be for an intelligent machine capable of helping a human operator without replacing him or her. The word 'cobot', from 'collaborative robot', has been invented to designate this type of machine.</p>
+<p><span class="para-letter">D</span>A similar trend is also apparent in the field of space exploration. Tasks which were in the past entrusted only to machines are now performed by human beings, sometimes with the aim of using simpler and less costly devices, sometimes to obtain better performance. In many cases, to involve a person in the control loop is a welcome simplification which may lower the cost of a mission without compromising safety. Many operations originally designed to be performed under completely automatic control can be performed more efficiently by astronauts, perhaps helped by their 'cobots'. The human-machine relationship must evolve towards a closer collaboration.</p>
+<p><span class="para-letter">E</span>One way this could happen is by adopting the Mars Outposts approach, proposed by the Planetary Society. This would involve sending a number of robotic research stations to Mars, equipped with permanent communications and navigational systems. They would perform research, and establish the infrastructure needed to prepare future landing sites for the exploration of Mars by humans. It has also been suggested that in the most difficult environments, as on Venus or Jupiter, robots could be controlled by human beings located in spaceships which remain in orbit around the planet. In this case the link time for communication between humans and robots would be far less than it would be from Earth.</p>
+<p><span class="para-letter">F</span>But if space is to be more than a place to build automatic laboratories or set up industrial enterprises in the vicinity of our planet, the presence of humans is essential. They must learn how to voyage through space towards destinations which will be not only scientific bases but also places to live. If space is a frontier, that frontier must see the presence of people. So the aim for humankind in the future will be not just the exploration of space, but its colonisation. The result of exploring and living in space may be a deep change in the views which humankind has of itself. And this process is already under way. The images of Earth taken from the Moon in the Apollo programme have given humankind a new consciousness of its fragility, its smallness, and its unity. These impressions have triggered a realisation of the need to protect and preserve it, for it is the place in the solar system most suitable for us and above all it is the only place we have, at least for now.</p>
+</div>`,
+3: `<div class="pass-title">The dark side of the technological boom</div>
+<div class="pass-sub">What are the effects on the individual of working in modern technological workplaces?</div>
+<div class="pass-body">
+<p>Changes in the way we work and how our offices are structured come at us faster and faster. Waves of state-of-the-art information technology and instant telecommunications let us reach anyone, anywhere, and speed is the key. Most of us are too busy struggling to keep pace with ongoing innovations to question the implications of our new electronic authority figures. According to a number of psychologists, however, the need to stay on top of the information flow and the extent to which we remain in touch with our offices exact a profound toll on us as individuals.</p>
+<p>Mass exposure to technological innovations in the workplace has come too recently for psychologists to reach a consensus on its societal implications. Many agree, however, that one of the first signs of the struggle to adapt to the electronic office is often 'technostress', a cognitive shift that results from an over-identification with information systems. Psychologist Craig Brod says people become accustomed to the patterns set by electronic tools — accelerated time and yes/no logic — and internalize these patterns. When they leave the office or go home, Brod says, they need complete isolation to recover from the effects of the technology.</p>
+<p>Brod warns that over-reliance on electronic tools could also have serious repercussions on our ability to think creatively and develop new ideas. Because we don't create in a vacuum, he points out, we need to avoid the temptation to replace informal gatherings for bouncing ideas off colleagues with electronic networking. It's also more difficult to spot errors or even evaluate the shape of a project displayed in a flat, two-dimensional way on a screen.</p>
+<p>Electronically networked offices can also make it increasingly difficult to convince ourselves that we're doing an adequate job and accumulating enough information to make informed decisions. Philosopher Daniel Dennett points out that modern technology eliminates the possibility of unavoidable ignorance. As the opportunity to amass information grows larger, the obligation to make accurate predictions — the right decisions — becomes more onerous. Instead of consoling ourselves that we're doing as good a job as we can, we are tormented by the knowledge that the world of information is limitless.</p>
+<p>For executives near the top of the office pyramid, the benefits of the electronic revolution — like telecommuting and flexible scheduling — may outweigh the disadvantages of being continuously on call. But in <em>Workplace 2000</em>, authors Joseph Boyett and Henry Conn describe a future in which millions of people now charged with analyzing information and making routine decisions will be replaced by less skilled workers using 'intelligent' software to make decisions for them. They predict that a cult of performance excellence will engulf most businesses.</p>
+<p>The millions of people on the bottom levels of electronic hierarchies are increasingly likely to spend their days in an isolated no-man's land, subservient to intelligent information systems that report their progress to unseen supervisors far away. Because computers measure quantity over quality, such systems tend to reward employees who work faster more than those who work better.</p>
+<p>Service people on the telephone or at a cash register curtly terminate attempts at idle conversation because their performance is being electronically monitored. Once judged on their ability to troubleshoot unexpected situations, they're now evaluated by the number of transactions they complete in a shift or the number of keystrokes required to draft a document. In such 'electronic sweatshops', the computers are running the people, not the other way around.</p>
+<p>'I think people are going to feel an increased fragmentation of self. They won't be able to hold the pieces together,' human resources consultant Philip Nicholson says. 'How do you keep a coherent space if you're going in and out of spaces that don't exist?' He likens the psychic numbing of electronic information overload to symptoms of post-traumatic stress syndrome (a mental disorder following a horrific event). In office 'wars', people become overwhelmed by the sheer amount of information available, internalize the diversity of the world outside, and fear losing control of their own lives.</p>
+<p>If we are to survive the challenges of information-driven, hardwired offices, says Nicholson, we need to provide psychological support systems. As no one has yet measured the social cost of the workplace revolution, some psychologists are mobilizing efforts to pool information as it is derived. Nicholson started the Technostress International Information Network in Massachusetts to foster an exchange of data and ideas on the effects of computerization and information technology. Meanwhile, Brod wants to examine the parallels between electronic work environments and sealed-cabin ecologies like space capsules or submarines, both totally automated artificial worlds in which people live in highly confined circumstances surrounded by technology that dictates the tenor of their days as well as their survival. He is petitioning other psychologists to convince the American Psychological Association to form a specialized study group.</p>
+<p>In addition, Brod suggests that we re-examine our value systems and that we make greater allowances for privacy in order to circumvent potential revolts against technology. 'We need to coevolve with technology,' he says. 'These are wonderful tools, but if we exploit them without imposing appropriate values on their use, they become alienating and dangerous.'</p>
+</div>`
+};
+
+const AK = {
+  1:'F',2:'T',3:'F',4:'T',5:'NGV',6:'F',
+  7:'seeds',8:'shells',9:'fish',10:'canals',11:'maize',12:'cotton',13:'flotation',
+  14:'vi',15:'iii',16:'i',17:'v',18:'ix',19:'viii',
+  20:'A',21:'D',
+  22:'infrastructure',23:'spaceships',24:'communication',25:'laboratories',26:'colonisation',
+  27:'B',28:'C',29:'E',
+  30:'B',31:'A',32:'A',33:'D',34:'C',35:'D',
+  36:'NGV',37:'T',38:'T',39:'F',40:'NGV'
+};
+
+function displayAK(n) {
+  const v = AK[n].toString();
+  if (v === 'T')   return 'TRUE';
+  if (v === 'F')   return 'FALSE';
+  if (v === 'NGV') return 'NOT GIVEN';
+  return v;
+}
+
+function tfnBlock(n, text) {
+  const v = ans[n]||'';
+  return `<div class="qitem" id="qi${n}">
+    <div class="qrow"><span class="qno">${n}</span><span>${text}</span></div>
+    <div class="tfn-opts">
+      ${['TRUE','FALSE','NOT GIVEN'].map(o=>`<label class="tfn-opt"><input type="radio" name="rq${n}" value="${o}" ${v===o?'checked':''} onchange="setAns(${n},this.value)">${o}</label>`).join('')}
+    </div>
+  </div>`;
+}
+
+function fillField(n, pre='', post='') {
+  const v = ans[n]||'';
+  return `<div class="notes-li" id="qi${n}">
+    ${pre ? pre+' ' : ''}<span class="fill-field"><span class="fqn">${n}</span><input id="fi${n}" value="${v}" onchange="setAns(${n},this.value)" onkeyup="setAns(${n},this.value)" placeholder="…"></span>${post ? ' '+post : ''}
+  </div>`;
+}
+
+function headingRow(n, para, opts) {
+  const v = ans[n]||'';
+  return `<div class="ph-row" id="qi${n}">
+    <span class="ph-no">${n}</span>
+    <span class="ph-para-label">Paragraph ${para}</span>
+    <select class="qsel" onchange="setAns(${n},this.value)">
+      <option value="">—</option>
+      ${opts.map(o=>`<option value="${o.v}" ${v===o.v?'selected':''}>${o.v}&nbsp;&nbsp;${o.t}</option>`).join('')}
+    </select>
+  </div>`;
+}
+
+function matchRow(n, text, opts) {
+  const v = ans[n]||'';
+  return `<div class="qitem" id="qi${n}">
+    <div class="qrow"><span class="qno">${n}</span><span>${text}</span></div>
+    <select class="qsel" onchange="setAns(${n},this.value)" style="margin-left:26px;margin-top:4px">
+      <option value="">— select —</option>
+      ${opts.map(o=>`<option value="${o.v}" ${v===o.v?'selected':''}>${o.v} — ${o.t}</option>`).join('')}
+    </select>
+  </div>`;
+}
+
+function mcqBlock(n, qtext, opts) {
+  const v = ans[n]||'';
+  return `<div class="qitem" id="qi${n}">
+    <div class="qrow"><span class="qno">${n}</span><span>${qtext}</span></div>
+    <div class="mcq-opts">
+      ${Object.entries(opts).map(([l,t])=>`<div class="mcq-opt"><input type="radio" name="rq${n}" value="${l}" ${v===l?'checked':''} onchange="setAns(${n},this.value)"><span class="mcq-let">${l}</span><span>${t}</span></div>`).join('')}
+    </div>
+  </div>`;
+}
+
+function renderQ(p){if(p===1)return renderQ1();if(p===2)return renderQ2();return renderQ3();}
+
+function renderQ1(){
+  const sv=(n)=>ans[n]||'';
+  return `
+  <div class="qs">
+    <div class="qs-instr">Questions 1–6<br>Do the following statements agree with the information given in Reading Passage 1?<br>In boxes 1–6 on your answer sheet, write<br><strong>TRUE</strong> if the statement agrees with the information<br><strong>FALSE</strong> if the statement contradicts the information<br><strong>NOT GIVEN</strong> if there is no information on this</div>
+    ${tfnBlock(1,'Caral was built at the same time as the construction of the Egyptian pyramids.')}
+    ${tfnBlock(2,'The absence of pottery at the archaeological dig gave Shady a significant clue to the age of the site.')}
+    ${tfnBlock(3,'The stones used to build Piramide Mayor came from a location far away.')}
+    ${tfnBlock(4,'The huge and complicated structures of Piramide Mayor suggest that its construction required an organised team of builders.')}
+    ${tfnBlock(5,'Archaeological evidence shows that the residents of Caral were highly skilled musicians.')}
+    ${tfnBlock(6,'The remains of housing areas at Caral suggest that there were no class distinctions in residential areas.')}
+  </div>
+  <div class="qs">
+    <div class="qs-instr">Questions 7–13<br>Complete the notes below.<br>Choose <strong>ONE WORD ONLY</strong> from the passage for each answer.<br>Write your answers in boxes 7–13 on your answer sheet.</div>
+    <div class="notes-wrap">
+      <div class="notes-head">Caral as a trading centre</div>
+      <div class="notes-sec-title">Items discovered at Caral but not naturally occurring in the area</div>
+      ${fillField(7,'• the','… of a certain plant')}
+      ${fillField(8,'• 8','… used to make jewellery')}
+      ${fillField(9,'• the remains of certain food such as 9','…')}
+      <div class="notes-sec-title">Clues to farming around Caral</div>
+      ${fillField(10,'•','… still in existence today indicate water diverted from rivers')}
+      ${fillField(11,'• no evidence that','… was grown')}
+      <div class="notes-sec-title">Evidence of relationship with fishing communities</div>
+      ${fillField(12,'• the excavation findings and fishing nets found on the coast suggest Caral farmers traded','…')}
+      ${fillField(13,'• dried squash may have been used to aid','… of fishing nets')}
+    </div>
+  </div>`;
+}
+
+function renderQ2(){
+  const HOPTS=[
+    {v:'i',t:'Robots on Earth – a re-evaluation'},
+    {v:'ii',t:'The barriers to cooperation in space exploration'},
+    {v:'iii',t:'Some limitations of robots in space'},
+    {v:'iv',t:'Reduced expectations for space exploration'},
+    {v:'v',t:'A general reconsideration of human/robot responsibilities in space'},
+    {v:'vi',t:'Problems in using humans for space exploration'},
+    {v:'vii',t:'The danger to humans of intelligent machines'},
+    {v:'viii',t:'Space settlement and the development of greater self-awareness'},
+    {v:'ix',t:'Possible examples of cooperation in space'}
+  ];
+  const sv=(n)=>ans[n]||'';
+  return `
+  <div class="qs">
+    <div class="qs-instr">Questions 14–19<br>Reading Passage 2 has six paragraphs, <strong>A–F</strong>.<br>Choose the correct heading for each paragraph from the list of headings below.<br>Write the correct number, <strong>i–ix</strong>, in boxes 14–19 on your answer sheet.</div>
+    <div class="hbox"><div class="hbox-title">List of Headings</div><div class="hbox-body">${HOPTS.map(o=>`<div class="hrow"><span class="hrn">${o.v}</span><span>${o.t}</span></div>`).join('')}</div></div>
+    ${headingRow(14,'A',HOPTS)}
+    ${headingRow(15,'B',HOPTS)}
+    ${headingRow(16,'C',HOPTS)}
+    ${headingRow(17,'D',HOPTS)}
+    ${headingRow(18,'E',HOPTS)}
+    ${headingRow(19,'F',HOPTS)}
+  </div>
+  <div class="qs">
+    <div class="qs-instr">Questions 20 and 21<br>Choose <strong>TWO</strong> letters, <strong>A–E</strong>.<br>Write the correct letters in boxes 20 and 21 on your answer sheet.<br>According to the writer, which <strong>TWO</strong> predictions about artificial intelligence have not yet been fulfilled?</div>
+    ${mcqBlock(20,'First unfulfilled prediction:',{A:'Robots will work independently of humans.',B:'Robots will begin to oppose human interests.',C:'Robots will be used to help humans perform tasks more efficiently.',D:'Robots will think in the same way as humans.',E:'Robots will become too costly to use on space missions.'})}
+    ${mcqBlock(21,'Second unfulfilled prediction:',{A:'Robots will work independently of humans.',B:'Robots will begin to oppose human interests.',C:'Robots will be used to help humans perform tasks more efficiently.',D:'Robots will think in the same way as humans.',E:'Robots will become too costly to use on space missions.'})}
+  </div>
+  <div class="qs">
+    <div class="qs-instr">Questions 22–26<br>Complete the summary below.<br>Choose <strong>ONE WORD ONLY</strong> from the passage for each answer.<br>Write your answers in boxes 22–26 on your answer sheet.</div>
+    <div class="sum-body">
+      <div class="sum-title">Humans in space – the Mars Outposts approach and its implications</div>
+      <div class="sum-text">One way of exploring space would be through collaboration between humans and robots. For example, when exploring the planet Mars, robots could be used to set up
+      <span class="fill-field" id="qi22"><span class="fqn">22</span><input id="fi22" value="${sv(22)}" onchange="setAns(22,this.value)" onkeyup="setAns(22,this.value)" placeholder="…"></span>
+      and do initial research before humans arrive. In other cases, humans could stay in orbiting
+      <span class="fill-field" id="qi23"><span class="fqn">23</span><input id="fi23" value="${sv(23)}" onchange="setAns(23,this.value)" onkeyup="setAns(23,this.value)" placeholder="…"></span>
+      and give orders to robots working on the surface of the planet. This would increase the speed of
+      <span class="fill-field" id="qi24"><span class="fqn">24</span><input id="fi24" value="${sv(24)}" onchange="setAns(24,this.value)" onkeyup="setAns(24,this.value)" placeholder="…"></span>
+      with the robots. In such ways, robots might be used to work in space in commercial enterprises or
+      <span class="fill-field" id="qi25"><span class="fqn">25</span><input id="fi25" value="${sv(25)}" onchange="setAns(25,this.value)" onkeyup="setAns(25,this.value)" placeholder="…"></span>.
+      However, the final aim of humankind may be the
+      <span class="fill-field" id="qi26"><span class="fqn">26</span><input id="fi26" value="${sv(26)}" onchange="setAns(26,this.value)" onkeyup="setAns(26,this.value)" placeholder="…"></span>
+      of space and this could in turn change people's attitudes towards Earth.</div>
+    </div>
+  </div>`;
+}
+
+function renderQ3(){
+  const ENDINGS=[
+    {v:'A',t:'requires more detailed study by psychologists.'},
+    {v:'B',t:'means people have no time to challenge the significance of the new technology.'},
+    {v:'C',t:'may reduce inventiveness and innovation.'},
+    {v:'D',t:'suggests computers will take over the workplace.'},
+    {v:'E',t:'results from increased electronic supervision.'}
+  ];
+  const PEOPLE=[
+    {v:'A',t:'Craig Brod'},
+    {v:'B',t:'Daniel Dennett'},
+    {v:'C',t:'Joseph Boyett and Henry Conn'},
+    {v:'D',t:'Philip Nicholson'}
+  ];
+  return `
+  <div class="qs">
+    <div class="qs-instr">Questions 27–29<br>Complete each sentence with the correct ending, <strong>A–E</strong>, below.<br>Write the correct letter, <strong>A–E</strong>, in boxes 27–29 on your answer sheet.</div>
+    <div class="abox"><div class="abox-title">List of Endings</div><div class="abox-body">${ENDINGS.map(e=>`<div class="arow"><span class="arl">${e.v}</span>${e.t}</div>`).join('')}</div></div>
+    ${matchRow(27,'The speed of technological changes',ENDINGS)}
+    ${matchRow(28,'A dependency on technology and computers',ENDINGS)}
+    ${matchRow(29,'A deterioration in personal service',ENDINGS)}
+  </div>
+  <div class="qs">
+    <div class="qs-instr">Questions 30–35<br>Look at the following statements (Questions 30–35) and the list of people below.<br>Match each statement with the correct person or people, <strong>A, B, C</strong> or <strong>D</strong>.<br>Write the correct letter, <strong>A, B, C</strong> or <strong>D</strong>, in boxes 30–35 on your answer sheet.<br><em><strong>NB</strong> You may use any letter more than once.</em></div>
+    <div class="abox"><div class="abox-title">List of People</div><div class="abox-body">${PEOPLE.map(p=>`<div class="arow"><span class="arl">${p.v}</span>${p.t}</div>`).join('')}</div></div>
+    ${matchRow(30,'Technology has placed greater expectations on workers not to make mistakes.',PEOPLE)}
+    ${matchRow(31,'People will need time away from technology to reduce the frustrations caused by it.',PEOPLE)}
+    ${matchRow(32,'Interacting with others at work contributes to creative thinking.',PEOPLE)}
+    ${matchRow(33,'The psychological effect of working with technology is similar to the anxiety felt after surviving a major ordeal.',PEOPLE)}
+    ${matchRow(34,'Technology will ultimately increase unemployment for more highly qualified personnel.',PEOPLE)}
+    ${matchRow(35,'More counselling is required to help people cope with the demands of the modern workplace.',PEOPLE)}
+  </div>
+  <div class="qs">
+    <div class="qs-instr">Questions 36–40<br>Do the following statements agree with the information given in Reading Passage 3?<br>In boxes 36–40 on your answer sheet, write<br><strong>TRUE</strong> if the statement agrees with the information<br><strong>FALSE</strong> if the statement contradicts the information<br><strong>NOT GIVEN</strong> if there is no information on this</div>
+    ${tfnBlock(36,'Our knowledge of the effects of technology on workers is still limited.')}
+    ${tfnBlock(37,'An early indicator of technological anxiety is a tendency to adopt machine-like thinking.')}
+    ${tfnBlock(38,'We have now started to doubt our ability to perform well at work.')}
+    ${tfnBlock(39,'Top level managers may be more negatively affected by changes in the electronic workplace than junior workers.')}
+    ${tfnBlock(40,'Employees who learn to use new technology quickly will get promoted.')}
+  </div>`;
+}
+
+let curPart=1, ans={};
+const pbarDescs={1:'Read the text and answer questions 1–13.',2:'Read the text and answer questions 14–26.',3:'Read the text and answer questions 27–40.'};
+const pRanges={1:[1,13],2:[14,26],3:[27,40]};
+
+function goPart(p){
+  if(p<1||p>3)return;
+  curPart=p;
+  document.getElementById('pbar-title').textContent='Passage '+p;
+  document.getElementById('pbar-desc').textContent='\u00a0\u00a0'+pbarDescs[p];
+  document.getElementById('ppane').innerHTML=PASSAGES[p];
+  document.getElementById('qpane').innerHTML=renderQ(p);
+  document.getElementById('bnav-po2').innerHTML=`<span class="bnav-plabel2" id="bnav-lbl2">Passage 2</span><span class="bnav-pscore" id="pts2">0 of 13</span>`;
+  document.getElementById('bnav-po3').innerHTML=`<span class="bnav-plabel2" id="bnav-lbl3">Passage 3</span><span class="bnav-pscore" id="pts3">0 of 14</span>`;
+  renderPills();
+  document.getElementById('ppane').scrollTop=0;
+  document.getElementById('qpane').scrollTop=0;
+  applyFontSizes();
+}
+
+function setAns(n,v){ans[n]=v.trim();renderPills();}
+
+function renderPills(){
+  const[s,e]=pRanges[curPart];
+  for(let p=1;p<=3;p++){const[ps,pe]=pRanges[p];let c=0;for(let i=ps;i<=pe;i++)if(ans[i]&&ans[i].trim()!=='')c++;if(p!==1){const el=document.getElementById('pts'+p);if(el)el.textContent=`${c} of ${pe-ps+1}`;}}
+  if(curPart===1){
+    let h='';for(let i=s;i<=e;i++){const a=ans[i]&&ans[i]!=='';h+=`<div class="qpill${a?' ans':''}" onclick="scrollToQ(${i})">${i}</div>`;}
+    document.getElementById('bnav-pills').innerHTML=h;
+    document.getElementById('bnav-lbl1').style.color='#222';
+    const l2=document.getElementById('bnav-lbl2');if(l2)l2.style.color='#666';
+    const l3=document.getElementById('bnav-lbl3');if(l3)l3.style.color='#666';
+  } else if(curPart===2){
+    document.getElementById('bnav-pills').innerHTML='';
+    document.getElementById('bnav-lbl1').style.color='#666';
+    let h='';for(let i=s;i<=e;i++){const a=ans[i]&&ans[i]!=='';h+=`<div class="qpill${a?' ans':''}" onclick="scrollToQ(${i})">${i}</div>`;}
+    document.getElementById('bnav-po2').innerHTML=`<span class="bnav-plabel2" id="bnav-lbl2" style="color:#222;font-weight:700">Passage 2</span><span style="display:flex;align-items:center;gap:3px">${h}</span>`;
+    const[ps3,pe3]=pRanges[3];let c3=0;for(let i=ps3;i<=pe3;i++)if(ans[i]&&ans[i]!=='')c3++;
+    document.getElementById('bnav-po3').innerHTML=`<span class="bnav-plabel2" id="bnav-lbl3" style="color:#666">Passage 3</span><span class="bnav-pscore" id="pts3">${c3} of ${pe3-ps3+1}</span>`;
+  } else {
+    document.getElementById('bnav-pills').innerHTML='';
+    document.getElementById('bnav-lbl1').style.color='#666';
+    const[ps2,pe2]=pRanges[2];let c2=0;for(let i=ps2;i<=pe2;i++)if(ans[i]&&ans[i]!=='')c2++;
+    document.getElementById('bnav-po2').innerHTML=`<span class="bnav-plabel2" id="bnav-lbl2" style="color:#666">Passage 2</span><span class="bnav-pscore" id="pts2">${c2} of ${pe2-ps2+1}</span>`;
+    let h='';for(let i=s;i<=e;i++){const a=ans[i]&&ans[i]!=='';h+=`<div class="qpill${a?' ans':''}" onclick="scrollToQ(${i})">${i}</div>`;}
+    document.getElementById('bnav-po3').innerHTML=`<span class="bnav-plabel2" id="bnav-lbl3" style="color:#222;font-weight:700">Passage 3</span><span style="display:flex;align-items:center;gap:3px">${h}</span>`;
+  }
+}
+
+function scrollToQ(n){const el=document.getElementById('qi'+n);if(el)el.scrollIntoView({behavior:'smooth',block:'center'});}
+
+/* Highlight */
+const hlTip=document.getElementById('hl-tip');
+let hlRange=null;
+function isInPane(node){const pp=document.getElementById('ppane');const qp=document.getElementById('qpane');return pp.contains(node)||qp.contains(node);}
+document.addEventListener('mouseup',e=>{
+  if(e.target===hlTip)return;
+  const sel=window.getSelection();
+  if(!sel||sel.isCollapsed||!sel.toString().trim()){hlTip.style.display='none';return;}
+  const range=sel.getRangeAt(0);
+  if(!isInPane(range.commonAncestorContainer)){hlTip.style.display='none';return;}
+  hlRange=range.cloneRange();
+  const r=range.getBoundingClientRect();
+  hlTip.style.left=(r.left+r.width/2-38)+'px';
+  hlTip.style.top=(r.top+window.scrollY-34)+'px';
+  hlTip.style.display='block';
+});
+document.addEventListener('mousedown',e=>{if(e.target!==hlTip)hlTip.style.display='none';});
+hlTip.addEventListener('click',()=>{
+  if(!hlRange)return;
+  const sp=document.createElement('span');sp.className='hl';sp.onclick=function(){this.outerHTML=this.innerHTML;};sp.title='Click to remove';
+  try{hlRange.surroundContents(sp);}catch(ex){const f=hlRange.extractContents();sp.appendChild(f);hlRange.insertNode(sp);}
+  hlTip.style.display='none';window.getSelection().removeAllRanges();
+});
+
+/* Resizable divider */
+let drag=false,dStartX,dStartW;
+const divEl=document.getElementById('divider'),ppEl=document.getElementById('ppane');
+divEl.addEventListener('mousedown',e=>{drag=true;dStartX=e.clientX;dStartW=ppEl.offsetWidth;document.body.style.cursor='col-resize';document.body.style.userSelect='none';});
+document.addEventListener('mousemove',e=>{if(!drag)return;const tot=document.getElementById('main').offsetWidth-10;ppEl.style.width=Math.max(240,Math.min(tot-240,dStartW+(e.clientX-dStartX)))+'px';});
+document.addEventListener('mouseup',()=>{drag=false;document.body.style.cursor='';document.body.style.userSelect='';});
+
+/* Results */
+function normalizeAns(v){
+  const s=v.trim().toLowerCase();
+  if(s==='true')return 't';
+  if(s==='false')return 'f';
+  if(s==='not given')return 'ngv';
+  return s;
+}
+function isCorrect(n){return normalizeAns(ans[n]||'')===normalizeAns(AK[n].toString());}
+
+function showResults(){
+  const partNames={1:'Passage 1 – Caral: an ancient South American city (Q1–13)',2:'Passage 2 – Should space be explored by robots or by humans? (Q14–26)',3:'Passage 3 – The dark side of the technological boom (Q27–40)'};
+  let total=0,html='';
+  for(let p=1;p<=3;p++){
+    const[s,e]=pRanges[p];let pc=0,rows='';
+    for(let i=s;i<=e;i++){
+      const ok=isCorrect(i);if(ok){pc++;total++;}
+      const ua=(ans[i]||'').trim()||'—';
+      rows+=`<tr class="${ok?'rr-ok':'rr-no'}">
+        <td><strong>${i}</strong></td>
+        <td>${ua}</td>
+        <td class="mc">${displayAK(i)}</td>
+        <td class="${ok?'mc':'mw'}">${ok?'✓':'✗'}</td>
+      </tr>`;
+    }
+    const tot2=e-s+1,pct=Math.round(pc/tot2*100),bc=pct>=70?'good':(pct>=50?'ok':'bad');
+    html+=`<div class="rm-part"><div class="rm-ph">${partNames[p]}<span class="rm-badge ${bc}">${pc}/${tot2} (${pct}%)</span></div>
+      <table class="rm-tbl"><thead><tr><th>Q</th><th>Your Answer</th><th>Correct</th><th></th></tr></thead><tbody>${rows}</tbody></table>
+    </div>`;
+  }
+  const pct=Math.round(total/40*100);
+  const band=total>=39?'9.0':total>=37?'8.5':total>=35?'8.0':total>=33?'7.5':total>=30?'7.0':total>=27?'6.5':total>=23?'6.0':total>=19?'5.5':total>=15?'5.0':total>=13?'4.5':'4.0';
+  html+=`<div class="total-strip"><span class="ts-lbl">Total Score</span><div><div class="ts-num">${total} / 40 <span style="font-size:14px;color:#888">(${pct}%)</span></div><div class="ts-band">Estimated Band Score: <strong>${band}</strong></div></div></div>`;
+  document.getElementById('res-body').innerHTML=html;
+  document.getElementById('res-overlay').style.display='flex';
+}
+
+function closeResults(){document.getElementById('res-overlay').style.display='none';}
+
+/* Font size */
+let fsPass=14,fsQ=13;
+const FS_MIN=10,FS_MAX=22;
+function changeFontSize(which,delta){
+  if(which==='pass'){fsPass=Math.max(FS_MIN,Math.min(FS_MAX,fsPass+delta));document.getElementById('fsz-pass-val').textContent=fsPass+'px';}
+  else{fsQ=Math.max(FS_MIN,Math.min(FS_MAX,fsQ+delta));document.getElementById('fsz-q-val').textContent=fsQ+'px';}
+  applyFontSizes();
+}
+function applyFontSizes(){
+  const pp=document.getElementById('ppane');if(pp)pp.querySelectorAll('p').forEach(el=>el.style.fontSize=fsPass+'px');
+  const qp=document.getElementById('qpane');if(qp)qp.style.fontSize=fsQ+'px';
+}
+function toggleMenu(){document.getElementById('menu-dropdown').classList.toggle('open');}
+document.addEventListener('click',e=>{const w=document.getElementById('menu-wrap');if(w&&!w.contains(e.target))document.getElementById('menu-dropdown').classList.remove('open');});
+
+goPart(1);
+</script>
+</body>
+</html>

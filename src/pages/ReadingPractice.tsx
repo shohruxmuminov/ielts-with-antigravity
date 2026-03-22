@@ -116,6 +116,7 @@ export default function ReadingPractice() {
       { id: 'premium-reading-10', title: 'Premium Full Reading 10', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/Full reading 10.html', htmlContent: '', correctAnswers: '' },
       { id: 'premium-reading-11', title: 'Premium Full Reading 11', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/IELTSwithJurabek FULL Reading 11.html', htmlContent: '', correctAnswers: '' },
       { id: 'premium-reading-12', title: 'Premium Full Reading 12', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/Full Reading 12.html', htmlContent: '', correctAnswers: '' },
+      { id: 'premium-reading-13', title: 'Premium Full Reading 25', type: 'Academic', category: 'premium', isStatic: true, url: '/reading/premiumreading/Full reading 25.html', htmlContent: '', correctAnswers: '' },
     ];
 
     // Initial state with static tests

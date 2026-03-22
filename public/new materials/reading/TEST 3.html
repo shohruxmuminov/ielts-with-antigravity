@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IELTS Academic Reading – Test 4</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,Helvetica,sans-serif;font-size:14px;height:100vh;display:flex;flex-direction:column;overflow:hidden;background:#fff;color:#222}
+#hdr{height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;border-bottom:1.5px solid #d0d0d0;background:#fff;flex-shrink:0}
+#hdr-left{display:flex;align-items:center;gap:14px}
+.ielts-badge{background:#c41230;color:#fff;font-family:'Arial Black',Arial,sans-serif;font-weight:900;font-size:19px;padding:3px 10px 4px;letter-spacing:0.5px;border-radius:2px;user-select:none;line-height:1.3}
+#tg-link{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:#222;font-size:13px;font-weight:600;font-family:Arial,sans-serif;background:#fff;border:1.5px solid #d0d0d0;border-radius:22px;padding:5px 14px 5px 6px;transition:border-color .15s,box-shadow .15s}
+#tg-link:hover{border-color:#0088cc;box-shadow:0 0 0 2px rgba(0,136,204,.12);color:#0088cc}
+#tg-link .tg-circle{width:28px;height:28px;border-radius:50%;background:linear-gradient(to bottom,#2aabee,#229ed9);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+#tg-link .tg-circle svg{width:16px;height:16px}
+#hdr-right{display:flex;align-items:center;gap:14px}
+#menu-wrap{position:relative}
+#menu-btn{background:none;border:none;cursor:pointer;padding:4px;display:flex;flex-direction:column;gap:4px;border-radius:4px}
+#menu-btn:hover{background:#f0f0f0}
+#menu-btn span{display:block;width:20px;height:2px;background:#444;border-radius:2px}
+#menu-dropdown{position:absolute;top:calc(100% + 8px);right:0;background:#fff;border:1px solid #d0d0d0;border-radius:6px;box-shadow:0 4px 16px rgba(0,0,0,.12);padding:12px 16px;min-width:180px;z-index:1000;display:none}
+#menu-dropdown.open{display:block}
+#menu-dropdown .md-title{font-size:11px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px;font-family:Arial,sans-serif}
+#menu-dropdown .md-row{display:flex;align-items:center;gap:8px}
+#menu-dropdown .md-lbl{font-size:13px;font-family:Arial,sans-serif;color:#333;min-width:60px}
+.fsz-btn{width:30px;height:30px;border:1px solid #ccc;background:#f8f8f8;border-radius:4px;cursor:pointer;font-size:14px;font-weight:700;font-family:Arial,sans-serif;display:flex;align-items:center;justify-content:center;color:#333;flex-shrink:0}
+.fsz-btn:hover{background:#eee;border-color:#999}
+#pbar{background:#f5f5f5;border-bottom:1px solid #d5d5d5;padding:7px 18px;font-size:13px;flex-shrink:0;color:#222;line-height:1.4}
+#pbar-title{font-weight:700}
+#main{flex:1;display:flex;overflow:hidden;min-height:0}
+#ppane{width:50%;overflow-y:auto;padding:22px 26px;background:#fff;user-select:text;flex-shrink:0}
+#ppane::-webkit-scrollbar{width:6px}
+#ppane::-webkit-scrollbar-track{background:#f2f2f2}
+#ppane::-webkit-scrollbar-thumb{background:#c8c8c8;border-radius:3px}
+#divider{width:10px;background:#e8e8e8;border-left:1px solid #ccc;border-right:1px solid #ccc;cursor:col-resize;flex-shrink:0;display:flex;align-items:center;justify-content:center;position:relative;z-index:10}
+#div-btn{width:26px;height:26px;background:#888;border-radius:3px;color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;user-select:none;position:absolute;line-height:1}
+#div-btn:hover{background:#666}
+#qpane{flex:1;overflow-y:auto;padding:16px 20px;background:#fff;min-width:0;user-select:text}
+#qpane::-webkit-scrollbar{width:6px}
+#qpane::-webkit-scrollbar-track{background:#f2f2f2}
+#qpane::-webkit-scrollbar-thumb{background:#c8c8c8;border-radius:3px}
+.pass-title{font-size:17px;font-weight:700;text-align:center;margin-bottom:3px;font-family:Arial,sans-serif}
+.pass-sub{font-size:12.5px;text-align:center;font-style:italic;margin-bottom:14px;color:#333;font-family:Arial,sans-serif}
+.pass-body p{font-size:14px;line-height:1.65;margin-bottom:13px;font-family:Arial,sans-serif;color:#111;text-align:left}
+.para-letter{font-weight:700;margin-right:6px;color:#111}
+.hl{background:#FFE066;border-radius:1px}
+#hl-tip{position:fixed;display:none;background:#111;color:#fff;padding:5px 13px;border-radius:18px;font-size:12px;font-family:Arial,sans-serif;cursor:pointer;z-index:9999;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.35)}
+#hl-tip:hover{background:#333}
+.qs{font-size:13px;color:#222;margin-bottom:16px}
+.qs-instr{margin-bottom:10px;line-height:1.55;font-size:13px}
+.qs-instr strong{font-weight:700}
+.qs-instr em{font-style:italic}
+.qitem{margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid #efefef}
+.qitem:last-child{border-bottom:none}
+.qrow{display:flex;gap:6px;font-size:13px;line-height:1.5;margin-bottom:6px}
+.qno{font-weight:700;min-width:20px;flex-shrink:0}
+.tfn-opts{display:flex;flex-direction:column;gap:5px;padding-left:26px}
+.tfn-opt{display:flex;align-items:center;gap:7px;font-size:13px;cursor:pointer;color:#222}
+.tfn-opt input[type=radio]{cursor:pointer;width:15px;height:15px;flex-shrink:0}
+.notes-wrap{border:1px solid #bbb;background:#fafafa;padding:12px 14px;margin-top:4px}
+.notes-head{font-weight:700;font-size:14px;text-align:center;margin-bottom:10px}
+.notes-sec-title{font-weight:700;font-size:13px;margin:8px 0 5px}
+.notes-li{display:flex;flex-wrap:wrap;align-items:baseline;gap:3px;font-size:13px;line-height:1.7;margin-bottom:5px;padding-left:10px}
+.notes-li::before{content:"•";margin-right:5px;flex-shrink:0}
+.fill-field{display:inline-flex;align-items:center;border:1px solid #888;border-radius:2px;padding:1px 5px;background:#fff;vertical-align:middle}
+.fill-field .fqn{font-size:11px;font-weight:700;color:#555;margin-right:3px;flex-shrink:0}
+.fill-field input{border:none;outline:none;font-size:13px;font-family:Arial,sans-serif;width:90px;background:transparent;color:#111}
+.hbox{border:1px solid #aaa;margin-bottom:12px}
+.hbox-title{font-weight:700;font-size:13px;text-align:center;background:#f0f0f0;border-bottom:1px solid #aaa;padding:6px 10px}
+.hbox-body{padding:8px 12px}
+.hrow{display:flex;gap:8px;font-size:13px;margin-bottom:4px}
+.hrn{font-weight:700;min-width:24px;flex-shrink:0}
+.abox{border:1px solid #aaa;margin-bottom:12px}
+.abox-title{font-weight:700;font-size:13px;text-align:center;background:#f0f0f0;border-bottom:1px solid #aaa;padding:6px 10px}
+.abox-body{padding:8px 12px}
+.arow{display:flex;gap:8px;font-size:13px;margin-bottom:3px}
+.arl{font-weight:700;min-width:20px}
+.ph-row{display:flex;align-items:center;gap:8px;margin-bottom:9px;font-size:13px}
+.ph-no{font-weight:700;min-width:24px;flex-shrink:0}
+.ph-para-label{font-size:13px;color:#333;min-width:90px}
+.qsel{border:1px solid #888;border-radius:2px;padding:3px 6px;font-size:12.5px;font-family:Arial,sans-serif;background:#fff;cursor:pointer;outline:none;color:#111}
+.qsel:focus{border-color:#444}
+.sum-body{padding:6px 0}
+.sum-title{font-weight:700;font-size:14px;text-align:center;margin-bottom:10px}
+.sum-text{font-size:13px;line-height:2.3}
+.mcq-opts{display:flex;flex-direction:column;gap:5px;padding-left:10px}
+.mcq-opt{display:flex;align-items:flex-start;gap:7px;font-size:13px;cursor:default;user-select:none}
+.mcq-opt input{cursor:pointer;width:17px;height:17px;flex-shrink:0;margin-top:1px}
+.mcq-opt .mcq-let{pointer-events:none}
+.mcq-opt span:last-child{pointer-events:none}
+.mcq-let{font-weight:700;flex-shrink:0;min-width:16px}
+#bnav{background:#f0f0f0;border-top:1px solid #ccc;flex-shrink:0;padding:0;min-height:44px;display:flex;align-items:stretch}
+#bnav-inner{display:flex;align-items:center;width:100%;padding:0 10px;gap:0;min-height:44px}
+#bnav-p1{display:flex;align-items:center;gap:5px;flex-shrink:0}
+.bnav-plabel{font-size:13px;font-weight:700;font-family:Arial,sans-serif;color:#222;white-space:nowrap;cursor:pointer}
+.bnav-plabel:hover{text-decoration:underline}
+#bnav-pills{display:flex;align-items:center;gap:3px;flex-wrap:nowrap}
+.qpill{min-width:26px;height:26px;padding:0 4px;display:flex;align-items:center;justify-content:center;font-size:12px;font-family:Arial,sans-serif;color:#444;border-radius:3px;border:1px solid transparent;cursor:pointer;user-select:none;background:transparent}
+.qpill:hover{border-color:#999;background:#e6e6e6}
+.qpill.ans{color:#222;font-weight:600}
+.bnav-sep{width:1px;background:#ccc;height:24px;margin:0 12px;flex-shrink:0}
+.bnav-pother{display:flex;align-items:center;gap:6px;flex-shrink:0;cursor:pointer;padding:0 4px}
+.bnav-pother:hover .bnav-plabel2{text-decoration:underline}
+.bnav-plabel2{font-size:13px;font-weight:700;font-family:Arial,sans-serif;color:#666}
+.bnav-pother.active .bnav-plabel2{color:#222}
+.bnav-pscore{font-size:12px;color:#666;font-family:Arial,sans-serif}
+#bnav-spacer{flex:1}
+#sub-btn{width:44px;height:44px;background:#e0e0e0;border:none;border-left:1px solid #ccc;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:20px;color:#444}
+#sub-btn:hover{background:#d0d0d0;color:#111}
+#res-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:99999;display:none;align-items:center;justify-content:center}
+#res-modal{background:#fff;width:92vw;max-width:720px;max-height:88vh;overflow-y:auto;border-radius:5px;padding:24px 26px;box-shadow:0 6px 36px rgba(0,0,0,.35);font-family:Arial,sans-serif}
+#res-modal::-webkit-scrollbar{width:6px}
+#res-modal::-webkit-scrollbar-thumb{background:#ccc;border-radius:3px}
+.rm-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.rm-title{font-size:18px;font-weight:700}
+.rm-close{background:none;border:none;font-size:24px;cursor:pointer;color:#666;line-height:1;padding:0}
+.rm-close:hover{color:#000}
+.rm-part{margin-bottom:20px;border:1px solid #ddd;border-radius:4px;overflow:hidden}
+.rm-ph{background:#f2f2f2;padding:8px 14px;font-weight:700;font-size:13.5px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #ddd}
+.rm-badge{font-size:12px;color:#fff;padding:2px 11px;border-radius:10px;font-weight:700}
+.rm-badge.good{background:#2e7d32}.rm-badge.ok{background:#e65100}.rm-badge.bad{background:#c41230}
+.rm-tbl{width:100%;border-collapse:collapse;font-size:12.5px}
+.rm-tbl th{background:#f8f8f8;padding:5px 10px;text-align:left;font-weight:700;border-bottom:1px solid #ddd;color:#333}
+.rm-tbl td{padding:5px 10px;border-bottom:1px solid #f0f0f0;vertical-align:top}
+.rm-tbl tr:last-child td{border-bottom:none}
+tr.rr-ok{background:#f1fff4}
+tr.rr-no{background:#fff5f5}
+.mc{color:#2e7d32;font-weight:700}
+.mw{color:#c41230;font-weight:700}
+.total-strip{margin-top:16px;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center}
+.ts-lbl{font-size:15px;font-weight:700}
+.ts-num{font-size:26px;font-weight:900;color:#c41230;text-align:right;line-height:1.1}
+.ts-band{font-size:12px;color:#666;margin-top:2px}
+.short-ans-input{border:1px solid #888;border-radius:2px;padding:3px 8px;font-size:13px;font-family:Arial,sans-serif;width:200px;outline:none;color:#111;margin-left:26px;margin-top:4px;display:block}
+.short-ans-input:focus{border-color:#444}
+</style>
+</head>
+<body>
+<div id="hl-tip">✏ Highlight</div>
+
+<div id="hdr">
+  <div id="hdr-left">
+    <div class="ielts-badge">IELTS</div>
+    <a id="tg-link" href="https://t.me/alisher_abduvohobov" target="_blank">
+      <span class="tg-circle">
+        <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" fill="none">
+          <path d="M54 117.9c35-15.2 58.3-25.3 70-30.2 33.3-13.9 40.2-16.3 44.7-16.4 1 0 3.2.2 4.6 1.5 1.2 1 1.5 2.5 1.7 3.5.2 1 .4 3.2.2 4.9-1.9 19.9-10 68.2-14.1 90.5-1.7 9.4-5.1 12.6-8.4 12.9-7.1.7-12.5-4.7-19.4-9.2-10.8-7.1-16.9-11.5-27.4-18.4-12.1-8-4.3-12.4 2.6-19.6 1.8-1.9 33.2-30.4 33.8-33 .1-.3.1-.6-.2-.9-.3-.2-.7-.1-1.1 0-.5.1-7.9 5-22.4 14.9-21.2 14.3-28.6 14.6-37 11.1-3.1-1.3-8.8-3.7-8.8-3.7s-3.2-2 2.2-4.9z" fill="#fff"/>
+        </svg>
+      </span>
+      Alisher's IELTS | 9.0
+    </a>
+  </div>
+  <div id="hdr-right">
+    <div id="menu-wrap">
+      <button id="menu-btn" onclick="toggleMenu()" title="Settings">
+        <span></span><span></span><span></span>
+      </button>
+      <div id="menu-dropdown">
+        <div class="md-title">Text Size</div>
+        <div class="md-row">
+          <span class="md-lbl">Passage</span>
+          <button class="fsz-btn" onclick="changeFontSize('pass',-1)">A−</button>
+          <span id="fsz-pass-val">14px</span>
+          <button class="fsz-btn" onclick="changeFontSize('pass',1)">A+</button>
+        </div>
+        <div class="md-row" style="margin-top:8px">
+          <span class="md-lbl">Questions</span>
+          <button class="fsz-btn" onclick="changeFontSize('q',-1)">A−</button>
+          <span id="fsz-q-val">13px</span>
+          <button class="fsz-btn" onclick="changeFontSize('q',1)">A+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="pbar">
+  <span id="pbar-title">Passage 1</span><span id="pbar-desc">&nbsp;&nbsp;Read the text and answer questions 1–13.</span>
+</div>
+
+<div id="main">
+  <div id="ppane"></div>
+  <div id="divider"><div id="div-btn">↔</div></div>
+  <div id="qpane"></div>
+</div>
+
+<div id="bnav">
+  <div id="bnav-inner">
+    <div id="bnav-p1">
+      <span class="bnav-plabel" onclick="goPart(1)" id="bnav-lbl1">Passage 1</span>
+      <div id="bnav-pills"></div>
+    </div>
+    <div class="bnav-sep" id="bnav-sep1"></div>
+    <div class="bnav-pother" id="bnav-po2" onclick="goPart(2)">
+      <span class="bnav-plabel2" id="bnav-lbl2">Passage 2</span>
+      <span class="bnav-pscore" id="pts2">0 of 13</span>
+    </div>
+    <div class="bnav-sep" id="bnav-sep2"></div>
+    <div class="bnav-pother" id="bnav-po3" onclick="goPart(3)">
+      <span class="bnav-plabel2" id="bnav-lbl3">Passage 3</span>
+      <span class="bnav-pscore" id="pts3">0 of 14</span>
+    </div>
+    <div id="bnav-spacer"></div>
+    <button id="sub-btn" onclick="showResults()" title="Submit">✓</button>
+  </div>
+</div>
+
+<div id="res-overlay">
+  <div id="res-modal">
+    <div class="rm-hdr">
+      <div class="rm-title">Test Results</div>
+      <button class="rm-close" onclick="closeResults()">✕</button>
+    </div>
+    <div id="res-body"></div>
+  </div>
+</div>
+
+<script>
+const PASSAGES = {
+1: `<div class="pass-title">The Wonder Plant</div>
+<div class="pass-sub">Bamboo is used for a wide range of purposes, but now it seems it may be under threat.</div>
+<div class="pass-body">
+<p><span class="para-letter">A</span>Every year, during the rainy season, the mountain gorillas of central Africa migrate to the lower slopes of the Virunga Mountains to graze on bamboo. For the 650 or so that remain in the wild, it's a vital food source. Without it, says Ian Redmond, chairman of the Ape Alliance, their chances of survival would be reduced significantly.</p>
+<p>Gorillas aren't the only local keen on bamboo. For the people who live close to the Virungas, it's a valuable and versatile raw material. But in the past 100 years or so, resources have come under increasing pressure as populations have exploded and large areas of bamboo forest have been cleared to make way for commercial plantations. Sadly, this isn't an isolated story. All over the world, the ranges of many bamboo species appear to be shrinking, endangering the people and animals that depend upon them.</p>
+<p><span class="para-letter">B</span>Despite bamboo's importance, we know surprisingly little about it. A recent report published by the UN Environment Programme (UNEP) and the International Network for Bamboo and Rattan (INBAR) has revealed just how profound our ignorance of global bamboo resources is, particularly in relation to conservation.</p>
+<p>There are almost 1,600 recognised species of bamboo, but the report concentrated on the 1,200 or so woody varieties distinguished by the strong stems, or 'culms', that most people associate with this versatile plant. Of these, only 38 'priority species' identified for their commercial value have been the subject of any real scientific research to date.</p>
+<p>This problem isn't confined to bamboo. Compared to the work carried out on animals, the science of assessing the conservation status of plants is still in its infancy. 'People have only started looking at this during the past 10-15 years, and only now are they understanding how to go about it systematically,' says Dr Valerie Kapos, one of the report's authors.</p>
+<p><span class="para-letter">C</span>Bamboo tends to grow in 'stands' (or groups) made up of individual plants that grow from roots known as rhizomes. It is the world's fastest-growing woody plant and some species grow over a meter in one day. But the plant's ecological role extends beyond providing food for wildlife. Its rhizome systems, which lie in the top layers of the soil, are crucial in preventing soil erosion. And there is growing evidence that bamboo plays an important part in determining forest structure and dynamics. 'Bamboo's pattern of mass flowering and mass death leaves behind large areas of dry biomass that attract wildfire,' says Kapos. 'When these burn, they create patches of open ground far bigger than would be left by a fallen tree. Patchiness helps to preserve diversity because certain plant species do better during the early stages of regeneration when there are gaps in the canopy.'</p>
+<p><span class="para-letter">D</span>However, bamboo's most immediate significance lies in its economic value. Many countries, particularly in Asia, are involved in the trade of bamboo products. Modern processing techniques mean it can be used in a variety of ways, for example as flooring and laminates. Traditionally it is used in construction, but one of the fastest growing bamboo products is paper – 25 per cent of paper produced in India is made from bamboo fibre.</p>
+<p>Of course, bamboo's main function has always been in domestic applications, and as a locally traded product it is worth about US$4.5 billion annually. Bamboo is often the only readily available raw material for people in many developing countries, says Chris Stapleton, a research associate at the UK's Royal Botanic Gardens. 'Bamboo can be harvested from forest areas or grown quickly elsewhere, and then converted simply without expensive machinery or facilities,' he says. 'In this way, it contributes substantially to poverty alleviation.'</p>
+<p><span class="para-letter">E</span>Keen horticulturists will spot an apparent contradiction in the worrying picture painted by the UNEP-INBAR report. Those in the West who've followed the recent vogue for cultivating exotic species in their gardens will point out that, if it isn't kept in check, bamboo can cause real problems. 'In a lot of places, the people who live with bamboo don't perceive it as being under threat in any way,' says Kapos. 'In fact, a lot of bamboo species are very invasive if they've been introduced.' So why are so many species endangered?</p>
+<p>There are two separate issues here, says Ray Townsend, arboretum manager at the Royal Botanic Gardens. 'Some plants are threatened because they can't survive in the habitat – they aren't strong enough or there aren't enough of them, perhaps. But bamboo can take care of itself – it's strong enough to survive if left alone. What is under threat is its habitat. When forest goes, it's converted into something else: then there isn't anywhere for forest plants such as bamboo to grow.'</p>
+<p><span class="para-letter">F</span>Around the world, bamboo species are routinely protected as part of forest ecosystem in national parks and reserves, but there is next to nothing that protects bamboo in the wild for its own sake. The UNEP-INBAR report will help conservationists to establish effective measures aimed at protecting valuable wild bamboo species.</p>
+<p>Townsend, too, sees the UNEP-INBAR report as an important step forward in promoting the cause of bamboo conservation. 'Until now, bamboo has been perceived as a second-class plant. When you talk about places like the Amazon, everyone always thinks about hardwoods. Of course, these are significant but there's a tendency to overlook the plants they are associated with, which are often bamboo species.'</p>
+</div>`,
+2: `<div class="pass-title">Renewable Energy</div>
+<div class="pass-sub">An insight into the progress in renewable energy research</div>
+<div class="pass-body">
+<p>The race is on for the ultimate goal of renewable energy: electricity production at prices that are competitive with coal-fired power stations, but without coal's pollution. Some new technologies are aiming to be the first to push coal from its position as Australia's chief source of electricity.</p>
+<p>At the moment the front-runner in renewable energy is wind technology. According to Peter Bergin of Australian Hydro, one of Australia's leading wind energy companies, there have been no dramatic changes in windmill design for many years, but the cumulative effects of numerous small improvements have had a major impact on cost. 'We're reaping the benefits of 30 years of research in Europe, without having to make the same mistakes that they did,' Mr. Bergin says.</p>
+<p>Electricity can be produced from coal at around 4 cents per kilowatt-hour, but only if the environmental costs are ignored. 'Australia has the second cheapest electricity in the world, and this makes it difficult for renewable to compete,' says Richard Hunter of the Australian Ecogeneration Association (AEA). Nevertheless, the AEA reports: 'The production cost of a kilowatt-hour of wind power is one fifth of what it was 20 years ago,' or around 7 cents per kilowatt-hour.</p>
+<p>Australian Hydro has dozens of wind monitoring stations across Australia as part of its aim to become Australia's pre-eminent renewable energy company. Despite all these developments, wind power remains one of the few forms of alternative energy where Australia is nowhere near the global cutting edge, mostly just replicating European designs.</p>
+<p>While wind may currently lead the way, some consider a number of technologies under development have more potential. In several cases, Australia is at the forefront of global research in the area. Some of them are very site-specific, ensuring that they may never become dominant market players. On the other hand, these newer developments are capable of providing more reliable power, avoiding the major criticism of windmills – the need for back-up on a calm day.</p>
+<p>One such development uses hot, dry rocks. Deep beneath South Australia, radiation from elements contained in granite heats the rocks. Layers of insulating sedimentation raise the temperatures in some location to 250° centigrade. An Australian firm, Geoenergy, is proposing to pump water 3.5 kilometres into the earth, where it will travel through tiny fissures in the granite, heating up as it goes, until it escapes as steam through another drilled hole.</p>
+<p>No greenhouse gases are produced, but the system needs some additional features if it is to be environmentally friendly. Dr Prue Chopra, a geophysicist at the Australian National University and one of the founders of Geoenergy, note that the steam will bring with it radon gas, along through a heat exchanger and then sent back underground for another cycle. Technically speaking, hot dry rocks are not a renewable source of energy. However, the Australian source is so large it could supply the entire country's needs for thousands of years at current rates of consumption.</p>
+<p>Two other proposals for very different ways to harness sun and wind energy have surfaced recently. Progress continues with Australian company EnviroPower's plans for Australia's first solar chimney near Mildura, in Victoria. Under this scheme, a tall tower will draw hot air from a greenhouse built to cover the surrounding 5km<sup>2</sup>. As the air rises, it will drive a turbine to produce electricity. The solar tower combines three very old technologies – the chimney, the turbine and the greenhouse – to produce something quite new. It is this reliance on proven engineering principles that led Enviropower's CEO, Richard Davies, to state: 'There is no doubt this technology will work, none at all.'</p>
+<p>This year, Enviropower recognized that the quality of sunlight in the Mildura district will require a substantially larger collecting area than was previously thought. However, spokesperson Kay Firth says that a new location closer to Mildura will enable Enviropower to balance the increased costs with extra revenue. Besides saving in transmission costs, the new site 'will mean increased revenue from tourism and use of power for telecommunications. We'll also be able to use the outer 500 metres for agribusiness.' Wind speeds closer to the tower will be too high for farming.</p>
+<p>Another Australian company, Wavetech, is achieving success with ways of harvesting the energy in waves. Wavetech's invention uses a curved surface to push waves into a chamber, where the flowing water column pushes air back and forth through a turbine. Wavetech was created when Dr. Tim Devine offered the idea to the world leader in wave generator manufacturers, who rather surprisingly rejected it. Dr. Devine responded by establishing Wavetech, and making a number of other improvements to generator design. Wavetech claims that, at appropriate sites, 'the cost of electricity produced with our technology should be below 4 cents per kilowatt-hour.'</p>
+<p>The diversity of forms of greenhouse-friendly energy under development in Australia is remarkable. However, support on a national level is disappointing. According to Richard Hunter of the AEA, 'Australia has huge potential for wind, sun and wave technology. We should really be at the forefront, but the reality is we are a long way behind.'</p>
+</div>`,
+3: `<div class="pass-title">Inside the mind of a fan</div>
+<div class="pass-sub">How watching sport affects the brain</div>
+<div class="pass-body">
+<p><span class="para-letter">A</span>At about the same time that the poet Homer invented the epic hero, the ancient Greeks started a festival in which men competed in a single race, about 200 metres long. The winner received a branch of wild olives. The Greeks called this celebration the Olympics. Through the ancient sprint remains, today the Olympics are far more than that. Indeed, the Games seem to celebrate the dream of progress as embodied in the human form. That the Games are intoxicating to watch is beyond question. During the Athens Olympics in 2004, 3.4 billion people, half the world, watched them on television. Certainly, being a spectator is a thrilling experience: but why?</p>
+<p><span class="para-letter">B</span>In 1996, three Italian neuroscientists, Giacomo Rizzolatti, Leonardo Fogassi and Vittorio Gallese, examined the premotor cortex of monkeys. They discovered that inside these primate brains there were groups of cells that 'store vocabularies of motor actions'. Just as there are grammars of movement. These networks of cells are the bodily 'sentences' we use every day, the ones our brain has chosen to retain and refine. Think, for example, about a golf swing. To those who have only watched the Masters' Tournament on TV, golfing seems easy. To the novice, however, the skill of casting a smooth arc with a lop-side metal stick is virtually impossible. This is because most novices swing with their consciousness, using an area of brain next to the premotor cortex. To the expert, on the other hand, a perfectly balanced stroke is second nature. For him, the motor action has become memorized, and the movements are embedded in the neurons of his premotor cortex. He hits the ball with the tranquility of his perfected autopilot.</p>
+<p><span class="para-letter">C</span>These neurons in the premotor cortex, besides explaining why certain athletes seem to possess almost unbelievable levels of skill, have an even more amazing characteristic, one that caused Rizzolatti, Fogassi and Gallese to give them the lofty title 'mirror neurons'. They note, 'The main functional characteristic of mirror neurons is that they become active both when the monkey performs a particular action (for example, grasping an object or holding it) and, astonishingly, when it sees another individual performing a similar action.' Humans have an even more elaborate mirror neuron system. These peculiar cells mirror, inside the brain, the outside world: they enable us to internalise the actions of another. In order to be activated, though, these cells require what the scientists call 'goal-orientated movements'. If we are staring at a photograph, a fixed image of a runner mid-stride, our mirror neurons are totally silent. They only fire when the runner is active: running, moving or sprinting.</p>
+<p><span class="para-letter">D</span>What these electrophysiological studies indicate is that when we watch a golfer or a runner in action, the mirror neurons in our own premotor cortex light up as if we were the ones competing. This phenomenon of neural mirror was first discovered in 1954, when two French physiologists, Gastaut and Berf, found that the brains of humans vibrate with two distinct wavelengths, alpha and mu. The mu system is involved in neural mirroring. It is active when your bodies are still, and disappears whenever we do something active, like playing sport or changing the TV channel. The surprising fact is that the mu signal is also quiet when we watch someone else being active, as on TV, these results are the effect of mirror neurons.</p>
+<p><span class="para-letter">E</span>Rizzolatti, Fogassi and Gallese call the idea of mirror neurons the 'direct matching hypothesis'. They believe that we only understand the movement of sports stars when we 'map the visual representation of the observed action onto our motor representation of the same action'. According to this theory, watching an Olympic athlete 'causes the motor system of the observer to resonate. The "motor knowledge" of the observer is used to understand the observed action.' But mirror neurons are more than just the neural basis for our attitude to sport. It turns out that watching a great golfer makes us better golfers, and watching a great sprinter actually makes us run faster. This ability to learn by watching is a crucial skill. From the acquisition of language as infants to learning facial expressions, mimesis (copying) is an essential part of being conscious. The best athletes are those with a premotor cortex capable of imagining the movements of victory, together with the physical properties to make those movements real.</p>
+<p><span class="para-letter">F</span>But how many of us regularly watch sports in order to be a better athlete? Rather, we watch sport for the feeling, the human drama. This feeling also derives from mirror neurons. By letting spectators share in the motions of victory, they also allow us to share in its feelings. This is because they are directly connected to the amygdalae, one of the main brain regions involved in emotion. During the Olympics, the mirror neurons of whole nations will be electrically identical, their athletes causing spectators to feel, just for a second or two, the same thing. Watching sports brings people together. Most of us will never run a mile in under four minutes, or hit a home run. Our consolation comes in watching, when we gather around the TV, we all feel, just for a moment, what it is to do something perfectly.</p>
+</div>`
+};
+
+const AK = {
+  1:'B',2:'E',3:'D',4:'A',5:'B',6:'D',7:'C',
+  8:'B',9:'A',10:'B',11:'D',
+  12:'soil erosion',13:'paper',
+  14:'F',15:'T',16:'NGV',17:'T',18:'F',19:'T',20:'F',
+  21:'B',22:'D',23:'A',24:'C',25:'B',26:'C',
+  27:'F',28:'B',29:'E',30:'C',31:'D',32:'E',
+  33:'C',34:'A',35:'C',
+  36:'Y',37:'N',38:'N',39:'NGV',40:'Y'
+};
+
+function displayAK(n) {
+  const v = AK[n].toString();
+  if (v === 'T')   return 'TRUE';
+  if (v === 'F')   return 'FALSE';
+  if (v === 'NGV') return 'NOT GIVEN';
+  if (v === 'Y')   return 'YES';
+  if (v === 'N')   return 'NO';
+  return v;
+}
+
+/* ---- Question block helpers ---- */
+function tfnBlock(n, text) {
+  const v = ans[n]||'';
+  return `<div class="qitem" id="qi${n}">
+    <div class="qrow"><span class="qno">${n}</span><span>${text}</span></div>
+    <div class="tfn-opts">
+      ${['TRUE','FALSE','NOT GIVEN'].map(o=>`<label class="tfn-opt"><input type="radio" name="rq${n}" value="${o}" ${v===o?'checked':''} onchange="setAns(${n},this.value)">${o}</label>`).join('')}
+    </div>
+  </div>`;
+}
+
+function ynBlock(n, text) {
+  const v = ans[n]||'';
+  return `<div class="qitem" id="qi${n}">
+    <div class="qrow"><span class="qno">${n}</span><span>${text}</span></div>
+    <div class="tfn-opts">
+      ${['YES','NO','NOT GIVEN'].map(o=>`<label class="tfn-opt"><input type="radio" name="rq${n}" value="${o}" ${v===o?'checked':''} onchange="setAns(${n},this.value)">${o}</label>`).join('')}
+    </div>
+  </div>`;
+}
+
+function sectionRow(n, text, letters) {
+  const v = ans[n]||'';
+  const opts = letters.map(l=>`<option value="${l}" ${v===l?'selected':''}>${l}</option>`).join('');
+  return `<div class="qitem" id="qi${n}">
+    <div class="qrow"><span class="qno">${n}</span><span>${text}</span></div>
+    <select class="qsel" onchange="setAns(${n},this.value)" style="margin-left:26px;margin-top:4px">
+      <option value="">— section —</option>
+      ${opts}
+    </select>
+  </div>`;
+}
+
+function matchRow(n, text, opts) {
+  const v = ans[n]||'';
+  return `<div class="qitem" id="qi${n}">
+    <div class="qrow"><span class="qno">${n}</span><span>${text}</span></div>
+    <select class="qsel" onchange="setAns(${n},this.value)" style="margin-left:26px;margin-top:4px">
+      <option value="">— select —</option>
+      ${opts.map(o=>`<option value="${o.v}" ${v===o.v?'selected':''}>${o.v} — ${o.t}</option>`).join('')}
+    </select>
+  </div>`;
+}
+
+function shortAnsBlock(n, qtext) {
+  const v = ans[n]||'';
+  return `<div class="qitem" id="qi${n}">
+    <div class="qrow"><span class="qno">${n}</span><span>${qtext}</span></div>
+    <input class="short-ans-input" value="${v}" onchange="setAns(${n},this.value)" onkeyup="setAns(${n},this.value)" placeholder="…">
+  </div>`;
+}
+
+function mcqBlock(n, qtext, opts) {
+  const v = ans[n]||'';
+  return `<div class="qitem" id="qi${n}">
+    <div class="qrow"><span class="qno">${n}</span><span>${qtext}</span></div>
+    <div class="mcq-opts">
+      ${Object.entries(opts).map(([l,t])=>`<div class="mcq-opt"><input type="radio" name="rq${n}" value="${l}" ${v===l?'checked':''} onchange="setAns(${n},this.value)"><span class="mcq-let">${l}</span><span>${t}</span></div>`).join('')}
+    </div>
+  </div>`;
+}
+
+/* ---- Render question panes ---- */
+function renderQ(p){if(p===1)return renderQ1();if(p===2)return renderQ2();return renderQ3();}
+
+function renderQ1(){
+  const PEOPLE=[{v:'A',t:'Ian Redmond'},{v:'B',t:'Valerie Kapos'},{v:'C',t:'Chris Stapleton'},{v:'D',t:'Ray Townsend'}];
+  const SEC=['A','B','C','D','E','F'];
+  return `
+  <div class="qs">
+    <div class="qs-instr">Questions 1–7<br>Reading Passage 1 has six sections, <strong>A–F</strong>.<br>Which section contains the following information?<br>Write the correct letter, <strong>A–F</strong>, in boxes 1–7 on your answer sheet.<br><em><strong>NB</strong> You may use any letter more than once.</em></div>
+    ${sectionRow(1,'an assessment of current levels of knowledge about bamboo',SEC)}
+    ${sectionRow(2,'a comparison between bamboo and more fragile plants',SEC)}
+    ${sectionRow(3,'details of the commercial significance of bamboo',SEC)}
+    ${sectionRow(4,'a human development that is threatening the availability of bamboo',SEC)}
+    ${sectionRow(5,'a description of the limited extent of existing research on bamboo',SEC)}
+    ${sectionRow(6,'examples of the uses to which bamboo is put',SEC)}
+    ${sectionRow(7,'an explanation of how bamboo may contribute to the survival of range of plants',SEC)}
+  </div>
+  <div class="qs">
+    <div class="qs-instr">Questions 8–11<br>Look at the following statements (Questions 8–11) and the list of people below.<br>Match each statement with the correct person, <strong>A–D</strong>.<br><em>NB You may use any letter more than once.</em></div>
+    <div class="abox"><div class="abox-title">List of People</div><div class="abox-body">${PEOPLE.map(p=>`<div class="arow"><span class="arl">${p.v}</span>${p.t}</div>`).join('')}</div></div>
+    ${matchRow(8,'Some people do not regard bamboo as an endangered plant species.',PEOPLE)}
+    ${matchRow(9,'A scarcity of bamboo places certain wildlife under threat.',PEOPLE)}
+    ${matchRow(10,'Research methods investigating endangered plants have yet to be fully developed.',PEOPLE)}
+    ${matchRow(11,'The greatest danger to bamboo is disturbance of the places it grows in.',PEOPLE)}
+  </div>
+  <div class="qs">
+    <div class="qs-instr">Questions 12 and 13<br>Answer the questions below.<br>Choose <strong>NO MORE THAN TWO WORDS</strong> from the passage for each answer.</div>
+    ${shortAnsBlock(12,'What ecological problem do the roots of bamboo help to control?')}
+    ${shortAnsBlock(13,'Which bamboo product is undergoing market expansion?')}
+  </div>`;
+}
+
+function renderQ2(){
+  const COMPANIES=[{v:'A',t:'Australian Hydro'},{v:'B',t:'Geoenergy'},{v:'C',t:'Enviropower'},{v:'D',t:'Wavetech'}];
+  return `
+  <div class="qs">
+    <div class="qs-instr">Questions 14–20<br>Do the following statements agree with the information given in <strong>Reading Passage 2</strong>?<br><em>In boxes 14–20 on your answer sheet, write</em><br><strong>TRUE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if the statement agrees with the information<br><strong>FALSE</strong>&nbsp;&nbsp;&nbsp;&nbsp;if the statement contradicts the information<br><strong>NOT GIVEN</strong>&nbsp;&nbsp;if there is no information on this</div>
+    ${tfnBlock(14,'In Australia, alternative energies are less expensive than conventional electricity.')}
+    ${tfnBlock(15,'Geoenergy needs to adapt its system to make it less harmful to the environment.')}
+    ${tfnBlock(16,'Dr. Prue Chopra has studied the effects of radon gas on the environment.')}
+    ${tfnBlock(17,'Hot, dry rocks could provide enough power for the whole of Australia.')}
+    ${tfnBlock(18,'The new Enviropower facility will keep tourists away.')}
+    ${tfnBlock(19,'Wavetech was established when its founders were turned down by another company.')}
+    ${tfnBlock(20,'According to the AEA, Australia is a world leader in developing renewable energy.')}
+  </div>
+  <div class="qs">
+    <div class="qs-instr">Questions 21–26<br>Look at the following statements (Questions 21–26) and the list of companies below.<br>Match each statement with the correct company, <strong>A–D</strong>.<br>Write the correct letter, <strong>A–D</strong>, in boxes 21–26 on your answer sheet.<br><em><strong>NB</strong> You may use any letter more than once.</em></div>
+    <div class="abox"><div class="abox-title">List of Companies</div><div class="abox-body">${COMPANIES.map(c=>`<div class="arow"><span class="arl">${c.v}</span>${c.t}</div>`).join('')}</div></div>
+    ${matchRow(21,'During the process, harmful substances are prevented from escaping.',COMPANIES)}
+    ${matchRow(22,'Water is used to force air through a special device.',COMPANIES)}
+    ${matchRow(23,'Techniques used by other countries are being copied.',COMPANIES)}
+    ${matchRow(24,'The system can provide services other than energy production.',COMPANIES)}
+    ${matchRow(25,'It is planned to force water deep under the ground.',COMPANIES)}
+    ${matchRow(26,'Original estimates for part of the project have been revised.',COMPANIES)}
+  </div>`;
+}
+
+function renderQ3(){
+  const SEC6=['A','B','C','D','E','F'];
+  return `
+  <div class="qs">
+    <div class="qs-instr">Questions 27–32<br>Reading Passage 3 has six paragraphs, <strong>A–F</strong>.<br>Which paragraph contains the following information?<br>Write the correct letter, <strong>A–F</strong>, in boxes 27–32 on your answer sheet.<br><em><strong>NB</strong> You may use any letter more than once.</em></div>
+    ${sectionRow(27,'an explanation of why watching sport may be emotionally satisfying',SEC6)}
+    ${sectionRow(28,'an explanation of why beginners find sporting tasks difficult',SEC6)}
+    ${sectionRow(29,'a factor that needs to combine with mirroring to attain sporting excellence',SEC6)}
+    ${sectionRow(30,'a comparison of human and animal mirror neurons',SEC6)}
+    ${sectionRow(31,'the first discovery of brain activity related to mirror neurons',SEC6)}
+    ${sectionRow(32,'a claim linking observation to improvement in performance',SEC6)}
+  </div>
+  <div class="qs">
+    <div class="qs-instr">Questions 33–35<br>Choose the correct letter, <strong>A</strong>, <strong>B</strong>, <strong>C</strong> or <strong>D</strong>.</div>
+    ${mcqBlock(33,'The writer uses the term \'grammar of movement\' to mean',{A:'a level of sporting skill.',B:'a system of words about movement.',C:'a pattern of connected cells.',D:'a type of golf swing.'})}
+    ${mcqBlock(34,'The writer states that expert players perform their actions',{A:'without conscious thought.',B:'by planning each phase of movement.',C:'without regular practice.',D:'by thinking about the actions of others.'})}
+    ${mcqBlock(35,'The writer states that the most common motive for watching sport is to',{A:'improve personal performance.',B:'feel linked with people of different nationalities.',C:'experience strong positive emotions.',D:'realize what skill consists of.'})}
+  </div>
+  <div class="qs">
+    <div class="qs-instr">Questions 36–40<br>Do the following statements agree with the views of the writer in <strong>Reading Passage 3</strong>?<br><em>In boxes 36–40 on your answer sheet, write</em><br><strong>YES</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if the statement agrees with the views of the writer<br><strong>NO</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if the statement contradicts the views of the writer<br><strong>NOT GIVEN</strong>&nbsp;&nbsp;if it is impossible to say what the writer thinks about this</div>
+    ${ynBlock(36,'Inexpert sports players are too aware of what they are doing.')}
+    ${ynBlock(37,'Monkeys have a more complex mirror neuron system than humans.')}
+    ${ynBlock(38,'Looking at a photograph can activate mirror neurons.')}
+    ${ynBlock(39,'Gastaut and Bert were both researchers and sports players.')}
+    ${ynBlock(40,'The mu system is at rest when we are engaged in an activity.')}
+  </div>`;
+}
+
+let curPart=1, ans={};
+const pbarDescs={1:'Read the text and answer questions 1–13.',2:'Read the text and answer questions 14–26.',3:'Read the text and answer questions 27–40.'};
+const pRanges={1:[1,13],2:[14,26],3:[27,40]};
+
+function goPart(p){
+  if(p<1||p>3)return;
+  curPart=p;
+  document.getElementById('pbar-title').textContent='Passage '+p;
+  document.getElementById('pbar-desc').textContent='\u00a0\u00a0'+pbarDescs[p];
+  document.getElementById('ppane').innerHTML=PASSAGES[p];
+  document.getElementById('qpane').innerHTML=renderQ(p);
+  document.getElementById('bnav-po2').innerHTML=`<span class="bnav-plabel2" id="bnav-lbl2">Passage 2</span><span class="bnav-pscore" id="pts2">0 of 13</span>`;
+  document.getElementById('bnav-po3').innerHTML=`<span class="bnav-plabel2" id="bnav-lbl3">Passage 3</span><span class="bnav-pscore" id="pts3">0 of 14</span>`;
+  renderPills();
+  document.getElementById('ppane').scrollTop=0;
+  document.getElementById('qpane').scrollTop=0;
+  applyFontSizes();
+}
+
+function setAns(n,v){ans[n]=v.trim();renderPills();}
+
+function renderPills(){
+  const[s,e]=pRanges[curPart];
+  for(let p=1;p<=3;p++){const[ps,pe]=pRanges[p];let c=0;for(let i=ps;i<=pe;i++)if(ans[i]&&ans[i].trim()!=='')c++;if(p!==1){const el=document.getElementById('pts'+p);if(el)el.textContent=`${c} of ${pe-ps+1}`;}}
+  if(curPart===1){
+    let h='';for(let i=s;i<=e;i++){const a=ans[i]&&ans[i]!=='';h+=`<div class="qpill${a?' ans':''}" onclick="scrollToQ(${i})">${i}</div>`;}
+    document.getElementById('bnav-pills').innerHTML=h;
+    document.getElementById('bnav-lbl1').style.color='#222';
+    const l2=document.getElementById('bnav-lbl2');if(l2)l2.style.color='#666';
+    const l3=document.getElementById('bnav-lbl3');if(l3)l3.style.color='#666';
+  } else if(curPart===2){
+    document.getElementById('bnav-pills').innerHTML='';
+    document.getElementById('bnav-lbl1').style.color='#666';
+    let h='';for(let i=s;i<=e;i++){const a=ans[i]&&ans[i]!=='';h+=`<div class="qpill${a?' ans':''}" onclick="scrollToQ(${i})">${i}</div>`;}
+    document.getElementById('bnav-po2').innerHTML=`<span class="bnav-plabel2" id="bnav-lbl2" style="color:#222;font-weight:700">Passage 2</span><span style="display:flex;align-items:center;gap:3px">${h}</span>`;
+    const[ps3,pe3]=pRanges[3];let c3=0;for(let i=ps3;i<=pe3;i++)if(ans[i]&&ans[i]!=='')c3++;
+    document.getElementById('bnav-po3').innerHTML=`<span class="bnav-plabel2" id="bnav-lbl3" style="color:#666">Passage 3</span><span class="bnav-pscore" id="pts3">${c3} of ${pe3-ps3+1}</span>`;
+  } else {
+    document.getElementById('bnav-pills').innerHTML='';
+    document.getElementById('bnav-lbl1').style.color='#666';
+    const[ps2,pe2]=pRanges[2];let c2=0;for(let i=ps2;i<=pe2;i++)if(ans[i]&&ans[i]!=='')c2++;
+    document.getElementById('bnav-po2').innerHTML=`<span class="bnav-plabel2" id="bnav-lbl2" style="color:#666">Passage 2</span><span class="bnav-pscore" id="pts2">${c2} of ${pe2-ps2+1}</span>`;
+    let h='';for(let i=s;i<=e;i++){const a=ans[i]&&ans[i]!=='';h+=`<div class="qpill${a?' ans':''}" onclick="scrollToQ(${i})">${i}</div>`;}
+    document.getElementById('bnav-po3').innerHTML=`<span class="bnav-plabel2" id="bnav-lbl3" style="color:#222;font-weight:700">Passage 3</span><span style="display:flex;align-items:center;gap:3px">${h}</span>`;
+  }
+}
+
+function scrollToQ(n){const el=document.getElementById('qi'+n);if(el)el.scrollIntoView({behavior:'smooth',block:'center'});}
+
+/* Highlight */
+const hlTip=document.getElementById('hl-tip');
+let hlRange=null;
+function isInPane(node){const pp=document.getElementById('ppane');const qp=document.getElementById('qpane');return pp.contains(node)||qp.contains(node);}
+document.addEventListener('mouseup',e=>{
+  if(e.target===hlTip)return;
+  const sel=window.getSelection();
+  if(!sel||sel.isCollapsed||!sel.toString().trim()){hlTip.style.display='none';return;}
+  const range=sel.getRangeAt(0);
+  if(!isInPane(range.commonAncestorContainer)){hlTip.style.display='none';return;}
+  hlRange=range.cloneRange();
+  const r=range.getBoundingClientRect();
+  hlTip.style.left=(r.left+r.width/2-38)+'px';
+  hlTip.style.top=(r.top+window.scrollY-34)+'px';
+  hlTip.style.display='block';
+});
+document.addEventListener('mousedown',e=>{if(e.target!==hlTip)hlTip.style.display='none';});
+hlTip.addEventListener('click',()=>{
+  if(!hlRange)return;
+  const sp=document.createElement('span');sp.className='hl';sp.onclick=function(){this.outerHTML=this.innerHTML;};sp.title='Click to remove';
+  try{hlRange.surroundContents(sp);}catch(ex){const f=hlRange.extractContents();sp.appendChild(f);hlRange.insertNode(sp);}
+  hlTip.style.display='none';window.getSelection().removeAllRanges();
+});
+
+/* Resizable divider */
+let drag=false,dStartX,dStartW;
+const divEl=document.getElementById('divider'),ppEl=document.getElementById('ppane');
+divEl.addEventListener('mousedown',e=>{drag=true;dStartX=e.clientX;dStartW=ppEl.offsetWidth;document.body.style.cursor='col-resize';document.body.style.userSelect='none';});
+document.addEventListener('mousemove',e=>{if(!drag)return;const tot=document.getElementById('main').offsetWidth-10;ppEl.style.width=Math.max(240,Math.min(tot-240,dStartW+(e.clientX-dStartX)))+'px';});
+document.addEventListener('mouseup',()=>{drag=false;document.body.style.cursor='';document.body.style.userSelect='';});
+
+/* Results */
+function normalizeAns(v){
+  const s=v.trim().toLowerCase();
+  if(s==='true')return 't';
+  if(s==='false')return 'f';
+  if(s==='not given')return 'ngv';
+  if(s==='yes')return 'y';
+  if(s==='no')return 'n';
+  return s;
+}
+function isCorrect(n){return normalizeAns(ans[n]||'')===normalizeAns(AK[n].toString());}
+
+function showResults(){
+  const partNames={1:'Passage 1 – The Wonder Plant (Q1–13)',2:'Passage 2 – Renewable Energy (Q14–26)',3:'Passage 3 – Inside the Mind of a Fan (Q27–40)'};
+  let total=0,html='';
+  for(let p=1;p<=3;p++){
+    const[s,e]=pRanges[p];let pc=0,rows='';
+    for(let i=s;i<=e;i++){
+      const ok=isCorrect(i);if(ok){pc++;total++;}
+      const ua=(ans[i]||'').trim()||'—';
+      rows+=`<tr class="${ok?'rr-ok':'rr-no'}">
+        <td><strong>${i}</strong></td>
+        <td>${ua}</td>
+        <td class="mc">${displayAK(i)}</td>
+        <td class="${ok?'mc':'mw'}">${ok?'✓':'✗'}</td>
+      </tr>`;
+    }
+    const tot2=e-s+1,pct=Math.round(pc/tot2*100),bc=pct>=70?'good':(pct>=50?'ok':'bad');
+    html+=`<div class="rm-part"><div class="rm-ph">${partNames[p]}<span class="rm-badge ${bc}">${pc}/${tot2} (${pct}%)</span></div>
+      <table class="rm-tbl"><thead><tr><th>Q</th><th>Your Answer</th><th>Correct</th><th></th></tr></thead><tbody>${rows}</tbody></table>
+    </div>`;
+  }
+  const pct=Math.round(total/40*100);
+  const band=total>=39?'9.0':total>=37?'8.5':total>=35?'8.0':total>=33?'7.5':total>=30?'7.0':total>=27?'6.5':total>=23?'6.0':total>=19?'5.5':total>=15?'5.0':total>=13?'4.5':'4.0';
+  html+=`<div class="total-strip"><span class="ts-lbl">Total Score</span><div><div class="ts-num">${total} / 40 <span style="font-size:14px;color:#888">(${pct}%)</span></div><div class="ts-band">Estimated Band Score: <strong>${band}</strong></div></div></div>`;
+  document.getElementById('res-body').innerHTML=html;
+  document.getElementById('res-overlay').style.display='flex';
+}
+
+function closeResults(){document.getElementById('res-overlay').style.display='none';}
+
+/* Font size */
+let fsPass=14,fsQ=13;
+const FS_MIN=10,FS_MAX=22;
+function changeFontSize(which,delta){
+  if(which==='pass'){fsPass=Math.max(FS_MIN,Math.min(FS_MAX,fsPass+delta));document.getElementById('fsz-pass-val').textContent=fsPass+'px';}
+  else{fsQ=Math.max(FS_MIN,Math.min(FS_MAX,fsQ+delta));document.getElementById('fsz-q-val').textContent=fsQ+'px';}
+  applyFontSizes();
+}
+function applyFontSizes(){
+  const pp=document.getElementById('ppane');if(pp)pp.querySelectorAll('p').forEach(el=>el.style.fontSize=fsPass+'px');
+  const qp=document.getElementById('qpane');if(qp)qp.style.fontSize=fsQ+'px';
+}
+function toggleMenu(){document.getElementById('menu-dropdown').classList.toggle('open');}
+document.addEventListener('click',e=>{const w=document.getElementById('menu-wrap');if(w&&!w.contains(e.target))document.getElementById('menu-dropdown').classList.remove('open');});
+
+goPart(1);
+</script>
+</body>
+</html>

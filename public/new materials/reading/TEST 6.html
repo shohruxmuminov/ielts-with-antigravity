@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IELTS Academic Reading – Test 7</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,Helvetica,sans-serif;font-size:14px;height:100vh;display:flex;flex-direction:column;overflow:hidden;background:#fff;color:#222}
+#hdr{height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;border-bottom:1.5px solid #d0d0d0;background:#fff;flex-shrink:0}
+#hdr-left{display:flex;align-items:center;gap:14px}
+.ielts-badge{background:#c41230;color:#fff;font-family:'Arial Black',Arial,sans-serif;font-weight:900;font-size:19px;padding:3px 10px 4px;letter-spacing:0.5px;border-radius:2px;user-select:none;line-height:1.3}
+#tg-link{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:#222;font-size:13px;font-weight:600;font-family:Arial,sans-serif;background:#fff;border:1.5px solid #d0d0d0;border-radius:22px;padding:5px 14px 5px 6px;transition:border-color .15s,box-shadow .15s}
+#tg-link:hover{border-color:#0088cc;box-shadow:0 0 0 2px rgba(0,136,204,.12);color:#0088cc}
+#tg-link .tg-circle{width:28px;height:28px;border-radius:50%;background:linear-gradient(to bottom,#2aabee,#229ed9);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+#tg-link .tg-circle svg{width:16px;height:16px}
+#hdr-right{display:flex;align-items:center;gap:14px}
+#menu-wrap{position:relative}
+#menu-btn{background:none;border:none;cursor:pointer;padding:4px;display:flex;flex-direction:column;gap:4px;border-radius:4px}
+#menu-btn:hover{background:#f0f0f0}
+#menu-btn span{display:block;width:20px;height:2px;background:#444;border-radius:2px}
+#menu-dropdown{position:absolute;top:calc(100% + 8px);right:0;background:#fff;border:1px solid #d0d0d0;border-radius:6px;box-shadow:0 4px 16px rgba(0,0,0,.12);padding:12px 16px;min-width:180px;z-index:1000;display:none}
+#menu-dropdown.open{display:block}
+#menu-dropdown .md-title{font-size:11px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px;font-family:Arial,sans-serif}
+#menu-dropdown .md-row{display:flex;align-items:center;gap:8px}
+#menu-dropdown .md-lbl{font-size:13px;font-family:Arial,sans-serif;color:#333;min-width:60px}
+.fsz-btn{width:30px;height:30px;border:1px solid #ccc;background:#f8f8f8;border-radius:4px;cursor:pointer;font-size:14px;font-weight:700;font-family:Arial,sans-serif;display:flex;align-items:center;justify-content:center;color:#333;flex-shrink:0}
+.fsz-btn:hover{background:#eee;border-color:#999}
+#pbar{background:#f5f5f5;border-bottom:1px solid #d5d5d5;padding:7px 18px;font-size:13px;flex-shrink:0;color:#222;line-height:1.4}
+#pbar-title{font-weight:700}
+#main{flex:1;display:flex;overflow:hidden;min-height:0}
+#ppane{width:50%;overflow-y:auto;padding:22px 26px;background:#fff;user-select:text;flex-shrink:0}
+#ppane::-webkit-scrollbar{width:6px}
+#ppane::-webkit-scrollbar-track{background:#f2f2f2}
+#ppane::-webkit-scrollbar-thumb{background:#c8c8c8;border-radius:3px}
+#divider{width:10px;background:#e8e8e8;border-left:1px solid #ccc;border-right:1px solid #ccc;cursor:col-resize;flex-shrink:0;display:flex;align-items:center;justify-content:center;position:relative;z-index:10}
+#div-btn{width:26px;height:26px;background:#888;border-radius:3px;color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;user-select:none;position:absolute;line-height:1}
+#div-btn:hover{background:#666}
+#qpane{flex:1;overflow-y:auto;padding:16px 20px;background:#fff;min-width:0;user-select:text}
+#qpane::-webkit-scrollbar{width:6px}
+#qpane::-webkit-scrollbar-track{background:#f2f2f2}
+#qpane::-webkit-scrollbar-thumb{background:#c8c8c8;border-radius:3px}
+.pass-title{font-size:17px;font-weight:700;text-align:center;margin-bottom:3px;font-family:Arial,sans-serif}
+.pass-sub{font-size:12.5px;text-align:left;margin-bottom:14px;color:#333;font-family:Arial,sans-serif}
+.pass-body p{font-size:14px;line-height:1.65;margin-bottom:13px;font-family:Arial,sans-serif;color:#111;text-align:left}
+.para-letter{font-weight:700;margin-right:6px;color:#111}
+.hl{background:#FFE066;border-radius:1px}
+#hl-tip{position:fixed;display:none;background:#111;color:#fff;padding:5px 13px;border-radius:18px;font-size:12px;font-family:Arial,sans-serif;cursor:pointer;z-index:9999;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.35)}
+#hl-tip:hover{background:#333}
+.qs{font-size:13px;color:#222;margin-bottom:16px}
+.qs-instr{margin-bottom:10px;line-height:1.55;font-size:13px}
+.qs-instr strong{font-weight:700}
+.qs-instr em{font-style:italic}
+.qitem{margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid #efefef}
+.qitem:last-child{border-bottom:none}
+.qrow{display:flex;gap:6px;font-size:13px;line-height:1.5;margin-bottom:6px}
+.qno{font-weight:700;min-width:20px;flex-shrink:0}
+.tfn-opts{display:flex;flex-direction:column;gap:5px;padding-left:26px}
+.tfn-opt{display:flex;align-items:center;gap:7px;font-size:13px;cursor:pointer;color:#222}
+.tfn-opt input[type=radio]{cursor:pointer;width:15px;height:15px;flex-shrink:0}
+.notes-wrap{border:1px solid #bbb;background:#fafafa;padding:12px 14px;margin-top:4px}
+.notes-head{font-weight:700;font-size:14px;text-align:center;margin-bottom:10px}
+.notes-sec-title{font-weight:700;font-size:13px;margin:8px 0 5px}
+.notes-li{display:flex;flex-wrap:wrap;align-items:baseline;gap:3px;font-size:13px;line-height:1.7;margin-bottom:5px;padding-left:10px}
+.notes-li::before{content:"•";margin-right:5px;flex-shrink:0}
+.fill-field{display:inline-flex;align-items:center;border:1px solid #888;border-radius:2px;padding:1px 5px;background:#fff;vertical-align:middle}
+.fill-field .fqn{font-size:11px;font-weight:700;color:#555;margin-right:3px;flex-shrink:0}
+.fill-field input{border:none;outline:none;font-size:13px;font-family:Arial,sans-serif;width:90px;background:transparent;color:#111}
+.hbox{border:1px solid #aaa;margin-bottom:12px}
+.hbox-title{font-weight:700;font-size:13px;text-align:center;background:#f0f0f0;border-bottom:1px solid #aaa;padding:6px 10px}
+.hbox-body{padding:8px 12px}
+.hrow{display:flex;gap:8px;font-size:13px;margin-bottom:4px}
+.hrn{font-weight:700;min-width:24px;flex-shrink:0}
+.abox{border:1px solid #aaa;margin-bottom:12px}
+.abox-title{font-weight:700;font-size:13px;text-align:center;background:#f0f0f0;border-bottom:1px solid #aaa;padding:6px 10px}
+.abox-body{padding:8px 12px}
+.arow{display:flex;gap:8px;font-size:13px;margin-bottom:3px}
+.arl{font-weight:700;min-width:20px}
+.ph-row{display:flex;align-items:center;gap:8px;margin-bottom:9px;font-size:13px}
+.ph-no{font-weight:700;min-width:24px;flex-shrink:0}
+.ph-para-label{font-size:13px;color:#333;min-width:90px}
+.qsel{border:1px solid #888;border-radius:2px;padding:3px 6px;font-size:12.5px;font-family:Arial,sans-serif;background:#fff;cursor:pointer;outline:none;color:#111}
+.qsel:focus{border-color:#444}
+.sum-body{padding:6px 0}
+.sum-title{font-weight:700;font-size:14px;text-align:center;margin-bottom:10px}
+.sum-text{font-size:13px;line-height:2.3}
+.mcq-opts{display:flex;flex-direction:column;gap:5px;padding-left:10px}
+.mcq-opt{display:flex;align-items:flex-start;gap:7px;font-size:13px;cursor:default;user-select:none}
+.mcq-opt input{cursor:pointer;width:17px;height:17px;flex-shrink:0;margin-top:1px}
+.mcq-opt .mcq-let{pointer-events:none}
+.mcq-opt span:last-child{pointer-events:none}
+.mcq-let{font-weight:700;flex-shrink:0;min-width:16px}
+#bnav{background:#f0f0f0;border-top:1px solid #ccc;flex-shrink:0;padding:0;min-height:44px;display:flex;align-items:stretch}
+#bnav-inner{display:flex;align-items:center;width:100%;padding:0 10px;gap:0;min-height:44px}
+#bnav-p1{display:flex;align-items:center;gap:5px;flex-shrink:0}
+.bnav-plabel{font-size:13px;font-weight:700;font-family:Arial,sans-serif;color:#222;white-space:nowrap;cursor:pointer}
+.bnav-plabel:hover{text-decoration:underline}
+#bnav-pills{display:flex;align-items:center;gap:3px;flex-wrap:nowrap}
+.qpill{min-width:26px;height:26px;padding:0 4px;display:flex;align-items:center;justify-content:center;font-size:12px;font-family:Arial,sans-serif;color:#444;border-radius:3px;border:1px solid transparent;cursor:pointer;user-select:none;background:transparent}
+.qpill:hover{border-color:#999;background:#e6e6e6}
+.qpill.ans{color:#222;font-weight:600}
+.bnav-sep{width:1px;background:#ccc;height:24px;margin:0 12px;flex-shrink:0}
+.bnav-pother{display:flex;align-items:center;gap:6px;flex-shrink:0;cursor:pointer;padding:0 4px}
+.bnav-pother:hover .bnav-plabel2{text-decoration:underline}
+.bnav-plabel2{font-size:13px;font-weight:700;font-family:Arial,sans-serif;color:#666}
+.bnav-pother.active .bnav-plabel2{color:#222}
+.bnav-pscore{font-size:12px;color:#666;font-family:Arial,sans-serif}
+#bnav-spacer{flex:1}
+#sub-btn{width:44px;height:44px;background:#e0e0e0;border:none;border-left:1px solid #ccc;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:20px;color:#444}
+#sub-btn:hover{background:#d0d0d0;color:#111}
+#res-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:99999;display:none;align-items:center;justify-content:center}
+#res-modal{background:#fff;width:92vw;max-width:720px;max-height:88vh;overflow-y:auto;border-radius:5px;padding:24px 26px;box-shadow:0 6px 36px rgba(0,0,0,.35);font-family:Arial,sans-serif}
+#res-modal::-webkit-scrollbar{width:6px}
+#res-modal::-webkit-scrollbar-thumb{background:#ccc;border-radius:3px}
+.rm-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.rm-title{font-size:18px;font-weight:700}
+.rm-close{background:none;border:none;font-size:24px;cursor:pointer;color:#666;line-height:1;padding:0}
+.rm-close:hover{color:#000}
+.rm-part{margin-bottom:20px;border:1px solid #ddd;border-radius:4px;overflow:hidden}
+.rm-ph{background:#f2f2f2;padding:8px 14px;font-weight:700;font-size:13.5px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #ddd}
+.rm-badge{font-size:12px;color:#fff;padding:2px 11px;border-radius:10px;font-weight:700}
+.rm-badge.good{background:#2e7d32}.rm-badge.ok{background:#e65100}.rm-badge.bad{background:#c41230}
+.rm-tbl{width:100%;border-collapse:collapse;font-size:12.5px}
+.rm-tbl th{background:#f8f8f8;padding:5px 10px;text-align:left;font-weight:700;border-bottom:1px solid #ddd;color:#333}
+.rm-tbl td{padding:5px 10px;border-bottom:1px solid #f0f0f0;vertical-align:top}
+.rm-tbl tr:last-child td{border-bottom:none}
+tr.rr-ok{background:#f1fff4}
+tr.rr-no{background:#fff5f5}
+.mc{color:#2e7d32;font-weight:700}
+.mw{color:#c41230;font-weight:700}
+.total-strip{margin-top:16px;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center}
+.ts-lbl{font-size:15px;font-weight:700}
+.ts-num{font-size:26px;font-weight:900;color:#c41230;text-align:right;line-height:1.1}
+.ts-band{font-size:12px;color:#666;margin-top:2px}
+</style>
+</head>
+<body>
+<div id="hl-tip">✏ Highlight</div>
+
+<div id="hdr">
+  <div id="hdr-left">
+    <div class="ielts-badge">IELTS</div>
+    <a id="tg-link" href="https://t.me/alisher_abduvohobov" target="_blank">
+      <span class="tg-circle">
+        <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" fill="none">
+          <path d="M54 117.9c35-15.2 58.3-25.3 70-30.2 33.3-13.9 40.2-16.3 44.7-16.4 1 0 3.2.2 4.6 1.5 1.2 1 1.5 2.5 1.7 3.5.2 1 .4 3.2.2 4.9-1.9 19.9-10 68.2-14.1 90.5-1.7 9.4-5.1 12.6-8.4 12.9-7.1.7-12.5-4.7-19.4-9.2-10.8-7.1-16.9-11.5-27.4-18.4-12.1-8-4.3-12.4 2.6-19.6 1.8-1.9 33.2-30.4 33.8-33 .1-.3.1-.6-.2-.9-.3-.2-.7-.1-1.1 0-.5.1-7.9 5-22.4 14.9-21.2 14.3-28.6 14.6-37 11.1-3.1-1.3-8.8-3.7-8.8-3.7s-3.2-2 2.2-4.9z" fill="#fff"/>
+        </svg>
+      </span>
+      Alisher's IELTS | 9.0
+    </a>
+  </div>
+  <div id="hdr-right">
+    <div id="menu-wrap">
+      <button id="menu-btn" onclick="toggleMenu()" title="Settings">
+        <span></span><span></span><span></span>
+      </button>
+      <div id="menu-dropdown">
+        <div class="md-title">Text Size</div>
+        <div class="md-row">
+          <span class="md-lbl">Passage</span>
+          <button class="fsz-btn" onclick="changeFontSize('pass',-1)">A−</button>
+          <span id="fsz-pass-val">14px</span>
+          <button class="fsz-btn" onclick="changeFontSize('pass',1)">A+</button>
+        </div>
+        <div class="md-row" style="margin-top:8px">
+          <span class="md-lbl">Questions</span>
+          <button class="fsz-btn" onclick="changeFontSize('q',-1)">A−</button>
+          <span id="fsz-q-val">13px</span>
+          <button class="fsz-btn" onclick="changeFontSize('q',1)">A+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="pbar">
+  <span id="pbar-title">Passage 1</span><span id="pbar-desc">&nbsp;&nbsp;Read the text and answer questions 1–13.</span>
+</div>
+
+<div id="main">
+  <div id="ppane"></div>
+  <div id="divider"><div id="div-btn">↔</div></div>
+  <div id="qpane"></div>
+</div>
+
+<div id="bnav">
+  <div id="bnav-inner">
+    <div id="bnav-p1">
+      <span class="bnav-plabel" onclick="goPart(1)" id="bnav-lbl1">Passage 1</span>
+      <div id="bnav-pills"></div>
+    </div>
+    <div class="bnav-sep" id="bnav-sep1"></div>
+    <div class="bnav-pother" id="bnav-po2" onclick="goPart(2)">
+      <span class="bnav-plabel2" id="bnav-lbl2">Passage 2</span>
+      <span class="bnav-pscore" id="pts2">0 of 13</span>
+    </div>
+    <div class="bnav-sep" id="bnav-sep2"></div>
+    <div class="bnav-pother" id="bnav-po3" onclick="goPart(3)">
+      <span class="bnav-plabel2" id="bnav-lbl3">Passage 3</span>
+      <span class="bnav-pscore" id="pts3">0 of 14</span>
+    </div>
+    <div id="bnav-spacer"></div>
+    <button id="sub-btn" onclick="showResults()" title="Submit">✓</button>
+  </div>
+</div>
+
+<div id="res-overlay">
+  <div id="res-modal">
+    <div class="rm-hdr">
+      <div class="rm-title">Test Results</div>
+      <button class="rm-close" onclick="closeResults()">✕</button>
+    </div>
+    <div id="res-body"></div>
+  </div>
+</div>
+
+<script>
+const PASSAGES = {
+1: `<div class="pass-title">Answers Underground</div>
+<div class="pass-sub">Burying greenhouse gases to slow global warming</div>
+<div class="pass-body">
+<p><span class="para-letter">A</span>One way to slow global warming is to take the greenhouse gases that cause it and bury them. That is the idea behind projects now under way to capture emissions from power plants and factories and force them underground or deep into the ocean. There, proponents argue, they could be trapped for thousands of years. This concept, known as carbon sequestration, is already being used by oil companies to improve the efficiency of oil wells, and now engineers have begun exploring ways to capture carbon dioxide emissions from power plants to reduce their impact on the environment. At a recent conference, delegates from fourteen industrialised and developing countries agreed to engage in cooperative research into capturing and storing carbon dioxide. The goal is to stabilise emissions of greenhouse gases that trap heat in the atmosphere.</p>
+<p><span class="para-letter">B</span>Over the past century, airborne carbon dioxide concentrations have risen by nearly a third, according to Scott Klara, sequestration manager at the US National Energy Technology Laboratory. Unless emissions are slashed by two thirds worldwide, the Intergovernmental Panel on Climate Change predicts that concentrations will rise to double the levels of the early 1700s, before the Industrial Revolution.</p>
+<p><span class="para-letter">C</span>These increased levels of carbon-based compounds in the atmosphere are believed to be the cause of rising temperatures and sea levels around the world. Ignoring the problem is therefore not an option.</p>
+<p><span class="para-letter">D</span>Limiting emissions, however, is not an easy undertaking since increased energy consumption is a key to economic growth. Two thirds of the world's power-generating capacity, expected to come into use by 2030, has not been constructed yet, according to the International Energy Agency. The developing world will be particularly important. China and India alone are expected to account for two thirds of the global increase in coal usage over the next fifteen years.</p>
+<p><span class="para-letter">E</span>Solutions are being sought. Work is being undertaken with alternatives to fossil fuels such as wind and solar energy, but it will be a long time before these alternative sources play a major role in fulfilling the world's energy needs. Geophysicist Klaus Lackner points out that around 85% of the world's energy is derived from fossil fuels, the cheapest and most plentiful energy source available, and the developing world in particular is unlikely to give them up. That is why many scientists support sequestration.</p>
+<p><span class="para-letter">F</span>However, several problems must be resolved before sequestration plays a key role in a low-carbon future. One is the cost of capturing carbon dioxide. A second is storing the gas safely once it's been captured. Today, it costs about $US50 to extract and store a tonne of carbon dioxide from a power plant, which raises the cost of producing electricity by 30-80%. Lackner argues that it is too expensive to adapt existing plants to capture carbon dioxide. Instead, he recommends that carbon-capturing capacity be built into future plants. Economic incentives are needed to encourage companies to identify low-cost carbon-sequestration solutions. A government-supported program in the US has enabled some factories to partially capture carbon emissions, which they then sell for various uses, including carbonating soft drinks. However, there are no power plants ready for full carbon capture.</p>
+<p><span class="para-letter">G</span>Once the carbon has been captured it must be stored. Natural carbon sinks, such as forests and wetlands, can remove some carbon dioxide from the atmosphere, but not nearly enough. Carbon dioxide could be pumped to the bottom of the ocean, where the pressure would keep it pinned to the seabed in liquid form for decades, but that has serious long-term environmental risks. David Hawkins, from the Natural Resources Defense Council in Washington, warns that the carbon dioxide could radically alter the chemical balance in the ocean, with potentially harmful consequences for marine life. Others worry that the carbon dioxide could escape back into the atmosphere.</p>
+<p><span class="para-letter">H</span>A few promising attempts at underground carbon sequestration are currently under way. In western Canada, an oil company is pumping liquefied carbon dioxide into oil wells to force more oil to the surface and boost recovery by 10-15%. The company gets the carbon dioxide via a pipeline from North Dakota in the US, where the gas is captured from a synthetic-fuel plant. In another instance in the North Sea, a Norwegian energy firm is injecting carbon dioxide waste from its natural-gas operations into a saline aquifer 1,000 metres beneath the ocean floor.</p>
+<p><span class="para-letter">I</span>Clearly, storing large amounts of gas underground raises environmental fears. Environmentalists argue that more research is needed on potential storage sites, such as oil and gas reservoirs and coal seams unsuitable for mining, to ensure that they offer long-term solutions. The World Wide Fund for Nature Australia has argued that the primary risk of underground storage is that dangerously large volumes of carbon dioxide might escape and people become asphyxiated.</p>
+<p><span class="para-letter">J</span>Little progress in slashing global greenhouse gases can be achieved without involving developing countries, but for now carbon sequestration is not their priority because of the increased costs this would add to energy production. Hawkins argues that, to encourage developing nations to use sequestration, developed nations will have to provide assistance. He suggests a multilateral initiative in which developed nations, perhaps by purchasing carbon credits from poorer countries, finance the difference between the cost of a regular coal-fired power plant and one that captures carbon emissions. That is, the rich - who will remain the world's biggest polluters for years to come - would buy the right to emit carbon from the poor, who would use the proceeds to build better plants.</p>
+</div>`,
+2: `<div class="pass-title">Science and the Stradivarius: Uncovering the secret of quality</div>
+<div class="pass-body">
+<p><span class="para-letter">A</span>Violins made by long-dead Italian craftsmen from the Cremona region are beautiful works of art, coveted by collectors as well as players. Particularly outstanding violins have reputedly changed hands for over a million pounds. In contrast, fine modern instruments can be bought for under £100. Do such figures really reflect such large differences in quality? After more than a hundred years of vigorous debate, this question remains highly contentious, provoking strongly held but divergent views among musicians, violin makers and scientists alike.</p>
+<p><span class="para-letter">B</span>Every violin, whether a Stradivarius or the cheapest factory-made copy, has a distinctive 'voice' of its own. Just as any musician can immediately recognise the difference between Domingo and Pavarotti singing the same operatic aria, so a skilled violinist can distinguish between different qualities in the sound produced by individual Stradivari or Guarneri violins. Individual notes on a single instrument sound different each time they are played, which suggests that the perceived tone of a violin must be related to the overall design of the instrument, rather than the frequencies of particular resonances on it. But although various attempts have been made to analyse such global properties, it is extremely difficult to distinguish between a fine Stradivarius instrument and an indifferent modern copy on the basis of the measured response alone.</p>
+<p><span class="para-letter">C</span>The ear is a supreme detection device, and a system has yet to be developed which can match the brain's sophisticated ability to assess complex sounds. So how do skilled violinmakers optimise the tone of an instrument during the construction process? They begin by selecting a wood of the highest possible quality for the front and back plates (or parts of the violin), which they test by tapping with a hammer and judging how well it 'rings'. The next important step is to skillfully carve the plates out of the solid wood, taking great care to get the right degree of arching and variations in thickness. Traditional makers optimise the thickness by testing the 'feel' of the plates when they are flexed, and by the sounds produced when they are tapped at different positions with the knuckles.</p>
+<p><span class="para-letter">D</span>However, in the last 50 years or so a group of violin makers has emerged who have tried to take a more overtly scientific approach to violin making. One common practice they have adopted is to replace the traditional flexing and tapping of plates by controlled measurements. During the carving process, the thinned plates are sprinkled with flakes of glitter and suspended horizontally above a loudspeaker. The glitter forms a pattern each time the loudspeaker excites a resonance. The aim is to interactively 'tune' these first few free plate resonances to specified patterns.</p>
+<p><span class="para-letter">E</span>Unfortunately, there are very few examples of such measurements for really fine Italian instruments because their owners are naturally reluctant to allow their violins to be taken apart for the sake of science. The few tests that have been performed suggest that the first Italian makers may have tuned the resonant modes of the individual plates - which they could identify as they tapped them to exact musical intervals. This would be consistent with the prevailing Renaissance view of 'perfection', which was measured in terms of numbers and exact ratios. However, there is no historical data to support this case.</p>
+<p><span class="para-letter">F</span>Another factor that affects sound quality is the presence of moisture. To achieve the quality of "vibrancy" in a violin requires high-quality wood with low internal damping. By measuring the pattern of growth-rings in the wood of a Stradivarius, we know that the Italian violin makers sometimes used planks of wood that had only been seasoned for five years. However, such wood is now 300 years old, and the intrinsic internal damping will almost certainly have decreased with time. The age of the wood may therefore automatically contribute to the improved quality of older instruments. This may also explain why the quality of a modern instrument appears to improve in its first few years.</p>
+<p><span class="para-letter">G</span>Another factor thought to account for sound quality is the nature of the varnish used to protect the instrument. One of the most popular theories for well over a century to account for the Stradivarius secret has been that the varnish had some sort of 'magic' composition. However, historical research has shown that it was very similar to the varnish used today. So apart from the possibility that the Italian varnish was contaminated with the wings of passing insects and debris from the workshop floor, there is no convincing evidence to support the idea of a secret formula.</p>
+<p><span class="para-letter">H</span>Other researchers, meanwhile, have claimed that Stradivarius's secret was to soak the timber in water, to leach out supposedly harmful chemicals, before it was seasoned. Although this would be consistent with the idea that the masts and oars of recently sunken Venetian war galleys might have been used to make violins, other scientific and historical evidence to support this view is unconvincing.</p>
+<p><span class="para-letter">I</span>In conclusion, science has not provided any convincing evidence to set Cremonese instruments apart from the finest violins made by skilled craftsmen today. Indeed, some leading soloists do occasionally play on modern instruments. However, the foremost soloists - and, not surprisingly, violin dealers, who have a vested interest in maintaining the Cremonese legend of intrinsic superiority - remain utterly unconvinced.</p>
+</div>`,
+3: `<div class="pass-title">When people are deaf to music</div>
+<div class="pass-body">
+<p>Music has long been considered a uniquely human concept. In fact, most psychologists agree that music is a universal human instinct. Like any ability, however, there is great variation in people's musical competence. For every brilliant pianist in the world, there are several people we refer to as "tone deaf". It is not simply that people with tone deafness (or "amusia") are unable to sing in tune, they are also unable to discriminate between tones or recognize familiar melodies. Such a "disorder" can occur after some sort of brain damage, but recently research has been undertaken in an attempt to discover the cause of congenital amusia (when people are born with the condition), which is not associated with any brain damage, hearing problems, or lack of exposure to music.</p>
+<p>According to the research of Dr. Isabelle Peretz of the University of Montreal, amusia is more complicated than the inability to distinguish pitches. An amusia (a person who has the condition of amusia) can distinguish between two pitches that are far apart, but cannot tell the difference between intervals smaller than a half step on the Western diatonic scale, while most people can easily distinguish differences smaller than that. When listening to melodies which have had a single note altered so that it is out of key with the rest of the melody, do not notice a problem. As would be expected, amusics perform significantly worse at singing and tapping a rhythm along with a melody than do non-amusics.</p>
+<p>The most fascinating aspect of amusia is how specific to music it is. Because of music's close ties to language, it might be expected that a musical impairment may be caused by a language impairment. Studies suggest, however, that language and music ability are independent of one another. People with brain damage in areas critical to language are often still able to sing, despite being unable to communicate through speech. Moreover, while amusics show deficiencies in their recognition of pitch differences in melodies, they show no tonal languages, such as Chinese, do not report having any difficulty discriminating between words that differ only in their intonation. The linguistic cues inherent in speech make discrimination of meaning much easier for amusics. Amusics are also successful most of the time at detecting the mood of a melody, can identify a speaker based on his or her voice and can discriminate and identify environmental sounds.</p>
+<p>Recent work has been focused on locating the part of the brain that is responsible for amusia. The temporal lobes of the brain, the location of the primary auditory cortex, have been considered. It has long been believed that the temporal lobes, especially the right temporal lobe, are most active when activity, so any musical disability should logically stem from here as well. Because it has been shown that there is no hearing deficit in amusia, researchers moved on to the temporal neocortex, which is where more sophisticated processing of musical cues was thought to take place. New studies, however, have suggested that the deficits in amusics are located outside the auditory cortex. Brain scans of amusics do not show any reaction at all to differences smaller than a half step. When changes in tones are large, their brains overreact, showing twice as much activity on the right side of the brain as a normal brain hearing the same thing. These differences do not occur in the auditory cortex, indicating again that the deficits of amusia lie mostly in hearing impairment, but in higher processing of melodies.</p>
+<p>So what does this all mean? Looking only at the research of Peretz in the field of neuropsychology of music, it would appear that amusia is some sort of disorder. As a student of neurobiology, however, I am skeptical. Certainly the studies by Peretz that have found significant differences between the brains of so-called amusics and normal brains are legitimate. The more important question now becomes one of normality. Every trait from skin color to intelligence to mood exists on a continuum-there is a great idea of variation from one extreme to the other. Just because we recognize that basic musical ability is something that the vast majority of people have, this doesn't mean that the lack of it is abnormal.</p>
+<p>What makes an amusic worse off than a musical prodigy? Musical ability is culturally valued, and may have been a factor in survival at one point in human history, but it does not seem likely that it is being selected for on an evolutionary scale any longer. Darwin believed that music was adaptive as a way of finding a mate, but who needs to be able to sing to find a partner in an age when it is possible to express your emotions through a song on your IPod? While the idea of amusia is interesting, it seems to be just one end of the continuum of innate musical ability. Comparing this 'disorder' to learning disorders like a specific language impairment seems to be going too far. Before, amusia can be declared a disability, further research must be done to determine whether lack of musical ability is actually detrimental in any way. If no disadvantages can be found of having amusia, then it is no more a disability than having poor fashion sense or bad handwriting.</p>
+</div>`
+};
+
+const AK = {
+  1:'D',2:'E',3:'D',4:'E',5:'A',6:'F',
+  7:'H',8:'F',9:'C',
+  10:'T',11:'T',12:'F',13:'NGV',
+  14:'iv',15:'ix',16:'ii',17:'viii',18:'vi',19:'i',20:'xi',21:'x',
+  22:'T',23:'F',24:'NGV',25:'T',26:'F',
+  27:'D',28:'B',29:'A',30:'C',31:'B',
+  32:'N',33:'NGV',34:'Y',35:'NGV',
+  36:'E',37:'C',38:'D',39:'G',40:'B'
+};
+
+/* Expand shorthand keys for display in results table */
+function displayAK(n) {
+  const v = AK[n].toString();
+  if (v === 'T')   return 'TRUE';
+  if (v === 'F')   return 'FALSE';
+  if (v === 'NGV') return 'NOT GIVEN';
+  if (v === 'Y')   return 'YES';
+  if (v === 'N')   return 'NO';
+  return v;
+}
+
+function tfnBlock(n, text) {
+  const v = ans[n]||'';
+  return `<div class="qitem" id="qi${n}">
+    <div class="qrow"><span class="qno">${n}</span><span>${text}</span></div>
+    <div class="tfn-opts">
+      ${['TRUE','FALSE','NOT GIVEN'].map(o=>`<label class="tfn-opt"><input type="radio" name="rq${n}" value="${o}" ${v===o?'checked':''} onchange="setAns(${n},this.value)">${o}</label>`).join('')}
+    </div>
+  </div>`;
+}
+
+function yngvBlock(n, text) {
+  const v = ans[n]||'';
+  return `<div class="qitem" id="qi${n}">
+    <div class="qrow"><span class="qno">${n}</span><span>${text}</span></div>
+    <div class="tfn-opts">
+      ${['YES','NO','NOT GIVEN'].map(o=>`<label class="tfn-opt"><input type="radio" name="rq${n}" value="${o}" ${v===o?'checked':''} onchange="setAns(${n},this.value)">${o}</label>`).join('')}
+    </div>
+  </div>`;
+}
+
+function fillField(n, pre='', post='') {
+  const v = ans[n]||'';
+  return `<div class="notes-li" id="qi${n}">
+    ${pre ? pre+' ' : ''}<span class="fill-field"><span class="fqn">${n}</span><input id="fi${n}" value="${v}" onchange="setAns(${n},this.value)" onkeyup="setAns(${n},this.value)" placeholder="…"></span>${post ? ' '+post : ''}
+  </div>`;
+}
+
+function headingRow(n, para, opts) {
+  const v = ans[n]||'';
+  return `<div class="ph-row" id="qi${n}">
+    <span class="ph-no">${n}</span>
+    <span class="ph-para-label">Paragraph ${para}</span>
+    <select class="qsel" onchange="setAns(${n},this.value)">
+      <option value="">—</option>
+      ${opts.map(o=>`<option value="${o.v}" ${v===o.v?'selected':''}>${o.v}&nbsp;&nbsp;${o.t}</option>`).join('')}
+    </select>
+  </div>`;
+}
+
+function matchRow(n, text, opts) {
+  const v = ans[n]||'';
+  return `<div class="qitem" id="qi${n}">
+    <div class="qrow"><span class="qno">${n}</span><span>${text}</span></div>
+    <select class="qsel" onchange="setAns(${n},this.value)" style="margin-left:26px;margin-top:4px">
+      <option value="">— select —</option>
+      ${opts.map(o=>`<option value="${o.v}" ${v===o.v?'selected':''}>${o.v} — ${o.t}</option>`).join('')}
+    </select>
+  </div>`;
+}
+
+function paraRow(n, text, max='J') {
+  const v = ans[n]||'';
+  const letters = [];
+  for(let i=65; i<=max.charCodeAt(0); i++) letters.push(String.fromCharCode(i));
+  return `<div class="qitem" id="qi${n}">
+    <div class="qrow"><span class="qno">${n}</span><span>${text}</span></div>
+    <select class="qsel" onchange="setAns(${n},this.value)" style="margin-left:26px;margin-top:4px">
+      <option value="">— paragraph —</option>
+      ${letters.map(l=>`<option value="${l}" ${v===l?'selected':''}>${l}</option>`).join('')}
+    </select>
+  </div>`;
+}
+
+function mcqBlock(n, qtext, opts) {
+  const v = ans[n]||'';
+  return `<div class="qitem" id="qi${n}">
+    <div class="qrow"><span class="qno">${n}</span><span>${qtext}</span></div>
+    <div class="mcq-opts">
+      ${Object.entries(opts).map(([l,t])=>`<div class="mcq-opt"><input type="radio" name="rq${n}" value="${l}" ${v===l?'checked':''} onchange="setAns(${n},this.value)"><span class="mcq-let">${l}</span><span>${t}</span></div>`).join('')}
+    </div>
+  </div>`;
+}
+
+function renderQ(p){if(p===1)return renderQ1();if(p===2)return renderQ2();return renderQ3();}
+
+function renderQ1(){
+  const ACADS=[{v:'A',t:'Scott Klara'},{v:'B',t:'Intergovernmental Panel on Climate Change'},{v:'C',t:'International Energy Agency'},{v:'D',t:'Klaus Lackner'},{v:'E',t:'David Hawkins'},{v:'F',t:'World Wide Fund for Nature Australia'}];
+  let h=`<div class="qs">
+  <div class="qs-instr">Questions 1–6<br>Look at the following issues (Questions 1-6) and the list of people and organisations below.<br>Match each issue with the correct person or organization, <strong>A-F</strong>.<br>Write the correct letter, <strong>A-F</strong>, in boxes 1-6.<br><br><strong>NB</strong> You may use any letter more than once.</div>
+  <div class="abox"><div class="abox-title">List of People and organisations</div><div class="abox-body">${ACADS.map(a=>`<div class="arow"><span class="arl">${a.v}</span>${a.t}</div>`).join('')}</div></div>
+  ${matchRow(1,'The cost implications of fitting plants with the necessary equipment.',ACADS)}
+  ${matchRow(2,'The effects of sequestration could have on sea creatures.',ACADS)}
+  ${matchRow(3,'The reasons why products such as oil and gas continue to be popular energy sources.',ACADS)}
+  ${matchRow(4,'The need for industrialised countries to give aid to less wealthy countries.',ACADS)}
+  ${matchRow(5,'The significant increase in carbon dioxide concentrations in the air over the last 100 years.',ACADS)}
+  ${matchRow(6,'The potential for sequestration to harm human life.',ACADS)}
+  </div>
+  <div class="qs">
+  <div class="qs-instr">Questions 7–9<br>Reading Passage 1 has ten paragraphs, <strong>A-J</strong>.<br>Which paragraph contains the following information?<br>Write the correct letter, <strong>A-J</strong>, in boxes 7-9.</div>
+  ${paraRow(7,'Examples of sequestration already in use in several parts of the world', 'J')}
+  ${paraRow(8,'An example of putting carbon dioxide emissions to use in the food and beverage industry', 'J')}
+  ${paraRow(9,'Current examples of the environmental harm attributed to carbon dioxide in the air', 'J')}
+  </div>
+  <div class="qs">
+  <div class="qs-instr">Questions 10–13<br>Do the following statements agree with the information given in Reading Passage 1?<br>In boxes 10–13, write:<br><strong>TRUE</strong> if the statement agrees with the information<br><strong>FALSE</strong> if the statement contradicts the information<br><strong>NOT GIVEN</strong> if there is no information on this</div>
+  ${tfnBlock(10,'Both developing and developed nations have decided to investigate carbon dioxide sequestration.')}
+  ${tfnBlock(11,'A growing economy will use more power.')}
+  ${tfnBlock(12,'Capturing carbon dioxide has become financially attractive.')}
+  ${tfnBlock(13,'More forests need to be planted to improve the atmosphere.')}
+  </div>`;
+  return h;
+}
+
+function renderQ2(){
+  const HOPTS2=[{v:'i',t:'An analysis of protective coatings'},{v:'ii',t:'Applying technology to violin production'},{v:'iii',t:'Location a key factor'},{v:'iv',t:'A controversial range of prices'},{v:'v',t:'Techniques of mass production'},{v:'vi',t:'The advantages of older wood'},{v:'vii',t:'A re-evaluation of documentary evidence'},{v:'viii',t:'The mathematical basis of earlier design'},{v:'ix',t:'Manual woodworking techniques'},{v:'x',t:'Preferences of top musicians'},{v:'xi',t:'The use of saturated wood'},{v:'xii',t:'The challenge for scientists'}];
+  let h=`<div class="qs">
+  <div class="qs-instr">Questions 14–21<br>Reading Passage 2 has nine paragraphs, <strong>A–I</strong>.<br>Choose the correct heading for paragraphs <strong>A</strong> and <strong>C–I</strong> from the list of headings below.<br>Write the correct number, <strong>i–xii</strong>, in boxes 14–21.</div>
+  <div class="hbox"><div class="hbox-title">List of Headings</div><div class="hbox-body">${HOPTS2.map(o=>`<div class="hrow"><span class="hrn">${o.v}</span><span>${o.t}</span></div>`).join('')}</div></div>
+  ${headingRow(14,'A',HOPTS2)}
+  ${headingRow(15,'C',HOPTS2)}
+  ${headingRow(16,'D',HOPTS2)}
+  ${headingRow(17,'E',HOPTS2)}
+  ${headingRow(18,'F',HOPTS2)}
+  ${headingRow(19,'G',HOPTS2)}
+  ${headingRow(20,'H',HOPTS2)}
+  ${headingRow(21,'I',HOPTS2)}
+  </div>
+  <div class="qs">
+  <div class="qs-instr">Questions 22–26<br>Do the following statements agree with the information given in Reading Passage 2?<br>In boxes 22–26, write:<br><strong>TRUE</strong> if the statement agrees with the information<br><strong>FALSE</strong> if the statement contradicts the information<br><strong>NOT GIVEN</strong> if there is no information on this</div>
+  ${tfnBlock(22,'The quality of any particular note played on the same violin varies.')}
+  ${tfnBlock(23,'Scientific instruments analyse complex sound more accurately than humans.')}
+  ${tfnBlock(24,'The quality of handmade violins varies according to the musical ability of the craftsman.')}
+  ${tfnBlock(25,'Modern violins seem to improve in their early years.')}
+  ${tfnBlock(26,'Modern violins are gaining in popularity amongst the top violinists')}
+  </div>`;
+  return h;
+}
+
+function renderQ3(){
+  const ENDINGS=[{v:'A',t:'an inability to hear when spoken language rises and falls.'},{v:'B',t:'considered to be desirable.'},{v:'C',t:'an inability to follow the beat of music.'},{v:'D',t:'not a problem.'},{v:'E',t:'not yet well understood.'},{v:'F',t:'a result of injury to the mother.'},{v:'G',t:'more marked that with other people.'},{v:'H',t:'associated with intelligence.'}];
+  
+  let h=`<div class="qs">
+  <div class="qs-instr">Questions 27–31<br><em>Choose the correct letter, <strong>A, B, C</strong> or <strong>D</strong>.</em></div>
+  ${mcqBlock(27,'What does the writer tell us about people with tone deafness (amusia) in the first paragraph?',{A:'They usually have hearing problems',B:'Some can play a musical instrument very well',C:'Some may be able to sing well-known melodies',D:'They have several inabilities in regard to music'})}
+  ${mcqBlock(28,'What is the writer doing in the second paragraph?',{A:'outlining some of factors that cause amusia',B:'summarising some findings about people with amusia',C:'suggesting that people with amusia are disadvantaged',D:'comparing the sing ability of amusia with their sense'})}
+  ${mcqBlock(29,'What does the writer say about the relationship between language ability and musical ability?',{A:'People who are unable to speak can sometimes sing',B:'People with amusia usually have language problems too',C:'Speakers of tonal languages like Chinese rarely have amusia',D:'People with amusia have difficulty recognizing people by their voices'})}
+  ${mcqBlock(30,'In the third paragraph, the writer notes that most amusics are able to',{A:'learn how to sing in tune',B:'identify a song by its tune',C:'distinguish a sad tone from a happy tune',D:'recognise when a singer is not sing in tune'})}
+  ${mcqBlock(31,'What is the writer doing in the fourth paragraph?',{A:'claiming that amusics have problems in the auditory cortex',B:'outlining progress in understanding the brains of amusics',C:'proving that amuisa is located in the temporal lobes',D:'explaining why studies of hearing are difficult'})}
+  </div>
+  <div class="qs">
+  <div class="qs-instr">Questions 32–35<br>Do the following statements agree with the views of the writer in Reading Passage 3?<br><em>In boxes 32–35, write:</em><br><strong>YES</strong> if the statement agrees with the claims of the writer<br><strong>NO</strong> if the statement contradicts the claims of the writer<br><strong>NOT GIVEN</strong> if it is impossible to say what the writer thinks about this</div>
+  ${yngvBlock(32,'Perezt\'s research suggesting that amusia is a disorder is convincing.')}
+  ${yngvBlock(33,'People with musical ability are happier than those without this ability.')}
+  ${yngvBlock(34,'It is inappropriate to consider amusia as real disorder.')}
+  ${yngvBlock(35,'People with amusia often have bad handwriting.')}
+  </div>
+  <div class="qs">
+  <div class="qs-instr">Questions 36–40<br>Complete each sentence with the correct ending, <strong>A-H</strong> below.<br>Write the correct letter, <strong>A-H</strong> in boxes 36-40.</div>
+  <div class="abox"><div class="abox-body">${ENDINGS.map(a=>`<div class="arow"><span class="arl">${a.v}</span>${a.t}</div>`).join('')}</div></div>
+  ${matchRow(36,'The reason why some people are born with amusia is',ENDINGS)}
+  ${matchRow(37,'One of the difficulties amusia experience is',ENDINGS)}
+  ${matchRow(38,'For amusia, discrimination of meaning in speech is',ENDINGS)}
+  ${matchRow(39,'Certain reactions in the brain of an amusia are',ENDINGS)}
+  ${matchRow(40,'In most cultures, musical ability is',ENDINGS)}
+  </div>`;
+  return h;
+}
+
+let curPart=1, ans={};
+const pbarDescs={1:'Read the text and answer questions 1–13.',2:'Read the text and answer questions 14–26.',3:'Read the text and answer questions 27–40.'};
+const pRanges={1:[1,13],2:[14,26],3:[27,40]};
+
+function goPart(p){
+  if(p<1||p>3)return;
+  curPart=p;
+  document.getElementById('pbar-title').textContent='Passage '+p;
+  document.getElementById('pbar-desc').textContent='\u00a0\u00a0'+pbarDescs[p];
+  document.getElementById('ppane').innerHTML=PASSAGES[p];
+  document.getElementById('qpane').innerHTML=renderQ(p);
+  document.getElementById('bnav-po2').innerHTML=`<span class="bnav-plabel2" id="bnav-lbl2">Passage 2</span><span class="bnav-pscore" id="pts2">0 of 13</span>`;
+  document.getElementById('bnav-po3').innerHTML=`<span class="bnav-plabel2" id="bnav-lbl3">Passage 3</span><span class="bnav-pscore" id="pts3">0 of 14</span>`;
+  renderPills();
+  document.getElementById('ppane').scrollTop=0;
+  document.getElementById('qpane').scrollTop=0;
+  applyFontSizes();
+}
+
+function setAns(n,v){ans[n]=v.trim();renderPills();}
+
+function renderPills(){
+  const[s,e]=pRanges[curPart];
+  for(let p=1;p<=3;p++){const[ps,pe]=pRanges[p];let c=0;for(let i=ps;i<=pe;i++)if(ans[i]&&ans[i].trim()!=='')c++;if(p!==1){const el=document.getElementById('pts'+p);if(el)el.textContent=`${c} of ${pe-ps+1}`;}}
+  if(curPart===1){
+    let h='';for(let i=s;i<=e;i++){const a=ans[i]&&ans[i]!=='';h+=`<div class="qpill${a?' ans':''}" onclick="scrollToQ(${i})">${i}</div>`;}
+    document.getElementById('bnav-pills').innerHTML=h;
+    document.getElementById('bnav-lbl1').style.color='#222';
+    const l2=document.getElementById('bnav-lbl2');if(l2)l2.style.color='#666';
+    const l3=document.getElementById('bnav-lbl3');if(l3)l3.style.color='#666';
+  } else if(curPart===2){
+    document.getElementById('bnav-pills').innerHTML='';
+    document.getElementById('bnav-lbl1').style.color='#666';
+    let h='';for(let i=s;i<=e;i++){const a=ans[i]&&ans[i]!=='';h+=`<div class="qpill${a?' ans':''}" onclick="scrollToQ(${i})">${i}</div>`;}
+    document.getElementById('bnav-po2').innerHTML=`<span class="bnav-plabel2" id="bnav-lbl2" style="color:#222;font-weight:700">Passage 2</span><span style="display:flex;align-items:center;gap:3px">${h}</span>`;
+    const[ps3,pe3]=pRanges[3];let c3=0;for(let i=ps3;i<=pe3;i++)if(ans[i]&&ans[i]!=='')c3++;
+    document.getElementById('bnav-po3').innerHTML=`<span class="bnav-plabel2" id="bnav-lbl3" style="color:#666">Passage 3</span><span class="bnav-pscore" id="pts3">${c3} of ${pe3-ps3+1}</span>`;
+  } else {
+    document.getElementById('bnav-pills').innerHTML='';
+    document.getElementById('bnav-lbl1').style.color='#666';
+    const[ps2,pe2]=pRanges[2];let c2=0;for(let i=ps2;i<=pe2;i++)if(ans[i]&&ans[i]!=='')c2++;
+    document.getElementById('bnav-po2').innerHTML=`<span class="bnav-plabel2" id="bnav-lbl2" style="color:#666">Passage 2</span><span class="bnav-pscore" id="pts2">${c2} of ${pe2-ps2+1}</span>`;
+    let h='';for(let i=s;i<=e;i++){const a=ans[i]&&ans[i]!=='';h+=`<div class="qpill${a?' ans':''}" onclick="scrollToQ(${i})">${i}</div>`;}
+    document.getElementById('bnav-po3').innerHTML=`<span class="bnav-plabel2" id="bnav-lbl3" style="color:#222;font-weight:700">Passage 3</span><span style="display:flex;align-items:center;gap:3px">${h}</span>`;
+  }
+}
+
+function scrollToQ(n){const el=document.getElementById('qi'+n);if(el)el.scrollIntoView({behavior:'smooth',block:'center'});}
+
+/* Highlight */
+const hlTip=document.getElementById('hl-tip');
+let hlRange=null;
+function isInPane(node){const pp=document.getElementById('ppane');const qp=document.getElementById('qpane');return pp.contains(node)||qp.contains(node);}
+document.addEventListener('mouseup',e=>{
+  if(e.target===hlTip)return;
+  const sel=window.getSelection();
+  if(!sel||sel.isCollapsed||!sel.toString().trim()){hlTip.style.display='none';return;}
+  const range=sel.getRangeAt(0);
+  if(!isInPane(range.commonAncestorContainer)){hlTip.style.display='none';return;}
+  hlRange=range.cloneRange();
+  const r=range.getBoundingClientRect();
+  hlTip.style.left=(r.left+r.width/2-38)+'px';
+  hlTip.style.top=(r.top+window.scrollY-34)+'px';
+  hlTip.style.display='block';
+});
+document.addEventListener('mousedown',e=>{if(e.target!==hlTip)hlTip.style.display='none';});
+hlTip.addEventListener('click',()=>{
+  if(!hlRange)return;
+  const sp=document.createElement('span');sp.className='hl';sp.onclick=function(){this.outerHTML=this.innerHTML;};sp.title='Click to remove';
+  try{hlRange.surroundContents(sp);}catch(ex){const f=hlRange.extractContents();sp.appendChild(f);hlRange.insertNode(sp);}
+  hlTip.style.display='none';window.getSelection().removeAllRanges();
+});
+
+/* Resizable divider */
+let drag=false,dStartX,dStartW;
+const divEl=document.getElementById('divider'),ppEl=document.getElementById('ppane');
+divEl.addEventListener('mousedown',e=>{drag=true;dStartX=e.clientX;dStartW=ppEl.offsetWidth;document.body.style.cursor='col-resize';document.body.style.userSelect='none';});
+document.addEventListener('mousemove',e=>{if(!drag)return;const tot=document.getElementById('main').offsetWidth-10;ppEl.style.width=Math.max(240,Math.min(tot-240,dStartW+(e.clientX-dStartX)))+'px';});
+document.addEventListener('mouseup',()=>{drag=false;document.body.style.cursor='';document.body.style.userSelect='';});
+
+/* Results */
+function normalizeAns(v){
+  const s=v.trim().toLowerCase();
+  if(s==='true'||s==='t')return 't';
+  if(s==='false'||s==='f')return 'f';
+  if(s==='not given'||s==='ngv')return 'ngv';
+  if(s==='yes'||s==='y')return 'y';
+  if(s==='no'||s==='n')return 'n';
+  return s;
+}
+function isCorrect(n){return normalizeAns(ans[n]||'')===normalizeAns(AK[n].toString());}
+
+function showResults(){
+  const partNames={1:'Passage 1 – Answers Underground (Q1–13)',2:'Passage 2 – Science and the Stradivarius (Q14–26)',3:'Passage 3 – When people are deaf to music (Q27–40)'};
+  let total=0,html='';
+  for(let p=1;p<=3;p++){
+    const[s,e]=pRanges[p];let pc=0,rows='';
+    for(let i=s;i<=e;i++){
+      const ok=isCorrect(i);if(ok){pc++;total++;}
+      const ua=(ans[i]||'').trim()||'—';
+      rows+=`<tr class="${ok?'rr-ok':'rr-no'}">
+        <td><strong>${i}</strong></td>
+        <td>${ua}</td>
+        <td class="mc">${displayAK(i)}</td>
+        <td class="${ok?'mc':'mw'}">${ok?'✓':'✗'}</td>
+      </tr>`;
+    }
+    const tot2=e-s+1,pct=Math.round(pc/tot2*100),bc=pct>=70?'good':(pct>=50?'ok':'bad');
+    html+=`<div class="rm-part"><div class="rm-ph">${partNames[p]}<span class="rm-badge ${bc}">${pc}/${tot2} (${pct}%)</span></div>
+      <table class="rm-tbl"><thead><tr><th>Q</th><th>Your Answer</th><th>Correct</th><th></th></tr></thead><tbody>${rows}</tbody></table>
+    </div>`;
+  }
+  const pct=Math.round(total/40*100);
+  const band=total>=39?'9.0':total>=37?'8.5':total>=35?'8.0':total>=33?'7.5':total>=30?'7.0':total>=27?'6.5':total>=23?'6.0':total>=19?'5.5':total>=15?'5.0':total>=13?'4.5':'4.0';
+  html+=`<div class="total-strip"><span class="ts-lbl">Total Score</span><div><div class="ts-num">${total} / 40 <span style="font-size:14px;color:#888">(${pct}%)</span></div><div class="ts-band">Estimated Band Score: <strong>${band}</strong></div></div></div>`;
+  document.getElementById('res-body').innerHTML=html;
+  document.getElementById('res-overlay').style.display='flex';
+}
+
+function closeResults(){document.getElementById('res-overlay').style.display='none';}
+
+/* Font size */
+let fsPass=14,fsQ=13;
+const FS_MIN=10,FS_MAX=22;
+function changeFontSize(which,delta){
+  if(which==='pass'){fsPass=Math.max(FS_MIN,Math.min(FS_MAX,fsPass+delta));document.getElementById('fsz-pass-val').textContent=fsPass+'px';}
+  else{fsQ=Math.max(FS_MIN,Math.min(FS_MAX,fsQ+delta));document.getElementById('fsz-q-val').textContent=fsQ+'px';}
+  applyFontSizes();
+}
+function applyFontSizes(){
+  const pp=document.getElementById('ppane');if(pp)pp.querySelectorAll('p').forEach(el=>el.style.fontSize=fsPass+'px');
+  const qp=document.getElementById('qpane');if(qp)qp.style.fontSize=fsQ+'px';
+}
+function toggleMenu(){document.getElementById('menu-dropdown').classList.toggle('open');}
+document.addEventListener('click',e=>{const w=document.getElementById('menu-wrap');if(w&&!w.contains(e.target))document.getElementById('menu-dropdown').classList.remove('open');});
+
+goPart(1);
+</script>
+</body>
+</html>

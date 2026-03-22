@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IELTS Academic Reading – Test 6</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,Helvetica,sans-serif;font-size:14px;height:100vh;display:flex;flex-direction:column;overflow:hidden;background:#fff;color:#222}
+#hdr{height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;border-bottom:1.5px solid #d0d0d0;background:#fff;flex-shrink:0}
+#hdr-left{display:flex;align-items:center;gap:14px}
+.ielts-badge{background:#c41230;color:#fff;font-family:'Arial Black',Arial,sans-serif;font-weight:900;font-size:19px;padding:3px 10px 4px;letter-spacing:0.5px;border-radius:2px;user-select:none;line-height:1.3}
+#tg-link{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:#222;font-size:13px;font-weight:600;font-family:Arial,sans-serif;background:#fff;border:1.5px solid #d0d0d0;border-radius:22px;padding:5px 14px 5px 6px;transition:border-color .15s,box-shadow .15s}
+#tg-link:hover{border-color:#0088cc;box-shadow:0 0 0 2px rgba(0,136,204,.12);color:#0088cc}
+#tg-link .tg-circle{width:28px;height:28px;border-radius:50%;background:linear-gradient(to bottom,#2aabee,#229ed9);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+#tg-link .tg-circle svg{width:16px;height:16px}
+#hdr-right{display:flex;align-items:center;gap:14px}
+#menu-wrap{position:relative}
+#menu-btn{background:none;border:none;cursor:pointer;padding:4px;display:flex;flex-direction:column;gap:4px;border-radius:4px}
+#menu-btn:hover{background:#f0f0f0}
+#menu-btn span{display:block;width:20px;height:2px;background:#444;border-radius:2px}
+#menu-dropdown{position:absolute;top:calc(100% + 8px);right:0;background:#fff;border:1px solid #d0d0d0;border-radius:6px;box-shadow:0 4px 16px rgba(0,0,0,.12);padding:12px 16px;min-width:180px;z-index:1000;display:none}
+#menu-dropdown.open{display:block}
+#menu-dropdown .md-title{font-size:11px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px;font-family:Arial,sans-serif}
+#menu-dropdown .md-row{display:flex;align-items:center;gap:8px}
+#menu-dropdown .md-lbl{font-size:13px;font-family:Arial,sans-serif;color:#333;min-width:60px}
+.fsz-btn{width:30px;height:30px;border:1px solid #ccc;background:#f8f8f8;border-radius:4px;cursor:pointer;font-size:14px;font-weight:700;font-family:Arial,sans-serif;display:flex;align-items:center;justify-content:center;color:#333;flex-shrink:0}
+.fsz-btn:hover{background:#eee;border-color:#999}
+#pbar{background:#f5f5f5;border-bottom:1px solid #d5d5d5;padding:7px 18px;font-size:13px;flex-shrink:0;color:#222;line-height:1.4}
+#pbar-title{font-weight:700}
+#main{flex:1;display:flex;overflow:hidden;min-height:0}
+#ppane{width:50%;overflow-y:auto;padding:22px 26px;background:#fff;user-select:text;flex-shrink:0}
+#ppane::-webkit-scrollbar{width:6px}
+#ppane::-webkit-scrollbar-track{background:#f2f2f2}
+#ppane::-webkit-scrollbar-thumb{background:#c8c8c8;border-radius:3px}
+#divider{width:10px;background:#e8e8e8;border-left:1px solid #ccc;border-right:1px solid #ccc;cursor:col-resize;flex-shrink:0;display:flex;align-items:center;justify-content:center;position:relative;z-index:10}
+#div-btn{width:26px;height:26px;background:#888;border-radius:3px;color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;user-select:none;position:absolute;line-height:1}
+#div-btn:hover{background:#666}
+#qpane{flex:1;overflow-y:auto;padding:16px 20px;background:#fff;min-width:0;user-select:text}
+#qpane::-webkit-scrollbar{width:6px}
+#qpane::-webkit-scrollbar-track{background:#f2f2f2}
+#qpane::-webkit-scrollbar-thumb{background:#c8c8c8;border-radius:3px}
+.pass-title{font-size:17px;font-weight:700;text-align:center;margin-bottom:3px;font-family:Arial,sans-serif}
+.pass-sub{font-size:12.5px;text-align:left;margin-bottom:14px;color:#333;font-family:Arial,sans-serif}
+.pass-body p{font-size:14px;line-height:1.65;margin-bottom:13px;font-family:Arial,sans-serif;color:#111;text-align:left}
+.para-letter{font-weight:700;margin-right:6px;color:#111}
+.hl{background:#FFE066;border-radius:1px}
+#hl-tip{position:fixed;display:none;background:#111;color:#fff;padding:5px 13px;border-radius:18px;font-size:12px;font-family:Arial,sans-serif;cursor:pointer;z-index:9999;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.35)}
+#hl-tip:hover{background:#333}
+.qs{font-size:13px;color:#222;margin-bottom:16px}
+.qs-instr{margin-bottom:10px;line-height:1.55;font-size:13px}
+.qs-instr strong{font-weight:700}
+.qs-instr em{font-style:italic}
+.qitem{margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid #efefef}
+.qitem:last-child{border-bottom:none}
+.qrow{display:flex;gap:6px;font-size:13px;line-height:1.5;margin-bottom:6px}
+.qno{font-weight:700;min-width:20px;flex-shrink:0}
+.tfn-opts{display:flex;flex-direction:column;gap:5px;padding-left:26px}
+.tfn-opt{display:flex;align-items:center;gap:7px;font-size:13px;cursor:pointer;color:#222}
+.tfn-opt input[type=radio]{cursor:pointer;width:15px;height:15px;flex-shrink:0}
+.notes-wrap{border:1px solid #bbb;background:#fafafa;padding:12px 14px;margin-top:4px}
+.notes-head{font-weight:700;font-size:14px;text-align:center;margin-bottom:10px}
+.notes-sec-title{font-weight:700;font-size:13px;margin:8px 0 5px}
+.notes-li{display:flex;flex-wrap:wrap;align-items:baseline;gap:3px;font-size:13px;line-height:1.7;margin-bottom:5px;padding-left:10px}
+.notes-li::before{content:"•";margin-right:5px;flex-shrink:0}
+.fill-field{display:inline-flex;align-items:center;border:1px solid #888;border-radius:2px;padding:1px 5px;background:#fff;vertical-align:middle}
+.fill-field .fqn{font-size:11px;font-weight:700;color:#555;margin-right:3px;flex-shrink:0}
+.fill-field input{border:none;outline:none;font-size:13px;font-family:Arial,sans-serif;width:90px;background:transparent;color:#111}
+.hbox{border:1px solid #aaa;margin-bottom:12px}
+.hbox-title{font-weight:700;font-size:13px;text-align:center;background:#f0f0f0;border-bottom:1px solid #aaa;padding:6px 10px}
+.hbox-body{padding:8px 12px}
+.hrow{display:flex;gap:8px;font-size:13px;margin-bottom:4px}
+.hrn{font-weight:700;min-width:24px;flex-shrink:0}
+.abox{border:1px solid #aaa;margin-bottom:12px}
+.abox-title{font-weight:700;font-size:13px;text-align:center;background:#f0f0f0;border-bottom:1px solid #aaa;padding:6px 10px}
+.abox-body{padding:8px 12px}
+.arow{display:flex;gap:8px;font-size:13px;margin-bottom:3px}
+.arl{font-weight:700;min-width:20px}
+.ph-row{display:flex;align-items:center;gap:8px;margin-bottom:9px;font-size:13px}
+.ph-no{font-weight:700;min-width:24px;flex-shrink:0}
+.ph-para-label{font-size:13px;color:#333;min-width:90px}
+.qsel{border:1px solid #888;border-radius:2px;padding:3px 6px;font-size:12.5px;font-family:Arial,sans-serif;background:#fff;cursor:pointer;outline:none;color:#111}
+.qsel:focus{border-color:#444}
+.sum-body{padding:6px 0}
+.sum-title{font-weight:700;font-size:14px;text-align:center;margin-bottom:10px}
+.sum-text{font-size:13px;line-height:2.3}
+.mcq-opts{display:flex;flex-direction:column;gap:5px;padding-left:10px}
+.mcq-opt{display:flex;align-items:flex-start;gap:7px;font-size:13px;cursor:default;user-select:none}
+.mcq-opt input{cursor:pointer;width:17px;height:17px;flex-shrink:0;margin-top:1px}
+.mcq-opt .mcq-let{pointer-events:none}
+.mcq-opt span:last-child{pointer-events:none}
+.mcq-let{font-weight:700;flex-shrink:0;min-width:16px}
+#bnav{background:#f0f0f0;border-top:1px solid #ccc;flex-shrink:0;padding:0;min-height:44px;display:flex;align-items:stretch}
+#bnav-inner{display:flex;align-items:center;width:100%;padding:0 10px;gap:0;min-height:44px}
+#bnav-p1{display:flex;align-items:center;gap:5px;flex-shrink:0}
+.bnav-plabel{font-size:13px;font-weight:700;font-family:Arial,sans-serif;color:#222;white-space:nowrap;cursor:pointer}
+.bnav-plabel:hover{text-decoration:underline}
+#bnav-pills{display:flex;align-items:center;gap:3px;flex-wrap:nowrap}
+.qpill{min-width:26px;height:26px;padding:0 4px;display:flex;align-items:center;justify-content:center;font-size:12px;font-family:Arial,sans-serif;color:#444;border-radius:3px;border:1px solid transparent;cursor:pointer;user-select:none;background:transparent}
+.qpill:hover{border-color:#999;background:#e6e6e6}
+.qpill.ans{color:#222;font-weight:600}
+.bnav-sep{width:1px;background:#ccc;height:24px;margin:0 12px;flex-shrink:0}
+.bnav-pother{display:flex;align-items:center;gap:6px;flex-shrink:0;cursor:pointer;padding:0 4px}
+.bnav-pother:hover .bnav-plabel2{text-decoration:underline}
+.bnav-plabel2{font-size:13px;font-weight:700;font-family:Arial,sans-serif;color:#666}
+.bnav-pother.active .bnav-plabel2{color:#222}
+.bnav-pscore{font-size:12px;color:#666;font-family:Arial,sans-serif}
+#bnav-spacer{flex:1}
+#sub-btn{width:44px;height:44px;background:#e0e0e0;border:none;border-left:1px solid #ccc;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:20px;color:#444}
+#sub-btn:hover{background:#d0d0d0;color:#111}
+#res-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:99999;display:none;align-items:center;justify-content:center}
+#res-modal{background:#fff;width:92vw;max-width:720px;max-height:88vh;overflow-y:auto;border-radius:5px;padding:24px 26px;box-shadow:0 6px 36px rgba(0,0,0,.35);font-family:Arial,sans-serif}
+#res-modal::-webkit-scrollbar{width:6px}
+#res-modal::-webkit-scrollbar-thumb{background:#ccc;border-radius:3px}
+.rm-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.rm-title{font-size:18px;font-weight:700}
+.rm-close{background:none;border:none;font-size:24px;cursor:pointer;color:#666;line-height:1;padding:0}
+.rm-close:hover{color:#000}
+.rm-part{margin-bottom:20px;border:1px solid #ddd;border-radius:4px;overflow:hidden}
+.rm-ph{background:#f2f2f2;padding:8px 14px;font-weight:700;font-size:13.5px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #ddd}
+.rm-badge{font-size:12px;color:#fff;padding:2px 11px;border-radius:10px;font-weight:700}
+.rm-badge.good{background:#2e7d32}.rm-badge.ok{background:#e65100}.rm-badge.bad{background:#c41230}
+.rm-tbl{width:100%;border-collapse:collapse;font-size:12.5px}
+.rm-tbl th{background:#f8f8f8;padding:5px 10px;text-align:left;font-weight:700;border-bottom:1px solid #ddd;color:#333}
+.rm-tbl td{padding:5px 10px;border-bottom:1px solid #f0f0f0;vertical-align:top}
+.rm-tbl tr:last-child td{border-bottom:none}
+tr.rr-ok{background:#f1fff4}
+tr.rr-no{background:#fff5f5}
+.mc{color:#2e7d32;font-weight:700}
+.mw{color:#c41230;font-weight:700}
+.total-strip{margin-top:16px;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center}
+.ts-lbl{font-size:15px;font-weight:700}
+.ts-num{font-size:26px;font-weight:900;color:#c41230;text-align:right;line-height:1.1}
+.ts-band{font-size:12px;color:#666;margin-top:2px}
+</style>
+</head>
+<body>
+<div id="hl-tip">✏ Highlight</div>
+
+<div id="hdr">
+  <div id="hdr-left">
+    <div class="ielts-badge">IELTS</div>
+    <a id="tg-link" href="https://t.me/alisher_abduvohobov" target="_blank">
+      <span class="tg-circle">
+        <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" fill="none">
+          <path d="M54 117.9c35-15.2 58.3-25.3 70-30.2 33.3-13.9 40.2-16.3 44.7-16.4 1 0 3.2.2 4.6 1.5 1.2 1 1.5 2.5 1.7 3.5.2 1 .4 3.2.2 4.9-1.9 19.9-10 68.2-14.1 90.5-1.7 9.4-5.1 12.6-8.4 12.9-7.1.7-12.5-4.7-19.4-9.2-10.8-7.1-16.9-11.5-27.4-18.4-12.1-8-4.3-12.4 2.6-19.6 1.8-1.9 33.2-30.4 33.8-33 .1-.3.1-.6-.2-.9-.3-.2-.7-.1-1.1 0-.5.1-7.9 5-22.4 14.9-21.2 14.3-28.6 14.6-37 11.1-3.1-1.3-8.8-3.7-8.8-3.7s-3.2-2 2.2-4.9z" fill="#fff"/>
+        </svg>
+      </span>
+      Alisher's IELTS | 9.0
+    </a>
+  </div>
+  <div id="hdr-right">
+    <div id="menu-wrap">
+      <button id="menu-btn" onclick="toggleMenu()" title="Settings">
+        <span></span><span></span><span></span>
+      </button>
+      <div id="menu-dropdown">
+        <div class="md-title">Text Size</div>
+        <div class="md-row">
+          <span class="md-lbl">Passage</span>
+          <button class="fsz-btn" onclick="changeFontSize('pass',-1)">A−</button>
+          <span id="fsz-pass-val">14px</span>
+          <button class="fsz-btn" onclick="changeFontSize('pass',1)">A+</button>
+        </div>
+        <div class="md-row" style="margin-top:8px">
+          <span class="md-lbl">Questions</span>
+          <button class="fsz-btn" onclick="changeFontSize('q',-1)">A−</button>
+          <span id="fsz-q-val">13px</span>
+          <button class="fsz-btn" onclick="changeFontSize('q',1)">A+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="pbar">
+  <span id="pbar-title">Passage 1</span><span id="pbar-desc">&nbsp;&nbsp;Read the text and answer questions 1–13.</span>
+</div>
+
+<div id="main">
+  <div id="ppane"></div>
+  <div id="divider"><div id="div-btn">↔</div></div>
+  <div id="qpane"></div>
+</div>
+
+<div id="bnav">
+  <div id="bnav-inner">
+    <div id="bnav-p1">
+      <span class="bnav-plabel" onclick="goPart(1)" id="bnav-lbl1">Passage 1</span>
+      <div id="bnav-pills"></div>
+    </div>
+    <div class="bnav-sep" id="bnav-sep1"></div>
+    <div class="bnav-pother" id="bnav-po2" onclick="goPart(2)">
+      <span class="bnav-plabel2" id="bnav-lbl2">Passage 2</span>
+      <span class="bnav-pscore" id="pts2">0 of 13</span>
+    </div>
+    <div class="bnav-sep" id="bnav-sep2"></div>
+    <div class="bnav-pother" id="bnav-po3" onclick="goPart(3)">
+      <span class="bnav-plabel2" id="bnav-lbl3">Passage 3</span>
+      <span class="bnav-pscore" id="pts3">0 of 14</span>
+    </div>
+    <div id="bnav-spacer"></div>
+    <button id="sub-btn" onclick="showResults()" title="Submit">✓</button>
+  </div>
+</div>
+
+<div id="res-overlay">
+  <div id="res-modal">
+    <div class="rm-hdr">
+      <div class="rm-title">Test Results</div>
+      <button class="rm-close" onclick="closeResults()">✕</button>
+    </div>
+    <div id="res-body"></div>
+  </div>
+</div>
+
+<script>
+const PASSAGES = {
+1: `<div class="pass-title">Developmental Tasks of Normal Adolescence</div>
+<div class="pass-body">
+<p>Some years ago, Professor Robert Havighurst of the University of Chicago, USA, proposed that stages in human development can best be thought of in terms of the developmental 'tasks' that are part of the normal transition. He identified ten developmental tasks associated with the adolescent transition. Each of the Havighurst tasks can also be seen as elements of the overall sense of self that adolescents carry with them as they move towards and into young adulthood. Adolescents do not progress through these multiple developmental tasks separately; at any given time they may be dealing with several.</p>
+<p>The adolescent must adjust to a new physical sense of self. At no other time since birth does an individual undergo such profound physical changes as during early adolescence. Puberty is marked by sudden rapid growth in height and weight. Also, the young person experiences the emergence and accentuation of those physical traits that make the person a boy or a girl. The young person looks less like a child and more like a physically mature adult. The effect of this rapid change is that mid-adolescents are body-conscious, and their concerns are directed towards their opposite-sexed peers.</p>
+<p>The adolescent must adjust to new intellectual abilities. In addition to a sudden spurt in physical growth, adolescents experience a sudden increase in their ability to think about their world. As a normal part of maturity, they are able to think more things. However, they are also able to conceive of their world with awareness. Before adolescence, children's thinking is dominated by a concrete example for any problem that they solve; their thinking is constrained to what is real and physical. During adolescence, young people begin to recognise and understand abstractions. The growth in ability to deal with abstractions accelerates during the middle stages of adolescence.</p>
+<p>The adolescent must adjust to increased cognitive demands at school. Adults see high school in part as a place where adolescents prepare for adult roles and responsibilities and in part as preparatory for further education. School curricula are frequently dominated by the inclusion of more abstract, demanding material, regardless of whether the adolescents have achieved formal thought. Since not all adolescents make the intellectual transition at the same rate, demands for abstract thinking prior to the achievement of that ability may be frustrating.</p>
+<p>The adolescent must adopt a personal value system. During adolescence, as teens develop increasingly complex knowledge systems, they also adopt an integrated set of values and morals. During the early stages of moral development, parents provide their child with a structured set of rules of what is right and wrong, what is acceptable and unacceptable. Eventually the adolescent must assess the parent's values as they come into conflict with values expressed by peers and other segments of society. To reconcile differences, the adolescent restructures those beliefs into a personal ideology.</p>
+<p>The adolescent must develop expanded verbal skills to accommodate more complex concepts and tasks. Their limited language of childhood is no longer adequate. As their conceptual development may outstrip their verbal development, adolescents may appear less competent than they really are.</p>
+<p>The adolescent must establish adult vocational goals. As part of the process of establishing a personal identity, the adolescent must also begin the process of focusing on the question, 'What do you plan to be when you grow up?' Mid-adolescents must identify, at least at a preliminary level, what their adult vocational goals are and how they intend to achieve them.</p>
+<p>The adolescent must develop a personal sense of identity. Prior to adolescence, one's identity is an extension of one's parents' identity. During the early adolescent years a young person begins to recognise their uniqueness and to establish themselves as separate individuals, independent of their parents. As such, one must reconsider the answer to the question, 'What does it mean to be me?' or "who am I?"</p>
+<p>The adolescent must establish emotional and psychological independence from his or her parents. Childhood is marked by strong dependence on one's parents. Adolescents may yearn to keep that safe, secure, supportive, dependent relationship. Yet, to be an adult implies a sense of independence, of autonomy, of being one's own person. In an attempt to assert their need for independence and individuality, adolescents may respond with what appears to be hostility and lack of cooperation.</p>
+<p>The adolescent must develop stable and productive peer relationships. Although peer interaction is not unique to adolescence, it seems to hit a peak of importance during early adolescence. Certainly by late adolescence or early adulthood the need for peer approval has diminished. This degree to which an adolescent is able to make friends and have an accepting peer group, though, is a major indicator of how well the adolescent will adjust in other areas of social and psychological development. Early adolescence is also a period of intense conformity to peers. 'Fitting in' not being different, and being accepted seem somehow pressing to this age group. The worst possibility, from the view of the young teen, is to be seen by peers as different.</p>
+<p>The adolescent must develop increased impulse control and behavioural maturity. In their shift to adulthood, most young people engage in one or more behaviours that place them at physical, social, or educational risk. Risky behaviours are sufficiently pervasive among adolescents to suggest that risk-taking may be a normal developmental process of middle adolescence. Gradually adolescents develop a set of behavioural self-controls through which they assess which behaviours are acceptable and adult-like.</p>
+</div>`,
+2: `<div class="pass-title">Reading Passage 2</div>
+<div class="pass-body">
+<p><span class="para-letter">A</span>Some time in the early Cretaceous period of the Earth's history, hunting wasps of a certain type became bees by adopting a vegetarian diet: they began to rely more and more on the pollen of plants as a source of protein for themselves and their offspring, as an alternative to insects. In so doing, they accidentally transported pollen on their bodies to other plants of the same species, bringing about pollination. The stage was thus set for a succession of ever-closer mutual adaptations of bees and flowering plants. In particular, flowers began to reward bees for their unwitting role in their reproduction by providing richer sources of pollen and another source of nutrition, nectar.</p>
+<p><span class="para-letter">B</span>Today about 15 per cent of our diet consists of crops which are pollinated by bees. The meat and other animal products we consume are ultimately derived from bee-pollinated forage crops, and account for another 15 per cent. It follows that around one third of our food is directly or indirectly dependent on the pollinating services of bees. On a global basis, the annual value of agricultural crops dependent on the pollination services of bees is estimated at £1,000 million (US$1,590 million). Much of this pollination is due to honey bees, and in monetary terms it exceeds the value of the annual honey crop by a factor of fifty.</p>
+<p><span class="para-letter">C</span>But the apparently harmonious relationship between bees and plants conceals a conflict of interests. Although flowers need bees and vice versa, it pays each partner to minimise its costs and maximise its profits. This may sound like an extreme case of attributing human qualities to non-human species, but using the marketplace and the principles of double-entry book keeping as metaphors may give us some insights into what is really going on between bees and flowering plants. In the real world, both flower and bee operate in a competitive marketplace. A community of retailers, the flowers, seek to attract more or less discriminating consumers, the bees. Each flower has to juggle the costs and benefits of investing in advertising, by colour and scent, and providing rewards, nectar and pollen. Clearly a species which depends on cross-pollination is on a knife-edge: it must provide sufficient nectar to attract the interest of a bee, but not enough to satisfy all of its needs in one visit. A satiated bee would return to its nest rather than visit another flower. The bee, on the other hand, is out to get the maximum amount of pollen and nectar. It must assess the quality and quantity of rewards which are on offer and juggle its energy costs so that it makes a calorific profit on each foraging trip. The apparent harmony between plants and bees is therefore not all that it seems. Instead, it is an equilibrium based on compromises between the competing interests of the protagonists.</p>
+<p><span class="para-letter">D</span>This sounds remarkably like the ideas of the 18th-century economist Adam Smith. In his book, The Wealth of Nations, Smith postulated that in human society the competitive interactions of different 'economic units' eventually resulted in a balanced, or 'harmonious' society. One might predict, therefore, that economists would find the relationships between bees and plants of some interest. This is the case in Israel, where economists are collaborating with botanists and entomologists in a long-term study of the pollination biology of the native flora, in an attempt to understand the dynamics of the relationship between communities of bees and plants.</p>
+<p><span class="para-letter">E</span>This sort of study is of more than passing academic interest. It is important that authorities understand the dynamic relationships between plants and their pollinators. This is especially true when, say, devising conservation policies. A good example comes from the forests of tropical South America. Here, as in all rainforests, there is a high diversity of tree species. There may be more than 120 per acre, but in a given acre there may only be one or two individuals of any one species: These trees are pollinated by large, fast-flying bees. There is evidence that certain types of bee learn the distribution of these scattered trees and forage regularly along the same routes. This is called 'trap-lining' and the bees forage for up to 23km from their nests. The bees are therefore acting as long distance pollinators.</p>
+<p><span class="para-letter">F</span>An issue of current concern in tropical forest conservation is that of trying to estimate the minimum sustainable size of islands' of forest reserve in areas where large-scale felling is taking place. There is much discussion on seed dispersal distances. But this is only one half of the equation, so far as the reproduction of trees is concerned. There is another question that must be addressed in order to calculate whether proposed forest reserves are close enough to the nearest large tract of forest: 'What is the flight range of these long-distance foragers?' We need to know much more about bees and their relationships with plants before this question can be answered.</p>
+<p><span class="para-letter">G</span>Bees, then, are vital to our survival. Furthermore, much of the visual impact of human environments derives from vegetation, and most vegetation is dependent on bees for pollination. Thus, as pollinators of crops and natural vegetation, bees occupy key positions in the web of relationships which sustain the living architecture of our planet.</p>
+</div>`,
+3: `<div class="pass-title">A new stage in the study and teaching of history</div>
+<div class="pass-body">
+<p><span class="para-letter">A</span>For hundreds of years, historians have relied on written or printed documents to provide the bulk of their source materials, and they have largely communicated with students and the wider public by writing books and journal articles. Today, however, the printed word is being superseded by a diversity of forms of communication, above all moving images on video or film.</p>
+<p><span class="para-letter">B</span>The development of this new form of communication is leading to a growing gap between the practice of professional historians based in academia, and the practice of those aiming to popularise the study of history among the general public, and to encourage people to create their own records for the future. On the one hand, there are mainstream academics who continue to use only the written word as they examine more and more fields with an ever- increasing number of sophisticated methodologies. On the other hand, film and video, especially as broadcast on television, are probably the major influence on the public's consciousness of history, as they see film of events of fifty or a hundred years ago, events they had previously only read about.</p>
+<p><span class="para-letter">C</span>In a related development, a great many people now document local and family events in the form of videos; many schools, too, produce video yearbooks. All these visual records may well prove to be invaluable sources of information for future historians. The glaring contradiction is that the two approaches-the academic and what we might term the popular - have intersected very little: with a few notable exceptions, professional historians have tended to avoid involvement in television programmes about history, and have even less impact on what is being captured and preserved on video. And the potential of moving images has wielded negligible influence on the academic study of history.</p>
+<p><span class="para-letter">D</span>This gulf can be seen as resulting from the willingness or otherwise of individual historians to accept the validity of new forms of communication in the study of history. This is not the first time that the question has arisen. The study of history, as conceived of today, began with the transition from oral to literate culture, leading to the earliest written records and the earliest historical studies. The next great shift came with the advent of printing, which transformed everything. Today, as the printed word loses its dominance, historians are faced with a variety of forms of communication, ranging from simple audiotape to the promising complexities of videodiscs linked with computers. As yet, however, the use of moving images to record current events for the benefit of future historians does not even have a commonly agreed name.</p>
+<p><span class="para-letter">E</span>This does not mean that mainstream historians have totally rejected the use of moving images as sources: the majority seem intrigued by the idea, and valuable research has been carried out into the history and analysis of films with a broad circulation, using them as a source of information on the social and intellectual history of the twentieth century. Journals such as American History Review have played a significant role in this field. Yet the number of historians using moving images in their research or teaching is very small. The barrier seems to be that the profession is structured around the medium of the written word, and is somewhat insulated in its academic setting. The use of moving images presents a substantial challenge to this setting and its assumptions. As a result, historians have rejected the training, the institutions, the motivations and the professional structures that would be needed in order to use moving images effectively. Above all, they have rejected the necessity to learn complicated new skills.</p>
+<p><span class="para-letter">F</span>So why should historians make this change? Clearly, films or videos of events and people can be used as solid evidence of the past, linked to the words of the narrator (whether a television presenter/historian or a university teacher giving a lecture) but carrying information in their own right. Film has reintroduced the oral form as a mode of research and communication for documenting historical events. Now, with moving images, people are reminded that oral communication is not limited to words: it also includes body language, expression and tone, and is embedded in a context. Little of this is evident in a written transcript. A further effect of video and film is that the narrator gives up some control and has less need to give explanations, while the viewer becomes involved in the process of interpreting and understanding history.</p>
+<p><span class="para-letter">G</span>Film or videotape can also aid historians by simplifying the work of the interviewer. Instead of trying to carry on an interview while simultaneously making notes about setting and other unspoken data, this new kind of historian can concentrate on the interview itself, and study the film later. The many benefits of using moving images as historical evidence easily outweigh worries about cost, technical skills, or the effect of a camera on a person telling his or her story. Moving images enhance the quality of historical research, and suggest new directions for historians to explore.</p>
+</div>`
+};
+
+const AK = {
+  1:'B',2:'B',3:'A',4:'A',5:'C',6:'B',
+  7:'A',8:'C',9:'E',10:'D',
+  11:'F',12:'T',13:'T',
+  14:'ii',15:'v',16:'i',17:'iv',18:'viii',
+  19:'insects',20:'nectar',21:'one third',22:'cross-pollination',23:'energy costs',24:'tree species',25:'trap-lining',
+  26:'A',
+  27:'C',28:'E',29:'F',30:'A',31:'B',32:'G',33:'C',34:'F',35:'E',
+  36:'NGV',37:'Y',38:'N',39:'Y',40:'NGV'
+};
+
+/* Expand shorthand keys for display in results table */
+function displayAK(n) {
+  const v = AK[n].toString();
+  if (v === 'T')   return 'TRUE';
+  if (v === 'F')   return 'FALSE';
+  if (v === 'Y')   return 'YES';
+  if (v === 'N')   return 'NO';
+  if (v === 'NGV') return 'NOT GIVEN';
+  return v;
+}
+
+function tfnBlock(n, text) {
+  const v = ans[n]||'';
+  return `<div class="qitem" id="qi${n}">
+    <div class="qrow"><span class="qno">${n}</span><span>${text}</span></div>
+    <div class="tfn-opts">
+      ${['TRUE','FALSE','NOT GIVEN'].map(o=>`<label class="tfn-opt"><input type="radio" name="rq${n}" value="${o}" ${v===o?'checked':''} onchange="setAns(${n},this.value)">${o}</label>`).join('')}
+    </div>
+  </div>`;
+}
+
+function yngvBlock(n, text) {
+  const v = ans[n]||'';
+  return `<div class="qitem" id="qi${n}">
+    <div class="qrow"><span class="qno">${n}</span><span>${text}</span></div>
+    <div class="tfn-opts">
+      ${['YES','NO','NOT GIVEN'].map(o=>`<label class="tfn-opt"><input type="radio" name="rq${n}" value="${o}" ${v===o?'checked':''} onchange="setAns(${n},this.value)">${o}</label>`).join('')}
+    </div>
+  </div>`;
+}
+
+function fillField(n, pre='', post='') {
+  const v = ans[n]||'';
+  return `<div class="notes-li" id="qi${n}">
+    ${pre ? pre+' ' : ''}<span class="fill-field"><span class="fqn">${n}</span><input id="fi${n}" value="${v}" onchange="setAns(${n},this.value)" onkeyup="setAns(${n},this.value)" placeholder="…"></span>${post ? ' '+post : ''}
+  </div>`;
+}
+
+function headingRow(n, para, opts) {
+  const v = ans[n]||'';
+  return `<div class="ph-row" id="qi${n}">
+    <span class="ph-no">${n}</span>
+    <span class="ph-para-label">Paragraph ${para}</span>
+    <select class="qsel" onchange="setAns(${n},this.value)">
+      <option value="">—</option>
+      ${opts.map(o=>`<option value="${o.v}" ${v===o.v?'selected':''}>${o.v}&nbsp;&nbsp;${o.t}</option>`).join('')}
+    </select>
+  </div>`;
+}
+
+function matchRow(n, text, opts) {
+  const v = ans[n]||'';
+  return `<div class="qitem" id="qi${n}">
+    <div class="qrow"><span class="qno">${n}</span><span>${text}</span></div>
+    <select class="qsel" onchange="setAns(${n},this.value)" style="margin-left:26px;margin-top:4px">
+      <option value="">— select —</option>
+      ${opts.map(o=>`<option value="${o.v}" ${v===o.v?'selected':''}>${o.v} — ${o.t}</option>`).join('')}
+    </select>
+  </div>`;
+}
+
+function paraRow(n, text) {
+  const v = ans[n]||'';
+  return `<div class="qitem" id="qi${n}">
+    <div class="qrow"><span class="qno">${n}</span><span>${text}</span></div>
+    <select class="qsel" onchange="setAns(${n},this.value)" style="margin-left:26px;margin-top:4px">
+      <option value="">— paragraph —</option>
+      ${['A','B','C','D','E','F','G','H'].map(l=>`<option value="${l}" ${v===l?'selected':''}>${l}</option>`).join('')}
+    </select>
+  </div>`;
+}
+
+function mcqBlock(n, qtext, opts) {
+  const v = ans[n]||'';
+  return `<div class="qitem" id="qi${n}">
+    <div class="qrow"><span class="qno">${n}</span><span>${qtext}</span></div>
+    <div class="mcq-opts">
+      ${Object.entries(opts).map(([l,t])=>`<div class="mcq-opt"><input type="radio" name="rq${n}" value="${l}" ${v===l?'checked':''} onchange="setAns(${n},this.value)"><span class="mcq-let">${l}</span><span>${t}</span></div>`).join('')}
+    </div>
+  </div>`;
+}
+
+function renderQ(p){if(p===1)return renderQ1();if(p===2)return renderQ2();return renderQ3();}
+
+function renderQ1(){
+  const OPTS1=[{v:'A',t:'early adolescence'},{v:'B',t:'middle adolescence'},{v:'C',t:'late adolescence'}];
+  const OPTS2=[{v:'A',t:'reflects an adolescent\'s emerging self-perception.'},{v:'B',t:'cannot solve a problem without an example.'},{v:'C',t:'is designed to become more challenging.'},{v:'D',t:'formulates a personal set of moral beliefs and values.'},{v:'E',t:'varies according to the individual.'}];
+  
+  let h=`<div class="qs">
+  <div class="qs-instr">Questions 1–6<br>Classify the following developments as characterising<br><strong>A</strong> early adolescence<br><strong>B</strong> middle adolescence<br><strong>C</strong> late adolescence<br>Write the correct letter, <strong>A, B or C</strong>, in boxes 1–6.</div>
+  <div class="abox"><div class="abox-title">Classifications</div><div class="abox-body">${OPTS1.map(a=>`<div class="arow"><span class="arl">${a.v}</span>${a.t}</div>`).join('')}</div></div>
+  ${matchRow(1,'becoming interested in people of the other gender',OPTS1)}
+  ${matchRow(2,'beginning to choose a future career',OPTS1)}
+  ${matchRow(3,'needing to feel the same as one\'s friends',OPTS1)}
+  ${matchRow(4,'beginning to form a self-image separate from the family context',OPTS1)}
+  ${matchRow(5,'having less need for the good opinion of friends',OPTS1)}
+  ${matchRow(6,'exposing oneself to dangers',OPTS1)}
+  </div>
+  <div class="qs">
+  <div class="qs-instr">Questions 7–10<br>Complete each sentence with the correct ending, <strong>A–E</strong>, below.</div>
+  <div class="abox"><div class="abox-title">Endings</div><div class="abox-body">${OPTS2.map(a=>`<div class="arow"><span class="arl">${a.v}</span>${a.t}</div>`).join('')}</div></div>
+  ${matchRow(7,'Havighurst proposed a set of tasks which',OPTS2)}
+  ${matchRow(8,'A course of study at high school',OPTS2)}
+  ${matchRow(9,'The speed of development of thinking ability during adolescence',OPTS2)}
+  ${matchRow(10,'Adolescence is a time when the young person',OPTS2)}
+  </div>
+  <div class="qs">
+  <div class="qs-instr">Questions 11–13<br>Do the following statements agree with the information given in Reading Passage 1?<br>In boxes 11–13, write:<br><strong>TRUE</strong> if the statement agrees with the information<br><strong>FALSE</strong> if the statement contradicts the information<br><strong>NOT GIVEN</strong> if there is no information on this</div>
+  ${tfnBlock(11,'Most pre-adolescent children are capable of abstract thought.')}
+  ${tfnBlock(12,'Adolescents \'limited skills with words may give a false impression of their ability.')}
+  ${tfnBlock(13,'Whether or not an adolescent is accepted by their age-group is an important clue to other aspects of their social adjustment.')}
+  </div>`;
+  return h;
+}
+
+function renderQ2(){
+  const HOPTS2=[{v:'i',t:'Parallels between bee and human activities'},{v:'ii',t:'An evolutionary turning point'},{v:'iii',t:'A lack of total co-operation'},{v:'iv',t:'The preservation of individual plant species'},{v:'v',t:'The commercial value of bees'},{v:'vi',t:'The structure of flowering plants'},{v:'vii',t:'The pursuit of self-interest'},{v:'viii',t:'The need for further research'}];
+  const sv=(n)=>ans[n]||'';
+  let h=`<div class="qs">
+  <div class="qs-instr">Questions 14–18<br>Reading Passage 2 has seven paragraphs, <strong>A–G</strong>.<br>Choose the correct heading for paragraphs <strong>A, B, D, E and F</strong> from the list of headings below.<br>Write the correct number, <strong>i–viii</strong>, in boxes 14–18.</div>
+  <div class="hbox"><div class="hbox-title">List of Headings</div><div class="hbox-body">${HOPTS2.map(o=>`<div class="hrow"><span class="hrn">${o.v}</span><span>${o.t}</span></div>`).join('')}</div></div>
+  ${headingRow(14,'A',HOPTS2)}${headingRow(15,'B',HOPTS2)}
+  <div class="ph-row" style="opacity:0.6"><span class="ph-no" style="font-weight:normal">Example</span><span class="ph-para-label">Paragraph C</span><span style="font-weight:bold;margin-left:8px">vii</span></div>
+  ${headingRow(16,'D',HOPTS2)}${headingRow(17,'E',HOPTS2)}${headingRow(18,'F',HOPTS2)}
+  </div>
+  <div class="qs">
+  <div class="qs-instr">Questions 19–25<br>Complete the sentences below.<br>Choose <strong>NO MORE THAN TWO WORDS AND/OR A NUMBER</strong> from the passage for each answer.</div>
+  <div class="notes-wrap" style="background:transparent;border:none;padding:0">
+    ${fillField(19,'Hunting wasps used to feed on other','rather than on vegetation.')}
+    ${fillField(20,'Flowering plants started to reward bees with rich pollen and an additional food in the form of','')}
+    ${fillField(21,'Approximately','of human food production relies on the activity of bees.')}
+    ${fillField(22,'If the process of','is to take place effectively, bees need to travel from one flower to another before going back to the nest.')}
+    ${fillField(23,'Bees need to balance the','of each trip against the calorific rewards they obtain.')}
+    ${fillField(24,'There can be over 120 different','in an acre of rainforest.')}
+    ${fillField(25,'The bees that pollinate large forests regularly practise an activity known as','')}
+  </div>
+  </div>
+  <div class="qs">
+  <div class="qs-instr">Question 26<br><em>Choose the correct letter, <strong>A, B, C</strong> or <strong>D</strong>.</em></div>
+  ${mcqBlock(26,'Which is the best title for Reading Passage 2?',{A:'The Ecological Importance of Bees',B:'The Evolutionary History of Bees',C:'The Social Behaviour of Bees',D:'The Geographical Distribution of Bees'})}
+  </div>`;
+  return h;
+}
+
+function renderQ3(){
+  let h=`<div class="qs">
+  <div class="qs-instr">Questions 27–35<br>Reading Passage 3 has seven paragraphs, <strong>A–G</strong>.<br>Which paragraph contains the following information?<br><em>Write the correct letter, <strong>A–G</strong>, in boxes 27–35.</em><br><br><strong>NB</strong> you may use any letter more than once.</div>
+  ${paraRow(27,'an overview of the range of methods that have been used over time to document history')}
+  ${paraRow(28,'the main reason why many historians are unwilling to use films in their work')}
+  ${paraRow(29,'a reference to some differences between oral and written communication')}
+  ${paraRow(30,'how most citizens today gain an understanding of history')}
+  ${paraRow(31,'how current student events are sometimes captured for future audiences')}
+  ${paraRow(32,'mention of the fact that the advantages of film are greater than the disadvantages')}
+  ${paraRow(33,'the claim that there is no official title for film-based historical work')}
+  ${paraRow(34,'reference to the active role the audience plays when watching films')}
+  ${paraRow(35,'a list of requirements that historians see as obstacles to their use of film to record history')}
+  </div>
+  <div class="qs">
+  <div class="qs-instr">Questions 36–40<br>Do the following statements agree with the claims of the writer in Reading Passage 3?<br><em>In boxes 36–40, write:</em><br><strong>YES</strong> if the statement agrees with the claims of the writer<br><strong>NO</strong> if the statement contradicts the claims of the writer<br><strong>NOT GIVEN</strong> if it is impossible to say what the writer thinks about this</div>
+  ${yngvBlock(36,'The needs of students in school have led to improvements in the teaching of history.')}
+  ${yngvBlock(37,'Academic and popular historians have different attitudes towards the value of innovations in communication.')}
+  ${yngvBlock(38,'It is common for historians to play a major role in creating historical documentaries for television.')}
+  ${yngvBlock(39,'Articles in American History Review have explored aspects of modern history through popular films.')}
+  ${yngvBlock(40,'Developments in technology are influencing a range of academic subjects.')}
+  </div>`;
+  return h;
+}
+
+let curPart=1, ans={};
+const pbarDescs={1:'Read the text and answer questions 1–13.',2:'Read the text and answer questions 14–26.',3:'Read the text and answer questions 27–40.'};
+const pRanges={1:[1,13],2:[14,26],3:[27,40]};
+
+function goPart(p){
+  if(p<1||p>3)return;
+  curPart=p;
+  document.getElementById('pbar-title').textContent='Passage '+p;
+  document.getElementById('pbar-desc').textContent='\u00a0\u00a0'+pbarDescs[p];
+  document.getElementById('ppane').innerHTML=PASSAGES[p];
+  document.getElementById('qpane').innerHTML=renderQ(p);
+  document.getElementById('bnav-po2').innerHTML=`<span class="bnav-plabel2" id="bnav-lbl2">Passage 2</span><span class="bnav-pscore" id="pts2">0 of 13</span>`;
+  document.getElementById('bnav-po3').innerHTML=`<span class="bnav-plabel2" id="bnav-lbl3">Passage 3</span><span class="bnav-pscore" id="pts3">0 of 14</span>`;
+  renderPills();
+  document.getElementById('ppane').scrollTop=0;
+  document.getElementById('qpane').scrollTop=0;
+  applyFontSizes();
+}
+
+function setAns(n,v){ans[n]=v.trim();renderPills();}
+
+function renderPills(){
+  const[s,e]=pRanges[curPart];
+  for(let p=1;p<=3;p++){const[ps,pe]=pRanges[p];let c=0;for(let i=ps;i<=pe;i++)if(ans[i]&&ans[i].trim()!=='')c++;if(p!==1){const el=document.getElementById('pts'+p);if(el)el.textContent=`${c} of ${pe-ps+1}`;}}
+  if(curPart===1){
+    let h='';for(let i=s;i<=e;i++){const a=ans[i]&&ans[i]!=='';h+=`<div class="qpill${a?' ans':''}" onclick="scrollToQ(${i})">${i}</div>`;}
+    document.getElementById('bnav-pills').innerHTML=h;
+    document.getElementById('bnav-lbl1').style.color='#222';
+    const l2=document.getElementById('bnav-lbl2');if(l2)l2.style.color='#666';
+    const l3=document.getElementById('bnav-lbl3');if(l3)l3.style.color='#666';
+  } else if(curPart===2){
+    document.getElementById('bnav-pills').innerHTML='';
+    document.getElementById('bnav-lbl1').style.color='#666';
+    let h='';for(let i=s;i<=e;i++){const a=ans[i]&&ans[i]!=='';h+=`<div class="qpill${a?' ans':''}" onclick="scrollToQ(${i})">${i}</div>`;}
+    document.getElementById('bnav-po2').innerHTML=`<span class="bnav-plabel2" id="bnav-lbl2" style="color:#222;font-weight:700">Passage 2</span><span style="display:flex;align-items:center;gap:3px">${h}</span>`;
+    const[ps3,pe3]=pRanges[3];let c3=0;for(let i=ps3;i<=pe3;i++)if(ans[i]&&ans[i]!=='')c3++;
+    document.getElementById('bnav-po3').innerHTML=`<span class="bnav-plabel2" id="bnav-lbl3" style="color:#666">Passage 3</span><span class="bnav-pscore" id="pts3">${c3} of ${pe3-ps3+1}</span>`;
+  } else {
+    document.getElementById('bnav-pills').innerHTML='';
+    document.getElementById('bnav-lbl1').style.color='#666';
+    const[ps2,pe2]=pRanges[2];let c2=0;for(let i=ps2;i<=pe2;i++)if(ans[i]&&ans[i]!=='')c2++;
+    document.getElementById('bnav-po2').innerHTML=`<span class="bnav-plabel2" id="bnav-lbl2" style="color:#666">Passage 2</span><span class="bnav-pscore" id="pts2">${c2} of ${pe2-ps2+1}</span>`;
+    let h='';for(let i=s;i<=e;i++){const a=ans[i]&&ans[i]!=='';h+=`<div class="qpill${a?' ans':''}" onclick="scrollToQ(${i})">${i}</div>`;}
+    document.getElementById('bnav-po3').innerHTML=`<span class="bnav-plabel2" id="bnav-lbl3" style="color:#222;font-weight:700">Passage 3</span><span style="display:flex;align-items:center;gap:3px">${h}</span>`;
+  }
+}
+
+function scrollToQ(n){const el=document.getElementById('qi'+n);if(el)el.scrollIntoView({behavior:'smooth',block:'center'});}
+
+/* Highlight */
+const hlTip=document.getElementById('hl-tip');
+let hlRange=null;
+function isInPane(node){const pp=document.getElementById('ppane');const qp=document.getElementById('qpane');return pp.contains(node)||qp.contains(node);}
+document.addEventListener('mouseup',e=>{
+  if(e.target===hlTip)return;
+  const sel=window.getSelection();
+  if(!sel||sel.isCollapsed||!sel.toString().trim()){hlTip.style.display='none';return;}
+  const range=sel.getRangeAt(0);
+  if(!isInPane(range.commonAncestorContainer)){hlTip.style.display='none';return;}
+  hlRange=range.cloneRange();
+  const r=range.getBoundingClientRect();
+  hlTip.style.left=(r.left+r.width/2-38)+'px';
+  hlTip.style.top=(r.top+window.scrollY-34)+'px';
+  hlTip.style.display='block';
+});
+document.addEventListener('mousedown',e=>{if(e.target!==hlTip)hlTip.style.display='none';});
+hlTip.addEventListener('click',()=>{
+  if(!hlRange)return;
+  const sp=document.createElement('span');sp.className='hl';sp.onclick=function(){this.outerHTML=this.innerHTML;};sp.title='Click to remove';
+  try{hlRange.surroundContents(sp);}catch(ex){const f=hlRange.extractContents();sp.appendChild(f);hlRange.insertNode(sp);}
+  hlTip.style.display='none';window.getSelection().removeAllRanges();
+});
+
+/* Resizable divider */
+let drag=false,dStartX,dStartW;
+const divEl=document.getElementById('divider'),ppEl=document.getElementById('ppane');
+divEl.addEventListener('mousedown',e=>{drag=true;dStartX=e.clientX;dStartW=ppEl.offsetWidth;document.body.style.cursor='col-resize';document.body.style.userSelect='none';});
+document.addEventListener('mousemove',e=>{if(!drag)return;const tot=document.getElementById('main').offsetWidth-10;ppEl.style.width=Math.max(240,Math.min(tot-240,dStartW+(e.clientX-dStartX)))+'px';});
+document.addEventListener('mouseup',()=>{drag=false;document.body.style.cursor='';document.body.style.userSelect='';});
+
+/* Results */
+function normalizeAns(v){
+  const s=v.trim().toLowerCase();
+  if(s==='true'||s==='t')return 't';
+  if(s==='false'||s==='f')return 'f';
+  if(s==='yes'||s==='y')return 'y';
+  if(s==='no'||s==='n')return 'n';
+  if(s==='not given'||s==='ngv')return 'ngv';
+  return s;
+}
+function isCorrect(n){return normalizeAns(ans[n]||'')===normalizeAns(AK[n].toString());}
+
+function showResults(){
+  const partNames={1:'Passage 1 – Developmental Tasks of Normal Adolescence (Q1–13)',2:'Passage 2 – Reading Passage 2 (Q14–26)',3:'Passage 3 – A new stage in the study and teaching of history (Q27–40)'};
+  let total=0,html='';
+  for(let p=1;p<=3;p++){
+    const[s,e]=pRanges[p];let pc=0,rows='';
+    for(let i=s;i<=e;i++){
+      const ok=isCorrect(i);if(ok){pc++;total++;}
+      const ua=(ans[i]||'').trim()||'—';
+      rows+=`<tr class="${ok?'rr-ok':'rr-no'}">
+        <td><strong>${i}</strong></td>
+        <td>${ua}</td>
+        <td class="mc">${displayAK(i)}</td>
+        <td class="${ok?'mc':'mw'}">${ok?'✓':'✗'}</td>
+      </tr>`;
+    }
+    const tot2=e-s+1,pct=Math.round(pc/tot2*100),bc=pct>=70?'good':(pct>=50?'ok':'bad');
+    html+=`<div class="rm-part"><div class="rm-ph">${partNames[p]}<span class="rm-badge ${bc}">${pc}/${tot2} (${pct}%)</span></div>
+      <table class="rm-tbl"><thead><tr><th>Q</th><th>Your Answer</th><th>Correct</th><th></th></tr></thead><tbody>${rows}</tbody></table>
+    </div>`;
+  }
+  const pct=Math.round(total/40*100);
+  const band=total>=39?'9.0':total>=37?'8.5':total>=35?'8.0':total>=33?'7.5':total>=30?'7.0':total>=27?'6.5':total>=23?'6.0':total>=19?'5.5':total>=15?'5.0':total>=13?'4.5':'4.0';
+  html+=`<div class="total-strip"><span class="ts-lbl">Total Score</span><div><div class="ts-num">${total} / 40 <span style="font-size:14px;color:#888">(${pct}%)</span></div><div class="ts-band">Estimated Band Score: <strong>${band}</strong></div></div></div>`;
+  document.getElementById('res-body').innerHTML=html;
+  document.getElementById('res-overlay').style.display='flex';
+}
+
+function closeResults(){document.getElementById('res-overlay').style.display='none';}
+
+/* Font size */
+let fsPass=14,fsQ=13;
+const FS_MIN=10,FS_MAX=22;
+function changeFontSize(which,delta){
+  if(which==='pass'){fsPass=Math.max(FS_MIN,Math.min(FS_MAX,fsPass+delta));document.getElementById('fsz-pass-val').textContent=fsPass+'px';}
+  else{fsQ=Math.max(FS_MIN,Math.min(FS_MAX,fsQ+delta));document.getElementById('fsz-q-val').textContent=fsQ+'px';}
+  applyFontSizes();
+}
+function applyFontSizes(){
+  const pp=document.getElementById('ppane');if(pp)pp.querySelectorAll('p').forEach(el=>el.style.fontSize=fsPass+'px');
+  const qp=document.getElementById('qpane');if(qp)qp.style.fontSize=fsQ+'px';
+}
+function toggleMenu(){document.getElementById('menu-dropdown').classList.toggle('open');}
+document.addEventListener('click',e=>{const w=document.getElementById('menu-wrap');if(w&&!w.contains(e.target))document.getElementById('menu-dropdown').classList.remove('open');});
+
+goPart(1);
+</script>
+</body>
+</html>

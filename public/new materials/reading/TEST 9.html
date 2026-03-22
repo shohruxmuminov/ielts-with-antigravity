@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IELTS Academic Reading – Test 10</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,Helvetica,sans-serif;font-size:14px;height:100vh;display:flex;flex-direction:column;overflow:hidden;background:#fff;color:#222}
+#hdr{height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;border-bottom:1.5px solid #d0d0d0;background:#fff;flex-shrink:0}
+#hdr-left{display:flex;align-items:center;gap:14px}
+.ielts-badge{background:#c41230;color:#fff;font-family:'Arial Black',Arial,sans-serif;font-weight:900;font-size:19px;padding:3px 10px 4px;letter-spacing:0.5px;border-radius:2px;user-select:none;line-height:1.3}
+#tg-link{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:#222;font-size:13px;font-weight:600;font-family:Arial,sans-serif;background:#fff;border:1.5px solid #d0d0d0;border-radius:22px;padding:5px 14px 5px 6px;transition:border-color .15s,box-shadow .15s}
+#tg-link:hover{border-color:#0088cc;box-shadow:0 0 0 2px rgba(0,136,204,.12);color:#0088cc}
+#tg-link .tg-circle{width:28px;height:28px;border-radius:50%;background:linear-gradient(to bottom,#2aabee,#229ed9);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+#tg-link .tg-circle svg{width:16px;height:16px}
+#hdr-right{display:flex;align-items:center;gap:14px}
+#menu-wrap{position:relative}
+#menu-btn{background:none;border:none;cursor:pointer;padding:4px;display:flex;flex-direction:column;gap:4px;border-radius:4px}
+#menu-btn:hover{background:#f0f0f0}
+#menu-btn span{display:block;width:20px;height:2px;background:#444;border-radius:2px}
+#menu-dropdown{position:absolute;top:calc(100% + 8px);right:0;background:#fff;border:1px solid #d0d0d0;border-radius:6px;box-shadow:0 4px 16px rgba(0,0,0,.12);padding:12px 16px;min-width:180px;z-index:1000;display:none}
+#menu-dropdown.open{display:block}
+#menu-dropdown .md-title{font-size:11px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px}
+#menu-dropdown .md-row{display:flex;align-items:center;gap:8px}
+#menu-dropdown .md-lbl{font-size:13px;color:#333;min-width:60px}
+.fsz-btn{width:30px;height:30px;border:1px solid #ccc;background:#f8f8f8;border-radius:4px;cursor:pointer;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;color:#333;flex-shrink:0}
+.fsz-btn:hover{background:#eee;border-color:#999}
+#pbar{background:#f5f5f5;border-bottom:1px solid #d5d5d5;padding:7px 18px;font-size:13px;flex-shrink:0;color:#222;line-height:1.4}
+#pbar-title{font-weight:700}
+#main{flex:1;display:flex;overflow:hidden;min-height:0}
+#ppane{width:50%;overflow-y:auto;padding:22px 26px;background:#fff;user-select:text;flex-shrink:0}
+#ppane::-webkit-scrollbar{width:6px}
+#ppane::-webkit-scrollbar-track{background:#f2f2f2}
+#ppane::-webkit-scrollbar-thumb{background:#c8c8c8;border-radius:3px}
+#divider{width:10px;background:#e8e8e8;border-left:1px solid #ccc;border-right:1px solid #ccc;cursor:col-resize;flex-shrink:0;display:flex;align-items:center;justify-content:center;position:relative;z-index:10}
+#div-btn{width:26px;height:26px;background:#888;border-radius:3px;color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;user-select:none;position:absolute;line-height:1}
+#div-btn:hover{background:#666}
+#qpane{flex:1;overflow-y:auto;padding:16px 20px;background:#fff;min-width:0;user-select:text}
+#qpane::-webkit-scrollbar{width:6px}
+#qpane::-webkit-scrollbar-track{background:#f2f2f2}
+#qpane::-webkit-scrollbar-thumb{background:#c8c8c8;border-radius:3px}
+.pass-title{font-size:17px;font-weight:700;text-align:center;margin-bottom:5px}
+.pass-sub{font-size:13px;text-align:center;font-style:italic;margin-bottom:14px;color:#333}
+.pass-body p{font-size:14px;line-height:1.65;margin-bottom:13px;color:#111}
+.para-letter{font-weight:700;margin-right:6px}
+.hl{background:#FFE066;border-radius:1px}
+#hl-tip{position:fixed;display:none;background:#111;color:#fff;padding:5px 13px;border-radius:18px;font-size:12px;cursor:pointer;z-index:9999;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.35)}
+#hl-tip:hover{background:#333}
+.qs{font-size:13px;color:#222;margin-bottom:16px}
+.qs-instr{margin-bottom:10px;line-height:1.55;font-size:13px}
+.qs-instr strong{font-weight:700}
+.qs-instr em{font-style:italic}
+.qitem{margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid #efefef}
+.qitem:last-child{border-bottom:none}
+.qrow{display:flex;gap:6px;font-size:13px;line-height:1.5;margin-bottom:6px}
+.qno{font-weight:700;min-width:20px;flex-shrink:0}
+.tfn-opts{display:flex;flex-direction:column;gap:5px;padding-left:26px}
+.tfn-opt{display:flex;align-items:center;gap:7px;font-size:13px;cursor:pointer;color:#222}
+.tfn-opt input[type=radio]{cursor:pointer;width:15px;height:15px;flex-shrink:0}
+.notes-wrap{border:1px solid #bbb;background:#fafafa;padding:12px 14px;margin-top:4px}
+.notes-head{font-weight:700;font-size:14px;text-align:center;margin-bottom:10px}
+.notes-sec-title{font-weight:700;font-size:13px;margin:10px 0 5px}
+.notes-li{display:flex;flex-wrap:wrap;align-items:baseline;gap:3px;font-size:13px;line-height:1.8;margin-bottom:5px;padding-left:10px}
+.notes-li::before{content:"•";margin-right:5px;flex-shrink:0}
+.notes-sub{font-size:13px;line-height:1.8;margin-bottom:4px;padding-left:28px;color:#222}
+.notes-sub::before{content:"–";margin-right:6px}
+.fill-field{display:inline-flex;align-items:center;border:1px solid #888;border-radius:2px;padding:1px 5px;background:#fff;vertical-align:middle}
+.fill-field .fqn{font-size:11px;font-weight:700;color:#555;margin-right:3px;flex-shrink:0}
+.fill-field input{border:none;outline:none;font-size:13px;font-family:Arial,sans-serif;width:90px;background:transparent;color:#111}
+.abox{border:1px solid #aaa;margin-bottom:12px}
+.abox-title{font-weight:700;font-size:13px;text-align:center;background:#f0f0f0;border-bottom:1px solid #aaa;padding:6px 10px}
+.abox-body{padding:8px 12px}
+.arow{display:flex;gap:8px;font-size:13px;margin-bottom:3px}
+.arl{font-weight:700;min-width:20px}
+.wbank{border:1px solid #aaa;margin-bottom:12px}
+.wbank-body{padding:8px 12px;display:grid;grid-template-columns:repeat(4,1fr);gap:4px 8px}
+.wbank-item{font-size:13px;display:flex;gap:5px}
+.wbank-lbl{font-weight:700;min-width:16px}
+.ph-row{display:flex;align-items:center;gap:8px;margin-bottom:9px;font-size:13px}
+.ph-no{font-weight:700;min-width:24px;flex-shrink:0}
+.qsel{border:1px solid #888;border-radius:2px;padding:3px 6px;font-size:12.5px;font-family:Arial,sans-serif;background:#fff;cursor:pointer;outline:none;color:#111}
+.qsel:focus{border-color:#444}
+.sum-body{padding:6px 0}
+.sum-title{font-weight:700;font-size:14px;text-align:center;margin-bottom:10px}
+.sum-text{font-size:13px;line-height:2.3}
+.mcq-opts{display:flex;flex-direction:column;gap:5px;padding-left:10px}
+.mcq-opt{display:flex;align-items:flex-start;gap:7px;font-size:13px;cursor:default;user-select:none}
+.mcq-opt input{cursor:pointer;width:17px;height:17px;flex-shrink:0;margin-top:1px}
+.mcq-opt .mcq-let{pointer-events:none;font-weight:700;min-width:16px;flex-shrink:0}
+.mcq-opt span:last-child{pointer-events:none}
+#bnav{background:#f0f0f0;border-top:1px solid #ccc;flex-shrink:0;padding:0;min-height:44px;display:flex;align-items:stretch}
+#bnav-inner{display:flex;align-items:center;width:100%;padding:0 10px;gap:0;min-height:44px}
+#bnav-p1{display:flex;align-items:center;gap:5px;flex-shrink:0}
+.bnav-plabel{font-size:13px;font-weight:700;color:#222;white-space:nowrap;cursor:pointer}
+.bnav-plabel:hover{text-decoration:underline}
+#bnav-pills{display:flex;align-items:center;gap:3px;flex-wrap:nowrap}
+.qpill{min-width:26px;height:26px;padding:0 4px;display:flex;align-items:center;justify-content:center;font-size:12px;color:#444;border-radius:3px;border:1px solid transparent;cursor:pointer;user-select:none;background:transparent}
+.qpill:hover{border-color:#999;background:#e6e6e6}
+.qpill.ans{color:#222;font-weight:600}
+.bnav-sep{width:1px;background:#ccc;height:24px;margin:0 12px;flex-shrink:0}
+.bnav-pother{display:flex;align-items:center;gap:6px;flex-shrink:0;cursor:pointer;padding:0 4px}
+.bnav-plabel2{font-size:13px;font-weight:700;color:#666}
+.bnav-pscore{font-size:12px;color:#666}
+#bnav-spacer{flex:1}
+#sub-btn{width:44px;height:44px;background:#e0e0e0;border:none;border-left:1px solid #ccc;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:20px;color:#444}
+#sub-btn:hover{background:#d0d0d0;color:#111}
+#res-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:99999;display:none;align-items:center;justify-content:center}
+#res-modal{background:#fff;width:92vw;max-width:720px;max-height:88vh;overflow-y:auto;border-radius:5px;padding:24px 26px;box-shadow:0 6px 36px rgba(0,0,0,.35)}
+#res-modal::-webkit-scrollbar{width:6px}
+#res-modal::-webkit-scrollbar-thumb{background:#ccc;border-radius:3px}
+.rm-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.rm-title{font-size:18px;font-weight:700}
+.rm-close{background:none;border:none;font-size:24px;cursor:pointer;color:#666;line-height:1;padding:0}
+.rm-close:hover{color:#000}
+.rm-part{margin-bottom:20px;border:1px solid #ddd;border-radius:4px;overflow:hidden}
+.rm-ph{background:#f2f2f2;padding:8px 14px;font-weight:700;font-size:13.5px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #ddd}
+.rm-badge{font-size:12px;color:#fff;padding:2px 11px;border-radius:10px;font-weight:700}
+.rm-badge.good{background:#2e7d32}.rm-badge.ok{background:#e65100}.rm-badge.bad{background:#c41230}
+.rm-tbl{width:100%;border-collapse:collapse;font-size:12.5px}
+.rm-tbl th{background:#f8f8f8;padding:5px 10px;text-align:left;font-weight:700;border-bottom:1px solid #ddd;color:#333}
+.rm-tbl td{padding:5px 10px;border-bottom:1px solid #f0f0f0;vertical-align:top}
+.rm-tbl tr:last-child td{border-bottom:none}
+tr.rr-ok{background:#f1fff4}
+tr.rr-no{background:#fff5f5}
+.mc{color:#2e7d32;font-weight:700}
+.mw{color:#c41230;font-weight:700}
+.total-strip{margin-top:16px;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center}
+.ts-lbl{font-size:15px;font-weight:700}
+.ts-num{font-size:26px;font-weight:900;color:#c41230;text-align:right;line-height:1.1}
+.ts-band{font-size:12px;color:#666;margin-top:2px}
+</style>
+</head>
+<body>
+<div id="hl-tip">✏ Highlight</div>
+
+<div id="hdr">
+  <div id="hdr-left">
+    <div class="ielts-badge">IELTS</div>
+    <a id="tg-link" href="https://t.me/alisher_abduvohobov" target="_blank">
+      <span class="tg-circle">
+        <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" fill="none">
+          <path d="M54 117.9c35-15.2 58.3-25.3 70-30.2 33.3-13.9 40.2-16.3 44.7-16.4 1 0 3.2.2 4.6 1.5 1.2 1 1.5 2.5 1.7 3.5.2 1 .4 3.2.2 4.9-1.9 19.9-10 68.2-14.1 90.5-1.7 9.4-5.1 12.6-8.4 12.9-7.1.7-12.5-4.7-19.4-9.2-10.8-7.1-16.9-11.5-27.4-18.4-12.1-8-4.3-12.4 2.6-19.6 1.8-1.9 33.2-30.4 33.8-33 .1-.3.1-.6-.2-.9-.3-.2-.7-.1-1.1 0-.5.1-7.9 5-22.4 14.9-21.2 14.3-28.6 14.6-37 11.1-3.1-1.3-8.8-3.7-8.8-3.7s-3.2-2 2.2-4.9z" fill="#fff"/>
+        </svg>
+      </span>
+      Alisher's IELTS | 9.0
+    </a>
+  </div>
+  <div id="hdr-right">
+    <div id="menu-wrap">
+      <button id="menu-btn" onclick="toggleMenu()" title="Settings">
+        <span></span><span></span><span></span>
+      </button>
+      <div id="menu-dropdown">
+        <div class="md-title">Text Size</div>
+        <div class="md-row">
+          <span class="md-lbl">Passage</span>
+          <button class="fsz-btn" onclick="changeFontSize('pass',-1)">A−</button>
+          <span id="fsz-pass-val">14px</span>
+          <button class="fsz-btn" onclick="changeFontSize('pass',1)">A+</button>
+        </div>
+        <div class="md-row" style="margin-top:8px">
+          <span class="md-lbl">Questions</span>
+          <button class="fsz-btn" onclick="changeFontSize('q',-1)">A−</button>
+          <span id="fsz-q-val">13px</span>
+          <button class="fsz-btn" onclick="changeFontSize('q',1)">A+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="pbar">
+  <span id="pbar-title">Passage 1</span><span id="pbar-desc">&nbsp;&nbsp;Read the text and answer questions 1–13.</span>
+</div>
+
+<div id="main">
+  <div id="ppane"></div>
+  <div id="divider"><div id="div-btn">↔</div></div>
+  <div id="qpane"></div>
+</div>
+
+<div id="bnav">
+  <div id="bnav-inner">
+    <div id="bnav-p1">
+      <span class="bnav-plabel" onclick="goPart(1)" id="bnav-lbl1">Passage 1</span>
+      <div id="bnav-pills"></div>
+    </div>
+    <div class="bnav-sep"></div>
+    <div class="bnav-pother" id="bnav-po2" onclick="goPart(2)">
+      <span class="bnav-plabel2" id="bnav-lbl2">Passage 2</span>
+      <span class="bnav-pscore" id="pts2">0 of 13</span>
+    </div>
+    <div class="bnav-sep"></div>
+    <div class="bnav-pother" id="bnav-po3" onclick="goPart(3)">
+      <span class="bnav-plabel2" id="bnav-lbl3">Passage 3</span>
+      <span class="bnav-pscore" id="pts3">0 of 14</span>
+    </div>
+    <div id="bnav-spacer"></div>
+    <button id="sub-btn" onclick="showResults()" title="Submit">✓</button>
+  </div>
+</div>
+
+<div id="res-overlay">
+  <div id="res-modal">
+    <div class="rm-hdr">
+      <div class="rm-title">Test Results</div>
+      <button class="rm-close" onclick="closeResults()">✕</button>
+    </div>
+    <div id="res-body"></div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   PASSAGES
+============================================================ */
+const PASSAGES = {
+1:`<div class="pass-title">A Brief History of Humans and Food</div>
+<div class="pass-body">
+<p>During the journey from our hunter-gatherer ancestors to the present day there have been three seismic changes that have had an impact on the food we eat: the discovery of cooking, the emergence of agriculture and the invention of methods of preserving food.</p>
+<p>The 19th-century scientist Charles Darwin thought that cooking, after language, was the greatest discovery made by man. All of us eat some raw food, for instance fruit and vegetables, but the great majority of food we eat is cooked. Cooking can turn plants that are inedible into edible food by destroying toxic chemicals that plants often manufacture to protect themselves against attack by insects or other herbivorous animals. These toxic chemicals are referred to as 'plant secondary compounds', because they are not directly involved in the plant's normal growth, development and reproduction, and are produced purely as chemical defences. They give many of the plants we consume, such as coffee or brussels sprouts, their bitter taste.</p>
+<p>Cooked food is often more digestible, because heat breaks down tough cellulose cell walls in plants or tough connective tissue in animals. Chewing raw turnip, a plate of uncooked rice, or a raw leg of lamb is much harder work than eating the cooked equivalent. The energy expended in chewing to break down the tough material is replaced by energy from the fuel that is used in cooking the food, so the ratio of energy gained to energy expended by the body is greater when food is cooked.</p>
+<p>Until the development of agriculture, hunter-gatherers spent up to seven hours a day gathering food. This all began to change around 10,500 years ago with the advent of farming, which led to some dramatic changes in human societies. People began to create a variety of new tools to help with survival, and in turn populations increased in size. These changes led to the possibility of specialisation of different tasks within society. It was around this time that writing became more sophisticated and allowed people to maintain records of the harvest and taxes. Eventually, formalised structures of government were established as people settled in one area.</p>
+<p>The arrival of agriculture meant that, for the first time, our ancestors had more food than they could eat immediately. This, combined with the seasonality of production, led them to discover methods of preserving food: smoking, drying, adding acid by fermentation or adding salt. These four methods all share one feature in common: they make the food a more hostile environment for bacteria that can cause it to spoil. They also tend to slow down any natural chemical reactions in the food that would cause decay.</p>
+<p>Although foods today are still preserved in the ancient ways, two more recent methods of preserving food have become more common: canning and freezing. Canning was invented by a Frenchman, Nicholas Appert, in the early 19th century. He sealed food in bottles fabricated from glass and then heated them in boiling water to cook the contents. Appert's method had great advantages over older methods of food preservation: it could be applied to a wide range of foods, and the flavour of the food as well as the texture were similar to the freshly cooked product. His idea was soon copied by Englishman, Peter Durand. Until this point containers had weighed too much to be widely used, but he produced the first ones which were light and resistant to damage. Two years later, in 1812, two Englishmen, Bryan Donkin and John Hall, started the commercial canning of food, although the real take-off in popularity of canning had to wait until the can opener was invented in 1855. Up to this time, cans were opened with a chisel which was used to break open the top when hit with a hammer. Canning is an extremely effective way of preserving food: one can which contained meat dating from 1824 was opened in 1939 and the contents were still in good condition.</p>
+<p>In the 21st century, the dominance of canning as a method of food preservation has been overtaken by another technology: freezing. Chilling food to keep it fresh is an old idea. The earliest mentions of icehouses, thick-walled buildings, half underground, date back to 1,700 BC in northwest Iran. In early 16th-century Italy, water was mixed with chemicals to lower its freezing point to -18 degrees Celsius, and several centuries later frozen fish and other goods were transported by ship from Australia to England. But the modern frozen food industry was started in the 1920s by an American, Clarence Birdseye. While Birdseye was on a fishing trip with the Inuit in the Canadian Arctic, he observed that very rapid freezing creates smaller ice crystals and therefore causes less damage to food. This was something he had not expected. Nevertheless, the big growth in demand for frozen food came about with the arrival of freezers in the homes of ordinary people. The advantages of frozen over canned food include the fact that the flavour and consistency are often identical to the equivalent fresh product, and that freezing can be used to preserve a huge variety of foods.</p>
+</div>`,
+2:`<div class="pass-title">Why do we need the arts?</div>
+<div class="pass-sub">Sometimes people question why we need 'the arts'; what functions do art, music, dance and literature serve?</div>
+<div class="pass-body">
+<p><span class="para-letter">A.</span>Imagine a world in which people spend hours working in offices or factories, and then go home in the evening to sit down to dinner, after which they sleep until it's time to get up and work again. In this world, people do not read or watch TV, listen to music, play computer games or have pictures to decorate their homes. In fact, there are no pictures in this world – not even advertisements are illustrated, but all are words, and very plain ones at that, with no playfulness left in them. The buildings are completely functional without a single decorative feature anywhere, and there is no music to dance to and enjoy. Such a world is a world without the arts in any form.</p>
+<p><span class="para-letter">B.</span>To ask what the arts are good for is not exactly the same as asking what their purpose is. The arts do not have to have a purpose – they do not exist in order to teach, to make a moral point, to entertain, to distract, to amuse, to support a revolution, to disgust, to challenge, to stimulate or to cheer; they exist chiefly for their own sake. It is artists, not the arts as such, that may have an aim in mind, and their aim may be to do any of the things just listed. But equally, artists may just make a work of art because they feel compelled to. Because the work is its own justification, no aim or goal is necessarily required to explain or, still less, to justify its existence.</p>
+<p><span class="para-letter">C.</span>But to say that the arts do not have to serve an aim beyond themselves, even though they may sometimes do so, is not to say that they are good for nothing. On the contrary, as such an important part of human experience, they are good for many things. The distinction here lies between things that are instrumental and things that are ends in themselves. An instrument exists for something beyond itself – namely, for what it can be used to do. We know that pictures are used as instruments in advertising, and the objective is always to persuade us to buy something. Similarly, music can be written chiefly to accompany dancing, or as a soundtrack to a movie. A play can be written to point out to the theatre audience a social injustice or other problems that should be dealt with. But even though the arts can sometimes be instrumental, that fact is not essential to their nature. What the arts are 'good for' arises from their being an end in themselves, or more accurately, representing many different things that are valuable for their own sakes – such as, for instance, the creation of beauty.</p>
+<p><span class="para-letter">D.</span>The phrase 'the arts' includes painting, sculpture, music, literature, dance and theatre performance, and whatever else (to quote the famous US artist Andy Warhol) anyone can get away with in calling their creation a contribution to 'the arts'. But the generalisation that the arts, whatever else they are, are always an end in themselves, applies to them all. The arts are one major form of response to the world. They are often an attempt to capture an aspect of the world, to draw attention to something about it to comment on it, to present a surprising or fresh angle on it, to represent it for the sake of exploring something about it, or enjoying or celebrating it. They can help people to focus on, for example, the colour or shape of an object, its eccentricity or typicality, and the interest or perhaps disgust it provokes in them.</p>
+<p><span class="para-letter">E.</span>For a loose comparison, think of laughing at a joke. We do not laugh so that we can achieve a further goal – in order to be healthy or relaxed, say, even if we thereby succeed in being healthier or more relaxed – but simply because the joke has elicited that reaction. But although it is merely a reaction, laughing is, in fact, good for something nevertheless; it does make people feel better. The arts are a reaction in the same way. French artist Cézanne painted Mont Sainte-Victoire repeatedly because he was fascinated by it, not because he thought that painting it would say something about politics or society or human hopes. Being fascinated by something, attracted to it, repelled by it, keen to reveal an unusual aspect of it, are all responses to that thing; the making of the arts is one outstanding way of expressing such responses.</p>
+<p><span class="para-letter">F.</span>But the arts are a response not only to things in the world but also to experience of the world, which lies inside the artist himself. And they are also often an expression of what presses from within the artist without being elicited by externals. Music is a prime example. A symphony, unless it is devised to represent bird song, rain, the sea and the like, is an abstract expression of a composer's conception. We may be able to describe what the Russian composer Tchaikovsky is doing in his ballet music, but how can we describe what he is expressing in his piano concertos? Composers may experiment with melody and rhythm in very abstract, sometimes mathematical, ways.</p>
+<p><span class="para-letter">G.</span>When artists get to work responding to and expressing ideas, whether or not they also want to make a point, entertain, distract, support a revolution and the rest, they are producing something that someone else will react to in some way. They seek to connect with their audience and express an idea or emotion which has the capacity to enrich our experience of life itself.</p>
+</div>`,
+3:`<div class="pass-title">The significant role of mother tongue language in education</div>
+<div class="pass-body">
+<p>One consequence of population mobility is an increasing diversity within schools. To illustrate, in the city of Toronto in Canada, 58% of kindergarten pupils come from homes where English is not the language of communication. Schools in Europe and North America have experienced this diversity for years, but educational policies and practices vary widely between countries and even within countries. Some political parties and groups search for ways to 'solve the problem' of diverse communities and their integration in schools and society. They see few positive consequences for the host society and worry that diversity threatens the identity of the host society. Consequently, they promote unfortunate educational policies that will make the 'problem' disappear. If students retain their culture and language, they are viewed as less capable of identifying with the mainstream culture and learning the mainstream language of the society.</p>
+<p>The challenge for educators and policy-makers is to shape the evolution of national identity in such a way that the rights of all citizens (including school children) are respected, and the cultural, linguistic and economic resources of the nation are maximized. To waste the resources of the nation by discouraging children from developing their mother tongues is quite simply unintelligent from the point of view of national self-interest. A first step in providing an appropriate education for culturally and linguistically diverse children is to examine what the existing research says about the role of children's mother tongues in their educational development.</p>
+<p>In fact, the research is very clear. When children continue to develop their abilities in two or more languages throughout primary school, they gain a deeper understanding of language and how to use it effectively. They have more practice in processing language, especially when they develop literacy in both. More than 150 research studies conducted during the past 35 years strongly support what Goethe, the famous eighteenth-century German philosopher, once said: that the person who knows only one language does not truly know that language. Research suggests that bilingual children may also develop more flexibility in their thinking as a result of processing information through two different languages.</p>
+<p>Children who come to school with a solid foundation in their mother tongue develop stronger literacy abilities in the school language. When parents and other caregivers (e.g. grandparents) are able to spend time with their children and tell stories or discuss issues with them in a way that develops their mother tongue, children come to school well-prepared to learn the school language and succeed educationally. Children's knowledge and skills transfer across languages from the mother tongue to the school language. Transfer across languages can be two-way: both languages nurture each other when the educational environment permits children access to both languages.</p>
+<p>Some educators and parents are suspicious of mother tongue-based teaching programs because they worry that they take time away from the majority language. For example, in a bilingual program where 50% of the time is spent teaching through children's home language and 50% through the majority language, surely children won't progress as far in the latter? One of the most strongly established findings of educational research, however, is that well-implemented bilingual programs can promote literacy and subject-matter knowledge in a minority language without any negative effects on children's development in the majority language. Within Europe, the Foyer program in Belgium, which develops children's speaking and literacy abilities in three languages (their mother tongue, Dutch and French), most clearly illustrates the benefits of bilingual and trilingual education (see Cummins, 2000).</p>
+<p>It is easy to understand how this happens. When children are learning through a minority language, they are learning concepts and intellectual skills too. Pupils who know how to tell the time in their mother tongue understand the concept of telling time. In order to tell time in the majority language they do not need to re-learn the concept. Similarly, at more advanced stages, there is transfer across languages in other skills, such as knowing how to distinguish the main idea from the supporting details of a written passage or story, and distinguishing fact from opinion. Studies of secondary school pupils are providing interesting findings in this area, and it would be worth extending this research.</p>
+<p>Many people marvel at how quickly bilingual children seem to 'pick up' conversational skills in the majority language at school (although it takes much longer for them to catch up with native speakers in academic language skills). However, educators are often much less aware of how quickly children can lose their ability to use their mother tongue, even in the home context. The extent and rapidity of language loss will vary according to the concentration of families from a particular linguistic group in the neighborhood. Where the mother tongue is used extensively in the community, then language loss among young children will be less. However, where language communities are not concentrated in particular neighborhoods, children can lose their ability to communicate in their mother tongue within two to three years of starting school. They may retain receptive skills in the language but they will use the majority language in speaking with their peers and siblings and in responding to their parents. By the time children become adolescents, the linguistic division between parents and children has become an emotional chasm. Pupils frequently become alienated from the cultures of both home and school, with predictable results.</p>
+</div>`
+};
+
+/* ============================================================
+   ANSWER KEY
+============================================================ */
+const AK = {
+  1:'F',2:'T',3:'T',4:'NGV',5:'F',
+  6:'populations',7:'records',8:'salt',9:'glass',10:'texture',11:'light',12:'chisel',13:'meat',
+  14:'B',15:'G',16:'C',17:'D',18:'E',
+  19:'movie',20:'advertising',21:'play',22:'beauty',
+  23:'B',24:'D',
+  25:'A',26:'C',
+  27:'C',28:'A',29:'B',30:'D',
+  31:'I',32:'D',33:'J',34:'F',35:'C',
+  36:'YES',37:'NGV',38:'NGV',39:'NGV',40:'YES'
+};
+
+function displayAK(n){
+  const v=AK[n].toString();
+  if(v==='T')return 'TRUE';
+  if(v==='F')return 'FALSE';
+  if(v==='NGV')return 'NOT GIVEN';
+  return v;
+}
+
+/* ============================================================
+   HELPERS
+============================================================ */
+function tfnBlock(n,text){
+  const v=ans[n]||'';
+  return `<div class="qitem" id="qi${n}">
+    <div class="qrow"><span class="qno">${n}</span><span>${text}</span></div>
+    <div class="tfn-opts">
+      ${['TRUE','FALSE','NOT GIVEN'].map(o=>`<label class="tfn-opt"><input type="radio" name="rq${n}" value="${o}" ${v===o?'checked':''} onchange="setAns(${n},this.value)">${o}</label>`).join('')}
+    </div>
+  </div>`;
+}
+
+function ynBlock(n,text){
+  const v=ans[n]||'';
+  return `<div class="qitem" id="qi${n}">
+    <div class="qrow"><span class="qno">${n}</span><span>${text}</span></div>
+    <div class="tfn-opts">
+      ${['YES','NO','NOT GIVEN'].map(o=>`<label class="tfn-opt"><input type="radio" name="rq${n}" value="${o}" ${v===o?'checked':''} onchange="setAns(${n},this.value)">${o}</label>`).join('')}
+    </div>
+  </div>`;
+}
+
+function sectionRow(n,text,letters){
+  const v=ans[n]||'';
+  return `<div class="qitem" id="qi${n}">
+    <div class="qrow"><span class="qno">${n}</span><span>${text}</span></div>
+    <select class="qsel" onchange="setAns(${n},this.value)" style="margin-left:26px;margin-top:4px">
+      <option value="">— paragraph —</option>
+      ${letters.map(l=>`<option value="${l}" ${v===l?'selected':''}>${l}</option>`).join('')}
+    </select>
+  </div>`;
+}
+
+function mcqBlock(n,qtext,opts){
+  const v=ans[n]||'';
+  return `<div class="qitem" id="qi${n}">
+    <div class="qrow"><span class="qno">${n}</span><span>${qtext}</span></div>
+    <div class="mcq-opts">
+      ${Object.entries(opts).map(([l,t])=>`<div class="mcq-opt"><input type="radio" name="rq${n}" value="${l}" ${v===l?'checked':''} onchange="setAns(${n},this.value)"><span class="mcq-let">${l}</span><span>${t}</span></div>`).join('')}
+    </div>
+  </div>`;
+}
+
+function fillInline(n,w){
+  const v=ans[n]||'';
+  return `<span class="fill-field" id="qi${n}"><span class="fqn">${n}</span><input id="fi${n}" value="${v}" style="width:${w||90}px" onchange="setAns(${n},this.value)" onkeyup="setAns(${n},this.value)" placeholder="…"></span>`;
+}
+
+function fillNote(n,pre,post){
+  const v=ans[n]||'';
+  return `<span>${pre||''}</span><span class="fill-field" id="qi${n}"><span class="fqn">${n}</span><input id="fi${n}" value="${v}" onchange="setAns(${n},this.value)" onkeyup="setAns(${n},this.value)" placeholder="…"></span><span>${post||''}</span>`;
+}
+
+/* ============================================================
+   RENDER Q1
+============================================================ */
+function renderQ1(){
+  const sv=n=>ans[n]||'';
+  return `
+  <div class="qs">
+    <div class="qs-instr">Questions 1–5<br>Do the following statements agree with the information given in Reading Passage 1?<br>In boxes 1–5 on your answer sheet, write<br><strong>TRUE</strong> &nbsp;if the statement agrees with the information<br><strong>FALSE</strong> &nbsp;if the statement contradicts the information<br><strong>NOT GIVEN</strong> &nbsp;if there is no information on this</div>
+    ${tfnBlock(1,'According to Darwin, cooking was the most significant development in human history.')}
+    ${tfnBlock(2,'The process of cooking gets rid of some plant poisons.')}
+    ${tfnBlock(3,'Eating cooked food is more energy efficient than eating raw food.')}
+    ${tfnBlock(4,'Clarence Birdseye had previously worked in the Australian food industry.')}
+    ${tfnBlock(5,"Birdseye's trip with the Inuit confirmed what he already believed about rapid freezing.")}
+  </div>
+  <div class="qs">
+    <div class="qs-instr">Questions 6–13<br>Complete the notes below.<br>Choose <strong>ONE WORD ONLY</strong> from the passage for each answer.<br>Write your answers in boxes 6–13 on your answer sheet.</div>
+    <div class="notes-wrap">
+      <div class="notes-head">The development of agriculture and food preservation</div>
+      <div class="notes-sec-title">The changes agriculture brought about were:</div>
+      <div class="notes-li">${fillNote(6,'the development of equipment and larger','…')}</div>
+      <div class="notes-li">${fillNote(7,'the ability to keep','… as writing developed')}</div>
+      <div class="notes-li" style="list-style:none">the setting up of organised government</div>
+      <div class="notes-sec-title">Food preservation</div>
+      <div class="notes-li">${fillNote(8,'early methods of food preservation included: smoking, drying and combining food with acid or','…')}</div>
+      <div class="notes-li" style="padding-left:10px">canning</div>
+      <div class="notes-sub">${fillNote(9,'Nicholas Appert put food into containers made of','…')}</div>
+      <div class="notes-sub">${fillNote(10,"Appert's method resulted in preserved food that had the same taste and",'… as fresh food')}</div>
+      <div class="notes-sub">${fillNote(11,'Peter Durand introduced cans which had the advantage of being','… and hard to break')}</div>
+      <div class="notes-sub">${fillNote(12,'in 1855, the metal can opener replaced the','… which had been used with a hammer to open cans')}</div>
+      <div class="notes-sub">${fillNote(13,'some food was still found to be edible after more than a hundred years, e.g. an old can of','…')}</div>
+      <div class="notes-li" style="padding-left:10px">freezing</div>
+    </div>
+  </div>`;
+}
+
+/* ============================================================
+   RENDER Q2
+============================================================ */
+function renderQ2(){
+  const PARAS=['A','B','C','D','E','F','G'];
+  const sv=n=>ans[n]||'';
+  return `
+  <div class="qs">
+    <div class="qs-instr">Questions 14–18<br>Reading Passage 2 has seven paragraphs, <strong>A–G</strong>.<br>Which paragraph contains the following information?<br>Write the correct letter, <strong>A–G</strong>, in boxes 14–18 on your answer sheet.</div>
+    ${sectionRow(14,'a claim that artists may have no clear objective when creating a piece of art',PARAS)}
+    ${sectionRow(15,'a description of how artists hope to benefit other people',PARAS)}
+    ${sectionRow(16,'a comparison between the arts and things made to perform a particular function',PARAS)}
+    ${sectionRow(17,"a claim that it's possible to convince the world that anything you have made is a work of art",PARAS)}
+    ${sectionRow(18,'an example of something that has an unintentional benefit for us',PARAS)}
+  </div>
+  <div class="qs">
+    <div class="qs-instr">Questions 19–22<br>Complete the summary below.<br>Choose <strong>ONE WORD ONLY</strong> from the passage for each answer.<br>Write your answers in boxes 19–22 on your answer sheet.</div>
+    <div class="sum-body">
+      <div class="sum-title">The arts and human experience</div>
+      <div class="sum-text">Some people may claim that the arts serve no useful purpose, that they achieve nothing measurable and help nobody. But there are many clear examples of their usefulness, such as the inter-dependent relationship between music and ${fillInline(19,65)}, or between the visual arts and the ${fillInline(20,95)} business. A dramatist may use a ${fillInline(21,55)} to draw our attention to various issues in society, for example some kind of injustice which needs correcting. Apart from these obvious practical benefits, there are other benefits that we gain from things, such as the ${fillInline(22,65)} we find in an artist's work.</div>
+    </div>
+  </div>
+  <div class="qs">
+    <div class="qs-instr">Questions 23 and 24<br>Choose <strong>TWO</strong> letters, <strong>A–E</strong>.<br>Write the correct letters in boxes 23 and 24 on your answer sheet.<br>In paragraph <strong>D</strong>, which <strong>TWO</strong> of the following effects does the writer say the arts can have?</div>
+    <div class="abox"><div class="abox-body">
+      <div class="arow"><span class="arl">A</span>They can interest people from all over the world.</div>
+      <div class="arow"><span class="arl">B</span>They can make us see things from a different perspective.</div>
+      <div class="arow"><span class="arl">C</span>They can inspire us to take up an artistic activity ourselves.</div>
+      <div class="arow"><span class="arl">D</span>They can encourage us to think about our reactions to things around us.</div>
+      <div class="arow"><span class="arl">E</span>They can draw our attention to serious global issues.</div>
+    </div></div>
+    ${mcqBlock(23,'First effect (paragraph D):',{A:'They can interest people from all over the world.',B:'They can make us see things from a different perspective.',C:'They can inspire us to take up an artistic activity ourselves.',D:'They can encourage us to think about our reactions to things around us.',E:'They can draw our attention to serious global issues.'})}
+    ${mcqBlock(24,'Second effect (paragraph D):',{A:'They can interest people from all over the world.',B:'They can make us see things from a different perspective.',C:'They can inspire us to take up an artistic activity ourselves.',D:'They can encourage us to think about our reactions to things around us.',E:'They can draw our attention to serious global issues.'})}
+  </div>
+  <div class="qs">
+    <div class="qs-instr">Questions 25 and 26<br>Choose <strong>TWO</strong> letters, <strong>A–E</strong>.<br>Write the correct letters in boxes 25 and 26 on your answer sheet.<br>Which <strong>TWO</strong> of the following statements about composers and music does the writer make?</div>
+    <div class="abox"><div class="abox-body">
+      <div class="arow"><span class="arl">A</span>Music tends to spring from the composer's individual experiences.</div>
+      <div class="arow"><span class="arl">B</span>Composers need to structure music very carefully.</div>
+      <div class="arow"><span class="arl">C</span>Music can be quite unrelated to the natural world.</div>
+      <div class="arow"><span class="arl">D</span>Music finds its best expression in a symphony.</div>
+      <div class="arow"><span class="arl">E</span>Composers are good at depicting the world around us.</div>
+    </div></div>
+    ${mcqBlock(25,'First statement about composers/music:',{A:'Music tends to spring from the composer\'s individual experiences.',B:'Composers need to structure music very carefully.',C:'Music can be quite unrelated to the natural world.',D:'Music finds its best expression in a symphony.',E:'Composers are good at depicting the world around us.'})}
+    ${mcqBlock(26,'Second statement about composers/music:',{A:'Music tends to spring from the composer\'s individual experiences.',B:'Composers need to structure music very carefully.',C:'Music can be quite unrelated to the natural world.',D:'Music finds its best expression in a symphony.',E:'Composers are good at depicting the world around us.'})}
+  </div>`;
+}
+
+/* ============================================================
+   RENDER Q3
+============================================================ */
+function renderQ3(){
+  const WBANK=[
+    {v:'A',t:'teachers'},{v:'B',t:'school'},{v:'C',t:'dislocation'},
+    {v:'D',t:'rate'},{v:'E',t:'time'},{v:'F',t:'family'},
+    {v:'G',t:'communication'},{v:'H',t:'type'},{v:'I',t:'ability'},
+    {v:'J',t:'area'}
+  ];
+  return `
+  <div class="qs">
+    <div class="qs-instr">Questions 27–30<br>Choose the correct letter, <strong>A, B, C</strong> or <strong>D</strong>.<br>Write the correct letter in boxes 27–30 on your answer sheet.</div>
+    ${mcqBlock(27,'What point is the writer making in the second paragraph?',{A:"Some present studies on children's mother tongues are misleading.",B:'A culturally rich education programme benefits some children more than others.',C:'Bilingual children can make a valuable contribution to the wealth of a country.',D:'The law on mother tongue use at school should be strengthened.'})}
+    ${mcqBlock(28,'Why does the writer refer to something that Goethe said?',{A:'to lend weight to his argument',B:'to contradict some research',C:'to introduce a new concept',D:'to update current thinking'})}
+    ${mcqBlock(29,'The writer believes that when young children have a firm grasp of their mother tongue',{A:'they can teach older family members what they learn at school.',B:'they go on to do much better throughout their time at school.',C:'they can read stories about their cultural background.',D:'they develop stronger relationships with their family than with their peers.'})}
+    ${mcqBlock(30,'Why are some people suspicious about mother tongue-based teaching programmes?',{A:'They worry that children will be slow to learn to read in either language.',B:'They think that children will confuse words in the two languages.',C:'They believe that the programmes will make children less interested in their lessons.',D:'They fear that the programmes will use up valuable time in the school day.'})}
+  </div>
+  <div class="qs">
+    <div class="qs-instr">Questions 31–35<br>Complete the summary using the list of words, <strong>A–J</strong>, below.<br>Write the correct letter, <strong>A–J</strong>, in boxes 31–35 on your answer sheet.</div>
+    <div class="wbank">
+      <div class="wbank-body">
+        ${WBANK.map(w=>`<div class="wbank-item"><span class="wbank-lbl">${w.v}</span><span>${w.t}</span></div>`).join('')}
+      </div>
+    </div>
+    <div class="sum-body">
+      <div class="sum-title">Bilingual children</div>
+      <div class="sum-text">It has often been noted that bilingual children acquire the
+      <span class="fill-field" id="qi31"><span class="fqn">31</span>
+      <select class="qsel" onchange="setAns(31,this.value)" style="width:120px">
+        <option value="">—</option>${WBANK.map(w=>`<option value="${w.v}" ${(ans[31]||'')==w.v?'selected':''}>${w.v} – ${w.t}</option>`).join('')}
+      </select></span>
+      to converse in the majority language remarkably quickly. The fact that the mother tongue can disappear at a similar
+      <span class="fill-field" id="qi32"><span class="fqn">32</span>
+      <select class="qsel" onchange="setAns(32,this.value)" style="width:110px">
+        <option value="">—</option>${WBANK.map(w=>`<option value="${w.v}" ${(ans[32]||'')==w.v?'selected':''}>${w.v} – ${w.t}</option>`).join('')}
+      </select></span>
+      is less well understood. This phenomenon depends to a certain extent on the proportion of people with the same linguistic background that have settled in a particular
+      <span class="fill-field" id="qi33"><span class="fqn">33</span>
+      <select class="qsel" onchange="setAns(33,this.value)" style="width:110px">
+        <option value="">—</option>${WBANK.map(w=>`<option value="${w.v}" ${(ans[33]||'')==w.v?'selected':''}>${w.v} – ${w.t}</option>`).join('')}
+      </select></span>.
+      If this is limited, children are likely to lose the active use of their mother tongue, and thus no longer employ it even with
+      <span class="fill-field" id="qi34"><span class="fqn">34</span>
+      <select class="qsel" onchange="setAns(34,this.value)" style="width:110px">
+        <option value="">—</option>${WBANK.map(w=>`<option value="${w.v}" ${(ans[34]||'')==w.v?'selected':''}>${w.v} – ${w.t}</option>`).join('')}
+      </select></span>,
+      although they may still understand it. It follows that teenage children in these circumstances experience a sense of
+      <span class="fill-field" id="qi35"><span class="fqn">35</span>
+      <select class="qsel" onchange="setAns(35,this.value)" style="width:120px">
+        <option value="">—</option>${WBANK.map(w=>`<option value="${w.v}" ${(ans[35]||'')==w.v?'selected':''}>${w.v} – ${w.t}</option>`).join('')}
+      </select></span>
+      in relation to all aspects of their lives.</div>
+    </div>
+  </div>
+  <div class="qs">
+    <div class="qs-instr">Questions 36–40<br>Do the following statements agree with the views of the writer in Reading Passage 3?<br>In boxes 36–40 on your answer sheet, write<br><strong>YES</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if the statement agrees with the views of the writer<br><strong>NO</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if the statement contradicts the views of the writer<br><strong>NOT GIVEN</strong> &nbsp;if it is impossible to say what the writer thinks about this</div>
+    ${ynBlock(36,'Less than half the children who attend kindergarten in Toronto have English as their mother tongue.')}
+    ${ynBlock(37,"Research proves that learning the host country language at school can have an adverse effect on a child's mother tongue.")}
+    ${ynBlock(38,'The Foyer programme is to be adopted by the French education system.')}
+    ${ynBlock(39,'Bilingual children are taught to tell the time earlier than monolingual children.')}
+    ${ynBlock(40,'Bilingual children can eventually apply reading comprehension strategies acquired in one language when reading in the other.')}
+  </div>`;
+}
+
+/* ============================================================
+   STATE & NAVIGATION
+============================================================ */
+let curPart=1, ans={};
+const pbarDescs={1:'Read the text and answer questions 1–13.',2:'Read the text and answer questions 14–26.',3:'Read the text and answer questions 27–40.'};
+const pRanges={1:[1,13],2:[14,26],3:[27,40]};
+
+function goPart(p){
+  if(p<1||p>3)return;
+  curPart=p;
+  document.getElementById('pbar-title').textContent='Passage '+p;
+  document.getElementById('pbar-desc').textContent='\u00a0\u00a0'+pbarDescs[p];
+  document.getElementById('ppane').innerHTML=PASSAGES[p];
+  document.getElementById('qpane').innerHTML=p===1?renderQ1():p===2?renderQ2():renderQ3();
+  renderPills();
+  document.getElementById('ppane').scrollTop=0;
+  document.getElementById('qpane').scrollTop=0;
+  applyFontSizes();
+}
+
+function setAns(n,v){ans[n]=v.trim();renderPills();}
+
+function renderPills(){
+  for(let p=2;p<=3;p++){
+    const[ps,pe]=pRanges[p];let c=0;
+    for(let i=ps;i<=pe;i++)if(ans[i]&&ans[i]!=='')c++;
+    const el=document.getElementById('pts'+p);if(el)el.textContent=`${c} of ${pe-ps+1}`;
+  }
+  const[s,e]=pRanges[curPart];
+  if(curPart===1){
+    let h='';for(let i=s;i<=e;i++){const a=ans[i]&&ans[i]!=='';h+=`<div class="qpill${a?' ans':''}" onclick="scrollToQ(${i})">${i}</div>`;}
+    document.getElementById('bnav-pills').innerHTML=h;
+    setNavColors(1);
+  } else if(curPart===2){
+    document.getElementById('bnav-pills').innerHTML='';
+    let h='';for(let i=s;i<=e;i++){const a=ans[i]&&ans[i]!=='';h+=`<div class="qpill${a?' ans':''}" onclick="scrollToQ(${i})">${i}</div>`;}
+    document.getElementById('bnav-po2').innerHTML=`<span class="bnav-plabel2" id="bnav-lbl2" style="color:#222;font-weight:700">Passage 2</span><span style="display:flex;align-items:center;gap:3px">${h}</span>`;
+    const[ps3,pe3]=pRanges[3];let c3=0;for(let i=ps3;i<=pe3;i++)if(ans[i]&&ans[i]!=='')c3++;
+    document.getElementById('bnav-po3').innerHTML=`<span class="bnav-plabel2" id="bnav-lbl3" style="color:#666">Passage 3</span><span class="bnav-pscore" id="pts3">${c3} of ${pe3-ps3+1}</span>`;
+    setNavColors(2);
+  } else {
+    document.getElementById('bnav-pills').innerHTML='';
+    const[ps2,pe2]=pRanges[2];let c2=0;for(let i=ps2;i<=pe2;i++)if(ans[i]&&ans[i]!=='')c2++;
+    document.getElementById('bnav-po2').innerHTML=`<span class="bnav-plabel2" id="bnav-lbl2" style="color:#666">Passage 2</span><span class="bnav-pscore" id="pts2">${c2} of ${pe2-ps2+1}</span>`;
+    let h='';for(let i=s;i<=e;i++){const a=ans[i]&&ans[i]!=='';h+=`<div class="qpill${a?' ans':''}" onclick="scrollToQ(${i})">${i}</div>`;}
+    document.getElementById('bnav-po3').innerHTML=`<span class="bnav-plabel2" id="bnav-lbl3" style="color:#222;font-weight:700">Passage 3</span><span style="display:flex;align-items:center;gap:3px">${h}</span>`;
+    setNavColors(3);
+  }
+}
+
+function setNavColors(active){
+  const l1=document.getElementById('bnav-lbl1');
+  if(l1)l1.style.color=active===1?'#222':'#666';
+}
+
+function scrollToQ(n){const el=document.getElementById('qi'+n);if(el)el.scrollIntoView({behavior:'smooth',block:'center'});}
+
+/* ============================================================
+   HIGHLIGHT
+============================================================ */
+const hlTip=document.getElementById('hl-tip');
+let hlRange=null;
+function isInPane(node){const pp=document.getElementById('ppane');const qp=document.getElementById('qpane');return pp.contains(node)||qp.contains(node);}
+document.addEventListener('mouseup',e=>{
+  if(e.target===hlTip)return;
+  const sel=window.getSelection();
+  if(!sel||sel.isCollapsed||!sel.toString().trim()){hlTip.style.display='none';return;}
+  const range=sel.getRangeAt(0);
+  if(!isInPane(range.commonAncestorContainer)){hlTip.style.display='none';return;}
+  hlRange=range.cloneRange();
+  const r=range.getBoundingClientRect();
+  hlTip.style.left=(r.left+r.width/2-38)+'px';
+  hlTip.style.top=(r.top+window.scrollY-34)+'px';
+  hlTip.style.display='block';
+});
+document.addEventListener('mousedown',e=>{if(e.target!==hlTip)hlTip.style.display='none';});
+hlTip.addEventListener('click',()=>{
+  if(!hlRange)return;
+  const sp=document.createElement('span');sp.className='hl';
+  sp.onclick=function(){this.outerHTML=this.innerHTML;};sp.title='Click to remove';
+  try{hlRange.surroundContents(sp);}catch(ex){const f=hlRange.extractContents();sp.appendChild(f);hlRange.insertNode(sp);}
+  hlTip.style.display='none';window.getSelection().removeAllRanges();
+});
+
+/* ============================================================
+   RESIZABLE DIVIDER
+============================================================ */
+let drag=false,dStartX,dStartW;
+const divEl=document.getElementById('divider'),ppEl=document.getElementById('ppane');
+divEl.addEventListener('mousedown',e=>{drag=true;dStartX=e.clientX;dStartW=ppEl.offsetWidth;document.body.style.cursor='col-resize';document.body.style.userSelect='none';});
+document.addEventListener('mousemove',e=>{if(!drag)return;const tot=document.getElementById('main').offsetWidth-10;ppEl.style.width=Math.max(240,Math.min(tot-240,dStartW+(e.clientX-dStartX)))+'px';});
+document.addEventListener('mouseup',()=>{drag=false;document.body.style.cursor='';document.body.style.userSelect='';});
+
+/* ============================================================
+   RESULTS
+============================================================ */
+function normalizeAns(v){
+  const s=v.trim().toLowerCase();
+  if(s==='true')return 't';
+  if(s==='false')return 'f';
+  if(s==='not given')return 'ngv';
+  if(s==='yes')return 'yes';
+  if(s==='no')return 'no';
+  return s;
+}
+function isCorrect(n){return normalizeAns(ans[n]||'')===normalizeAns(AK[n].toString());}
+
+function showResults(){
+  const partNames={1:'Passage 1 – A Brief History of Humans and Food (Q1–13)',2:'Passage 2 – Why do we need the arts? (Q14–26)',3:'Passage 3 – The significant role of mother tongue language in education (Q27–40)'};
+  let total=0,html='';
+  for(let p=1;p<=3;p++){
+    const[s,e]=pRanges[p];let pc=0,rows='';
+    for(let i=s;i<=e;i++){
+      const ok=isCorrect(i);if(ok){pc++;total++;}
+      const ua=(ans[i]||'').trim()||'—';
+      rows+=`<tr class="${ok?'rr-ok':'rr-no'}"><td><strong>${i}</strong></td><td>${ua}</td><td class="mc">${displayAK(i)}</td><td class="${ok?'mc':'mw'}">${ok?'✓':'✗'}</td></tr>`;
+    }
+    const tot2=e-s+1,pct=Math.round(pc/tot2*100),bc=pct>=70?'good':(pct>=50?'ok':'bad');
+    html+=`<div class="rm-part"><div class="rm-ph">${partNames[p]}<span class="rm-badge ${bc}">${pc}/${tot2} (${pct}%)</span></div>
+      <table class="rm-tbl"><thead><tr><th>Q</th><th>Your Answer</th><th>Correct</th><th></th></tr></thead><tbody>${rows}</tbody></table>
+    </div>`;
+  }
+  const pct=Math.round(total/40*100);
+  const band=total>=39?'9.0':total>=37?'8.5':total>=35?'8.0':total>=33?'7.5':total>=30?'7.0':total>=27?'6.5':total>=23?'6.0':total>=19?'5.5':total>=15?'5.0':total>=13?'4.5':'4.0';
+  html+=`<div class="total-strip"><span class="ts-lbl">Total Score</span><div><div class="ts-num">${total} / 40 <span style="font-size:14px;color:#888">(${pct}%)</span></div><div class="ts-band">Estimated Band Score: <strong>${band}</strong></div></div></div>`;
+  document.getElementById('res-body').innerHTML=html;
+  document.getElementById('res-overlay').style.display='flex';
+}
+function closeResults(){document.getElementById('res-overlay').style.display='none';}
+
+/* ============================================================
+   FONT SIZE
+============================================================ */
+let fsPass=14,fsQ=13;
+const FS_MIN=10,FS_MAX=22;
+function changeFontSize(which,delta){
+  if(which==='pass'){fsPass=Math.max(FS_MIN,Math.min(FS_MAX,fsPass+delta));document.getElementById('fsz-pass-val').textContent=fsPass+'px';}
+  else{fsQ=Math.max(FS_MIN,Math.min(FS_MAX,fsQ+delta));document.getElementById('fsz-q-val').textContent=fsQ+'px';}
+  applyFontSizes();
+}
+function applyFontSizes(){
+  const pp=document.getElementById('ppane');if(pp)pp.querySelectorAll('p').forEach(el=>el.style.fontSize=fsPass+'px');
+  const qp=document.getElementById('qpane');if(qp)qp.style.fontSize=fsQ+'px';
+}
+function toggleMenu(){document.getElementById('menu-dropdown').classList.toggle('open');}
+document.addEventListener('click',e=>{const w=document.getElementById('menu-wrap');if(w&&!w.contains(e.target))document.getElementById('menu-dropdown').classList.remove('open');});
+
+goPart(1);
+</script>
+</body>
+</html>

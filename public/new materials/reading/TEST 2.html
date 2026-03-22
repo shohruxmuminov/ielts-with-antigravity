@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IELTS Academic Reading – Test 3</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,Helvetica,sans-serif;font-size:14px;height:100vh;display:flex;flex-direction:column;overflow:hidden;background:#fff;color:#222}
+#hdr{height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;border-bottom:1.5px solid #d0d0d0;background:#fff;flex-shrink:0}
+#hdr-left{display:flex;align-items:center;gap:14px}
+.ielts-badge{background:#c41230;color:#fff;font-family:'Arial Black',Arial,sans-serif;font-weight:900;font-size:19px;padding:3px 10px 4px;letter-spacing:0.5px;border-radius:2px;user-select:none;line-height:1.3}
+#tg-link{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:#222;font-size:13px;font-weight:600;font-family:Arial,sans-serif;background:#fff;border:1.5px solid #d0d0d0;border-radius:22px;padding:5px 14px 5px 6px;transition:border-color .15s,box-shadow .15s}
+#tg-link:hover{border-color:#0088cc;box-shadow:0 0 0 2px rgba(0,136,204,.12);color:#0088cc}
+#tg-link .tg-circle{width:28px;height:28px;border-radius:50%;background:linear-gradient(to bottom,#2aabee,#229ed9);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+#tg-link .tg-circle svg{width:16px;height:16px}
+#hdr-right{display:flex;align-items:center;gap:14px}
+#menu-wrap{position:relative}
+#menu-btn{background:none;border:none;cursor:pointer;padding:4px;display:flex;flex-direction:column;gap:4px;border-radius:4px}
+#menu-btn:hover{background:#f0f0f0}
+#menu-btn span{display:block;width:20px;height:2px;background:#444;border-radius:2px}
+#menu-dropdown{position:absolute;top:calc(100% + 8px);right:0;background:#fff;border:1px solid #d0d0d0;border-radius:6px;box-shadow:0 4px 16px rgba(0,0,0,.12);padding:12px 16px;min-width:180px;z-index:1000;display:none}
+#menu-dropdown.open{display:block}
+#menu-dropdown .md-title{font-size:11px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px;font-family:Arial,sans-serif}
+#menu-dropdown .md-row{display:flex;align-items:center;gap:8px}
+#menu-dropdown .md-lbl{font-size:13px;font-family:Arial,sans-serif;color:#333;min-width:60px}
+.fsz-btn{width:30px;height:30px;border:1px solid #ccc;background:#f8f8f8;border-radius:4px;cursor:pointer;font-size:14px;font-weight:700;font-family:Arial,sans-serif;display:flex;align-items:center;justify-content:center;color:#333;flex-shrink:0}
+.fsz-btn:hover{background:#eee;border-color:#999}
+#pbar{background:#f5f5f5;border-bottom:1px solid #d5d5d5;padding:7px 18px;font-size:13px;flex-shrink:0;color:#222;line-height:1.4}
+#pbar-title{font-weight:700}
+#main{flex:1;display:flex;overflow:hidden;min-height:0}
+#ppane{width:50%;overflow-y:auto;padding:22px 26px;background:#fff;user-select:text;flex-shrink:0}
+#ppane::-webkit-scrollbar{width:6px}
+#ppane::-webkit-scrollbar-track{background:#f2f2f2}
+#ppane::-webkit-scrollbar-thumb{background:#c8c8c8;border-radius:3px}
+#divider{width:10px;background:#e8e8e8;border-left:1px solid #ccc;border-right:1px solid #ccc;cursor:col-resize;flex-shrink:0;display:flex;align-items:center;justify-content:center;position:relative;z-index:10}
+#div-btn{width:26px;height:26px;background:#888;border-radius:3px;color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;user-select:none;position:absolute;line-height:1}
+#div-btn:hover{background:#666}
+#qpane{flex:1;overflow-y:auto;padding:16px 20px;background:#fff;min-width:0;user-select:text}
+#qpane::-webkit-scrollbar{width:6px}
+#qpane::-webkit-scrollbar-track{background:#f2f2f2}
+#qpane::-webkit-scrollbar-thumb{background:#c8c8c8;border-radius:3px}
+.pass-title{font-size:17px;font-weight:700;text-align:center;margin-bottom:3px;font-family:Arial,sans-serif}
+.pass-sub{font-size:12.5px;text-align:left;margin-bottom:14px;color:#333;font-family:Arial,sans-serif;font-style:italic}
+.pass-body p{font-size:14px;line-height:1.65;margin-bottom:13px;font-family:Arial,sans-serif;color:#111;text-align:left}
+.para-letter{font-weight:700;margin-right:6px;color:#111}
+.hl{background:#FFE066;border-radius:1px}
+#hl-tip{position:fixed;display:none;background:#111;color:#fff;padding:5px 13px;border-radius:18px;font-size:12px;font-family:Arial,sans-serif;cursor:pointer;z-index:9999;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.35)}
+#hl-tip:hover{background:#333}
+.qs{font-size:13px;color:#222;margin-bottom:16px}
+.qs-instr{margin-bottom:10px;line-height:1.55;font-size:13px}
+.qs-instr strong{font-weight:700}
+.qs-instr em{font-style:italic}
+.qitem{margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid #efefef}
+.qitem:last-child{border-bottom:none}
+.qrow{display:flex;gap:6px;font-size:13px;line-height:1.5;margin-bottom:6px}
+.qno{font-weight:700;min-width:20px;flex-shrink:0}
+.tfn-opts{display:flex;flex-direction:column;gap:5px;padding-left:26px}
+.tfn-opt{display:flex;align-items:center;gap:7px;font-size:13px;cursor:pointer;color:#222}
+.tfn-opt input[type=radio]{cursor:pointer;width:15px;height:15px;flex-shrink:0}
+.notes-wrap{border:1px solid #bbb;background:#fafafa;padding:12px 14px;margin-top:4px}
+.notes-head{font-weight:700;font-size:14px;text-align:center;margin-bottom:10px}
+.notes-sec-title{font-weight:700;font-size:13px;margin:8px 0 5px}
+.notes-sub-title{font-weight:600;font-size:12.5px;margin:6px 0 4px;padding-left:10px;color:#333}
+.notes-li{display:flex;flex-wrap:wrap;align-items:baseline;gap:3px;font-size:13px;line-height:1.7;margin-bottom:5px;padding-left:10px}
+.notes-li::before{content:"•";margin-right:5px;flex-shrink:0}
+.notes-li-circ{display:flex;flex-wrap:wrap;align-items:baseline;gap:3px;font-size:13px;line-height:1.7;margin-bottom:5px;padding-left:24px}
+.notes-li-circ::before{content:"◦";margin-right:5px;flex-shrink:0}
+.fill-field{display:inline-flex;align-items:center;border:1px solid #888;border-radius:2px;padding:1px 5px;background:#fff;vertical-align:middle}
+.fill-field .fqn{font-size:11px;font-weight:700;color:#555;margin-right:3px;flex-shrink:0}
+.fill-field input{border:none;outline:none;font-size:13px;font-family:Arial,sans-serif;width:90px;background:transparent;color:#111}
+.hbox{border:1px solid #aaa;margin-bottom:12px}
+.hbox-title{font-weight:700;font-size:13px;text-align:center;background:#f0f0f0;border-bottom:1px solid #aaa;padding:6px 10px}
+.hbox-body{padding:8px 12px}
+.hrow{display:flex;gap:8px;font-size:13px;margin-bottom:4px}
+.hrn{font-weight:700;min-width:28px;flex-shrink:0}
+.abox{border:1px solid #aaa;margin-bottom:12px}
+.abox-title{font-weight:700;font-size:13px;text-align:center;background:#f0f0f0;border-bottom:1px solid #aaa;padding:6px 10px}
+.abox-body{padding:8px 12px}
+.arow{display:flex;gap:8px;font-size:13px;margin-bottom:3px}
+.arl{font-weight:700;min-width:20px}
+.ph-row{display:flex;align-items:center;gap:8px;margin-bottom:9px;font-size:13px}
+.ph-no{font-weight:700;min-width:24px;flex-shrink:0}
+.ph-para-label{font-size:13px;color:#333;min-width:90px}
+.qsel{border:1px solid #888;border-radius:2px;padding:3px 6px;font-size:12.5px;font-family:Arial,sans-serif;background:#fff;cursor:pointer;outline:none;color:#111}
+.qsel:focus{border-color:#444}
+.mcq-opts{display:flex;flex-direction:column;gap:5px;padding-left:10px}
+.mcq-opt{display:flex;align-items:flex-start;gap:7px;font-size:13px;cursor:default;user-select:none}
+.mcq-opt input{cursor:pointer;width:17px;height:17px;flex-shrink:0;margin-top:1px}
+.mcq-opt .mcq-let{pointer-events:none}
+.mcq-opt span:last-child{pointer-events:none}
+.mcq-let{font-weight:700;flex-shrink:0;min-width:16px}
+.fc-wrap{border:1px solid #aaa;margin-bottom:10px;background:#fafafa}
+.fc-title{font-weight:700;font-size:13px;text-align:center;background:#f0f0f0;border-bottom:1px solid #aaa;padding:6px 10px}
+.fc-box{border:1px solid #ccc;margin:8px 14px;padding:9px 12px;text-align:center;font-size:13px;line-height:2.1;background:#fff}
+.fc-arrow{text-align:center;font-size:16px;color:#666;padding:1px 0;line-height:1.2}
+#bnav{background:#f0f0f0;border-top:1px solid #ccc;flex-shrink:0;padding:0;min-height:44px;display:flex;align-items:stretch}
+#bnav-inner{display:flex;align-items:center;width:100%;padding:0 10px;gap:0;min-height:44px}
+#bnav-p1{display:flex;align-items:center;gap:5px;flex-shrink:0}
+.bnav-plabel{font-size:13px;font-weight:700;font-family:Arial,sans-serif;color:#222;white-space:nowrap;cursor:pointer}
+.bnav-plabel:hover{text-decoration:underline}
+#bnav-pills{display:flex;align-items:center;gap:3px;flex-wrap:nowrap}
+.qpill{min-width:26px;height:26px;padding:0 4px;display:flex;align-items:center;justify-content:center;font-size:12px;font-family:Arial,sans-serif;color:#444;border-radius:3px;border:1px solid transparent;cursor:pointer;user-select:none;background:transparent}
+.qpill:hover{border-color:#999;background:#e6e6e6}
+.qpill.ans{color:#222;font-weight:600}
+.bnav-sep{width:1px;background:#ccc;height:24px;margin:0 12px;flex-shrink:0}
+.bnav-pother{display:flex;align-items:center;gap:6px;flex-shrink:0;cursor:pointer;padding:0 4px}
+.bnav-pother:hover .bnav-plabel2{text-decoration:underline}
+.bnav-plabel2{font-size:13px;font-weight:700;font-family:Arial,sans-serif;color:#666}
+.bnav-pother.active .bnav-plabel2{color:#222}
+.bnav-pscore{font-size:12px;color:#666;font-family:Arial,sans-serif}
+#bnav-spacer{flex:1}
+#sub-btn{width:44px;height:44px;background:#e0e0e0;border:none;border-left:1px solid #ccc;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:20px;color:#444}
+#sub-btn:hover{background:#d0d0d0;color:#111}
+#res-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:99999;display:none;align-items:center;justify-content:center}
+#res-modal{background:#fff;width:92vw;max-width:720px;max-height:88vh;overflow-y:auto;border-radius:5px;padding:24px 26px;box-shadow:0 6px 36px rgba(0,0,0,.35);font-family:Arial,sans-serif}
+#res-modal::-webkit-scrollbar{width:6px}
+#res-modal::-webkit-scrollbar-thumb{background:#ccc;border-radius:3px}
+.rm-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.rm-title{font-size:18px;font-weight:700}
+.rm-close{background:none;border:none;font-size:24px;cursor:pointer;color:#666;line-height:1;padding:0}
+.rm-close:hover{color:#000}
+.rm-part{margin-bottom:20px;border:1px solid #ddd;border-radius:4px;overflow:hidden}
+.rm-ph{background:#f2f2f2;padding:8px 14px;font-weight:700;font-size:13.5px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #ddd}
+.rm-badge{font-size:12px;color:#fff;padding:2px 11px;border-radius:10px;font-weight:700}
+.rm-badge.good{background:#2e7d32}.rm-badge.ok{background:#e65100}.rm-badge.bad{background:#c41230}
+.rm-tbl{width:100%;border-collapse:collapse;font-size:12.5px}
+.rm-tbl th{background:#f8f8f8;padding:5px 10px;text-align:left;font-weight:700;border-bottom:1px solid #ddd;color:#333}
+.rm-tbl td{padding:5px 10px;border-bottom:1px solid #f0f0f0;vertical-align:top}
+.rm-tbl tr:last-child td{border-bottom:none}
+tr.rr-ok{background:#f1fff4}
+tr.rr-no{background:#fff5f5}
+.mc{color:#2e7d32;font-weight:700}
+.mw{color:#c41230;font-weight:700}
+.total-strip{margin-top:16px;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center}
+.ts-lbl{font-size:15px;font-weight:700}
+.ts-num{font-size:26px;font-weight:900;color:#c41230;text-align:right;line-height:1.1}
+.ts-band{font-size:12px;color:#666;margin-top:2px}
+</style>
+</head>
+<body>
+<div id="hl-tip">✏ Highlight</div>
+
+<div id="hdr">
+  <div id="hdr-left">
+    <div class="ielts-badge">IELTS</div>
+    <a id="tg-link" href="https://t.me/alisher_abduvohobov" target="_blank">
+      <span class="tg-circle">
+        <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" fill="none">
+          <path d="M54 117.9c35-15.2 58.3-25.3 70-30.2 33.3-13.9 40.2-16.3 44.7-16.4 1 0 3.2.2 4.6 1.5 1.2 1 1.5 2.5 1.7 3.5.2 1 .4 3.2.2 4.9-1.9 19.9-10 68.2-14.1 90.5-1.7 9.4-5.1 12.6-8.4 12.9-7.1.7-12.5-4.7-19.4-9.2-10.8-7.1-16.9-11.5-27.4-18.4-12.1-8-4.3-12.4 2.6-19.6 1.8-1.9 33.2-30.4 33.8-33 .1-.3.1-.6-.2-.9-.3-.2-.7-.1-1.1 0-.5.1-7.9 5-22.4 14.9-21.2 14.3-28.6 14.6-37 11.1-3.1-1.3-8.8-3.7-8.8-3.7s-3.2-2 2.2-4.9z" fill="#fff"/>
+        </svg>
+      </span>
+      Alisher's IELTS | 9.0
+    </a>
+  </div>
+  <div id="hdr-right">
+    <div id="menu-wrap">
+      <button id="menu-btn" onclick="toggleMenu()" title="Settings">
+        <span></span><span></span><span></span>
+      </button>
+      <div id="menu-dropdown">
+        <div class="md-title">Text Size</div>
+        <div class="md-row">
+          <span class="md-lbl">Passage</span>
+          <button class="fsz-btn" onclick="changeFontSize('pass',-1)">A−</button>
+          <span id="fsz-pass-val">14px</span>
+          <button class="fsz-btn" onclick="changeFontSize('pass',1)">A+</button>
+        </div>
+        <div class="md-row" style="margin-top:8px">
+          <span class="md-lbl">Questions</span>
+          <button class="fsz-btn" onclick="changeFontSize('q',-1)">A−</button>
+          <span id="fsz-q-val">13px</span>
+          <button class="fsz-btn" onclick="changeFontSize('q',1)">A+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="pbar">
+  <span id="pbar-title">Passage 1</span><span id="pbar-desc">&nbsp;&nbsp;Read the text and answer questions 1–13.</span>
+</div>
+
+<div id="main">
+  <div id="ppane"></div>
+  <div id="divider"><div id="div-btn">↔</div></div>
+  <div id="qpane"></div>
+</div>
+
+<div id="bnav">
+  <div id="bnav-inner">
+    <div id="bnav-p1">
+      <span class="bnav-plabel" onclick="goPart(1)" id="bnav-lbl1">Passage 1</span>
+      <div id="bnav-pills"></div>
+    </div>
+    <div class="bnav-sep" id="bnav-sep1"></div>
+    <div class="bnav-pother" id="bnav-po2" onclick="goPart(2)">
+      <span class="bnav-plabel2" id="bnav-lbl2">Passage 2</span>
+      <span class="bnav-pscore" id="pts2">0 of 13</span>
+    </div>
+    <div class="bnav-sep" id="bnav-sep2"></div>
+    <div class="bnav-pother" id="bnav-po3" onclick="goPart(3)">
+      <span class="bnav-plabel2" id="bnav-lbl3">Passage 3</span>
+      <span class="bnav-pscore" id="pts3">0 of 14</span>
+    </div>
+    <div id="bnav-spacer"></div>
+    <button id="sub-btn" onclick="showResults()" title="Submit">✓</button>
+  </div>
+</div>
+
+<div id="res-overlay">
+  <div id="res-modal">
+    <div class="rm-hdr">
+      <div class="rm-title">Test Results</div>
+      <button class="rm-close" onclick="closeResults()">✕</button>
+    </div>
+    <div id="res-body"></div>
+  </div>
+</div>
+
+<script>
+const PASSAGES = {
+1: `<div class="pass-title">The pesticide-free village</div>
+<div class="pass-sub">Gerry Marten and Dona Glee Williams report on the Indian village of Punukula, so nearly destroyed by reliance on pesticides</div>
+<div class="pass-body">
+<p>Around 20 years ago, a handful of families migrated from the Guntur district of Andhra Pradesh, south-east India, into Punukula, a community of around 900 people farming plots of between two and ten acres. The outsiders from Guntur brought cotton culture with them, and this attracted resident farmers by promising to bring in more hard cash than the mixed crops they were already growing to eat and sell, such as millet, mung beans, chilli and rice. But growing cotton meant using pesticides and fertilisers – until then a mystery to the mostly illiterate farmers of the community.</p>
+<p>Local agrochemical dealers obligingly filled the need for information and supplies. These 'middlemen' sold commercial seeds, fertilisers and insecticides on credit, and guaranteed purchase of the crop. They offered technical advice provided by the companies that supplied their products. The farmers depend on the dealers. If they wanted to grow cotton – and they did – it seemed they had no choice.</p>
+<p>A quick 'high' of booming yields and incomes hooked growers during the early years of cotton in the region. Outlay on insecticides was fairly low because cotton pests hadn't moved in yet. Many farmers were so impressed with the chemicals that they started using them on their other crops as well. The immediate payoffs from chemically-dependent cotton agriculture both ensured and obscured the fact that the black dirt fields had gone into a freefall of environmental degradation, dragged down by a chain of cause and effect.</p>
+<p>Soon cotton-eaters, such as bollworms and aphids, plagued the fields. Repeated spraying killed off the most susceptible pests and left the strongest to reproduce and pass on their resistance to generations of ever-hardier offspring. As the bugs grew tougher and more abundant, farmers applied a greater variety and quantity of poisons, something mixing 'cocktails' of as many as ten insecticides. At the same time, cotton was gobbling up the nutrients in the soil, leaving the growers no option but to invest in chemical fertilisers.</p>
+<p>By the time some farmers tried to break free of their chemical dependence, insecticides had already decimated the birds, wasps, beetles, and other predators that had once provided natural control of crop pests. Without their balancing presence, pests ran riot if insecticide was cut back. As outlays for fertilisers and insecticides escalated, the cost of producing cotton mounted. Eventually the expense of chemical inputs outgrew the cash value of the crop, and farmers fell further and further into debt and poverty.</p>
+<p>Their vicious cycle was only broken by the willingness of a prominent village elder to experiment with something different. He had been among the first villagers to grow cotton, and he would be the first to try it without chemicals, as set out by a programme in Non-Pesticide Management (NPM). This had been devised for Punukala with the help of a Non-Government Organisation called SECURE that had become aware of the hardships caused by the pesticide trap.</p>
+<p>It involved turning to neem, a fast-growing, broad-leaved evergreen tree related to mahogany. Neem protects itself against insects by producing a multitude of natural pesticides that have evolved specifically to defeat plant-eating insects. Thus they are generally harmless to human and other animals, including birds and insects that eat pests.</p>
+<p>The plant is native to India and Burma, where it has been used for centuries to control pests and to promote health. To protect cotton, neem seeds are simply ground into a powder, soaked overnight in water, and sprayed onto the crop at least every 10 days. Neem cake applied to the soil kills insect pests and doubles as an organic fertiliser high in nitrogen. As neem grows locally and is easy to process, it is much less expensive than the chemical insecticides sold for profit by the dealers and their corporate suppliers.</p>
+<p>Quick, short-term gains had once pushed Punukula into chemical-dependent agriculture. Now they found that similar immediate rewards were helping to speed change in the other direction: the harvest of the next 20 NPM farmers was as good as the harvest of farmers using insecticides, and they came out ahead because they weren't buying insecticides. Instead of investing cash (in short supply) in chemicals, they invested time and labour in NPM practices.</p>
+<p>By the end of 2000, all the farmers in Punukula village were using NPM rather than chemicals for cotton, and they began to use it on other crops as well. The change gathered momentum as NPM became even more effective once everyone was using it. The status and economic opportunities of women improved – neem became a source of income for some of them, as they gathered seeds from the surrounding area to sell for NPM in other villages. The improved situation meant that families could afford to put more land under cultivation.</p>
+<p>In 2004, the panchayat (village government) formally declared Punukula to be a pesticide-free village. And they have big plans for the future, such as water purification. The village now serves as a model for disseminating NPM to other communities, with around 2000 farmers visiting each year.</p>
+<p>What began as a few farmers desperate to find a way to farm without poisons has become a movement with the potential to pull an entire region back from ecological disaster.</p>
+</div>`,
+2: `<div class="pass-title">New filter promises clean water for millions</div>
+<div class="pass-sub">An ingenious invention is set to bring clean water to developing countries, and while the science may be cutting edge, the materials are extremely down to earth.</div>
+<div class="pass-body">
+<p>A handful of clay, yesterday's coffee grounds and some cow manure are the ingredients that could bring clean, safe drinking water to many developing countries. The simple new technology, developed by Australian National University (ANU) materials scientist and potter Tony Flynn, allows water filters to be made from commonly available materials and fired (or baked) using cow manure as the source of heat, without the need for a kiln (an oven for baking or drying pottery). The filters have been tested and shown to remove common pathogens (disease-producing organisms) including E-coli.</p>
+<p>The invention was born out of a project involving the Manatuto community in East Timor. A charity operating there wanted to help set up a small industrial site manufacturing water filters, but initial research found the local clay to be too fine – a problem solved by the addition of organic material. While the problems of producing a working ceramic filter in East Timor were overcome, the solution was kiln-based and particular to that community's materials and couldn't be applied elsewhere. Flynn's technique for manure firing, with no requirement for a kiln, has made this zero technology approach available anywhere it is needed.</p>
+<p>Other commercial clay filters do exist, but, even if available, with prices starting at US$5 each, they are often outside the budgets of most people in the developing world. Unlike other water filtering devices, Flynn's filters are inexpensive and simple to produce. Take a handful of clay, mix it with a handful of organic material such as used tea leaves, coffee grounds or rice hulls, add water in a sufficient quantity to make a stiff mixture and form a cylindrical pot that has one end closed, then dry it in the sun. According to Flynn, used coffee grounds have given the best results to date. The walls of the filter can be measured using the width of an adult finger as the standard. Next, surround the pots with straw, put them in a mound of cow manure, light the straw and then top up the burning manure as required. The filters are finished in 45 to 60 minutes.</p>
+<p>The properties of cow manure are vital, as the fuel can reach a temperature of 700 degrees in half an hour, and will be up to 950 degrees after another 20 to 30 minutes. The manure makes a good fuel because it is very high in organic material that burns readily and quickly. The manure has to be dry and is best used exactly as found in the field; there is no need to break it up or process it any further. In contrast, a potter's kiln is an expensive item and can take up to four or five hours to get up to 800 degrees. It needs expensive scarce fuel, such as gas or wood to heat it, and experience to use it. With no technology, no insulation and nothing other than a pile of cow manure and a match, none of these requirements apply.</p>
+<p>It is also helpful that, like clay and organic material, cow manure is freely available across the developing world. A cow is a natural fuel factory. Manure is a mixture of vegetable materials of different sizes, and cow manure as a fuel is the same wherever it is found.</p>
+<p>Just as using manure as a fuel for domestic use is not a new idea, the fact that liquid can pass through clay objects is something that potters have always known, and clay's porous nature is something that, as a former ceramics lecturer in the ANU School of Art, Flynn is well aware of. The difference is that, rather than viewing the porous nature of the material as a problem – after all, not many people want a pot that won't hold water – his filters capitalise on this property.</p>
+<p>The filtration process is simple, but effective. The basic principle is that there are passages through the filter that are wide enough for water droplets to pass through, but too narrow for pathogens. Tests with the deadly E-coli bacterium have seen the filters remove 96.4 to 99.8 per cent of the pathogen – well within safe levels. The thickness of the clay container needs to be the same thickness as an adult finger for the process to be effective. If this is the case, using only one filter, a liter of water can be obtained in two hours.</p>
+<p>The use of organic material, which burns away leaving cavities after firing, helps produce the structure in which pathogens will become trapped. It overcomes the potential problems of finer clays that may not let water through and also means that cracks are soon halted. And like clay and cow manure, organic material is universally available in the developing communities that need most assistance, as tea, coffee and rice are grown in these areas.</p>
+<p>With all the components being widely available, Flynn says there is no reason the technology couldn't be applied throughout the developing world. He has no plans to exploit his idea financially by registering ownership through a patent. If he did, any commercial copying would legally entitle him to a share in any profits made. Without a patent, there will be no illegality in it being adopted in any community that needs it. 'Everyone has a right to clean water, and these filters have the potential to enable anyone in the world to drink water safely,' says Flynn.</p>
+</div>`,
+3: `<div class="pass-title">Putting the brakes on climate change</div>
+<div class="pass-sub">Are hydrogen cars the answer?</div>
+<div class="pass-body">
+<p><span class="para-letter">A</span>It is tempting to think that the conservation of coral reefs and rainforests is a separate issue from traffic and air pollution. But it is not. Scientists are now confident that rapid changes in the Earth's climate are already disrupting and altering many wildlife habitats. Pollution from vehicles is a big part of the problem.</p>
+<p><span class="para-letter">B</span>The United Nation's Climate Change Panel has estimated that the global average temperature rise expected by the year 2100 could be as much as 6°C, causing forest fires and dieback on land and coral bleaching in the ocean. Few species, if any, will be immune from the changes in temperature, rainfall and sea levels. The panel believes that if such catastrophic temperature rises are to be avoided, the quantity of greenhouse gases, especially carbon dioxide, being released into the atmosphere must be reduced. That will depend on slowing the rate of deforestation and, more crucially, finding alternatives to coal, oil and gas as our principal energy sources.</p>
+<p><span class="para-letter">C</span>Technologies do exist to reduce or eliminate carbon dioxide as a waste product of our energy consumption. Wind power and solar power are both spreading fast, but what are we doing about traffic? Electric cars are one possible option, but their range and the time it takes to charge their batteries pose serious limitations. However, the technology that shows the most potential to make cars climate-friendly is fuel-cell technology. This was actually invented in the late nineteenth century, but because the world's motor industry put its effort into developing the combustion engine, it was never refined for mass production. One of the first prototype fuel-cell-powered vehicles has been built by the Ford Motor Company. It is like a conventional car, only with better acceleration and a smoother ride. Ford engineers expect to be able to produce a virtually silent vehicle in the future.</p>
+<p><span class="para-letter">D</span>So what's the process involved – and is there a catch? Hydrogen goes into the fuel tank, producing electricity. The only emission from the exhaust pipe is water. The fuel-cell is, in some ways, similar to a battery, but unlike a battery it does not run down. As long as hydrogen and oxygen are supplied to the cell, it will keep on generating electricity. Some cells work off methane and a few use liquid fuels such as methanol, but fuel-cells using hydrogen probably have the most potential. Furthermore, they need not be limited to transport. Fuel-cells can be made in a huge range of size, small enough for portable computers or large enough for power stations. They have no moving parts and therefore need no oil. They just need a supply of hydrogen. The big question, then, is where to get it from.</p>
+<p><span class="para-letter">E</span>One source of hydrogen is water. But to exploit the abundant resource, electricity is needed, and if the electricity is produced by a coal-fired power station or other fossil fuel, then the overall carbon reduction benefit of the fuel-cell disappears. Renewable sources, such as wind and solar power, do not produce enough energy for it to be economically viable to use them in the 'manufacture' of hydrogen as a transport fuel. Another source of hydrogen is, however, available and could provide a supply pending the development of more efficient and cheaper renewable energy technologies. By splitting natural gas (methane) into its constituent parts, hydrogen and carbon dioxide are produced. One way round the problem of what to do with the carbon dioxide could be to store it back below ground – so called geological sequestration. Oil companies, such as Norway's Statoil, are experimenting with storing carbon dioxide below ground in oil and gas wells.</p>
+<p><span class="para-letter">F</span>With freak weather conditions, arguably caused by global warming, frequently in the headlines, the urgent need to get fuel-cell vehicles will be available in most showrooms. Even now, fuel-cell buses are operating in the US, while in Germany a courier company is planning to take delivery of fuel-cell-powered vans in the near future. The fact that centrally-run fleets of buses and vans are the first fuel-cell vehicles identifies another challenge – fuel distribution. The refueling facilities necessary to top up hydrogen-powered vehicles are available only in a very few places at present. Public transport and delivery firms are logical places to start, since their vehicles are operated from central depots.</p>
+<p><span class="para-letter">G</span>Fuel-cell technology is being developed right across the automotive industry. This technology could have a major impact in slowing down climate change, but further investment is needed if the industry – and the world's wildlife – is to have a long-term future.</p>
+</div>`
+};
+
+const AK = {
+  1:'T', 2:'NGV', 3:'F', 4:'T',
+  5:'evergreen tree', 6:'natural pesticides',
+  7:'a powder', 8:'overnight', 9:'neem cake', 10:'nitrogen',
+  11:'2000', 12:'(neem) cakes', 13:'water purification',
+  14:'clay', 15:'water', 16:'cow manure', 17:'straw',
+  18:'950 degrees', 19:'60 minutes',
+  20:'T', 21:'NGV', 22:'F', 23:'NGV',
+  24:'C', 25:'B', 26:'A',
+  27:'vii', 28:'iv', 29:'vi', 30:'v', 31:'viii', 32:'iii',
+  33:'combustion engine', 34:'silent', 35:'battery', 36:'portable computers',
+  37:'F', 38:'NGV', 39:'T', 40:'T'
+};
+
+/* Expand shorthand keys for display in results table */
+function displayAK(n) {
+  const v = AK[n].toString();
+  if (v === 'T')   return 'TRUE';
+  if (v === 'F')   return 'FALSE';
+  if (v === 'NGV') return 'NOT GIVEN';
+  return v;
+}
+
+function tfnBlock(n, text) {
+  const v = ans[n]||'';
+  return `<div class="qitem" id="qi${n}">
+    <div class="qrow"><span class="qno">${n}</span><span>${text}</span></div>
+    <div class="tfn-opts">
+      ${['TRUE','FALSE','NOT GIVEN'].map(o=>`<label class="tfn-opt"><input type="radio" name="rq${n}" value="${o}" ${v===o?'checked':''} onchange="setAns(${n},this.value)">${o}</label>`).join('')}
+    </div>
+  </div>`;
+}
+
+function fillField(n, pre='', post='') {
+  const v = ans[n]||'';
+  return `<div class="notes-li-circ" id="qi${n}">
+    ${pre ? pre+' ' : ''}<span class="fill-field"><span class="fqn">${n}</span><input id="fi${n}" value="${v}" onchange="setAns(${n},this.value)" onkeyup="setAns(${n},this.value)" placeholder="…"></span>${post ? ' '+post : ''}
+  </div>`;
+}
+
+function headingRow(n, para, opts) {
+  const v = ans[n]||'';
+  return `<div class="ph-row" id="qi${n}">
+    <span class="ph-no">${n}</span>
+    <span class="ph-para-label">Paragraph ${para}</span>
+    <select class="qsel" onchange="setAns(${n},this.value)">
+      <option value="">—</option>
+      ${opts.map(o=>`<option value="${o.v}" ${v===o.v?'selected':''}>${o.v}&nbsp;&nbsp;${o.t}</option>`).join('')}
+    </select>
+  </div>`;
+}
+
+function mcqBlock(n, qtext, opts) {
+  const v = ans[n]||'';
+  return `<div class="qitem" id="qi${n}">
+    <div class="qrow"><span class="qno">${n}</span><span>${qtext}</span></div>
+    <div class="mcq-opts">
+      ${Object.entries(opts).map(([l,t])=>`<div class="mcq-opt"><input type="radio" name="rq${n}" value="${l}" ${v===l?'checked':''} onchange="setAns(${n},this.value)"><span class="mcq-let">${l}</span><span>${t}</span></div>`).join('')}
+    </div>
+  </div>`;
+}
+
+function inlineField(n) {
+  const v = ans[n]||'';
+  return `<span class="fill-field" id="qi${n}"><span class="fqn">${n}</span><input id="fi${n}" value="${v}" onchange="setAns(${n},this.value)" onkeyup="setAns(${n},this.value)" placeholder="…"></span>`;
+}
+
+function renderQ(p){if(p===1)return renderQ1();if(p===2)return renderQ2();return renderQ3();}
+
+function renderQ1(){
+  let h=`<div class="qs">
+  <div class="qs-instr">Questions 1–4<br>Do the following statements agree with the information given in Reading Passage 1?<br>In boxes <strong>1–4</strong> on your answer sheet, write<br><strong>TRUE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if the statement agrees with the information<br><strong>FALSE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if the statement contradicts the information<br><strong>NOT GIVEN</strong>&nbsp;&nbsp;if there is no information on this</div>
+  ${tfnBlock(1,'Cotton growing was expected to raise more money than other crop.')}
+  ${tfnBlock(2,'Some of the local agrochemical dealers had been farmers in the past.')}
+  ${tfnBlock(3,'Initially the farmers\' cotton yields were low.')}
+  ${tfnBlock(4,'At first, the farmers failed to notice the negative effects on their fields of pesticide use.')}
+  </div>
+  <div class="qs">
+  <div class="qs-instr">Questions 5–10<br>Complete the notes below.<br>Choose <strong>NO MORE THAN TWO WORDS</strong> from the passage for each answer.<br>Write your answers in boxes <strong>5–10</strong> on your answer sheet.</div>
+  <div class="notes-wrap">
+    <div class="notes-head">Non-Pesticide-Management Programme</div>
+    <div class="notes-li">Developed with the aid of SECURE</div>
+    ${fillField(5,'Based on use of an','called neem')}
+    ${fillField(6,'Neem contains many','that target plant-eating predators')}
+    <div class="notes-sec-title">Neem</div>
+    <div class="notes-sub-title">Used as a pesticide</div>
+    ${fillField(7,'','formed by grinding seeds')}
+    ${fillField(8,'left','to soak in water')}
+    <div class="notes-li-circ">Sprayed regularly</div>
+    <div class="notes-sub-title">Used as a pesticide and as a fertiliser</div>
+    ${fillField(9,'added in','form to soil')}
+    ${fillField(10,'contains a lot of','')}
+  </div>
+  </div>
+  <div class="qs">
+  <div class="qs-instr">Questions 11–13<br>Answer the questions below.<br>Choose <strong>NO MORE THAN TWO WORDS AND/OR A NUMBER</strong> from the passage for each answer.<br>Write your answers in boxes <strong>11–13</strong> on your answer sheet.</div>
+  <div class="qitem" id="qi11">
+    <div class="qrow"><span class="qno">11</span><span>In which year did farmers finally stop using chemicals on cotton crops in Punukula?</span></div>
+    <div style="padding-left:26px;margin-top:5px">${inlineField(11)}</div>
+  </div>
+  <div class="qitem" id="qi12">
+    <div class="qrow"><span class="qno">12</span><span>What did the women of Punukula collect to make money?</span></div>
+    <div style="padding-left:26px;margin-top:5px">${inlineField(12)}</div>
+  </div>
+  <div class="qitem" id="qi13">
+    <div class="qrow"><span class="qno">13</span><span>What project do the authorities in Punukula hope to set up in the future?</span></div>
+    <div style="padding-left:26px;margin-top:5px">${inlineField(13)}</div>
+  </div>
+  </div>`;
+  return h;
+}
+
+function renderQ2(){
+  let h=`<div class="qs">
+  <div class="qs-instr">Questions 14–19<br>Complete the flow-chart below.<br>Choose <strong>NO MORE THAN TWO WORDS AND/OR A NUMBER</strong> from the passage for each answer.<br>Write your answers in boxes <strong>14–19</strong> on your answer sheet.</div>
+  <div class="fc-wrap">
+    <div class="fc-title">Step-by-step guide to making Flynn's water filters</div>
+    <div class="fc-box">
+      Make the mixture for the filter from organic material (e.g. tea, coffee, rice),<br>
+      ${inlineField(14)} &nbsp;and&nbsp; ${inlineField(15)}
+    </div>
+    <div class="fc-arrow">▼</div>
+    <div class="fc-box">
+      Shape into pots and place them in a fire made from<br>
+      ${inlineField(16)} &nbsp;and&nbsp; ${inlineField(17)}
+    </div>
+    <div class="fc-arrow">▼</div>
+    <div class="fc-box">
+      Fuel the fire to reach a maximum heat of &nbsp;${inlineField(18)}
+    </div>
+    <div class="fc-arrow">▼</div>
+    <div class="fc-box">Remove the filters from the fire.</div>
+    <div class="fc-arrow">▼</div>
+    <div class="fc-box">
+      Bake the filters in the fire for a maximum period of &nbsp;${inlineField(19)}
+    </div>
+  </div>
+  </div>
+  <div class="qs">
+  <div class="qs-instr">Questions 20–23<br>Do the following statements agree with the information given in Reading Passage 2?<br>In boxes <strong>20–23</strong> on your answer sheet, write<br><strong>TRUE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if the statement agrees with the information<br><strong>FALSE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if the statement contradicts the information<br><strong>NOT GIVEN</strong>&nbsp;&nbsp;if there is no information on this</div>
+  ${tfnBlock(20,'The clay in the Manatuto project was initially unsuitable for the project\'s purpose.')}
+  ${tfnBlock(21,'Coffee grounds produce filters that are twice as efficient as those using other organic materials.')}
+  ${tfnBlock(22,'It takes half an hour for a cow-manure fire to reach 950 degrees.')}
+  ${tfnBlock(23,'E-coli is the most difficult bacterium to remove from water by filtration.')}
+  </div>
+  <div class="qs">
+  <div class="qs-instr">Questions 24–26<br>Choose the correct letter, <strong>A</strong>, <strong>B</strong>, <strong>C</strong> or <strong>D</strong>.<br>Write the correct letter in boxes <strong>24–26</strong> on your answer sheet.</div>
+  ${mcqBlock(24,'The Manatuto project aimed to set up a',{A:'charitable trust.',B:'filtration experiment.',C:'water filter factory.',D:'community kiln.'})}
+  ${mcqBlock(25,'To be effective, the Flynn filters must',{A:'remove all dangerous pathogens.',B:'be a particular thickness.',C:'filter water as quickly as possible.',D:'be made from 100 per cent clay.'})}
+  ${mcqBlock(26,'Flynn does not intend to patent his filter because he',{A:'wants it to be freely available.',B:'has produced a very simple design.',C:'cannot make a profit in poor countries.',D:'has already given the idea to a charity.'})}
+  </div>`;
+  return h;
+}
+
+function renderQ3(){
+  const HOPTS3=[
+    {v:'i',   t:'Action already taken by the United Nations'},
+    {v:'ii',  t:'Marketing the hydrogen car'},
+    {v:'iii', t:'Making the new technology available worldwide'},
+    {v:'iv',  t:'Some negative predictions from one group of experts'},
+    {v:'v',   t:'How the new vehicle technology works'},
+    {v:'vi',  t:'The history of fuel-cell technology'},
+    {v:'vii', t:'A holistic view of climate change'},
+    {v:'viii',t:'Locating the essential ingredient'},
+    {v:'ix',  t:'Sustaining car manufacture'}
+  ];
+  let h=`<div class="qs">
+  <div class="qs-instr">Questions 27–32<br>Reading Passage 3 has seven paragraphs, <strong>A–G</strong>.<br>Choose the correct heading for paragraphs <strong>A–F</strong> from the list of headings below.<br><em>Write the correct number, <strong>i–ix</strong>, in boxes 27–32 on your answer sheet.</em></div>
+  <div class="hbox"><div class="hbox-title">List of Headings</div><div class="hbox-body">${HOPTS3.map(o=>`<div class="hrow"><span class="hrn">${o.v}</span><span>${o.t}</span></div>`).join('')}</div></div>
+  ${headingRow(27,'A',HOPTS3)}
+  ${headingRow(28,'B',HOPTS3)}
+  ${headingRow(29,'C',HOPTS3)}
+  ${headingRow(30,'D',HOPTS3)}
+  ${headingRow(31,'E',HOPTS3)}
+  ${headingRow(32,'F',HOPTS3)}
+  </div>
+  <div class="qs">
+  <div class="qs-instr">Questions 33–36<br>Complete the sentences below.<br>Choose <strong>NO MORE THAN TWO WORDS</strong> from the passage for each answer.<br>Write your answers in boxes <strong>33–36</strong> on your answer sheet.</div>
+  <div class="qitem" id="qi33">
+    <div class="qrow"><span class="qno">33</span><span>In the late nineteenth century, the car industry invested in the development of the ${inlineField(33)}, rather than fuel-cell technology.</span></div>
+  </div>
+  <div class="qitem" id="qi34">
+    <div class="qrow"><span class="qno">34</span><span>Ford engineers predict that they will eventually design an almost ${inlineField(34)} car.</span></div>
+  </div>
+  <div class="qitem" id="qi35">
+    <div class="qrow"><span class="qno">35</span><span>While a fuel-cell lasts longer, some aspects of it are comparable to a ${inlineField(35)}.</span></div>
+  </div>
+  <div class="qitem" id="qi36">
+    <div class="qrow"><span class="qno">36</span><span>Fuel-cells can come in many sizes and can be used in power stations and in ${inlineField(36)} as well as in vehicles.</span></div>
+  </div>
+  </div>
+  <div class="qs">
+  <div class="qs-instr">Questions 37–40<br>Do the following statements agree with the information given in Reading Passage 3?<br>In boxes <strong>37–40</strong> on your answer sheet, write<br><strong>TRUE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if the statement agrees with the information<br><strong>FALSE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if the statement contradicts the information<br><strong>NOT GIVEN</strong>&nbsp;&nbsp;if there is no information on this</div>
+  ${tfnBlock(37,'Using electricity produced by burning fossil fuels to access sources of hydrogen may increase the positive effect of the fuel-cell.')}
+  ${tfnBlock(38,'The oil company Statoil in Norway owns gas wells in other parts of the world.')}
+  ${tfnBlock(39,'Public transport is leading the way in the application of fuel-cell technology.')}
+  ${tfnBlock(40,'More funding is necessary to ensure the success of the fuel-cell vehicle industry.')}
+  </div>`;
+  return h;
+}
+
+let curPart=1, ans={};
+const pbarDescs={1:'Read the text and answer questions 1–13.',2:'Read the text and answer questions 14–26.',3:'Read the text and answer questions 27–40.'};
+const pRanges={1:[1,13],2:[14,26],3:[27,40]};
+
+function goPart(p){
+  if(p<1||p>3)return;
+  curPart=p;
+  document.getElementById('pbar-title').textContent='Passage '+p;
+  document.getElementById('pbar-desc').textContent='\u00a0\u00a0'+pbarDescs[p];
+  document.getElementById('ppane').innerHTML=PASSAGES[p];
+  document.getElementById('qpane').innerHTML=renderQ(p);
+  document.getElementById('bnav-po2').innerHTML=`<span class="bnav-plabel2" id="bnav-lbl2">Passage 2</span><span class="bnav-pscore" id="pts2">0 of 13</span>`;
+  document.getElementById('bnav-po3').innerHTML=`<span class="bnav-plabel2" id="bnav-lbl3">Passage 3</span><span class="bnav-pscore" id="pts3">0 of 14</span>`;
+  renderPills();
+  document.getElementById('ppane').scrollTop=0;
+  document.getElementById('qpane').scrollTop=0;
+  applyFontSizes();
+}
+
+function setAns(n,v){ans[n]=v.trim();renderPills();}
+
+function renderPills(){
+  const[s,e]=pRanges[curPart];
+  for(let p=1;p<=3;p++){const[ps,pe]=pRanges[p];let c=0;for(let i=ps;i<=pe;i++)if(ans[i]&&ans[i].trim()!=='')c++;if(p!==1){const el=document.getElementById('pts'+p);if(el)el.textContent=`${c} of ${pe-ps+1}`;}}
+  if(curPart===1){
+    let h='';for(let i=s;i<=e;i++){const a=ans[i]&&ans[i]!=='';h+=`<div class="qpill${a?' ans':''}" onclick="scrollToQ(${i})">${i}</div>`;}
+    document.getElementById('bnav-pills').innerHTML=h;
+    document.getElementById('bnav-lbl1').style.color='#222';
+    const l2=document.getElementById('bnav-lbl2');if(l2)l2.style.color='#666';
+    const l3=document.getElementById('bnav-lbl3');if(l3)l3.style.color='#666';
+  } else if(curPart===2){
+    document.getElementById('bnav-pills').innerHTML='';
+    document.getElementById('bnav-lbl1').style.color='#666';
+    let h='';for(let i=s;i<=e;i++){const a=ans[i]&&ans[i]!=='';h+=`<div class="qpill${a?' ans':''}" onclick="scrollToQ(${i})">${i}</div>`;}
+    document.getElementById('bnav-po2').innerHTML=`<span class="bnav-plabel2" id="bnav-lbl2" style="color:#222;font-weight:700">Passage 2</span><span style="display:flex;align-items:center;gap:3px">${h}</span>`;
+    const[ps3,pe3]=pRanges[3];let c3=0;for(let i=ps3;i<=pe3;i++)if(ans[i]&&ans[i]!=='')c3++;
+    document.getElementById('bnav-po3').innerHTML=`<span class="bnav-plabel2" id="bnav-lbl3" style="color:#666">Passage 3</span><span class="bnav-pscore" id="pts3">${c3} of ${pe3-ps3+1}</span>`;
+  } else {
+    document.getElementById('bnav-pills').innerHTML='';
+    document.getElementById('bnav-lbl1').style.color='#666';
+    const[ps2,pe2]=pRanges[2];let c2=0;for(let i=ps2;i<=pe2;i++)if(ans[i]&&ans[i]!=='')c2++;
+    document.getElementById('bnav-po2').innerHTML=`<span class="bnav-plabel2" id="bnav-lbl2" style="color:#666">Passage 2</span><span class="bnav-pscore" id="pts2">${c2} of ${pe2-ps2+1}</span>`;
+    let h='';for(let i=s;i<=e;i++){const a=ans[i]&&ans[i]!=='';h+=`<div class="qpill${a?' ans':''}" onclick="scrollToQ(${i})">${i}</div>`;}
+    document.getElementById('bnav-po3').innerHTML=`<span class="bnav-plabel2" id="bnav-lbl3" style="color:#222;font-weight:700">Passage 3</span><span style="display:flex;align-items:center;gap:3px">${h}</span>`;
+  }
+}
+
+function scrollToQ(n){const el=document.getElementById('qi'+n);if(el)el.scrollIntoView({behavior:'smooth',block:'center'});}
+
+/* Highlight */
+const hlTip=document.getElementById('hl-tip');
+let hlRange=null;
+function isInPane(node){const pp=document.getElementById('ppane');const qp=document.getElementById('qpane');return pp.contains(node)||qp.contains(node);}
+document.addEventListener('mouseup',e=>{
+  if(e.target===hlTip)return;
+  const sel=window.getSelection();
+  if(!sel||sel.isCollapsed||!sel.toString().trim()){hlTip.style.display='none';return;}
+  const range=sel.getRangeAt(0);
+  if(!isInPane(range.commonAncestorContainer)){hlTip.style.display='none';return;}
+  hlRange=range.cloneRange();
+  const r=range.getBoundingClientRect();
+  hlTip.style.left=(r.left+r.width/2-38)+'px';
+  hlTip.style.top=(r.top+window.scrollY-34)+'px';
+  hlTip.style.display='block';
+});
+document.addEventListener('mousedown',e=>{if(e.target!==hlTip)hlTip.style.display='none';});
+hlTip.addEventListener('click',()=>{
+  if(!hlRange)return;
+  const sp=document.createElement('span');sp.className='hl';sp.onclick=function(){this.outerHTML=this.innerHTML;};sp.title='Click to remove';
+  try{hlRange.surroundContents(sp);}catch(ex){const f=hlRange.extractContents();sp.appendChild(f);hlRange.insertNode(sp);}
+  hlTip.style.display='none';window.getSelection().removeAllRanges();
+});
+
+/* Resizable divider */
+let drag=false,dStartX,dStartW;
+const divEl=document.getElementById('divider'),ppEl=document.getElementById('ppane');
+divEl.addEventListener('mousedown',e=>{drag=true;dStartX=e.clientX;dStartW=ppEl.offsetWidth;document.body.style.cursor='col-resize';document.body.style.userSelect='none';});
+document.addEventListener('mousemove',e=>{if(!drag)return;const tot=document.getElementById('main').offsetWidth-10;ppEl.style.width=Math.max(240,Math.min(tot-240,dStartW+(e.clientX-dStartX)))+'px';});
+document.addEventListener('mouseup',()=>{drag=false;document.body.style.cursor='';document.body.style.userSelect='';});
+
+/* Results */
+function normalizeAns(v){
+  const s=v.trim().toLowerCase();
+  if(s==='true')return 't';
+  if(s==='false')return 'f';
+  if(s==='not given')return 'ngv';
+  return s;
+}
+function isCorrect(n){return normalizeAns(ans[n]||'')===normalizeAns(AK[n].toString());}
+
+function showResults(){
+  const partNames={
+    1:'Passage 1 – The Pesticide-Free Village (Q1–13)',
+    2:'Passage 2 – New Filter Promises Clean Water (Q14–26)',
+    3:'Passage 3 – Putting the Brakes on Climate Change (Q27–40)'
+  };
+  let total=0,html='';
+  for(let p=1;p<=3;p++){
+    const[s,e]=pRanges[p];let pc=0,rows='';
+    for(let i=s;i<=e;i++){
+      const ok=isCorrect(i);if(ok){pc++;total++;}
+      const ua=(ans[i]||'').trim()||'—';
+      rows+=`<tr class="${ok?'rr-ok':'rr-no'}">
+        <td><strong>${i}</strong></td>
+        <td>${ua}</td>
+        <td class="mc">${displayAK(i)}</td>
+        <td class="${ok?'mc':'mw'}">${ok?'✓':'✗'}</td>
+      </tr>`;
+    }
+    const tot2=e-s+1,pct=Math.round(pc/tot2*100),bc=pct>=70?'good':(pct>=50?'ok':'bad');
+    html+=`<div class="rm-part"><div class="rm-ph">${partNames[p]}<span class="rm-badge ${bc}">${pc}/${tot2} (${pct}%)</span></div>
+      <table class="rm-tbl"><thead><tr><th>Q</th><th>Your Answer</th><th>Correct</th><th></th></tr></thead><tbody>${rows}</tbody></table>
+    </div>`;
+  }
+  const pct=Math.round(total/40*100);
+  const band=total>=39?'9.0':total>=37?'8.5':total>=35?'8.0':total>=33?'7.5':total>=30?'7.0':total>=27?'6.5':total>=23?'6.0':total>=19?'5.5':total>=15?'5.0':total>=13?'4.5':'4.0';
+  html+=`<div class="total-strip"><span class="ts-lbl">Total Score</span><div><div class="ts-num">${total} / 40 <span style="font-size:14px;color:#888">(${pct}%)</span></div><div class="ts-band">Estimated Band Score: <strong>${band}</strong></div></div></div>`;
+  document.getElementById('res-body').innerHTML=html;
+  document.getElementById('res-overlay').style.display='flex';
+}
+
+function closeResults(){document.getElementById('res-overlay').style.display='none';}
+
+/* Font size */
+let fsPass=14,fsQ=13;
+const FS_MIN=10,FS_MAX=22;
+function changeFontSize(which,delta){
+  if(which==='pass'){fsPass=Math.max(FS_MIN,Math.min(FS_MAX,fsPass+delta));document.getElementById('fsz-pass-val').textContent=fsPass+'px';}
+  else{fsQ=Math.max(FS_MIN,Math.min(FS_MAX,fsQ+delta));document.getElementById('fsz-q-val').textContent=fsQ+'px';}
+  applyFontSizes();
+}
+function applyFontSizes(){
+  const pp=document.getElementById('ppane');if(pp)pp.querySelectorAll('p').forEach(el=>el.style.fontSize=fsPass+'px');
+  const qp=document.getElementById('qpane');if(qp)qp.style.fontSize=fsQ+'px';
+}
+function toggleMenu(){document.getElementById('menu-dropdown').classList.toggle('open');}
+document.addEventListener('click',e=>{const w=document.getElementById('menu-wrap');if(w&&!w.contains(e.target))document.getElementById('menu-dropdown').classList.remove('open');});
+
+goPart(1);
+</script>
+</body>
+</html>
