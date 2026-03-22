@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS Listening Test 8</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #f9fafb; line-height: 1.5; color: #1f2937; }
+        .hidden { display: none !important; }
+        .test-interface { min-height: 100vh; display: flex; flex-direction: column; padding-bottom: 80px; }
+        .header { background-color: white; border-bottom: 1px solid #e5e7eb; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
+        .ielts-logo { color: #dc2626; font-weight: bold; font-size: 1.25rem; }
+        .audio-player { background: white; padding: 10px; border-radius: 8px; border: 1px solid #e5e7eb; margin: 20px auto; max-width: 600px; width: 95%; }
+        .main-content { flex: 1; padding: 16px 24px; max-width: 1000px; margin: 0 auto; width: 100%; }
+        .part-container { background: white; border-radius: 12px; padding: 24px; border: 1px solid #e5e7eb; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .part-title { font-size: 1.5rem; font-weight: 700; color: #111827; margin-bottom: 8px; border-bottom: 2px solid #3b82f6; padding-bottom: 8px; display: inline-block; }
+        .instructions { font-style: italic; color: #4b5563; margin-bottom: 20px; font-weight: 500; }
+        .question-group { margin-bottom: 30px; }
+        .question-item { margin-bottom: 15px; display: flex; align-items: flex-start; gap: 10px; flex-wrap: wrap; }
+        .question-num { font-weight: bold; min-width: 25px; color: #3b82f6; }
+        .question-input { border: 1px solid #d1d5db; border-radius: 4px; padding: 4px 8px; outline: none; transition: border-color 0.2s; min-width: 120px; }
+        .question-input:focus { border-color: #3b82f6; box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1); }
+        .mcq-group { margin-left: 25px; margin-bottom: 20px; }
+        .mcq-option { margin-bottom: 8px; display: flex; align-items: center; gap: 10px; cursor: pointer; }
+        .diagram-container { margin: 20px 0; text-align: center; }
+        .diagram-image { max-width: 100%; border-radius: 8px; border: 1px solid #e5e7eb; }
+        .nav-footer { position: fixed; bottom: 0; left: 0; right: 0; background: white; border-top: 1px solid #e5e7eb; padding: 15px; display: flex; justify-content: center; gap: 10px; z-index: 100; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); }
+        .nav-btn { padding: 8px 16px; border-radius: 6px; border: 1px solid #d1d5db; background: white; cursor: pointer; font-weight: 600; color: #4b5563; transition: all 0.2s; }
+        .nav-btn.active { background: #3b82f6; color: white; border-color: #3b82f6; }
+        .submit-btn { background: #059669; color: white; border-color: #059669; margin-left: auto; }
+        .submit-btn:hover { background: #047857; }
+        .correct-ans { color: #059669; font-weight: bold; margin-left: 10px; display: none; }
+        .wrong-ans { color: #dc2626; font-weight: bold; margin-left: 10px; display: none; }
+    </style>
+</head>
+<body>
+    <div class="test-interface">
+        <div class="header">
+            <div class="ielts-logo">IELTS with Shohrux</div>
+            <div id="timer" style="font-family: monospace; font-size: 1.2rem; font-weight: bold;">30:00</div>
+        </div>
+
+        <div class="audio-player">
+            <audio id="testAudio" controls style="width: 100%;">
+                <source src="./audios/Listening test 8.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+
+        <div class="main-content">
+            <!-- Part 1 -->
+            <div id="part1" class="part-container">
+                <h2 class="part-title">Part 1</h2>
+                <div class="instructions">Questions 1–10: Write NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.</div>
+                <div class="question-group">
+                    <h3>Cycling holiday in Austria</h3>
+                    <div class="question-item">
+                        <span class="question-num">1</span> Holiday begins on: <input type="text" class="question-input" data-q="1">
+                    </div>
+                    <div class="question-item">
+                        <span class="question-num">2</span> No more than: <input type="text" class="question-input" data-q="2" style="width: 60px;"> people in cycling group.
+                    </div>
+                    <div class="question-item">
+                        <span class="question-num">3</span> Each day, group cycles: <input type="text" class="question-input" data-q="3" style="width: 60px;"> on average.
+                    </div>
+                    <div class="question-item">
+                        <span class="question-num">4</span> Some of the hotels have a: <input type="text" class="question-input" data-q="4">
+                    </div>
+                    <div class="question-item">
+                        <span class="question-num">5</span> Holiday costs £: <input type="text" class="question-input" data-q="5" style="width: 60px;"> per person without flights.
+                    </div>
+                    <div class="question-item">
+                        <span class="question-num">6</span> All food included except: <input type="text" class="question-input" data-q="6">
+                    </div>
+                    <div class="question-item">
+                        <span class="question-num">7</span> Essential to bring a: <input type="text" class="question-input" data-q="7">
+                    </div>
+                    <div class="question-item">
+                        <span class="question-num">8</span> Discount possible on equipment at www. <input type="text" class="question-input" data-q="8"> .com
+                    </div>
+                    <div class="question-item">
+                        <span class="question-num">9</span> Possible that the <input type="text" class="question-input" data-q="9"> may change.
+                    </div>
+                    <div class="question-item">
+                        <span class="question-num">10</span> Guided tour of a <input type="text" class="question-input" data-q="10"> is arranged.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Part 2 -->
+            <div id="part2" class="part-container hidden">
+                <h2 class="part-title">Part 2</h2>
+                <div class="instructions">Questions 11–14: Choose the correct letter, A, B or C.</div>
+                <div class="question-group">
+                    <div class="question-item"><span class="question-num">11</span> The market is situated:</div>
+                    <div class="mcq-group">
+                        <label class="mcq-option"><input type="radio" name="q11" value="A"> A. under the city wall</label>
+                        <label class="mcq-option"><input type="radio" name="q11" value="B"> B. beside the cathedral</label>
+                        <label class="mcq-option"><input type="radio" name="q11" value="C"> C. near the river beach</label>
+                    </div>
+
+                    <div class="question-item"><span class="question-num">12</span> One day a week the market sells:</div>
+                    <div class="mcq-group">
+                        <label class="mcq-option"><input type="radio" name="q12" value="A"> A. furniture</label>
+                        <label class="mcq-option"><input type="radio" name="q12" value="B"> B. clothing</label>
+                        <label class="mcq-option"><input type="radio" name="q12" value="C"> C. plants</label>
+                    </div>
+
+                    <div class="question-item"><span class="question-num">13</span> The area is well known for its:</div>
+                    <div class="mcq-group">
+                        <label class="mcq-option"><input type="radio" name="q13" value="A"> A. meat dish</label>
+                        <label class="mcq-option"><input type="radio" name="q13" value="B"> B. vegetable dish</label>
+                        <label class="mcq-option"><input type="radio" name="q13" value="C"> C. fish dish</label>
+                    </div>
+
+                    <div class="question-item"><span class="question-num">14</span> What change has happened in the harbour recently?</div>
+                    <div class="mcq-group">
+                        <label class="mcq-option"><input type="radio" name="q14" value="A"> A. It has been deepened</label>
+                        <label class="mcq-option"><input type="radio" name="q14" value="B"> B. It is now a pedestrian zone</label>
+                        <label class="mcq-option"><input type="radio" name="q14" value="C"> C. It has new storage facilities</label>
+                    </div>
+                </div>
+
+                <div class="instructions">Questions 15–20: Matching Category to Restaurant.</div>
+                <div class="diagram-container">
+                    <img src="./audios/Listening test 8 diagram.png" class="diagram-image" alt="Harbor Map">
+                </div>
+                <div class="question-group">
+                    <div class="question-item">
+                        <span class="question-num">15</span> Merrivales: <input type="text" class="question-input" data-q="15" style="width: 40px;">
+                    </div>
+                    <div class="question-item">
+                        <span class="question-num">16</span> The Lobster Pot: <input type="text" class="question-input" data-q="16" style="width: 40px;">
+                    </div>
+                    <div class="question-item">
+                        <span class="question-num">17</span> Elliots: <input type="text" class="question-input" data-q="17" style="width: 40px;">
+                    </div>
+                    <div class="question-item">
+                        <span class="question-num">18</span> The Cabin: <input type="text" class="question-input" data-q="18" style="width: 40px;">
+                    </div>
+                    <div class="question-item">
+                        <span class="question-num">19</span> The Olive Tree: <input type="text" class="question-input" data-q="19" style="width: 40px;">
+                    </div>
+                    <div class="question-item">
+                        <span class="question-num">20</span> The Sea Garden: <input type="text" class="question-input" data-q="20" style="width: 40px;">
+                    </div>
+                    <div style="font-size: 0.9rem; color: #6b7280; margin-top: 10px;">
+                        A. the decoration | B. original cooking | C. entertainment | D. the service | E. good value | F. good views | G. quiet | H. wide range of food
+                    </div>
+                </div>
+            </div>
+
+            <!-- Part 3 -->
+            <div id="part3" class="part-container hidden">
+                <h2 class="part-title">Part 3</h2>
+                <div class="instructions">Questions 21–25: Matching source to task.</div>
+                <div class="question-group">
+                    <h3>Film Project</h3>
+                    <div class="question-item"><span class="question-num">21</span> Source 1 (Old documents): <input type="text" class="question-input" data-q="21" style="width: 40px;"></div>
+                    <div class="question-item"><span class="question-num">22</span> Source 2 (Former factory worker): <input type="text" class="question-input" data-q="22" style="width: 40px;"></div>
+                    <div class="question-item"><span class="question-num">23</span> Source 3 (University library): <input type="text" class="question-input" data-q="23" style="width: 40px;"></div>
+                    <div class="question-item"><span class="question-num">24</span> Source 4 (Local council member): <input type="text" class="question-input" data-q="24" style="width: 40px;"></div>
+                    <div class="question-item"><span class="question-num">25</span> Source 5 (Town archive): <input type="text" class="question-input" data-q="25" style="width: 40px;"></div>
+                    <div style="font-size: 0.9rem; color: #6b7280; margin-top: 10px;">
+                        A. actors | B. costumes | C. financing | D. location scouting | E. local council | F. equipment | G. shooting schedule | H. permissions | I. shopowners
+                    </div>
+                </div>
+
+                <div class="instructions">Questions 26–30: Matching prop to use.</div>
+                <div class="question-group">
+                    <div class="question-item"><span class="question-num">26</span> Prop 1: <input type="text" class="question-input" data-q="26" style="width: 40px;"></div>
+                    <div class="question-item"><span class="question-num">27</span> Prop 2: <input type="text" class="question-input" data-q="27" style="width: 40px;"></div>
+                    <div class="question-item"><span class="question-num">28</span> Prop 3: <input type="text" class="question-input" data-q="28" style="width: 40px;"></div>
+                    <div class="question-item"><span class="question-num">29</span> Prop 4: <input type="text" class="question-input" data-q="29" style="width: 40px;"></div>
+                    <div class="question-item"><span class="question-num">30</span> Prop 5: <input type="text" class="question-input" data-q="30" style="width: 40px;"></div>
+                    <div style="font-size: 0.9rem; color: #6b7280; margin-top: 10px;">
+                       A. lights | B. background | C. mirror | D. extra space | E. wooden screen | F. bike | G. large box | H. umbrella
+                    </div>
+                </div>
+            </div>
+
+            <!-- Part 4 -->
+            <div id="part4" class="part-container hidden">
+                <h2 class="part-title">Part 4</h2>
+                <div class="instructions">Questions 31–40: Write NO MORE THAN TWO WORDS AND/OR A NUMBER.</div>
+                <div class="question-group">
+                    <h3>Exotic Pests</h3>
+                    <div class="question-item"><span class="question-num">31</span> First record of pest in: <input type="text" class="question-input" data-q="31"></div>
+                    <div class="question-item"><span class="question-num">32</span> Causes major damage to: <input type="text" class="question-input" data-q="32"> crops.</div>
+                    <div class="question-item"><span class="question-num">33</span> Transported internationally on: <input type="text" class="question-input" data-q="33"></div>
+                    <div class="question-item"><span class="question-num">34</span> The distribution is affected by the: <input type="text" class="question-input" data-q="34"></div>
+                    <div class="question-item"><span class="question-num">35</span> Larvae are typically found in the: <input type="text" class="question-input" data-q="35"></div>
+                    <div class="question-item"><span class="question-num">36</span> Main food source is high in: <input type="text" class="question-input" data-q="36"></div>
+                    <div class="question-item"><span class="question-num">37</span> Pests are spread naturally by the: <input type="text" class="question-input" data-q="37"></div>
+                    <div class="question-item"><span class="question-num">38</span> Small numbers are carried on: <input type="text" class="question-input" data-q="38"></div>
+                    <div class="question-item"><span class="question-num">39</span> Survival rate is low if the <input type="text" class="question-input" data-q="39"> is high.</div>
+                    <div class="question-item"><span class="question-num">40</span> Historically, these were often kept as: <input type="text" class="question-input" data-q="40"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-footer">
+            <button class="nav-btn active" onclick="showPart(1)">Part 1</button>
+            <button class="nav-btn" onclick="showPart(2)">Part 2</button>
+            <button class="nav-btn" onclick="showPart(3)">Part 3</button>
+            <button class="nav-btn" onclick="showPart(4)">Part 4</button>
+            <button class="nav-btn submit-btn" onclick="submitTest()">Submit Test</button>
+        </div>
+    </div>
+
+    <script>
+        const correctAnswers = {
+            1: "17th August", 2: "16", 3: "27km", 4: "swimming pool", 5: "644",
+            6: "dinner", 7: "backpack / rucksack", 8: "cyclestore", 9: "itinerary", 10: "castle",
+            11: "B", 12: "A", 13: "C", 14: "B", 15: "F", 16: "A", 17: "E", 18: "G", 19: "C", 20: "H",
+            21: "E", 22: "F", 23: "A", 24: "I", 25: "G", 26: "C", 27: "E", 28: "F", 29: "A", 30: "G",
+            31: "1920s", 32: "fruit", 33: "ships", 34: "climate", 35: "soil", 36: "sugar", 37: "wind", 38: "boats", 39: "temperature", 40: "pets"
+        };
+
+        function showPart(num) {
+            document.querySelectorAll('.part-container').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`part${num}`).classList.remove('hidden');
+            document.querySelectorAll('.nav-btn').forEach((btn, i) => {
+                if(i < 4) btn.classList.toggle('active', i === num - 1);
+            });
+            window.scrollTo(0, 0);
+        }
+
+        function calculateBandScore(score) {
+            if (score >= 39) return 9.0;
+            if (score >= 37) return 8.5;
+            if (score >= 35) return 8.0;
+            if (score >= 32) return 7.5;
+            if (score >= 30) return 7.0;
+            if (score >= 26) return 6.5;
+            if (score >= 23) return 6.0;
+            if (score >= 18) return 5.5;
+            if (score >= 15) return 5.0;
+            if (score >= 12) return 4.5;
+            if (score >= 10) return 4.0;
+            return 3.5;
+        }
+
+        function submitTest() {
+            let score = 0;
+            const userAnswers = {};
+            
+            for (let i = 1; i <= 40; i++) {
+                let userVal = "";
+                if ([11, 12, 13, 14].includes(i)) {
+                    const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                    userVal = selected ? selected.value : "";
+                } else {
+                    const input = document.querySelector(`input[data-q="${i}"]`);
+                    userVal = input ? input.value.trim() : "";
+                }
+                
+                userAnswers[i] = userVal;
+                
+                // Flexible comparison
+                const correctStr = correctAnswers[i].toLowerCase();
+                const userStr = userVal.toLowerCase();
+                
+                if (userStr === correctStr || (correctStr.includes('/') && correctStr.split('/').map(s => s.trim()).includes(userStr))) {
+                    if (userStr !== "") score++;
+                }
+            }
+
+            const band = calculateBandScore(score);
+            
+            // Send back to parent
+            window.parent.postMessage({
+                type: 'LISTENING_RESULTS',
+                result: {
+                    score: score,
+                    totalQuestions: 40,
+                    band: band,
+                    answers: userAnswers,
+                    correctAnswers: correctAnswers,
+                    timestamp: new Date().toISOString()
+                }
+            }, '*');
+
+            alert(`Test submitted! Your score: ${score}/40 (Band: ${band})`);
+        }
+
+        // Timer
+        let timeLeft = 30 * 60;
+        setInterval(() => {
+            if (timeLeft > 0) {
+                timeLeft--;
+                const mins = Math.floor(timeLeft / 60);
+                const secs = timeLeft % 60;
+                document.getElementById('timer').textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            } else {
+                submitTest();
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
