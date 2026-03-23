@@ -1,8 +1,63 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <style id="shohrux-dark-mode">
+        body, .container, .main-content, .loading-screen, .start-screen, .header, .footer, 
+        .main-container, .left-panel, .right-panel, .nav-row, .progress-container,
+        .passage-container, .questions-container, .test-container, .question-group {
+            background-color: #0f172a !important;
+            color: #f1f5f9 !important;
+        }
+        .question, .question-content, .passage-content, .passage-box, 
+        .task-description, .part-header, .test-info, .question-section, .task-prompt, .options, .option {
+            background-color: #1e293b !important;
+            color: #f1f5f9 !important;
+            border-color: #334155 !important;
+        }
+        table, th, td {
+            background-color: #1e293b !important;
+            color: #f1f5f9 !important;
+            border-color: #334155 !important;
+        }
+        th { background-color: #334155 !important; }
+        input[type="text"], input[type="radio"], select, textarea, .writing-textarea, .input-field {
+            background-color: #334155 !important;
+            color: #fff !important;
+            border-color: #475569 !important;
+        }
+        .option:hover, .btn:not(.btn-primary):not(.btn-submit):not(.start-button):not(.more-tests-button):hover {
+            background-color: #334155 !important;
+        }
+        .timer, .timer-container {
+            background-color: #451a1a !important;
+            color: #fca5a5 !important;
+            border-color: #7f1d1d !important;
+        }
+        .logo-area, .more-tests-button {
+            background-color: #3b82f6 !important;
+        }
+        .progress-item {
+            background-color: #334155 !important;
+            color: #94a3b8 !important;
+            border-color: #475569 !important;
+        }
+        .progress-item.current { background-color: #3b82f6 !important; color: #fff !important; }
+        .progress-item.answered { background-color: #10b981 !important; color: #fff !important; }
+        .resizer { background-color: #334155 !important; border-color: #475569 !important; }
+        h1, h2, h3, .section-title, .loading-title, .start-title, .passage-info, .brand {
+            color: #60a5fa !important;
+        }
+        .loading-subtitle, .start-description, .word-count {
+            color: #94a3b8 !important;
+        }
+        .timer-icon, .brand-icon { filter: brightness(0.8) invert(1); }
+        .watermark-layer {
+            color: rgba(255, 255, 255, 0.05) !important;
+        }
+    </style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CDI IELTS Listening Test Simulation</title>
     <style>
@@ -642,7 +697,7 @@
             </div>
             <!-- Questions Section -->
             <div class="questions-section">
-                <h2 class="questions-title" id="questionsTitle">Questions 1–10</h2>
+                <h2 class="questions-title" id="questionsTitle">Questions 1вЂ“10</h2>
                 <p class="questions-description selectable-text" id="questionsDescription">Complete the table below.
                     Write ONE WORD AND/OR A NUMBER for each answer.</p>
 
@@ -651,22 +706,22 @@
                     <h3 class="scenario-title selectable-text">The London Relocation Services</h3>
                     <div class="question-group">
                         <div class="question-item">
-                            <span class="selectable-text">Customer’s name: Anna Woods</span>
+                            <span class="selectable-text">CustomerвЂ™s name: Anna Woods</span>
                         </div>
                         <div class="question-item">
-                            <span class="selectable-text">Customer’s personal details</span>
+                            <span class="selectable-text">CustomerвЂ™s personal details</span>
                         </div>
                         <div class="question-item">
-                            <span class="selectable-text">• Customer address: 118 </span>
+                            <span class="selectable-text">вЂў Customer address: 118 </span>
                             <input type="text" class="question-input" id="q1" onchange="saveAnswer(1, this.value)"
                                 placeholder="1">
                             <span class="selectable-text"> Park, Ballysillan</span>
                         </div>
                         <div class="question-item">
-                            <span class="selectable-text">• Postcode: BT14 9BJ</span>
+                            <span class="selectable-text">вЂў Postcode: BT14 9BJ</span>
                         </div>
                         <div class="question-item">
-                            <span class="selectable-text">• Phone no: </span>
+                            <span class="selectable-text">вЂў Phone no: </span>
                             <input type="text" class="question-input" id="q2" onchange="saveAnswer(2, this.value)"
                                 placeholder="2">
                             <span class="selectable-text"> (mobile)</span>
@@ -675,12 +730,12 @@
                             <span class="selectable-text">Other information</span>
                         </div>
                         <div class="question-item">
-                            <span class="selectable-text">• Anna is hoping to find work as a </span>
+                            <span class="selectable-text">вЂў Anna is hoping to find work as a </span>
                             <input type="text" class="question-input" id="q3" onchange="saveAnswer(3, this.value)"
                                 placeholder="3">
                         </div>
                         <div class="question-item">
-                            <span class="selectable-text">• She needs to find a </span>
+                            <span class="selectable-text">вЂў She needs to find a </span>
                             <input type="text" class="question-input" id="q4" onchange="saveAnswer(4, this.value)"
                                 placeholder="4">
                             <span class="selectable-text"> school for her son.</span>
@@ -692,18 +747,18 @@
                             <span class="selectable-text">Location:</span>
                         </div>
                         <div class="question-item">
-                            <span class="selectable-text">• Her preferred location is in the </span>
+                            <span class="selectable-text">вЂў Her preferred location is in the </span>
                             <input type="text" class="question-input" id="q5" onchange="saveAnswer(5, this.value)"
                                 placeholder="5">
                             <span class="selectable-text"> of the city.</span>
                         </div>
                         <div class="question-item">
-                            <span class="selectable-text">• Her husband would like to be near a </span>
+                            <span class="selectable-text">вЂў Her husband would like to be near a </span>
                             <input type="text" class="question-input" id="q6" onchange="saveAnswer(6, this.value)"
                                 placeholder="6">
                         </div>
                         <div class="question-item">
-                            <span class="selectable-text">• Her son would prefer to be close to a </span>
+                            <span class="selectable-text">вЂў Her son would prefer to be close to a </span>
                             <input type="text" class="question-input" id="q7" onchange="saveAnswer(7, this.value)"
                                 placeholder="7">
                         </div>
@@ -711,18 +766,18 @@
                             <span class="selectable-text">Property details:</span>
                         </div>
                         <div class="question-item">
-                            <span class="selectable-text">• She would like to live in a </span>
+                            <span class="selectable-text">вЂў She would like to live in a </span>
                             <input type="text" class="question-input" id="q8" onchange="saveAnswer(8, this.value)"
                                 placeholder="8">
                         </div>
                         <div class="question-item">
-                            <span class="selectable-text">• She would prefer </span>
+                            <span class="selectable-text">вЂў She would prefer </span>
                             <input type="text" class="question-input" id="q9" onchange="saveAnswer(9, this.value)"
                                 placeholder="9">
                             <span class="selectable-text"> bedrooms.</span>
                         </div>
                         <div class="question-item">
-                            <span class="selectable-text">• A small </span>
+                            <span class="selectable-text">вЂў A small </span>
                             <input type="text" class="question-input" id="q10" onchange="saveAnswer(10, this.value)"
                                 placeholder="10">
                             <span class="selectable-text"> is also desirable.</span>
@@ -734,7 +789,7 @@
                 <div id="part2Content" class="hidden">
                     <h3 class="scenario-title selectable-text">Starting work at Hollies supermarket</h3>
                     <div class="question-group">
-                        <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">Questions 11–14</h4>
+                        <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">Questions 11вЂ“14</h4>
                         <p class="selectable-text" style="margin-bottom: 16px;">Choose the correct letter, A, B, or C.
                         </p>
                         <div style="margin-bottom: 20px;">
@@ -821,9 +876,9 @@
                                 </div>
                             </div>
                         </div>
-                        <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">Questions 15–20</h4>
+                        <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">Questions 15вЂ“20</h4>
                         <p class="selectable-text" style="margin-bottom: 16px;">Label the plan below. Choose the correct
-                            letter, A–J, next to questions 15–20.</p>
+                            letter, AвЂ“J, next to questions 15вЂ“20.</p>
                         <div class="question-item">
                             <img src="https://i.ibb.co/nsdvnQFv/image.png" alt="Supermarket Plan"
                                 style="max-width: 100%; margin-bottom: 20px;">
@@ -866,10 +921,10 @@
                 <div id="part3Content" class="hidden">
                     <h3 class="scenario-title selectable-text">Picture Books for Children</h3>
                     <div class="question-group">
-                        <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">Questions 21–26</h4>
+                        <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">Questions 21вЂ“26</h4>
                         <p class="selectable-text" style="margin-bottom: 16px;">What reason do teachers give for using
-                            each of the following picture books with children? Choose SIX correct answers, A–I, next to
-                            questions 21–26.</p>
+                            each of the following picture books with children? Choose SIX correct answers, AвЂ“I, next to
+                            questions 21вЂ“26.</p>
                         <div class="matching-layout">
                             <div class="features-list">
                                 <div class="matching-title">Reasons:</div>
@@ -927,9 +982,9 @@
                                 </div>
                             </div>
                         </div>
-                        <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">Questions 27–28</h4>
+                        <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">Questions 27вЂ“28</h4>
                         <p class="selectable-text" style="margin-bottom: 16px;">Which TWO points from Smith's article
-                            about picture books did both speakers find surprising? Choose TWO letters, A–E.</p>
+                            about picture books did both speakers find surprising? Choose TWO letters, AвЂ“E.</p>
                         <div class="multiple-choice">
                             <div class="choice-item">
                                 <input type="checkbox" name="q27_28" value="A" class="choice-input"
@@ -957,9 +1012,9 @@
                                 <span class="selectable-text">E. the variety of versions</span>
                             </div>
                         </div>
-                        <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">Questions 29–30</h4>
+                        <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">Questions 29вЂ“30</h4>
                         <p class="selectable-text" style="margin-bottom: 16px;">Which TWO aspects of picture books do
-                            the speakers agree to talk about in their presentation? Choose TWO letters, A–E.</p>
+                            the speakers agree to talk about in their presentation? Choose TWO letters, AвЂ“E.</p>
                         <div class="multiple-choice">
                             <div class="choice-item">
                                 <input type="checkbox" name="q29_30" value="A" class="choice-input"
@@ -992,22 +1047,22 @@
 
                 <!-- Part 4 Content -->
                 <div id="part4Content" class="hidden">
-                    <h3 class="scenario-title selectable-text">Geography – 331 Field Trip</h3>
+                    <h3 class="scenario-title selectable-text">Geography вЂ“ 331 Field Trip</h3>
                     <div class="question-group">
-                        <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">Questions 31–40</h4>
+                        <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">Questions 31вЂ“40</h4>
                         <p class="selectable-text" style="margin-bottom: 16px;">Complete the notes below. Write ONE WORD
                             ONLY for each answer.</p>
                         <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">The James Bay Road
                         </h4>
                         <div class="question-item">
-                            <span class="selectable-text">• At the starting point of the road, everyone must stop for
+                            <span class="selectable-text">вЂў At the starting point of the road, everyone must stop for
                             </span>
                             <input type="text" class="question-input" id="q31" onchange="saveAnswer(31, this.value)"
                                 placeholder="31">
                             <span class="selectable-text"> .</span>
                         </div>
                         <div class="question-item">
-                            <span class="selectable-text">• For safety reasons, there are </span>
+                            <span class="selectable-text">вЂў For safety reasons, there are </span>
                             <input type="text" class="question-input" id="q32" onchange="saveAnswer(32, this.value)"
                                 placeholder="32">
                             <span class="selectable-text"> on the highway.</span>
@@ -1015,23 +1070,23 @@
                         <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">Radisson Research
                             Centre</h4>
                         <div class="question-item">
-                            <span class="selectable-text">• The Centre works with other institutes to research the
+                            <span class="selectable-text">вЂў The Centre works with other institutes to research the
                                 region's </span>
                             <input type="text" class="question-input" id="q33" onchange="saveAnswer(33, this.value)"
                                 placeholder="33">
                             <span class="selectable-text"> .</span>
                         </div>
                         <div class="question-item">
-                            <span class="selectable-text">• Security is the responsibility of Hydro Quebec.</span>
+                            <span class="selectable-text">вЂў Security is the responsibility of Hydro Quebec.</span>
                         </div>
                         <div class="question-item">
-                            <span class="selectable-text">• Lectures will discuss the effect of </span>
+                            <span class="selectable-text">вЂў Lectures will discuss the effect of </span>
                             <input type="text" class="question-input" id="q34" onchange="saveAnswer(34, this.value)"
                                 placeholder="34">
                             <span class="selectable-text"> on the land.</span>
                         </div>
                         <div class="question-item">
-                            <span class="selectable-text">• Outpost stations gather and publish research related to
+                            <span class="selectable-text">вЂў Outpost stations gather and publish research related to
                                 variations in the </span>
                             <input type="text" class="question-input" id="q35" onchange="saveAnswer(35, this.value)"
                                 placeholder="35">
@@ -1040,40 +1095,40 @@
                         <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">The Trans-Taiga Road
                         </h4>
                         <div class="question-item">
-                            <span class="selectable-text">• The road is unpaved.</span>
+                            <span class="selectable-text">вЂў The road is unpaved.</span>
                         </div>
                         <div class="question-item">
-                            <span class="selectable-text">• Breakdowns are serious as car </span>
+                            <span class="selectable-text">вЂў Breakdowns are serious as car </span>
                             <input type="text" class="question-input" id="q36" onchange="saveAnswer(36, this.value)"
                                 placeholder="36">
                             <span class="selectable-text"> are expensive.</span>
                         </div>
                         <div class="question-item">
-                            <span class="selectable-text">• At hydro stations, engineers will discuss hydro production
+                            <span class="selectable-text">вЂў At hydro stations, engineers will discuss hydro production
                                 and the impact of rainfall.</span>
                         </div>
                         <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">The Taiga</h4>
                         <div class="question-item">
-                            <span class="selectable-text">• There are not many types of </span>
+                            <span class="selectable-text">вЂў There are not many types of </span>
                             <input type="text" class="question-input" id="q37" onchange="saveAnswer(37, this.value)"
                                 placeholder="37">
                             <span class="selectable-text"> , but a good range of wildlife.</span>
                         </div>
                         <div class="question-item">
-                            <span class="selectable-text">• The area known as Muskeg is dangerous as it has hidden
+                            <span class="selectable-text">вЂў The area known as Muskeg is dangerous as it has hidden
                             </span>
                             <input type="text" class="question-input" id="q38" onchange="saveAnswer(38, this.value)"
                                 placeholder="38">
                             <span class="selectable-text"> .</span>
                         </div>
                         <div class="question-item">
-                            <span class="selectable-text">• Photographs of birds should be taken for future </span>
+                            <span class="selectable-text">вЂў Photographs of birds should be taken for future </span>
                             <input type="text" class="question-input" id="q39" onchange="saveAnswer(39, this.value)"
                                 placeholder="39">
                             <span class="selectable-text"> .</span>
                         </div>
                         <div class="question-item">
-                            <span class="selectable-text">• Water samples will be checked for </span>
+                            <span class="selectable-text">вЂў Water samples will be checked for </span>
                             <input type="text" class="question-input" id="q40" onchange="saveAnswer(40, this.value)"
                                 placeholder="40">
                             <span class="selectable-text"> .</span>
@@ -1243,10 +1298,10 @@
 
             // Test Section Data
             const testData = [
-                { title: "PART 1", instructions: "Questions 1-10", description: "Complete the table below. Write ONE WORD AND/OR A NUMBER for each answer.", questionRange: "1–10" },
-                { title: "PART 2", instructions: "Questions 11-20", description: "Starting work at Hollies supermarket", questionRange: "11–20" },
-                { title: "PART 3", instructions: "Questions 21-30", description: "Picture Books for Children", questionRange: "21–30" },
-                { title: "PART 4", instructions: "Questions 31-40", description: "Geography – 331 Field Trip", questionRange: "31–40" }
+                { title: "PART 1", instructions: "Questions 1-10", description: "Complete the table below. Write ONE WORD AND/OR A NUMBER for each answer.", questionRange: "1вЂ“10" },
+                { title: "PART 2", instructions: "Questions 11-20", description: "Starting work at Hollies supermarket", questionRange: "11вЂ“20" },
+                { title: "PART 3", instructions: "Questions 21-30", description: "Picture Books for Children", questionRange: "21вЂ“30" },
+                { title: "PART 4", instructions: "Questions 31-40", description: "Geography вЂ“ 331 Field Trip", questionRange: "31вЂ“40" }
             ];
 
             // Initialize on load
@@ -1370,7 +1425,7 @@
                     let userAnswer = (answers[i] || '').trim();
                     let correctAnswer = correctAnswers[i];
 
-                    // Handle multiple-choice questions 27–28, 29–30
+                    // Handle multiple-choice questions 27вЂ“28, 29вЂ“30
                     if (i === 27 || i === 28 || i === 29 || i === 30) {
                         const qGroup = i <= 28 ? [27, 28] : [29, 30];
                         const groupName = i <= 28 ? 'q27_28' : 'q29_30';
@@ -1424,7 +1479,7 @@
                     let correctAnswer = Array.isArray(correctAnswers[i]) ? correctAnswers[i].join(', ') : correctAnswers[i] || 'Unknown';
                     let isCorrect = false;
 
-                    // Handle multiple-choice questions 11–14, 27–28, 29–30
+                    // Handle multiple-choice questions 11вЂ“14, 27вЂ“28, 29вЂ“30
                     if ((i >= 11 && i <= 14) || (i >= 27 && i <= 30)) {
                         if (i >= 11 && i <= 14) {
                             const selected = document.querySelector(`input[name="q${i}"]:checked`);
@@ -1441,8 +1496,8 @@
                                 feedback.style.backgroundColor = isCorrect ? '#d4edda' : '#f8d7da';
                                 feedback.style.color = isCorrect ? '#155724' : '#721c24';
                                 feedback.innerHTML = isCorrect
-                                    ? `<strong>✓ Correct!</strong> You chose: <em>${userAnswer}</em>`
-                                    : `<strong>✗ Incorrect.</strong> You chose: <em>${userAnswer}</em><br><strong>Correct:</strong> <em>${correctAnswer}</em>`;
+                                    ? `<strong>вњ“ Correct!</strong> You chose: <em>${userAnswer}</em>`
+                                    : `<strong>вњ— Incorrect.</strong> You chose: <em>${userAnswer}</em><br><strong>Correct:</strong> <em>${correctAnswer}</em>`;
                                 container.appendChild(feedback);
                             }
                         } else {
@@ -1464,14 +1519,14 @@
                                 feedback.style.backgroundColor = isCorrect ? '#d4edda' : '#f8d7da';
                                 feedback.style.color = isCorrect ? '#155724' : '#721c24';
                                 feedback.innerHTML = isCorrect
-                                    ? `<strong>✓ Correct${selected.length === 2 && selected.includes(correct[0]) && selected.includes(correct[1]) ? ' (Both)' : ' (At least one)'}</strong> You chose: <em>${userAnswer}</em>`
-                                    : `<strong>✗ Incorrect.</strong> You chose: <em>${userAnswer}</em><br><strong>Correct:</strong> <em>${correctAnswer}</em>`;
+                                    ? `<strong>вњ“ Correct${selected.length === 2 && selected.includes(correct[0]) && selected.includes(correct[1]) ? ' (Both)' : ' (At least one)'}</strong> You chose: <em>${userAnswer}</em>`
+                                    : `<strong>вњ— Incorrect.</strong> You chose: <em>${userAnswer}</em><br><strong>Correct:</strong> <em>${correctAnswer}</em>`;
                                 container.appendChild(feedback);
                             }
                             continue;
                         }
                     }
-                    // Handle text input questions (1–10, 15–26, 31–40)
+                    // Handle text input questions (1вЂ“10, 15вЂ“26, 31вЂ“40)
                     else {
                         const input = document.getElementById(`q${i}`);
                         if (input) {
@@ -1487,8 +1542,8 @@
                             feedback.style.backgroundColor = isCorrect ? '#d4edda' : '#f8d7da';
                             feedback.style.color = isCorrect ? '#155724' : '#721c24';
                             feedback.innerHTML = isCorrect
-                                ? `<strong>✓ Correct!</strong> You chose: <em>${userAnswer}</em>`
-                                : `<strong>✗ Incorrect.</strong> You chose: <em>${userAnswer}</em><br><strong>Correct:</strong> <em>${correctAnswer}</em>`;
+                                ? `<strong>вњ“ Correct!</strong> You chose: <em>${userAnswer}</em>`
+                                : `<strong>вњ— Incorrect.</strong> You chose: <em>${userAnswer}</em><br><strong>Correct:</strong> <em>${correctAnswer}</em>`;
                             container.appendChild(feedback);
                         }
                     }

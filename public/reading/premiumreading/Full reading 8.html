@@ -1,4 +1,4 @@
-
+﻿
 
 
 
@@ -32,6 +32,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <style id="shohrux-dark-mode">
+        body, .container, .main-content, .loading-screen, .start-screen, .header, .footer, 
+        .main-container, .left-panel, .right-panel, .nav-row, .progress-container,
+        .passage-container, .questions-container, .test-container, .question-group {
+            background-color: #0f172a !important;
+            color: #f1f5f9 !important;
+        }
+        .question, .question-content, .passage-content, .passage-box, 
+        .task-description, .part-header, .test-info, .question-section, .task-prompt, .options, .option {
+            background-color: #1e293b !important;
+            color: #f1f5f9 !important;
+            border-color: #334155 !important;
+        }
+        table, th, td {
+            background-color: #1e293b !important;
+            color: #f1f5f9 !important;
+            border-color: #334155 !important;
+        }
+        th { background-color: #334155 !important; }
+        input[type="text"], input[type="radio"], select, textarea, .writing-textarea, .input-field {
+            background-color: #334155 !important;
+            color: #fff !important;
+            border-color: #475569 !important;
+        }
+        .option:hover, .btn:not(.btn-primary):not(.btn-submit):not(.start-button):not(.more-tests-button):hover {
+            background-color: #334155 !important;
+        }
+        .timer, .timer-container {
+            background-color: #451a1a !important;
+            color: #fca5a5 !important;
+            border-color: #7f1d1d !important;
+        }
+        .logo-area, .more-tests-button {
+            background-color: #3b82f6 !important;
+        }
+        .progress-item {
+            background-color: #334155 !important;
+            color: #94a3b8 !important;
+            border-color: #475569 !important;
+        }
+        .progress-item.current { background-color: #3b82f6 !important; color: #fff !important; }
+        .progress-item.answered { background-color: #10b981 !important; color: #fff !important; }
+        .resizer { background-color: #334155 !important; border-color: #475569 !important; }
+        h1, h2, h3, .section-title, .loading-title, .start-title, .passage-info, .brand {
+            color: #60a5fa !important;
+        }
+        .loading-subtitle, .start-description, .word-count {
+            color: #94a3b8 !important;
+        }
+        .timer-icon, .brand-icon { filter: brightness(0.8) invert(1); }
+        .watermark-layer {
+            color: rgba(255, 255, 255, 0.05) !important;
+        }
+    </style>
     <style>
         * {
             margin: 0;
@@ -781,7 +835,7 @@
 
                 <p>During the journey from our hunter-gatherer ancestors to the present day there have been three seismic changes that have had an impact on the food we eat: the discovery of cooking, the emergence of agriculture and the invention of methods of preserving food.</p>
 
-                <p>The 19th-century scientist Charles Darwin thought that cooking, after language, was the greatest discovery made by man. All of us eat some raw food, for instance fruit and vegetables, but the great majority of food we eat is cooked. Cooking can turn plants that are inedible into edible food by destroying toxic chemicals that plants often manufacture to protect themselves against attack by insects or other herbivorous animals. These toxic chemicals are referred to as ‘plant secondary compounds’, because they are not directly involved in the plant’s normal growth, development and reproduction, and are produced purely as chemical defences. They give many of the plants we consume, such as coffee or brussels sprouts. their bitter taste.</p>
+                <p>The 19th-century scientist Charles Darwin thought that cooking, after language, was the greatest discovery made by man. All of us eat some raw food, for instance fruit and vegetables, but the great majority of food we eat is cooked. Cooking can turn plants that are inedible into edible food by destroying toxic chemicals that plants often manufacture to protect themselves against attack by insects or other herbivorous animals. These toxic chemicals are referred to as вЂplant secondary compoundsвЂ™, because they are not directly involved in the plantвЂ™s normal growth, development and reproduction, and are produced purely as chemical defences. They give many of the plants we consume, such as coffee or brussels sprouts. their bitter taste.</p>
 
                 <p>Cooked food is often more digestible, because heat breaks down tough cellulose cell walls in plants or tough connective tissue in animals. Chewing raw turnip, a plate of uncooked rice, or a raw leg of lamb is much harder work than eating the cooked equivalent. The energy expended in chewing to break down the tough material is replaced by energy from the fuel that is used in cooking the food, so the ratio of energy gained to energy expended by the body is greater when food is cooked.</p>
 
@@ -789,7 +843,7 @@
 
                 <p>The arrival of agriculture meant that, for the first time, our ancestors had more food than they could eat immediately. This, combined with the seasonality of production, led them to discover methods of preserving food: smoking, drying, adding acid by fermentation or adding salt. These four methods all share one feature in common: they make the food a more hostile environment for bacteria that can cause it to spoil. They also tend to slow down any natural chemical reactions in the food that would cause decay.</p>
 
-                <p>Although foods today are still preserved in the ancient ways. two more recent methods of preserving food have become more common: canning and freezing. Canning was invented by a Frenchman, Nicholas Appert, in the early-19th century. He sealed food in bottles fabricated from glass and then heated them in boiling water to cook the contents. Appert’s method had great advantages over older methods of food preservation: it could be applied to a wide range of foods, and the flavour of the food as well as the texture were similar to the freshly cooked product. His idea was soon copied be Englishman, Peter Durand. Until this point containers had weighed too much to be widely used, but he produced the first ones which were light andresistant to damage. Two years later, in 1812, two Englishmen, Bryan Donkin and John Hall, started the commercial canning of food, although the real take-off in popularity of canning had to wait until the can opener was invented in 1855. Up to this time, cans were opened with a chisel which was used to break open the top when hit with a hammer. Canning is an extremely effective way of preserving food: one can which contained meat dating from 1824 was opened in 1939 and the contents were still in good condition.</p>
+                <p>Although foods today are still preserved in the ancient ways. two more recent methods of preserving food have become more common: canning and freezing. Canning was invented by a Frenchman, Nicholas Appert, in the early-19th century. He sealed food in bottles fabricated from glass and then heated them in boiling water to cook the contents. AppertвЂ™s method had great advantages over older methods of food preservation: it could be applied to a wide range of foods, and the flavour of the food as well as the texture were similar to the freshly cooked product. His idea was soon copied be Englishman, Peter Durand. Until this point containers had weighed too much to be widely used, but he produced the first ones which were light andresistant to damage. Two years later, in 1812, two Englishmen, Bryan Donkin and John Hall, started the commercial canning of food, although the real take-off in popularity of canning had to wait until the can opener was invented in 1855. Up to this time, cans were opened with a chisel which was used to break open the top when hit with a hammer. Canning is an extremely effective way of preserving food: one can which contained meat dating from 1824 was opened in 1939 and the contents were still in good condition.</p>
 
                 <p>In the 21st century, the dominance of canning as a method of food preservation has been overtaken by another technology: freezing. Chilling food to keep it fresh is an old idea. The earliest mentions of icehouses, thick-walled buildings, half underground, date back to 1,700BC in northwest Iran. In early 16th-century Italy, water was mixed with chemicals to lower its freezing point to -18 degrees Celsius, and several centuries later frozen fish and other goods were transported by ship from Australia to England. But the modern frozen food industry was started in the 1920s by an American, Clarence Birdseye. While Birdseye was on a fishing trip with the Inuit in the Canadian Arctic, he observed that very rapid freezing creates smaller ice crystals and therefore causes less damage to food. This was something he had not expected. Nevertheless, the big growth in demand for frozen food came about with the arrival of freezers in the homes of ordinary people. The advantages of frozen over canned food include the fact that the flavour and consistency are often identical to the equivalent fresh product, and that freezing can be used to preserve a huge variety of foods.</p>
             </div>
@@ -798,10 +852,10 @@
 
         <!-- Questions for Passage 1 -->
         <div class="questions-container" id="p1_questionsPanel" role="region" aria-label="Questions">
-            <h2 class="section-title">Questions 1–13</h2>
+            <h2 class="section-title">Questions 1вЂ“13</h2>
 
             <div class="question-group">
-                <div class="question-group-title">Questions 1–5</div>
+                <div class="question-group-title">Questions 1вЂ“5</div>
                 <p>Do the following statements agree with the information given in Reading Passage 1?</p>
                 <p>In boxes 1-5 on your answer sheet, write</p>
                 <p>TRUE if the statement agrees with the information</p>
@@ -825,35 +879,35 @@
                     <div class="options"><label><input type="radio" name="q4" value="TRUE">TRUE</label><label><input type="radio" name="q4" value="FALSE">FALSE</label><label><input type="radio" name="q4" value="NOT GIVEN">NOT GIVEN</label></div>
                 </div>
                 <div class="question" data-question="5">
-                    <div class="question-text">5 Birdseye’s trip with the Inuit confirmed what he already believed about rapid freezing.</div>
+                    <div class="question-text">5 BirdseyeвЂ™s trip with the Inuit confirmed what he already believed about rapid freezing.</div>
                     <div class="options"><label><input type="radio" name="q5" value="TRUE">TRUE</label><label><input type="radio" name="q5" value="FALSE">FALSE</label><label><input type="radio" name="q5" value="NOT GIVEN">NOT GIVEN</label></div>
                 </div>
             </div>
 
             <div class="question-group">
-                <div class="question-group-title">Questions 6–13</div>
+                <div class="question-group-title">Questions 6вЂ“13</div>
                 <p>Complete the notes below.</p>
                 <p>Choose ONE WORD ONLY from the passage for each answer.</p>
                 <p>Write your answers in boxes 6-13 on your answer sheet.</p>
 
                 <div class="question" data-question="6">
                     <div class="question-text">The changes agriculture brought about were:</div>
-                    <div class="question-text">• the development of equipment and larger <input type="text" name="q6" maxlength="30"> populations</div>
+                    <div class="question-text">вЂў the development of equipment and larger <input type="text" name="q6" maxlength="30"> populations</div>
                 </div>
                 <div class="question" data-question="7">
-                    <div class="question-text">• the ability to keep <input type="text" name="q7" maxlength="30"> as writing developed</div>
+                    <div class="question-text">вЂў the ability to keep <input type="text" name="q7" maxlength="30"> as writing developed</div>
                 </div>
                 <div class="question" data-question="8">
-                    <div class="question-text">• the setting up of organised government</div>
+                    <div class="question-text">вЂў the setting up of organised government</div>
                     <div class="question-text">Food preservation</div>
-                    <div class="question-text">• early methods of food preservation included: smoking, drying and combining food with acid or <input type="text" name="q8" maxlength="30"></div>
+                    <div class="question-text">вЂў early methods of food preservation included: smoking, drying and combining food with acid or <input type="text" name="q8" maxlength="30"></div>
                 </div>
                 <div class="question" data-question="9">
-                    <div class="question-text">• canning</div>
+                    <div class="question-text">вЂў canning</div>
                     <div class="question-text">- Nicholas Appert put food into containers made of <input type="text" name="q9" maxlength="30"></div>
                 </div>
                 <div class="question" data-question="10">
-                    <div class="question-text">- Appert’s method resulted in preserved food that had the same taste and <input type="text" name="q10" maxlength="30"> as fresh food</div>
+                    <div class="question-text">- AppertвЂ™s method resulted in preserved food that had the same taste and <input type="text" name="q10" maxlength="30"> as fresh food</div>
                 </div>
                 <div class="question" data-question="11">
                     <div class="question-text">- Peter Durand introduced cans which had the advantage of being <input type="text" name="q11" maxlength="30"> and hard to break</div>
@@ -872,34 +926,34 @@
             <h2 class="section-title">READING PASSAGE 2</h2>
             <div class="passage-content" id="passage2">
                 <h3>Photovoltaics</h3>
-                <p>Residential use of photovoltaics – by day excess power is sent to the grid, and by night power is supplied to the home.</p>
+                <p>Residential use of photovoltaics вЂ“ by day excess power is sent to the grid, and by night power is supplied to the home.</p>
 
-                <p><strong>A</strong> In the past, urban home owners have not always had much choice in the way electricity is supplied to their homes. Now, however, there is a choice, and a rapidly increasing number of households worldwide are choosing the solar energy option. Solar energy, the conversion of sunlight into energy, is made possible through the use of ‘photovoltaics’, which are simple appliances that fit onto the roof of a house.</p>
+                <p><strong>A</strong> In the past, urban home owners have not always had much choice in the way electricity is supplied to their homes. Now, however, there is a choice, and a rapidly increasing number of households worldwide are choosing the solar energy option. Solar energy, the conversion of sunlight into energy, is made possible through the use of вЂphotovoltaicsвЂ™, which are simple appliances that fit onto the roof of a house.</p>
 
                 <p><strong>B</strong> The photovoltaic-powered home remains connected to the power lines, but no storage is required on-site, only a box of electronics (the inverter) to interface between the photovoltaics and the grid network. Figure 1 illustrates the system. During the day, when the home may not be using much electricity, excess power from the solar array is fed back to the grid, to factories offices that need daytime power. At night, power flows the opposite way. The grid network effectively provides storage. If the demand for electricity is well matched to when the sun shines, solar energy is especially valuable. This occurs in places like California in the US and Japan, where air-conditioning loads for offices and factories are large but heating loads for the home are small.</p>
 
-                <p><strong>C</strong> The first systematic exploration of the use of photovoltaics on homes began in the US during the 1970s, a well-conceived program started with the siting of a number of ‘residential experiment stations’ at selected locations around the country, representing different climatic zones. These stations contained a number of ‘dummy’ houses, each with a different solar-energy system design. Homes within the communities close to these stations were monitored to see how well their energy use matched the energy generated by the stations’ dummy roofs. A change in US government priorities in the early 1980s halted this program.</p>
+                <p><strong>C</strong> The first systematic exploration of the use of photovoltaics on homes began in the US during the 1970s, a well-conceived program started with the siting of a number of вЂresidential experiment stationsвЂ™ at selected locations around the country, representing different climatic zones. These stations contained a number of вЂdummyвЂ™ houses, each with a different solar-energy system design. Homes within the communities close to these stations were monitored to see how well their energy use matched the energy generated by the stationsвЂ™ dummy roofs. A change in US government priorities in the early 1980s halted this program.</p>
 
-                <p><strong>D</strong> with the US effort dropping away, the Japanese Sunshine Project came to the fore. A large residential test station was installed on Rokko Island beginning in 1986. This installation consists of 18 ‘dummy’ house, each equipped with its own 2-5 kilowatt photovoltaic system (about 20-50 square metres for each system). For the other systems, electronics simulate these household loads. This test station has allowed the technical issues involved in using photovoltaics within the electricity network to be explored in a systematic way, under well-controlled test conditions. With no insurmountable problems identified, the Japanese have used the experience gained from this station to begin their own massive residential photovoltaics campaign.</p>
+                <p><strong>D</strong> with the US effort dropping away, the Japanese Sunshine Project came to the fore. A large residential test station was installed on Rokko Island beginning in 1986. This installation consists of 18 вЂdummyвЂ™ house, each equipped with its own 2-5 kilowatt photovoltaic system (about 20-50 square metres for each system). For the other systems, electronics simulate these household loads. This test station has allowed the technical issues involved in using photovoltaics within the electricity network to be explored in a systematic way, under well-controlled test conditions. With no insurmountable problems identified, the Japanese have used the experience gained from this station to begin their own massive residential photovoltaics campaign.</p>
 
-                <p><strong>E</strong> Meanwhile, Germany began a very important ‘1000 roof program’ in 1990, aimed at installing photovoltaics on the roofs of 1000 private homes. Large federal and regional government subsidies were involved, accounting in most cases for 70 per cent of the total system costs. The program proved immensely popular, forcing its extension to over 2000 homes scattered across Germany. The success of this program stimulated other European countries to launch similar programs.</p>
+                <p><strong>E</strong> Meanwhile, Germany began a very important вЂ1000 roof programвЂ™ in 1990, aimed at installing photovoltaics on the roofs of 1000 private homes. Large federal and regional government subsidies were involved, accounting in most cases for 70 per cent of the total system costs. The program proved immensely popular, forcing its extension to over 2000 homes scattered across Germany. The success of this program stimulated other European countries to launch similar programs.</p>
 
-                <p><strong>F</strong> Japan’s ‘one million roof program’ was prompted by the experience gained in the Rokko Island test site and success of the German 1000 roof program. The initially quoted aims of the Japanese New Energy Development Organisation were to have 70,000 homes equipped with photovoltaics by the year 2000, on the way to one million by 2020. The program made a modest start in 1994, when 539 systems were installed with a government subsidy of 50 per cent. Under this program, entire new suburban developments are using photovoltaics.</p>
+                <p><strong>F</strong> JapanвЂ™s вЂone million roof programвЂ™ was prompted by the experience gained in the Rokko Island test site and success of the German 1000 roof program. The initially quoted aims of the Japanese New Energy Development Organisation were to have 70,000 homes equipped with photovoltaics by the year 2000, on the way to one million by 2020. The program made a modest start in 1994, when 539 systems were installed with a government subsidy of 50 per cent. Under this program, entire new suburban developments are using photovoltaics.</p>
 
                 <p><strong>G</strong> The Japanese initiative in embracing residential photovoltaics on a large scale prompted responses in both Europe and the US. The European Commission has called for one million solar residential systems before the year 2010, with 500,000 in Europe and 500,000 in the developing world, to be subsidised by the Commission. In 1997, a similar one million roof target was announced in the US. Since then, several other countries including Germany, Italy, the Netherlands and Australia, have announced their own targets for residential photovoltaics.</p>
 
                 <p><strong>H</strong> This is good news, not only for the photovoltaic industry, but for everyone concerned with the environment. The use of fossil fuels to generate electricity is not only costly in financial terms, but also in terms of environmental damage. Gases produced by the burning of fossil fuels in the production of electricity are a major contributor to the greenhouse effect. To deal with this problem, many governments are now proposing stringent targets on the amount of greenhouse gas emissions permitted. These targets mean that all sources of greenhouse gas emissions, including residential electricity use, will receive closer attention in the future.</p>
 
-                <p><strong>I</strong> It is likely that, in the future, governments will develop building codes that attempt to constrain the energy demands of new housing. For example, the use of photovoltaics or the equivalent may be stipulated to lessen demands on the grid network and hence reduce fossil fuel emissions. Approvals for building renovations may also be conditional upon talking such energy-saving measures. If this were to happen, everyone would benefit. Although there is an initial cost in attaching the system to the rooftop, the householder’s outlay is soon compensated with the savings on energy bills. In addition, everyone living on the planet stands to gain from the more benign environmental impact.</p>
+                <p><strong>I</strong> It is likely that, in the future, governments will develop building codes that attempt to constrain the energy demands of new housing. For example, the use of photovoltaics or the equivalent may be stipulated to lessen demands on the grid network and hence reduce fossil fuel emissions. Approvals for building renovations may also be conditional upon talking such energy-saving measures. If this were to happen, everyone would benefit. Although there is an initial cost in attaching the system to the rooftop, the householderвЂ™s outlay is soon compensated with the savings on energy bills. In addition, everyone living on the planet stands to gain from the more benign environmental impact.</p>
             </div>
         </div>
         <div class="resizer"></div>
 
         <div class="questions-container hidden" id="p2_questionsPanel" role="region" aria-label="Questions">
-            <h2 class="section-title">Questions 14–26</h2>
+            <h2 class="section-title">Questions 14вЂ“26</h2>
 
             <div class="question-group">
-                <div class="question-group-title">Questions 14–19</div>
+                <div class="question-group-title">Questions 14вЂ“19</div>
                 <p>The text has nine paragraphs, A-I. Which paragraph contains the following information?</p>
                 <p>NB You may choose any paragraph more than once.</p>
 
@@ -996,7 +1050,7 @@
             </div>
 
             <div class="question-group">
-                <div class="question-group-title">Questions 20–26</div>
+                <div class="question-group-title">Questions 20вЂ“26</div>
                 <p>Do the following statements agree with the information given in the text?</p>
                 <p>In boxes 20-26 on your answer sheet, write</p>
                 <p>TRUE if the statement agrees with the information</p>
@@ -1041,19 +1095,19 @@
                 <h3>Crossing the Threshold</h3>
                 <p>The renovated Auckland Art Gallery in New Zealand unites old and new, creating an irresistible urge to step inside</p>
 
-                <p>Architects are finding it very difficult in today’s cultural landscape. The profession faces a three-way threat: a public that apparently doesn’t understand what architects do, developers who couldn’t care less what they do, and overbearing councils micromanaging every single aspect of what they do. According to sources within the architectural profession, the situation is much worse when architects work on municipal buildings, as architects FJMT and Archimedia discovered with their Auckland Gallery makeover, where a vast number of external pressures threatened the project, and with so many bureaucratic difficulties it looked doomed to fail.</p>
+                <p>Architects are finding it very difficult in todayвЂ™s cultural landscape. The profession faces a three-way threat: a public that apparently doesnвЂ™t understand what architects do, developers who couldnвЂ™t care less what they do, and overbearing councils micromanaging every single aspect of what they do. According to sources within the architectural profession, the situation is much worse when architects work on municipal buildings, as architects FJMT and Archimedia discovered with their Auckland Gallery makeover, where a vast number of external pressures threatened the project, and with so many bureaucratic difficulties it looked doomed to fail.</p>
 
-                <p>The major challenge of the gallery renovation project was that it involved two parts. The first was to restore the heritage building, dating back to 1888, which contained a network of small spaces, refurbished so often it contained 17 different floor heights. The second was to deliver a new extension that would not only double floor and exhibition space but also attract new patrons, a total necessity. While the old building’s circulation was off-putting, so was something intangible yet just as powerful: its atmosphere. For many, Auckland Art Gallery was just an old building that served a limited range of patrons with highbrow interests, missing its chance to engage with new audiences.</p>
+                <p>The major challenge of the gallery renovation project was that it involved two parts. The first was to restore the heritage building, dating back to 1888, which contained a network of small spaces, refurbished so often it contained 17 different floor heights. The second was to deliver a new extension that would not only double floor and exhibition space but also attract new patrons, a total necessity. While the old buildingвЂ™s circulation was off-putting, so was something intangible yet just as powerful: its atmosphere. For many, Auckland Art Gallery was just an old building that served a limited range of patrons with highbrow interests, missing its chance to engage with new audiences.</p>
 
-                <p>A 2003 survey of young people’s impressions of the gallery confirmed this opinion, sounding more like references to an abandoned building. For the survey authors, ‘threshold fear’ – where certain groups are intimidated from entering certain spaces by their off-putting atmosphere – was the institution’s undoing, something no architect wants anything to do with. For those young people Auckland Art Gallery was undemocratic, ‘dusty’ and ‘cold’ – the epitome of threshold fear. Also, 16% of the sample group had no idea where it even was, despite being interviewed on the pavement right outside it. Clearly, the gallery was fatally out of step at a time when New Zealand’s national museum in Wellington was successfully engaging broader audiences with contemporary branding and marketing, interactive displays and temporary events.</p>
+                <p>A 2003 survey of young peopleвЂ™s impressions of the gallery confirmed this opinion, sounding more like references to an abandoned building. For the survey authors, вЂthreshold fearвЂ™ вЂ“ where certain groups are intimidated from entering certain spaces by their off-putting atmosphere вЂ“ was the institutionвЂ™s undoing, something no architect wants anything to do with. For those young people Auckland Art Gallery was undemocratic, вЂdustyвЂ™ and вЂcoldвЂ™ вЂ“ the epitome of threshold fear. Also, 16% of the sample group had no idea where it even was, despite being interviewed on the pavement right outside it. Clearly, the gallery was fatally out of step at a time when New ZealandвЂ™s national museum in Wellington was successfully engaging broader audiences with contemporary branding and marketing, interactive displays and temporary events.</p>
 
-                <p>The decision to evolve the gallery was actually made in 2000, although it too eight years for building to commence, the architects fought off heritage committees and conservationists trying stop them. The architects were not just dealing with a disillusioned public, but also with precious timber and the parkland which surrounds the building. Pushing the design through the Environment Court, the body which approves renovations of this scale, alone took three years. During this time the budget blew out by several million dollars, the funding dried up, and the new wing had to be completely redesigned. Even after the redesign, the use of kauri timber, with its significance to New Zealand’s Maori people*, stirred up political debate.</p>
+                <p>The decision to evolve the gallery was actually made in 2000, although it too eight years for building to commence, the architects fought off heritage committees and conservationists trying stop them. The architects were not just dealing with a disillusioned public, but also with precious timber and the parkland which surrounds the building. Pushing the design through the Environment Court, the body which approves renovations of this scale, alone took three years. During this time the budget blew out by several million dollars, the funding dried up, and the new wing had to be completely redesigned. Even after the redesign, the use of kauri timber, with its significance to New ZealandвЂ™s Maori people*, stirred up political debate.</p>
 
                 <p>In the new building the architects have used kauri to produce a canopy with a curving interior roof supported by tapered. steel columns, also clad in kauri. The canopy represents a signature public face, its curvature filtering light to the forecourt to the west and creating a visual echo of the canopy of pohutukawa trees in Albert Park to the east. The park also has cultural significance to Maori as it was the site of early settlements.</p>
 
-                <p>The connection is reinforced by sculptures from Maori artist Arnold Wilson decorating the columns, while fellow artist Bernard Makoare was a consultant, ensuring the gallery emphasised Maori beliefs. Still that didn’t stop the conservationist Stephen King from accusing the architects of ‘throwing’ kauri at a ‘mediocre building’ and of misappropriating the ‘mana’ (spiritual energy) of the precious material (which is almost extinct: harvesting of both petrified and swamp kauri has been likened to a gold rush). However, the kauri that was used here was from the forest floor, and King’s misconceptions sum up the prejudice that surrounded the project.</p>
+                <p>The connection is reinforced by sculptures from Maori artist Arnold Wilson decorating the columns, while fellow artist Bernard Makoare was a consultant, ensuring the gallery emphasised Maori beliefs. Still that didnвЂ™t stop the conservationist Stephen King from accusing the architects of вЂthrowingвЂ™ kauri at a вЂmediocre buildingвЂ™ and of misappropriating the вЂmanaвЂ™ (spiritual energy) of the precious material (which is almost extinct: harvesting of both petrified and swamp kauri has been likened to a gold rush). However, the kauri that was used here was from the forest floor, and KingвЂ™s misconceptions sum up the prejudice that surrounded the project.</p>
 
-                <p>Objections also came from the Auckland Regional Council, worrying about the extension’s impact on Albert Park, yet the project’s relationship with parkland is one of the most successful outcomes. Impact is not only minimal, but improves the park’s social function. The extension’s enormous glass atrium opens up the building by directing the gaze from street level to the parkland beyond, while inside, the new art space is fronted along the east by a continuous glass wall incorporating the park into the gallery. The glass becomes a ‘screen’ for viewing the outside world and makes the art accessible to those in the park, a far cry from both ‘white cube’ galleries worldwide, the plain boxes where paintings are hung in antiseptic white surroundings. and also the dusty impermeable Auckland Gallery of old.</p>
+                <p>Objections also came from the Auckland Regional Council, worrying about the extensionвЂ™s impact on Albert Park, yet the projectвЂ™s relationship with parkland is one of the most successful outcomes. Impact is not only minimal, but improves the parkвЂ™s social function. The extensionвЂ™s enormous glass atrium opens up the building by directing the gaze from street level to the parkland beyond, while inside, the new art space is fronted along the east by a continuous glass wall incorporating the park into the gallery. The glass becomes a вЂscreenвЂ™ for viewing the outside world and makes the art accessible to those in the park, a far cry from both вЂwhite cubeвЂ™ galleries worldwide, the plain boxes where paintings are hung in antiseptic white surroundings. and also the dusty impermeable Auckland Gallery of old.</p>
 
                 <p>Another success is the refurbishment of the heritage building, especially the Mackelvie Gallery, in disrepair after its characteristic early twentieth-century Edwardian decoration had been stripped out or walled away in previous renovations. Remarkably the Mackelvie space has been reconstructed from two old photos, although the problem of multiple floor levels was so serious that scaffolding had to be erected at the highest level, with work progressing downwards, the reverse of normal practice. When it was over, a fascinating detail was retained: the lowest level visible under glass embedded in the new floor, the building itself as artwork, while elsewhere columns from the old gallery have been exposed in the walls of the new wing.</p>
 
@@ -1064,15 +1118,15 @@
 
         <!-- Questions for Passage 3 -->
         <div class="questions-container hidden" id="p3_questionsPanel" role="region" aria-label="Questions">
-            <h2 class="section-title">Questions 27–40</h2>
+            <h2 class="section-title">Questions 27вЂ“40</h2>
 
             <div class="question-group">
-                <div class="question-group-title">Questions 27–31</div>
+                <div class="question-group-title">Questions 27вЂ“31</div>
                 <p>Choose the correct letter, A, B, C or D.</p>
                 <p>Write the correct letter in boxes 27-31 on your answer sheet.</p>
 
                 <div class="question" data-question="27">
-                    <div class="question-text">27 What is the writer’s main point in the first paragraph?</div>
+                    <div class="question-text">27 What is the writerвЂ™s main point in the first paragraph?</div>
                     <div class="options"><label><input type="radio" name="q27" value="A">A Criticism of architects by different groups is unfair.</label><label><input type="radio" name="q27" value="B">B The architectural profession is generally well respected.</label><label><input type="radio" name="q27" value="C">C The most difficult projects for architects are public buildings.</label><label><input type="radio" name="q27" value="D">D Failure to deliver buildings is a result of poor communication.</label></div>
                 </div>
                 <div class="question" data-question="28">
@@ -1094,7 +1148,7 @@
             </div>
 
             <div class="question-group">
-                <div class="question-group-title">Questions 32–36</div>
+                <div class="question-group-title">Questions 32вЂ“36</div>
                 <p>Do the following statements agree with the claims of the writer in Reading Passage 3?</p>
                 <p>In boxes 32-36 on your answer sheet, write</p>
                 <p>YES if the statement agrees with the claims of the writer</p>
@@ -1106,7 +1160,7 @@
                     <div class="options"><label><input type="radio" name="q32" value="YES">YES</label><label><input type="radio" name="q32" value="NO">NO</label><label><input type="radio" name="q32" value="NOT GIVEN">NOT GIVEN</label></div>
                 </div>
                 <div class="question" data-question="33">
-                    <div class="question-text">33 Stephen King’s intervention in the project shows his understanding of the architects’ use of kauri.</div>
+                    <div class="question-text">33 Stephen KingвЂ™s intervention in the project shows his understanding of the architectsвЂ™ use of kauri.</div>
                     <div class="options"><label><input type="radio" name="q33" value="YES">YES</label><label><input type="radio" name="q33" value="NO">NO</label><label><input type="radio" name="q33" value="NOT GIVEN">NOT GIVEN</label></div>
                 </div>
                 <div class="question" data-question="34">
@@ -1118,13 +1172,13 @@
                     <div class="options"><label><input type="radio" name="q35" value="YES">YES</label><label><input type="radio" name="q35" value="NO">NO</label><label><input type="radio" name="q35" value="NOT GIVEN">NOT GIVEN</label></div>
                 </div>
                 <div class="question" data-question="36">
-                    <div class="question-text">36 The design of the extension to the Auckland Art Gallery is similar to the design of ‘white cube’ galleries in other parts of the world.</div>
+                    <div class="question-text">36 The design of the extension to the Auckland Art Gallery is similar to the design of вЂwhite cubeвЂ™ galleries in other parts of the world.</div>
                     <div class="options"><label><input type="radio" name="q36" value="YES">YES</label><label><input type="radio" name="q36" value="NO">NO</label><label><input type="radio" name="q36" value="NOT GIVEN">NOT GIVEN</label></div>
                 </div>
             </div>
 
             <div class="question-group">
-                <div class="question-group-title">Questions 37–40</div>
+                <div class="question-group-title">Questions 37вЂ“40</div>
                 <p>Complete each sentence with the correct ending, A-F, below.</p>
                 <p>Write the correct letter, A-F, in boxes 37-40 on your answer sheet.</p>
 
@@ -1222,15 +1276,15 @@
 
     /* ======= ANSWER KEY ======= */
     const correctAnswers = {
-        // Passage 1 (Q1–13)
+        // Passage 1 (Q1вЂ“13)
         q1: "FALSE", q2: "TRUE", q3: "TRUE", q4: "NOT GIVEN", q5: "FALSE",
         q6: "population", q7: "records", q8: "salt", q9: "glass", q10: "texture", q11: "light", q12: "chisel", q13: "meat",
 
-        // Passage 2 (Q14–26)
+        // Passage 2 (Q14вЂ“26)
         q14: "B", q15: "D", q16: "H", q17: "B", q18: "I", q19: "G",
         q20: "FALSE", q21: "FALSE", q22: "TRUE", q23: "TRUE", q24: "NOT GIVEN", q25: "NOT GIVEN", q26: "FALSE",
 
-        // Passage 3 (Q27–40)
+        // Passage 3 (Q27вЂ“40)
         q27: "D", q28: "D", q29: "A", q30: "B", q31: "C",
         q32: "YES", q33: "NO", q34: "YES", q35: "NOT GIVEN", q36: "NO",
         q37: "F", q38: "C", q39: "A", q40: "D"

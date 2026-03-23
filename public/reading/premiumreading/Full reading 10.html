@@ -1,4 +1,4 @@
-
+﻿
 
 
 
@@ -32,6 +32,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <style id="shohrux-dark-mode">
+        body, .container, .main-content, .loading-screen, .start-screen, .header, .footer, 
+        .main-container, .left-panel, .right-panel, .nav-row, .progress-container,
+        .passage-container, .questions-container, .test-container, .question-group {
+            background-color: #0f172a !important;
+            color: #f1f5f9 !important;
+        }
+        .question, .question-content, .passage-content, .passage-box, 
+        .task-description, .part-header, .test-info, .question-section, .task-prompt, .options, .option {
+            background-color: #1e293b !important;
+            color: #f1f5f9 !important;
+            border-color: #334155 !important;
+        }
+        table, th, td {
+            background-color: #1e293b !important;
+            color: #f1f5f9 !important;
+            border-color: #334155 !important;
+        }
+        th { background-color: #334155 !important; }
+        input[type="text"], input[type="radio"], select, textarea, .writing-textarea, .input-field {
+            background-color: #334155 !important;
+            color: #fff !important;
+            border-color: #475569 !important;
+        }
+        .option:hover, .btn:not(.btn-primary):not(.btn-submit):not(.start-button):not(.more-tests-button):hover {
+            background-color: #334155 !important;
+        }
+        .timer, .timer-container {
+            background-color: #451a1a !important;
+            color: #fca5a5 !important;
+            border-color: #7f1d1d !important;
+        }
+        .logo-area, .more-tests-button {
+            background-color: #3b82f6 !important;
+        }
+        .progress-item {
+            background-color: #334155 !important;
+            color: #94a3b8 !important;
+            border-color: #475569 !important;
+        }
+        .progress-item.current { background-color: #3b82f6 !important; color: #fff !important; }
+        .progress-item.answered { background-color: #10b981 !important; color: #fff !important; }
+        .resizer { background-color: #334155 !important; border-color: #475569 !important; }
+        h1, h2, h3, .section-title, .loading-title, .start-title, .passage-info, .brand {
+            color: #60a5fa !important;
+        }
+        .loading-subtitle, .start-description, .word-count {
+            color: #94a3b8 !important;
+        }
+        .timer-icon, .brand-icon { filter: brightness(0.8) invert(1); }
+        .watermark-layer {
+            color: rgba(255, 255, 255, 0.05) !important;
+        }
+    </style>
     <style>
         * {
             margin: 0;
@@ -780,27 +834,27 @@
                     <h3>Caral: an ancient South American city</h3>
                     <p>Huge earth and rock mounds rise out of the desert of the Supe Valley near the coast of Peru in South America. These immense mounds appear simply to be part of the geographical landscape in this arid region squeezed between the Pacific Ocean and the Andes mountains. But looks deceive. These are actually human-made pyramids. Strong evidence indicates they are the remains of a city known as Caral that flourished nearly 5,000 years ago. If true, it would be the oldest known urban center in the Americas and among the most ancient in the world.</p>
 
-                    <p>Research undertaken by Peruvian archaeologist Ruth Shady suggests that the 150-acre complex of pyramids, plazas and residential buildings was a thriving metropolis when Egypt’s great pyramids were still being built. Though discovered in 1905, for years Caral attracted little attention, largely because archaeologists believed the structures were fairly recent. But the monumental scale of the pyramids had long interested Shady, who began excavations at the site in 1996, about 22 kilometers from the coast and 190 kilometers north of Peru’s capital city of Lima.</p>
+                    <p>Research undertaken by Peruvian archaeologist Ruth Shady suggests that the 150-acre complex of pyramids, plazas and residential buildings was a thriving metropolis when EgyptвЂ™s great pyramids were still being built. Though discovered in 1905, for years Caral attracted little attention, largely because archaeologists believed the structures were fairly recent. But the monumental scale of the pyramids had long interested Shady, who began excavations at the site in 1996, about 22 kilometers from the coast and 190 kilometers north of PeruвЂ™s capital city of Lima.</p>
 
-                    <p>Shady and her crew searched for broken remains of the pots and containers that most such sites contain. Not finding any only made her more excited: it meant Caral could be what archaeologists term pre-ceramic. that is, existing before the advent in the area of pot-firing techniques. Shady’s team undertook the task of excavating Piramide Mayor, the largest of the pyramids. After carefully clearing away many hundreds of years’ worth of rubble and sand, they identified staircases, walls covered with remnants of colored plaster, and brickwork. In the foundations, they found the remains of grass-like reeds woven into bags. The original workers, she surmised, must have filled these bags with stones from a nearby quarry and laid them atop one another inside retaining walls, gradually giving rise to the pyramid’s immense structure. Shady had samples of the reeds subjected to radiocarbon dating and found that the reeds were 4,600 years old. This evidence indicated that Caral was, in fact, more than 1,000 years older than what had previously been thought to be the oldest urban center in the Americas.</p>
+                    <p>Shady and her crew searched for broken remains of the pots and containers that most such sites contain. Not finding any only made her more excited: it meant Caral could be what archaeologists term pre-ceramic. that is, existing before the advent in the area of pot-firing techniques. ShadyвЂ™s team undertook the task of excavating Piramide Mayor, the largest of the pyramids. After carefully clearing away many hundreds of yearsвЂ™ worth of rubble and sand, they identified staircases, walls covered with remnants of colored plaster, and brickwork. In the foundations, they found the remains of grass-like reeds woven into bags. The original workers, she surmised, must have filled these bags with stones from a nearby quarry and laid them atop one another inside retaining walls, gradually giving rise to the pyramidвЂ™s immense structure. Shady had samples of the reeds subjected to radiocarbon dating and found that the reeds were 4,600 years old. This evidence indicated that Caral was, in fact, more than 1,000 years older than what had previously been thought to be the oldest urban center in the Americas.</p>
 
-                    <p>What amazed archaeologists was not just the age, but the complexity and scope of Caral. Piramide Mayor alone covers an area nearly the size of four football fields and is 18 meters tall. A nine-meter-wide staircase rises from a circular plaza at the foot of the pyramid, passing over three terraced levels until it reaches the top. Thousands of manual laborers would have been needed to build such a project. not counting the many architects. craftsmen, and managers. Shady’s team found the remains of a large amphitheater, containing almost 70 musical instruments made of bird and deer bones. Clearly, music played an important role in Caral’s society Around the perimeter of Caral are a series of smaller mounds and various buildings. These indicate a hierarchy of living arrangements: large, well-kept rooms atop pyramids for the elite, ground-level quarters for craftsmen, and shabbier outlying dwellings for workers.</p>
+                    <p>What amazed archaeologists was not just the age, but the complexity and scope of Caral. Piramide Mayor alone covers an area nearly the size of four football fields and is 18 meters tall. A nine-meter-wide staircase rises from a circular plaza at the foot of the pyramid, passing over three terraced levels until it reaches the top. Thousands of manual laborers would have been needed to build such a project. not counting the many architects. craftsmen, and managers. ShadyвЂ™s team found the remains of a large amphitheater, containing almost 70 musical instruments made of bird and deer bones. Clearly, music played an important role in CaralвЂ™s society Around the perimeter of Caral are a series of smaller mounds and various buildings. These indicate a hierarchy of living arrangements: large, well-kept rooms atop pyramids for the elite, ground-level quarters for craftsmen, and shabbier outlying dwellings for workers.</p>
 
                     <p>But why had Caral been built in the first place? Her excavations convinced Shady that Caral once served as a trade center for the region, which extends from the rainforests of the Amazonto the high forests of the Andes. Shady found evidence of a rich trading environment, including seeds of the cocoa bush and necklaces of shells, neither of which was native to the immediate Caral area. This environment gave rise to people who did not take part in the production of food, allowing them to become priests and planners, builders and designers Thus occupational specialization, elemental to an urban society, emerged.</p>
 
-                    <p>But what sustained such a trading center and drew travelers to it? Was it food? Shady and her team found the bones of small edible fish, which must have come from the Pacific coast to the west, in the excavations. But they also found evidence of squash, sweet potatoes and beans having been grown locally. Shady theorized that Caral’s early farmers diverted the area’s rivers into canals, which still cross the Supe Valley today, to irrigate their fields. But because she found no traces of maize, which can be traded or stored and used in times of crop failure, she concluded that Caral’s trade leverage was not based on stockpiling food supplies.</p>
+                    <p>But what sustained such a trading center and drew travelers to it? Was it food? Shady and her team found the bones of small edible fish, which must have come from the Pacific coast to the west, in the excavations. But they also found evidence of squash, sweet potatoes and beans having been grown locally. Shady theorized that CaralвЂ™s early farmers diverted the areaвЂ™s rivers into canals, which still cross the Supe Valley today, to irrigate their fields. But because she found no traces of maize, which can be traded or stored and used in times of crop failure, she concluded that CaralвЂ™s trade leverage was not based on stockpiling food supplies.</p>
 
-                    <p>It was evidence of another crop in the excavations that gave Shady the best clue to Caral’s success. In nearly every excavated building, her team discovered evidence of cotton – seeds, fibers and textiles. Her theory fell into place when a large fishing net made of those fibers, unearthed in an unrelated dig on Peru’s coast, turned out to be as old as Carat. ‘The farmers of Caral grew the cotton that the fishermen needed to make their nets,’ Shady speculates. ‘And the fishermen gave them shellfish and dried fish in exchange for these nets.’ In essence, the people of Caral enabled fishermen to work with larger and more effective nets, which made the resources of the sea more readily available. and the fishermen probably used dried squash grown by the Caral people as flotation devices for their nets.</p>
+                    <p>It was evidence of another crop in the excavations that gave Shady the best clue to CaralвЂ™s success. In nearly every excavated building, her team discovered evidence of cotton вЂ“ seeds, fibers and textiles. Her theory fell into place when a large fishing net made of those fibers, unearthed in an unrelated dig on PeruвЂ™s coast, turned out to be as old as Carat. вЂThe farmers of Caral grew the cotton that the fishermen needed to make their nets,вЂ™ Shady speculates. вЂAnd the fishermen gave them shellfish and dried fish in exchange for these nets.вЂ™ In essence, the people of Caral enabled fishermen to work with larger and more effective nets, which made the resources of the sea more readily available. and the fishermen probably used dried squash grown by the Caral people as flotation devices for their nets.</p>
                 </div>
             </div>
             <div class="resizer"></div>
 
             <!-- Questions for Passage 1 -->
             <div class="questions-container" id="p1_questionsPanel" role="region" aria-label="Questions">
-                <h2 class="section-title">Questions 1–13</h2>
+                <h2 class="section-title">Questions 1вЂ“13</h2>
 
                 <div class="question-group">
-                    <div class="question-group-title">Questions 1–6</div>
+                    <div class="question-group-title">Questions 1вЂ“6</div>
                     <p>Do the following statements agree with the information given in Reading Passage 1?</p>
                     <p>In boxes 1-6 on your answer sheet, write</p>
                     <p>TRUE if the statement agrees with the information</p>
@@ -834,7 +888,7 @@
                 </div>
 
                 <div class="question-group">
-                    <div class="question-group-title">Questions 7–13</div>
+                    <div class="question-group-title">Questions 7вЂ“13</div>
                     <p>Complete the notes below.</p>
                     <p>Choose <strong>ONE WORD ONLY</strong> from the passage for each answer.</p>
                     <p>Write your answers in boxes 7-13 on your answer sheet.</p>
@@ -867,30 +921,30 @@
                 <div class="passage-content" id="passage2">
                     <p>It was that summer, scientists now realise, when global warming at last made itself unmistakably felt. People in the Northern Hemisphere knew that summer 2003 was remarkable. Britain had record high temperatures; Europe had out-of-control forest fires, great rivers drying to a trickle and thousands of heat-related deaths. But how remarkable that summer was is only now becoming clear.</p>
 
-                    <p>June, July and August were the warmest three months recorded in western and central Europe. And they were the warmest by a very long way. Like Britain, Portugal, Germany and Switzerland had record national highs. Over a great rectangular block stretching from west of Paris to northern Italy, taking in Switzerland and southern Germany, the average temperature for the summer months was 3.78 °C higher than the long-term norm, says the University of East Anglia’s Tyndall Centre for Climate Change Research, one of the world’s leading institutions for monitoring and analysing temperature records That might not seem a lot until you are aware of the usual pattern. But then you realise it is enormous. There is nothing like this in previous data. It is considered so exceptional that Professor Phil Jones, the unit’s director, says openly - in a way that few scientists have done - that 2003’s extreme temperatures may be directly attributed to global warming caused by human actions, rather than natural climate variations.</p>
+                    <p>June, July and August were the warmest three months recorded in western and central Europe. And they were the warmest by a very long way. Like Britain, Portugal, Germany and Switzerland had record national highs. Over a great rectangular block stretching from west of Paris to northern Italy, taking in Switzerland and southern Germany, the average temperature for the summer months was 3.78 В°C higher than the long-term norm, says the University of East AngliaвЂ™s Tyndall Centre for Climate Change Research, one of the worldвЂ™s leading institutions for monitoring and analysing temperature records That might not seem a lot until you are aware of the usual pattern. But then you realise it is enormous. There is nothing like this in previous data. It is considered so exceptional that Professor Phil Jones, the unitвЂ™s director, says openly - in a way that few scientists have done - that 2003вЂ™s extreme temperatures may be directly attributed to global warming caused by human actions, rather than natural climate variations.</p>
 
-                    <p>Meteorologists have hitherto contented themselves with the formula that recent high temperatures are ‘consistent with predictions' of climate change. For the great block of the map in question, the unit has reliable temperature records dating back to 1781. Using as a baseline the average summer temperature between 1961 and 1990, departures from the temperature norm, ‘anomalies’, can easily be plotted.</p>
+                    <p>Meteorologists have hitherto contented themselves with the formula that recent high temperatures are вЂconsistent with predictions' of climate change. For the great block of the map in question, the unit has reliable temperature records dating back to 1781. Using as a baseline the average summer temperature between 1961 and 1990, departures from the temperature norm, вЂanomaliesвЂ™, can easily be plotted.</p>
 
-                    <p>Over the past 200 years, there have been at least half a dozen excess temperature anomalies approaching, or even exceeding, 2 °C. But there has been nothing remotely like that year, when the anomaly was nearly 4 °C. ‘That is quite remarkable,’ Professor Jones says. ‘It’s very unusual in a statistical sense. If this series had a normal statistical distribution you wouldn't get this number. The return period (i.e. how often it could be expected to recur) would be something like one in 1,000 years. If we look at an excess above the average of nearly 4 °C, then perhaps nearly 3 °C of that is natural variability, because we’ve seen that in past summers. But the final degree of it is likely to be due to global warming, caused by human action.’</p>
+                    <p>Over the past 200 years, there have been at least half a dozen excess temperature anomalies approaching, or even exceeding, 2 В°C. But there has been nothing remotely like that year, when the anomaly was nearly 4 В°C. вЂThat is quite remarkable,вЂ™ Professor Jones says. вЂItвЂ™s very unusual in a statistical sense. If this series had a normal statistical distribution you wouldn't get this number. The return period (i.e. how often it could be expected to recur) would be something like one in 1,000 years. If we look at an excess above the average of nearly 4 В°C, then perhaps nearly 3 В°C of that is natural variability, because weвЂ™ve seen that in past summers. But the final degree of it is likely to be due to global warming, caused by human action.вЂ™</p>
 
                     <p>That year's summer had in a sense been one that climate scientists had long been anticipating Until then, the warming had been manifesting itself mainly in winters that were less cold rather than in summers that were much hotter. Last week, the UN predicted that winters were warming so quickly that some of Europe's lower-level ski resorts will die out.</p>
 
-                    <p>But sooner or later the unprecedented hot summer was bound to come - and that year it did Over a large swathe of the western part of the European continent, records were broken in all three months It wasn't only monthly averages, but daily extremes and the lengths of spells above thresholds National records were set in at least four countries.One of the most dramatic features of the summer was the hot nights, especially in the first half of August The high night-time temperatures were related to the 15,000 extra deaths in France during August, compared with previous years They gradually increased during the first 12 days of the month, peaking at about 2,000 a day on August 12 and 13 and severely overloading the medical services Then they dropped dramatically after August 14 when minimum temperatures fell by about 5 °C The elderly were most affected - their death rate rose 70 per cent.</p>
+                    <p>But sooner or later the unprecedented hot summer was bound to come - and that year it did Over a large swathe of the western part of the European continent, records were broken in all three months It wasn't only monthly averages, but daily extremes and the lengths of spells above thresholds National records were set in at least four countries.One of the most dramatic features of the summer was the hot nights, especially in the first half of August The high night-time temperatures were related to the 15,000 extra deaths in France during August, compared with previous years They gradually increased during the first 12 days of the month, peaking at about 2,000 a day on August 12 and 13 and severely overloading the medical services Then they dropped dramatically after August 14 when minimum temperatures fell by about 5 В°C The elderly were most affected - their death rate rose 70 per cent.</p>
 
                     <p>For Britain, the year as a whole is likely to be the warmest recorded But despite the temperature record on August 10, the summer itself - defined as the June, July and August period - comes behind 1976 and 1995, when there were longer periods of intense heat At the moment, the year is likely to be the third-hottest in the global temperature record (which goes back to 1856), behind 1998 and 2002. But when the records for October, November and December are collated, it might move into second place. The ten hottest years in the record have occurred since 1990.</p>
 
-                    <p>Professor Jones is in no doubt about the astonishing nature of that year’s European summer. ‘The temperatures recorded that year were out of all proportion to the previous record,’ he says. ‘It was the warmest summer in the last 500 years and probably way beyond that. It was enormously exceptional.’</p>
+                    <p>Professor Jones is in no doubt about the astonishing nature of that yearвЂ™s European summer. вЂThe temperatures recorded that year were out of all proportion to the previous record,вЂ™ he says. вЂIt was the warmest summer in the last 500 years and probably way beyond that. It was enormously exceptional.вЂ™</p>
 
-                    <p>His colleagues at the Tyndall Centre are planning a study of it. ‘It was a summer that had not been experienced before, either in terms of the temperature extremes that were reached, or the range and diversity of the effects of the extreme heat,’ says the centre's executive director, Professor Mike Hulme. ‘It will certainly have left its mark on a number of countries as to how they think and plan for climate change, much as the 2000 floods revolutionised the way the Government is thinking about flooding in the UK The 2003 heatwave will have similar repercussions across Europe.'</p>
+                    <p>His colleagues at the Tyndall Centre are planning a study of it. вЂIt was a summer that had not been experienced before, either in terms of the temperature extremes that were reached, or the range and diversity of the effects of the extreme heat,вЂ™ says the centre's executive director, Professor Mike Hulme. вЂIt will certainly have left its mark on a number of countries as to how they think and plan for climate change, much as the 2000 floods revolutionised the way the Government is thinking about flooding in the UK The 2003 heatwave will have similar repercussions across Europe.'</p>
                 </div>
             </div>
             <div class="resizer"></div>
 
             <div class="questions-container hidden" id="p2_questionsPanel" role="region" aria-label="Questions">
-                <h2 class="section-title">Questions 14–26</h2>
+                <h2 class="section-title">Questions 14вЂ“26</h2>
 
                 <div class="question-group">
-                    <div class="question-group-title">Questions 14–19</div>
+                    <div class="question-group-title">Questions 14вЂ“19</div>
                     <p>Do the following statements agree with the information given in Reading Passage 2?</p>
                     <p>In boxes 14-19 on your answer sheet, write</p>
                     <p>TRUE if the statement agrees with the information</p>
@@ -898,11 +952,11 @@
                     <p>NOT GIVEN if there is no information on this</p>
 
                     <div class="question" data-question="14">
-                        <div class="question-text">14 In 2003, the average temperature for June to August in parts of Europe was almost 4 °C higher than usual.</div>
+                        <div class="question-text">14 In 2003, the average temperature for June to August in parts of Europe was almost 4 В°C higher than usual.</div>
                         <div class="options"><label><input type="radio" name="q14" value="TRUE"> TRUE</label><label><input type="radio" name="q14" value="FALSE"> FALSE</label><label><input type="radio" name="q14" value="NOT GIVEN"> NOT GIVEN</label></div>
                     </div>
                     <div class="question" data-question="15">
-                        <div class="question-text">15 According to Phil Jones, the impact people have on the planet was one reason for 2003’s record summer.</div>
+                        <div class="question-text">15 According to Phil Jones, the impact people have on the planet was one reason for 2003вЂ™s record summer.</div>
                         <div class="options"><label><input type="radio" name="q15" value="TRUE"> TRUE</label><label><input type="radio" name="q15" value="FALSE"> FALSE</label><label><input type="radio" name="q15" value="NOT GIVEN"> NOT GIVEN</label></div>
                     </div>
                     <div class="question" data-question="16">
@@ -940,7 +994,7 @@
                 </div>
 
                 <div class="question-group">
-                    <div class="question-group-title">Questions 22–25</div>
+                    <div class="question-group-title">Questions 22вЂ“25</div>
                     <p>Complete the summary below.</p>
                     <p>Choose <strong>ONE WORD AND/OR A NUMBER</strong> from the passage for each answer.</p>
                     <p>Write your answers in boxes 22-25 on your answer sheet.</p>
@@ -977,27 +1031,27 @@
 
                     <p>Forty years ago, the research psychologist Dr Paul Ekman was addressing a group of young psychiatrists in training when he was asked a question, the answer to which has kept him busy ever since. Suppose, the group wanted to know, a particular patient swears they are telling the truth. They look and sound sincere. So here is the question: is there any way you can be sure they are telling the truth? Ekman did not know the answer then, but wanted to find out.</p>
 
-                    <p>As part of his research, he had already filmed a series of 12-minute interviews with psychiatric patients. In a subsequent conversation, one of the patients told hint that she had lies to him. So Ekman sat and looked at the film but saw nothing noteworthy. Then he slowed it down and looked again. Then he slowed it even further. And suddenly, there, across just two frames of the film, he saw it: an intense expression of extreme anguish. It lasted less than a 15th of a second, but once he had spotted the first expression, he soon found three more examples in that same interview. He termed his discovery ‘micro-expressions’ : very rapid, intense demonstrations of emotion that the subject intended to be concealed.</p>
+                    <p>As part of his research, he had already filmed a series of 12-minute interviews with psychiatric patients. In a subsequent conversation, one of the patients told hint that she had lies to him. So Ekman sat and looked at the film but saw nothing noteworthy. Then he slowed it down and looked again. Then he slowed it even further. And suddenly, there, across just two frames of the film, he saw it: an intense expression of extreme anguish. It lasted less than a 15th of a second, but once he had spotted the first expression, he soon found three more examples in that same interview. He termed his discovery вЂmicro-expressionsвЂ™ : very rapid, intense demonstrations of emotion that the subject intended to be concealed.</p>
 
                     <p>Over the course of the next four decades, Ekman successfully demonstrated a proposition first suggested by Charles Darwin: that the ways in which we express rage, disgust, contempt, fear, surprise, happiness and sadness are universal. The facial muscles triggered by those seven basic emotions are, he has shown, essentially standard, regardless of language and culture, from the US to Japan, and Brazil to Papua New Guinea. What is more, expressions of emotion are impossible to suppress and, particularly when we are lying, micro-expressions of powerfully felt emotions will inevitably flit across our faces before we get the chance to stop them.</p>
 
-                    <p>Fortunately for liars, most people will fail to spot these fleeting signals of inner torment. Of the l5,000 Ekman has tested, only 50 people, whom he calls ‘naturals’, have been able to do it. But given a little more training, Ekman says, almost anyone can develop the skill. He should know: since these tests were completed in the mid-1980s and the first publication of his research, he has been called in by the FBI and CIA (among countless more law-enforcement and other agencies around the world), not just to solve cases, but to teach them how to use his technique for themselves. He has held workshops for defence and prosecution lawyers, health professionals, even jealous spouses, all of them wanting to know exactly when someone is not being 100 per cent candid.</p>
+                    <p>Fortunately for liars, most people will fail to spot these fleeting signals of inner torment. Of the l5,000 Ekman has tested, only 50 people, whom he calls вЂnaturalsвЂ™, have been able to do it. But given a little more training, Ekman says, almost anyone can develop the skill. He should know: since these tests were completed in the mid-1980s and the first publication of his research, he has been called in by the FBI and CIA (among countless more law-enforcement and other agencies around the world), not just to solve cases, but to teach them how to use his technique for themselves. He has held workshops for defence and prosecution lawyers, health professionals, even jealous spouses, all of them wanting to know exactly when someone is not being 100 per cent candid.</p>
 
-                    <p>Most recently, Ekman’s research has resulted in a new television series about the exploits of the fictional Dr Cal Lightman, a scientist who studies involuntary body language to discover not only if you are lying, but why you might have been motivated to do so. According to the publicity blurb, Lightman is a ‘human lie detector’, even more accurate than a polygraph test. Ekman concedes he was sceptical when the producer first approached him with the idea of turning his life's work into a TV series, and initially would have stopped the project if he could. In particular, he was fearful that the show would exaggerate the effectiveness of his techniques and create the quite inaccurate impression among audiences that criminals couldno longer hope to get away with lying. In the worst can scenario, he was concerned about unfair convictions: that one day someone nut properly trained in his techniques might be sitting on a jury and wrongly find someone guilty of I crime simply on the basis of a television programme.</p>
+                    <p>Most recently, EkmanвЂ™s research has resulted in a new television series about the exploits of the fictional Dr Cal Lightman, a scientist who studies involuntary body language to discover not only if you are lying, but why you might have been motivated to do so. According to the publicity blurb, Lightman is a вЂhuman lie detectorвЂ™, even more accurate than a polygraph test. Ekman concedes he was sceptical when the producer first approached him with the idea of turning his life's work into a TV series, and initially would have stopped the project if he could. In particular, he was fearful that the show would exaggerate the effectiveness of his techniques and create the quite inaccurate impression among audiences that criminals couldno longer hope to get away with lying. In the worst can scenario, he was concerned about unfair convictions: that one day someone nut properly trained in his techniques might be sitting on a jury and wrongly find someone guilty of I crime simply on the basis of a television programme.</p>
 
-                    <p>In the end though, he was won over because the series is unusual in several respects. It is the first time, as far as Ekman is aware, than commercial TV drama has been based on the work of just one scientist. That scientist is also deeply involved in the project, talking through plot ideas and checking five successive drafts of each script to ensure details arc correct. He was also impressed with the producer’s manifestly serious and well-intentioned reasons for making the programme. Now that the first series has been completed, he believes probably 80-90 per cent of the show is based on fact, and that's good enough for what is, after all, a drama, not a documentary.</p>
+                    <p>In the end though, he was won over because the series is unusual in several respects. It is the first time, as far as Ekman is aware, than commercial TV drama has been based on the work of just one scientist. That scientist is also deeply involved in the project, talking through plot ideas and checking five successive drafts of each script to ensure details arc correct. He was also impressed with the producerвЂ™s manifestly serious and well-intentioned reasons for making the programme. Now that the first series has been completed, he believes probably 80-90 per cent of the show is based on fact, and that's good enough for what is, after all, a drama, not a documentary.</p>
 
-                    <p>Ekman, incidentally, professes to have been a terrible liar ever since he was a small boy and observes that the ability to detect a lie and the ability to lie successfully arc completely unrelated. He has been asked by people running for high office if he could teach them to become ‘more credible’ with the public, but has always refused to use his skills in that way on ethical grounds. He also insists that there are various kinds of lies. A 'true' lie can be identified by having two essential characteristics: there must be a deliberate intent to mislead and there must be no notification that this is what is occurring. This means that an actor or a poker player isn't a true liar. They're supposed to be deceiving you, it's part of the game, and the same is true of flattery. lie prefers to focus on the kinds of lies where the liar would be in grave trouble if they were found out, and where the target would feel properly aggrieved if they knew.</p>
+                    <p>Ekman, incidentally, professes to have been a terrible liar ever since he was a small boy and observes that the ability to detect a lie and the ability to lie successfully arc completely unrelated. He has been asked by people running for high office if he could teach them to become вЂmore credibleвЂ™ with the public, but has always refused to use his skills in that way on ethical grounds. He also insists that there are various kinds of lies. A 'true' lie can be identified by having two essential characteristics: there must be a deliberate intent to mislead and there must be no notification that this is what is occurring. This means that an actor or a poker player isn't a true liar. They're supposed to be deceiving you, it's part of the game, and the same is true of flattery. lie prefers to focus on the kinds of lies where the liar would be in grave trouble if they were found out, and where the target would feel properly aggrieved if they knew.</p>
                 </div>
             </div>
             <div class="resizer"></div>
 
             <!-- Questions for Passage 3 -->
             <div class="questions-container hidden" id="p3_questionsPanel" role="region" aria-label="Questions">
-                <h2 class="section-title">Questions 27–40</h2>
+                <h2 class="section-title">Questions 27вЂ“40</h2>
 
                 <div class="question-group">
-                    <div class="question-group-title">Questions 27–31</div>
+                    <div class="question-group-title">Questions 27вЂ“31</div>
                     <p>Choose the correct letter, <strong>A</strong>, <strong>B</strong>, <strong>C</strong> or <strong>D</strong>.</p>
                     <p>Write the correct letter in boxes 27-31 on your answer sheet.</p>
 
@@ -1049,7 +1103,7 @@
                 </div>
 
                 <div class="question-group">
-                    <div class="question-group-title">Questions 32–36</div>
+                    <div class="question-group-title">Questions 32вЂ“36</div>
                     <p>Complete the summary using the list of words, <strong>A-I</strong>, below.</p>
                     <p>Write the correct letter, <strong>A-I</strong>, in boxes 32-36 on your answer sheet.</p>
 
@@ -1060,7 +1114,7 @@
                 </div>
 
                 <div class="question-group">
-                    <div class="question-group-title">Questions 37–40</div>
+                    <div class="question-group-title">Questions 37вЂ“40</div>
                     <p>Do the following statements agree with the claims of the writer in Reading Passage 3?</p>
                     <p>In boxes 37-40 on your answer sheet, write</p>
                     <p>YES if the statement agrees with the claims of the writer</p>

@@ -1,4 +1,4 @@
-
+﻿
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,6 +7,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <style id="shohrux-dark-mode">
+        body, .container, .main-content, .loading-screen, .start-screen, .header, .footer, 
+        .main-container, .left-panel, .right-panel, .nav-row, .progress-container,
+        .passage-container, .questions-container, .test-container, .question-group {
+            background-color: #0f172a !important;
+            color: #f1f5f9 !important;
+        }
+        .question, .question-content, .passage-content, .passage-box, 
+        .task-description, .part-header, .test-info, .question-section, .task-prompt, .options, .option {
+            background-color: #1e293b !important;
+            color: #f1f5f9 !important;
+            border-color: #334155 !important;
+        }
+        table, th, td {
+            background-color: #1e293b !important;
+            color: #f1f5f9 !important;
+            border-color: #334155 !important;
+        }
+        th { background-color: #334155 !important; }
+        input[type="text"], input[type="radio"], select, textarea, .writing-textarea, .input-field {
+            background-color: #334155 !important;
+            color: #fff !important;
+            border-color: #475569 !important;
+        }
+        .option:hover, .btn:not(.btn-primary):not(.btn-submit):not(.start-button):not(.more-tests-button):hover {
+            background-color: #334155 !important;
+        }
+        .timer, .timer-container {
+            background-color: #451a1a !important;
+            color: #fca5a5 !important;
+            border-color: #7f1d1d !important;
+        }
+        .logo-area, .more-tests-button {
+            background-color: #3b82f6 !important;
+        }
+        .progress-item {
+            background-color: #334155 !important;
+            color: #94a3b8 !important;
+            border-color: #475569 !important;
+        }
+        .progress-item.current { background-color: #3b82f6 !important; color: #fff !important; }
+        .progress-item.answered { background-color: #10b981 !important; color: #fff !important; }
+        .resizer { background-color: #334155 !important; border-color: #475569 !important; }
+        h1, h2, h3, .section-title, .loading-title, .start-title, .passage-info, .brand {
+            color: #60a5fa !important;
+        }
+        .loading-subtitle, .start-description, .word-count {
+            color: #94a3b8 !important;
+        }
+        .timer-icon, .brand-icon { filter: brightness(0.8) invert(1); }
+        .watermark-layer {
+            color: rgba(255, 255, 255, 0.05) !important;
+        }
+    </style>
     <style>
         * {
             margin: 0;
@@ -760,10 +814,10 @@
 
             <!-- Questions for Passage 1 -->
             <div class="questions-container" id="p1_questionsPanel" role="region" aria-label="Questions">
-                <h2 class="section-title">Questions 1–13</h2>
+                <h2 class="section-title">Questions 1вЂ“13</h2>
 
                 <div class="question-group">
-                    <div class="question-group-title">Questions 1–6 – TRUE / FALSE / NOT GIVEN</div>
+                    <div class="question-group-title">Questions 1вЂ“6 вЂ“ TRUE / FALSE / NOT GIVEN</div>
                     <div class="question" data-question="1">
                         <div class="question-text">1. In the seventeenth and eighteenth centuries, the British East India Company faced a lot of competition.</div>
                         <div class="options">
@@ -815,21 +869,21 @@
                 </div>
 
                 <div class="question-group">
-                    <div class="question-group-title">Questions 7–13 – Notes completion (ONE WORD ONLY)</div>
+                    <div class="question-group-title">Questions 7вЂ“13 вЂ“ Notes completion (ONE WORD ONLY)</div>
                     <p><strong>Clipper races</strong></p>
                     <p><em>The ships</em><br>
                         Clipper ships were first used for trading by American merchants.<br>
-                        • The ships were remarkable for the number of <span class="question-text">7</span> <input type="text" name="q7" maxlength="30"> they had.<br>
-                        • The performance of British tea clippers was particularly affected when there were <span class="question-text">8</span> <input type="text" name="q8" maxlength="30"> at sea.
+                        вЂў The ships were remarkable for the number of <span class="question-text">7</span> <input type="text" name="q7" maxlength="30"> they had.<br>
+                        вЂў The performance of British tea clippers was particularly affected when there were <span class="question-text">8</span> <input type="text" name="q8" maxlength="30"> at sea.
                     </p>
                     <p><em>The races</em><br>
-                        • It was in a ship called <span class="question-text">9</span> <input type="text" name="q9" maxlength="30"> that the British first competed successfully against the Americans. Richard Green's ship arrived two days ahead of its competitor.<br>
-                        • Competition increased when additional Chinese trading <span class="question-text">10</span> <input type="text" name="q10" maxlength="30"> were established.<br>
-                        • Merchants were occasionally in such a hurry that they failed to complete the <span class="question-text">11</span> <input type="text" name="q11" maxlength="30"> before leaving China.<br>
-                        • At the end of their journey, the ships needed the help of <span class="question-text">12</span> <input type="text" name="q12" maxlength="30">.
+                        вЂў It was in a ship called <span class="question-text">9</span> <input type="text" name="q9" maxlength="30"> that the British first competed successfully against the Americans. Richard Green's ship arrived two days ahead of its competitor.<br>
+                        вЂў Competition increased when additional Chinese trading <span class="question-text">10</span> <input type="text" name="q10" maxlength="30"> were established.<br>
+                        вЂў Merchants were occasionally in such a hurry that they failed to complete the <span class="question-text">11</span> <input type="text" name="q11" maxlength="30"> before leaving China.<br>
+                        вЂў At the end of their journey, the ships needed the help of <span class="question-text">12</span> <input type="text" name="q12" maxlength="30">.
                     </p>
                     <p><em>The rewards</em><br>
-                        • The crews were motivated by both <span class="question-text">13</span> <input type="text" name="q13" maxlength="30"> and their enthusiasm for the competition.
+                        вЂў The crews were motivated by both <span class="question-text">13</span> <input type="text" name="q13" maxlength="30"> and their enthusiasm for the competition.
                     </p>
                 </div>
             </div> <!-- /p1_questionsPanel -->
@@ -859,10 +913,10 @@
             </div>
 
             <div class="questions-container hidden" id="p2_questionsPanel" role="region" aria-label="Questions">
-                <h2 class="section-title">Questions 14–26</h2>
+                <h2 class="section-title">Questions 14вЂ“26</h2>
 
                 <div class="question-group">
-                    <div class="question-group-title">Questions 14–18 – Summary completion (NO MORE THAN TWO WORDS)</div>
+                    <div class="question-group-title">Questions 14вЂ“18 вЂ“ Summary completion (NO MORE THAN TWO WORDS)</div>
                     <p><strong>Types of homing behaviour</strong></p>
                     <p><em>First type:</em> Birds rely on their sophisticated <span class="question-text">14</span> <input type="text" name="q14" maxlength="40">. However, they are generally most successful if they are released within their feeding territory.</p>
                     <p><em>Second type:</em> Birds select their accustomed <span class="question-text">15</span> <input type="text" name="q15" maxlength="40">, no matter where they are released. As a result, they may miss their <span class="question-text">16</span> <input type="text" name="q16" maxlength="40">.</p>
@@ -870,7 +924,7 @@
                 </div>
 
                 <div class="question-group">
-                    <div class="question-group-title">Questions 19–22 – Which paragraph contains the information?</div>
+                    <div class="question-group-title">Questions 19вЂ“22 вЂ“ Which paragraph contains the information?</div>
                     <div class="question" data-question="19">
                         <div class="question-text">19. the effects of distance on some birds' ability to find their nests</div>
                         <div class="options">
@@ -898,7 +952,7 @@
                 </div>
 
                 <div class="question-group">
-                    <div class="question-group-title">Questions 23–26 – Match the bird to the point (A–G)</div>
+                    <div class="question-group-title">Questions 23вЂ“26 вЂ“ Match the bird to the point (AвЂ“G)</div>
                     <p><em>Birds:</em></p>
                     <div class="question" data-question="23">
                         <div class="question-text">23. domestic pigeon</div>
@@ -971,10 +1025,10 @@
             </div>
 
             <div class="questions-container hidden" id="p3_questionsPanel" role="region" aria-label="Questions">
-                <h2 class="section-title">Questions 27–40</h2>
+                <h2 class="section-title">Questions 27вЂ“40</h2>
 
                 <div class="question-group">
-                    <div class="question-group-title">Questions 27–31 – YES / NO / NOT GIVEN</div>
+                    <div class="question-group-title">Questions 27вЂ“31 вЂ“ YES / NO / NOT GIVEN</div>
                     <div class="question" data-question="27">
                         <div class="question-text">27. The delay in the process used by the Kellogg brothers affected the final product.</div>
                         <div class="options">
@@ -1018,12 +1072,12 @@
                 </div>
 
                 <div class="question-group">
-                    <div class="question-group-title">Questions 32–35 – Complete the sentence with A–H</div>
+                    <div class="question-group-title">Questions 32вЂ“35 вЂ“ Complete the sentence with AвЂ“H</div>
                     <p>
-                        32. The usual business environment …<br>
-                        33. Geroski and Markides's book …<br>
-                        34. Microsoft is an example of a company which …<br>
-                        35. The origin of useful accidents …
+                        32. The usual business environment вЂ¦<br>
+                        33. Geroski and Markides's book вЂ¦<br>
+                        34. Microsoft is an example of a company which вЂ¦<br>
+                        35. The origin of useful accidents вЂ¦
                     </p>
                     <div class="options" style="margin:8px 0 12px;">
                         <em>Endings:</em> A can be found in unusual thoughts and chance events. B can be taught in business schools. C has made a success from someone else's invention. D is designed to nurture differences. E is unlikely to lead to creative innovation. F says that all mistakes are the same. G shows that businesses are good at either inventing or selling. H suggests ways of increasing the number of mistakes.
@@ -1051,7 +1105,7 @@
                 </div>
 
                 <div class="question-group">
-                    <div class="question-group-title">Questions 36–40 – Choose the correct letter, A–D</div>
+                    <div class="question-group-title">Questions 36вЂ“40 вЂ“ Choose the correct letter, AвЂ“D</div>
                     <div class="question" data-question="36">
                         <div class="question-text">36. How do Austin and Devin advise companies to get out of the 'cone of expectation'?</div>
                         <div class="options">
@@ -1071,7 +1125,7 @@
                         </div>
                     </div>
                     <div class="question" data-question="38">
-                        <div class="question-text">38. The writer describes the Empire Lager disaster in order to show that …</div>
+                        <div class="question-text">38. The writer describes the Empire Lager disaster in order to show that вЂ¦</div>
                         <div class="options">
                             <label><input type="radio" name="q38" value="A"> A. success can come out of a business failure</label>
                             <label><input type="radio" name="q38" value="B"> B. the majority of companies now value risk-taking</label>
@@ -1080,7 +1134,7 @@
                         </div>
                     </div>
                     <div class="question" data-question="39">
-                        <div class="question-text">39. Pure Blonde has been more successful than Empire Lager because …</div>
+                        <div class="question-text">39. Pure Blonde has been more successful than Empire Lager because вЂ¦</div>
                         <div class="options">
                             <label><input type="radio" name="q39" value="A"> A. digital media other than TV were used.</label>
                             <label><input type="radio" name="q39" value="B"> B. it was advertised under a different brand name.</label>
@@ -1089,7 +1143,7 @@
                         </div>
                     </div>
                     <div class="question" data-question="40">
-                        <div class="question-text">40. The writer concludes that creating a culture that learns from mistakes …</div>
+                        <div class="question-text">40. The writer concludes that creating a culture that learns from mistakes вЂ¦</div>
                         <div class="options">
                             <label><input type="radio" name="q40" value="A"> A. brings short-term financial gains.</label>
                             <label><input type="radio" name="q40" value="B"> B. can be very difficult for some companies.</label>
@@ -1143,15 +1197,15 @@
 
         /* ======= ANSWER KEY ======= */
         const correctAnswers = {
-            // Passage 1 – Clipper Races (Q1–13)
+            // Passage 1 вЂ“ Clipper Races (Q1вЂ“13)
             q1: "FALSE", q2: "TRUE", q3: "TRUE", q4: "NOT GIVEN", q5: "FALSE", q6: "FALSE",
             q7: "sails", q8: "storms", q9: "Challenger", q10: "ports", q11: "paperwork", q12: "tugs", q13: "money",
 
-            // Passage 2 – Orientation of birds (Q14–26)
+            // Passage 2 вЂ“ Orientation of birds (Q14вЂ“26)
             q14: "visual memory", q15: "migration direction", q16: "destination", q17: "landmarks", q18: "albatross",
             q19: "C", q20: "B", q21: "C", q22: "G", q23: "C", q24: "F", q25: "A", q26: "D",
 
-            // Passage 3 – Accidents in business (Q27–40)
+            // Passage 3 вЂ“ Accidents in business (Q27вЂ“40)
             q27: "YES", q28: "NO", q29: "NO", q30: "YES", q31: "NOT GIVEN",
             q32: "F", q33: "G", q34: "C", q35: "A",
             q36: "B", q37: "D", q38: "A", q39: "C", q40: "B"

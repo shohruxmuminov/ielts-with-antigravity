@@ -1,4 +1,4 @@
-
+﻿
 
 
 <!--made by IELTSwithShohrux-->
@@ -31,6 +31,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .option-row[data-target="contrast"] { display: none !important; }
+    </style>
     <style>
         * {
             margin: 0;
@@ -1045,7 +1048,7 @@
         .submenu button:hover { background: #f7fafc; }
 
         .submenu .selected > .checkmark::before {
-            content: "✓";
+            content: "вњ“";
             font-weight: 800;
         }
 
@@ -1332,6 +1335,60 @@
             }
         }
     </style>
+    <style id="shohrux-dark-mode">
+        body, .container, .main-content, .loading-screen, .start-screen, .header, .footer, 
+        .main-container, .left-panel, .right-panel, .nav-row, .progress-container,
+        .passage-container, .questions-container, .test-container, .question-group {
+            background-color: #0f172a !important;
+            color: #f1f5f9 !important;
+        }
+        .question, .question-content, .passage-content, .passage-box, 
+        .task-description, .part-header, .test-info, .question-section, .task-prompt, .options, .option {
+            background-color: #1e293b !important;
+            color: #f1f5f9 !important;
+            border-color: #334155 !important;
+        }
+        table, th, td {
+            background-color: #1e293b !important;
+            color: #f1f5f9 !important;
+            border-color: #334155 !important;
+        }
+        th { background-color: #334155 !important; }
+        input[type="text"], input[type="radio"], select, textarea, .writing-textarea, .input-field {
+            background-color: #334155 !important;
+            color: #fff !important;
+            border-color: #475569 !important;
+        }
+        .option:hover, .btn:not(.btn-primary):not(.btn-submit):not(.start-button):not(.more-tests-button):hover {
+            background-color: #334155 !important;
+        }
+        .timer, .timer-container {
+            background-color: #451a1a !important;
+            color: #fca5a5 !important;
+            border-color: #7f1d1d !important;
+        }
+        .logo-area, .more-tests-button {
+            background-color: #3b82f6 !important;
+        }
+        .progress-item {
+            background-color: #334155 !important;
+            color: #94a3b8 !important;
+            border-color: #475569 !important;
+        }
+        .progress-item.current { background-color: #3b82f6 !important; color: #fff !important; }
+        .progress-item.answered { background-color: #10b981 !important; color: #fff !important; }
+        .resizer { background-color: #334155 !important; border-color: #475569 !important; }
+        h1, h2, h3, .section-title, .loading-title, .start-title, .passage-info, .brand {
+            color: #60a5fa !important;
+        }
+        .loading-subtitle, .start-description, .word-count {
+            color: #94a3b8 !important;
+        }
+        .timer-icon, .brand-icon { filter: brightness(0.8) invert(1); }
+        .watermark-layer {
+            color: rgba(255, 255, 255, 0.05) !important;
+        }
+    </style>
 </head>
 <!--made by IELTSwithShohrux-->
 <!--made by IELTSwithShohrux-->
@@ -1443,12 +1500,12 @@
 
             <!-- Questions for Passage 1 -->
             <div class="questions-container" id="p1_questionsPanel" role="region" aria-label="Questions">
-                <h2 class="section-title">Questions 1–13</h2>
+                <h2 class="section-title">Questions 1вЂ“13</h2>
 
                 <div class="question-group">
-                    <div class="question-group-title">Questions 1–6</div>
+                    <div class="question-group-title">Questions 1вЂ“6</div>
                     <p>Do the following statements agree with the information given in the text?</p>
-                    <p>In boxes 1–6, write <strong>TRUE</strong> if the statement agrees with the information, <strong>FALSE</strong> if the statement contradicts the information, or <strong>NOT GIVEN</strong> if there is no information on this.</p>
+                    <p>In boxes 1вЂ“6, write <strong>TRUE</strong> if the statement agrees with the information, <strong>FALSE</strong> if the statement contradicts the information, or <strong>NOT GIVEN</strong> if there is no information on this.</p>
 
                     <div class="question" data-question="1">
                         <div class="question-text">1 Field failed to find a company that could produce all of the cable needed by the specified date.</div>
@@ -1501,7 +1558,7 @@
                 </div>
 
                 <div class="question-group">
-                    <div class="question-group-title">Questions 7–13</div>
+                    <div class="question-group-title">Questions 7вЂ“13</div>
                     <p>Complete the notes below.</p>
                     <p>Choose <strong>ONE WORD ONLY</strong> from the text for each answer.</p>
                     <p><strong>The history of the trans-Atlantic telegraph</strong></p>
@@ -1562,13 +1619,13 @@
 
             <!-- Questions for Passage 2 -->
             <div class="questions-container hidden" id="p2_questionsPanel" role="region" aria-label="Questions">
-                <h2 class="section-title">Questions 14–26</h2>
+                <h2 class="section-title">Questions 14вЂ“26</h2>
 
                 <div class="question-group">
-                    <div class="question-group-title">Questions 14–19</div>
-                    <p>The text has six sections, <strong>A–F</strong>.</p>
+                    <div class="question-group-title">Questions 14вЂ“19</div>
+                    <p>The text has six sections, <strong>AвЂ“F</strong>.</p>
                     <p>Choose the correct heading for each section from the list of headings below.</p>
-                    <p>Drag the correct heading into the paragraph labels in Reading Passage 2 (14–19).</p>
+                    <p>Drag the correct heading into the paragraph labels in Reading Passage 2 (14вЂ“19).</p>
 
                     <p><strong>List of Headings</strong></p>
                     <div class="drag-options">
@@ -1587,7 +1644,7 @@
                 </div>
 
                 <div class="question-group">
-                    <div class="question-group-title">Questions 20–23</div>
+                    <div class="question-group-title">Questions 20вЂ“23</div>
                     <p>Complete the summary below.</p>
                     <p>Choose <strong>NO MORE THAN TWO WORDS</strong> from the passage for each answer.</p>
                     <p><strong>Improving the performance of hearing aids</strong></p>
@@ -1595,7 +1652,7 @@
                 </div>
 
                 <div class="question-group">
-                    <div class="question-group-title">Questions 24–26</div>
+                    <div class="question-group-title">Questions 24вЂ“26</div>
                     <p>Choose the correct letter, <strong>A</strong>, <strong>B</strong>, <strong>C</strong> or <strong>D</strong>.</p>
                     <div class="question" data-question="24">
                         <div class="question-text">24 Turner's team are now planning a new development involving a device which could</div>
@@ -1660,12 +1717,12 @@
 
             <!-- Questions for Passage 3 -->
             <div class="questions-container hidden" id="p3_questionsPanel" role="region" aria-label="Questions">
-                <h2 class="section-title">Questions 27–40</h2>
+                <h2 class="section-title">Questions 27вЂ“40</h2>
 
                 <div class="question-group">
-                    <div class="question-group-title">Questions 27–31</div>
+                    <div class="question-group-title">Questions 27вЂ“31</div>
                     <p>Do the following statements agree with the views of the writer in the text?</p>
-                    <p>In boxes 27–31, write <strong>YES</strong> if the statement agrees with the views of the writer, <strong>NO</strong> if the statement contradicts the views of the writer, or <strong>NOT GIVEN</strong> if it is impossible to say what the writer thinks about this.</p>
+                    <p>In boxes 27вЂ“31, write <strong>YES</strong> if the statement agrees with the views of the writer, <strong>NO</strong> if the statement contradicts the views of the writer, or <strong>NOT GIVEN</strong> if it is impossible to say what the writer thinks about this.</p>
 
                     <div class="question" data-question="27">
                         <div class="question-text">27 Early guesses probably greatly over-estimated the total number of species on Earth.</div>
@@ -1710,9 +1767,9 @@
                 </div>
 
                 <div class="question-group">
-                    <div class="question-group-title">Questions 32–36</div>
-                    <p>Complete each sentence with the correct ending, <strong>A–F</strong>, below.</p>
-                    <p>Drag the correct letter into each box 32–36.</p>
+                    <div class="question-group-title">Questions 32вЂ“36</div>
+                    <p>Complete each sentence with the correct ending, <strong>AвЂ“F</strong>, below.</p>
+                    <p>Drag the correct letter into each box 32вЂ“36.</p>
                     <div class="drag-options">
                         <div class="drag-item" draggable="true" data-option="A" data-label="a fall in the total number and variety of insects in the world">A a fall in the total number and variety of insects in the world.</div>
                         <div class="drag-item" draggable="true" data-option="B" data-label="the number of plants that are pollinated by insects">B the number of plants that are pollinated by insects.</div>
@@ -1744,7 +1801,7 @@
                 </div>
 
                 <div class="question-group">
-                    <div class="question-group-title">Questions 37–40</div>
+                    <div class="question-group-title">Questions 37вЂ“40</div>
                     <p>Choose the correct letter, <strong>A</strong>, <strong>B</strong>, <strong>C</strong> or <strong>D</strong>.</p>
 
                     <div class="question" data-question="37">
@@ -1917,7 +1974,7 @@
         let currentQuestion = 1;
         let seconds = 60 * 60;
         let timerInterval;
-        let selectedContrast = 'normal';
+        let selectedContrast = 'whiteblack';
         let selectedTextSize = 'medium';
 
         /* ========= HELPERS ========= */
@@ -2384,7 +2441,7 @@
             });
         });
 
-        applyContrast(selectedContrast);
+        applyContrast('whiteblack');
         applyTextSize(selectedTextSize);
 
         /* Fullscreen toggle */
@@ -2521,3 +2578,4 @@
 
 
 </html>
+

@@ -1,4 +1,4 @@
-
+﻿
 
 
 <!--made by IELTSwithShohrux-->
@@ -1037,7 +1037,7 @@
         .submenu button:hover { background: #f7fafc; }
 
         .submenu .selected > .checkmark::before {
-            content: "✓";
+            content: "вњ“";
             font-weight: 800;
         }
 
@@ -1324,6 +1324,60 @@
             }
         }
     </style>
+    <style id="shohrux-dark-mode">
+        body, .container, .main-content, .loading-screen, .start-screen, .header, .footer, 
+        .main-container, .left-panel, .right-panel, .nav-row, .progress-container,
+        .passage-container, .questions-container, .test-container, .question-group {
+            background-color: #0f172a !important;
+            color: #f1f5f9 !important;
+        }
+        .question, .question-content, .passage-content, .passage-box, 
+        .task-description, .part-header, .test-info, .question-section, .task-prompt, .options, .option {
+            background-color: #1e293b !important;
+            color: #f1f5f9 !important;
+            border-color: #334155 !important;
+        }
+        table, th, td {
+            background-color: #1e293b !important;
+            color: #f1f5f9 !important;
+            border-color: #334155 !important;
+        }
+        th { background-color: #334155 !important; }
+        input[type="text"], input[type="radio"], select, textarea, .writing-textarea, .input-field {
+            background-color: #334155 !important;
+            color: #fff !important;
+            border-color: #475569 !important;
+        }
+        .option:hover, .btn:not(.btn-primary):not(.btn-submit):not(.start-button):not(.more-tests-button):hover {
+            background-color: #334155 !important;
+        }
+        .timer, .timer-container {
+            background-color: #451a1a !important;
+            color: #fca5a5 !important;
+            border-color: #7f1d1d !important;
+        }
+        .logo-area, .more-tests-button {
+            background-color: #3b82f6 !important;
+        }
+        .progress-item {
+            background-color: #334155 !important;
+            color: #94a3b8 !important;
+            border-color: #475569 !important;
+        }
+        .progress-item.current { background-color: #3b82f6 !important; color: #fff !important; }
+        .progress-item.answered { background-color: #10b981 !important; color: #fff !important; }
+        .resizer { background-color: #334155 !important; border-color: #475569 !important; }
+        h1, h2, h3, .section-title, .loading-title, .start-title, .passage-info, .brand {
+            color: #60a5fa !important;
+        }
+        .loading-subtitle, .start-description, .word-count {
+            color: #94a3b8 !important;
+        }
+        .timer-icon, .brand-icon { filter: brightness(0.8) invert(1); }
+        .watermark-layer {
+            color: rgba(255, 255, 255, 0.05) !important;
+        }
+    </style>
 </head>
 <!--made by IELTSwithShohrux-->
 <!--made by IELTSwithShohrux-->
@@ -1418,24 +1472,24 @@
                     <p><strong>You should spend about 20 minutes on Questions 1-13, which are based on Reading Passage 1.</strong></p>
                     <h3>Steam across the water</h3>
                     <p><em>A look at the early history of boats powered by steam</em></p>
-                    <p>During the 1600s, very early in the development of steam engines, inventive spirits like the Frenchman Denis Papin dreamed of – and experimented with – boats driven by steam, rather than by the wind or human effort, but many decades passed before those visions became reality.</p>
-                    <p>Englishman Jonathan Hulls took out patents on a steamboat in 1736, but it was to be driven by a Newcomen engine, which was heavy and therefore inefficient, and would never be a success. In 1763, William Henry, an American. put a Watt steam engine in a boat, but it sank. Nearly 20 years later, in the 1780s, a steam-powered paddle-wheeler managed to last fifteen minutes against the current on the River Saone in France, but lacked the endurance for longer trips. Developments elsewhere included a boat driven by a steam-powered water-jet and able to do six kilometres per hour. However, all these steamboats were either too slow or too expensive to run. For example, American John Fitch successfully trialled his first steamboat in 1787, but although he tried a number of designs and solved many technical challenges – one of his boats could even travel at 13 km/h – he could never convince sceptics that steamboats would pay.</p>
-                    <p>The 19th century came before real success could be claimed. In Scotland in 1802, Lord Dundas launched the steamboat Charlotte Dundas, which was driven by a paddle wheel and had an improved engine designed by William Symington. Barges, some weighing as much as 70 tonnes. were towed by this steamboat 30 kilometres along the Forth and Clyde Canal to Glasgow, Scotland’s second city. Soon after, success came to American Robert Fulton, whose countrymen called him ‘the father of the steamboat’. Inspired by news of the Charlotte Dundas, Fulton ran steamboat trials on the River Seine, in an attempt to attract French support for his submarine Nautilus. He later imported a Boulton-Watt steam engine and built a boat to use it in. In 1807, the Clermont began a scheduled passenger steamboat service between New York and Albany, 250 kilometres up the Hudson River, taking 30 hours for the trip. Within few years, steamers were running on the St Lawrence River in Canada and would soon appear on other rivers and lakes, including the Mississippi River, a most famous venue for the paddle-wheelers.</p>
-                    <p>Back in Scotland, Fulton’s ideas inspired Henry Bell, who launched his Comet in 1812 on the Clyde between Glasgow and Greenock. Inside a decade, dozens of steamboats were to be seen on the rivers, lochs and canals of Scotland, carrying cargo and occasionally passengers. The age of steamboats had come.</p>
+                    <p>During the 1600s, very early in the development of steam engines, inventive spirits like the Frenchman Denis Papin dreamed of вЂ“ and experimented with вЂ“ boats driven by steam, rather than by the wind or human effort, but many decades passed before those visions became reality.</p>
+                    <p>Englishman Jonathan Hulls took out patents on a steamboat in 1736, but it was to be driven by a Newcomen engine, which was heavy and therefore inefficient, and would never be a success. In 1763, William Henry, an American. put a Watt steam engine in a boat, but it sank. Nearly 20 years later, in the 1780s, a steam-powered paddle-wheeler managed to last fifteen minutes against the current on the River Saone in France, but lacked the endurance for longer trips. Developments elsewhere included a boat driven by a steam-powered water-jet and able to do six kilometres per hour. However, all these steamboats were either too slow or too expensive to run. For example, American John Fitch successfully trialled his first steamboat in 1787, but although he tried a number of designs and solved many technical challenges вЂ“ one of his boats could even travel at 13 km/h вЂ“ he could never convince sceptics that steamboats would pay.</p>
+                    <p>The 19th century came before real success could be claimed. In Scotland in 1802, Lord Dundas launched the steamboat Charlotte Dundas, which was driven by a paddle wheel and had an improved engine designed by William Symington. Barges, some weighing as much as 70 tonnes. were towed by this steamboat 30 kilometres along the Forth and Clyde Canal to Glasgow, ScotlandвЂ™s second city. Soon after, success came to American Robert Fulton, whose countrymen called him вЂthe father of the steamboatвЂ™. Inspired by news of the Charlotte Dundas, Fulton ran steamboat trials on the River Seine, in an attempt to attract French support for his submarine Nautilus. He later imported a Boulton-Watt steam engine and built a boat to use it in. In 1807, the Clermont began a scheduled passenger steamboat service between New York and Albany, 250 kilometres up the Hudson River, taking 30 hours for the trip. Within few years, steamers were running on the St Lawrence River in Canada and would soon appear on other rivers and lakes, including the Mississippi River, a most famous venue for the paddle-wheelers.</p>
+                    <p>Back in Scotland, FultonвЂ™s ideas inspired Henry Bell, who launched his Comet in 1812 on the Clyde between Glasgow and Greenock. Inside a decade, dozens of steamboats were to be seen on the rivers, lochs and canals of Scotland, carrying cargo and occasionally passengers. The age of steamboats had come.</p>
                     <p>Once steamboats were carrying passengers and industrial goods along the inland waterways and sheltered coastlines of Europe, North America and elsewhere, the challenge became to send steamboats onto the open ocean, such as across the Atlantic Ocean, between Europe and the US. Travelling under steam power alone would require engines to use less coal so the ship could stay at sea for several weeks. In order to provide a reliable service, it was also necessary to replace paddle wheels as a source of power with something less affected by the rolling of the ship.</p>
-                    <p>Without waiting for such breakthroughs, crossings under a combination of steam and sail got underway in 1819 with the American ship Savannah. A regular service took another two decades and introduced the famous name of Cunard. Securing the British government contract for the mail service across the Atlantic, Samuel Cunard established a shipping line in 1840, soon carrying passengers as well, and offering guaranteed sailing dates. Cunard’s first ships used a sail-steam combination, but the era of the passenger liner, using steam alone, was getting close.</p>
-                    <p>When it came to building the ships, the versatile British engineer Isambard Kingdom Brunel set the pace. Brunel, brilliant and daring, had already built the Great Western Railway. He created ever bigger ships – faster, more luxurious and comfortable for passengers. The Great Western, launched in 1838, was 70 metres long and crossed from Bristol to New York in just fifteen days. The largest paddle steamer ever built was Brunel’s Great Eastern. Ultimately too expensive to run as a passenger ship, it was leased to lay the first submarine telegraph cable from Europe to America. His 1853 Great Britain, nearly 100 metres long and luxuriously appointed, was the first ocean-going steamship made of iron, and the first to use the underwater screw propeller for powering movement in place of paddle wheels. The idea of the screw had been around since the experiments of the American John Stevens in 1803, but only in 1838 did a large steamer use one, the riverboat Archimedes built by Francis Pettit Smith. Later ships had twin screws for reliability.</p>
-                    <p>In many modern ships, steam turbines have replaced engines with pistons, with fuel oil instead of coal to fire the boilers. Diesel engines keep others moving. The largest ships afloat now would dwarf Brunel’s Great Eastern (launched in 1860); the Atlantic can be crossed in only four days. But in whatever form, the ever-evolving descendants of the original visions of Denis Papin and Robert Fulton continue to travel the seas in vast numbers.</p>
+                    <p>Without waiting for such breakthroughs, crossings under a combination of steam and sail got underway in 1819 with the American ship Savannah. A regular service took another two decades and introduced the famous name of Cunard. Securing the British government contract for the mail service across the Atlantic, Samuel Cunard established a shipping line in 1840, soon carrying passengers as well, and offering guaranteed sailing dates. CunardвЂ™s first ships used a sail-steam combination, but the era of the passenger liner, using steam alone, was getting close.</p>
+                    <p>When it came to building the ships, the versatile British engineer Isambard Kingdom Brunel set the pace. Brunel, brilliant and daring, had already built the Great Western Railway. He created ever bigger ships вЂ“ faster, more luxurious and comfortable for passengers. The Great Western, launched in 1838, was 70 metres long and crossed from Bristol to New York in just fifteen days. The largest paddle steamer ever built was BrunelвЂ™s Great Eastern. Ultimately too expensive to run as a passenger ship, it was leased to lay the first submarine telegraph cable from Europe to America. His 1853 Great Britain, nearly 100 metres long and luxuriously appointed, was the first ocean-going steamship made of iron, and the first to use the underwater screw propeller for powering movement in place of paddle wheels. The idea of the screw had been around since the experiments of the American John Stevens in 1803, but only in 1838 did a large steamer use one, the riverboat Archimedes built by Francis Pettit Smith. Later ships had twin screws for reliability.</p>
+                    <p>In many modern ships, steam turbines have replaced engines with pistons, with fuel oil instead of coal to fire the boilers. Diesel engines keep others moving. The largest ships afloat now would dwarf BrunelвЂ™s Great Eastern (launched in 1860); the Atlantic can be crossed in only four days. But in whatever form, the ever-evolving descendants of the original visions of Denis Papin and Robert Fulton continue to travel the seas in vast numbers.</p>
                 </div>
             </div>
             <div class="resizer"></div>
 
             <!-- Questions for Passage 1 -->
             <div class="questions-container" id="p1_questionsPanel" role="region" aria-label="Questions">
-                <h2 class="section-title"><img src="https://cdn.kiberai.uz/content/uploads/2026/01/icon-modified.png" alt="Logo" style="width:24px; height:24px; object-fit:contain; margin-right:6px;">Questions 1–13</h2>
+                <h2 class="section-title"><img src="https://cdn.kiberai.uz/content/uploads/2026/01/icon-modified.png" alt="Logo" style="width:24px; height:24px; object-fit:contain; margin-right:6px;">Questions 1вЂ“13</h2>
 
                 <div class="question-group">
-                    <div class="question-group-title">Questions 1–6</div>
+                    <div class="question-group-title">Questions 1вЂ“6</div>
                     <p>Complete the table below.</p>
                     <p>Write <strong>ONE WORD ONLY</strong> from the passage for each answer.</p>
                     <table>
@@ -1479,7 +1533,7 @@
                 </div>
 
                 <div class="question-group">
-                    <div class="question-group-title"><img src="https://cdn.kiberai.uz/content/uploads/2026/01/icon-modified.png" alt="Logo" style="width:24px; height:24px; object-fit:contain; margin-right:6px;">Questions 7–13</div>
+                    <div class="question-group-title"><img src="https://cdn.kiberai.uz/content/uploads/2026/01/icon-modified.png" alt="Logo" style="width:24px; height:24px; object-fit:contain; margin-right:6px;">Questions 7вЂ“13</div>
                     <p>Choose <strong>TRUE</strong> if the statement agrees with the information given in the text, <strong>FALSE</strong> if the statement contradicts the information, or <strong>NOT GIVEN</strong> if there is no information on this.</p>
 
                     <div class="question" data-question="7">
@@ -1574,10 +1628,10 @@
 
             <!-- Questions for Passage 2 -->
             <div class="questions-container hidden" id="p2_questionsPanel" role="region" aria-label="Questions">
-                <h2 class="section-title"><img src="https://cdn.kiberai.uz/content/uploads/2026/01/icon-modified.png" alt="Logo" style="width:24px; height:24px; object-fit:contain; margin-right:6px;">Questions 14–26</h2>
+                <h2 class="section-title"><img src="https://cdn.kiberai.uz/content/uploads/2026/01/icon-modified.png" alt="Logo" style="width:24px; height:24px; object-fit:contain; margin-right:6px;">Questions 14вЂ“26</h2>
 
                 <div class="question-group">
-                    <div class="question-group-title">Questions 14–18</div>
+                    <div class="question-group-title">Questions 14вЂ“18</div>
                     <p>Look at the following statements (Questions 14-18) and the list of people.</p>
                     <p>Match each statement with the correct person, <strong>A</strong>, <strong>B</strong>, <strong>C</strong> or <strong>D</strong>.</p>
                     <p><strong>List of people</strong></p>
@@ -1630,10 +1684,10 @@
                 </div>
 
                 <div class="question-group">
-                    <div class="question-group-title"><img src="https://cdn.kiberai.uz/content/uploads/2026/01/icon-modified.png" alt="Logo" style="width:24px; height:24px; object-fit:contain; margin-right:6px;">Questions 19–22</div>
-                    <p>Reading Passage 2 has six paragraphs, <strong>A–F</strong>.</p>
+                    <div class="question-group-title"><img src="https://cdn.kiberai.uz/content/uploads/2026/01/icon-modified.png" alt="Logo" style="width:24px; height:24px; object-fit:contain; margin-right:6px;">Questions 19вЂ“22</div>
+                    <p>Reading Passage 2 has six paragraphs, <strong>AвЂ“F</strong>.</p>
                     <p>Which paragraph contains the following information?</p>
-                    <p>Choose the correct letter, <strong>A–F</strong>, in boxes 19–22.</p>
+                    <p>Choose the correct letter, <strong>AвЂ“F</strong>, in boxes 19вЂ“22.</p>
                     <table>
                         <tr>
                             <th style="width: 45%;">Statement</th>
@@ -1684,7 +1738,7 @@
                 </div>
 
                 <div class="question-group">
-                    <div class="question-group-title"><img src="https://cdn.kiberai.uz/content/uploads/2026/01/icon-modified.png" alt="Logo" style="width:24px; height:24px; object-fit:contain; margin-right:6px;">Questions 23–26</div>
+                    <div class="question-group-title"><img src="https://cdn.kiberai.uz/content/uploads/2026/01/icon-modified.png" alt="Logo" style="width:24px; height:24px; object-fit:contain; margin-right:6px;">Questions 23вЂ“26</div>
                     <p>Complete the summary below.</p>
                     <p>Write <strong>NO MORE THAN TWO WORDS AND/OR A NUMBER</strong> from the passage for each answer.</p>
 
@@ -1727,10 +1781,10 @@
 
             <!-- Questions for Passage 3 -->
             <div class="questions-container hidden" id="p3_questionsPanel" role="region" aria-label="Questions">
-                <h2 class="section-title"><img src="https://cdn.kiberai.uz/content/uploads/2026/01/icon-modified.png" alt="Logo" style="width:24px; height:24px; object-fit:contain; margin-right:6px;">Questions 27–40</h2>
+                <h2 class="section-title"><img src="https://cdn.kiberai.uz/content/uploads/2026/01/icon-modified.png" alt="Logo" style="width:24px; height:24px; object-fit:contain; margin-right:6px;">Questions 27вЂ“40</h2>
 
                 <div class="question-group">
-                    <div class="question-group-title">Questions 27–31</div>
+                    <div class="question-group-title">Questions 27вЂ“31</div>
                     <p>Choose the correct answer.</p>
 
                     <div class="question" data-question="27">
@@ -1781,10 +1835,10 @@
                 </div>
 
                 <div class="question-group">
-                    <div class="question-group-title"><img src="https://cdn.kiberai.uz/content/uploads/2026/01/icon-modified.png" alt="Logo" style="width:24px; height:24px; object-fit:contain; margin-right:6px;">Questions 32–36</div>
-                    <p>Complete the summary using the list of words, <strong>A–H</strong>, below.</p>
+                    <div class="question-group-title"><img src="https://cdn.kiberai.uz/content/uploads/2026/01/icon-modified.png" alt="Logo" style="width:24px; height:24px; object-fit:contain; margin-right:6px;">Questions 32вЂ“36</div>
+                    <p>Complete the summary using the list of words, <strong>AвЂ“H</strong>, below.</p>
                     <p>The Zuni earthen architecture project</p>
-                    <p>Drag the correct letter into each box 32–36.</p>
+                    <p>Drag the correct letter into each box 32вЂ“36.</p>
                     <div class="drag-options">
                         <div class="drag-item" draggable="true" data-option="A" data-label="experts">A experts</div>
                         <div class="drag-item" draggable="true" data-option="B" data-label="location">B location</div>
@@ -1814,7 +1868,7 @@
                 </div>
 
                 <div class="question-group">
-                    <div class="question-group-title"><img src="https://cdn.kiberai.uz/content/uploads/2026/01/icon-modified.png" alt="Logo" style="width:24px; height:24px; object-fit:contain; margin-right:6px;">Questions 37–40</div>
+                    <div class="question-group-title"><img src="https://cdn.kiberai.uz/content/uploads/2026/01/icon-modified.png" alt="Logo" style="width:24px; height:24px; object-fit:contain; margin-right:6px;">Questions 37вЂ“40</div>
                     <p>Choose <strong>YES</strong> if the statement agrees with the claims of the writer, <strong>NO</strong> if the statement contradicts the claims of the writer, or <strong>NOT GIVEN</strong> if it is impossible to say what the writer thinks about this.</p>
 
                     <div class="question" data-question="37">
@@ -1904,13 +1958,7 @@
                 </div>
             </div>
 
-            <div id="contrast-menu" style="display:none;">
-                <div class="options-list submenu">
-                    <button data-contrast="normal"><span>Black on white</span><span class="checkmark"></span></button>
-                    <button data-contrast="whiteblack"><span>White on black</span><span class="checkmark"></span></button>
-                    <button data-contrast="yellowblack"><span>Yellow on black</span><span class="checkmark"></span></button>
-                </div>
-            </div>
+                <div class="options-list submenu" style="display:none !important;">
 
             <div id="textsize-menu" style="display:none;">
                 <div class="options-list submenu">
@@ -1983,7 +2031,7 @@
         let currentQuestion = 1;
         let seconds = 60 * 60;
         let timerInterval;
-        let selectedContrast = 'normal';
+        let selectedContrast = 'whiteblack';
         let selectedTextSize = 'medium';
 
         /* ========= HELPERS ========= */
@@ -2422,7 +2470,7 @@
             });
         });
 
-        applyContrast(selectedContrast);
+        applyContrast('whiteblack');
         applyTextSize(selectedTextSize);
 
         /* Fullscreen toggle */
@@ -2559,3 +2607,4 @@
 
 
 </html>
+

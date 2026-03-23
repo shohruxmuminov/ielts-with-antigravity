@@ -1,4 +1,4 @@
-
+﻿
 
 
 <!DOCTYPE html>
@@ -9,6 +9,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <style id="shohrux-dark-mode">
+        body, .container, .main-content, .loading-screen, .start-screen, .header, .footer, 
+        .main-container, .left-panel, .right-panel, .nav-row, .progress-container,
+        .passage-container, .questions-container, .test-container, .question-group {
+            background-color: #0f172a !important;
+            color: #f1f5f9 !important;
+        }
+        .question, .question-content, .passage-content, .passage-box, 
+        .task-description, .part-header, .test-info, .question-section, .task-prompt, .options, .option {
+            background-color: #1e293b !important;
+            color: #f1f5f9 !important;
+            border-color: #334155 !important;
+        }
+        table, th, td {
+            background-color: #1e293b !important;
+            color: #f1f5f9 !important;
+            border-color: #334155 !important;
+        }
+        th { background-color: #334155 !important; }
+        input[type="text"], input[type="radio"], select, textarea, .writing-textarea, .input-field {
+            background-color: #334155 !important;
+            color: #fff !important;
+            border-color: #475569 !important;
+        }
+        .option:hover, .btn:not(.btn-primary):not(.btn-submit):not(.start-button):not(.more-tests-button):hover {
+            background-color: #334155 !important;
+        }
+        .timer, .timer-container {
+            background-color: #451a1a !important;
+            color: #fca5a5 !important;
+            border-color: #7f1d1d !important;
+        }
+        .logo-area, .more-tests-button {
+            background-color: #3b82f6 !important;
+        }
+        .progress-item {
+            background-color: #334155 !important;
+            color: #94a3b8 !important;
+            border-color: #475569 !important;
+        }
+        .progress-item.current { background-color: #3b82f6 !important; color: #fff !important; }
+        .progress-item.answered { background-color: #10b981 !important; color: #fff !important; }
+        .resizer { background-color: #334155 !important; border-color: #475569 !important; }
+        h1, h2, h3, .section-title, .loading-title, .start-title, .passage-info, .brand {
+            color: #60a5fa !important;
+        }
+        .loading-subtitle, .start-description, .word-count {
+            color: #94a3b8 !important;
+        }
+        .timer-icon, .brand-icon { filter: brightness(0.8) invert(1); }
+        .watermark-layer {
+            color: rgba(255, 255, 255, 0.05) !important;
+        }
+    </style>
     <style>
         * {
             margin: 0;
@@ -737,7 +791,7 @@
             <div class="passage-content" id="passage1">
                 <h3>Chilli Peppers</h3>
 
-                <p><strong>A</strong> For thousands of years, humans have taken painful pleasure from adding chillies (also known as peppers or chilli peppers) to their food. A study published in the British Medical Journal in 2015 indicated that a diet filled with spices – including chillies – was beneficial for health. The study, which was carried out by scientists at the Chinese Academy of Medical Sciences, tracked the health of nearly half a million participants in China for several years. They found that participants who ate spicy food once or twice a week had a mortality rate 10% lower than those who ate spicy food less than once a week. Risk of death reduced still further for people who ate spicy food six or seven days a week. Chilli peppers were the most commonly used spice among the sample, and those who ate fresh chilli had a lower probability of death from cancer, heart disease and diabetes.</p>
+                <p><strong>A</strong> For thousands of years, humans have taken painful pleasure from adding chillies (also known as peppers or chilli peppers) to their food. A study published in the British Medical Journal in 2015 indicated that a diet filled with spices вЂ“ including chillies вЂ“ was beneficial for health. The study, which was carried out by scientists at the Chinese Academy of Medical Sciences, tracked the health of nearly half a million participants in China for several years. They found that participants who ate spicy food once or twice a week had a mortality rate 10% lower than those who ate spicy food less than once a week. Risk of death reduced still further for people who ate spicy food six or seven days a week. Chilli peppers were the most commonly used spice among the sample, and those who ate fresh chilli had a lower probability of death from cancer, heart disease and diabetes.</p>
 
                 <p><strong>B</strong> The health-promoting properties of chillies can be found in capsaicin, which is the odourless, colourless chemical compound that makes chillies hot. Inside a chilli there are yellow stalks that attach the seeds to its sides and in many types of chilli, this is the location of capsaicin, but there are several varieties where this is not the case. The heat of a chilli is measured in Scoville heat units, which is the number of times a sample of dissolved dried chilli must be diluted by its own weight in sugar water before it loses its heat. For a green bell pepper this is zero. But habanero peppers have a Scoville value of between 100,000 and 350,000. For pure capsaicin the figure is 16 million. Pure capsaicin can be bought on the internet, though its use as a food additive is banned in the European Union. The use of chilli peppers as weapons dates back to pre-Columbian times (before 1492), when, it is said, Mayans burned rows of them to create a stinging smokescreen to protect themselves from their enemies. The Aztecs also put chilli on their teeth to kill toothache pain, and the use of capsaicin as a pain reliever continues today.</p>
 
@@ -754,10 +808,10 @@
 
         <!-- Questions for Passage 1 -->
         <div class="questions-container" id="p1_questionsPanel" role="region" aria-label="Questions">
-            <h2 class="section-title">Questions 1–13</h2>
+            <h2 class="section-title">Questions 1вЂ“13</h2>
 
             <div class="question-group">
-                <div class="question-group-title">Questions 1–7</div>
+                <div class="question-group-title">Questions 1вЂ“7</div>
                 <p>Choose TRUE if the statement agrees with the information given in the text, choose FALSE if the statement contradicts the information, or choose NOT GIVEN if there is no information on this.</p>
 
                 <div class="question" data-question="1">
@@ -791,33 +845,33 @@
             </div>
 
             <div class="question-group">
-                <div class="question-group-title">Questions 8–13</div>
+                <div class="question-group-title">Questions 8вЂ“13</div>
                 <p>Complete the notes below.</p>
                 <p>Write <strong>ONE WORD ONLY</strong> from the passage for each answer.</p>
 
                 <div class="question" data-question="8">
                     <div class="question-text">The health benefits of chilli</div>
                     <div class="question-text">Using chilli to fight bacteria</div>
-                    <div class="question-text">○ chilli's ability to fight germs was very significant before the invention of <input type="text" name="q8" maxlength="30"></div>
+                    <div class="question-text">в—‹ chilli's ability to fight germs was very significant before the invention of <input type="text" name="q8" maxlength="30"></div>
                 </div>
                 <div class="question" data-question="9">
-                    <div class="question-text">○ it was thought that chilli was eaten because it causes bodies to produce <input type="text" name="q9" maxlength="30"> which reduces body heat</div>
+                    <div class="question-text">в—‹ it was thought that chilli was eaten because it causes bodies to produce <input type="text" name="q9" maxlength="30"> which reduces body heat</div>
                 </div>
                 <div class="question" data-question="10">
-                    <div class="question-text">○ books of <input type="text" name="q10" maxlength="30"> from around the world show chilli is more commonly used in certain geographical areas</div>
+                    <div class="question-text">в—‹ books of <input type="text" name="q10" maxlength="30"> from around the world show chilli is more commonly used in certain geographical areas</div>
                 </div>
                 <div class="question" data-question="11">
-                    <div class="question-text">○ chilli is most likely to be used in valleys with a lot of humidity</div>
+                    <div class="question-text">в—‹ chilli is most likely to be used in valleys with a lot of humidity</div>
                     <div class="question-text">Using chilli for weight loss</div>
-                    <div class="question-text">○ the University of Wyoming found that chilli raised the mice's <input type="text" name="q11" maxlength="30"></div>
+                    <div class="question-text">в—‹ the University of Wyoming found that chilli raised the mice's <input type="text" name="q11" maxlength="30"></div>
                 </div>
                 <div class="question" data-question="12">
-                    <div class="question-text">○ the University of Adelaide found that receptors in the <input type="text" name="q12" maxlength="30"> react with chilli to indicate when you've had enough to eat</div>
+                    <div class="question-text">в—‹ the University of Adelaide found that receptors in the <input type="text" name="q12" maxlength="30"> react with chilli to indicate when you've had enough to eat</div>
                 </div>
                 <div class="question" data-question="13">
                     <div class="question-text">Using chilli as pain relief</div>
-                    <div class="question-text">○ it reacts with the part of our brain that notices a difference in temperature</div>
-                    <div class="question-text">○ the sensation we have when eating chilli is similar to the one we have after <input type="text" name="q13" maxlength="30"></div>
+                    <div class="question-text">в—‹ it reacts with the part of our brain that notices a difference in temperature</div>
+                    <div class="question-text">в—‹ the sensation we have when eating chilli is similar to the one we have after <input type="text" name="q13" maxlength="30"></div>
                 </div>
             </div>
         </div> <!-- /p1_questionsPanel -->
@@ -836,22 +890,22 @@
 
                 <p><strong>D</strong> Being 'too busy' is highly subjective, but for any individual there are some concrete signs of stress: disturbed sleep and declining mental and physical health are the most common examples. Figures for National Workers' Compensation (insurance against injury caused by work) show that stress causes the most lost time of any workplace injury: employees suffering stress are absent from work for an average of 16.6 weeks. The effects of stress are also expensive. The Australian Government insurer reports that in 2003-2004, claims for stress-related psychological injury accounted for 7% of insurance claims, but almost 27% of the amount paid out in claim payments.</p>
 
-                <p><strong>E</strong> Experts say the key to dealing with stress is not to focus on relief – a game of golf or a massage – but to reassess workloads. Neil Plumridge says he makes it a priority to work out what has to change: that might mean allocating extra staff to a job, allowing more time, or changing expectations. He also relies on the advice of colleagues, saying that his peers coach each other on business problems: 'Just a fresh pair of eyes over an issue can help,' he states.</p>
+                <p><strong>E</strong> Experts say the key to dealing with stress is not to focus on relief вЂ“ a game of golf or a massage вЂ“ but to reassess workloads. Neil Plumridge says he makes it a priority to work out what has to change: that might mean allocating extra staff to a job, allowing more time, or changing expectations. He also relies on the advice of colleagues, saying that his peers coach each other on business problems: 'Just a fresh pair of eyes over an issue can help,' he states.</p>
 
                 <p><strong>F</strong> Executive stress is not confined to big organisations. Vanessa Stoykov has been running her own advertising agency and public relations business for seven years. Her company has grown so fast that it appeared on the BUSINESS REVIEW WEEKLY 'Fast 100' list of fastest-growing small enterprises in 2004, just after Stoykov had her first child. In 2005, revenue was projected to double to $2.4 million. She had just had her second child. With a fast-growing business and two small children, Stoykov says she has mastered the art of caring for children, typing, and talking on the phone at the same time. But, unlike many others, she appears to thrive on the mental stimulation of running her own business, despite the stress.</p>
 
-                <p><strong>G</strong> Jan Elsner, a psychologist who specialises in executive coaching, says that doing well on a demanding workload is typical of senior executives. Some people work best with high-adrenaline periods followed by quieter times, while others thrive under sustained pressure. Elsner's practice is based on a movement known as positive psychology, a school of thought that argues that positive experiences – feeling engaged and challenged, for example – do not balance out negative experiences such as stress; instead they help people increase their resilience over time. Elsner says that many of the senior business people she coaches are increasingly relying more on regulating stress through methods such as meditation. She points to research showing that meditation can alter the biochemistry of the brain and the way that brains and bodies react to stress.</p>
+                <p><strong>G</strong> Jan Elsner, a psychologist who specialises in executive coaching, says that doing well on a demanding workload is typical of senior executives. Some people work best with high-adrenaline periods followed by quieter times, while others thrive under sustained pressure. Elsner's practice is based on a movement known as positive psychology, a school of thought that argues that positive experiences вЂ“ feeling engaged and challenged, for example вЂ“ do not balance out negative experiences such as stress; instead they help people increase their resilience over time. Elsner says that many of the senior business people she coaches are increasingly relying more on regulating stress through methods such as meditation. She points to research showing that meditation can alter the biochemistry of the brain and the way that brains and bodies react to stress.</p>
 
-                <p><strong>H</strong> Some experts believe there is too much emphasis on treating job stress as an individual problem. Tony LaMontagne, of the University of Melbourne, says that while personality traits do have some effect on stress, it is systemic stressors – qualities of job roles and organisations themselves – that have a far greater effect. His recent research shows that the major predictor of stress is the level of job control a person has. The best type of job combines challenging work with high autonomy. The worst jobs combine challenging work and low control. People with demanding jobs but little autonomy have up to four times the probability of depression and more than double the risk of heart attack.</p>
+                <p><strong>H</strong> Some experts believe there is too much emphasis on treating job stress as an individual problem. Tony LaMontagne, of the University of Melbourne, says that while personality traits do have some effect on stress, it is systemic stressors вЂ“ qualities of job roles and organisations themselves вЂ“ that have a far greater effect. His recent research shows that the major predictor of stress is the level of job control a person has. The best type of job combines challenging work with high autonomy. The worst jobs combine challenging work and low control. People with demanding jobs but little autonomy have up to four times the probability of depression and more than double the risk of heart attack.</p>
             </div>
         </div>
         <div class="resizer"></div>
 
         <div class="questions-container hidden" id="p2_questionsPanel" role="region" aria-label="Questions">
-            <h2 class="section-title">Questions 14–26</h2>
+            <h2 class="section-title">Questions 14вЂ“26</h2>
 
             <div class="question-group">
-                <div class="question-group-title">Questions 14–18</div>
+                <div class="question-group-title">Questions 14вЂ“18</div>
                 <p>Look at the following statements (Questions 14-18) and the list of people below.</p>
                 <p>Match each statement with the correct person, A-D.</p>
                 <p>Choose the correct letter, A-D, in boxes 14-18.</p>
@@ -915,7 +969,7 @@
             </div>
 
             <div class="question-group">
-                <div class="question-group-title">Questions 19–21</div>
+                <div class="question-group-title">Questions 19вЂ“21</div>
                 <p>Choose the correct answer.</p>
 
                 <div class="question" data-question="19">
@@ -933,7 +987,7 @@
             </div>
 
             <div class="question-group">
-                <div class="question-group-title">Questions 22–26</div>
+                <div class="question-group-title">Questions 22вЂ“26</div>
                 <p>Complete the summary below.</p>
                 <p>Write <strong>NO MORE THAN TWO WORDS AND/OR A NUMBER</strong> from the passage for each answer.</p>
 
@@ -945,7 +999,7 @@
                     <div class="question-text">On average, workers who take time off because of stress stay away for <input type="text" name="q23" maxlength="30"> .</div>
                 </div>
                 <div class="question" data-question="24">
-                    <div class="question-text">This absence comes at a high price – while the number of insurance claims due to stress amount to only <input type="text" name="q24" maxlength="30"> of the total, they account for a much higher proportion of the cost of claims payments.</div>
+                    <div class="question-text">This absence comes at a high price вЂ“ while the number of insurance claims due to stress amount to only <input type="text" name="q24" maxlength="30"> of the total, they account for a much higher proportion of the cost of claims payments.</div>
                 </div>
                 <div class="question" data-question="25">
                     <div class="question-text">Experts believe that seeking to relieve stress through physical therapies such as sport or <input type="text" name="q25" maxlength="30"> may be less effective than simply reviewing your <input type="text" name="q26" maxlength="30">.</div>
@@ -973,10 +1027,10 @@
         <div class="resizer"></div>
 
         <div class="questions-container hidden" id="p3_questionsPanel" role="region" aria-label="Questions">
-            <h2 class="section-title">Questions 27–40</h2>
+            <h2 class="section-title">Questions 27вЂ“40</h2>
 
             <div class="question-group">
-                <div class="question-group-title">Questions 27–31</div>
+                <div class="question-group-title">Questions 27вЂ“31</div>
                 <p>Choose the correct answer.</p>
 
                 <div class="question" data-question="27">
@@ -1002,7 +1056,7 @@
             </div>
 
             <div class="question-group">
-                <div class="question-group-title">Questions 32–35</div>
+                <div class="question-group-title">Questions 32вЂ“35</div>
                 <p>Choose YES if the statement agrees with the claims of the writer, choose NO if the statement contradicts the claims of the writer, or NOT GIVEN if it is impossible to say what the writer thinks about this.</p>
 
                 <div class="question" data-question="32">
@@ -1024,7 +1078,7 @@
             </div>
 
             <div class="question-group">
-                <div class="question-group-title">Questions 36–40</div>
+                <div class="question-group-title">Questions 36вЂ“40</div>
                 <p>Complete the summary using the list of words, A-I, below.</p>
                 <p>Robert Louis Stevenson and Sir Walter Scott</p>
                 <p>Opinions differ as to whether Robert Louis Stevenson or Sir Walter Scott should be considered Scotland's best writer. Scott had greater <span class="question-text">36</span> <select name="q36">
@@ -1129,16 +1183,16 @@
 
     /* ======= ANSWER KEY ======= */
     const correctAnswers = {
-        // Passage 1 – Chilli Peppers (Q1–13)
+        // Passage 1 вЂ“ Chilli Peppers (Q1вЂ“13)
         q1: "FALSE", q2: "TRUE", q3: "FALSE", q4: "NOT GIVEN", q5: "FALSE", q6: "NOT GIVEN", q7: "TRUE",
         q8: "refrigeration", q9: "sweat", q10: "recipes", q11: "metabolism", q12: "stomach", q13: "exercise",
 
-        // Passage 2 – STRESS LESS (Q14–26)
+        // Passage 2 вЂ“ STRESS LESS (Q14вЂ“26)
         q14: "C", q15: "A", q16: "A", q17: "D", q18: "B",
         q19: "C", q20: "D", q21: "B",
         q22: "injury", q23: "16.6 weeks", q24: "7%", q25: "massage", q26: "workloads",
 
-        // Passage 3 – Robert Louis Stevenson (Q27–40)
+        // Passage 3 вЂ“ Robert Louis Stevenson (Q27вЂ“40)
         q27: "D", q28: "C", q29: "B", q30: "A", q31: "C",
         q32: "YES", q33: "NOT GIVEN", q34: "NO", q35: "YES",
         q36: "F", q37: "A", q38: "H", q39: "G", q40: "I"

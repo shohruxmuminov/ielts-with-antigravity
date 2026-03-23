@@ -1,8 +1,63 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <style id="shohrux-dark-mode">
+        body, .container, .main-content, .loading-screen, .start-screen, .header, .footer, 
+        .main-container, .left-panel, .right-panel, .nav-row, .progress-container,
+        .passage-container, .questions-container, .test-container, .question-group {
+            background-color: #0f172a !important;
+            color: #f1f5f9 !important;
+        }
+        .question, .question-content, .passage-content, .passage-box, 
+        .task-description, .part-header, .test-info, .question-section, .task-prompt, .options, .option {
+            background-color: #1e293b !important;
+            color: #f1f5f9 !important;
+            border-color: #334155 !important;
+        }
+        table, th, td {
+            background-color: #1e293b !important;
+            color: #f1f5f9 !important;
+            border-color: #334155 !important;
+        }
+        th { background-color: #334155 !important; }
+        input[type="text"], input[type="radio"], select, textarea, .writing-textarea, .input-field {
+            background-color: #334155 !important;
+            color: #fff !important;
+            border-color: #475569 !important;
+        }
+        .option:hover, .btn:not(.btn-primary):not(.btn-submit):not(.start-button):not(.more-tests-button):hover {
+            background-color: #334155 !important;
+        }
+        .timer, .timer-container {
+            background-color: #451a1a !important;
+            color: #fca5a5 !important;
+            border-color: #7f1d1d !important;
+        }
+        .logo-area, .more-tests-button {
+            background-color: #3b82f6 !important;
+        }
+        .progress-item {
+            background-color: #334155 !important;
+            color: #94a3b8 !important;
+            border-color: #475569 !important;
+        }
+        .progress-item.current { background-color: #3b82f6 !important; color: #fff !important; }
+        .progress-item.answered { background-color: #10b981 !important; color: #fff !important; }
+        .resizer { background-color: #334155 !important; border-color: #475569 !important; }
+        h1, h2, h3, .section-title, .loading-title, .start-title, .passage-info, .brand {
+            color: #60a5fa !important;
+        }
+        .loading-subtitle, .start-description, .word-count {
+            color: #94a3b8 !important;
+        }
+        .timer-icon, .brand-icon { filter: brightness(0.8) invert(1); }
+        .watermark-layer {
+            color: rgba(255, 255, 255, 0.05) !important;
+        }
+    </style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CDI IELTS Listening Test Simulation</title>
     <style>
@@ -642,7 +697,7 @@
             </div>
             <!-- Questions Section -->
             <div class="questions-section">
-                <h2 class="questions-title" id="questionsTitle">Questions 1–13</h2>
+                <h2 class="questions-title" id="questionsTitle">Questions 1вЂ“13</h2>
                 <p class="questions-description selectable-text" id="questionsDescription">Complete the form below.
                     Write ONE WORD AND/OR A NUMBER for each answer.</p>
 
@@ -739,8 +794,8 @@
                 <div id="part2Content" class="hidden">
                     <h3 class="scenario-title selectable-text">Iron River Food Festival</h3>
                     <div class="question-group">
-                        <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">Questions 14–15</h4>
-                        <p class="selectable-text" style="margin-bottom: 16px;">Choose TWO letters, A–E. Which TWO facts
+                        <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">Questions 14вЂ“15</h4>
+                        <p class="selectable-text" style="margin-bottom: 16px;">Choose TWO letters, AвЂ“E. Which TWO facts
                             are given about this year's Iron River Food Festival?</p>
                         <div class="multiple-choice">
                             <div class="choice-item">
@@ -769,8 +824,8 @@
                                 <span class="selectable-text">E. More chefs will do cooking demonstrations</span>
                             </div>
                         </div>
-                        <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">Questions 16–17</h4>
-                        <p class="selectable-text" style="margin-bottom: 16px;">Choose TWO letters, A–E. Which TWO of
+                        <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">Questions 16вЂ“17</h4>
+                        <p class="selectable-text" style="margin-bottom: 16px;">Choose TWO letters, AвЂ“E. Which TWO of
                             the following duties will the volunteers have?</p>
                         <div class="multiple-choice">
                             <div class="choice-item">
@@ -799,8 +854,8 @@
                                 <span class="selectable-text">E. cleaning the facilities</span>
                             </div>
                         </div>
-                        <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">Questions 18–19</h4>
-                        <p class="selectable-text" style="margin-bottom: 16px;">Choose TWO letters, A–E. Which TWO
+                        <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">Questions 18вЂ“19</h4>
+                        <p class="selectable-text" style="margin-bottom: 16px;">Choose TWO letters, AвЂ“E. Which TWO
                             things still need to be done?</p>
                         <div class="multiple-choice">
                             <div class="choice-item">
@@ -829,9 +884,9 @@
                                 <span class="selectable-text">E. booking additional musical acts</span>
                             </div>
                         </div>
-                        <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">Questions 20–26</h4>
+                        <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">Questions 20вЂ“26</h4>
                         <p class="selectable-text" style="margin-bottom: 16px;">Label the map below. Write the correct
-                            letter, A–J, next to questions 20–26.</p>
+                            letter, AвЂ“J, next to questions 20вЂ“26.</p>
                         <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">Iron River Food
                             Festival Site</h4>
                         <div style="margin-bottom: 20px;">
@@ -839,7 +894,7 @@
                             <img src="https://i.postimg.cc/7L4VcYcy/image.png" alt="Iron River Food Festival Map"
                                 style="max-width: 100%; height: auto;">
                             <p class="selectable-text">
-                                *Note: The map should display locations labeled A–J corresponding to the festival site
+                                *Note: The map should display locations labeled AвЂ“J corresponding to the festival site
                                 layout.
                             </p>
                         </div>
@@ -886,7 +941,7 @@
                 <div id="part3Content" class="hidden">
                     <h3 class="scenario-title selectable-text">Food Science</h3>
                     <div class="question-group">
-                        <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">Questions 27–30</h4>
+                        <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">Questions 27вЂ“30</h4>
                         <p class="selectable-text" style="margin-bottom: 16px;">Choose the correct letter, A, B, or C.
                         </p>
                         <div style="margin-bottom: 20px;">
@@ -975,10 +1030,10 @@
                                 </div>
                             </div>
                         </div>
-                        <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">Questions 31–36</h4>
+                        <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">Questions 31вЂ“36</h4>
                         <p class="selectable-text" style="margin-bottom: 16px;">What is the best feature of each of the
                             following books on the reading list? Choose SIX answers from the box and write the correct
-                            letter, A–I, next to questions 31–36.</p>
+                            letter, AвЂ“I, next to questions 31вЂ“36.</p>
                         <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">Best Features</h4>
                         <div class="question-item selectable-text" style="margin-bottom: 10px;">A. has a good
                             bibliography</div>
@@ -1035,7 +1090,7 @@
                 <div id="part4Content" class="hidden">
                     <h3 class="scenario-title selectable-text">The Perception of Color</h3>
                     <div class="question-group">
-                        <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">Questions 37–49</h4>
+                        <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">Questions 37вЂ“49</h4>
                         <p class="selectable-text" style="margin-bottom: 16px;">Complete the notes below. Write ONE WORD
                             ONLY for each answer.</p>
                         <h4 class="selectable-text" style="font-weight: 500; margin-bottom: 16px;">How do we perceive
@@ -1313,10 +1368,10 @@
 
             // Test Section Data
             const testData = [
-                { title: "PART 1", instructions: "Questions 1-13", description: "Complete the form below. Write ONE WORD AND/OR A NUMBER for each answer.", questionRange: "1–13" },
-                { title: "PART 2", instructions: "Questions 14-26", description: "Iron River Food Festival", questionRange: "14–26" },
-                { title: "PART 3", instructions: "Questions 27-36", description: "Food Science", questionRange: "27–36" },
-                { title: "PART 4", instructions: "Questions 37-49", description: "The Perception of Color", questionRange: "37–49" }
+                { title: "PART 1", instructions: "Questions 1-13", description: "Complete the form below. Write ONE WORD AND/OR A NUMBER for each answer.", questionRange: "1вЂ“13" },
+                { title: "PART 2", instructions: "Questions 14-26", description: "Iron River Food Festival", questionRange: "14вЂ“26" },
+                { title: "PART 3", instructions: "Questions 27-36", description: "Food Science", questionRange: "27вЂ“36" },
+                { title: "PART 4", instructions: "Questions 37-49", description: "The Perception of Color", questionRange: "37вЂ“49" }
             ];
 
             // Initialize on load
@@ -1435,13 +1490,13 @@
                 let partScores = [0, 0, 0, 0];
                 let detailedResults = [];
 
-                // Handle questions 1–49
+                // Handle questions 1вЂ“49
                 for (let i = 1; i <= 49; i++) {
                     let isCorrect = false;
                     let userAnswer = (answers[i] || '').trim();
                     let correctAnswer = correctAnswers[i];
 
-                    // Handle questions 14–19 (multiple-choice pairs)
+                    // Handle questions 14вЂ“19 (multiple-choice pairs)
                     if (i >= 14 && i <= 19) {
                         const selected = i <= 15 ? [answers[14] || '', answers[15] || ''].filter(a => a)
                             : i <= 17 ? [answers[16] || '', answers[17] || ''].filter(a => a)
@@ -1515,8 +1570,8 @@
                             feedback.style.backgroundColor = isCorrect ? '#d4edda' : '#f8d7da';
                             feedback.style.color = isCorrect ? '#155724' : '#721c24';
                             feedback.innerHTML = isCorrect
-                                ? `<strong>✓ Correct${selected.length === 2 && selected.includes(correct[0]) && selected.includes(correct[1]) ? ' (Both)' : ' (At least one)'}</strong> You chose: <em>${userAnswer}</em>`
-                                : `<strong>✗ Incorrect.</strong> You chose: <em>${userAnswer}</em><br><strong>Correct:</strong> <em>${correctAnswer}</em>`;
+                                ? `<strong>вњ“ Correct${selected.length === 2 && selected.includes(correct[0]) && selected.includes(correct[1]) ? ' (Both)' : ' (At least one)'}</strong> You chose: <em>${userAnswer}</em>`
+                                : `<strong>вњ— Incorrect.</strong> You chose: <em>${userAnswer}</em><br><strong>Correct:</strong> <em>${correctAnswer}</em>`;
                             container.appendChild(feedback);
                         }
                         continue;
@@ -1537,8 +1592,8 @@
                             feedback.style.backgroundColor = isCorrect ? '#d4edda' : '#f8d7da';
                             feedback.style.color = isCorrect ? '#155724' : '#721c24';
                             feedback.innerHTML = isCorrect
-                                ? `<strong>✓ Correct!</strong> You chose: <em>${userAnswer}</em>`
-                                : `<strong>✗ Incorrect.</strong> You chose: <em>${userAnswer}</em><br><strong>Correct:</strong> <em>${correctAnswer}</em>`;
+                                ? `<strong>вњ“ Correct!</strong> You chose: <em>${userAnswer}</em>`
+                                : `<strong>вњ— Incorrect.</strong> You chose: <em>${userAnswer}</em><br><strong>Correct:</strong> <em>${correctAnswer}</em>`;
                             container.appendChild(feedback);
                         }
                         continue;
@@ -1558,8 +1613,8 @@
                         feedback.style.backgroundColor = isCorrect ? '#d4edda' : '#f8d7da';
                         feedback.style.color = isCorrect ? '#155724' : '#721c24';
                         feedback.innerHTML = isCorrect
-                            ? `<strong>✓ Correct!</strong> You chose: <em>${userAnswer}</em>`
-                            : `<strong>✗ Incorrect.</strong> You chose: <em>${userAnswer}</em><br><strong>Correct:</strong> <em>${correctAnswer}</em>`;
+                            ? `<strong>вњ“ Correct!</strong> You chose: <em>${userAnswer}</em>`
+                            : `<strong>вњ— Incorrect.</strong> You chose: <em>${userAnswer}</em><br><strong>Correct:</strong> <em>${correctAnswer}</em>`;
                         container.appendChild(feedback);
                     }
                 }

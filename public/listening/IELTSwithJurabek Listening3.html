@@ -1,4 +1,4 @@
-
+﻿
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,6 +6,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <style id="shohrux-dark-mode">
+        body, .container, .main-content, .loading-screen, .start-screen, .header, .footer, 
+        .main-container, .left-panel, .right-panel, .nav-row, .progress-container,
+        .passage-container, .questions-container, .test-container, .question-group {
+            background-color: #0f172a !important;
+            color: #f1f5f9 !important;
+        }
+        .question, .question-content, .passage-content, .passage-box, 
+        .task-description, .part-header, .test-info, .question-section, .task-prompt, .options, .option {
+            background-color: #1e293b !important;
+            color: #f1f5f9 !important;
+            border-color: #334155 !important;
+        }
+        table, th, td {
+            background-color: #1e293b !important;
+            color: #f1f5f9 !important;
+            border-color: #334155 !important;
+        }
+        th { background-color: #334155 !important; }
+        input[type="text"], input[type="radio"], select, textarea, .writing-textarea, .input-field {
+            background-color: #334155 !important;
+            color: #fff !important;
+            border-color: #475569 !important;
+        }
+        .option:hover, .btn:not(.btn-primary):not(.btn-submit):not(.start-button):not(.more-tests-button):hover {
+            background-color: #334155 !important;
+        }
+        .timer, .timer-container {
+            background-color: #451a1a !important;
+            color: #fca5a5 !important;
+            border-color: #7f1d1d !important;
+        }
+        .logo-area, .more-tests-button {
+            background-color: #3b82f6 !important;
+        }
+        .progress-item {
+            background-color: #334155 !important;
+            color: #94a3b8 !important;
+            border-color: #475569 !important;
+        }
+        .progress-item.current { background-color: #3b82f6 !important; color: #fff !important; }
+        .progress-item.answered { background-color: #10b981 !important; color: #fff !important; }
+        .resizer { background-color: #334155 !important; border-color: #475569 !important; }
+        h1, h2, h3, .section-title, .loading-title, .start-title, .passage-info, .brand {
+            color: #60a5fa !important;
+        }
+        .loading-subtitle, .start-description, .word-count {
+            color: #94a3b8 !important;
+        }
+        .timer-icon, .brand-icon { filter: brightness(0.8) invert(1); }
+        .watermark-layer {
+            color: rgba(255, 255, 255, 0.05) !important;
+        }
+    </style>
     <title>CDI IELTS Listening Test Simulation</title>
     <style>
         * {
@@ -176,7 +230,7 @@
         }
 
         .ielts-logo::after {
-            content: '®';
+            content: 'В®';
             font-size: 0.65em;
             margin-left: 0.35rem;
             vertical-align: super;
@@ -1230,7 +1284,7 @@
         }
 
         .submenu button.selected .checkmark::before {
-            content: '✓';
+            content: 'вњ“';
             font-size: 1.1rem;
             color: #059669;
             font-weight: 700;
@@ -1613,18 +1667,18 @@
                    
                 <h1 class="part-title" id="partTitle">SECTION 1</h1>
             </div>
-                <p class="part-instructions" id="partInstructions">Questions 1–10: Building Work</p>
+                <p class="part-instructions" id="partInstructions">Questions 1вЂ“10: Building Work</p>
             </div>
             <!-- Questions Section -->
             <div class="questions-section">
-                <h2 class="questions-title" id="questionsTitle">Questions 1–40</h2>
+                <h2 class="questions-title" id="questionsTitle">Questions 1вЂ“40</h2>
                 <p class="questions-description selectable-text" id="questionsDescription">Follow the instructions for each section and enter the correct responses.</p>
 
                 <!-- Part 1 Content -->
                 <div id="part1Content">
                     <h3 class="scenario-title selectable-text">Westfield Sports Center</h3>
                     <div class="question-group">
-                        <p class="selectable-text" style="margin-bottom: 16px;"><strong>Section 1: Questions 1–10</strong></p>
+                        <p class="selectable-text" style="margin-bottom: 16px;"><strong>Section 1: Questions 1вЂ“10</strong></p>
                         <div class="multiple-choice-block">
                             <div class="selectable-text" style="font-weight: 500;">1. How long is the heated pool?</div>
                             <div class="multiple-choice">
@@ -1700,7 +1754,7 @@
                             <span class="selectable-text">.</span>
                         </div>
                         <div class="question-item">
-                            <span class="selectable-text">Cost £1.50. Meet John</span>
+                            <span class="selectable-text">Cost ВЈ1.50. Meet John</span>
                             <input type="text" class="question-input inline" id="q10" onchange="saveAnswer(10, this.value)" placeholder="10">
                             <span class="selectable-text">.</span>
                         </div>
@@ -1709,10 +1763,10 @@
 
                 <!-- Part 2 Content -->
                 <div id="part2Content" class="hidden">
-                    <h3 class="scenario-title selectable-text">Listening Marathon – Vacuum collector</h3>
+                    <h3 class="scenario-title selectable-text">Listening Marathon вЂ“ Vacuum collector</h3>
                     <div class="question-group">
-                        <p class="selectable-text" style="margin-top: 8px;"><strong>Section 2: Questions 11–20</strong></p>
-                        <p class="selectable-text" style="margin-bottom: 12px;"><strong>Questions 11–15: Choose the correct letter, A, B or C.</strong></p>
+                        <p class="selectable-text" style="margin-top: 8px;"><strong>Section 2: Questions 11вЂ“20</strong></p>
+                        <p class="selectable-text" style="margin-bottom: 12px;"><strong>Questions 11вЂ“15: Choose the correct letter, A, B or C.</strong></p>
                         <div class="multiple-choice-block">
                             <div class="selectable-text" style="font-weight: 500;">11. When did James Brown start collecting vacuum cleaners?</div>
                             <div class="multiple-choice">
@@ -1798,7 +1852,7 @@
                                 </label>
                             </div>
                         </div>
-                        <p class="selectable-text" style="margin-top: 16px; margin-bottom: 12px;"><strong>Questions 16–20: Which characteristic belongs to each company? Drag the correct letter, A–G.</strong></p>
+                        <p class="selectable-text" style="margin-top: 16px; margin-bottom: 12px;"><strong>Questions 16вЂ“20: Which characteristic belongs to each company? Drag the correct letter, AвЂ“G.</strong></p>
                         <div class="matching-layout">
                             <div class="drop-column">
                                 <div class="matching-title">Companies</div>
@@ -1846,10 +1900,10 @@
 
                 <!-- Part 3 Content -->
                 <div id="part3Content" class="hidden">
-                    <h3 class="scenario-title selectable-text">Listening Marathon – Architecture Conference</h3>
+                    <h3 class="scenario-title selectable-text">Listening Marathon вЂ“ Architecture Conference</h3>
                     <div class="question-group">
-                        <p class="selectable-text"><strong>Section 3: Questions 21–30</strong></p>
-                        <p class="selectable-text" style="margin-top: 8px;"><strong>Questions 21–28: Complete the notes below. Write ONE WORD ONLY for each answer.</strong></p>
+                        <p class="selectable-text"><strong>Section 3: Questions 21вЂ“30</strong></p>
+                        <p class="selectable-text" style="margin-top: 8px;"><strong>Questions 21вЂ“28: Complete the notes below. Write ONE WORD ONLY for each answer.</strong></p>
                         <div class="question-item">
                             <span class="selectable-text">Find details of conference themes on</span>
                             <input type="text" class="question-input inline" id="q21" onchange="saveAnswer(21, this.value)" placeholder="21">
@@ -1887,13 +1941,13 @@
                             <span class="selectable-text">Send conference organizers a personal profile for the</span>
                             <input type="text" class="question-input inline" id="q28" onchange="saveAnswer(28, this.value)" placeholder="28">
                         </div>
-                        <p class="selectable-text" style="margin-top: 16px;"><strong>Questions 29–30: Which TWO things does Kirsten plan to do to prepare her conference paper? Choose TWO letters, A–E.</strong></p>
-                        <div class="row-heading">29–30.</div>
+                        <p class="selectable-text" style="margin-top: 16px;"><strong>Questions 29вЂ“30: Which TWO things does Kirsten plan to do to prepare her conference paper? Choose TWO letters, AвЂ“E.</strong></p>
+                        <div class="row-heading">29вЂ“30.</div>
                         <div class="multiple-choice-block">
                             <div class="multiple-choice multi-select">
                                 <label class="choice-item">
                                     <input type="checkbox" name="q29_30_choices" value="A" onchange="updateCheckboxGroup([29,30], 'q29_30_choices')">
-                                    <span class="selectable-text">A. read another student’s thesis</span>
+                                    <span class="selectable-text">A. read another studentвЂ™s thesis</span>
                                 </label>
                                 <label class="choice-item">
                                     <input type="checkbox" name="q29_30_choices" value="B" onchange="updateCheckboxGroup([29,30], 'q29_30_choices')">
@@ -1922,7 +1976,7 @@
                 <div id="part4Content" class="hidden">
                     <h3 class="scenario-title selectable-text">Course on the Sense of Smell</h3>
                     <div class="question-group">
-                        <p class="selectable-text" style="margin-top: 8px;"><strong>Section 4: Questions 31–40</strong></p>
+                        <p class="selectable-text" style="margin-top: 8px;"><strong>Section 4: Questions 31вЂ“40</strong></p>
                         <p class="selectable-text"><strong>Complete the notes below. Write ONE WORD ONLY for each answer.</strong></p>
                         <div class="question-item">
                             <span class="selectable-text">Animal with the most accurate sense of smell is the</span>
@@ -2212,7 +2266,7 @@
                 }
             }
 
-            // Correct answers placeholder – fill with the actual values when available
+            // Correct answers placeholder вЂ“ fill with the actual values when available
             const correctAnswers = {};
             for (let i = 1; i <= 40; i++) {
                 correctAnswers[i] = '';
@@ -2265,27 +2319,27 @@
             const testData = [
                 {
                     title: "SECTION 1",
-                    instructions: "Questions 1–10: Westfield Sports Center",
+                    instructions: "Questions 1вЂ“10: Westfield Sports Center",
                     description: "Answer the pool, membership and yoga schedule details.",
-                    questionRange: "1–10"
+                    questionRange: "1вЂ“10"
                 },
                 {
                     title: "SECTION 2",
-                    instructions: "Questions 11–20: Vacuum collector",
+                    instructions: "Questions 11вЂ“20: Vacuum collector",
                     description: "Choose the facts about James Brown's collection and match companies to characteristics.",
-                    questionRange: "11–20"
+                    questionRange: "11вЂ“20"
                 },
                 {
                     title: "SECTION 3",
-                    instructions: "Questions 21–30: Architecture Conference",
+                    instructions: "Questions 21вЂ“30: Architecture Conference",
                     description: "Complete the submission notes and select Kirsten's preparation plans.",
-                    questionRange: "21–30"
+                    questionRange: "21вЂ“30"
                 },
                 {
                     title: "SECTION 4",
-                    instructions: "Questions 31–40: Course on the Sense of Smell",
+                    instructions: "Questions 31вЂ“40: Course on the Sense of Smell",
                     description: "Fill the notes describing experiments on smell perception.",
-                    questionRange: "31–40"
+                    questionRange: "31вЂ“40"
                 }
             ];
 
@@ -2525,9 +2579,9 @@
                     feedback.style.color = isCorrect ? '#155724' : '#721c24';
                     const correctLabel = correctAnswer || 'Not set';
                     if (isCorrect) {
-                        feedback.innerHTML = `<strong>✓ Correct.</strong> You answered: <em>${userAnswer}</em>`;
+                        feedback.innerHTML = `<strong>вњ“ Correct.</strong> You answered: <em>${userAnswer}</em>`;
                     } else {
-                        feedback.innerHTML = `<strong>✗ Incorrect.</strong> You answered: <em>${userAnswer}</em><br><strong>Correct:</strong> <em>${correctLabel}</em>`;
+                        feedback.innerHTML = `<strong>вњ— Incorrect.</strong> You answered: <em>${userAnswer}</em><br><strong>Correct:</strong> <em>${correctLabel}</em>`;
                     }
                     container.appendChild(feedback);
                 });
@@ -2955,3 +3009,4 @@
 </body>
 
 </html>
+

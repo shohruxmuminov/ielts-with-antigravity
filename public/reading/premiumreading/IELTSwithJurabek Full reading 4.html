@@ -1,4 +1,4 @@
-
+﻿
 
 
 
@@ -32,6 +32,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <style id="shohrux-dark-mode">
+        body, .container, .main-content, .loading-screen, .start-screen, .header, .footer, 
+        .main-container, .left-panel, .right-panel, .nav-row, .progress-container,
+        .passage-container, .questions-container, .test-container, .question-group {
+            background-color: #0f172a !important;
+            color: #f1f5f9 !important;
+        }
+        .question, .question-content, .passage-content, .passage-box, 
+        .task-description, .part-header, .test-info, .question-section, .task-prompt, .options, .option {
+            background-color: #1e293b !important;
+            color: #f1f5f9 !important;
+            border-color: #334155 !important;
+        }
+        table, th, td {
+            background-color: #1e293b !important;
+            color: #f1f5f9 !important;
+            border-color: #334155 !important;
+        }
+        th { background-color: #334155 !important; }
+        input[type="text"], input[type="radio"], select, textarea, .writing-textarea, .input-field {
+            background-color: #334155 !important;
+            color: #fff !important;
+            border-color: #475569 !important;
+        }
+        .option:hover, .btn:not(.btn-primary):not(.btn-submit):not(.start-button):not(.more-tests-button):hover {
+            background-color: #334155 !important;
+        }
+        .timer, .timer-container {
+            background-color: #451a1a !important;
+            color: #fca5a5 !important;
+            border-color: #7f1d1d !important;
+        }
+        .logo-area, .more-tests-button {
+            background-color: #3b82f6 !important;
+        }
+        .progress-item {
+            background-color: #334155 !important;
+            color: #94a3b8 !important;
+            border-color: #475569 !important;
+        }
+        .progress-item.current { background-color: #3b82f6 !important; color: #fff !important; }
+        .progress-item.answered { background-color: #10b981 !important; color: #fff !important; }
+        .resizer { background-color: #334155 !important; border-color: #475569 !important; }
+        h1, h2, h3, .section-title, .loading-title, .start-title, .passage-info, .brand {
+            color: #60a5fa !important;
+        }
+        .loading-subtitle, .start-description, .word-count {
+            color: #94a3b8 !important;
+        }
+        .timer-icon, .brand-icon { filter: brightness(0.8) invert(1); }
+        .watermark-layer {
+            color: rgba(255, 255, 255, 0.05) !important;
+        }
+    </style>
     <style>
         * {
             margin: 0;
@@ -789,14 +843,14 @@
 
                     <p>Additional theories suggest that either Verica, a British king of the Roman Empire in the years preceding the Claudian invasion, was owner of the palace, or Tiberius Claudius Catuarus, following the recent discovery of a gold ring belonging to him. The palace outlasted the original owner, whoever he was, and was extensively re-planned early in the 2nd century AD, and subdivided into a series of lesser apartments. Further redevelopment was begun in the late 3rd century AD, but these alterations were incomplete when the north wing was destroyed in a fire in around 270 AD. The damage was too great to repair, and the palace was abandoned and later dismantled.</p>
 
-                    <p>A modern museum has been built by the Sussex Archaeological Society, incorporating most of the visible remains, including one wing of the palace. The gardens have been re¬planted using authentic plants from the Roman period.</p>
+                    <p>A modern museum has been built by the Sussex Archaeological Society, incorporating most of the visible remains, including one wing of the palace. The gardens have been reВ¬planted using authentic plants from the Roman period.</p>
                 </div>
             </div>
             <div class="resizer"></div>
 
             <!-- Questions for Passage 1 -->
             <div class="questions-container" id="p1_questionsPanel" role="region" aria-label="Questions">
-                <h2 class="section-title">Questions 1–13</h2>
+                <h2 class="section-title">Questions 1вЂ“13</h2>
 
                 <div class="question-group">
                     <div class="question-group-title">Questions 1-6</div>
@@ -865,36 +919,36 @@
                     <div class="question" data-question="7">
                         <div class="question-text">Fishbourne Palace</div>
                         <div class="question-subtext">Construction</div>
-                        <div class="question-subtext">•The first buildings on the site contained food for the <input type="text" name="q7" placeholder="Answer..."></div>
+                        <div class="question-subtext">вЂўThe first buildings on the site contained food for the <input type="text" name="q7" placeholder="Answer..."></div>
                     </div>
 
                     <div class="question" data-question="8">
-                        <div class="question-subtext">•The palace building surrounded <input type="text" name="q8" placeholder="Answer..."></div>
+                        <div class="question-subtext">вЂўThe palace building surrounded <input type="text" name="q8" placeholder="Answer..."></div>
                     </div>
 
                     <div class="question" data-question="9">
-                        <div class="question-subtext">•In the 2nd and 3rd centuries colour was added to the <input type="text" name="q9" placeholder="Answer..."> of the palace.</div>
+                        <div class="question-subtext">вЂўIn the 2nd and 3rd centuries colour was added to the <input type="text" name="q9" placeholder="Answer..."> of the palace.</div>
                     </div>
 
                     <div class="question" data-question="10">
                         <div class="question-text">Discovery</div>
-                        <div class="question-subtext">•The first part of the palace to be found was part of a <input type="text" name="q10" placeholder="Answer..."></div>
+                        <div class="question-subtext">вЂўThe first part of the palace to be found was part of a <input type="text" name="q10" placeholder="Answer..."></div>
                     </div>
 
                     <div class="question" data-question="11">
                         <div class="question-text">Possible inhabitants</div>
-                        <div class="question-subtext">•Cogidubnus - he is named in several writings</div>
-                        <div class="question-subtext">•Sallustius Lucullus - he may have lived there until approximately <input type="text" name="q11" placeholder="Answer..."> AD</div>
+                        <div class="question-subtext">вЂўCogidubnus - he is named in several writings</div>
+                        <div class="question-subtext">вЂўSallustius Lucullus - he may have lived there until approximately <input type="text" name="q11" placeholder="Answer..."> AD</div>
                     </div>
 
                     <div class="question" data-question="12">
-                        <div class="question-subtext">•Verica - a British king</div>
-                        <div class="question-subtext">•Catuarus - his <input type="text" name="q12" placeholder="Answer..."> was found there</div>
+                        <div class="question-subtext">вЂўVerica - a British king</div>
+                        <div class="question-subtext">вЂўCatuarus - his <input type="text" name="q12" placeholder="Answer..."> was found there</div>
                     </div>
 
                     <div class="question" data-question="13">
                         <div class="question-text">Present Day</div>
-                        <div class="question-subtext">•A <input type="text" name="q13" placeholder="Answer..."> has been built on the site to help protect it.</div>
+                        <div class="question-subtext">вЂўA <input type="text" name="q13" placeholder="Answer..."> has been built on the site to help protect it.</div>
                     </div>
                 </div>
             </div>
@@ -923,7 +977,7 @@
 
             <!-- Questions for Passage 2 -->
             <div class="questions-container hidden" id="p2_questionsPanel" role="region" aria-label="Questions">
-                <h2 class="section-title">Questions 14–26</h2>
+                <h2 class="section-title">Questions 14вЂ“26</h2>
 
                 <div class="question-group">
                     <div class="question-group-title">Questions 14-18</div>
@@ -1106,29 +1160,29 @@
                     <h3>The strange world of sight</h3>
                     <p>Seeing is believing, it is said. But, asks Richard Gregory, could it be the other way round?</p>
 
-                    <p>Two of the great British men of the 17th century, the philosopher John Locke and the physicist Isaac Newton, were both aware that objects are not coloured, and that against all appearances light is not coloured either. This is still not generally recognised even now, 400 years later, because it seems to implausible. Yet it tells us something very important – that perceptions are not identical with what we perceive, and may be very different.</p>
+                    <p>Two of the great British men of the 17th century, the philosopher John Locke and the physicist Isaac Newton, were both aware that objects are not coloured, and that against all appearances light is not coloured either. This is still not generally recognised even now, 400 years later, because it seems to implausible. Yet it tells us something very important вЂ“ that perceptions are not identical with what we perceive, and may be very different.</p>
 
-                    <p>The most accurate historical account of perception is that date 19th-century German scientist Hermann von Helmholtz. However, it was ridiculed at the time. Von Helmholtz thought that perceptions are unconscious inferences we make based on a combination of clues provided by the eyes and other senses, and knowledge of the world. This idea of unconscious inference for perception preceded, by several years, the psychoanalyst Freud’s notion of the unconscious, which was also initially treated with derision because it undermined the notion of humans as pre-eminently rational beings who could he held responsible for their actions and awarded blame or praise accordingly.</p>
+                    <p>The most accurate historical account of perception is that date 19th-century German scientist Hermann von Helmholtz. However, it was ridiculed at the time. Von Helmholtz thought that perceptions are unconscious inferences we make based on a combination of clues provided by the eyes and other senses, and knowledge of the world. This idea of unconscious inference for perception preceded, by several years, the psychoanalyst FreudвЂ™s notion of the unconscious, which was also initially treated with derision because it undermined the notion of humans as pre-eminently rational beings who could he held responsible for their actions and awarded blame or praise accordingly.</p>
 
-                    <p>Crucially, perception of the present depends on rich, though of course not always correct or appropriate, knowledge from the past. We interpret sense data (what we hear, touch, taste, see and smell) from the present according to what we already know. This raises the question: if we see the present through memory, why aren’t past and present confused? The pioneering Russian neurologist Alexander Luria described the case of Mr S, who had a remarkable memory. However, he was prone to just such confusions, for example mistaking seeing his clock for remembering it, and so failing to get up in the morning. This suggests that perhaps an important function of perception is to underline the present. Individual perceptions have a vividness that is rare for memories, which might be how we are able to separate them. Try this: look at something for a few seconds, and then shut your eyes and visualise it in memory. You will almost certainly find that the memory is pale by comparison with the perception. Perhaps this is why past and present are not normally confused. Luria’s Mr S had exceptionally vivid memories, and rich synaesthesia (experiencing perceptions from another sense as well as the one being stimulated, such as musical notes experienced as colours), which may be why he confused seeing with having seen.</p>
+                    <p>Crucially, perception of the present depends on rich, though of course not always correct or appropriate, knowledge from the past. We interpret sense data (what we hear, touch, taste, see and smell) from the present according to what we already know. This raises the question: if we see the present through memory, why arenвЂ™t past and present confused? The pioneering Russian neurologist Alexander Luria described the case of Mr S, who had a remarkable memory. However, he was prone to just such confusions, for example mistaking seeing his clock for remembering it, and so failing to get up in the morning. This suggests that perhaps an important function of perception is to underline the present. Individual perceptions have a vividness that is rare for memories, which might be how we are able to separate them. Try this: look at something for a few seconds, and then shut your eyes and visualise it in memory. You will almost certainly find that the memory is pale by comparison with the perception. Perhaps this is why past and present are not normally confused. LuriaвЂ™s Mr S had exceptionally vivid memories, and rich synaesthesia (experiencing perceptions from another sense as well as the one being stimulated, such as musical notes experienced as colours), which may be why he confused seeing with having seen.</p>
 
-                    <p>The complexity of processes involved in how we see first impressed itself on me 45 years ago. With my colleague Jean Wallace, I studied the rare case of Sydney Bradford, a man who had been born blind but, through a corneal graft at the age of 52, suddenly found himself able to see. Almost immediately after the operation he was able to ‘see’ but he could only see those things that he already knew about, having experienced theta through touch. It was his touch memories that enabled him to perceive them with his eyes. When Bradford was firsttaken to the zoo, he proved utterly unable to see an elephant as he had no knowledge to make sense of his perceptions.</p>
+                    <p>The complexity of processes involved in how we see first impressed itself on me 45 years ago. With my colleague Jean Wallace, I studied the rare case of Sydney Bradford, a man who had been born blind but, through a corneal graft at the age of 52, suddenly found himself able to see. Almost immediately after the operation he was able to вЂseeвЂ™ but he could only see those things that he already knew about, having experienced theta through touch. It was his touch memories that enabled him to perceive them with his eyes. When Bradford was firsttaken to the zoo, he proved utterly unable to see an elephant as he had no knowledge to make sense of his perceptions.</p>
 
-                    <p>The more recent case in California of Mike May, who was also born blind, is similar. Since his operation, his sight has gradually improved as he learns to see, for example, by understanding how shadows represent depth and tell us about the shape of things. Some of the consequences of May’s new-found vision were less happy. He had been a champion blind skier, but following the operation, he would have to shut his eyes while skiing to block out what he now found was a terrifying sight.</p>
+                    <p>The more recent case in California of Mike May, who was also born blind, is similar. Since his operation, his sight has gradually improved as he learns to see, for example, by understanding how shadows represent depth and tell us about the shape of things. Some of the consequences of MayвЂ™s new-found vision were less happy. He had been a champion blind skier, but following the operation, he would have to shut his eyes while skiing to block out what he now found was a terrifying sight.</p>
 
                     <p>But acceptance of this intimate connection between memory and perception, even though it was first noticed in the 17th century, has been slow in brain science. Despite the fact that state-of-the-art brain imaging shows that perception animates parts of the brain associated with both present information and memory, most research on memory and perception is still undertaken as if these were separate processes. Seeing used to be thought of as taking place only in the eyes, and in quite specialised brain regions; but now it seems that half the brain is occupied with seeing, requiring a lot of energy. Perhaps this is why we shut our eyes for a rest.</p>
 
-                    <p>It is not just extreme cases like Mike May, but also much more common errors of seeing – illusions – that can reveal the crucial role of memory in governing what we (think we) see. Perception depends on specific knowledge and probabilities. Our brains calculate the likelihood of what is out there, and when too far-fetched, perceptions are rejected. A dramatic and discomforting example is looking at the two sides of a face-mask. From the front it is a convex shape with the nose sticking out. Then if the mask is rotated, the back of the mask will be seen as convex, though we know that it must be concave. It is almost, if not quite, impossible to sketch the back of a hollow mask to look as it is – hollow. Science often learns from what does not happen: people not seeing a hollow face as hollow is the most revealing experiment on perception. The unsettling truth from brain science is that even people with no visual impairment see what, at some level, they expect to see, and often miss things as they really are.</p>
+                    <p>It is not just extreme cases like Mike May, but also much more common errors of seeing вЂ“ illusions вЂ“ that can reveal the crucial role of memory in governing what we (think we) see. Perception depends on specific knowledge and probabilities. Our brains calculate the likelihood of what is out there, and when too far-fetched, perceptions are rejected. A dramatic and discomforting example is looking at the two sides of a face-mask. From the front it is a convex shape with the nose sticking out. Then if the mask is rotated, the back of the mask will be seen as convex, though we know that it must be concave. It is almost, if not quite, impossible to sketch the back of a hollow mask to look as it is вЂ“ hollow. Science often learns from what does not happen: people not seeing a hollow face as hollow is the most revealing experiment on perception. The unsettling truth from brain science is that even people with no visual impairment see what, at some level, they expect to see, and often miss things as they really are.</p>
                 </div>
             </div>
             <div class="resizer"></div>
 
             <!-- Questions for Passage 3 -->
             <div class="questions-container hidden" id="p3_questionsPanel" role="region" aria-label="Questions">
-                <h2 class="section-title">Questions 27–40</h2>
+                <h2 class="section-title">Questions 27вЂ“40</h2>
 
                 <div class="question-group">
-                    <div class="question-group-title">Questions 27 – 30</div>
+                    <div class="question-group-title">Questions 27 вЂ“ 30</div>
                     <p>Choose the correct letter, A, B, C or D.</p>
                     <p>Write the correct letter in boxes 27-30 on your answer sheet.</p>
 
@@ -1155,7 +1209,7 @@
                     <div class="question" data-question="29">
                         <div class="question-text">29 The writer describes Mr S failing to get up in order to demonstrate</div>
                         <div class="options">
-                            <label><input type="radio" name="q29" value="A"> <strong>A</strong> how realistic most people’s memories are.</label>
+                            <label><input type="radio" name="q29" value="A"> <strong>A</strong> how realistic most peopleвЂ™s memories are.</label>
                             <label><input type="radio" name="q29" value="B"> <strong>B</strong> how hard it is to tell dreaming and waking apart.</label>
                             <label><input type="radio" name="q29" value="C"> <strong>C</strong> how unusual it is to mistake a perception for a memory.</label>
                             <label><input type="radio" name="q29" value="D"> <strong>D</strong> how valuable knowledge of the past can be.</label>
@@ -1174,7 +1228,7 @@
                 </div>
 
                 <div class="question-group">
-                    <div class="question-group-title">Questions 31 – 36</div>
+                    <div class="question-group-title">Questions 31 вЂ“ 36</div>
                     <p>Do the following statements agree with the views of the writer in Reading Passage 3?</p>
                     <p>In boxes 31-36 on your answer sheet, write</p>
                     <p><strong>YES</strong> if the statement agrees with the views of the writer</p>
@@ -1232,7 +1286,7 @@
                 </div>
 
                <div class="question-group">
-    <div class="question-group-title">Questions 37 – 40</div>
+    <div class="question-group-title">Questions 37 вЂ“ 40</div>
     <p>Complete the summary using the list of words, A-J, below.</p>
     <p>Write the correct letter, A-J, in boxes 37-40 on your answer sheet.</p>
 

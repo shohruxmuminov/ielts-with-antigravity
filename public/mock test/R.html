@@ -165,7 +165,7 @@
         .timer-controls button svg { width: 18px; height: 18px; fill: var(--timer-color); }
 
         #night-mode-btn {
-            background: rgba(255,255,255,0.08);
+            display: none !important;
             border: 1px solid rgba(255,255,255,0.15);
             border-radius: 20px;
             padding: 5px 12px;
@@ -987,7 +987,7 @@
         #passage-header-container { flex-shrink: 0; }
     </style>
 </head>
-<body>
+<body class="night-mode">
     <div class="header">
         <div class="header-left">
             <div class="logo-text">IELTS <span>Reading</span></div>

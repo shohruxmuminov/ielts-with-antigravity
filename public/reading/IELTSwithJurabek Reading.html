@@ -1,4 +1,4 @@
-
+﻿
 
 
 <!--made by IELTSwithShohrux-->
@@ -31,6 +31,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .option-row[data-target="contrast"] { display: none !important; }
+    </style>
     <style>
         * {
             margin: 0;
@@ -1069,7 +1072,7 @@
         .submenu button:hover { background: #f7fafc; }
 
         .submenu .selected > .checkmark::before {
-            content: "✓";
+            content: "вњ“";
             font-weight: 800;
         }
 
@@ -1356,6 +1359,60 @@
             }
         }
     </style>
+    <style id="shohrux-dark-mode">
+        body, .container, .main-content, .loading-screen, .start-screen, .header, .footer, 
+        .main-container, .left-panel, .right-panel, .nav-row, .progress-container,
+        .passage-container, .questions-container, .test-container, .question-group {
+            background-color: #0f172a !important;
+            color: #f1f5f9 !important;
+        }
+        .question, .question-content, .passage-content, .passage-box, 
+        .task-description, .part-header, .test-info, .question-section, .task-prompt, .options, .option {
+            background-color: #1e293b !important;
+            color: #f1f5f9 !important;
+            border-color: #334155 !important;
+        }
+        table, th, td {
+            background-color: #1e293b !important;
+            color: #f1f5f9 !important;
+            border-color: #334155 !important;
+        }
+        th { background-color: #334155 !important; }
+        input[type="text"], input[type="radio"], select, textarea, .writing-textarea, .input-field {
+            background-color: #334155 !important;
+            color: #fff !important;
+            border-color: #475569 !important;
+        }
+        .option:hover, .btn:not(.btn-primary):not(.btn-submit):not(.start-button):not(.more-tests-button):hover {
+            background-color: #334155 !important;
+        }
+        .timer, .timer-container {
+            background-color: #451a1a !important;
+            color: #fca5a5 !important;
+            border-color: #7f1d1d !important;
+        }
+        .logo-area, .more-tests-button {
+            background-color: #3b82f6 !important;
+        }
+        .progress-item {
+            background-color: #334155 !important;
+            color: #94a3b8 !important;
+            border-color: #475569 !important;
+        }
+        .progress-item.current { background-color: #3b82f6 !important; color: #fff !important; }
+        .progress-item.answered { background-color: #10b981 !important; color: #fff !important; }
+        .resizer { background-color: #334155 !important; border-color: #475569 !important; }
+        h1, h2, h3, .section-title, .loading-title, .start-title, .passage-info, .brand {
+            color: #60a5fa !important;
+        }
+        .loading-subtitle, .start-description, .word-count {
+            color: #94a3b8 !important;
+        }
+        .timer-icon, .brand-icon { filter: brightness(0.8) invert(1); }
+        .watermark-layer {
+            color: rgba(255, 255, 255, 0.05) !important;
+        }
+    </style>
 </head>
 <!--made by IELTSwithShohrux-->
 <!--made by IELTSwithShohrux-->
@@ -1450,11 +1507,11 @@
                     <p><strong>You should spend about 20 minutes on Questions 1-13, which are based on Reading Passage 1</strong></p>
                     <h3>The Origins of Weather Forecasting</h3>
                     <p>The world's first public weather forecast appeared in <em>The Times</em> newspaper over 150 years ago: the beginning of a service that gives everyone something to comment on.</p>
-                    <p>The pioneering forecast on August 1, 1861, was introduced with a deceptively simple heading: ‘General weather probable during next two days.’ But those few words started an ongoing controversy that still continues today – after all, everyone remembers the forecasts that go wrong, but rarely the ones that are right.</p>
+                    <p>The pioneering forecast on August 1, 1861, was introduced with a deceptively simple heading: вЂGeneral weather probable during next two days.вЂ™ But those few words started an ongoing controversy that still continues today вЂ“ after all, everyone remembers the forecasts that go wrong, but rarely the ones that are right.</p>
                     <p>The first forecast was the idea of Admiral Robert FitzRoy, head of the newly founded Meteorological Department, and one of Britain's greatest but least-known heroes. It was a brave undertaking, because in those days predicting the weather had gained a reputation similar to astrology or fortune-telling. The few people who attempted it had become a national joke when their forecasts inevitably went wrong.</p>
                     <p>FitzRoy was different, though. His background was faultless, most famously his captaining of the ship HMS Beagle on Charles Darwin's voyage around the world, which eventually led to the publication of Darwin's well-known book <em>On the Origin of Species.</em> When FitzRoy retired from active service as an admiral in Britain's navy, he was looking for a new direction. He subsequently secured a job as chief statistician at the Meteorological Department, part of the Board of Trade.</p>
                     <p>Parliament had voted to set up and fund the Meteorological Department on June 30, 1854, to chart the safest sailing routes across the Atlantic Ocean. However, the British Government was not impressed with the idea of collecting weather reports and establishing a weather forecast, and the suggestion by one Member of Parliament for this was met with laughter from the other MPs.</p>
-                    <p>FitzRoy was given a staff of three clerks in a small office in London, but he soon grew bored with the tedium of transcribing thousands of ships’ reports. Instead, he focused on a much more pressing issue – the huge loss of life at sea from storms. This problem came to a head in 1859, when gale-force winds sank the ship named Royal Charter, with the loss of 430 lives, within sight of the shore. Even in those days when ships regularly sank in storms, the loss of the Royal Charter was considered a national tragedy. FitzRoy stirred up feelings even further when he wrote a letter to <em>The Times</em> newspaper explaining that the storm had been entirely predictable.</p>
+                    <p>FitzRoy was given a staff of three clerks in a small office in London, but he soon grew bored with the tedium of transcribing thousands of shipsвЂ™ reports. Instead, he focused on a much more pressing issue вЂ“ the huge loss of life at sea from storms. This problem came to a head in 1859, when gale-force winds sank the ship named Royal Charter, with the loss of 430 lives, within sight of the shore. Even in those days when ships regularly sank in storms, the loss of the Royal Charter was considered a national tragedy. FitzRoy stirred up feelings even further when he wrote a letter to <em>The Times</em> newspaper explaining that the storm had been entirely predictable.</p>
                     <p>That same year, a total of 1,645 lives were lost off the British coast, and FitzRoy wrote repeatedly to <em>The Times</em> pushing for a storm-warning service for shipping. This was just the right moment for a national forecasting service. Knowledge of the weather was improving, barometer readings gave warning of approaching storms, and the invention of the electric telegraph and Morse code in 1844 gave instant communication for the first time.</p>
                     <p>So in February 1861, FitzRoy pressed ahead with a storm-warning service. Previous weather reports had been unreliable, but FitzRoy's innovation was to issue ships with standardised instruments which allowed for accurate weather reports. At exactly the same time each day the information was sent to him by telegraph, and he was able to draw up more detailed weather maps. The approach of an incoming storm could be recognised, and from London, FitzRoy could telegraph warnings to ports on the coast, where an ingenious system of flags was hoisted up high for passing ships to read. This represented the biggest advance in shipping safety after the introduction of the lifeboat, and in subsequent years the number of lives lost around Britain fell by about a third. FitzRoy became a hero to the fishing and maritime fleets.</p>
                     <p>Encouraged by his storm-warning success, FitzRoy then started a public weather forecasting service. As he had a close connection with <em>The Times</em>, this newspaper introduced his daily forecast in August 1861. It attracted huge attention, including from Queen Victoria, who regularly sent messengers to FitzRoy's office to get a forecast for the sea crossing over the Solent to an island which she liked to visit off the south coast of England. He was also popular with ordinary fishermen, who were happy not to be out at sea in bad weather. The owners of fishing vessels, however, were not supportive of FitzRoy's forecasts, which often caused delays for them when bad weather was forecast.</p>
@@ -1516,17 +1573,17 @@
                     <div class="question-group-title">Questions 6-13</div>
                     <p>Complete the notes below. Choose <strong>ONE WORD ONLY</strong> from the passage for each answer.</p>
                     <p><strong>February 1861: Storm warning service</strong></p>
-                    <p>• FitzRoy received weather reports produced by ships using reliable <span class="question-anchor" data-question-anchor="6"></span><input type="text" name="q6" placeholder="6" class="input-field inline-input"></p>
-                    <p>• simultaneous weather reports were taken daily</p>
-                    <p>• storm warnings were telegraphed to <span class="question-anchor" data-question-anchor="7"></span><input type="text" name="q7" placeholder="7" class="input-field inline-input"> along the shore</p>
-                    <p>• signals for ships were displayed using raised <span class="question-anchor" data-question-anchor="8"></span><input type="text" name="q8" placeholder="8" class="input-field inline-input"></p>
-                    <p>• the storm warning service was the greatest development in sea safety since the <span class="question-anchor" data-question-anchor="9"></span><input type="text" name="q9" placeholder="9" class="input-field inline-input"> was introduced</p>
+                    <p>вЂў FitzRoy received weather reports produced by ships using reliable <span class="question-anchor" data-question-anchor="6"></span><input type="text" name="q6" placeholder="6" class="input-field inline-input"></p>
+                    <p>вЂў simultaneous weather reports were taken daily</p>
+                    <p>вЂў storm warnings were telegraphed to <span class="question-anchor" data-question-anchor="7"></span><input type="text" name="q7" placeholder="7" class="input-field inline-input"> along the shore</p>
+                    <p>вЂў signals for ships were displayed using raised <span class="question-anchor" data-question-anchor="8"></span><input type="text" name="q8" placeholder="8" class="input-field inline-input"></p>
+                    <p>вЂў the storm warning service was the greatest development in sea safety since the <span class="question-anchor" data-question-anchor="9"></span><input type="text" name="q9" placeholder="9" class="input-field inline-input"> was introduced</p>
                     <p><strong>August 1861: Public weather forecasting service</strong></p>
-                    <p>• very popular in <em>The Times</em> newspaper</p>
-                    <p>• frequently used by the English Queen for safe trips to a favourite <span class="question-anchor" data-question-anchor="10"></span><input type="text" name="q10" placeholder="10" class="input-field inline-input"></p>
-                    <p>• FitzRoy's forecasts were popular with fishermen but not with boat <span class="question-anchor" data-question-anchor="11"></span><input type="text" name="q11" placeholder="11" class="input-field inline-input"></p>
-                    <p>• in modern times FitzRoy's <span class="question-anchor" data-question-anchor="12"></span><input type="text" name="q12" placeholder="12" class="input-field inline-input"> is used for a marine area</p>
-                    <p>• FitzRoy produced a <span class="question-anchor" data-question-anchor="13"></span><input type="text" name="q13" placeholder="13" class="input-field inline-input"> which was respected by the scientific community</p>
+                    <p>вЂў very popular in <em>The Times</em> newspaper</p>
+                    <p>вЂў frequently used by the English Queen for safe trips to a favourite <span class="question-anchor" data-question-anchor="10"></span><input type="text" name="q10" placeholder="10" class="input-field inline-input"></p>
+                    <p>вЂў FitzRoy's forecasts were popular with fishermen but not with boat <span class="question-anchor" data-question-anchor="11"></span><input type="text" name="q11" placeholder="11" class="input-field inline-input"></p>
+                    <p>вЂў in modern times FitzRoy's <span class="question-anchor" data-question-anchor="12"></span><input type="text" name="q12" placeholder="12" class="input-field inline-input"> is used for a marine area</p>
+                    <p>вЂў FitzRoy produced a <span class="question-anchor" data-question-anchor="13"></span><input type="text" name="q13" placeholder="13" class="input-field inline-input"> which was respected by the scientific community</p>
                 </div>
             </div>
             <!-- ===== PASSAGE 2 ===== -->
@@ -1575,7 +1632,7 @@
                 <h2 class="section-title">Questions 14-26</h2>
                 <div class="question-group">
                     <div class="question-group-title">Questions 14-19</div>
-                    <p>Reading Passage 2 has six paragraphs, A–F. Choose the correct heading for each paragraph by dragging it from the list below onto the appropriate paragraph above.</p>
+                    <p>Reading Passage 2 has six paragraphs, AвЂ“F. Choose the correct heading for each paragraph by dragging it from the list below onto the appropriate paragraph above.</p>
                     <p><strong>List of Headings</strong></p>
                     <div class="drag-options">
                         <div class="drag-item" data-option="I" data-answer="I" data-label="Increasing the amount of information about the geography of the ocean">i. Increasing the amount of information about the geography of the ocean</div>
@@ -1638,7 +1695,7 @@
                     <p><strong>E</strong> People have varying capacities for tasting bitterness and the differences appear to be genetic. About 75% of people are sensitive to the taste of some well-identified bitter compounds. Those who are sensitive seem to be less likely than others to eat bitter vegetables, according to Stephen Wooding, a geneticist at the University of Utah. Some people who have an unusually high number of taste buds, and are known as 'supertasters', are especially sensitive to these compounds. Supertasters tend to shun all kinds of bitter-tasting things, including vegetables, coffee, and dark chocolate.</p>
                     <p><strong>F</strong> The tongue is covered with taste buds. Under the microscope each one looks like an onion, consisting of 50 to 100 elongated cells running from the top of the taste buds to the bottom. At the top is a group of receptors that captures the taste molecules, known as tastants, in food and drink. The receptors function much like those for sight and smell. Once a bitter signal has been received, it is relayed via proteins known as G proteins. The G protein involved in the perception of bitterness, sweetness and umami was identified in the early 1990s by Robert Margolskee, at Mount Sinai School of Medicine in New York. The protein triggers a cascade of chemical reactions that lead to ion concentrations within the cell. Ultimately, this delivers a signal to the brain that registers as bitter.</p>
                     <p><strong>G</strong> Once they understood the taste mechanism, scientists began to think of ways to interfere with it. They tried AMP, an organic compound found in breast milk and other substances, that is created as cells break down food. AMP has no bitterness of its own, but when put in foods, as Margolskee and his colleagues discovered, it attaches to bitter-taste receptors. As effective as it is, AMP may not be able to dampen every type of bitter taste because it probably doesn't attach to all 30 bitter-taste receptors.</p>
-                    <p><strong>H</strong> Some taste researchers believe that, in time, compounds like AMP will help make processed foods less unhealthy. Consider, for example, that a single cup of canned chicken noodle soup contains 850 milligrams of sodium chloride, or table salt – more than a third of the recommended daily allowance. The salt masks the bitterness created by the high temperatures used in the canning process, which cause sugars and amino acids to react. Part of the table salt could be replaced by another type of salt, potassium chloride, which tends to be scarce in some people's diets because of its bitter taste. But that bitter taste could be eliminated with a dose of AMP. Bitter blockers could also be used in place of sugary cherry and grape flavourings in children's cough syrups, and they could dampen the bitterness of drugs like antihistamines, antibiotics and other similar products.</p>
+                    <p><strong>H</strong> Some taste researchers believe that, in time, compounds like AMP will help make processed foods less unhealthy. Consider, for example, that a single cup of canned chicken noodle soup contains 850 milligrams of sodium chloride, or table salt вЂ“ more than a third of the recommended daily allowance. The salt masks the bitterness created by the high temperatures used in the canning process, which cause sugars and amino acids to react. Part of the table salt could be replaced by another type of salt, potassium chloride, which tends to be scarce in some people's diets because of its bitter taste. But that bitter taste could be eliminated with a dose of AMP. Bitter blockers could also be used in place of sugary cherry and grape flavourings in children's cough syrups, and they could dampen the bitterness of drugs like antihistamines, antibiotics and other similar products.</p>
                     <p><strong>I</strong> A number of foodmakers have already begun to experiment with AMP in their products, and other bitter blockers are being developed. In a few years, perhaps, after food companies have taken the bitterness from canned soup and improved the taste of medicines, they can set their sights on something more useful: a bitter blocker in a bottle that any of us can sprinkle on our Brussels sprouts or stir into our grapefruit juice.</p>
                 </div>
             </div>
@@ -1910,7 +1967,7 @@
         let currentQuestion = 1;
         let seconds = 60 * 60;
         let timerInterval;
-        let selectedContrast = 'normal';
+        let selectedContrast = 'whiteblack';
         let selectedTextSize = 'medium';
 
         /* ========= HELPERS ========= */
@@ -2446,7 +2503,7 @@
             });
         });
 
-        applyContrast(selectedContrast);
+        applyContrast('whiteblack');
         applyTextSize(selectedTextSize);
 
         /* Fullscreen toggle */
@@ -2583,3 +2640,4 @@
 
 
 </html>
+

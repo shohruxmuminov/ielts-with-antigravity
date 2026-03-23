@@ -1,4 +1,4 @@
-
+﻿
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,6 +7,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <style id="shohrux-dark-mode">
+        body, .container, .main-content, .loading-screen, .start-screen, .header, .footer, 
+        .main-container, .left-panel, .right-panel, .nav-row, .progress-container,
+        .passage-container, .questions-container, .test-container, .question-group {
+            background-color: #0f172a !important;
+            color: #f1f5f9 !important;
+        }
+        .question, .question-content, .passage-content, .passage-box, 
+        .task-description, .part-header, .test-info, .question-section, .task-prompt, .options, .option {
+            background-color: #1e293b !important;
+            color: #f1f5f9 !important;
+            border-color: #334155 !important;
+        }
+        table, th, td {
+            background-color: #1e293b !important;
+            color: #f1f5f9 !important;
+            border-color: #334155 !important;
+        }
+        th { background-color: #334155 !important; }
+        input[type="text"], input[type="radio"], select, textarea, .writing-textarea, .input-field {
+            background-color: #334155 !important;
+            color: #fff !important;
+            border-color: #475569 !important;
+        }
+        .option:hover, .btn:not(.btn-primary):not(.btn-submit):not(.start-button):not(.more-tests-button):hover {
+            background-color: #334155 !important;
+        }
+        .timer, .timer-container {
+            background-color: #451a1a !important;
+            color: #fca5a5 !important;
+            border-color: #7f1d1d !important;
+        }
+        .logo-area, .more-tests-button {
+            background-color: #3b82f6 !important;
+        }
+        .progress-item {
+            background-color: #334155 !important;
+            color: #94a3b8 !important;
+            border-color: #475569 !important;
+        }
+        .progress-item.current { background-color: #3b82f6 !important; color: #fff !important; }
+        .progress-item.answered { background-color: #10b981 !important; color: #fff !important; }
+        .resizer { background-color: #334155 !important; border-color: #475569 !important; }
+        h1, h2, h3, .section-title, .loading-title, .start-title, .passage-info, .brand {
+            color: #60a5fa !important;
+        }
+        .loading-subtitle, .start-description, .word-count {
+            color: #94a3b8 !important;
+        }
+        .timer-icon, .brand-icon { filter: brightness(0.8) invert(1); }
+        .watermark-layer {
+            color: rgba(255, 255, 255, 0.05) !important;
+        }
+    </style>
     <style>
         * {
             margin: 0;
@@ -808,11 +862,11 @@
 
         <!-- Questions for Passage 1 -->
         <div class="questions-container" id="p1_questionsPanel" role="region" aria-label="Questions">
-            <h2 class="section-title">Questions 1–13</h2>
+            <h2 class="section-title">Questions 1вЂ“13</h2>
             <p>Do the following statements agree with the information given in Reading Passage 1?</p>
 
             <div class="question-group">
-                <div class="question-group-title">Questions 1–8</div>
+                <div class="question-group-title">Questions 1вЂ“8</div>
                 <div class="question" data-question="1">
                     <div class="question-text">1 Ochre was used in paintings before it was used in fabric dyes.</div>
                     <div class="options"><label><input type="radio" name="q1" value="TRUE">
@@ -874,7 +928,7 @@
             </div>
 
             <div class="question-group">
-                <div class="question-group-title">Questions 9–13</div>
+                <div class="question-group-title">Questions 9вЂ“13</div>
                 <p>Complete the notes below.
 
                     Choose <strong>ONE WORD ONLY</strong> from the passage for each answer.</p>
@@ -885,29 +939,29 @@
                         Tyrian purple
 
                         - mucus from <span class="question-text">9</span> <input type="text" name="q9" maxlength="30">
-                        …………………………found in the Mediterranean</div>
+                        вЂ¦вЂ¦вЂ¦вЂ¦вЂ¦вЂ¦вЂ¦вЂ¦вЂ¦вЂ¦found in the Mediterranean</div>
                 </div>
                 <div class="question" data-question="10">
                     <div class="question-text">cochineal (a red dye)
 
                         - made from <span class="question-text">10</span> <input type="text" name="q10" maxlength="30">
-                        …………………………found in Latin America</div>
+                        вЂ¦вЂ¦вЂ¦вЂ¦вЂ¦вЂ¦вЂ¦вЂ¦вЂ¦вЂ¦found in Latin America</div>
                 </div>
                 <div class="question" data-question="11">
                     <div class="question-text">17th century Europe
 
                         dyes made by country people:
 
-                         <span class="question-text">11</span> <input type="text" name="q11" maxlength="30">
-                        …………………………had two uses
+                        п‚· <span class="question-text">11</span> <input type="text" name="q11" maxlength="30">
+                        вЂ¦вЂ¦вЂ¦вЂ¦вЂ¦вЂ¦вЂ¦вЂ¦вЂ¦вЂ¦had two uses
 
                         - jam
 
                         - blue dye</div>
                 </div>
                 <div class="question" data-question="12">
-                    <div class="question-text"> liquid from cleaning <span class="question-text">12</span> <input type="text" name="q12" maxlength="30">
-                        …………………………had two uses
+                    <div class="question-text">п‚· liquid from cleaning <span class="question-text">12</span> <input type="text" name="q12" maxlength="30">
+                        вЂ¦вЂ¦вЂ¦вЂ¦вЂ¦вЂ¦вЂ¦вЂ¦вЂ¦вЂ¦had two uses
 
                         - making mead
 
@@ -916,8 +970,8 @@
                 <div class="question" data-question="13">
                     <div class="question-text">19th century Europe
 
-                         progress in study of <span class="question-text">13</span> <input type="text" name="q13" maxlength="30">
-                        …………………………led to synthetic dyes</div>
+                        п‚· progress in study of <span class="question-text">13</span> <input type="text" name="q13" maxlength="30">
+                        вЂ¦вЂ¦вЂ¦вЂ¦вЂ¦вЂ¦вЂ¦вЂ¦вЂ¦вЂ¦led to synthetic dyes</div>
                 </div>
             </div>
         </div> <!-- /p1_questionsPanel -->
@@ -1073,7 +1127,7 @@
                     bond with artifacts, whether it be a
                     car, a doll, or a robot,' he said. But he
                     also cautioned that researchers do not
-                    yet understand the 封 consequences
+                    yet understand the е°Ѓ consequences
                     of increased human/robot interaction.
                     'Studying how robots and humans
                     work together can give us insight into
@@ -1090,10 +1144,10 @@
         </div>
 
         <div class="questions-container hidden" id="p2_questionsPanel" role="region" aria-label="Questions">
-            <h2 class="section-title">Questions 14–26</h2>
+            <h2 class="section-title">Questions 14вЂ“26</h2>
 
             <div class="question-group">
-                <div class="question-group-title">Questions 14–18</div>
+                <div class="question-group-title">Questions 14вЂ“18</div>
                 <p>Reading Passage 2 has seven paragraphs, A-G</p>
                 <p>Which paragraph contains the following information?</p>
                 <div class="question" data-question="14">
@@ -1165,7 +1219,7 @@
             </div>
 
             <div class="question-group">
-                <div class="question-group-title">Questions 19–23</div>
+                <div class="question-group-title">Questions 19вЂ“23</div>
                 <p>Look at the following statements (Questions 19-23) and the list of people below.</p>
                 <p>Match each statement with the correct person, A, B, C or D.</p>
                 <div class="question" data-question="19">
@@ -1221,12 +1275,12 @@
             </div>
 
             <div class="question-group">
-                <div class="question-group-title">Questions 24–26</div>
+                <div class="question-group-title">Questions 24вЂ“26</div>
                 <p>Complete the sentences below.</p>
                 <p>Choose <strong>ONE WORD ONLY</strong> from the passage for each answer.</p>
                 <div class="question" data-question="24">
                     <div class="question-text">24 Until recently, robots that were best at holding people's attention were those that
-                        acted as<span class="question-text"><input type="text" name="q24" maxlength="30"></span>………………………</div>
+                        acted as<span class="question-text"><input type="text" name="q24" maxlength="30"></span>вЂ¦вЂ¦вЂ¦вЂ¦вЂ¦вЂ¦вЂ¦вЂ¦вЂ¦</div>
                 </div>
                 <div class="question" data-question="25">
                     <div class="question-text">25 The children responded to the QRIO robot as a friend or a<span class="question-text"><input type="text" name="q25" maxlength="30"></span>, rather
@@ -1270,7 +1324,7 @@
                 <p>In late 2000, however, Stanley Coren
                     from the University of British Columbia
                     started a study to discover whether dogs
-                    suffer from ‘seasonal affective disorder.’
+                    suffer from вЂseasonal affective disorder.вЂ™
                     Twice weekly, he emailed 200 dog owners
                     in Vancouver, asking them to rate their pets'
                     activity and anxiety levels using a nine-point
@@ -1316,11 +1370,11 @@
                     from rocks before a quake, despite the fact
                     that few experts accept such gas is
                     produced. Rupert Sheldrake, a British
-                    researcher, suggests that ‘people notice
+                    researcher, suggests that вЂpeople notice
                     unusual animal behaviour before disasters. I
                     think animals are picking up on something
                     that we can't, perhaps by using a sixth
-                    sense.’</p>
+                    sense.вЂ™</p>
 
                 <p>Coren, however, had read about
                     rescue dogs hearing avalanche victims
@@ -1412,10 +1466,10 @@
         </div>
 
         <div class="questions-container hidden" id="p3_questionsPanel" role="region" aria-label="Questions">
-            <h2 class="section-title">Questions 27–40</h2>
+            <h2 class="section-title">Questions 27вЂ“40</h2>
 
             <div class="question-group">
-                <div class="question-group-title">Questions 27–30</div>
+                <div class="question-group-title">Questions 27вЂ“30</div>
                 <p>Do the following statements agree with the views of the writer in Reading Passage 3?</p>
                 <div class="question" data-question="27">
                     <div class="question-text">27 There is historical scientific evidence to support stories of animals predicting
@@ -1448,7 +1502,7 @@
             </div>
 
             <div class="question-group">
-                <div class="question-group-title">Questions 31–35</div>
+                <div class="question-group-title">Questions 31вЂ“35</div>
                 <p>Choose the correct letter, A, B, C or D.</p>
                 <div class="question" data-question="31">
                     <div class="question-text">31 What is the writer's main point in paragraph 4?</div>
@@ -1477,7 +1531,7 @@
             </div>
 
             <div class="question-group">
-                <div class="question-group-title">Questions 36–40</div>
+                <div class="question-group-title">Questions 36вЂ“40</div>
                 <p>Complete each sentence with the correct ending, A-H, below.</p>
                 <p><strong>The belief in the ability of animals to predict earthquakes</strong> <select name="q36">
                         <option value="" disabled selected>Select</option>
@@ -1601,16 +1655,16 @@
 
     /* ======= ANSWER KEY ======= */
     const correctAnswers = {
-        // Passage 1 – Dyes and fabric dyeing (Q1–13)
+        // Passage 1 вЂ“ Dyes and fabric dyeing (Q1вЂ“13)
         q1: "TRUE", q2: "FALSE", q3: "TRUE", q4: "NOT GIVEN", q5: "FALSE", q6: "NOT GIVEN", q7: "FALSE", q8: "TRUE",
         q9: "shellfish", q10: "insects", q11: "blackberries", q12: "beehives", q13: "chemistry",
 
-        // Passage 2 – A mechanical friend for children (Q14–26)
+        // Passage 2 вЂ“ A mechanical friend for children (Q14вЂ“26)
         q14: "D", q15: "F", q16: "D", q17: "A", q18: "C",
         q19: "B", q20: "C", q21: "A", q22: "D", q23: "A",
         q24: "storytellers", q25: "peer", q26: "affection",
 
-        // Passage 3 – Animals predicting earthquakes? (Q27–40)
+        // Passage 3 вЂ“ Animals predicting earthquakes? (Q27вЂ“40)
         q27: "NO", q28: "YES", q29: "NOT GIVEN", q30: "NO", q31: "C", q32: "B", q33: "A", q34: "D", q35: "B",
         q36: "G", q37: "A", q38: "F", q39: "D", q40: "B"
     };
