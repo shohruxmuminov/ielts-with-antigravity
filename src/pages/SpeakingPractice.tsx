@@ -32,6 +32,8 @@ export default function SpeakingPractice() {
   const [recordingTime, setRecordingTime] = useState(0);
   const [activeTab, setActiveTab] = useState<'task' | 'sample' | 'vocab'>('task');
   const [activeFilter, setActiveFilter] = useState('all');
+  const [isSending, setIsSending] = useState(false);
+  const [sendSuccess, setSendSuccess] = useState(false);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -196,6 +198,47 @@ export default function SpeakingPractice() {
       alert('Error evaluating speaking. Please try again.');
     } finally {
       setIsEvaluating(false);
+    }
+  };
+  
+  const sendToTelegram = async () => {
+    if (!audioBlob || !selectedTask) return;
+    
+    setIsSending(true);
+    setSendSuccess(false);
+    
+    try {
+      const reader = new FileReader();
+      const base64Promise = new Promise<string>((resolve) => {
+        reader.onloadend = () => {
+          const base64 = (reader.result as string).split(',')[1];
+          resolve(base64);
+        };
+      });
+      reader.readAsDataURL(audioBlob);
+      const base64Audio = await base64Promise;
+
+      const response = await fetch('/api/telegram/send-audio', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          audioData: base64Audio,
+          filename: `${selectedTask.title}_recording`,
+          caption: `New Speaking Recording for: ${selectedTask.title}`
+        })
+      });
+
+      if (response.ok) {
+        setSendSuccess(true);
+        setTimeout(() => setSendSuccess(false), 3000);
+      } else {
+        alert('Telegramga yuborishda xatolik yuz berdi.');
+      }
+    } catch (error) {
+      console.error('Error sending to Telegram:', error);
+      alert('Telegramga yuborishda xatolik yuz berdi.');
+    } finally {
+      setIsSending(false);
     }
   };
 
@@ -456,23 +499,52 @@ export default function SpeakingPractice() {
                           </div>
                           <audio src={audioUrl} controls className="flex-1 h-12 accent-purple-500" />
                         </div>
-                        <button 
-                          onClick={handleEvaluate}
-                          disabled={isEvaluating}
-                          className="w-full bg-purple-600 text-white py-5 rounded-2xl font-black hover:bg-purple-500 transition-all shadow-lg shadow-purple-900/40 flex items-center justify-center gap-3 text-lg"
-                        >
-                          {isEvaluating ? (
-                            <>
-                              <div className="w-5 h-5 border-3 border-white border-t-transparent rounded-full animate-spin" />
-                              Analyzing Audio...
-                            </>
-                          ) : (
-                            <>
-                              <CheckCircle className="w-6 h-6" />
-                              Submit for AI Review
-                            </>
-                          )}
-                        </button>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                          <button 
+                            onClick={handleEvaluate}
+                            disabled={isEvaluating}
+                            className="bg-purple-600 text-white py-5 rounded-2xl font-black hover:bg-purple-500 transition-all shadow-lg shadow-purple-900/40 flex items-center justify-center gap-3 text-lg"
+                          >
+                            {isEvaluating ? (
+                              <>
+                                <div className="w-5 h-5 border-3 border-white border-t-transparent rounded-full animate-spin" />
+                                Analyzing...
+                              </>
+                            ) : (
+                              <>
+                                <CheckCircle className="w-6 h-6" />
+                                AI Review
+                              </>
+                            )}
+                          </button>
+                          
+                          <button 
+                            onClick={sendToTelegram}
+                            disabled={isSending || !audioBlob}
+                            className={`py-5 rounded-2xl font-black transition-all shadow-lg flex items-center justify-center gap-3 text-lg ${
+                              sendSuccess 
+                                ? 'bg-emerald-600 text-white shadow-emerald-900/40' 
+                                : 'bg-blue-600 text-white hover:bg-blue-500 shadow-blue-900/40'
+                            }`}
+                          >
+                            {isSending ? (
+                              <>
+                                <div className="w-5 h-5 border-3 border-white border-t-transparent rounded-full animate-spin" />
+                                Yuborilmoqda...
+                              </>
+                            ) : sendSuccess ? (
+                              <>
+                                <CheckCircle className="w-6 h-6" />
+                                Yuborildi!
+                              </>
+                            ) : (
+                              <>
+                                <Volume2 className="w-6 h-6" />
+                                Telegramga yuborish
+                              </>
+                            )}
+                          </button>
+                        </div>
                       </motion.div>
                     )}
                   </motion.div>

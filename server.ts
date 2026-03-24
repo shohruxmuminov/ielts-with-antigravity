@@ -168,6 +168,41 @@ Provide a detailed evaluation including:
     }
   });
 
+  app.post('/api/telegram/send-audio', async (req, res) => {
+    try {
+      const { audioData, filename, caption } = req.body;
+      const botToken = process.env.TELEGRAM_BOT_TOKEN;
+      const chatId = process.env.TELEGRAM_CHAT_ID;
+
+      if (!botToken || !chatId) {
+        return res.status(400).json({ error: 'Telegram bot token or chat ID not configured' });
+      }
+
+      const blob = Buffer.from(audioData, 'base64');
+      const formData = new FormData();
+      formData.append('chat_id', chatId);
+      // Sending as audio/webm which is common for browser recordings
+      formData.append('audio', new Blob([blob], { type: 'audio/webm' }), `${filename}.webm`);
+      formData.append('caption', caption || 'New IELTS Speaking Recording');
+
+      const tgRes = await fetch(`https://api.telegram.org/bot${botToken}/sendAudio`, {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!tgRes.ok) {
+        const errText = await tgRes.text();
+        console.error('Telegram API error:', errText);
+        throw new Error('Failed to send audio to Telegram');
+      }
+
+      res.json({ status: 'ok' });
+    } catch (error) {
+      console.error('Telegram audio error:', error);
+      res.status(500).json({ error: 'Failed to send audio to Telegram' });
+    }
+  });
+
   // Vite middleware for development
   if (process.env.NODE_ENV !== 'production') {
     const vite = await createViteServer({
