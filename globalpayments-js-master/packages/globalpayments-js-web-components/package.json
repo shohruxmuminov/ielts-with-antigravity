@@ -1,0 +1,55 @@
+{
+  "name": "@globalpayments/js-web-components",
+  "version": "1.8.5",
+  "type": "module",
+  "main": "./lib/globalpayments-js-web-components.js",
+  "module": "./lib/globalpayments-js-web-components.js",
+  "types": "./lib/index.d.ts",
+  "typings": "./lib/index.d.ts",
+  "author": "Heartland Developer Portal <developers@heartland.us>",
+  "license": "GPL-2.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/globalpayments/globalpayments-js.git"
+  },
+  "scripts": {
+
+    "build": "cross-os build-cross",
+  
+    "build:docs": "wca analyze src --format markdown --outFile custom-elements.md",
+    "clean": "rimraf lib",
+    "format": "prettier --write src/**/* !examples/**/*.html",
+    "prebuild": "rimraf lib && yarn test:lint",
+
+    "prepublish": "cross-os prepublish-cross",
+    
+    "test:lint": "tslint --project tsconfig.json",
+    "test:serve": "serve -p 7777"
+  },
+  "cross-os": {
+    "build-cross": {
+      "linux": "rollup -c ./config/rollup.js && $npm_execpath run build:docs",
+      "win32": "rollup -c ./config/rollup.js && node \"%npm_execpath%\" run build:docs"
+    },
+    "prepublish-cross": {
+      "linux": "$npm_execpath run build",
+      "win32": "node \"%npm_execpath%\" run build"
+    }
+  },
+  "dependencies": {
+    "@globalpayments/js": "^1.8.5",
+    "@globalpayments/js-loader": "^1.8.5"
+  },
+  "devDependencies": {
+    "rimraf": "*",
+    "rollup": "*",
+    "web-component-analyzer": "^1.1.6"
+  },
+  "gitHead": "09776fcfe6140ce5b1ea8fc55fb4867b15565f1d"
+}

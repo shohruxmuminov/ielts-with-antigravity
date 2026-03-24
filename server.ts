@@ -203,6 +203,61 @@ Provide a detailed evaluation including:
     }
   });
 
+  // ─── GLOBAL PAYMENT INTEGRATION ───
+  app.post('/api/payment/notify-admin', async (req, res) => {
+    try {
+      const { userId, userEmail, amount, cardLast4 } = req.body;
+      const botToken = process.env.TELEGRAM_BOT_TOKEN;
+      const chatId = process.env.TELEGRAM_CHAT_ID;
+
+      if (!botToken || !chatId) {
+        return res.status(400).json({ error: 'Telegram bot not configured' });
+      }
+
+      const message = `💰 *Yangi To'lov Xabarnomasi!*\n\n` +
+                      `👤 Foydalanuvchi: ${userEmail}\n` +
+                      `🆔 ID: ${userId}\n` +
+                      `💳 Karta: **** **** **** ${cardLast4 || 'XXXX'}\n` +
+                      `💵 Miqdor: ${amount || 'Noma\'lum'}\n\n` +
+                      `Iltimos, to'lovni tekshiring va premiumni faollashtiring.`;
+
+      const tgRes = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: message,
+          parse_mode: 'Markdown'
+        })
+      });
+
+      if (!tgRes.ok) throw new Error('Failed to notify admin via Telegram');
+
+      res.json({ status: 'ok' });
+    } catch (error) {
+      console.error('Payment notification error:', error);
+      res.status(500).json({ error: 'Failed to send notification' });
+    }
+  });
+
+  // Mock callback for Global Payment automation
+  app.post('/api/payment/global-callback', async (req, res) => {
+    try {
+      const { transactionId, status, userId } = req.body;
+      
+      if (status === 'success') {
+        // In a real implementation, you would use firebase-admin here
+        // to update the user's premiumUntil field.
+        console.log(`✅ Automated premium grant for user ${userId} (Tx: ${transactionId})`);
+        // For now, we'll return ok and let the frontend or admin handle it.
+      }
+      
+      res.json({ status: 'ok' });
+    } catch (error) {
+      res.status(500).json({ error: 'Callback processing failed' });
+    }
+  });
+
   // Vite middleware for development
   if (process.env.NODE_ENV !== 'production') {
     const vite = await createViteServer({

@@ -13,6 +13,7 @@ interface PremiumContextType {
   isPremium: boolean;
   premiumUntil: number;
   activatePremium: (code: string) => Promise<boolean>;
+  grantPremium: (days: number) => Promise<boolean>;
   deactivatePremium: () => Promise<void>;
 }
 
@@ -44,6 +45,22 @@ export function PremiumProvider({ children }: { children: ReactNode }) {
     return false;
   };
 
+  const grantPremium = async (days: number): Promise<boolean> => {
+    if (!user) return false;
+    const duration = days * 24 * 60 * 60 * 1000;
+    const newExpiry = Math.max(premiumUntil, Date.now()) + duration;
+    try {
+      await updateDoc(doc(db, 'users', user.uid), {
+        premiumUntil: newExpiry,
+        isPremium: true
+      });
+      return true;
+    } catch (error) {
+      console.error('Error granting premium:', error);
+      return false;
+    }
+  };
+
   const deactivatePremium = async () => {
     if (!user) return;
     try {
@@ -57,7 +74,7 @@ export function PremiumProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <PremiumContext.Provider value={{ isPremium, premiumUntil, activatePremium, deactivatePremium }}>
+    <PremiumContext.Provider value={{ isPremium, premiumUntil, activatePremium, grantPremium, deactivatePremium }}>
       {children}
     </PremiumContext.Provider>
   );

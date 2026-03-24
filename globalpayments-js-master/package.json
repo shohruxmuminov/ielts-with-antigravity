@@ -1,0 +1,40 @@
+{
+  "name": "root",
+  "version": "4.1.21",
+  "private": true,
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^16.0.0",
+    "@rollup/plugin-node-resolve": "^10.0.0",
+    "@types/base64-js": "^1.3.0",
+    "@types/promise-polyfill": "^6.0.3",
+    "cross-os": "^1.4.0",
+    "cypress": "^6.0.0",
+    "cypress-axe": "^0.11.0",
+    "lerna": "^3.22.1",
+    "prettier": "^2.2.0",
+    "replace-in-file": "^6.1.0",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.33.3",
+    "rollup-plugin-node-builtins": "^2.1.2",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-typescript2": "^0.29.0",
+    "serve": "^11.3.2",
+    "start-server-and-test": "^1.11.6",
+    "testcafe": "^1.9.4",
+    "tslint": "^6.1.3",
+    "typescript": "^4.1.2",
+    "web-component-analyzer": "^1.1.6"
+  },
+  "dependencies": {
+    "@globalpayments/js": "file:packages/globalpayments-js",
+    "@globalpayments/js-loader": "file:packages/globalpayments-js-loader",
+    "@globalpayments/js-web-components": "file:packages/globalpayments-js-web-components",
+    "country-list-with-dial-code-and-flag": "^5.1.0",
+    "dompurify": "^3.2.6",
+    "globalpayments-3ds": "file:packages/globalpayments-3ds",
+    "globalpayments-lib": "file:packages/globalpayments-lib"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Crown, Send, Phone, CheckCircle, Lock, Star, Zap, Shield } from 'lucide-react';
 import { usePremium } from '../context/PremiumContext';
+import { useAuth } from '../FirebaseProvider';
 
 export default function PremiumPanel() {
   const { isPremium, premiumUntil, activatePremium, deactivatePremium } = usePremium();
@@ -8,6 +9,10 @@ export default function PremiumPanel() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [activeTab, setActiveTab] = useState<'code' | 'payment'>('code');
+  const [paymentLoading, setPaymentLoading] = useState(false);
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
+  const { user } = useAuth();
 
   const handleActivate = async () => {
     setError('');
@@ -25,6 +30,36 @@ export default function PremiumPanel() {
       setCode('');
     } else {
       setError('❌ Noto\'g\'ri kod! Telegram orqali to\'g\'ri kodni oling.');
+    }
+  };
+
+  const handleManualPaymentNotify = async () => {
+    if (!user) return;
+    setPaymentLoading(true);
+    try {
+      const resp = await fetch('/api/payment/notify-admin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userId: user.uid,
+          userEmail: user.email,
+          amount: "1 oylik premium (manual)",
+          cardLast4: "3365"
+        })
+      });
+      if (resp.ok) {
+        setPaymentSuccess(true);
+        // Automaticaly grant 1 month for now as requested
+        // "kimki qancha pul to'lasa ham 1 oylik premium taqdim etilsin"
+        const ok = await activatePremium('2010'); // Using existing 30-day code '2010' for simplicity
+        if (ok) setSuccess(true);
+      } else {
+        setError('Xabarnoma yuborishda xatolik.');
+      }
+    } catch (err) {
+      setError('Xatolik yuz berdi.');
+    } finally {
+      setPaymentLoading(false);
     }
   };
 
@@ -115,73 +150,150 @@ export default function PremiumPanel() {
             ) : (
               /* Activation Form */
               <div className="bg-slate-900 rounded-[2rem] border border-slate-800 p-8 shadow-xl">
-                <div className="flex items-center gap-3 mb-8">
-                  <div className="w-10 h-10 bg-amber-500/10 rounded-xl flex items-center justify-center border border-amber-500/20">
-                    <Lock className="w-5 h-5 text-amber-400" />
-                  </div>
-                  <h3 className="text-xl font-black text-white">Premium Kodni Kiriting</h3>
-                </div>
-
-                {/* Contact Info */}
-                <div className="bg-slate-800 rounded-2xl p-5 mb-6 border border-slate-700 space-y-4">
-                  <p className="text-xs font-black text-slate-400 uppercase tracking-widest mb-4">
-                    Premium kod olish uchun bog'laning:
-                  </p>
-                  <a
-                    href="https://t.me/jujutsukaisen_jap"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center gap-3 text-sky-400 hover:text-sky-300 font-bold transition-colors group"
+                {/* Tabs */}
+                <div className="flex gap-2 p-1 bg-slate-800 rounded-2xl border border-slate-700 mb-8">
+                  <button 
+                    onClick={() => setActiveTab('code')}
+                    className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl font-bold text-xs transition-all ${activeTab === 'code' ? 'bg-amber-500 text-white shadow-lg' : 'text-slate-400 hover:text-white'}`}
                   >
-                    <div className="w-9 h-9 bg-sky-500/10 rounded-xl flex items-center justify-center border border-sky-500/20 group-hover:bg-sky-500/20 transition-colors">
-                      <Send className="w-4 h-4" />
-                    </div>
-                    <span>@jujutsukaisen_jap</span>
-                  </a>
-                </div>
-
-                {/* Code Input */}
-                <div className="space-y-4">
-                  <label className="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2">
-                    Aktivatsiya kodi
-                  </label>
-                  <input
-                    type="text"
-                    value={code}
-                    onChange={(e) => { setCode(e.target.value); setError(''); setSuccess(false); }}
-                    onKeyDown={(e) => e.key === 'Enter' && handleActivate()}
-                    placeholder="Kodni kiriting..."
-                    className="w-full bg-slate-800 border-2 border-slate-700 rounded-2xl px-5 py-4 text-white font-bold text-lg placeholder-slate-600 outline-none focus:border-amber-500 focus:ring-4 focus:ring-amber-500/10 transition-all shadow-inner"
-                  />
-
-                  {error && (
-                    <div className="bg-red-900/30 border border-red-500/30 rounded-xl px-4 py-3 text-red-400 font-bold text-sm animate-shake">
-                      {error}
-                    </div>
-                  )}
-
-                  {success && (
-                    <div className="bg-emerald-900/30 border border-emerald-500/30 rounded-xl px-4 py-3 text-emerald-400 font-bold text-sm flex items-center gap-2 animate-bounce-in">
-                      <CheckCircle className="w-5 h-5" />
-                      Premium muvaffaqiyatli aktivlashtirildi! 🎉
-                    </div>
-                  )}
-
-                  <button
-                    onClick={handleActivate}
-                    disabled={loading}
-                    className="w-full bg-gradient-to-r from-amber-500 to-orange-500 text-white py-4 rounded-2xl font-black text-lg hover:from-amber-400 hover:to-orange-400 transition-all shadow-xl shadow-amber-900/30 active:scale-95 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed"
+                    <Lock className="w-4 h-4" />
+                    Kod orqali
+                  </button>
+                  <button 
+                    onClick={() => setActiveTab('payment')}
+                    className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl font-bold text-xs transition-all ${activeTab === 'payment' ? 'bg-amber-500 text-white shadow-lg' : 'text-slate-400 hover:text-white'}`}
                   >
-                    {loading ? (
-                      <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                    ) : (
-                      <>
-                        <Crown className="w-5 h-5" />
-                        Premiumni Aktivlashtirish
-                      </>
-                    )}
+                    <Zap className="w-4 h-4" />
+                    Karta orqali
                   </button>
                 </div>
+
+                {activeTab === 'code' ? (
+                  <div className="space-y-6 animate-in fade-in slide-in-from-bottom-2">
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="w-10 h-10 bg-amber-500/10 rounded-xl flex items-center justify-center border border-amber-500/20">
+                        <Lock className="w-5 h-5 text-amber-400" />
+                      </div>
+                      <h3 className="text-xl font-black text-white">Premium Kodni Kiriting</h3>
+                    </div>
+
+                    {/* Contact Info */}
+                    <div className="bg-slate-800 rounded-2xl p-5 border border-slate-700 space-y-4">
+                      <p className="text-xs font-black text-slate-400 uppercase tracking-widest mb-4">
+                        Premium kod olish uchun bog'laning:
+                      </p>
+                      <a
+                        href="https://t.me/jujutsukaisen_jap"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex items-center gap-3 text-sky-400 hover:text-sky-300 font-bold transition-colors group"
+                      >
+                        <div className="w-9 h-9 bg-sky-500/10 rounded-xl flex items-center justify-center border border-sky-500/20 group-hover:bg-sky-500/20 transition-colors">
+                          <Send className="w-4 h-4" />
+                        </div>
+                        <span>@jujutsukaisen_jap</span>
+                      </a>
+                    </div>
+
+                    <div className="space-y-4">
+                      <label className="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2">
+                        Aktivatsiya kodi
+                      </label>
+                      <input
+                        type="text"
+                        value={code}
+                        onChange={(e) => { setCode(e.target.value); setError(''); setSuccess(false); }}
+                        onKeyDown={(e) => e.key === 'Enter' && handleActivate()}
+                        placeholder="Kodni kiriting..."
+                        className="w-full bg-slate-800 border-2 border-slate-700 rounded-2xl px-5 py-4 text-white font-bold text-lg placeholder-slate-600 outline-none focus:border-amber-500 focus:ring-4 focus:ring-amber-500/10 transition-all shadow-inner"
+                      />
+
+                      {error && (
+                        <div className="bg-red-900/30 border border-red-500/30 rounded-xl px-4 py-3 text-red-400 font-bold text-sm animate-shake">
+                          {error}
+                        </div>
+                      )}
+
+                      {success && (
+                        <div className="bg-emerald-900/30 border border-emerald-500/30 rounded-xl px-4 py-3 text-emerald-400 font-bold text-sm flex items-center gap-2 animate-bounce-in">
+                          <CheckCircle className="w-5 h-5" />
+                          Premium muvaffaqiyatli aktivlashtirildi! 🎉
+                        </div>
+                      )}
+
+                      <button
+                        onClick={handleActivate}
+                        disabled={loading}
+                        className="w-full bg-gradient-to-r from-amber-500 to-orange-500 text-white py-4 rounded-2xl font-black text-lg hover:from-amber-400 hover:to-orange-400 transition-all shadow-xl shadow-amber-900/30 active:scale-95 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        {loading ? (
+                          <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                        ) : (
+                          <>
+                            <Crown className="w-5 h-5" />
+                            Premiumni Aktivlashtirish
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="space-y-6 animate-in fade-in slide-in-from-bottom-2">
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="w-10 h-10 bg-amber-500/10 rounded-xl flex items-center justify-center border border-amber-500/20">
+                        <Zap className="w-5 h-5 text-amber-400" />
+                      </div>
+                      <h3 className="text-xl font-black text-white">Karta orqali to'lov</h3>
+                    </div>
+
+                    <div className="bg-slate-800 rounded-3xl p-6 border border-slate-700 space-y-6">
+                      <div className="space-y-2">
+                        <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Quyidagi kartaga to'lovni amalga oshiring:</p>
+                        <div className="bg-slate-900 p-5 rounded-2xl border-2 border-amber-500/30 flex items-center justify-between group">
+                          <span className="text-xl font-black text-white tracking-widest">4916 9903 4041 3365</span>
+                          <button 
+                            onClick={() => navigator.clipboard.writeText('4916990340413365')}
+                            className="text-[10px] font-black text-amber-500 uppercase hover:text-amber-400"
+                          >
+                            Nusxa olish
+                          </button>
+                        </div>
+                      </div>
+
+                      <div className="bg-amber-500/5 p-4 rounded-2xl border border-amber-500/10">
+                        <p className="text-xs text-amber-200/70 leading-relaxed font-medium italic">
+                          "To'lovni amalga oshirgandan so'ng 'To'ladim' tugmasini bosing. Tizim avtomatik ravishda 1 oylik premiumga ruxsat beradi."
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="space-y-4">
+                      {paymentSuccess ? (
+                        <div className="bg-emerald-900/30 border border-emerald-500/30 rounded-2xl p-6 text-center animate-bounce-in">
+                          <div className="w-12 h-12 bg-emerald-500 rounded-full flex items-center justify-center mx-auto mb-3 shadow-lg shadow-emerald-900/30">
+                            <CheckCircle className="w-6 h-6 text-white" />
+                          </div>
+                          <p className="text-emerald-400 font-black">Xabar yuborildi va Premium faollashtirildi! 🎉</p>
+                        </div>
+                      ) : (
+                        <button
+                          onClick={handleManualPaymentNotify}
+                          disabled={paymentLoading}
+                          className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-5 rounded-2xl font-black text-lg hover:from-blue-500 hover:to-indigo-500 transition-all shadow-xl shadow-blue-900/40 active:scale-95 flex items-center justify-center gap-3 disabled:opacity-50"
+                        >
+                          {paymentLoading ? (
+                            <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                          ) : (
+                            <>
+                              <Zap className="w-5 h-5 fill-current" />
+                              To'ladim
+                            </>
+                          )}
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                )}
               </div>
             )}
           </div>
