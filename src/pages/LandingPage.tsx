@@ -112,10 +112,10 @@ const Navbar = () => {
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 bg-slate-800 rounded-xl group-hover:rotate-12 transition-all overflow-hidden border border-white/10 shadow-lg shadow-indigo-500/10">
-            <img src="/logo.png" alt="Logo" className="w-full h-full object-cover" />
+          <div className="w-10 h-10 bg-indigo-600 rounded-xl group-hover:rotate-12 transition-all flex items-center justify-center border border-white/10 shadow-lg shadow-indigo-500/10">
+            <BookOpen className="w-6 h-6 text-white" />
           </div>
-          <span className="text-2xl font-black text-white tracking-tighter uppercase italic">Antigravity</span>
+          <span className="text-2xl font-black text-white tracking-tighter uppercase italic">IELTS Prep</span>
         </Link>
 
         <div className="hidden md:flex items-center gap-8">
@@ -392,10 +392,10 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
           <div className="space-y-6">
             <Link to="/" className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-slate-800 rounded-xl overflow-hidden border border-white/10">
-                <img src="/logo.png" alt="Logo" className="w-full h-full object-cover" />
+              <div className="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center border border-white/10">
+                <BookOpen className="w-6 h-6 text-white" />
               </div>
-              <span className="text-2xl font-black text-white tracking-tighter uppercase italic">Antigravity</span>
+              <span className="text-2xl font-black text-white tracking-tighter uppercase italic">IELTS Prep</span>
             </Link>
             <p className="text-slate-400 text-sm leading-relaxed">
               The world's most advanced IELTS preparation platform. Powered by AI, designed for excellence.
@@ -451,7 +451,7 @@ const Footer = () => {
         </div>
 
         <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="text-xs text-slate-500">© 2026 Antigravity. All rights reserved.</p>
+          <p className="text-xs text-slate-500">© 2026 IELTS Prep. All rights reserved.</p>
           <div className="flex gap-8 text-xs text-slate-500">
             <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
