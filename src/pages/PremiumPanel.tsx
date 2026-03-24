@@ -49,10 +49,7 @@ export default function PremiumPanel() {
       });
       if (resp.ok) {
         setPaymentSuccess(true);
-        // Automaticaly grant 1 month for now as requested
-        // "kimki qancha pul to'lasa ham 1 oylik premium taqdim etilsin"
-        const ok = await activatePremium('2010'); // Using existing 30-day code '2010' for simplicity
-        if (ok) setSuccess(true);
+        // Premium will be granted automatically by the backend webhook
       } else {
         setError('Xabarnoma yuborishda xatolik.');
       }

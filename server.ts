@@ -6,6 +6,8 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { GoogleGenAI, Type } from '@google/genai';
 import multer from 'multer';
+import { initializeApp } from 'firebase/app';
+import { getFirestore, doc, updateDoc, getDoc } from 'firebase/firestore';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const upload = multer({ storage: multer.memoryStorage() });
@@ -240,21 +242,62 @@ Provide a detailed evaluation including:
     }
   });
 
-  // Mock callback for Global Payment automation
-  app.post('/api/payment/global-callback', async (req, res) => {
+  // ─── GLOBAL PAYMENT WEBHOOK ───
+  app.post('/api/payment/global-webhook', async (req, res) => {
     try {
-      const { transactionId, status, userId } = req.body;
+      const { transactionId, status, userId, amount } = req.body;
       
-      if (status === 'success') {
-        // In a real implementation, you would use firebase-admin here
-        // to update the user's premiumUntil field.
-        console.log(`✅ Automated premium grant for user ${userId} (Tx: ${transactionId})`);
-        // For now, we'll return ok and let the frontend or admin handle it.
+      console.log(`📡 Webhook received: ID=${userId}, Status=${status}, Tx=${transactionId}`);
+
+      if (status === 'success' || status === 'paid') {
+        const firebaseConfig = {
+          projectId: "flutter-ai-playground-e59c0",
+          appId: "1:739402615898:web:36c8d993157efdd874dc63",
+          apiKey: process.env.FIREBASE_API_KEY || "AIzaSyA2ueFz2ijbBz8uoNxWW4RlGhqcTJqjhWM",
+          authDomain: "flutter-ai-playground-e59c0.firebaseapp.com",
+          storageBucket: "flutter-ai-playground-e59c0.firebasestorage.app",
+        };
+
+        const fbApp = initializeApp(firebaseConfig, "server-instance");
+        const db = getFirestore(fbApp);
+        
+        const userRef = doc(db, 'users', userId);
+        const userSnap = await getDoc(userRef);
+
+        if (userSnap.exists()) {
+          const currentPremiumUntil = userSnap.data().premiumUntil || Date.now();
+          const newExpiry = Math.max(currentPremiumUntil, Date.now()) + (30 * 24 * 60 * 60 * 1000);
+          
+          await updateDoc(userRef, {
+            premiumUntil: newExpiry,
+            isPremium: true
+          });
+
+          console.log(`✅ Webhook: Premium granted to user ${userId} for 30 days.`);
+          
+          // Notify admin of success
+          const botToken = process.env.TELEGRAM_BOT_TOKEN;
+          const chatId = process.env.TELEGRAM_CHAT_ID;
+          if (botToken && chatId) {
+            await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                chat_id: chatId,
+                text: `✅ *To'lov Tasdiqlandi!*\n\nFoydalanuvchi: ${userSnap.data().email || userId}\nStatus: Avtomatik faollashtirildi.`,
+                parse_mode: 'Markdown'
+              })
+            });
+          }
+        } else {
+          console.error(`❌ Webhook: User ${userId} not found.`);
+        }
       }
       
       res.json({ status: 'ok' });
     } catch (error) {
-      res.status(500).json({ error: 'Callback processing failed' });
+      console.error('Webhook error:', error);
+      res.status(500).json({ error: 'Webhook processing failed' });
     }
   });
 
