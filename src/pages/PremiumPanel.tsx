@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Crown, Send, Phone, CheckCircle, Lock, Star, Zap, Shield } from 'lucide-react';
 import { usePremium } from '../context/PremiumContext';
 import { useAuth } from '../FirebaseProvider';
@@ -9,95 +9,7 @@ export default function PremiumPanel() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [activeTab, setActiveTab] = useState<'code' | 'payment'>('code');
-  const [paymentLoading, setPaymentLoading] = useState(false);
-  const [paymentSuccess, setPaymentSuccess] = useState(false);
   const { user } = useAuth();
-  
-  useEffect(() => {
-    if (activeTab === 'payment' && !isPremium) {
-      // Initialize Global Payments UI
-      const script = document.createElement('script');
-      script.src = "https://js.globalpay.com/v1/globalpayments.js";
-      script.async = true;
-      script.onload = () => {
-        // @ts-ignore
-        const GlobalPayments = window.GlobalPayments;
-        if (!GlobalPayments) return;
-
-        GlobalPayments.configure({
-          publicApiKey: "pkapi_cert_dNpEYIISXCGDDyKJiV" // Sandbox Test Key
-        });
-
-        const cardForm = GlobalPayments.ui.form({
-          fields: {
-            "card-number": {
-              placeholder: "•••• •••• •••• ••••",
-              target: "#credit-card-card-number"
-            },
-            "card-expiration": {
-              placeholder: "MM / YYYY",
-              target: "#credit-card-card-expiration"
-            },
-            "card-cvv": {
-              placeholder: "•••",
-              target: "#credit-card-card-cvv"
-            }
-          },
-          styles: {
-            'input': {
-              'color': '#ffffff',
-              'font-size': '16px',
-              'font-family': 'inherit',
-              'font-weight': '700'
-            },
-            '.invalid': {
-              'color': '#f87171'
-            }
-          }
-        });
-
-        cardForm.on("token-success", async (resp: any) => {
-          setPaymentLoading(true);
-          try {
-            const response = await fetch('/api/payment/process-card', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                userId: user?.uid,
-                paymentToken: resp.paymentReference, // Official Token
-                amount: "129.99",
-                currency: "EUR"
-              })
-            });
-            const result = await response.json();
-            if (response.ok && result.responseCode === '00') {
-              setPaymentSuccess(true);
-            } else {
-              setError(result.message || 'To\'lovda xatolik yuz berdi.');
-            }
-          } catch (err) {
-            setError('Server bilan bog\'lanishda xatolik.');
-          } finally {
-            setPaymentLoading(false);
-          }
-        });
-
-        cardForm.on("token-error", (resp: any) => {
-          setError(resp.error?.message || 'Karta ma\'lumotlari noto\'g\'ri.');
-          setPaymentLoading(false);
-        });
-      };
-      
-      // If already loaded
-      // @ts-ignore
-      if (window.GlobalPayments) {
-        script.onload(new Event('load') as any);
-      } else {
-        document.head.appendChild(script);
-      }
-    }
-  }, [activeTab, isPremium, user]);
 
   const handleActivate = async () => {
     setError('');
@@ -116,13 +28,6 @@ export default function PremiumPanel() {
     } else {
       setError('❌ Noto\'g\'ri kod! Telegram orqali to\'g\'ri kodni oling.');
     }
-  };
-
-  const handleManualPaymentNotify = () => {
-    // This is now handled by the Global Payments SDK submit listener or trigger
-    // @ts-ignore
-    const submitBtn = document.querySelector('.gp-submit-trigger');
-    if (submitBtn) (submitBtn as any).click();
   };
 
   const formatExpiry = (timestamp: number) => {
@@ -212,25 +117,6 @@ export default function PremiumPanel() {
             ) : (
               /* Activation Form */
               <div className="bg-slate-900 rounded-[2rem] border border-slate-800 p-8 shadow-xl">
-                {/* Tabs */}
-                <div className="flex gap-2 p-1 bg-slate-800 rounded-2xl border border-slate-700 mb-8">
-                  <button 
-                    onClick={() => setActiveTab('code')}
-                    className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl font-bold text-xs transition-all ${activeTab === 'code' ? 'bg-amber-500 text-white shadow-lg' : 'text-slate-400 hover:text-white'}`}
-                  >
-                    <Lock className="w-4 h-4" />
-                    Kod orqali
-                  </button>
-                  <button 
-                    onClick={() => setActiveTab('payment')}
-                    className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl font-bold text-xs transition-all ${activeTab === 'payment' ? 'bg-amber-500 text-white shadow-lg' : 'text-slate-400 hover:text-white'}`}
-                  >
-                    <Zap className="w-4 h-4" />
-                    Karta orqali
-                  </button>
-                </div>
-
-                {activeTab === 'code' ? (
                   <div className="space-y-6 animate-in fade-in slide-in-from-bottom-2">
                     <div className="flex items-center gap-3 mb-2">
                       <div className="w-10 h-10 bg-amber-500/10 rounded-xl flex items-center justify-center border border-amber-500/20">
@@ -299,77 +185,6 @@ export default function PremiumPanel() {
                       </button>
                     </div>
                   </div>
-                ) : (
-                    <div className="space-y-6 animate-in fade-in slide-in-from-bottom-2">
-                      <div className="flex items-center gap-3 mb-2">
-                        <div className="w-10 h-10 bg-amber-500/10 rounded-xl flex items-center justify-center border border-amber-500/20">
-                          <Zap className="w-5 h-5 text-amber-400" />
-                        </div>
-                        <h3 className="text-xl font-black text-white">Karta ma'lumotlarini kiriting</h3>
-                      </div>
-
-                      <div className="bg-slate-800 rounded-3xl p-6 border border-slate-700 space-y-6">
-                        <div className="space-y-4">
-                          <div>
-                            <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Karta raqami</label>
-                            <div id="credit-card-card-number" className="w-full bg-slate-900 border-2 border-slate-700 rounded-2xl px-5 py-4 text-white font-bold h-[60px]"></div>
-                          </div>
-
-                          <div className="grid grid-cols-2 gap-4">
-                            <div>
-                              <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Amal qilish muddati</label>
-                              <div id="credit-card-card-expiration" className="w-full bg-slate-900 border-2 border-slate-700 rounded-2xl px-5 py-4 text-white font-bold h-[60px]"></div>
-                            </div>
-                            <div>
-                              <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">CVV / CVN</label>
-                              <div id="credit-card-card-cvv" className="w-full bg-slate-900 border-2 border-slate-700 rounded-2xl px-5 py-4 text-white font-bold h-[60px]"></div>
-                            </div>
-                          </div>
-                          
-                          {/* Hidden submit trigger for Global Payments SDK */}
-                          <button type="submit" className="gp-submit-trigger hidden">Submit</button>
-                        </div>
-
-                        {error && (
-                          <div className="bg-red-900/30 border border-red-500/30 rounded-xl px-4 py-3 text-red-400 font-bold text-sm animate-shake">
-                            {error}
-                          </div>
-                        )}
-
-                        <div className="bg-amber-500/5 p-4 rounded-2xl border border-amber-500/10">
-                          <p className="text-xs text-amber-200/70 leading-relaxed font-medium italic">
-                            "To'lov Global Payments xavfsiz tizimi orqali amalga oshiriladi. To'lov tasdiqlanishi bilan 1 oylik premium avtomatik beriladi."
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="space-y-4">
-                        {paymentSuccess ? (
-                          <div className="bg-emerald-900/30 border border-emerald-500/30 rounded-2xl p-6 text-center animate-bounce-in">
-                            <div className="w-12 h-12 bg-emerald-500 rounded-full flex items-center justify-center mx-auto mb-3 shadow-lg shadow-emerald-900/30">
-                              <CheckCircle className="w-6 h-6 text-white" />
-                            </div>
-                            <p className="text-emerald-400 font-black">To'lov muvaffaqiyatli! Premium faollashtirildi! 🎉</p>
-                          </div>
-                        ) : (
-                          <button
-                            onClick={handleManualPaymentNotify}
-                            disabled={paymentLoading}
-                            className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-5 rounded-2xl font-black text-lg hover:from-blue-500 hover:to-indigo-500 transition-all shadow-xl shadow-blue-900/40 active:scale-95 flex items-center justify-center gap-3 disabled:opacity-50"
-                          >
-                            {paymentLoading ? (
-                              <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                            ) : (
-                              <>
-                                <Zap className="w-5 h-5 fill-current" />
-                                To'lovni amalga oshirish
-                              </>
-                            )}
-                          </button>
-                        )}
-                      </div>
-                    </div>
-                )}
               </div>
             )}
           </div>
