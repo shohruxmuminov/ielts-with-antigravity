@@ -221,18 +221,6 @@ export default function WritingPractice() {
           isStatic: true,
           isPremium: true,
           createdAt: { seconds: Date.now() / 1000 }
-        },
-        {
-          id: 'writing-practice-set-20',
-          title: 'Writing Practice Set 20',
-          type: 'full',
-          data: '/writing/PracticeSet20.html',
-          isStatic: true,
-          isPremium: true,
-          imageUrl: '/writing/images/practice20_barchart.jpg',
-          task1Type: 'Bar Chart',
-          task2Type: 'TO WHAT EXTENT DO YOU AGREE OR DISAGREE?',
-          createdAt: { seconds: Date.now() / 1000 }
         }
       ];
       setTasks(staticTasks);
