@@ -137,14 +137,14 @@ export default function WritingPractice() {
           createdAt: { seconds: Date.now() / 1000 }
         },
         {
-          id: 'writing-practice-set-13',
-          title: 'November 9, 2025 - Practice Set',
+          id: 'writing-practice-set-20',
+          title: 'Writing Practice Set 20',
           type: 'full',
-          data: '/writing/PracticeSet13.html',
+          data: '/writing/PracticeSet20.html',
           isStatic: true,
           isPremium: true,
-          imageUrl: '/writing/images/practice13_map_real.jpg',
-          task1Type: 'Map',
+          imageUrl: '/writing/images/practice20_barchart.jpg',
+          task1Type: 'Bar Chart',
           task2Type: 'TO WHAT EXTENT DO YOU AGREE OR DISAGREE?',
           createdAt: { seconds: Date.now() / 1000 }
         }
@@ -223,14 +223,14 @@ export default function WritingPractice() {
           createdAt: { seconds: Date.now() / 1000 }
         },
         {
-          id: 'writing-practice-set-13',
-          title: 'November 9, 2025 - Practice Set',
+          id: 'writing-practice-set-20',
+          title: 'Writing Practice Set 20',
           type: 'full',
-          data: '/writing/PracticeSet13.html',
+          data: '/writing/PracticeSet20.html',
           isStatic: true,
           isPremium: true,
-          imageUrl: '/writing/images/practice13_map.png',
-          task1Type: 'Map',
+          imageUrl: '/writing/images/practice20_barchart.jpg',
+          task1Type: 'Bar Chart',
           task2Type: 'TO WHAT EXTENT DO YOU AGREE OR DISAGREE?',
           createdAt: { seconds: Date.now() / 1000 }
         }
