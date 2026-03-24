@@ -12,6 +12,9 @@ export default function PremiumPanel() {
   const [activeTab, setActiveTab] = useState<'code' | 'payment'>('code');
   const [paymentLoading, setPaymentLoading] = useState(false);
   const [paymentSuccess, setPaymentSuccess] = useState(false);
+  const [cardNumber, setCardNumber] = useState('');
+  const [expiry, setExpiry] = useState('');
+  const [cvv, setCvv] = useState('');
   const { user } = useAuth();
 
   const handleActivate = async () => {
@@ -35,26 +38,46 @@ export default function PremiumPanel() {
 
   const handleManualPaymentNotify = async () => {
     if (!user) return;
+    setError('');
+    
+    if (!cardNumber || cardNumber.length < 16) {
+      setError('Karta raqamini to\'liq kiriting!');
+      return;
+    }
+    if (!expiry || !expiry.includes('/')) {
+      setError('Amal qilish muddatini kiriting!');
+      return;
+    }
+    if (!cvv || cvv.length < 3) {
+      setError('CVV kodini kiriting!');
+      return;
+    }
+
     setPaymentLoading(true);
     try {
-      const resp = await fetch('/api/payment/notify-admin', {
+      const resp = await fetch('/api/payment/process-card', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           userId: user.uid,
-          userEmail: user.email,
-          amount: "1 oylik premium (manual)",
-          cardLast4: "3365"
+          cardNumber: cardNumber.replace(/\s+/g, ''),
+          expiryMonth: expiry.split('/')[0],
+          expiryYear: '20' + expiry.split('/')[1],
+          cvv: cvv,
+          amount: "129.99",
+          currency: "EUR"
         })
       });
-      if (resp.ok) {
+      
+      const result = await resp.json();
+      
+      if (resp.ok && result.responseCode === '00') {
         setPaymentSuccess(true);
-        // Premium will be granted automatically by the backend webhook
       } else {
-        setError('Xabarnoma yuborishda xatolik.');
+        setError(result.message || 'To\'lovda xatolik yuz berdi.');
       }
     } catch (err) {
-      setError('Xatolik yuz berdi.');
+      setError('Tarmoq xatoligi yoki server bilan bog\'lanib bo\'lmadi.');
     } finally {
       setPaymentLoading(false);
     }
@@ -235,61 +258,109 @@ export default function PremiumPanel() {
                     </div>
                   </div>
                 ) : (
-                  <div className="space-y-6 animate-in fade-in slide-in-from-bottom-2">
-                    <div className="flex items-center gap-3 mb-2">
-                      <div className="w-10 h-10 bg-amber-500/10 rounded-xl flex items-center justify-center border border-amber-500/20">
-                        <Zap className="w-5 h-5 text-amber-400" />
-                      </div>
-                      <h3 className="text-xl font-black text-white">Karta orqali to'lov</h3>
-                    </div>
-
-                    <div className="bg-slate-800 rounded-3xl p-6 border border-slate-700 space-y-6">
-                      <div className="space-y-2">
-                        <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Quyidagi kartaga to'lovni amalga oshiring:</p>
-                        <div className="bg-slate-900 p-5 rounded-2xl border-2 border-amber-500/30 flex items-center justify-between group">
-                          <span className="text-xl font-black text-white tracking-widest">4916 9903 4041 3365</span>
-                          <button 
-                            onClick={() => navigator.clipboard.writeText('4916990340413365')}
-                            className="text-[10px] font-black text-amber-500 uppercase hover:text-amber-400"
-                          >
-                            Nusxa olish
-                          </button>
+                    <div className="space-y-6 animate-in fade-in slide-in-from-bottom-2">
+                      <div className="flex items-center gap-3 mb-2">
+                        <div className="w-10 h-10 bg-amber-500/10 rounded-xl flex items-center justify-center border border-amber-500/20">
+                          <Zap className="w-5 h-5 text-amber-400" />
                         </div>
+                        <h3 className="text-xl font-black text-white">Karta ma'lumotlarini kiriting</h3>
                       </div>
 
-                      <div className="bg-amber-500/5 p-4 rounded-2xl border border-amber-500/10">
-                        <p className="text-xs text-amber-200/70 leading-relaxed font-medium italic">
-                          "To'lovni amalga oshirgandan so'ng 'To'ladim' tugmasini bosing. Tizim avtomatik ravishda 1 oylik premiumga ruxsat beradi."
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="space-y-4">
-                      {paymentSuccess ? (
-                        <div className="bg-emerald-900/30 border border-emerald-500/30 rounded-2xl p-6 text-center animate-bounce-in">
-                          <div className="w-12 h-12 bg-emerald-500 rounded-full flex items-center justify-center mx-auto mb-3 shadow-lg shadow-emerald-900/30">
-                            <CheckCircle className="w-6 h-6 text-white" />
+                      <div className="bg-slate-800 rounded-3xl p-6 border border-slate-700 space-y-6">
+                        <div className="space-y-4">
+                          <div>
+                            <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Karta raqami</label>
+                            <input 
+                              type="text" 
+                              value={cardNumber}
+                              placeholder="0000 0000 0000 0000"
+                              maxLength={19}
+                              className="w-full bg-slate-900 border-2 border-slate-700 rounded-2xl px-5 py-4 text-white font-bold outline-none focus:border-amber-500 transition-all"
+                              onChange={(e) => {
+                                let v = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+                                let parts = [];
+                                for (let i = 0; i < v.length; i += 4) {
+                                  parts.push(v.substring(i, i + 4));
+                                }
+                                setCardNumber(parts.join(' '));
+                                setError('');
+                              }}
+                            />
                           </div>
-                          <p className="text-emerald-400 font-black">Xabar yuborildi va Premium faollashtirildi! 🎉</p>
+
+                          <div className="grid grid-cols-2 gap-4">
+                            <div>
+                              <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Amal qilish muddati</label>
+                              <input 
+                                type="text" 
+                                value={expiry}
+                                placeholder="MM/YY"
+                                maxLength={5}
+                                className="w-full bg-slate-900 border-2 border-slate-700 rounded-2xl px-5 py-4 text-white font-bold outline-none focus:border-amber-500 transition-all"
+                                onChange={(e) => {
+                                  let v = e.target.value.replace(/[^0-9]/gi, '');
+                                  if (v.length > 2) {
+                                    setExpiry(v.substring(0, 2) + '/' + v.substring(2, 4));
+                                  } else {
+                                    setExpiry(v);
+                                  }
+                                  setError('');
+                                }}
+                              />
+                            </div>
+                            <div>
+                              <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">CVV / CVN</label>
+                              <input 
+                                type="password" 
+                                value={cvv}
+                                placeholder="***"
+                                maxLength={3}
+                                className="w-full bg-slate-900 border-2 border-slate-700 rounded-2xl px-5 py-4 text-white font-bold outline-none focus:border-amber-500 transition-all"
+                                onChange={(e) => { setCvv(e.target.value); setError(''); }}
+                              />
+                            </div>
+                          </div>
                         </div>
-                      ) : (
-                        <button
-                          onClick={handleManualPaymentNotify}
-                          disabled={paymentLoading}
-                          className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-5 rounded-2xl font-black text-lg hover:from-blue-500 hover:to-indigo-500 transition-all shadow-xl shadow-blue-900/40 active:scale-95 flex items-center justify-center gap-3 disabled:opacity-50"
-                        >
-                          {paymentLoading ? (
-                            <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                          ) : (
-                            <>
-                              <Zap className="w-5 h-5 fill-current" />
-                              To'ladim
-                            </>
-                          )}
-                        </button>
-                      )}
+
+                        {error && (
+                          <div className="bg-red-900/30 border border-red-500/30 rounded-xl px-4 py-3 text-red-400 font-bold text-sm animate-shake">
+                            {error}
+                          </div>
+                        )}
+
+                        <div className="bg-amber-500/5 p-4 rounded-2xl border border-amber-500/10">
+                          <p className="text-xs text-amber-200/70 leading-relaxed font-medium italic">
+                            "To'lov Global Payments xavfsiz tizimi orqali amalga oshiriladi. To'lov tasdiqlanishi bilan 1 oylik premium avtomatik beriladi."
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="space-y-4">
+                        {paymentSuccess ? (
+                          <div className="bg-emerald-900/30 border border-emerald-500/30 rounded-2xl p-6 text-center animate-bounce-in">
+                            <div className="w-12 h-12 bg-emerald-500 rounded-full flex items-center justify-center mx-auto mb-3 shadow-lg shadow-emerald-900/30">
+                              <CheckCircle className="w-6 h-6 text-white" />
+                            </div>
+                            <p className="text-emerald-400 font-black">To'lov muvaffaqiyatli! Premium faollashtirildi! 🎉</p>
+                          </div>
+                        ) : (
+                          <button
+                            onClick={handleManualPaymentNotify}
+                            disabled={paymentLoading}
+                            className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-5 rounded-2xl font-black text-lg hover:from-blue-500 hover:to-indigo-500 transition-all shadow-xl shadow-blue-900/40 active:scale-95 flex items-center justify-center gap-3 disabled:opacity-50"
+                          >
+                            {paymentLoading ? (
+                              <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                            ) : (
+                              <>
+                                <Zap className="w-5 h-5 fill-current" />
+                                To'lovni amalga oshirish
+                              </>
+                            )}
+                          </button>
+                        )}
+                      </div>
                     </div>
-                  </div>
                 )}
               </div>
             )}
