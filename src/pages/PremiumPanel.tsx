@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Crown, Send, Phone, CheckCircle, Lock, Star, Zap, Shield } from 'lucide-react';
 import { usePremium } from '../context/PremiumContext';
 import { useAuth } from '../FirebaseProvider';
@@ -12,10 +12,92 @@ export default function PremiumPanel() {
   const [activeTab, setActiveTab] = useState<'code' | 'payment'>('code');
   const [paymentLoading, setPaymentLoading] = useState(false);
   const [paymentSuccess, setPaymentSuccess] = useState(false);
-  const [cardNumber, setCardNumber] = useState('');
-  const [expiry, setExpiry] = useState('');
-  const [cvv, setCvv] = useState('');
   const { user } = useAuth();
+  
+  useEffect(() => {
+    if (activeTab === 'payment' && !isPremium) {
+      // Initialize Global Payments UI
+      const script = document.createElement('script');
+      script.src = "https://js.globalpay.com/v1/globalpayments.js";
+      script.async = true;
+      script.onload = () => {
+        // @ts-ignore
+        const GlobalPayments = window.GlobalPayments;
+        if (!GlobalPayments) return;
+
+        GlobalPayments.configure({
+          publicApiKey: "pkapi_cert_dNpEYIISXCGDDyKJiV" // Sandbox Test Key
+        });
+
+        const cardForm = GlobalPayments.ui.form({
+          fields: {
+            "card-number": {
+              placeholder: "•••• •••• •••• ••••",
+              target: "#credit-card-card-number"
+            },
+            "card-expiration": {
+              placeholder: "MM / YYYY",
+              target: "#credit-card-card-expiration"
+            },
+            "card-cvv": {
+              placeholder: "•••",
+              target: "#credit-card-card-cvv"
+            }
+          },
+          styles: {
+            'input': {
+              'color': '#ffffff',
+              'font-size': '16px',
+              'font-family': 'inherit',
+              'font-weight': '700'
+            },
+            '.invalid': {
+              'color': '#f87171'
+            }
+          }
+        });
+
+        cardForm.on("token-success", async (resp: any) => {
+          setPaymentLoading(true);
+          try {
+            const response = await fetch('/api/payment/process-card', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                userId: user?.uid,
+                paymentToken: resp.paymentReference, // Official Token
+                amount: "129.99",
+                currency: "EUR"
+              })
+            });
+            const result = await response.json();
+            if (response.ok && result.responseCode === '00') {
+              setPaymentSuccess(true);
+            } else {
+              setError(result.message || 'To\'lovda xatolik yuz berdi.');
+            }
+          } catch (err) {
+            setError('Server bilan bog\'lanishda xatolik.');
+          } finally {
+            setPaymentLoading(false);
+          }
+        });
+
+        cardForm.on("token-error", (resp: any) => {
+          setError(resp.error?.message || 'Karta ma\'lumotlari noto\'g\'ri.');
+          setPaymentLoading(false);
+        });
+      };
+      
+      // If already loaded
+      // @ts-ignore
+      if (window.GlobalPayments) {
+        script.onload(new Event('load') as any);
+      } else {
+        document.head.appendChild(script);
+      }
+    }
+  }, [activeTab, isPremium, user]);
 
   const handleActivate = async () => {
     setError('');
@@ -36,51 +118,11 @@ export default function PremiumPanel() {
     }
   };
 
-  const handleManualPaymentNotify = async () => {
-    if (!user) return;
-    setError('');
-    
-    if (!cardNumber || cardNumber.length < 16) {
-      setError('Karta raqamini to\'liq kiriting!');
-      return;
-    }
-    if (!expiry || !expiry.includes('/')) {
-      setError('Amal qilish muddatini kiriting!');
-      return;
-    }
-    if (!cvv || cvv.length < 3) {
-      setError('CVV kodini kiriting!');
-      return;
-    }
-
-    setPaymentLoading(true);
-    try {
-      const resp = await fetch('/api/payment/process-card', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          userId: user.uid,
-          cardNumber: cardNumber.replace(/\s+/g, ''),
-          expiryMonth: expiry.split('/')[0],
-          expiryYear: '20' + expiry.split('/')[1],
-          cvv: cvv,
-          amount: "129.99",
-          currency: "EUR"
-        })
-      });
-      
-      const result = await resp.json();
-      
-      if (resp.ok && result.responseCode === '00') {
-        setPaymentSuccess(true);
-      } else {
-        setError(result.message || 'To\'lovda xatolik yuz berdi.');
-      }
-    } catch (err) {
-      setError('Tarmoq xatoligi yoki server bilan bog\'lanib bo\'lmadi.');
-    } finally {
-      setPaymentLoading(false);
-    }
+  const handleManualPaymentNotify = () => {
+    // This is now handled by the Global Payments SDK submit listener or trigger
+    // @ts-ignore
+    const submitBtn = document.querySelector('.gp-submit-trigger');
+    if (submitBtn) (submitBtn as any).click();
   };
 
   const formatExpiry = (timestamp: number) => {
@@ -270,56 +312,22 @@ export default function PremiumPanel() {
                         <div className="space-y-4">
                           <div>
                             <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Karta raqami</label>
-                            <input 
-                              type="text" 
-                              value={cardNumber}
-                              placeholder="0000 0000 0000 0000"
-                              maxLength={19}
-                              className="w-full bg-slate-900 border-2 border-slate-700 rounded-2xl px-5 py-4 text-white font-bold outline-none focus:border-amber-500 transition-all"
-                              onChange={(e) => {
-                                let v = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
-                                let parts = [];
-                                for (let i = 0; i < v.length; i += 4) {
-                                  parts.push(v.substring(i, i + 4));
-                                }
-                                setCardNumber(parts.join(' '));
-                                setError('');
-                              }}
-                            />
+                            <div id="credit-card-card-number" className="w-full bg-slate-900 border-2 border-slate-700 rounded-2xl px-5 py-4 text-white font-bold h-[60px]"></div>
                           </div>
 
                           <div className="grid grid-cols-2 gap-4">
                             <div>
                               <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Amal qilish muddati</label>
-                              <input 
-                                type="text" 
-                                value={expiry}
-                                placeholder="MM/YY"
-                                maxLength={5}
-                                className="w-full bg-slate-900 border-2 border-slate-700 rounded-2xl px-5 py-4 text-white font-bold outline-none focus:border-amber-500 transition-all"
-                                onChange={(e) => {
-                                  let v = e.target.value.replace(/[^0-9]/gi, '');
-                                  if (v.length > 2) {
-                                    setExpiry(v.substring(0, 2) + '/' + v.substring(2, 4));
-                                  } else {
-                                    setExpiry(v);
-                                  }
-                                  setError('');
-                                }}
-                              />
+                              <div id="credit-card-card-expiration" className="w-full bg-slate-900 border-2 border-slate-700 rounded-2xl px-5 py-4 text-white font-bold h-[60px]"></div>
                             </div>
                             <div>
                               <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">CVV / CVN</label>
-                              <input 
-                                type="password" 
-                                value={cvv}
-                                placeholder="***"
-                                maxLength={3}
-                                className="w-full bg-slate-900 border-2 border-slate-700 rounded-2xl px-5 py-4 text-white font-bold outline-none focus:border-amber-500 transition-all"
-                                onChange={(e) => { setCvv(e.target.value); setError(''); }}
-                              />
+                              <div id="credit-card-card-cvv" className="w-full bg-slate-900 border-2 border-slate-700 rounded-2xl px-5 py-4 text-white font-bold h-[60px]"></div>
                             </div>
                           </div>
+                          
+                          {/* Hidden submit trigger for Global Payments SDK */}
+                          <button type="submit" className="gp-submit-trigger hidden">Submit</button>
                         </div>
 
                         {error && (

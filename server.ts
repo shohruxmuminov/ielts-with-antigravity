@@ -240,30 +240,26 @@ Provide a detailed evaluation including:
       console.error('Payment notification error:', error);
       res.status(500).json({ error: 'Failed to send notification' });
     }
-  // ─── PROCESS REAL CARD PAYMENT ───
+  // ─── PROCESS OFFICIAL CARD PAYMENT (TOKEN) ───
   app.post('/api/payment/process-card', async (req, res) => {
     try {
-      const { userId, cardNumber, expiryMonth, expiryYear, cvv, amount, currency } = req.body;
+      const { userId, paymentToken, amount, currency } = req.body;
       
-      console.log(`💳 Card Processing request: User=${userId}, Card=...${cardNumber.slice(-4)}, Amount=${amount} ${currency}`);
+      console.log(`💳 Official Card Processing: User=${userId}, Token=${paymentToken?.substring(0, 10)}..., Amnt=${amount}`);
 
-      // Adapted from User's Java Snippet
-      // responseCode "00" == Success
-      let responseCode = "01"; // Default to Failure
+      // In a real integration, you would use the Global Payments Node.js SDK here
+      // to "Charge" the token (paymentReference).
+      // For this demo, we simulate success if a token is present.
+      
+      let responseCode = "01";
       let message = "Transaction Declined";
 
-      // Simulation for the provided test card
-      if (cardNumber === "4916990340413365" && expiryMonth === "12" && expiryYear === "2026" && cvv === "176") {
+      if (paymentToken) {
         responseCode = "00";
-        message = "[ test system ] AUTHORISED";
-      } else if (cardNumber.startsWith("4") || cardNumber.startsWith("5")) {
-        // Generic success for other Visa/Mastercard in this demo/test environment
-        responseCode = "00";
-        message = "AUTHORISED";
+        message = "[ test system ] AUTHORISED VIA TOKEN";
       }
 
       if (responseCode === "00") {
-        // 1. Grant Premium in Firestore
         const firebaseConfig = {
           projectId: "flutter-ai-playground-e59c0",
           appId: "1:739402615898:web:36c8d993157efdd874dc63",
@@ -272,7 +268,7 @@ Provide a detailed evaluation including:
           storageBucket: "flutter-ai-playground-e59c0.firebasestorage.app",
         };
 
-        const fbApp = initializeApp(firebaseConfig, "payment-instance");
+        const fbApp = initializeApp(firebaseConfig, "token-instance");
         const db = getFirestore(fbApp);
         
         const userRef = doc(db, 'users', userId);
@@ -287,9 +283,8 @@ Provide a detailed evaluation including:
             isPremium: true
           });
 
-          console.log(`✅ Success: Premium granted to user ${userId} for 30 days.`);
+          console.log(`✅ Success: Premium granted to user ${userId} via Token.`);
           
-          // 2. Notify admin via Telegram
           const botToken = process.env.TELEGRAM_BOT_TOKEN;
           const chatId = process.env.TELEGRAM_CHAT_ID;
           if (botToken && chatId) {
@@ -298,7 +293,7 @@ Provide a detailed evaluation including:
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
                 chat_id: chatId,
-                text: `💰 *Yangi To'lov Tasdiqlandi!*\n\nFoydalanuvchi: ${userSnap.data().email || userId}\nKarta: ****${cardNumber.slice(-4)}\nMablag': ${amount} ${currency}\nStatus: Avtomatik faollashtirildi.`,
+                text: `💰 *Yangi To'lov (SDK Token)!*\n\nFoydalanuvchi: ${userSnap.data().email || userId}\nToken: ${paymentToken.substring(0, 8)}...\nMablag': ${amount} ${currency}\nStatus: Avtomatik faollashtirildi.`,
                 parse_mode: 'Markdown'
               })
             });
