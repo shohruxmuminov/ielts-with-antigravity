@@ -143,7 +143,7 @@ export default function WritingPractice() {
           data: '/writing/PracticeSet13.html',
           isStatic: true,
           isPremium: true,
-          imageUrl: '/writing/images/practice13_map.png',
+          imageUrl: '/writing/images/practice13_map_real.jpg',
           task1Type: 'Map',
           task2Type: 'TO WHAT EXTENT DO YOU AGREE OR DISAGREE?',
           createdAt: { seconds: Date.now() / 1000 }
