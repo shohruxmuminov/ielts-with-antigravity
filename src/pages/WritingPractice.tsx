@@ -135,6 +135,18 @@ export default function WritingPractice() {
           isStatic: true,
           isPremium: true,
           createdAt: { seconds: Date.now() / 1000 }
+        },
+        {
+          id: 'writing-practice-set-13',
+          title: 'November 9, 2025 - Practice Set',
+          type: 'full',
+          data: '/writing/PracticeSet13.html',
+          isStatic: true,
+          isPremium: true,
+          imageUrl: '/writing/images/practice13_map.png',
+          task1Type: 'Map',
+          task2Type: 'TO WHAT EXTENT DO YOU AGREE OR DISAGREE?',
+          createdAt: { seconds: Date.now() / 1000 }
         }
       ];
 
@@ -208,6 +220,18 @@ export default function WritingPractice() {
           data: '/writing/Writing Practice 27.html',
           isStatic: true,
           isPremium: true,
+          createdAt: { seconds: Date.now() / 1000 }
+        },
+        {
+          id: 'writing-practice-set-13',
+          title: 'November 9, 2025 - Practice Set',
+          type: 'full',
+          data: '/writing/PracticeSet13.html',
+          isStatic: true,
+          isPremium: true,
+          imageUrl: '/writing/images/practice13_map.png',
+          task1Type: 'Map',
+          task2Type: 'TO WHAT EXTENT DO YOU AGREE OR DISAGREE?',
           createdAt: { seconds: Date.now() / 1000 }
         }
       ];
@@ -507,7 +531,7 @@ export default function WritingPractice() {
                 <div key={task.id} className="bg-white dark:bg-slate-900 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow border border-slate-200 dark:border-slate-800 flex flex-col">
                   
                   {/* Card Red Header */}
-                  <div className="bg-amber-500 p-4 text-white">
+                  <div className={`${task.task1Type ? 'bg-[#e61e25]' : 'bg-amber-500'} p-4 text-white`}>
                     <h3 className="font-bold text-lg leading-tight">{task.title}</h3>
                     <div className="flex items-center gap-1.5 mt-1 opacity-90 text-sm font-medium">
                       <Crown className="w-3.5 h-3.5" />
@@ -529,20 +553,42 @@ export default function WritingPractice() {
                     </div>
                     
                     <div className="space-y-4 flex-1">
-                      <div>
-                        <p className="text-slate-500 dark:text-slate-400 text-xs font-bold mb-1.5 uppercase tracking-wider">Type:</p>
-                        <div className="bg-amber-500 text-white text-xs font-bold px-3 py-1.5 rounded inline-flex items-center gap-1.5 shadow-sm">
-                          <Crown className="w-3.5 h-3.5" />
-                          Premium Writing
+                      {task.task1Type && (
+                        <div>
+                          <p className="text-slate-500 dark:text-slate-400 text-xs font-bold mb-1.5 uppercase tracking-wider">Task 1:</p>
+                          <div className="bg-emerald-500 text-white text-xs font-bold px-3 py-1.5 rounded inline-flex items-center gap-1.5 shadow-sm">
+                            <Layout className="w-3.5 h-3.5" />
+                            {task.task1Type}
+                          </div>
                         </div>
-                      </div>
+                      )}
+                      
+                      {task.task2Type && (
+                        <div>
+                          <p className="text-slate-500 dark:text-slate-400 text-xs font-bold mb-1.5 uppercase tracking-wider">Task 2:</p>
+                          <div className="bg-[#e61e25] text-white text-xs font-bold px-3 py-1.5 rounded inline-flex items-center gap-1.5 shadow-sm w-full leading-tight text-center justify-center">
+                            <PenTool className="w-3.5 h-3.5 flex-shrink-0" />
+                            {task.task2Type}
+                          </div>
+                        </div>
+                      )}
+
+                      {!task.task1Type && (
+                        <div>
+                          <p className="text-slate-500 dark:text-slate-400 text-xs font-bold mb-1.5 uppercase tracking-wider">Type:</p>
+                          <div className="bg-amber-500 text-white text-xs font-bold px-3 py-1.5 rounded inline-flex items-center gap-1.5 shadow-sm">
+                            <Crown className="w-3.5 h-3.5" />
+                            Premium Writing
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
                   
                   {/* Start Button */}
                   <button 
                     onClick={() => handleStartTest(task)}
-                    className="bg-amber-500 hover:bg-amber-600 text-white py-3.5 w-full font-bold flex items-center justify-center gap-2 transition-colors border-t border-amber-600/50"
+                    className={`${task.task1Type ? 'bg-[#e61e25] hover:bg-[#d01920]' : 'bg-amber-500 hover:bg-amber-600'} text-white py-3.5 w-full font-bold flex items-center justify-center gap-2 transition-colors border-t ${task.task1Type ? 'border-rose-700/50' : 'border-amber-600/50'}`}
                   >
                     <Play className="w-4 h-4 fill-white" />
                     Start Practice
