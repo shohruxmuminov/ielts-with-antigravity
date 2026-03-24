@@ -4,132 +4,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IELTS Writing Practice - Set 20</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
-        
+        /* Global Dark Mode Overrides */
         body {
-            font-family: 'Inter', sans-serif;
             background-color: #020617;
             color: #f1f5f9;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
         }
 
-        .task-container {
-            max-width: 900px;
+        .container {
+            max-width: 800px;
             margin: 0 auto;
-            padding: 2rem;
-        }
-
-        .card {
             background-color: #0f172a;
+            padding: 30px;
+            border-radius: 12px;
             border: 1px solid #1e293b;
-            border-radius: 1.5rem;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
 
-        .task-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
+        /* Override Sanokulov's inline styles for Dark Mode without changing the HTML */
+        div[style*="background: #e9ecef"] {
+            background: #1e293b !important;
+            color: #f1f5f9 !important;
         }
 
-        .task-badge {
-            background: linear-gradient(to right, #4f46e5, #9333ea);
-            color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 0.5rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            letter-spacing: 0.05em;
+        span[style*="color: #666"] {
+            color: #94a3b8 !important;
         }
 
-        .prompt-text {
-            font-size: 1.125rem;
-            line-height: 1.75;
-            color: #e2e8f0;
-            margin-bottom: 1.5rem;
-            font-weight: 500;
+        h2 {
+            border-bottom: 2px solid #334155;
+            padding-bottom: 10px;
+            margin-top: 40px;
+            color: #fbbf24;
+        }
+        
+        h2:first-of-type {
+            margin-top: 0;
         }
 
-        .highlight {
-            color: #818cf8;
-            font-weight: 700;
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            border-radius: 8px;
+            background-color: white; /* Charts usually need white bg */
+            padding: 10px;
         }
 
-        h1 {
-            font-size: 2.25rem;
-            font-weight: 900;
-            margin-bottom: 2rem;
-            background: linear-gradient(to right, #fff, #94a3b8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .instruction-box {
-            background: rgba(30, 41, 59, 0.5);
-            padding: 1rem;
-            border-radius: 1rem;
-            border-left: 4px solid #6366f1;
-            font-style: italic;
-            color: #94a3b8;
-            margin-top: 1.5rem;
-        }
-
-        .writing-practice-container {
-            /* Keep original structure styles */
+        hr {
+            border: 0;
+            border-top: 1px solid #1e293b;
+            margin: 40px 0;
         }
     </style>
 </head>
 <body>
-    <div class="task-container">
-        <header class="text-center mb-12">
-            <h1>IELTS Writing Practice Set 20</h1>
-            <p class="text-slate-400 font-bold uppercase tracking-widest text-sm">Premium Material • sanokulov.uz</p>
-        </header>
-
-        <div class="writing-practice-container">
-            <!-- Task 1 Card -->
-            <div class="card task-section" id="task1">
-                <div class="task-header">
-                    <span class="task-badge">Task 1</span>
-                    <h2 class="text-xl font-black">Bar Chart</h2>
-                </div>
-                <p class="prompt-text">
-                    The bar chart shows the number of <span class="highlight">cars per 1000 people</span> in 5 European countries in 3 years and compares with the European average.
-                </p>
-                <div class="bg-white p-4 rounded-2xl overflow-hidden shadow-2xl mb-4 text-center">
-                    <img src="/writing/images/practice20_barchart.jpg" alt="IELTS Writing Task 1 Bar Chart" class="mx-auto max-w-full h-auto rounded-lg">
-                </div>
-                <div class="instruction-box">
-                    <strong>Instructions:</strong> Summarise the information by selecting and reporting the main features, and make comparisons where relevant. Write at least 150 words.
-                </div>
-            </div>
-
-            <!-- Task 2 Card -->
-            <div class="card task-section" id="task2">
-                <div class="task-header">
-                    <span class="task-badge">Task 2</span>
-                    <h2 class="text-xl font-black">Agree or Disagree</h2>
-                </div>
-                <p class="prompt-text">
-                    Many employers believe that <span class="highlight">good  social skills</span> are as important as good qualifications to succeed in a job, so they should employ people who are with good social skills.
-                </p>
-                <div class="bg-[#1e1b4b]/50 p-6 rounded-2xl border-l-4 border-indigo-500 italic text-slate-300 shadow-inner mb-4">
-                    To what extent do you agree or disagree?
-                </div>
-                <div class="instruction-box">
-                    <strong>Instructions:</strong> Give reasons for your answer and include any relevant examples from your own knowledge and experience. Write at least 250 words.
-                </div>
-            </div>
+    <div class="container">
+        <h2 style="font-size: 18px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;">Task 1</h2>
+        <!-- START EXACT COPY TASK 1 -->
+        <div class="task-topic" style="padding: 10px; font-size: 13px; margin-bottom: 10px;">
+            <p>The bar chart shows the number of cars per 1000 people in 5 European countries in 3 years and compares with the European average.</p>
+            <span style="color: #666; font-size: 12px;"><strong>Instructions:</strong> Summarise the information by selecting and reporting the main features, and make comparisons where relevant. Write at least 150 words.</span>
         </div>
+        <img src="/writing/images/practice20_barchart.jpg" alt="Task 1 Chart/Diagram" class="task-image" onerror="this.style.display='none';">
+        <!-- END EXACT COPY TASK 1 -->
 
-        <footer class="text-center pb-12 opacity-50 text-xs font-bold uppercase tracking-widest">
-            100% Exact Copy from Sanokulov.uz • IELTS AI Prep Platform
-        </footer>
+        <hr>
+
+        <h2 style="font-size: 18px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;">Task 2</h2>
+        <!-- START EXACT COPY TASK 2 -->
+        <div class="task-topic" style="padding: 10px; font-size: 13px;">
+            <p>Many employers believe that good  social skills are as important as good qualifications to succeed in a job, so they should employ people who are with good social skills.</p>
+            <div style="background: #e9ecef; padding: 10px; border-radius: 6px; margin: 8px 0; font-size: 13px;">
+                <p>To what extent do you agree or disagree?</p>
+            </div>
+            <span style="color: #666; font-size: 12px;"><strong>Instructions:</strong> Give reasons for your answer and include any relevant examples from your own knowledge and experience. Write at least 250 words.</span>
+        </div>
+        <!-- END EXACT COPY TASK 2 -->
     </div>
 </body>
 </html>
