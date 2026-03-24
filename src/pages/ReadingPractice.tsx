@@ -54,18 +54,6 @@ export default function ReadingPractice() {
   useEffect(() => {
     const staticFreeTests: ReadingTest[] = [
       {
-        id: 'premium-reading-13',
-        title: 'Premium Full Reading 25',
-        type: 'Academic',
-        category: 'free',
-        isNew: true,
-        isStatic: true,
-        url: '/reading/premiumreading/Full reading 25.html',
-        htmlContent: '',
-        correctAnswers: '',
-        createdAt: { seconds: Date.now() / 1000 }
-      } as ReadingTest,
-      {
         id: 'jurabek-reading-1',
         title: 'IELTS with Jurabek - Reading Test 1',
         type: 'Academic',

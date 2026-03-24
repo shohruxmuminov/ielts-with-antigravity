@@ -19,6 +19,7 @@ interface WritingTask {
   task1Type?: string;
   task2Type?: string;
   isStatic?: boolean;
+  isPremium?: boolean;
 }
 
 export default function WritingPractice() {
@@ -125,6 +126,15 @@ export default function WritingPractice() {
           data: '/writing/writing day 2.html',
           isStatic: true,
           createdAt: { seconds: Date.now() / 1000 }
+        },
+        {
+          id: 'writing-practice-27',
+          title: 'Writing Practice 27',
+          type: 'full',
+          data: '/writing/Writing Practice 27.html',
+          isStatic: true,
+          isPremium: true,
+          createdAt: { seconds: Date.now() / 1000 }
         }
       ];
 
@@ -189,6 +199,15 @@ export default function WritingPractice() {
           type: 'full',
           data: '/writing/writing day 2.html',
           isStatic: true,
+          createdAt: { seconds: Date.now() / 1000 }
+        },
+        {
+          id: 'writing-practice-27',
+          title: 'Writing Practice 27',
+          type: 'full',
+          data: '/writing/Writing Practice 27.html',
+          isStatic: true,
+          isPremium: true,
           createdAt: { seconds: Date.now() / 1000 }
         }
       ];
@@ -482,10 +501,61 @@ export default function WritingPractice() {
         )}
 
         {activeTab === 'premium' && isPremium && (
-          <div className="text-center py-20 bg-slate-900/50 rounded-[3rem] border border-dashed border-amber-500/30">
-            <Crown className="w-12 h-12 text-amber-500/50 mx-auto mb-4" />
-            <p className="text-slate-500 font-bold">Premium writing testlar tez orada qo'shiladi.</p>
-          </div>
+          tasks.filter(t => t.isPremium).length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {tasks.filter(t => t.isPremium).map((task) => (
+                <div key={task.id} className="bg-white dark:bg-slate-900 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow border border-slate-200 dark:border-slate-800 flex flex-col">
+                  
+                  {/* Card Red Header */}
+                  <div className="bg-amber-500 p-4 text-white">
+                    <h3 className="font-bold text-lg leading-tight">{task.title}</h3>
+                    <div className="flex items-center gap-1.5 mt-1 opacity-90 text-sm font-medium">
+                      <Crown className="w-3.5 h-3.5" />
+                      Premium Practice Set
+                    </div>
+                  </div>
+                  
+                  {/* Card Body */}
+                  <div className="p-5 flex-1 flex flex-col relative bg-slate-50/50 dark:bg-slate-900/50">
+                    <div className="mb-6 h-[120px] bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 flex items-center justify-center overflow-hidden p-2">
+                       {task.imageUrl ? (
+                        <img src={task.imageUrl} alt="Task Image" className="max-w-full max-h-full object-contain" />
+                      ) : (
+                        <div className="text-slate-400 dark:text-slate-500 text-sm font-medium flex flex-col items-center">
+                          <Crown className="w-8 h-8 mb-2 opacity-50 text-amber-500" />
+                          Premium Material
+                        </div>
+                      )}
+                    </div>
+                    
+                    <div className="space-y-4 flex-1">
+                      <div>
+                        <p className="text-slate-500 dark:text-slate-400 text-xs font-bold mb-1.5 uppercase tracking-wider">Type:</p>
+                        <div className="bg-amber-500 text-white text-xs font-bold px-3 py-1.5 rounded inline-flex items-center gap-1.5 shadow-sm">
+                          <Crown className="w-3.5 h-3.5" />
+                          Premium Writing
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Start Button */}
+                  <button 
+                    onClick={() => handleStartTest(task)}
+                    className="bg-amber-500 hover:bg-amber-600 text-white py-3.5 w-full font-bold flex items-center justify-center gap-2 transition-colors border-t border-amber-600/50"
+                  >
+                    <Play className="w-4 h-4 fill-white" />
+                    Start Practice
+                  </button>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-20 bg-slate-900/50 rounded-[3rem] border border-dashed border-amber-500/30">
+              <Crown className="w-12 h-12 text-amber-500/50 mx-auto mb-4" />
+              <p className="text-slate-500 font-bold">Premium writing testlar tez orada qo'shiladi.</p>
+            </div>
+          )
         )}
 
         {activeTab === 'free' && (loading ? (

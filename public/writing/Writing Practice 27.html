@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS Writing Practice 27</title>
+    <style id="shohrux-dark-mode">
+        body, .container, .main-content, .loading-screen, .start-screen, .header, .footer, 
+        .main-container, .left-panel, .right-panel, .nav-row, .progress-container,
+        .passage-container, .questions-container, .test-container, .question-group {
+            background-color: #0f172a !important;
+            color: #f1f5f9 !important;
+        }
+        .question, .question-content, .passage-content, .passage-box, 
+        .task-description, .part-header, .test-info, .question-section, .task-prompt, .options, .option {
+            background-color: #1e293b !important;
+            color: #f1f5f9 !important;
+            border-color: #334155 !important;
+        }
+        table, th, td {
+            background-color: #1e293b !important;
+            color: #f1f5f9 !important;
+            border-color: #334155 !important;
+        }
+        th { background-color: #334155 !important; }
+        input[type="text"], input[type="radio"], select, textarea, .writing-textarea, .input-field {
+            background-color: #334155 !important;
+            color: #fff !important;
+            border-color: #475569 !important;
+        }
+        .option:hover, .btn:not(.btn-primary):not(.btn-submit):not(.start-button):not(.more-tests-button):hover {
+            background-color: #334155 !important;
+        }
+        .timer, .timer-container {
+            background-color: #451a1a !important;
+            color: #fca5a5 !important;
+            border-color: #7f1d1d !important;
+        }
+        .logo-area, .more-tests-button {
+            background-color: #3b82f6 !important;
+        }
+        .progress-item {
+            background-color: #334155 !important;
+            color: #94a3b8 !important;
+            border-color: #475569 !important;
+        }
+        .progress-item.current { background-color: #3b82f6 !important; color: #fff !important; }
+        .progress-item.answered { background-color: #10b981 !important; color: #fff !important; }
+        .resizer { background-color: #334155 !important; border-color: #475569 !important; }
+        h1, h2, h3, .section-title, .loading-title, .start-title, .passage-info, .brand {
+            color: #60a5fa !important;
+        }
+        .loading-subtitle, .start-description, .word-count {
+            color: #94a3b8 !important;
+        }
+        .timer-icon, .brand-icon { filter: brightness(0.8) invert(1); }
+        .watermark-layer {
+            color: rgba(255, 255, 255, 0.05) !important;
+        }
+    </style>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            line-height: 1.4;
+            font-size: 16px;
+            padding-bottom: 90px;
+        }
+
+        /* Loading Screen Styles */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #007bff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            font-size: 18px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        /* Start Screen Styles */
+        .start-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9998;
+            padding: 40px;
+        }
+
+        .start-content {
+            text-align: center;
+            max-width: 600px;
+        }
+
+        .start-logo {
+            width: 160px;
+            height: auto;
+            margin: 0 auto 20px;
+            display: block;
+        }
+
+        .start-title {
+            font-size: 32px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .start-description {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .test-info {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 40px;
+            border-left: 5px solid #007bff;
+        }
+
+        .test-info h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .test-info ul {
+            list-style: none;
+            text-align: left;
+        }
+
+        .test-info li {
+            padding: 8px 0;
+            color: #555;
+            font-size: 16px;
+        }
+
+        .test-info li:before {
+            content: "✓ ";
+            color: #28a745;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .start-button {
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+        }
+
+        .start-button:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+        }
+
+        /* Header Styles */
+        .header {
+            background-color: #ffffff;
+            padding: 8px 20px;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            height: 50px;
+        }
+
+        .header-left {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .header-logo {
+            width: 34px;
+            height: 34px;
+        }
+
+        .timer-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #ffebee;
+            border: 1px solid #f44336;
+            border-radius: 15px;
+            padding: 6px 12px;
+            color: #d32f2f;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .timer-icon { width: 16px; height: 16px; fill: #d32f2f; }
+
+        /* Main Container */
+        .main-container {
+            margin-top: 50px;
+            display: none;
+            background: #ffffff;
+            height: calc(100vh - 110px);
+            flex-direction: column;
+        }
+
+        .panels-container {
+            display: flex;
+            flex-grow: 1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .left-panel {
+            width: 50%;
+            padding: 20px;
+            border-right: 1px solid #e0e0e0;
+            overflow-y: auto;
+            min-width: 300px;
+        }
+
+        .right-panel {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            min-width: 300px;
+        }
+
+        .resizer {
+            width: 8px;
+            background: #f0f0f0;
+            cursor: col-resize;
+            border-left: 1px solid #e0e0e0;
+            border-right: 1px solid #e0e0e0;
+        }
+
+        .part-header {
+            background-color: #f1f2ec;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .task-prompt {
+            padding: 15px;
+            margin: 20px 0;
+            border: 1px solid #000;
+            font-style: italic;
+        }
+
+        .chart-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .chart-container img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ccc;
+        }
+
+        .writing-textarea {
+            border: 1px solid #ccc;
+            padding: 15px;
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+            line-height: 1.5;
+            resize: none;
+            outline: none;
+            min-height: 400px;
+            width: 100%;
+        }
+
+        .word-count {
+            text-align: right;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* Bottom Navigation */
+        .nav-row {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #ffffff;
+            border-top: 1px solid #e0e0e0;
+            display: none;
+            height: 60px;
+            z-index: 100;
+        }
+
+        .footer__questionWrapper___1tZ46 {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .footer__questionNo___3WNct {
+            background: none;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+            padding-left: 20px;
+            text-align: left;
+        }
+
+        .footer__questionWrapper___1tZ46.selected {
+            background-color: #f5f5f5;
+        }
+
+        .footer__deliverButton___3FM07 {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .hidden { display: none; }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Loading IELTS Writing Practice 27...</div>
+    </div>
+
+    <!-- Start Screen -->
+    <div class="start-screen" id="startScreen">
+        <div class="start-content">
+            <h1 class="start-title">IELTS Writing Practice 27</h1>
+            <p class="start-description">
+                This practice test consists of two tasks: a data description task and an essay task.
+            </p>
+
+            <div class="test-info">
+                <h3>Test Information</h3>
+                <ul>
+                    <li>Task 1: Renewable Energy Transport (150+ words)</li>
+                    <li>Task 2: Ambition in Society (250+ words)</li>
+                    <li>Total time: 60 minutes</li>
+                </ul>
+            </div>
+
+            <button class="start-button" onclick="startTest()">
+                <i class="fas fa-play"></i> Start Practice
+            </button>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <div class="header" id="header" style="display: none;">
+        <div class="header-left">
+            <span>Writing Practice 27</span>
+        </div>
+
+        <div class="timer-container">
+            <svg class="timer-icon" viewBox="0 0 24 24">
+                <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M16.2,16.2L11,13V7H12.5V12.2L17,14.9L16.2,16.2Z" />
+            </svg>
+            <span class="timer-display">60:00</span>
+        </div>
+    </div>
+
+    <!-- Test Interface -->
+    <div class="main-container" id="mainContainer">
+        <div id="part-header-1" class="part-header">
+            <p><strong>Task 1</strong></p>
+            <p>You should spend about 20 minutes on this task. Write at least 150 words.</p>
+        </div>
+
+        <div id="part-header-2" class="part-header hidden">
+            <p><strong>Task 2</strong></p>
+            <p>You should spend about 40 minutes on this task. Write at least 250 words.</p>
+        </div>
+
+        <div class="panels-container">
+            <div class="left-panel" id="leftPanel">
+                <div id="part-1" class="writing-part">
+                    <div class="task-prompt">
+                        <p><strong>The bar chart shows the percentage of fuel from renewable energy used in the transport sector, 2009 and 2010.</strong></p>
+                        <p>Summarise the information by selecting and reporting the main features, and make comparisons where relevant.</p>
+                    </div>
+
+                    <div class="chart-container">
+                        <img src="https://www.sanokulov.uz/media/writing_question_sets/task1_images/photo_2025-12-13_20-57-33.jpg" alt="Transport Renewable Fuel Bar Chart">
+                    </div>
+                </div>
+
+                <div id="part-2" class="writing-part hidden">
+                    <div class="task-prompt">
+                        <p><strong>Ambition is a positive quality for people to have in society today. How important is it for people who want to succeed in life? Is it a positive or negative characteristic?</strong></p>
+                    </div>
+                    <p>Give reasons for your answer and include any relevant examples from your own knowledge and experience. Write at least 250 words.</p>
+                </div>
+            </div>
+
+            <div class="resizer" id="resizer"></div>
+
+            <div class="right-panel" id="rightPanel">
+                <textarea class="writing-textarea" id="writingTextarea" placeholder="Start writing your response here..." oninput="updateWordCount()"></textarea>
+                <div class="word-count">Words: <span id="wordCount">0</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav-row" id="navigation">
+        <div class="footer__questionWrapper___1tZ46 selected" onclick="switchPart(1)" id="nav-part-1">
+            <button class="footer__questionNo___3WNct">Part 1</button>
+        </div>
+        <div class="footer__questionWrapper___1tZ46" onclick="switchPart(2)" id="nav-part-2">
+            <button class="footer__questionNo___3WNct">Part 2</button>
+        </div>
+        <button class="footer__deliverButton___3FM07" onclick="submitTest()">
+            <i class="fa fa-check"></i>
+        </button>
+    </nav>
+
+    <script>
+        let currentPart = 1;
+        let timeInSeconds = 3600;
+        let timerInterval;
+
+        window.onload = () => {
+            setTimeout(() => {
+                document.getElementById('loadingScreen').style.display = 'none';
+                document.getElementById('startScreen').style.display = 'flex';
+            }, 1000);
+        };
+
+        function startTest() {
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('header').style.display = 'flex';
+            document.getElementById('mainContainer').style.display = 'flex';
+            document.getElementById('navigation').style.display = 'flex';
+            startTimer();
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeInSeconds--;
+                if (timeInSeconds <= 0) {
+                    clearInterval(timerInterval);
+                    submitTest();
+                }
+                updateTimerDisplay();
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeInSeconds / 60);
+            const seconds = timeInSeconds % 60;
+            document.querySelector('.timer-display').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        function switchPart(part) {
+            currentPart = part;
+            document.getElementById('part-1').classList.toggle('hidden', part !== 1);
+            document.getElementById('part-2').classList.toggle('hidden', part !== 2);
+            document.getElementById('part-header-1').classList.toggle('hidden', part !== 1);
+            document.getElementById('part-header-2').classList.toggle('hidden', part !== 2);
+            document.getElementById('nav-part-1').classList.toggle('selected', part === 1);
+            document.getElementById('nav-part-2').classList.toggle('selected', part === 2);
+        }
+
+        function updateWordCount() {
+            const text = document.getElementById('writingTextarea').value;
+            const count = text.trim() ? text.trim().split(/\s+/).length : 0;
+            document.getElementById('wordCount').textContent = count;
+        }
+
+        function submitTest() {
+            clearInterval(timerInterval);
+            alert('Test submitted successfully! Your response has been recorded.');
+            window.parent.postMessage({ type: 'TEST_SUBMITTED', results: { score: 'N/A' } }, '*');
+        }
+
+        // Resizer Logic
+        const resizer = document.getElementById('resizer');
+        const leftPanel = document.getElementById('leftPanel');
+        let isResizing = false;
+
+        resizer.addEventListener('mousedown', (e) => {
+            isResizing = true;
+            document.addEventListener('mousemove', handleMouseMove);
+            document.addEventListener('mouseup', () => {
+                isResizing = false;
+                document.removeEventListener('mousemove', handleMouseMove);
+            });
+        });
+
+        function handleMouseMove(e) {
+            if (!isResizing) return;
+            const offsetLeft = e.clientX;
+            const totalWidth = window.innerWidth;
+            const percentage = (offsetLeft / totalWidth) * 100;
+            if (percentage > 20 && percentage < 80) {
+                leftPanel.style.width = `${percentage}%`;
+            }
+        }
+    </script>
+</body>
+
+</html>
