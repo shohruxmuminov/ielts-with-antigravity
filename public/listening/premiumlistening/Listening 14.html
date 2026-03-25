@@ -725,150 +725,86 @@
             transform: scale(1.05);
         }
 
-        .draggable-option.used {
-            background: linear-gradient(135deg, #95a5a6, #7f8c8d);
-            opacity: 0.5;
-            cursor: not-allowed;
+        /* Correct/Incorrect Answers */
+        .correct-answer {
+            border: 2px solid #27ae60 !important;
+            background-color: #e8f5e9 !important;
         }
 
-        .draggable-option.selected {
-            background: linear-gradient(135deg, #f39c12, #e67e22);
-            box-shadow: 0 0 0 2px rgba(243, 156, 18, 0.4);
+        .incorrect-answer {
+            border: 2px solid #e74c3c !important;
+            background-color: #fdf2f2 !important;
         }
 
-        .option-letter {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 20px;
-            height: 20px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 50%;
-            font-weight: bold;
-            flex-shrink: 0;
-            font-size: 11px;
+        /* Night mode overrides for feedback */
+        .night-mode .correct-answer {
+            background-color: #1b3a27 !important;
+            border-color: #2ecc71 !important;
+            color: #fff !important;
         }
 
-        .option-text {
-            font-size: 12px;
-            line-height: 1.2;
+        .night-mode .incorrect-answer {
+            background-color: #3d1a1a !important;
+            border-color: #e74c3c !important;
+            color: #fff !important;
         }
 
-        .drag-drop-question {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 10px;
-            margin-bottom: 6px;
-            background: white;
-            border-radius: 6px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            position: relative;
-        }
-
-        .drag-drop-question .question-number {
-            font-weight: bold;
-            color: #2c3e50;
-            min-width: 24px;
-            font-size: 13px;
-        }
-
-        .drag-drop-question .question-text {
-            flex: 1;
-            color: #333;
-            font-size: 13px;
-        }
-
-        .drop-zone {
-            min-width: 100px;
-            min-height: 28px;
-            padding: 4px 8px;
-            border: 2px dashed #bdc3c7;
-            border-radius: 5px;
-            background: #f9f9f9;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-        }
-
-        .drop-zone.drag-over {
-            border-color: #3498db;
-            background: #e8f4f8;
-            border-style: solid;
-        }
-
-        .drop-zone.has-answer {
-            border-color: #27ae60;
-            border-style: solid;
-            background: #e8f8f0;
-        }
-
-        .drop-placeholder {
-            color: #95a5a6;
-            font-size: 10px;
-            font-style: italic;
-        }
-
-        .drop-zone.has-answer .drop-placeholder {
-            display: none;
-        }
-
-        .dropped-answer {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            padding: 3px 6px;
-            background: linear-gradient(135deg, #27ae60, #219653);
-            color: white;
+        .feedback-tag {
+            display: inline-block;
+            margin-left: 10px;
+            padding: 2px 8px;
             border-radius: 4px;
-            font-weight: 500;
-            cursor: pointer;
-            font-size: 11px;
-        }
-
-        .dropped-answer:hover {
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
-        }
-
-        .dropped-answer .option-letter {
-            width: 16px;
-            height: 16px;
-            font-size: 10px;
-        }
-
-        .dropped-answer .remove-btn {
             font-size: 12px;
-            margin-left: 3px;
+            font-weight: bold;
+            text-transform: uppercase;
         }
 
-        /* Mobile responsive for drag and drop */
-        @media (max-width: 768px) {
-            .drag-drop-layout {
-                flex-direction: column-reverse;
-            }
-
-            .drag-drop-options {
-                width: 100%;
-            }
-
-            .drag-drop-questions {
-                width: 100%;
-            }
-
-            .draggable-options {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .drop-zone {
-                min-width: 80px;
-            }
+        .feedback-tag.correct {
+            background-color: #27ae60;
+            color: white;
         }
 
-        @media (max-width: 480px) {
-            .draggable-options {
-                grid-template-columns: 1fr;
-            }
+        .feedback-tag.incorrect {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .correct-answer-text {
+            display: block;
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .night-mode .correct-answer-text {
+            color: #2ecc71;
+        }
+
+        .result-summary-overlay {
+            margin-top: 20px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .night-mode .result-summary-overlay {
+            background: #2c3e50;
+            color: #fff;
+        }
+
+        .result-score {
+            font-size: 32px;
+            font-weight: 800;
+            color: #27ae60;
+        }
+
+        .result-band {
+            font-size: 24px;
+            font-weight: 600;
+            color: #3498db;
         }
     </style>
 
@@ -954,7 +890,66 @@
     <script>
         // Test data from Django
         const testData = {
-            parts: [{'number': 1, 'content_sections': [{'html': '<div class="instructions">Questions 1–10\r\n\r\nComplete the form below.\r\nWrite NO MORE THAN TWO WORDS OR A NUMBER for each answer.</div>\n<p><strong>Health club customer research</strong></p>\n<p>Example</p>\n<p><strong>Name: Selina Thompson</strong></p>\n<div class="question-text">Occupation: <strong>1</strong> <input type="text" class="completion-input" name="q1" autocomplete="one-time-code"></div>\n<div class="question-text">Age group: <strong>2</strong> <input type="text" class="completion-input" name="q2" autocomplete="one-time-code"></div>\n<div class="question-text">Type of membership: <strong>3</strong> <input type="text" class="completion-input" name="q3" autocomplete="one-time-code"></div>\n<div class="question-text">Length of membership: <strong>4</strong> <input type="text" class="completion-input" name="q4" autocomplete="one-time-code"> years</div>\n<div class="question-text">Why joined: Recommended by a <strong>5</strong> <input type="text" class="completion-input" name="q5" autocomplete="one-time-code"></div>\n<div class="question-text">Visits to club per month: Eight (on an average) </div>\n<div class="question-text">Facility used most: <strong>6</strong> <input type="text" class="completion-input" name="q6" autocomplete="one-time-code"></div>\n<p>Facility not used (if any): Tennis courts</p>\n<div class="question-text">(because reluctant to <strong>7</strong> <input type="text" class="completion-input" name="q7" autocomplete="one-time-code">)</div>\n<p>Suggestions for improvements:</p>\n<div class="question-text">Have more <strong>8</strong> <input type="text" class="completion-input" name="q8" autocomplete="one-time-code"></div>\n<div class="question-text">Install <strong>9</strong> <input type="text" class="completion-input" name="q9" autocomplete="one-time-code"> in the gym.</div>\n<div class="question-text">Open <strong>10</strong> <input type="text" class="completion-input" name="q10" autocomplete="one-time-code"> later at weekends.</div>', 'diagram_url': '', 'question_count': 10, 'questions': [{'number': 1, 'type': 'completion', 'text': 'Occupation: 1 ________________'}, {'number': 2, 'type': 'completion', 'text': 'Age group: 2 ________________'}, {'number': 3, 'type': 'completion', 'text': 'Type of membership: 3 ________________'}, {'number': 4, 'type': 'completion', 'text': 'Length of membership: 4 ________________ years'}, {'number': 5, 'type': 'completion', 'text': 'Why joined: Recommended by a 5 ________________'}, {'number': 6, 'type': 'completion', 'text': 'Visits to club per month: Eight (on an average) ________________'}, {'number': 6, 'type': 'completion', 'text': 'Facility used most: 6 ________________'}, {'number': 7, 'type': 'completion', 'text': '(because reluctant to 7 ________________)'}, {'number': 8, 'type': 'completion', 'text': 'Have more 8 ________________'}, {'number': 9, 'type': 'completion', 'text': 'Install 9 ________________ in the gym.'}, {'number': 10, 'type': 'completion', 'text': 'Open 10 ________________ later at weekends.'}]}], 'question_count': 10, 'audio_url': '/media/listening_tests/audio/6f170c30fb314475a7ff92b978e4987c.mp3', 'questions': [{'number': 1, 'type': 'completion', 'text': 'Occupation: 1 ________________'}, {'number': 2, 'type': 'completion', 'text': 'Age group: 2 ________________'}, {'number': 3, 'type': 'completion', 'text': 'Type of membership: 3 ________________'}, {'number': 4, 'type': 'completion', 'text': 'Length of membership: 4 ________________ years'}, {'number': 5, 'type': 'completion', 'text': 'Why joined: Recommended by a 5 ________________'}, {'number': 6, 'type': 'completion', 'text': 'Visits to club per month: Eight (on an average) ________________'}, {'number': 6, 'type': 'completion', 'text': 'Facility used most: 6 ________________'}, {'number': 7, 'type': 'completion', 'text': '(because reluctant to 7 ________________)'}, {'number': 8, 'type': 'completion', 'text': 'Have more 8 ________________'}, {'number': 9, 'type': 'completion', 'text': 'Install 9 ________________ in the gym.'}, {'number': 10, 'type': 'completion', 'text': 'Open 10 ________________ later at weekends.'}]}, {'number': 2, 'content_sections': [{'html': '<div class="instructions">Questions 11–16\r\n\r\nComplete the flow chart below.\r\n\r\nChoose SIX answers from the box and write the correct letter, A–G, next to questions 11–16.</div>\n<p><strong>A) air B) ash C) earth D) grass</strong></p>\n<p><strong>E) sticks F) stones G) water</strong></p>\n<br>\n<p><strong>Making a steam pit</strong></p>\n<br>\n<p>Dig a pit.</p>\n<p>⬇️</p>\n<div class="question-text">Arrange a row of <strong>11</strong> <input type="text" class="completion-input" name="q11" autocomplete="one-time-code"> over the pit.</div>\n<p>⬇️</p>\n<div class="question-text">Place <strong>12</strong> <input type="text" class="completion-input" name="q12" autocomplete="one-time-code"> on top.</div>\n<p>⬇️</p>\n<p>Light the wood and let it burn out.</p>\n<p>⬇️</p>\n<div class="question-text">Remove <strong>13</strong> <input type="text" class="completion-input" name="q13" autocomplete="one-time-code">.</div>\n<p>⬇️</p>\n<p>Insert a stick.</p>\n<p>⬇️</p>\n<div class="question-text">Cover the pit with <strong>14</strong> <input type="text" class="completion-input" name="q14" autocomplete="one-time-code">.</div>\n<p>⬇️</p>\n<div class="question-text">Place wrapped food on top, and cover it with <strong>15</strong> <input type="text" class="completion-input" name="q15" autocomplete="one-time-code">.</div>\n<p>⬇️</p>\n<div class="question-text">Remove the stick and put <strong>16</strong> <input type="text" class="completion-input" name="q16" autocomplete="one-time-code"> into the hole.</div>', 'diagram_url': '', 'question_count': 6, 'questions': [{'number': 11, 'type': 'completion', 'text': 'Arrange a row of 11 ________________ over the pit.'}, {'number': 12, 'type': 'completion', 'text': 'Place 12 ________________ on top.'}, {'number': 13, 'type': 'completion', 'text': 'Remove 13 ________________.'}, {'number': 14, 'type': 'completion', 'text': 'Cover the pit with 14 ________________.'}, {'number': 15, 'type': 'completion', 'text': 'Place wrapped food on top, and cover it with 15 ________________.'}, {'number': 16, 'type': 'completion', 'text': 'Remove the stick and put 16 ________________ into the hole.'}]}, {'html': '<div class="instructions">Questions 17–20\r\n\r\nChoose TWO letters, A–E.</div>\n\n                <div class="question dual-choice" data-question="17,18" data-type="which_two">\n                    <div class="question-header">\n                        <span class="question-number">17–18.</span>\n                        <span>Which TWO characteristics apply to the bamboo oven?</span>\n                    </div>\n                    <div style="font-size: 12px; color: #666; margin-bottom: 5px; font-style: italic;">Choose TWO answers</div>\n                    <div class="options">\n                \n\n                        <div class="option" data-value="A">A. It’s suitable for windy weather.</div>\n                    \n\n                        <div class="option" data-value="B">B. The fire is lit below the bottom end of the bamboo.</div>\n                    \n\n                        <div class="option" data-value="C">C. The bamboo is cut into equal lengths.</div>\n                    \n\n                        <div class="option" data-value="D">D. The oven hangs from a stick.</div>\n                    \n\n                        <div class="option" data-value="E">E. It cooks food by steaming it.</div>\n                    \n\n                    </div>\n                    \n                        <input type="hidden" name="q17" id="q17_hidden">\n                        <input type="hidden" name="q18" id="q18_hidden">\n                    \n                </div>\n                \n\n                <div class="question dual-choice" data-question="19,20" data-type="which_two">\n                    <div class="question-header">\n                        <span class="question-number">19–20.</span>\n                        <span>Which TWO pieces of advice does the speaker give about eating wild fungi?</span>\n                    </div>\n                    <div style="font-size: 12px; color: #666; margin-bottom: 5px; font-style: italic;">Choose TWO answers</div>\n                    <div class="options">\n                \n\n                        <div class="option" data-value="A">A. Cooking doesn’t make poisonous fungi edible.</div>\n                    \n\n                        <div class="option" data-value="B">B. Edible wild fungi can be eaten without cooking.</div>\n                    \n\n                        <div class="option" data-value="C">C. Wild fungi are highly nutritious.</div>\n                    \n\n                        <div class="option" data-value="D">D. Some edible fungi look very similar to poisonous varieties.</div>\n                    \n\n                        <div class="option" data-value="E">E. Fungi which cannot be identified should only be eaten in small quantities.</div>\n                    \n\n                    </div>\n                    \n                        <input type="hidden" name="q19" id="q19_hidden">\n                        <input type="hidden" name="q20" id="q20_hidden">\n                    \n                </div>\n                ', 'diagram_url': '', 'question_count': 4, 'questions': [{'number': 17, 'type': 'which_two', 'text': 'Which TWO characteristics apply to the bamboo oven?', 'options': [{'letter': 'A', 'text': 'It’s suitable for windy weather.'}, {'letter': 'B', 'text': 'The fire is lit below the bottom end of the bamboo.'}, {'letter': 'C', 'text': 'The bamboo is cut into equal lengths.'}, {'letter': 'D', 'text': 'The oven hangs from a stick.'}, {'letter': 'E', 'text': 'It cooks food by steaming it.'}]}, {'number': 18, 'type': 'which_two', 'text': 'Which TWO characteristics apply to the bamboo oven?', 'options': [{'letter': 'A', 'text': 'It’s suitable for windy weather.'}, {'letter': 'B', 'text': 'The fire is lit below the bottom end of the bamboo.'}, {'letter': 'C', 'text': 'The bamboo is cut into equal lengths.'}, {'letter': 'D', 'text': 'The oven hangs from a stick.'}, {'letter': 'E', 'text': 'It cooks food by steaming it.'}]}, {'number': 19, 'type': 'which_two', 'text': 'Which TWO pieces of advice does the speaker give about eating wild fungi?', 'options': [{'letter': 'A', 'text': 'Cooking doesn’t make poisonous fungi edible.'}, {'letter': 'B', 'text': 'Edible wild fungi can be eaten without cooking.'}, {'letter': 'C', 'text': 'Wild fungi are highly nutritious.'}, {'letter': 'D', 'text': 'Some edible fungi look very similar to poisonous varieties.'}, {'letter': 'E', 'text': 'Fungi which cannot be identified should only be eaten in small quantities.'}]}, {'number': 20, 'type': 'which_two', 'text': 'Which TWO pieces of advice does the speaker give about eating wild fungi?', 'options': [{'letter': 'A', 'text': 'Cooking doesn’t make poisonous fungi edible.'}, {'letter': 'B', 'text': 'Edible wild fungi can be eaten without cooking.'}, {'letter': 'C', 'text': 'Wild fungi are highly nutritious.'}, {'letter': 'D', 'text': 'Some edible fungi look very similar to poisonous varieties.'}, {'letter': 'E', 'text': 'Fungi which cannot be identified should only be eaten in small quantities.'}]}]}], 'question_count': 10, 'audio_url': '/media/listening_tests/audio/dbeb192c7c0e4f80a5fb7691b0d07377.mp3', 'questions': [{'number': 11, 'type': 'completion', 'text': 'Arrange a row of 11 ________________ over the pit.'}, {'number': 12, 'type': 'completion', 'text': 'Place 12 ________________ on top.'}, {'number': 13, 'type': 'completion', 'text': 'Remove 13 ________________.'}, {'number': 14, 'type': 'completion', 'text': 'Cover the pit with 14 ________________.'}, {'number': 15, 'type': 'completion', 'text': 'Place wrapped food on top, and cover it with 15 ________________.'}, {'number': 16, 'type': 'completion', 'text': 'Remove the stick and put 16 ________________ into the hole.'}, {'number': 17, 'type': 'which_two', 'text': 'Which TWO characteristics apply to the bamboo oven?', 'options': [{'letter': 'A', 'text': 'It’s suitable for windy weather.'}, {'letter': 'B', 'text': 'The fire is lit below the bottom end of the bamboo.'}, {'letter': 'C', 'text': 'The bamboo is cut into equal lengths.'}, {'letter': 'D', 'text': 'The oven hangs from a stick.'}, {'letter': 'E', 'text': 'It cooks food by steaming it.'}]}, {'number': 18, 'type': 'which_two', 'text': 'Which TWO characteristics apply to the bamboo oven?', 'options': [{'letter': 'A', 'text': 'It’s suitable for windy weather.'}, {'letter': 'B', 'text': 'The fire is lit below the bottom end of the bamboo.'}, {'letter': 'C', 'text': 'The bamboo is cut into equal lengths.'}, {'letter': 'D', 'text': 'The oven hangs from a stick.'}, {'letter': 'E', 'text': 'It cooks food by steaming it.'}]}, {'number': 19, 'type': 'which_two', 'text': 'Which TWO pieces of advice does the speaker give about eating wild fungi?', 'options': [{'letter': 'A', 'text': 'Cooking doesn’t make poisonous fungi edible.'}, {'letter': 'B', 'text': 'Edible wild fungi can be eaten without cooking.'}, {'letter': 'C', 'text': 'Wild fungi are highly nutritious.'}, {'letter': 'D', 'text': 'Some edible fungi look very similar to poisonous varieties.'}, {'letter': 'E', 'text': 'Fungi which cannot be identified should only be eaten in small quantities.'}]}, {'number': 20, 'type': 'which_two', 'text': 'Which TWO pieces of advice does the speaker give about eating wild fungi?', 'options': [{'letter': 'A', 'text': 'Cooking doesn’t make poisonous fungi edible.'}, {'letter': 'B', 'text': 'Edible wild fungi can be eaten without cooking.'}, {'letter': 'C', 'text': 'Wild fungi are highly nutritious.'}, {'letter': 'D', 'text': 'Some edible fungi look very similar to poisonous varieties.'}, {'letter': 'E', 'text': 'Fungi which cannot be identified should only be eaten in small quantities.'}]}]}, {'number': 3, 'content_sections': [{'html': '<div class="instructions">Questions 21–25\r\n\r\nChoose the correct letter, A, B or C.</div>\n<p><strong>Research project on attitudes towards study</strong></p>\n\n                <div class="question " data-question="21" data-type="multiple_choice">\n                    <div class="question-header">\n                        <span class="question-number">21.</span>\n                        <span>Phoebe’s main reason for choosing her topic was that</span>\n                    </div>\n                    \n                    <div class="options">\n                \n\n                        <div class="option" data-value="A">A. her classmates had been very interested in it.</div>\n                    \n\n                        <div class="option" data-value="B">B. it would help prepare her for her first teaching post.</div>\n                    \n\n                        <div class="option" data-value="C">C. she had been inspired by a particular book.</div>\n                    \n\n                    </div>\n                    <input type="hidden" name="q21" id="q21_hidden">\n                </div>\n                \n\n                <div class="question " data-question="22" data-type="multiple_choice">\n                    <div class="question-header">\n                        <span class="question-number">22.</span>\n                        <span>Phoebe’s main research question related to</span>\n                    </div>\n                    \n                    <div class="options">\n                \n\n                        <div class="option" data-value="A">A. the effect of teacher discipline.</div>\n                    \n\n                        <div class="option" data-value="B">B. the variety of learning activities.</div>\n                    \n\n                        <div class="option" data-value="C">C. levels of pupil confidence.</div>\n                    \n\n                    </div>\n                    <input type="hidden" name="q22" id="q22_hidden">\n                </div>\n                \n\n                <div class="question " data-question="23" data-type="multiple_choice">\n                    <div class="question-header">\n                        <span class="question-number">23.</span>\n                        <span>Phoebe was most surprised by her finding that</span>\n                    </div>\n                    \n                    <div class="options">\n                \n\n                        <div class="option" data-value="A">A. gender did not influence behaviour significantly.</div>\n                    \n\n                        <div class="option" data-value="B">B. girls were more negative about school than boys.</div>\n                    \n\n                        <div class="option" data-value="C">C. boys were more talkative than girls in class.</div>\n                    \n\n                    </div>\n                    <input type="hidden" name="q23" id="q23_hidden">\n                </div>\n                \n\n                <div class="question " data-question="24" data-type="multiple_choice">\n                    <div class="question-header">\n                        <span class="question-number">24.</span>\n                        <span>Regarding teaching, Phoebe says she has learned that</span>\n                    </div>\n                    \n                    <div class="options">\n                \n\n                        <div class="option" data-value="A">A. teachers should be flexible in their lesson planning.</div>\n                    \n\n                        <div class="option" data-value="B">B. brighter children learn from supporting weaker ones.</div>\n                    \n\n                        <div class="option" data-value="C">C. children vary from each other in unpredictable ways.</div>\n                    \n\n                    </div>\n                    <input type="hidden" name="q24" id="q24_hidden">\n                </div>\n                \n\n                <div class="question " data-question="25" data-type="multiple_choice">\n                    <div class="question-header">\n                        <span class="question-number">25.</span>\n                        <span>Tony is particularly impressed by Phoebe’s ability to</span>\n                    </div>\n                    \n                    <div class="options">\n                \n\n                        <div class="option" data-value="A">A. recognise the limitations of such small-scale research.</div>\n                    \n\n                        <div class="option" data-value="B">B. reflect on her own research experience in an interesting way.</div>\n                    \n\n                        <div class="option" data-value="C">C. design her research in such a way as to minimise difficulties.</div>\n                    \n\n                    </div>\n                    <input type="hidden" name="q25" id="q25_hidden">\n                </div>\n                ', 'diagram_url': '', 'question_count': 5, 'questions': [{'number': 21, 'type': 'multiple_choice', 'text': 'Phoebe’s main reason for choosing her topic was that', 'options': [{'letter': 'A', 'text': 'her classmates had been very interested in it.'}, {'letter': 'B', 'text': 'it would help prepare her for her first teaching post.'}, {'letter': 'C', 'text': 'she had been inspired by a particular book.'}]}, {'number': 22, 'type': 'multiple_choice', 'text': 'Phoebe’s main research question related to', 'options': [{'letter': 'A', 'text': 'the effect of teacher discipline.'}, {'letter': 'B', 'text': 'the variety of learning activities.'}, {'letter': 'C', 'text': 'levels of pupil confidence.'}]}, {'number': 23, 'type': 'multiple_choice', 'text': 'Phoebe was most surprised by her finding that', 'options': [{'letter': 'A', 'text': 'gender did not influence behaviour significantly.'}, {'letter': 'B', 'text': 'girls were more negative about school than boys.'}, {'letter': 'C', 'text': 'boys were more talkative than girls in class.'}]}, {'number': 24, 'type': 'multiple_choice', 'text': 'Regarding teaching, Phoebe says she has learned that', 'options': [{'letter': 'A', 'text': 'teachers should be flexible in their lesson planning.'}, {'letter': 'B', 'text': 'brighter children learn from supporting weaker ones.'}, {'letter': 'C', 'text': 'children vary from each other in unpredictable ways.'}]}, {'number': 25, 'type': 'multiple_choice', 'text': 'Tony is particularly impressed by Phoebe’s ability to', 'options': [{'letter': 'A', 'text': 'recognise the limitations of such small-scale research.'}, {'letter': 'B', 'text': 'reflect on her own research experience in an interesting way.'}, {'letter': 'C', 'text': 'design her research in such a way as to minimise difficulties.'}]}]}, {'html': '<div class="instructions">Questions 26–30\r\n\r\nWhat did Phoebe find difficult about the different research techniques she used?\r\n\r\nChoose FIVE answers from the box and write the correct letter, A–G, next to questions 26–30.</div>\n<div class="drag-drop-container">\n<div class="drag-drop-subtitle"><strong>Difficulties</strong></div>\n<div class="drag-drop-layout">\n<div class="drag-drop-questions">\n\n                <div class="drag-drop-question" data-question="26">\n                    <span class="question-number">26.</span>\n                    <span class="question-text">Observing lessons</span>\n                    <div class="drop-zone" data-question="26">\n                        <span class="drop-placeholder">Drop answer here</span>\n                        <input type="hidden" name="q26" class="drag-drop-input">\n                    </div>\n                </div>\n            \n\n                <div class="drag-drop-question" data-question="27">\n                    <span class="question-number">27.</span>\n                    <span class="question-text">Interviewing teachers</span>\n                    <div class="drop-zone" data-question="27">\n                        <span class="drop-placeholder">Drop answer here</span>\n                        <input type="hidden" name="q27" class="drag-drop-input">\n                    </div>\n                </div>\n            \n\n                <div class="drag-drop-question" data-question="28">\n                    <span class="question-number">28.</span>\n                    <span class="question-text">Interviewing pupils</span>\n                    <div class="drop-zone" data-question="28">\n                        <span class="drop-placeholder">Drop answer here</span>\n                        <input type="hidden" name="q28" class="drag-drop-input">\n                    </div>\n                </div>\n            \n\n                <div class="drag-drop-question" data-question="29">\n                    <span class="question-number">29.</span>\n                    <span class="question-text">Using questionnaires</span>\n                    <div class="drop-zone" data-question="29">\n                        <span class="drop-placeholder">Drop answer here</span>\n                        <input type="hidden" name="q29" class="drag-drop-input">\n                    </div>\n                </div>\n            \n\n                <div class="drag-drop-question" data-question="30">\n                    <span class="question-number">30.</span>\n                    <span class="question-text">Taking photographs</span>\n                    <div class="drop-zone" data-question="30">\n                        <span class="drop-placeholder">Drop answer here</span>\n                        <input type="hidden" name="q30" class="drag-drop-input">\n                    </div>\n                </div>\n            \n</div>\n<div class="drag-drop-options">\n<div class="options-title">Options</div>\n<div class="draggable-options">\n\n                <div class="draggable-option" draggable="true" data-value="A">\n                    <span class="option-letter">A</span>\n                    <span class="option-text">Obtaining permission</span>\n                </div>\n            \n\n                <div class="draggable-option" draggable="true" data-value="B">\n                    <span class="option-letter">B</span>\n                    <span class="option-text">Deciding on a suitable focus</span>\n                </div>\n            \n\n                <div class="draggable-option" draggable="true" data-value="C">\n                    <span class="option-letter">C</span>\n                    <span class="option-text">Concentrating while gathering data</span>\n                </div>\n            \n\n                <div class="draggable-option" draggable="true" data-value="D">\n                    <span class="option-letter">D</span>\n                    <span class="option-text">Working collaboratively</span>\n                </div>\n            \n\n                <div class="draggable-option" draggable="true" data-value="E">\n                    <span class="option-letter">E</span>\n                    <span class="option-text">Processing data she had gathered</span>\n                </div>\n            \n\n                <div class="draggable-option" draggable="true" data-value="F">\n                    <span class="option-letter">F</span>\n                    <span class="option-text">Finding a suitable time to conduct the research</span>\n                </div>\n            \n\n                <div class="draggable-option" draggable="true" data-value="G">\n                    <span class="option-letter">G</span>\n                    <span class="option-text">Getting hold of suitable equipment</span>\n                </div>\n            \n</div>\n</div>\n</div>\n</div>', 'diagram_url': '', 'question_count': 5, 'questions': [{'number': 26, 'type': 'drag_drop', 'text': 'Observing lessons'}, {'number': 27, 'type': 'drag_drop', 'text': 'Interviewing teachers'}, {'number': 28, 'type': 'drag_drop', 'text': 'Interviewing pupils'}, {'number': 29, 'type': 'drag_drop', 'text': 'Using questionnaires'}, {'number': 30, 'type': 'drag_drop', 'text': 'Taking photographs'}]}], 'question_count': 10, 'audio_url': '/media/listening_tests/audio/b655494a816f4611a2ecb5f56c49058d.mp3', 'questions': [{'number': 21, 'type': 'multiple_choice', 'text': 'Phoebe’s main reason for choosing her topic was that', 'options': [{'letter': 'A', 'text': 'her classmates had been very interested in it.'}, {'letter': 'B', 'text': 'it would help prepare her for her first teaching post.'}, {'letter': 'C', 'text': 'she had been inspired by a particular book.'}]}, {'number': 22, 'type': 'multiple_choice', 'text': 'Phoebe’s main research question related to', 'options': [{'letter': 'A', 'text': 'the effect of teacher discipline.'}, {'letter': 'B', 'text': 'the variety of learning activities.'}, {'letter': 'C', 'text': 'levels of pupil confidence.'}]}, {'number': 23, 'type': 'multiple_choice', 'text': 'Phoebe was most surprised by her finding that', 'options': [{'letter': 'A', 'text': 'gender did not influence behaviour significantly.'}, {'letter': 'B', 'text': 'girls were more negative about school than boys.'}, {'letter': 'C', 'text': 'boys were more talkative than girls in class.'}]}, {'number': 24, 'type': 'multiple_choice', 'text': 'Regarding teaching, Phoebe says she has learned that', 'options': [{'letter': 'A', 'text': 'teachers should be flexible in their lesson planning.'}, {'letter': 'B', 'text': 'brighter children learn from supporting weaker ones.'}, {'letter': 'C', 'text': 'children vary from each other in unpredictable ways.'}]}, {'number': 25, 'type': 'multiple_choice', 'text': 'Tony is particularly impressed by Phoebe’s ability to', 'options': [{'letter': 'A', 'text': 'recognise the limitations of such small-scale research.'}, {'letter': 'B', 'text': 'reflect on her own research experience in an interesting way.'}, {'letter': 'C', 'text': 'design her research in such a way as to minimise difficulties.'}]}, {'number': 26, 'type': 'drag_drop', 'text': 'Observing lessons'}, {'number': 27, 'type': 'drag_drop', 'text': 'Interviewing teachers'}, {'number': 28, 'type': 'drag_drop', 'text': 'Interviewing pupils'}, {'number': 29, 'type': 'drag_drop', 'text': 'Using questionnaires'}, {'number': 30, 'type': 'drag_drop', 'text': 'Taking photographs'}]}, {'number': 4, 'content_sections': [{'html': '<div class="instructions">Questions 31–40\r\n\r\nComplete the sentences below.\r\nWrite NO MORE THAN TWO WORDS for each answer.</div>\n<p><strong>Saving the juniper plant</strong></p>\n<p><strong>Background</strong></p>\n<div class="question-text">Juniper was one of the first plants to colonise Britain after the last <strong>31</strong> <input type="text" class="completion-input" name="q31" autocomplete="one-time-code">.</div>\n<div class="question-text">Its smoke is virtually <strong>32</strong> <input type="text" class="completion-input" name="q32" autocomplete="one-time-code">, so juniper wood was used as fuel in illegal activities.</div>\n<div class="question-text">Oils from the plant were used to prevent <strong>33</strong> <input type="text" class="completion-input" name="q33" autocomplete="one-time-code"> spreading.</div>\n<div class="question-text">Nowadays, its berries are widely used to <strong>34</strong> <input type="text" class="completion-input" name="q34" autocomplete="one-time-code"> food and drink.</div>\n<p>Ecology</p>\n<div class="question-text">Juniper plants also support several species of insects and <strong>35</strong> <input type="text" class="completion-input" name="q35" autocomplete="one-time-code">.</div>\n<p><strong>Problems</strong></p>\n<div class="question-text">In current juniper populations, ratios of the <strong>36</strong> <input type="text" class="completion-input" name="q36" autocomplete="one-time-code"> are poor.</div>\n<div class="question-text">Many of the bushes in each group are of the same age so <strong>37</strong> <input type="text" class="completion-input" name="q37" autocomplete="one-time-code"> of whole populations is rapid.</div>\n<p><strong>Solutions</strong></p>\n<div class="question-text">Plantlife is trialling novel techniques across <strong>38</strong> <input type="text" class="completion-input" name="q38" autocomplete="one-time-code"> areas of England. One measure is to introduce <strong>39</strong> <input type="text" class="completion-input" name="q39" autocomplete="one-time-code"> for seedlings.  A further step is to plant <strong>40</strong> <input type="text" class="completion-input" name="q40" autocomplete="one-time-code"> from healthy bushes.</div>', 'diagram_url': '', 'question_count': 10, 'questions': [{'number': 31, 'type': 'completion', 'text': 'Juniper was one of the first plants to colonise Britain after the last 31 ________________.'}, {'number': 32, 'type': 'completion', 'text': 'Its smoke is virtually 32 ________________, so juniper wood was used as fuel in illegal activities.'}, {'number': 33, 'type': 'completion', 'text': 'Oils from the plant were used to prevent 33 ________________ spreading.'}, {'number': 34, 'type': 'completion', 'text': 'Nowadays, its berries are widely used to 34 ________________ food and drink.'}, {'number': 35, 'type': 'completion', 'text': 'Juniper plants also support several species of insects and 35 ________________.'}, {'number': 36, 'type': 'completion', 'text': 'In current juniper populations, ratios of the 36 ________________ are poor.'}, {'number': 37, 'type': 'completion', 'text': 'Many of the bushes in each group are of the same age so 37 ________________ of whole populations is rapid.'}, {'number': 38, 'type': 'completion', 'text': 'Plantlife is trialling novel techniques across 38 ________________ areas of England. One measure is to introduce 39________________ for seedlings.  A further step is to plant 40________________ from healthy bushes.'}, {'number': 39, 'type': 'completion', 'text': 'Plantlife is trialling novel techniques across <strong>38</strong> <input type="text" class="completion-input" name="q38" autocomplete="one-time-code"> areas of England. One measure is to introduce 39________________ for seedlings.  A further step is to plant 40________________ from healthy bushes.'}, {'number': 40, 'type': 'completion', 'text': 'Plantlife is trialling novel techniques across <strong>38</strong> <input type="text" class="completion-input" name="q38" autocomplete="one-time-code"> areas of England. One measure is to introduce <strong>39</strong> <input type="text" class="completion-input" name="q39" autocomplete="one-time-code"> for seedlings.  A further step is to plant 40________________ from healthy bushes.'}]}], 'question_count': 10, 'audio_url': '/media/listening_tests/audio/e017b44d19264d30b768a791a7ef8987.mp3', 'questions': [{'number': 31, 'type': 'completion', 'text': 'Juniper was one of the first plants to colonise Britain after the last 31 ________________.'}, {'number': 32, 'type': 'completion', 'text': 'Its smoke is virtually 32 ________________, so juniper wood was used as fuel in illegal activities.'}, {'number': 33, 'type': 'completion', 'text': 'Oils from the plant were used to prevent 33 ________________ spreading.'}, {'number': 34, 'type': 'completion', 'text': 'Nowadays, its berries are widely used to 34 ________________ food and drink.'}, {'number': 35, 'type': 'completion', 'text': 'Juniper plants also support several species of insects and 35 ________________.'}, {'number': 36, 'type': 'completion', 'text': 'In current juniper populations, ratios of the 36 ________________ are poor.'}, {'number': 37, 'type': 'completion', 'text': 'Many of the bushes in each group are of the same age so 37 ________________ of whole populations is rapid.'}, {'number': 38, 'type': 'completion', 'text': 'Plantlife is trialling novel techniques across 38 ________________ areas of England. One measure is to introduce 39________________ for seedlings.  A further step is to plant 40________________ from healthy bushes.'}, {'number': 39, 'type': 'completion', 'text': 'Plantlife is trialling novel techniques across <strong>38</strong> <input type="text" class="completion-input" name="q38" autocomplete="one-time-code"> areas of England. One measure is to introduce 39________________ for seedlings.  A further step is to plant 40________________ from healthy bushes.'}, {'number': 40, 'type': 'completion', 'text': 'Plantlife is trialling novel techniques across <strong>38</strong> <input type="text" class="completion-input" name="q38" autocomplete="one-time-code"> areas of England. One measure is to introduce <strong>39</strong> <input type="text" class="completion-input" name="q39" autocomplete="one-time-code"> for seedlings.  A further step is to plant 40________________ from healthy bushes.'}]}],
+            parts: [
+                {
+                    number: 1,
+                    question_count: 10,
+                    audio_url: 'audios/Listening 14 Part 1.mp3',
+                    content_sections: [
+                        {
+                            html: '<div class="instructions">Questions 1–10\r\n\r\nComplete the form below.\r\nWrite NO MORE THAN TWO WORDS OR A NUMBER for each answer.</div>\n<p><strong>Health club customer research</strong></p>\n<p>Example</p>\n<p><strong>Name: Selina Thompson</strong></p>\n<div class="question-text">Occupation: <strong>1</strong> <input type="text" class="completion-input" name="q1" autocomplete="one-time-code"></div>\n<div class="question-text">Age group: <strong>2</strong> <input type="text" class="completion-input" name="q2" autocomplete="one-time-code"></div>\n<div class="question-text">Type of membership: <strong>3</strong> <input type="text" class="completion-input" name="q3" autocomplete="one-time-code"></div>\n<div class="question-text">Length of membership: <strong>4</strong> <input type="text" class="completion-input" name="q4" autocomplete="one-time-code"> years</div>\n<div class="question-text">Why joined: Recommended by a <strong>5</strong> <input type="text" class="completion-input" name="q5" autocomplete="one-time-code"></div>\n<div class="question-text">Visits to club per month: Eight (on an average) </div>\n<div class="question-text">Facility used most: <strong>6</strong> <input type="text" class="completion-input" name="q6" autocomplete="one-time-code"></div>\n<p>Facility not used (if any): Tennis courts</p>\n<div class="question-text">(because reluctant to <strong>7</strong> <input type="text" class="completion-input" name="q7" autocomplete="one-time-code">)</div>\n<p>Suggestions for improvements:</p>\n<div class="question-text">Have more <strong>8</strong> <input type="text" class="completion-input" name="q8" autocomplete="one-time-code"></div>\n<div class="question-text">Install <strong>9</strong> <input type="text" class="completion-input" name="q9" autocomplete="one-time-code"> in the gym.</div>\n<div class="question-text">Open <strong>10</strong> <input type="text" class="completion-input" name="q10" autocomplete="one-time-code"> later at weekends.</div>',
+                            diagram_url: '',
+                            question_count: 10
+                        }
+                    ]
+                },
+                {
+                    number: 2,
+                    question_count: 10,
+                    audio_url: 'audios/Listening 14 Part 2.mp3',
+                    content_sections: [
+                        {
+                            html: '<div class="instructions">Questions 11–16\r\n\r\nComplete the flow chart below.\r\n\r\nChoose SIX answers from the box and write the correct letter, A–G, next to questions 11–16.</div>\n<p><strong>A) air B) ash C) earth D) grass</strong></p>\n<p><strong>E) sticks F) stones G) water</strong></p>\n<br>\n<p><strong>Making a steam pit</strong></p>\n<br>\n<p>Dig a pit.</p>\n<p>⬇️</p>\n<div class="question-text">Arrange a row of <strong>11</strong> <input type="text" class="completion-input" name="q11" autocomplete="one-time-code"> over the pit.</div>\n<p>⬇️</p>\n<div class="question-text">Place <strong>12</strong> <input type="text" class="completion-input" name="q12" autocomplete="one-time-code"> on top.</div>\n<p>⬇️</p>\n<p>Light the wood and let it burn out.</p>\n<p>⬇️</p>\n<div class="question-text">Remove <strong>13</strong> <input type="text" class="completion-input" name="q13" autocomplete="one-time-code">.</div>\n<p>⬇️</p>\n<p>Insert a stick.</p>\n<p>⬇️</p>\n<div class="question-text">Cover the pit with <strong>14</strong> <input type="text" class="completion-input" name="q14" autocomplete="one-time-code">.</div>\n<p>⬇️</p>\n<div class="question-text">Place wrapped food on top, and cover it with <strong>15</strong> <input type="text" class="completion-input" name="q15" autocomplete="one-time-code">.</div>\n<p>⬇️</p>\n<div class="question-text">Remove the stick and put <strong>16</strong> <input type="text" class="completion-input" name="q16" autocomplete="one-time-code"> into the hole.</div>',
+                            diagram_url: '',
+                            question_count: 6
+                        },
+                        {
+                            html: '<div class="instructions">Questions 17–20\r\n\r\nChoose TWO letters, A–E.</div>\n\n                <div class="question dual-choice" data-question="17,18" data-type="which_two">\n                    <div class="question-header">\n                        <span class="question-number">17–18.</span>\n                        <span>Which TWO characteristics apply to the bamboo oven?</span>\n                    </div>\n                    <div style="font-size: 12px; color: #666; margin-bottom: 5px; font-style: italic;">Choose TWO answers</div>\n                    <div class="options">\n                \n\n                        <div class="option" data-value="A">A. It’s suitable for windy weather.</div>\n                    \n\n                        <div class="option" data-value="B">B. The fire is lit below the bottom end of the bamboo.</div>\n                    \n\n                        <div class="option" data-value="C">C. The bamboo is cut into equal lengths.</div>\n                    \n\n                        <div class="option" data-value="D">D. The oven hangs from a stick.</div>\n                    \n\n                        <div class="option" data-value="E">E. It cooks food by steaming it.</div>\n                    \n\n                    </div>\n                    \n                        <input type="hidden" name="q17" id="q17_hidden">\n                        <input type="hidden" name="q18" id="q18_hidden">\n                    \n                </div>\n                \n\n                <div class="question dual-choice" data-question="19,20" data-type="which_two">\n                    <div class="question-header">\n                        <span class="question-number">19–20.</span>\n                        <span>Which TWO pieces of advice does the speaker give about eating wild fungi?</span>\n                    </div>\n                    <div style="font-size: 12px; color: #666; margin-bottom: 5px; font-style: italic;">Choose TWO answers</div>\n                    <div class="options">\n                \n\n                        <div class="option" data-value="A">A. Cooking doesn’t make poisonous fungi edible.</div>\n                    \n\n                        <div class="option" data-value="B">B. Edible wild fungi can be eaten without cooking.</div>\n                    \n\n                        <div class="option" data-value="C">C. Wild fungi are highly nutritious.</div>\n                    \n\n                        <div class="option" data-value="D">D. Some edible fungi look very similar to poisonous varieties.</div>\n                    \n\n                        <div class="option" data-value="E">E. Fungi which cannot be identified should only be eaten in small quantities.</div>\n                    \n\n                    </div>\n                    \n                        <input type="hidden" name="q19" id="q19_hidden">\n                        <input type="hidden" name="q20" id="q20_hidden">\n                    \n                </div>',
+                            diagram_url: '',
+                            question_count: 4
+                        }
+                    ]
+                },
+                {
+                    number: 3,
+                    question_count: 10,
+                    audio_url: 'audios/Listening 14 Part 3.mp3',
+                    content_sections: [
+                        {
+                            html: '<div class="instructions">Questions 21–25\r\n\r\nChoose the correct letter, A, B or C.</div>\n<p><strong>Research project on attitudes towards study</strong></p>\n\n                <div class="question " data-question="21" data-type="multiple_choice">\n                    <div class="question-header">\n                        <span class="question-number">21.</span>\n                        <span>Phoebe’s main reason for choosing her topic was that</span>\n                    </div>\n                    \n                    <div class="options">\n                \n\n                        <div class="option" data-value="A">A. her classmates had been very interested in it.</div>\n                    \n\n                        <div class="option" data-value="B">B. it would help prepare her for her first teaching post.</div>\n                    \n\n                        <div class="option" data-value="C">C. she had been inspired by a particular book.</div>\n                    \n\n                    </div>\n                    <input type="hidden" name="q21" id="q21_hidden">\n                </div>\n                \n\n                <div class="question " data-question="22" data-type="multiple_choice">\n                    <div class="question-header">\n                        <span class="question-number">22.</span>\n                        <span>Phoebe’s main research question related to</span>\n                    </div>\n                    \n                    <div class="options">\n                \n\n                        <div class="option" data-value="A">A. the effect of teacher discipline.</div>\n                    \n\n                        <div class="option" data-value="B">B. the variety of learning activities.</div>\n                    \n\n                        <div class="option" data-value="C">C. levels of pupil confidence.</div>\n                    \n\n                    </div>\n                    <input type="hidden" name="q22" id="q22_hidden">\n                </div>\n                \n\n                <div class="question " data-question="23" data-type="multiple_choice">\n                    <div class="question-header">\n                        <span class="question-number">23.</span>\n                        <span>Phoebe was most surprised by her finding that</span>\n                    </div>\n                    \n                    <div class="options">\n                \n\n                        <div class="option" data-value="A">A. gender did not influence behaviour significantly.</div>\n                    \n\n                        <div class="option" data-value="B">B. girls were more negative about school than boys.</div>\n                    \n\n                        <div class="option" data-value="C">C. boys were more talkative than girls in class.</div>\n                    \n\n                    </div>\n                    <input type="hidden" name="q23" id="q23_hidden">\n                </div>\n                \n\n                <div class="question " data-question="24" data-type="multiple_choice">\n                    <div class="question-header">\n                        <span class="question-number">24.</span>\n                        <span>Regarding teaching, Phoebe says she has learned that</span>\n                    </div>\n                    \n                    <div class="options">\n                \n\n                        <div class="option" data-value="A">A. teachers should be flexible in their lesson planning.</div>\n                    \n\n                        <div class="option" data-value="B">B. brighter children learn from supporting weaker ones.</div>\n                    \n\n                        <div class="option" data-value="C">C. children vary from each other in unpredictable ways.</div>\n                    \n\n                    </div>\n                    <input type="hidden" name="q24" id="q24_hidden">\n                </div>\n                \n\n                <div class="question " data-question="25" data-type="multiple_choice">\n                    <div class="question-header">\n                        <span class="question-number">25.</span>\n                        <span>Tony is particularly impressed by Phoebe’s ability to</span>\n                    </div>\n                    \n                    <div class="options">\n                \n\n                        <div class="option" data-value="A">A. recognise the limitations of such small-scale research.</div>\n                    \n\n                        <div class="option" data-value="B">B. reflect on her own research experience in an interesting way.</div>\n                    \n\n                        <div class="option" data-value="C">C. design her research in such a way as to minimise difficulties.</div>\n                    \n\n                    </div>\n                    <input type="hidden" name="q25" id="q25_hidden">\n                </div>',
+                            diagram_url: '',
+                            question_count: 5
+                        },
+                        {
+                            html: '<div class="instructions">Questions 26–30\r\n\r\nWhat did Phoebe find difficult about the different research techniques she used?\r\n\r\nChoose FIVE answers from the box and write the correct letter, A–G, next to questions 26–30.</div>\n<div class="drag-drop-container">\n<div class="drag-drop-subtitle"><strong>Difficulties</strong></div>\n<div class="drag-drop-layout">\n<div class="drag-drop-questions">\n\n                <div class="drag-drop-question" data-question="26">\n                    <span class="question-number">26.</span>\n                    <span class="question-text">Observing lessons</span>\n                    <div class="drop-zone" data-question="26">\n                        <span class="drop-placeholder">Drop answer here</span>\n                        <input type="hidden" name="q26" class="drag-drop-input">\n                    </div>\n                </div>\n            \n\n                <div class="drag-drop-question" data-question="27">\n                    <span class="question-number">27.</span>\n                    <span class="question-text">Interviewing teachers</span>\n                    <div class="drop-zone" data-question="27">\n                        <span class="drop-placeholder">Drop answer here</span>\n                        <input type="hidden" name="q27" class="drag-drop-input">\n                    </div>\n                </div>\n            \n\n                <div class="drag-drop-question" data-question="28">\n                    <span class="question-number">28.</span>\n                    <span class="question-text">Interviewing pupils</span>\n                    <div class="drop-zone" data-question="28">\n                        <span class="drop-placeholder">Drop answer here</span>\n                        <input type="hidden" name="q28" class="drag-drop-input">\n                    </div>\n                </div>\n            \n\n                <div class="drag-drop-question" data-question="29">\n                    <span class="question-number">29.</span>\n                    <span class="question-text">Using questionnaires</span>\n                    <div class="drop-zone" data-question="29">\n                        <span class="drop-placeholder">Drop answer here</span>\n                        <input type="hidden" name="q29" class="drag-drop-input">\n                    </div>\n                </div>\n            \n\n                <div class="drag-drop-question" data-question="30">\n                    <span class="question-number">30.</span>\n                    <span class="question-text">Taking photographs</span>\n                    <div class="drop-zone" data-question="30">\n                        <span class="drop-placeholder">Drop answer here</span>\n                        <input type="hidden" name="q30" class="drag-drop-input">\n                    </div>\n                </div>\n            \n</div>\n<div class="drag-drop-options">\n<div class="options-title">Options</div>\n<div class="draggable-options">\n\n                <div class="draggable-option" draggable="true" data-value="A">\n                    <span class="option-letter">A</span>\n                    <span class="option-text">Obtaining permission</span>\n                </div>\n            \n\n                <div class="draggable-option" draggable="true" data-value="B">\n                    <span class="option-letter">B</span>\n                    <span class="option-text">Deciding on a suitable focus</span>\n                </div>\n            \n\n                <div class="draggable-option" draggable="true" data-value="C">\n                    <span class="option-letter">C</span>\n                    <span class="option-text">Concentrating while gathering data</span>\n                </div>\n            \n\n                <div class="draggable-option" draggable="true" data-value="D">\n                    <span class="option-letter">D</span>\n                    <span class="option-text">Working collaboratively</span>\n                </div>\n            \n\n                <div class="draggable-option" draggable="true" data-value="E">\n                    <span class="option-letter">E</span>\n                    <span class="option-text">Processing data she had gathered</span>\n                </div>\n            \n\n                <div class="draggable-option" draggable="true" data-value="F">\n                    <span class="option-letter">F</span>\n                    <span class="option-text">Finding a suitable time to conduct the research</span>\n                </div>\n            \n\n                <div class="draggable-option" draggable="true" data-value="G">\n                    <span class="option-letter">G</span>\n                    <span class="option-text">Getting hold of suitable equipment</span>\n                </div>\n            \n</div>\n</div>\n</div>\n</div>',
+                            diagram_url: '',
+                            question_count: 5
+                        }
+                    ]
+                },
+                {
+                    number: 4,
+                    question_count: 10,
+                    audio_url: 'audios/Listening 14 Part 4.mp3',
+                    content_sections: [
+                        {
+                            html: '<div class="instructions">Questions 31–40\r\n\r\nComplete the sentences below.\r\nWrite NO MORE THAN TWO WORDS for each answer.</div>\n<p><strong>Saving the juniper plant</strong></p>\n<p><strong>Background</strong></p>\n<div class="question-text">Juniper was one of the first plants to colonise Britain after the last <strong>31</strong> <input type="text" class="completion-input" name="q31" autocomplete="one-time-code">.</div>\n<div class="question-text">Its smoke is virtually <strong>32</strong> <input type="text" class="completion-input" name="q32" autocomplete="one-time-code">, so juniper wood was used as fuel in illegal activities.</div>\n<div class="question-text">Oils from the plant were used to prevent <strong>33</strong> <input type="text" class="completion-input" name="q33" autocomplete="one-time-code"> spreading.</div>\n<div class="question-text">Nowadays, its berries are widely used to <strong>34</strong> <input type="text" class="completion-input" name="q34" autocomplete="one-time-code"> food and drink.</div>\n<p>Ecology</p>\n<div class="question-text">Juniper plants also support several species of insects and <strong>35</strong> <input type="text" class="completion-input" name="q35" autocomplete="one-time-code">.</div>\n<p><strong>Problems</strong></p>\n<div class="question-text">In current juniper populations, ratios of the <strong>36</strong> <input type="text" class="completion-input" name="q36" autocomplete="one-time-code"> are poor.</div>\n<div class="question-text">Many of the bushes in each group are of the same age so <strong>37</strong> <input type="text" class="completion-input" name="q37" autocomplete="one-time-code"> of whole populations is rapid.</div>\n<p><strong>Solutions</strong></p>\n<div class="question-text">Plantlife is trialling novel techniques across <strong>38</strong> <input type="text" class="completion-input" name="q38" autocomplete="one-time-code"> areas of England. One measure is to introduce <strong>39</strong> <input type="text" class="completion-input" name="q39" autocomplete="one-time-code"> for seedlings.  A further step is to plant <strong>40</strong> <input type="text" class="completion-input" name="q40" autocomplete="one-time-code"> from healthy bushes.</div>',
+                            diagram_url: '',
+                            question_count: 10
+                        }
+                    ]
+                }
+            ],
             totalQuestions: 40
         };
         
@@ -1431,33 +1426,77 @@
         document.getElementById('testForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
+            if (this.classList.contains('submitted')) return;
+            this.classList.add('submitted');
+
             let score = 0;
             const answers = {};
             const checkedWhichTwo = {};
 
+            // Disable all inputs
+            this.querySelectorAll('input').forEach(input => input.disabled = true);
+
             for (let i = 1; i <= 40; i++) {
                 const input = document.querySelector(`[name="q${i}"]`);
-                const userAns = input ? input.value.trim().toUpperCase() : "";
+                if (!input) continue;
+
+                const userAns = input.value.trim().toUpperCase();
                 answers[i] = userAns;
 
                 const correctAns = correctAnswers[i];
+                let isCorrect = false;
 
                 if (Array.isArray(correctAns)) {
                     // Handle "Which TWO" questions (17-18, 19-20)
-                    // Ensure each choice is only counted once
                     const groupKey = i <= 18 ? "17-18" : "19-20";
                     if (!checkedWhichTwo[groupKey]) checkedWhichTwo[groupKey] = [];
                     
                     if (userAns && correctAns.includes(userAns) && !checkedWhichTwo[groupKey].includes(userAns)) {
+                        isCorrect = true;
                         score++;
                         checkedWhichTwo[groupKey].push(userAns);
                     }
                 } else if (userAns === correctAns) {
+                    isCorrect = true;
                     score++;
+                }
+
+                // Visual Feedback
+                const container = input.closest('.question') || input.parentElement;
+                
+                if (isCorrect) {
+                    input.classList.add('correct-answer');
+                    const tag = document.createElement('span');
+                    tag.className = 'feedback-tag correct';
+                    tag.textContent = 'Correct';
+                    input.after(tag);
+                } else {
+                    input.classList.add('incorrect-answer');
+                    const tag = document.createElement('span');
+                    tag.className = 'feedback-tag incorrect';
+                    tag.textContent = 'Incorrect';
+                    input.after(tag);
+
+                    const correctHint = document.createElement('div');
+                    correctHint.className = 'correct-answer-text';
+                    correctHint.innerHTML = `Correct answer: <strong>${Array.isArray(correctAns) ? correctAns.join(' or ') : correctAns}</strong>`;
+                    input.parentNode.appendChild(correctHint);
                 }
             }
 
             const bandScore = calculateBandScore(score);
+
+            // Show Result Summary at the top of the form
+            const summary = document.createElement('div');
+            summary.className = 'result-summary-overlay';
+            summary.innerHTML = `
+                <h2>Test Completed!</h2>
+                <div class="result-score">Score: ${score}/40</div>
+                <div class="result-band">Estimated Band: ${bandScore}</div>
+                <p>Scroll down to review your answers.</p>
+            `;
+            this.prepend(summary);
+            summary.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
             // Send results to parent window
             window.parent.postMessage({
@@ -1470,9 +1509,6 @@
                     correctAnswers: correctAnswers
                 }
             }, '*');
-
-            // Optional: Provide feedback in the iframe as well
-            alert(`Test Completed!\nScore: ${score}/40\nBand Score: ${bandScore}`);
         });
 
         function jumpToQuestion(questionNum) {
