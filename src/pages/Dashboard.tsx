@@ -141,6 +141,13 @@ export default function Dashboard() {
       icon: Book,
       colors: { start: '#4f46e5', mid: '#7c3aed', glow: '#6366f1', shadow: 'rgba(99, 102, 241, 0.3)' }
     },
+    { 
+      id: 'premium-vocabulary', 
+      name: 'Premium Vocabulary', 
+      path: '/premium-vocabulary', 
+      icon: Sparkles,
+      colors: { start: '#f59e0b', mid: '#ea580c', glow: '#f59e0b', shadow: 'rgba(245, 158, 11, 0.3)' }
+    },
   ];
 
   const displayName = profile?.displayName?.split(' ')[0] || 'Student';

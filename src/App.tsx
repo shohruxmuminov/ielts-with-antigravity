@@ -15,6 +15,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import PremiumPanel from './pages/PremiumPanel';
 import PremiumBooks from './pages/PremiumBooks';
+import PremiumVocabulary from './pages/PremiumVocabulary';
 import VocabularyBank from './pages/VocabularyBank';
 import MatchingGame from './pages/MatchingGame';
 import VocabularyQuiz from './pages/VocabularyQuiz';
@@ -47,6 +48,7 @@ export default function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/premium" element={<PremiumPanel />} />
           <Route path="/premium-books" element={<PremiumBooks />} />
+          <Route path="/premium-vocabulary" element={<PremiumVocabulary />} />
         </Route>
       </Routes>
     </Router>

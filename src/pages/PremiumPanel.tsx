@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { Crown, Send, Phone, CheckCircle, Lock, Star, Zap, Shield } from 'lucide-react';
+import { Crown, Send, Phone, CheckCircle, Lock, Star, Zap, Shield, Book } from 'lucide-react';
 import { usePremium } from '../context/PremiumContext';
 import { useAuth } from '../FirebaseProvider';
+import { Link } from 'react-router-dom';
 
 export default function PremiumPanel() {
   const { isPremium, premiumUntil, activatePremium, deactivatePremium } = usePremium();
@@ -107,6 +108,24 @@ export default function PremiumPanel() {
                     </div>
                   ))}
                 </div>
+
+                <div className="space-y-3 mb-8">
+                  <Link 
+                    to="/premium-vocabulary"
+                    className="w-full flex items-center justify-center gap-3 bg-gradient-to-r from-amber-500 to-orange-600 text-white py-4 rounded-2xl font-black text-lg shadow-xl shadow-amber-900/40 hover:scale-[1.02] transition-all"
+                  >
+                    <Star className="w-5 h-5" />
+                    Premium Vocabulary
+                  </Link>
+                  <Link 
+                    to="/premium-books"
+                    className="w-full flex items-center justify-center gap-3 bg-slate-800 text-slate-200 py-4 rounded-2xl font-black text-lg border border-slate-700 hover:bg-slate-700 transition-all"
+                  >
+                    <Book className="w-5 h-5" />
+                    My Premium Books
+                  </Link>
+                </div>
+
                 <button
                   onClick={deactivatePremium}
                   className="text-slate-500 text-xs hover:text-red-400 transition-colors underline"
