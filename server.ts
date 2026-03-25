@@ -39,16 +39,16 @@ async function startServer() {
     });
   });
 
-  app.post('/api/evaluate/writing', async (req, res) => {
+  app.post('/api/evaluate/writing', upload.single('image'), async (req, res) => {
     try {
       const { text, taskType = 'Task 2', prompt = 'General IELTS Writing' } = req.body;
+      const image = req.file;
       
       if (!text || text.trim().length < 50) {
         return res.status(400).json({ error: 'Text is too short for evaluation (minimum 50 words)' });
       }
 
-      const systemInstruction = `You are an expert IELTS examiner. Evaluate the following IELTS Writing ${taskType} response.
-The prompt/topic was: "${prompt}"
+      let systemInstruction = `You are an expert IELTS examiner. Evaluate the following IELTS Writing ${taskType} response.
 Provide a detailed evaluation in JSON format including:
 1. band: number (Estimated Band Score 0-9, in 0.5 increments)
 2. grammar: string[] (Grammar & Accuracy feedback, 2-3 specific points)
@@ -56,9 +56,25 @@ Provide a detailed evaluation in JSON format including:
 4. coherence: string (Coherence & Cohesion feedback, 1-2 paragraphs)
 5. improvements: string[] (Practical suggestions for improvement)`;
 
+      const contents: any[] = [{ role: 'user', parts: [] }];
+
+      if (taskType === 'Task 1' && image) {
+        systemInstruction += `\nAn image of the Task 1 prompt (graph, chart, map, etc.) has been provided. Analyze the image carefully and evaluate how well the essay describes the data/information shown.`;
+        contents[0].parts.push({
+          inlineData: {
+            data: image.buffer.toString('base64'),
+            mimeType: image.mimetype
+          }
+        });
+        contents[0].parts.push({ text: `Evaluate this IELTS Task 1 essay based on the provided image: ${text}` });
+      } else {
+        systemInstruction += `\nThe prompt/topic was: "${prompt}"`;
+        contents[0].parts.push({ text: `Evaluate this IELTS ${taskType} essay: ${text}` });
+      }
+
       const response = await ai.models.generateContent({
         model: 'gemini-1.5-pro',
-        contents: [{ role: 'user', parts: [{ text }] }],
+        contents,
         config: {
           systemInstruction,
           responseMimeType: 'application/json',

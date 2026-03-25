@@ -15,7 +15,10 @@ import {
   Lightbulb,
   Trash2,
   Send,
-  Loader2
+  Loader2,
+  Upload,
+  Image as ImageIcon,
+  X
 } from 'lucide-react';
 import { usePremium } from '../context/PremiumContext';
 
@@ -36,8 +39,26 @@ export default function AiEssayChecker() {
   const [isEvaluating, setIsEvaluating] = useState(false);
   const [result, setResult] = useState<EvaluationResult | null>(null);
   const [error, setError] = useState<string | null>(null);
-
+  const [image, setImage] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
   const wordCount = text.trim().split(/\s+/).filter(w => w.length > 0).length;
+
+  const onImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setImage(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const removeImage = () => {
+    setImage(null);
+    setImagePreview(null);
+  };
 
   const handleEvaluate = async () => {
     if (wordCount < 50) {
@@ -50,14 +71,17 @@ export default function AiEssayChecker() {
     setResult(null);
 
     try {
+      const formData = new FormData();
+      formData.append('text', text);
+      formData.append('taskType', taskType);
+      formData.append('prompt', prompt || `General IELTS Writing ${taskType}`);
+      if (taskType === 'Task 1' && image) {
+        formData.append('image', image);
+      }
+
       const response = await fetch('/api/evaluate/writing', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          text, 
-          taskType, 
-          prompt: prompt || `General IELTS Writing ${taskType}`
-        })
+        body: formData
       });
 
       if (!response.ok) {
@@ -161,14 +185,59 @@ export default function AiEssayChecker() {
               </div>
 
               <div className="mb-8">
-                <label className="text-sm font-black text-slate-500 uppercase tracking-widest mb-4 block">Question / Topic (Optional)</label>
-                <input 
-                  type="text"
-                  value={prompt}
-                  onChange={(e) => setPrompt(e.target.value)}
-                  placeholder="Paste the writing prompt here for more accurate feedback..."
-                  className="w-full bg-slate-950 border border-slate-800 rounded-2xl px-6 py-4 outline-none focus:border-rose-500 transition-colors text-slate-200"
-                />
+                {taskType === 'Task 1' ? (
+                  <>
+                    <label className="text-sm font-black text-slate-500 uppercase tracking-widest mb-4 block">Upload Task 1 Image (Graph/Chart/Map)</label>
+                    {!imagePreview ? (
+                      <div className="relative group">
+                        <input 
+                          type="file"
+                          accept="image/*"
+                          onChange={onImageChange}
+                          className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+                        />
+                        <div className="w-full bg-slate-950 border-2 border-dashed border-slate-800 rounded-3xl p-8 flex flex-col items-center justify-center gap-4 group-hover:border-rose-500/50 transition-all">
+                          <div className="w-12 h-12 bg-slate-900 rounded-2xl flex items-center justify-center text-slate-500 group-hover:text-rose-500 transition-colors">
+                            <Upload className="w-6 h-6" />
+                          </div>
+                          <div className="text-center">
+                            <p className="text-sm font-bold text-slate-300">Click or drag image to upload</p>
+                            <p className="text-xs text-slate-500 mt-1">PNG, JPG or WEBP (Max 5MB)</p>
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="relative group rounded-3xl overflow-hidden border border-slate-800 bg-slate-950 p-4">
+                        <img 
+                          src={imagePreview} 
+                          alt="Task 1 Preview" 
+                          className="w-full h-48 object-contain rounded-2xl"
+                        />
+                        <button 
+                          onClick={removeImage}
+                          className="absolute top-6 right-6 p-2 bg-rose-500 text-white rounded-xl shadow-lg hover:bg-rose-600 transition-colors"
+                        >
+                          <X className="w-4 h-4" />
+                        </button>
+                        <div className="absolute inset-x-4 bottom-4 p-3 bg-slate-900/90 backdrop-blur-md rounded-xl border border-slate-700/50 flex items-center gap-3">
+                          <ImageIcon className="w-4 h-4 text-rose-500" />
+                          <span className="text-[10px] font-black text-slate-300 uppercase tracking-widest truncate">{image?.name}</span>
+                        </div>
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    <label className="text-sm font-black text-slate-500 uppercase tracking-widest mb-4 block">Question / Topic</label>
+                    <input 
+                      type="text"
+                      value={prompt}
+                      onChange={(e) => setPrompt(e.target.value)}
+                      placeholder="Paste the writing prompt here..."
+                      className="w-full bg-slate-950 border border-slate-800 rounded-2xl px-6 py-4 outline-none focus:border-rose-500 transition-colors text-slate-200"
+                    />
+                  </>
+                )}
               </div>
 
               <div>
