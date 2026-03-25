@@ -1,3 +1,6 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 import express from 'express';
 import { createServer as createViteServer } from 'vite';
 import mongoose from 'mongoose';
@@ -92,7 +95,9 @@ Provide a detailed evaluation in JSON format including:
         }
       });
 
-      const result = JSON.parse(response.text || '{}');
+      let responseText = response.text || '{}';
+      responseText = responseText.replace(/^```json/im, '').replace(/```$/m, '').trim();
+      const result = JSON.parse(responseText);
       res.json(result);
     } catch (error) {
       console.error('Error evaluating writing:', error);
@@ -143,7 +148,9 @@ Provide a detailed evaluation including:
         }
       });
 
-      const result = JSON.parse(response.text || '{}');
+      let responseText = response.text || '{}';
+      responseText = responseText.replace(/^```json/im, '').replace(/```$/m, '').trim();
+      const result = JSON.parse(responseText);
       res.json(result);
     } catch (error) {
       console.error('Speaking evaluation error:', error);
@@ -256,6 +263,8 @@ Provide a detailed evaluation including:
       console.error('Payment notification error:', error);
       res.status(500).json({ error: 'Failed to send notification' });
     }
+  });
+
   // ─── PROCESS OFFICIAL CARD PAYMENT (TOKEN) ───
   app.post('/api/payment/process-card', async (req, res) => {
     try {

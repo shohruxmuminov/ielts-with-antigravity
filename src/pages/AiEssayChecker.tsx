@@ -85,10 +85,25 @@ export default function AiEssayChecker() {
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to evaluate essay');
+        let errorMessage = 'Failed to evaluate essay';
+        try {
+          const contentType = response.headers.get('content-type');
+          if (contentType && contentType.includes('application/json')) {
+            const errorData = await response.json();
+            errorMessage = errorData.error || errorMessage;
+          } else {
+            errorMessage = `Server Error (${response.status}): The API endpoint is unreachable or misconfigured.`;
+          }
+        } catch (e) {
+          // Fallback if parsing fails
+        }
+        throw new Error(errorMessage);
       }
 
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+         throw new Error('Server returned an invalid response format instead of JSON data.');
+      }
       const data = await response.json();
       setResult(data);
     } catch (err: any) {
