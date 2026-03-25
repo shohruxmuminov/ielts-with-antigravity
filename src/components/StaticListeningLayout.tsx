@@ -24,12 +24,12 @@ const StaticListeningLayout: React.FC<StaticListeningLayoutProps> = ({ testId, t
 
   useEffect(() => {
     const handleMessage = async (event: MessageEvent) => {
-      if (event.data?.type === 'PRACTICE_TEST_RESULT' && event.data.result) {
-        const { score, total, band } = event.data.result;
+      if ((event.data?.type === 'PRACTICE_TEST_RESULT' || event.data?.type === 'LISTENING_RESULTS') && event.data.result) {
+        const data = event.data.result;
         const testResult = {
-          score: typeof score === 'number' ? score : 0,
-          total: typeof total === 'number' ? total : 40,
-          band: typeof band === 'number' ? band : 0
+          score: typeof data.score === 'number' ? data.score : 0,
+          total: typeof data.total === 'number' ? data.total : (typeof data.totalQuestions === 'number' ? data.totalQuestions : 40),
+          band: typeof data.band === 'number' ? data.band : (typeof data.bandScore === 'number' ? data.bandScore : 0)
         };
         setResult(testResult);
         setIsSubmitted(true);
