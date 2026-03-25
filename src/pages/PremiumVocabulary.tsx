@@ -226,9 +226,17 @@ export default function PremiumVocabulary() {
                     <p className="text-slate-400 text-sm font-medium leading-relaxed mb-4">
                       {word.definition}
                     </p>
-                    <div className="bg-slate-950/50 p-4 rounded-2xl border border-slate-800/50">
-                      <p className="text-[10px] font-black text-indigo-500 uppercase tracking-tighter mb-1 select-none opacity-50">Example Usage:</p>
-                      <p className="text-xs font-bold text-slate-300 italic">"{word.example}"</p>
+                    <div className="bg-slate-950/50 p-4 rounded-2xl border border-slate-800/50 space-y-3">
+                      <div>
+                        <p className="text-[10px] font-black text-indigo-500 uppercase tracking-tighter mb-1 select-none opacity-50">Example Usage:</p>
+                        <p className="text-xs font-bold text-slate-300 italic">"{word.example}"</p>
+                      </div>
+                      {word.collocations && (
+                        <div>
+                          <p className="text-[10px] font-black text-amber-500 uppercase tracking-tighter mb-1 select-none opacity-50">Common Collocations:</p>
+                          <p className="text-[11px] font-bold text-slate-400">{word.collocations}</p>
+                        </div>
+                      )}
                     </div>
                   </motion.div>
                 ))}
@@ -283,9 +291,17 @@ export default function PremiumVocabulary() {
                       <h3 className="text-2xl font-bold text-white leading-tight">
                         {premiumVocabulary[currentIndex].definition}
                       </h3>
-                      <div className="pt-6 border-t border-slate-800 w-full">
-                        <p className="text-slate-500 text-xs font-black uppercase tracking-tighter mb-2">Example Sentence</p>
-                        <p className="text-lg text-slate-300 font-medium italic">"{premiumVocabulary[currentIndex].example}"</p>
+                      <div className="pt-6 border-t border-slate-800 w-full space-y-4">
+                        <div>
+                          <p className="text-slate-500 text-xs font-black uppercase tracking-tighter mb-2">Example Sentence</p>
+                          <p className="text-lg text-slate-300 font-medium italic">"{premiumVocabulary[currentIndex].example}"</p>
+                        </div>
+                        {premiumVocabulary[currentIndex].collocations && (
+                          <div className="bg-indigo-500/10 p-4 rounded-2xl border border-indigo-500/20">
+                            <p className="text-indigo-400 text-[10px] font-black uppercase tracking-widest mb-2">Collocations</p>
+                            <p className="text-sm text-slate-300 font-bold">{premiumVocabulary[currentIndex].collocations}</p>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
