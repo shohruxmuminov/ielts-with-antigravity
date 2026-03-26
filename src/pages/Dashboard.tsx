@@ -273,7 +273,14 @@ export default function Dashboard() {
               >
                 {/* Liquid Wave Background Animation */}
                 <div className="liquid-wave-container">
-                  <div className="liquid-wave" />
+                  <div className="liquid-wave">
+                    <svg viewBox="0 0 120 28" preserveAspectRatio="none" className="w-full h-full fill-current opacity-70">
+                      <path d="M0 28V15.05C0 15.05 28.5 -2.45 60 1.55C91.5 5.55 120 15.05 120 15.05V28H0Z" />
+                    </svg>
+                    <svg viewBox="0 0 120 28" preserveAspectRatio="none" className="w-full h-full fill-current opacity-40 -ml-[100%]">
+                      <path d="M0 28V15.05C0 15.05 28.5 -2.45 60 1.55C91.5 5.55 120 15.05 120 15.05V28H0Z" />
+                    </svg>
+                  </div>
                 </div>
 
                 {/* Rising Bubbles Overlay */}
