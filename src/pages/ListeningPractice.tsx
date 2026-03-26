@@ -164,7 +164,7 @@ export default function ListeningPractice() {
     return (
       <div className="min-h-screen bg-slate-950 text-slate-100">
         {/* Header */}
-        <div className="bg-emerald-600 text-white py-16 px-4 text-center">
+        <div className="bg-emerald-600 text-white py-16 px-4 text-center relative overflow-hidden">
           <div className="max-w-5xl mx-auto">
             <div className="flex items-center justify-center gap-4 mb-6">
               <div className="p-4 bg-white/10 rounded-3xl backdrop-blur-md">
@@ -176,8 +176,8 @@ export default function ListeningPractice() {
               Authentic audio materials with native speakers to improve your listening comprehension
             </p>
           </div>
-          <div className="absolute bottom-4 right-8 z-10 hidden sm:block">
-            <p className="text-[10px] font-black text-emerald-100/40 uppercase tracking-[0.2em]">
+          <div className="absolute bottom-4 right-6 z-10 hidden sm:block">
+            <p className="text-[10px] font-black text-white/30 uppercase tracking-[0.2em]">
               Received from IELTSwithJurabek and Sanokulov.uz
             </p>
           </div>

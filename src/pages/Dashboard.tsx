@@ -171,7 +171,10 @@ export default function Dashboard() {
           animate={{ opacity: 1, y: 0 }}
           className="flex flex-col md:flex-row md:items-end justify-between gap-4"
         >
-          <div className="space-y-2 text-left">
+          <div className="space-y-1 text-left">
+            <p className="text-[8px] font-black text-[var(--text-secondary)] uppercase tracking-[0.2em] opacity-40 mb-1">
+              Received from IELTSwithJurabek and Sanokulov.uz
+            </p>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 text-indigo-300 font-bold text-[10px] border border-indigo-500/20 uppercase tracking-widest backdrop-blur-md">
               <Sparkles className="w-3 h-3 text-indigo-400" />
               {greeting}, IELTS Achiever
@@ -180,9 +183,6 @@ export default function Dashboard() {
               Ready to learn,<br />
               <span className="text-[#a48afd] drop-shadow-[0_0_15px_rgba(168,85,247,0.4)]">{displayName}!</span>
             </h1>
-            <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest opacity-60">
-              Received from IELTSwithJurabek and Sanokulov.uz
-            </p>
           </div>
 
           <div className="flex flex-wrap items-center gap-4">
