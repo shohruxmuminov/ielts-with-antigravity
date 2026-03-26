@@ -269,11 +269,30 @@ export default function Dashboard() {
                   '--shadow-color': feature.colors.shadow,
                 } as React.CSSProperties}
               >
-                <div className="icon-squircle group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
+                {/* Liquid Wave Background Animation */}
+                <div className="liquid-wave-container">
+                  <div className="liquid-wave">
+                    <svg viewBox="0 0 120 28" preserveAspectRatio="none" className="w-1/2 h-full fill-current">
+                      <path d="M0 28V15.05C0 15.05 28.5 -2.45 60 1.55C91.5 5.55 120 15.05 120 15.05V28H0Z" />
+                    </svg>
+                    <svg viewBox="0 0 120 28" preserveAspectRatio="none" className="w-1/2 h-full fill-current">
+                      <path d="M0 28V15.05C0 15.05 28.5 -2.45 60 1.55C91.5 5.55 120 15.05 120 15.05V28H0Z" />
+                    </svg>
+                  </div>
+                </div>
+
+                {/* Rising Bubbles Overlay */}
+                <div className="bubbles-container">
+                  <span className="bubble b1"></span>
+                  <span className="bubble b2"></span>
+                  <span className="bubble b3"></span>
+                </div>
+
+                <div className="icon-squircle group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 relative z-10">
                   {React.createElement(feature.icon)}
                 </div>
                 
-                <h3 className="text-sm font-extrabold text-white leading-tight mb-1 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-[var(--section-color)] transition-all">
+                <h3 className="text-sm font-extrabold text-white leading-tight mb-1 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-[var(--section-color)] transition-all relative z-10">
                   {feature.name}
                 </h3>
               </Link>
