@@ -147,6 +147,42 @@ export default function WritingPractice() {
           task1Type: 'Bar Chart',
           task2Type: 'TO WHAT EXTENT DO YOU AGREE OR DISAGREE?',
           createdAt: { seconds: Date.now() / 1000 }
+        },
+        {
+          id: 'cdi-writing-mock-1',
+          title: 'CDI Writing Mock 1',
+          type: 'full',
+          data: '/writing/premium materials/CDI Writing mock.html',
+          isStatic: true,
+          isPremium: true,
+          createdAt: { seconds: Date.now() / 1000 }
+        },
+        {
+          id: 'cdi-writing-mock-2',
+          title: 'CDI Writing Mock 2',
+          type: 'full',
+          data: '/writing/premium materials/CDI Writing mock    httpst.meielts_material_full.html',
+          isStatic: true,
+          isPremium: true,
+          createdAt: { seconds: Date.now() / 1000 }
+        },
+        {
+          id: 'cdi-writing-mock-3',
+          title: 'CDI Writing Mock 3',
+          type: 'full',
+          data: '/writing/premium materials/CDI Writing mock    httpst.meielts_material_full 2.html',
+          isStatic: true,
+          isPremium: true,
+          createdAt: { seconds: Date.now() / 1000 }
+        },
+        {
+          id: 'cdi-writing-mock-4',
+          title: 'CDI Writing Mock 4',
+          type: 'full',
+          data: '/writing/premium materials/CDI Writing mock    httpst.meielts_material_full 3.html',
+          isStatic: true,
+          isPremium: true,
+          createdAt: { seconds: Date.now() / 1000 }
         }
       ];
 
@@ -218,6 +254,42 @@ export default function WritingPractice() {
           title: 'Writing Practice 27',
           type: 'full',
           data: '/writing/Writing Practice 27.html',
+          isStatic: true,
+          isPremium: true,
+          createdAt: { seconds: Date.now() / 1000 }
+        },
+        {
+          id: 'cdi-writing-mock-1',
+          title: 'CDI Writing Mock 1',
+          type: 'full',
+          data: '/writing/premium materials/CDI Writing mock.html',
+          isStatic: true,
+          isPremium: true,
+          createdAt: { seconds: Date.now() / 1000 }
+        },
+        {
+          id: 'cdi-writing-mock-2',
+          title: 'CDI Writing Mock 2',
+          type: 'full',
+          data: '/writing/premium materials/CDI Writing mock    httpst.meielts_material_full.html',
+          isStatic: true,
+          isPremium: true,
+          createdAt: { seconds: Date.now() / 1000 }
+        },
+        {
+          id: 'cdi-writing-mock-3',
+          title: 'CDI Writing Mock 3',
+          type: 'full',
+          data: '/writing/premium materials/CDI Writing mock    httpst.meielts_material_full 2.html',
+          isStatic: true,
+          isPremium: true,
+          createdAt: { seconds: Date.now() / 1000 }
+        },
+        {
+          id: 'cdi-writing-mock-4',
+          title: 'CDI Writing Mock 4',
+          type: 'full',
+          data: '/writing/premium materials/CDI Writing mock    httpst.meielts_material_full 3.html',
           isStatic: true,
           isPremium: true,
           createdAt: { seconds: Date.now() / 1000 }
