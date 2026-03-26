@@ -176,7 +176,7 @@ export default function Dashboard() {
               <Sparkles className="w-3 h-3 text-indigo-400" />
               {greeting}, IELTS Achiever
             </div>
-            <h1 className="text-3xl lg:text-4xl font-black text-white tracking-tight leading-tight">
+            <h1 className="text-3xl lg:text-4xl font-black text-[var(--text-primary)] tracking-tight leading-tight">
               Ready to learn,<br />
               <span className="text-[#a48afd] drop-shadow-[0_0_15px_rgba(168,85,247,0.4)]">{displayName}!</span>
             </h1>
@@ -196,8 +196,8 @@ export default function Dashboard() {
                 ))}
               </div>
               <div className="flex flex-col">
-                <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Community</span>
-                <span className="text-xs font-black text-white">{totalUsers + 824}+ Students</span>
+                <span className="text-[9px] font-bold text-[var(--text-secondary)] uppercase tracking-widest">Community</span>
+                <span className="text-xs font-black text-[var(--text-primary)]">{totalUsers + 824}+ Students</span>
               </div>
             </div>
 
@@ -206,8 +206,8 @@ export default function Dashboard() {
                   <Trophy className="w-4 h-4" />
                </div>
                <div>
-                  <p className="text-slate-400 text-[9px] font-bold uppercase tracking-widest">Target Band</p>
-                  <p className="text-lg font-black text-white tracking-tighter">{targetBand}</p>
+                  <p className="text-[var(--text-secondary)] text-[9px] font-bold uppercase tracking-widest">Target Band</p>
+                  <p className="text-lg font-black text-[var(--text-primary)] tracking-tighter">{targetBand}</p>
                </div>
             </div>
           </div>
@@ -286,7 +286,7 @@ export default function Dashboard() {
                   {React.createElement(feature.icon)}
                 </div>
                 
-                <h3 className="text-sm font-extrabold text-white leading-tight mb-1 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-[var(--section-color)] transition-all relative z-10">
+                <h3 className="text-sm font-extrabold text-[var(--text-primary)] leading-tight mb-1 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[var(--text-primary)] group-hover:to-[var(--section-color)] transition-all relative z-10">
                   {feature.name}
                 </h3>
               </Link>

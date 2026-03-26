@@ -92,7 +92,7 @@ export default function Layout() {
                 title={item.name}
                 className={cn(
                   "w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-300 group relative nav-link-premium mx-auto",
-                  isActive ? "text-white" : "text-slate-500 hover:text-[var(--foreground)]"
+                  isActive ? "text-white" : "text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
                 )}
                 style={{ '--section-color': item.color } as React.CSSProperties}
               >
@@ -109,7 +109,7 @@ export default function Layout() {
                 
                 {/* Tooltip */}
                 {!isActive && (
-                  <span className="absolute left-20 bg-[var(--sidebar-bg)] backdrop-blur-xl text-[var(--foreground)] text-[10px] font-bold px-3 py-1.5 rounded-xl border border-[var(--sidebar-border)] opacity-0 group-hover:opacity-100 transition-all pointer-events-none whitespace-nowrap z-50 shadow-xl uppercase tracking-widest translate-x-2 group-hover:translate-x-0">
+                  <span className="absolute left-20 bg-[var(--sidebar-bg)] backdrop-blur-xl text-[var(--text-primary)] text-[10px] font-bold px-3 py-1.5 rounded-xl border border-[var(--sidebar-border)] opacity-0 group-hover:opacity-100 transition-all pointer-events-none whitespace-nowrap z-50 shadow-xl uppercase tracking-widest translate-x-2 group-hover:translate-x-0">
                     {item.name}
                   </span>
                 )}
@@ -147,7 +147,7 @@ export default function Layout() {
               "w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-300 group mx-auto",
               location.pathname === '/profile'
                 ? "bg-indigo-600/20 text-indigo-400 border border-indigo-500/30"
-                : "text-slate-500 hover:bg-[var(--sidebar-border)] hover:text-[var(--foreground)]"
+                : "text-[var(--text-secondary)] hover:bg-[var(--sidebar-border)] hover:text-[var(--text-primary)]"
             )}
           >
             <User className="w-6 h-6" />
@@ -155,7 +155,7 @@ export default function Layout() {
 
           <button 
             onClick={handleLogout}
-            className="w-14 h-14 rounded-2xl flex items-center justify-center text-slate-500 hover:bg-red-500/10 hover:text-red-400 transition-all duration-300 mx-auto group"
+            className="w-14 h-14 rounded-2xl flex items-center justify-center text-[var(--text-secondary)] hover:bg-red-500/10 hover:text-red-400 transition-all duration-300 mx-auto group"
           >
             <LogOut className="w-6 h-6 group-hover:-translate-x-1 transition-transform" />
           </button>
