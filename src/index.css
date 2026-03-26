@@ -95,21 +95,47 @@ body {
 }
 
 @utility icon-squircle {
-  width: 52px;
-  height: 52px;
+  width: 56px;
+  height: 56px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 1.25rem;
   background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
-  margin-bottom: 1rem;
-  box-shadow: 0 10px 20px -5px var(--shadow-color);
+  margin-bottom: 1.5rem;
   color: white;
-  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+
+  /* The actual CSS box-shadow for direct depth */
+  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.2), inset 0 -3px 4px rgba(0, 0, 0, 0.1);
+
+  /* The watery blur drop shadow */
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: inherit;
+    border-radius: inherit;
+    filter: blur(14px);
+    opacity: 0.7;
+    z-index: -1;
+    transition: all 0.4s ease;
+    transform: translateY(6px); /* Shifts the liquid blur slightly down */
+  }
 
   & svg {
     width: 24px;
     height: 24px;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Interactive lift */
+  .group:hover &::before {
+    opacity: 1;
+    filter: blur(20px);
+    transform: translateY(10px) scale(1.1);
   }
 }
 
