@@ -206,16 +206,20 @@ body {
   }
 }
 
-/* Enhanced Liquid Card Animations */
+/* Liquid Card Animations */
 .liquid-wave-container {
   position: absolute;
-  inset: 0;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 60px;
   z-index: 0;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 0.4s ease;
   overflow: hidden;
-  border-radius: 1.75rem;
+  border-bottom-left-radius: 1.75rem;
+  border-bottom-right-radius: 1.75rem;
 }
 
 .clean-card:hover .liquid-wave-container {
@@ -224,26 +228,27 @@ body {
 
 .liquid-wave {
   position: absolute;
-  bottom: -40px;
-  left: -50%;
+  bottom: -15px;
+  left: 0;
   width: 200%;
-  height: 200%; /* Cover the entire card when rising */
+  height: 50px;
   display: flex;
   background: var(--section-color);
-  opacity: 0.15;
-  border-radius: 40%;
-  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  transform: translateY(100%) rotate(0deg);
+  opacity: 0.6;
+  transform-origin: bottom;
+  transform: translateY(10px);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .clean-card:hover .liquid-wave {
-  animation: wave-rise-rotate 10s linear infinite;
-  transform: translateY(-20%) rotate(360deg);
+  animation: wave-flow 3s linear infinite;
+  transform: translateY(0px) scaleY(1.3);
 }
 
-@keyframes wave-rise-rotate {
-  from { transform: translateY(100%) rotate(0deg); }
-  to { transform: translateY(-20%) rotate(360deg); }
+@keyframes wave-flow {
+  0% { transform: translateX(0) scaleY(1); }
+  50% { transform: translateX(-25%) scaleY(1.2); }
+  100% { transform: translateX(-50%) scaleY(1); }
 }
 
 .bubbles-container {
