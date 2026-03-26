@@ -81,29 +81,24 @@ Scoring requirements:
 - Keep feedback concise but useful
 `;
 
-      const contents: any[] = [];
+      let finalContents: any = promptText;
 
       if (taskType === 'Task 1' && image) {
         promptText += `\n\nAnalyze the provided image carefully and evaluate how well the essay describes the data/information shown.`;
-        contents.push({
-          role: 'user',
-          parts: [
-            {
-              inlineData: {
-                data: image.buffer.toString('base64'),
-                mimeType: image.mimetype
-              }
-            },
-            { text: promptText }
-          ]
-        });
-      } else {
-        contents.push({ role: 'user', parts: [{ text: promptText }] });
+        finalContents = [
+          {
+            inlineData: {
+              data: image.buffer.toString('base64'),
+              mimeType: image.mimetype
+            }
+          },
+          promptText
+        ];
       }
 
       const response = await ai.models.generateContent({
         model: "gemini-1.5-pro",
-        contents,
+        contents: finalContents,
         config: {
           responseMimeType: "application/json",
           responseSchema: {
@@ -168,12 +163,21 @@ Scoring requirements:
       });
 
       let responseText = response.text || '{}';
-      responseText = responseText.replace(/^```json/im, '').replace(/```$/m, '').trim();
-      const result = JSON.parse(responseText);
-      res.json(result);
-    } catch (error) {
+      try {
+        const jsonMatch = responseText.match(/```(?:json)?\s*([\s\S]*?)```/i);
+        if (jsonMatch) {
+          responseText = jsonMatch[1].trim();
+        } else {
+          responseText = responseText.trim();
+        }
+        const result = JSON.parse(responseText);
+        res.json(result);
+      } catch (parseError) {
+        throw new Error(`AI Payload Parsing Error: received invalid JSON from Gemini. Raw output: ${responseText.substring(0, 100)}...`);
+      }
+    } catch (error: any) {
       console.error('Error evaluating writing:', error);
-      res.status(500).json({ error: 'Failed to evaluate writing. Please try again later.' });
+      res.status(500).json({ error: error.message || 'Failed to evaluate writing. Please try again later.' });
     }
   });
 
