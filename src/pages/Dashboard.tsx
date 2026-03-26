@@ -20,6 +20,7 @@ import { Link } from 'react-router-dom';
 import { collection, getDocs, query, where, limit, orderBy, doc, getDoc } from 'firebase/firestore';
 import { db } from '../firebase';
 import PremiumCountdown from '../components/PremiumCountdown';
+import ThemeToggle from '../components/ThemeToggle';
 
 export default function Dashboard() {
   const { profile, loading, user } = useAuth();
@@ -74,7 +75,7 @@ export default function Dashboard() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-screen bg-[#05050f]">
+      <div className="flex items-center justify-center h-screen bg-[var(--background)]">
         <motion.div 
           animate={{ rotate: 360 }}
           transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
@@ -89,14 +90,14 @@ export default function Dashboard() {
       id: 'vocabulary', 
       name: 'Learn Vocabulary', 
       path: '/vocabulary', 
-      icon: Headphones,
+      icon: Book,
       colors: { start: '#00d2ff', mid: '#3a7bd5', glow: '#00d2ff', shadow: 'rgba(0, 210, 255, 0.3)' }
     },
     { 
       id: 'listening', 
       name: 'Listening Practice', 
       path: '/listening', 
-      icon: Mic2,
+      icon: Headphones,
       colors: { start: '#9d50bb', mid: '#6e48aa', glow: '#9d50bb', shadow: 'rgba(157, 80, 187, 0.3)' }
     },
     { 
@@ -117,7 +118,7 @@ export default function Dashboard() {
       id: 'speaking', 
       name: 'Speaking Practice', 
       path: '/speaking', 
-      icon: Smartphone,
+      icon: Mic2,
       colors: { start: '#ff0084', mid: '#33001b', glow: '#ff0084', shadow: 'rgba(255, 0, 132, 0.2)' }
     },
     { 
@@ -154,7 +155,7 @@ export default function Dashboard() {
   const targetBand = profile?.targetBand || '7.0';
 
   return (
-    <div className="w-full min-h-screen bg-[#05050f] text-white font-sans p-5 lg:p-8 relative overflow-hidden">
+    <div className="w-full min-h-screen bg-[var(--background)] text-[var(--foreground)] font-sans p-5 lg:p-8 relative overflow-hidden transition-colors duration-300">
       
       {/* Ambient Glow Background Orbs (IELTS Wisdom Style) */}
       <div className="fixed top-[10%] right-[5%] w-[500px] h-[500px] bg-[#0070f3] rounded-full mix-blend-screen filter blur-[120px] opacity-20 pointer-events-none z-0" />
@@ -186,7 +187,8 @@ export default function Dashboard() {
 
           <div className="flex flex-wrap items-center gap-4">
             <PremiumCountdown />
-            <div className="flex items-center gap-3 bg-[#121124]/90 backdrop-blur-xl px-4 py-2 rounded-2xl border border-slate-700/50 shadow-2xl">
+            <ThemeToggle />
+            <div className="flex items-center gap-3 bg-slate-800/40 dark:bg-[#121124]/90 backdrop-blur-xl px-4 py-2 rounded-2xl border border-slate-700/50 shadow-2xl">
               <div className="flex -space-x-3">
                 {[1,2,3].map(i => (
                   <div key={i} className="w-7 h-7 rounded-full border-2 border-[#121124] bg-slate-800 overflow-hidden shadow-md">
@@ -271,14 +273,7 @@ export default function Dashboard() {
               >
                 {/* Liquid Wave Background Animation */}
                 <div className="liquid-wave-container">
-                  <div className="liquid-wave">
-                    <svg viewBox="0 0 120 28" preserveAspectRatio="none" className="w-1/2 h-full fill-current">
-                      <path d="M0 28V15.05C0 15.05 28.5 -2.45 60 1.55C91.5 5.55 120 15.05 120 15.05V28H0Z" />
-                    </svg>
-                    <svg viewBox="0 0 120 28" preserveAspectRatio="none" className="w-1/2 h-full fill-current">
-                      <path d="M0 28V15.05C0 15.05 28.5 -2.45 60 1.55C91.5 5.55 120 15.05 120 15.05V28H0Z" />
-                    </svg>
-                  </div>
+                  <div className="liquid-wave" />
                 </div>
 
                 {/* Rising Bubbles Overlay */}
@@ -286,9 +281,11 @@ export default function Dashboard() {
                   <span className="bubble b1"></span>
                   <span className="bubble b2"></span>
                   <span className="bubble b3"></span>
+                  <span className="bubble b4"></span>
+                  <span className="bubble b5"></span>
                 </div>
 
-                <div className="icon-squircle group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 relative z-10">
+                <div className="icon-squircle group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 relative z-20">
                   {React.createElement(feature.icon)}
                 </div>
                 

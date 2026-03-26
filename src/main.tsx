@@ -4,12 +4,15 @@ import App from './App.tsx';
 import './index.css';
 import { FirebaseProvider } from './FirebaseProvider';
 import { PremiumProvider } from './context/PremiumContext';
+import { ThemeProvider } from './context/ThemeContext';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <FirebaseProvider>
       <PremiumProvider>
-        <App />
+        <ThemeProvider>
+          <App />
+        </ThemeProvider>
       </PremiumProvider>
     </FirebaseProvider>
   </StrictMode>,
