@@ -187,7 +187,6 @@ export default function Dashboard() {
 
           <div className="flex flex-wrap items-center gap-4">
             <PremiumCountdown />
-            <ThemeToggle />
             <div className="flex items-center gap-3 bg-slate-800/40 dark:bg-[#121124]/90 backdrop-blur-xl px-4 py-2 rounded-2xl border border-slate-700/50 shadow-2xl">
               <div className="flex -space-x-3">
                 {[1,2,3].map(i => (
@@ -281,15 +280,6 @@ export default function Dashboard() {
                       <path d="M0 28V15.05C0 15.05 28.5 -2.45 60 1.55C91.5 5.55 120 15.05 120 15.05V28H0Z" />
                     </svg>
                   </div>
-                </div>
-
-                {/* Rising Bubbles Overlay */}
-                <div className="bubbles-container">
-                  <span className="bubble b1"></span>
-                  <span className="bubble b2"></span>
-                  <span className="bubble b3"></span>
-                  <span className="bubble b4"></span>
-                  <span className="bubble b5"></span>
                 </div>
 
                 <div className="icon-squircle group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 relative z-20">
