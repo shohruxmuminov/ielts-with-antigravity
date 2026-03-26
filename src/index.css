@@ -46,10 +46,10 @@ body {
 }
 
 @utility clean-card {
-  background: rgba(30, 27, 75, 0.4); /* Deep transparent indigo/purple base */
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-radius: 1.5rem;
+  background: rgba(20, 18, 48, 0.35); /* Extremely transparent deep purple to let background bleed through */
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border-radius: 1.75rem;
   padding: 2rem 1.5rem;
   display: flex;
   flex-direction: column;
@@ -59,46 +59,38 @@ body {
   position: relative;
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.08); /* Delicate glass border */
-  border-top: 1px solid rgba(255, 255, 255, 0.15); /* Slightly brighter top border for lighting */
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: 1px solid rgba(255, 255, 255, 0.2); /* Enhanced lighting hit */
   color: white;
 
   &:hover {
     transform: translateY(-8px);
     box-shadow: 0 15px 45px rgba(0, 0, 0, 0.4);
-    background: rgba(30, 27, 75, 0.6);
-    border-color: rgba(255, 255, 255, 0.12);
+    background: rgba(20, 18, 48, 0.45);
+    border-color: rgba(255, 255, 255, 0.25);
   }
 
-  /* The glowing blurred orb at the bottom of the card (IELTS Wisdom style) */
-  &::after {
+  /* Frosted glare overlay for hyper-realism */
+  &::before {
     content: '';
     position: absolute;
-    bottom: -30px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80%;
-    height: 70px;
-    background: var(--section-color, #8b5cf6);
-    filter: blur(28px);
-    opacity: 0.45;
-    transition: all 0.5s ease;
-    z-index: 0;
-    border-radius: 100%;
-    pointer-events: none;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba(255, 255, 255, 0.05),
+      transparent
+    );
+    transform: skewX(-20deg);
+    transition: all 0.7s ease;
   }
 
-  /* Content needs to be above the blur */
-  & > * {
-    position: relative;
-    z-index: 1;
-  }
-
-  &:hover::after {
-    height: 100px;
-    opacity: 0.7;
-    filter: blur(35px);
+  &:hover::before {
+    left: 200%;
   }
 }
 

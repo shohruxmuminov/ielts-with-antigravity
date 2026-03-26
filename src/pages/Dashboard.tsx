@@ -156,10 +156,11 @@ export default function Dashboard() {
   return (
     <div className="w-full min-h-screen bg-[#05050f] text-white font-sans p-5 lg:p-8 relative overflow-hidden">
       
-      {/* Cosmic Background Elements */}
-      <div className="absolute top-[-20%] left-[-10%] w-[70%] h-[70%] bg-indigo-600/10 rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] bg-purple-600/10 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute top-[30%] right-[10%] w-[40%] h-[30%] bg-fuchsia-600/10 rounded-full blur-[120px] transform -rotate-45 pointer-events-none" />
+      {/* Ambient Glow Background Orbs (IELTS Wisdom Style) */}
+      <div className="fixed top-[10%] right-[5%] w-[500px] h-[500px] bg-[#0070f3] rounded-full mix-blend-screen filter blur-[120px] opacity-20 pointer-events-none z-0" />
+      <div className="fixed bottom-[10%] left-[-5%] w-[600px] h-[600px] bg-[#ff8c00] rounded-full mix-blend-screen filter blur-[140px] opacity-15 pointer-events-none z-0" />
+      <div className="fixed top-[45%] right-[15%] w-[450px] h-[450px] bg-[#ff0080] rounded-full mix-blend-screen filter blur-[100px] opacity-20 pointer-events-none z-0" />
+      <div className="fixed top-[-10%] left-[20%] w-[500px] h-[500px] bg-[#7928ca] rounded-full mix-blend-screen filter blur-[130px] opacity-15 pointer-events-none z-0" />
 
       <div className="max-w-6xl mx-auto w-full relative z-10 space-y-8">
         
