@@ -47,50 +47,122 @@ async function startServer() {
       const { text, taskType = 'Task 2', prompt = 'General IELTS Writing' } = req.body;
       const image = req.file;
       
-      if (!text || text.trim().length < 50) {
-        return res.status(400).json({ error: 'Text is too short for evaluation (minimum 50 words)' });
+      if (!text || text.trim().length < 20) {
+        return res.status(400).json({ error: 'Text is too short for evaluation (minimum 20 words)' });
       }
 
-      let systemInstruction = `You are an expert IELTS examiner. Evaluate the following IELTS Writing ${taskType} response.
-Provide a detailed evaluation in JSON format including:
-1. band: number (Estimated Band Score 0-9, in 0.5 increments)
-2. grammar: string[] (Grammar & Accuracy feedback, 2-3 specific points)
-3. vocabulary: string[] (Lexical Resource/Vocabulary feedback, 2-3 specific points)
-4. coherence: string (Coherence & Cohesion feedback, 1-2 paragraphs)
-5. improvements: string[] (Practical suggestions for improvement)`;
+      let promptText = `
+You are a strict IELTS essay examiner.
 
-      const contents: any[] = [{ role: 'user', parts: [] }];
+Evaluate this ${taskType} essay.
+Return ONLY valid JSON.
+
+Prompt/Topic:
+"""
+${prompt}
+"""
+
+Essay:
+"""
+${text}
+"""
+
+Scoring requirements:
+- Give estimated overall band
+- Score these categories separately:
+  - task_response
+  - coherence_and_cohesion
+  - lexical_resource
+  - grammatical_range_and_accuracy
+- Find grammar mistakes
+- Find vocabulary weaknesses
+- Give clear improvement advice
+- Rewrite the essay in a stronger version
+- Keep feedback concise but useful
+`;
+
+      const contents: any[] = [];
 
       if (taskType === 'Task 1' && image) {
-        systemInstruction += `\nAn image of the Task 1 prompt (graph, chart, map, etc.) has been provided. Analyze the image carefully and evaluate how well the essay describes the data/information shown.`;
-        contents[0].parts.push({
-          inlineData: {
-            data: image.buffer.toString('base64'),
-            mimeType: image.mimetype
-          }
+        promptText += `\n\nAnalyze the provided image carefully and evaluate how well the essay describes the data/information shown.`;
+        contents.push({
+          role: 'user',
+          parts: [
+            {
+              inlineData: {
+                data: image.buffer.toString('base64'),
+                mimeType: image.mimetype
+              }
+            },
+            { text: promptText }
+          ]
         });
-        contents[0].parts.push({ text: `Evaluate this IELTS Task 1 essay based on the provided image: ${text}` });
       } else {
-        systemInstruction += `\nThe prompt/topic was: "${prompt}"`;
-        contents[0].parts.push({ text: `Evaluate this IELTS ${taskType} essay: ${text}` });
+        contents.push({ role: 'user', parts: [{ text: promptText }] });
       }
 
       const response = await ai.models.generateContent({
-        model: 'gemini-1.5-pro',
+        model: "gemini-1.5-pro",
         contents,
         config: {
-          systemInstruction,
-          responseMimeType: 'application/json',
+          responseMimeType: "application/json",
           responseSchema: {
             type: Type.OBJECT,
             properties: {
-              band: { type: Type.NUMBER, description: "Estimated band score" },
-              grammar: { type: Type.ARRAY, items: { type: Type.STRING }, description: "Grammar feedback points" },
-              vocabulary: { type: Type.ARRAY, items: { type: Type.STRING }, description: "Vocabulary feedback points" },
-              coherence: { type: Type.STRING, description: "Coherence feedback paragraph" },
-              improvements: { type: Type.ARRAY, items: { type: Type.STRING }, description: "Suggestions for improvement" }
+              overall_band: { type: Type.NUMBER },
+              scores: {
+                type: Type.OBJECT,
+                properties: {
+                  task_response: { type: Type.NUMBER },
+                  coherence_and_cohesion: { type: Type.NUMBER },
+                  lexical_resource: { type: Type.NUMBER },
+                  grammatical_range_and_accuracy: { type: Type.NUMBER }
+                },
+                required: [
+                  "task_response",
+                  "coherence_and_cohesion",
+                  "lexical_resource",
+                  "grammatical_range_and_accuracy"
+                ]
+              },
+              grammar_issues: {
+                type: Type.ARRAY,
+                items: {
+                  type: Type.OBJECT,
+                  properties: {
+                    original: { type: Type.STRING },
+                    corrected: { type: Type.STRING },
+                    explanation: { type: Type.STRING }
+                  },
+                  required: ["original", "corrected", "explanation"]
+                }
+              },
+              vocabulary_issues: {
+                type: Type.ARRAY,
+                items: {
+                  type: Type.OBJECT,
+                  properties: {
+                    weak_wording: { type: Type.STRING },
+                    better_option: { type: Type.STRING },
+                    explanation: { type: Type.STRING }
+                  },
+                  required: ["weak_wording", "better_option", "explanation"]
+                }
+              },
+              advice: {
+                type: Type.ARRAY,
+                items: { type: Type.STRING }
+              },
+              improved_essay: { type: Type.STRING }
             },
-            required: ["band", "grammar", "vocabulary", "coherence", "improvements"]
+            required: [
+              "overall_band",
+              "scores",
+              "grammar_issues",
+              "vocabulary_issues",
+              "advice",
+              "improved_essay"
+            ]
           }
         }
       });

@@ -22,12 +22,30 @@ import {
 } from 'lucide-react';
 import { usePremium } from '../context/PremiumContext';
 
+interface GrammarIssue {
+  original: string;
+  corrected: string;
+  explanation: string;
+}
+
+interface VocabularyIssue {
+  weak_wording: string;
+  better_option: string;
+  explanation: string;
+}
+
 interface EvaluationResult {
-  band: number;
-  grammar: string[];
-  vocabulary: string[];
-  coherence: string;
-  improvements: string[];
+  overall_band: number;
+  scores: {
+    task_response: number;
+    coherence_and_cohesion: number;
+    lexical_resource: number;
+    grammatical_range_and_accuracy: number;
+  };
+  grammar_issues: GrammarIssue[];
+  vocabulary_issues: VocabularyIssue[];
+  advice: string[];
+  improved_essay: string;
 }
 
 export default function AiEssayChecker() {
@@ -319,7 +337,7 @@ export default function AiEssayChecker() {
                    {/* Band Score Card */}
                    <div className="bg-gradient-to-br from-slate-900 to-slate-950 rounded-[2.5rem] border border-slate-800 p-8 text-center relative overflow-hidden">
                       <div className="absolute inset-0 bg-rose-500/5 blur-[80px] rounded-full translate-y-1/2"></div>
-                      <h3 className="text-sm font-black text-slate-500 uppercase tracking-widest mb-6">Estimated Score</h3>
+                      <h3 className="text-sm font-black text-slate-500 uppercase tracking-widest mb-6">Overall Band Score</h3>
                       <div className="relative inline-flex items-center justify-center">
                         <svg className="w-32 h-32 transform -rotate-90">
                           <circle
@@ -339,61 +357,80 @@ export default function AiEssayChecker() {
                             strokeWidth="10"
                             fill="transparent"
                             strokeDasharray={364.4}
-                            strokeDashoffset={364.4 - (result.band / 9) * 364.4}
+                            strokeDashoffset={364.4 - (result.overall_band / 9) * 364.4}
                             className="text-rose-500"
                             strokeLinecap="round"
                           />
                         </svg>
-                        <span className="absolute text-4xl font-black text-white">{result.band}</span>
+                        <span className="absolute text-4xl font-black text-white">{result.overall_band}</span>
                       </div>
-                      <p className="mt-4 text-emerald-400 font-black text-sm uppercase tracking-widest">IELTS Band {result.band >= 7 ? 'Advanced' : result.band >= 6 ? 'Intermediate' : 'Developing'}</p>
+                      
+                      {/* Sub-scores */}
+                      <div className="grid grid-cols-2 gap-4 mt-8">
+                        <div className="bg-slate-800/50 rounded-2xl p-4 border border-slate-700/50">
+                          <p className="text-[10px] uppercase font-bold text-slate-400 mb-1">Task Response</p>
+                          <p className="text-xl font-black text-white">{result.scores.task_response}</p>
+                        </div>
+                        <div className="bg-slate-800/50 rounded-2xl p-4 border border-slate-700/50">
+                          <p className="text-[10px] uppercase font-bold text-slate-400 mb-1">Coherence</p>
+                          <p className="text-xl font-black text-white">{result.scores.coherence_and_cohesion}</p>
+                        </div>
+                        <div className="bg-slate-800/50 rounded-2xl p-4 border border-slate-700/50">
+                          <p className="text-[10px] uppercase font-bold text-slate-400 mb-1">Vocabulary</p>
+                          <p className="text-xl font-black text-white">{result.scores.lexical_resource}</p>
+                        </div>
+                        <div className="bg-slate-800/50 rounded-2xl p-4 border border-slate-700/50">
+                          <p className="text-[10px] uppercase font-bold text-slate-400 mb-1">Grammar</p>
+                          <p className="text-xl font-black text-white">{result.scores.grammatical_range_and_accuracy}</p>
+                        </div>
+                      </div>
                    </div>
 
                    {/* Categorized Feedback */}
                    <div className="grid grid-cols-1 gap-4">
+                      {/* Grammar Issues */}
                       <div className="bg-slate-900/50 rounded-[2rem] border border-slate-800 p-6">
                         <h4 className="flex items-center gap-2 text-rose-400 font-black text-xs uppercase tracking-widest mb-4">
-                          <CheckCircle className="w-4 h-4" /> Grammar & Accuracy
+                          <CheckCircle className="w-4 h-4" /> Grammar Corrections
                         </h4>
-                        <ul className="space-y-3">
-                          {result.grammar.map((item, i) => (
-                            <li key={i} className="text-sm text-slate-300 flex gap-3 leading-relaxed">
-                              <span className="w-1 h-1 rounded-full bg-rose-500 mt-2 shrink-0"></span>
-                              {item}
-                            </li>
-                          ))}
-                        </ul>
+                        <div className="space-y-4">
+                          {result.grammar_issues?.length > 0 ? result.grammar_issues.map((issue, i) => (
+                            <div key={i} className="bg-slate-950 rounded-2xl p-4 border border-slate-800">
+                              <p className="line-through text-rose-400 text-sm mb-1">{issue.original}</p>
+                              <p className="text-emerald-400 font-bold mb-2">{issue.corrected}</p>
+                              <p className="text-xs text-slate-500">{issue.explanation}</p>
+                            </div>
+                          )) : (
+                            <p className="text-sm text-slate-500 italic">No major grammatical errors found. Great job!</p>
+                          )}
+                        </div>
                       </div>
 
+                      {/* Vocabulary Issues */}
                       <div className="bg-slate-900/50 rounded-[2rem] border border-slate-800 p-6">
                         <h4 className="flex items-center gap-2 text-blue-400 font-black text-xs uppercase tracking-widest mb-4">
-                          <BookOpen className="w-4 h-4" /> Lexical Resource
+                          <BookOpen className="w-4 h-4" /> Vocabulary Enhancement
                         </h4>
-                        <ul className="space-y-3">
-                          {result.vocabulary.map((item, i) => (
-                            <li key={i} className="text-sm text-slate-300 flex gap-3 leading-relaxed">
-                              <span className="w-1 h-1 rounded-full bg-blue-500 mt-2 shrink-0"></span>
-                              {item}
-                            </li>
-                          ))}
-                        </ul>
+                        <div className="space-y-4">
+                          {result.vocabulary_issues?.length > 0 ? result.vocabulary_issues.map((issue, i) => (
+                            <div key={i} className="bg-slate-950 rounded-2xl p-4 border border-slate-800">
+                              <p className="text-slate-400 text-sm mb-1">Weak: <span className="text-rose-400 italic">{issue.weak_wording}</span></p>
+                              <p className="text-blue-400 font-bold mb-2">Better: {issue.better_option}</p>
+                              <p className="text-xs text-slate-500">{issue.explanation}</p>
+                            </div>
+                          )) : (
+                            <p className="text-sm text-slate-500 italic">Excellent vocabulary usage throughout the essay.</p>
+                          )}
+                        </div>
                       </div>
 
-                      <div className="bg-slate-900/50 rounded-[2rem] border border-slate-800 p-6">
-                        <h4 className="flex items-center gap-2 text-amber-400 font-black text-xs uppercase tracking-widest mb-4">
-                          <Layout className="w-4 h-4" /> Coherence & Cohesion
-                        </h4>
-                        <p className="text-sm text-slate-300 leading-relaxed font-medium">
-                          {result.coherence}
-                        </p>
-                      </div>
-
+                      {/* General Advice */}
                       <div className="bg-emerald-500/5 rounded-[2rem] border border-emerald-500/20 p-6">
                         <h4 className="flex items-center gap-2 text-emerald-400 font-black text-xs uppercase tracking-widest mb-4">
-                          <Lightbulb className="w-4 h-4" /> Key Improvements
+                          <Lightbulb className="w-4 h-4" /> Key Improvements & Advice
                         </h4>
                         <ul className="space-y-3">
-                          {result.improvements.map((item, i) => (
+                          {result.advice.map((item, i) => (
                             <li key={i} className="text-sm text-slate-300 flex gap-3 leading-relaxed">
                               <div className="w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center shrink-0 mt-0.5">
                                 <span className="text-[10px] text-emerald-400 font-black">{i+1}</span>
@@ -402,6 +439,16 @@ export default function AiEssayChecker() {
                             </li>
                           ))}
                         </ul>
+                      </div>
+
+                      {/* Improved Essay Version */}
+                      <div className="bg-amber-500/5 rounded-[2rem] border border-amber-500/20 p-6">
+                        <h4 className="flex items-center gap-2 text-amber-400 font-black text-xs uppercase tracking-widest mb-4">
+                          <Sparkles className="w-4 h-4" /> Rewritten Stronger Version
+                        </h4>
+                        <p className="text-sm text-slate-300 leading-relaxed font-medium whitespace-pre-wrap">
+                          {result.improved_essay}
+                        </p>
                       </div>
                    </div>
                 </motion.div>
